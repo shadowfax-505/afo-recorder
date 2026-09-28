@@ -1,0 +1,146 @@
+[
+  {
+    "id": "harness-1-VMID",
+    "net": "VMID",
+    "a": {
+      "board": "BB0",
+      "hole": "c20"
+    },
+    "b": {
+      "board": "BB1",
+      "hole": "a8"
+    }
+  },
+  {
+    "id": "harness-1-3V0A",
+    "net": "3V0A",
+    "a": {
+      "board": "BB0",
+      "hole": "c2"
+    },
+    "b": {
+      "board": "BB1",
+      "hole": "g10"
+    }
+  },
+  {
+    "id": "harness-1-GND",
+    "net": "GND",
+    "a": {
+      "board": "BB0",
+      "hole": "d6"
+    },
+    "b": {
+      "board": "BB1",
+      "hole": "c6"
+    }
+  },
+  {
+    "id": "harness-2-VMID",
+    "net": "VMID",
+    "a": {
+      "board": "BB1",
+      "hole": "b8"
+    },
+    "b": {
+      "board": "BB2",
+      "hole": "a8"
+    }
+  },
+  {
+    "id": "harness-2-3V0A",
+    "net": "3V0A",
+    "a": {
+      "board": "BB1",
+      "hole": "i10"
+    },
+    "b": {
+      "board": "BB2",
+      "hole": "g10"
+    }
+  },
+  {
+    "id": "harness-2-GND",
+    "net": "GND",
+    "a": {
+      "board": "BB1",
+      "hole": "e6"
+    },
+    "b": {
+      "board": "BB2",
+      "hole": "c6"
+    }
+  },
+  {
+    "id": "harness-3-VMID",
+    "net": "VMID",
+    "a": {
+      "board": "BB2",
+      "hole": "b8"
+    },
+    "b": {
+      "board": "BB3",
+      "hole": "a8"
+    }
+  },
+  {
+    "id": "harness-3-3V0A",
+    "net": "3V0A",
+    "a": {
+      "board": "BB2",
+      "hole": "i10"
+    },
+    "b": {
+      "board": "BB3",
+      "hole": "g10"
+    }
+  },
+  {
+    "id": "harness-3-GND",
+    "net": "GND",
+    "a": {
+      "board": "BB2",
+      "hole": "e6"
+    },
+    "b": {
+      "board": "BB3",
+      "hole": "c6"
+    }
+  },
+  {
+    "id": "harness-4-VMID",
+    "net": "VMID",
+    "a": {
+      "board": "BB3",
+      "hole": "b8"
+    },
+    "b": {
+      "board": "BB4",
+      "hole": "a8"
+    }
+  },
+  {
+    "id": "harness-4-3V0A",
+    "net": "3V0A",
+    "a": {
+      "board": "BB3",
+      "hole": "i10"
+    },
+    "b": {
+      "board": "BB4",
+      "hole": "g10"
+    }
+  },
+  {
+    "id": "harness-4-GND",
+    "net": "GND",
+    "a": {
+      "board": "BB3",
+      "hole": "e6"
+    },
+    "b": {
+      "board": "BB4",
+      "hole": "c6"
+    }
+  }
+]

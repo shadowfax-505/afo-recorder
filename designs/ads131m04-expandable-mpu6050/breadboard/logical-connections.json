@@ -1,0 +1,2531 @@
+{
+  "revision": 1,
+  "physical_release": false,
+  "fixtures": [
+    {
+      "id": "power-switch",
+      "label": "POWER switch (SPST)",
+      "stage": 1,
+      "x": -220,
+      "z": 230
+    },
+    {
+      "id": "lab-supply",
+      "label": "Current-limited lab supply",
+      "stage": 1,
+      "x": -160,
+      "z": 230
+    },
+    {
+      "id": "cap-2",
+      "label": "LDO input 1uF",
+      "stage": 1,
+      "x": -100,
+      "z": 230
+    },
+    {
+      "id": "cap-3",
+      "label": "LDO output 1uF",
+      "stage": 1,
+      "x": -40,
+      "z": 230
+    },
+    {
+      "id": "adc-cs-pullup",
+      "label": "10k ADC CS pull-up",
+      "stage": 3,
+      "x": 20,
+      "z": 230
+    },
+    {
+      "id": "clock",
+      "label": "8.192 MHz oscillator / carrier",
+      "stage": 3,
+      "x": 80,
+      "z": 230
+    },
+    {
+      "id": "clamp1",
+      "label": "BAV199 EMG1 adapter",
+      "stage": 4,
+      "x": 140,
+      "z": 230
+    },
+    {
+      "id": "clamp2",
+      "label": "BAV199 EMG2 adapter",
+      "stage": 5,
+      "x": 200,
+      "z": 230
+    },
+    {
+      "id": "clamp3",
+      "label": "BAV199 EMG3 adapter",
+      "stage": 5,
+      "x": -220,
+      "z": 295
+    },
+    {
+      "id": "clamp4",
+      "label": "BAV199 EMG4 adapter",
+      "stage": 5,
+      "x": -160,
+      "z": 295
+    },
+    {
+      "id": "foot-pullup",
+      "label": "10k AD0 pull-up",
+      "stage": 6,
+      "x": -100,
+      "z": 295
+    },
+    {
+      "id": "shank-pullup",
+      "label": "10k AD0 pull-up",
+      "stage": 6,
+      "x": -40,
+      "z": 295
+    },
+    {
+      "id": "IMU_SDA-pullup",
+      "label": "I2C pull-up effective 2.2k",
+      "stage": 6,
+      "x": 20,
+      "z": 295
+    },
+    {
+      "id": "IMU_SCL-pullup",
+      "label": "I2C pull-up effective 2.2k",
+      "stage": 6,
+      "x": 80,
+      "z": 295
+    },
+    {
+      "id": "button",
+      "label": "Start/stop NO button",
+      "stage": 2,
+      "x": 140,
+      "z": 295
+    },
+    {
+      "id": "button-pullup",
+      "label": "10k button pull-up",
+      "stage": 2,
+      "x": 200,
+      "z": 295
+    },
+    {
+      "id": "rec-r",
+      "label": "1k LED resistor",
+      "stage": 2,
+      "x": -220,
+      "z": 360
+    },
+    {
+      "id": "rec-led",
+      "label": "green status LED",
+      "stage": 2,
+      "x": -160,
+      "z": 360
+    },
+    {
+      "id": "err-r",
+      "label": "1k LED resistor",
+      "stage": 2,
+      "x": -100,
+      "z": 360
+    },
+    {
+      "id": "err-led",
+      "label": "red status LED",
+      "stage": 2,
+      "x": -40,
+      "z": 360
+    },
+    {
+      "id": "low-r",
+      "label": "1k LED resistor",
+      "stage": 2,
+      "x": 20,
+      "z": 360
+    },
+    {
+      "id": "low-led",
+      "label": "amber status LED",
+      "stage": 2,
+      "x": 80,
+      "z": 360
+    },
+    {
+      "id": "bat-r-top",
+      "label": "100k battery divider top",
+      "stage": 2,
+      "x": 140,
+      "z": 360
+    },
+    {
+      "id": "bat-r-low",
+      "label": "100k battery divider bottom",
+      "stage": 2,
+      "x": 200,
+      "z": 360
+    },
+    {
+      "id": "bat-cap",
+      "label": "100nF battery sense",
+      "stage": 2,
+      "x": -220,
+      "z": 425
+    },
+    {
+      "id": "usb",
+      "label": "USB cable-side VBUS tap (pending)",
+      "stage": 2,
+      "x": -160,
+      "z": 425
+    },
+    {
+      "id": "usb-r",
+      "label": "100k VBUS resistor",
+      "stage": 2,
+      "x": -100,
+      "z": 425
+    },
+    {
+      "id": "usb-pd",
+      "label": "1M gate pull-down",
+      "stage": 2,
+      "x": -40,
+      "z": 425
+    },
+    {
+      "id": "usb-q",
+      "label": "2N7002 adapter",
+      "stage": 2,
+      "x": 20,
+      "z": 425
+    },
+    {
+      "id": "usb-pu",
+      "label": "10k USB sense pull-up",
+      "stage": 2,
+      "x": 80,
+      "z": 425
+    }
+  ],
+  "connections": [
+    {
+      "id": "system-1",
+      "net": "PACK_PLUS",
+      "a": {
+        "module": "battery",
+        "terminal": "PACK+ (verify polarity)",
+        "physical": false
+      },
+      "b": {
+        "module": "power-switch",
+        "terminal": "IN",
+        "physical": false
+      },
+      "stage": 9,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-2",
+      "net": "VBAT",
+      "a": {
+        "module": "lab-supply",
+        "terminal": "+3.7V",
+        "physical": false
+      },
+      "b": {
+        "module": "power-switch",
+        "terminal": "IN",
+        "physical": false
+      },
+      "stage": 1,
+      "status": "named terminals; physical mapping required",
+      "note": "Lab source only: disconnect battery. These are alternatives, never parallel sources."
+    },
+    {
+      "id": "system-3",
+      "net": "GND",
+      "a": {
+        "module": "lab-supply",
+        "terminal": "COM",
+        "physical": false
+      },
+      "b": {
+        "module": "reg3",
+        "terminal": "GND",
+        "physical": false
+      },
+      "stage": 1,
+      "status": "named terminals; physical mapping required",
+      "note": "Disconnect lab supply for battery/wearable use."
+    },
+    {
+      "id": "system-4",
+      "net": "VBAT",
+      "a": {
+        "module": "power-switch",
+        "terminal": "OUT",
+        "physical": false
+      },
+      "b": {
+        "module": "reg5",
+        "terminal": "VIN",
+        "physical": false
+      },
+      "stage": 1,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-5",
+      "net": "GND",
+      "a": {
+        "module": "reg5",
+        "terminal": "GND",
+        "physical": false
+      },
+      "b": {
+        "module": "reg3",
+        "terminal": "GND",
+        "physical": false
+      },
+      "stage": 1,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-6",
+      "net": "VBAT",
+      "a": {
+        "module": "power-switch",
+        "terminal": "OUT",
+        "physical": false
+      },
+      "b": {
+        "module": "reg3",
+        "terminal": "VIN",
+        "physical": false
+      },
+      "stage": 1,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-7",
+      "net": "GND",
+      "a": {
+        "module": "battery",
+        "terminal": "PACK\u2212",
+        "physical": false
+      },
+      "b": {
+        "module": "reg3",
+        "terminal": "GND",
+        "physical": false
+      },
+      "stage": 9,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-8",
+      "net": "5V",
+      "a": {
+        "module": "reg5",
+        "terminal": "VOUT 5V",
+        "physical": false
+      },
+      "b": {
+        "module": "esp",
+        "terminal": "J1.21 / 5V",
+        "physical": true,
+        "header": "J1",
+        "pin": 21
+      },
+      "stage": 2,
+      "status": "named terminals; physical mapping required",
+      "note": "External-power mode only. Remove USB power first."
+    },
+    {
+      "id": "system-9",
+      "net": "GND",
+      "a": {
+        "module": "reg3",
+        "terminal": "GND",
+        "physical": false
+      },
+      "b": {
+        "module": "esp",
+        "terminal": "J1.22 / GND",
+        "physical": true,
+        "header": "J1",
+        "pin": 22
+      },
+      "stage": 2,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-10",
+      "net": "3V3D",
+      "a": {
+        "module": "reg3",
+        "terminal": "VOUT 3.3V",
+        "physical": false
+      },
+      "b": {
+        "module": "ldo",
+        "terminal": "IN pin1 \u2192 JP2.1",
+        "physical": false,
+        "adapter_pin": {
+          "header": "JP2",
+          "pin": 1,
+          "x": -3.81,
+          "z": -2.54,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "TPS7A2030 on top U$1; carrier pad 5 unused"
+        }
+      },
+      "stage": 1,
+      "status": "named terminals; physical mapping required",
+      "note": "Adapter header is now CAD-mapped; solder orientation and continuity must be checked. See adapter-assembly.md."
+    },
+    {
+      "id": "system-11",
+      "net": "3V3D",
+      "a": {
+        "module": "reg3",
+        "terminal": "VOUT 3.3V",
+        "physical": false
+      },
+      "b": {
+        "module": "ldo",
+        "terminal": "EN pin3 \u2192 JP2.3",
+        "physical": false,
+        "adapter_pin": {
+          "header": "JP2",
+          "pin": 3,
+          "x": -3.81,
+          "z": 2.54,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "TPS7A2030 on top U$1; carrier pad 5 unused"
+        }
+      },
+      "stage": 1,
+      "status": "named terminals; physical mapping required",
+      "note": "Adapter header is now CAD-mapped; solder orientation and continuity must be checked. See adapter-assembly.md."
+    },
+    {
+      "id": "system-12",
+      "net": "GND",
+      "a": {
+        "module": "reg3",
+        "terminal": "GND",
+        "physical": false
+      },
+      "b": {
+        "module": "ldo",
+        "terminal": "GND pin2 \u2192 JP2.2",
+        "physical": false,
+        "adapter_pin": {
+          "header": "JP2",
+          "pin": 2,
+          "x": -3.81,
+          "z": 0.0,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "TPS7A2030 on top U$1; carrier pad 5 unused"
+        }
+      },
+      "stage": 1,
+      "status": "named terminals; physical mapping required",
+      "note": "Adapter header is now CAD-mapped; solder orientation and continuity must be checked. See adapter-assembly.md."
+    },
+    {
+      "id": "system-13",
+      "net": "3V3D",
+      "a": {
+        "module": "reg3",
+        "terminal": "VOUT 3.3V",
+        "physical": false
+      },
+      "b": {
+        "module": "cap-2",
+        "terminal": "1",
+        "physical": false
+      },
+      "stage": 1,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-14",
+      "net": "GND",
+      "a": {
+        "module": "cap-2",
+        "terminal": "2",
+        "physical": false
+      },
+      "b": {
+        "module": "reg3",
+        "terminal": "GND",
+        "physical": false
+      },
+      "stage": 1,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-15",
+      "net": "3V0A",
+      "a": {
+        "module": "ldo",
+        "terminal": "OUT pin5 / 3.0V \u2192 JP1.1",
+        "physical": false,
+        "adapter_pin": {
+          "header": "JP1",
+          "pin": 1,
+          "x": 3.81,
+          "z": -2.54,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "TPS7A2030 on top U$1; carrier pad 5 unused"
+        }
+      },
+      "b": {
+        "module": "cap-3",
+        "terminal": "1",
+        "physical": false
+      },
+      "stage": 1,
+      "status": "named terminals; physical mapping required",
+      "note": "Adapter header is now CAD-mapped; solder orientation and continuity must be checked. See adapter-assembly.md."
+    },
+    {
+      "id": "system-16",
+      "net": "GND",
+      "a": {
+        "module": "cap-3",
+        "terminal": "2",
+        "physical": false
+      },
+      "b": {
+        "module": "reg3",
+        "terminal": "GND",
+        "physical": false
+      },
+      "stage": 1,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-17",
+      "net": "3V0A",
+      "a": {
+        "module": "ldo",
+        "terminal": "OUT pin5 / 3.0V \u2192 JP1.1",
+        "physical": false,
+        "adapter_pin": {
+          "header": "JP1",
+          "pin": 1,
+          "x": 3.81,
+          "z": -2.54,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "TPS7A2030 on top U$1; carrier pad 5 unused"
+        }
+      },
+      "b": {
+        "module": "BB0",
+        "terminal": "d2",
+        "physical": true,
+        "hole": "d2"
+      },
+      "stage": 1,
+      "status": "named terminals; physical mapping required",
+      "note": "Adapter header is now CAD-mapped; solder orientation and continuity must be checked. See adapter-assembly.md."
+    },
+    {
+      "id": "system-18",
+      "net": "GND",
+      "a": {
+        "module": "reg3",
+        "terminal": "GND",
+        "physical": false
+      },
+      "b": {
+        "module": "BB0",
+        "terminal": "e6",
+        "physical": true,
+        "hole": "e6"
+      },
+      "stage": 1,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-19",
+      "net": "3V0A",
+      "a": {
+        "module": "ldo",
+        "terminal": "OUT pin5 / 3.0V \u2192 JP1.1",
+        "physical": false,
+        "adapter_pin": {
+          "header": "JP1",
+          "pin": 1,
+          "x": 3.81,
+          "z": -2.54,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "TPS7A2030 on top U$1; carrier pad 5 unused"
+        }
+      },
+      "b": {
+        "module": "adc",
+        "terminal": "AVDD",
+        "physical": false
+      },
+      "stage": 3,
+      "status": "named terminals; physical mapping required",
+      "note": "Adapter header is now CAD-mapped; solder orientation and continuity must be checked. See adapter-assembly.md."
+    },
+    {
+      "id": "system-20",
+      "net": "3V3D",
+      "a": {
+        "module": "reg3",
+        "terminal": "VOUT 3.3V",
+        "physical": false
+      },
+      "b": {
+        "module": "adc",
+        "terminal": "DVDD",
+        "physical": false
+      },
+      "stage": 3,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-21",
+      "net": "GND",
+      "a": {
+        "module": "reg3",
+        "terminal": "GND",
+        "physical": false
+      },
+      "b": {
+        "module": "adc",
+        "terminal": "GND",
+        "physical": false
+      },
+      "stage": 3,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-22",
+      "net": "ADC_CS",
+      "a": {
+        "module": "esp",
+        "terminal": "J1.16 / GPIO10",
+        "physical": true,
+        "header": "J1",
+        "pin": 16
+      },
+      "b": {
+        "module": "adc",
+        "terminal": "CS",
+        "physical": false
+      },
+      "stage": 3,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-23",
+      "net": "ADC_SCK",
+      "a": {
+        "module": "esp",
+        "terminal": "J1.18 / GPIO12",
+        "physical": true,
+        "header": "J1",
+        "pin": 18
+      },
+      "b": {
+        "module": "adc",
+        "terminal": "SCLK",
+        "physical": false
+      },
+      "stage": 3,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-24",
+      "net": "ADC_MISO",
+      "a": {
+        "module": "esp",
+        "terminal": "J1.19 / GPIO13",
+        "physical": true,
+        "header": "J1",
+        "pin": 19
+      },
+      "b": {
+        "module": "adc",
+        "terminal": "DOUT",
+        "physical": false
+      },
+      "stage": 3,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-25",
+      "net": "ADC_RESET",
+      "a": {
+        "module": "esp",
+        "terminal": "J1.15 / GPIO9",
+        "physical": true,
+        "header": "J1",
+        "pin": 15
+      },
+      "b": {
+        "module": "adc",
+        "terminal": "SYNC / RESET",
+        "physical": false
+      },
+      "stage": 3,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-26",
+      "net": "ADC_DRDY",
+      "a": {
+        "module": "esp",
+        "terminal": "J1.12 / GPIO8",
+        "physical": true,
+        "header": "J1",
+        "pin": 12
+      },
+      "b": {
+        "module": "adc",
+        "terminal": "DRDY",
+        "physical": false
+      },
+      "stage": 3,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-27",
+      "net": "3V3D",
+      "a": {
+        "module": "reg3",
+        "terminal": "VOUT 3.3V",
+        "physical": false
+      },
+      "b": {
+        "module": "adc-cs-pullup",
+        "terminal": "1",
+        "physical": false
+      },
+      "stage": 3,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-28",
+      "net": "ADC_CS",
+      "a": {
+        "module": "adc-cs-pullup",
+        "terminal": "2",
+        "physical": false
+      },
+      "b": {
+        "module": "esp",
+        "terminal": "J1.16 / GPIO10",
+        "physical": true,
+        "header": "J1",
+        "pin": 16
+      },
+      "stage": 3,
+      "status": "named terminals; physical mapping required",
+      "note": "Verify existing module pull-up before fitting; retain equivalent pull-up."
+    },
+    {
+      "id": "system-29",
+      "net": "ADC_MOSI",
+      "a": {
+        "module": "esp",
+        "terminal": "J1.17 / GPIO11",
+        "physical": true,
+        "header": "J1",
+        "pin": 17
+      },
+      "b": {
+        "module": "adc",
+        "terminal": "DIN",
+        "physical": false
+      },
+      "stage": 3,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-30",
+      "net": "3V3D",
+      "a": {
+        "module": "reg3",
+        "terminal": "VOUT 3.3V",
+        "physical": false
+      },
+      "b": {
+        "module": "clock",
+        "terminal": "VDD",
+        "physical": false
+      },
+      "stage": 3,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-31",
+      "net": "GND",
+      "a": {
+        "module": "reg3",
+        "terminal": "GND",
+        "physical": false
+      },
+      "b": {
+        "module": "clock",
+        "terminal": "GND",
+        "physical": false
+      },
+      "stage": 3,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-32",
+      "net": "ADC_CLK",
+      "a": {
+        "module": "clock",
+        "terminal": "OUT",
+        "physical": false
+      },
+      "b": {
+        "module": "adc",
+        "terminal": "CLKIN",
+        "physical": false
+      },
+      "stage": 3,
+      "status": "named terminals; physical mapping required",
+      "note": "Verify selected carrier clock source and isolate conflicting onboard oscillator."
+    },
+    {
+      "id": "system-33",
+      "net": "AIN0P",
+      "a": {
+        "module": "BB1",
+        "terminal": "c28",
+        "physical": true,
+        "hole": "c28"
+      },
+      "b": {
+        "module": "adc",
+        "terminal": "AIN0P",
+        "physical": false
+      },
+      "stage": 4,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-34",
+      "net": "AIN0N",
+      "a": {
+        "module": "BB1",
+        "terminal": "c32",
+        "physical": true,
+        "hole": "c32"
+      },
+      "b": {
+        "module": "adc",
+        "terminal": "AIN0N",
+        "physical": false
+      },
+      "stage": 4,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-35",
+      "net": "RAW0",
+      "a": {
+        "module": "myo1",
+        "terminal": "RAW (not ENV)",
+        "physical": false
+      },
+      "b": {
+        "module": "BB1",
+        "terminal": "b2",
+        "physical": true,
+        "hole": "b2"
+      },
+      "stage": 10,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-36",
+      "net": "3V0A",
+      "a": {
+        "module": "ldo",
+        "terminal": "OUT pin5 / 3.0V \u2192 JP1.1",
+        "physical": false,
+        "adapter_pin": {
+          "header": "JP1",
+          "pin": 1,
+          "x": 3.81,
+          "z": -2.54,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "TPS7A2030 on top U$1; carrier pad 5 unused"
+        }
+      },
+      "b": {
+        "module": "myo1",
+        "terminal": "VIN",
+        "physical": false
+      },
+      "stage": 10,
+      "status": "named terminals; physical mapping required",
+      "note": "Adapter header is now CAD-mapped; solder orientation and continuity must be checked. See adapter-assembly.md."
+    },
+    {
+      "id": "system-37",
+      "net": "GND",
+      "a": {
+        "module": "reg3",
+        "terminal": "GND",
+        "physical": false
+      },
+      "b": {
+        "module": "myo1",
+        "terminal": "GND",
+        "physical": false
+      },
+      "stage": 10,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-38",
+      "net": "GND",
+      "a": {
+        "module": "BB1",
+        "terminal": "d6",
+        "physical": true,
+        "hole": "d6"
+      },
+      "b": {
+        "module": "clamp1",
+        "terminal": "CHIP_PAD_1 \u2192 JP1.2",
+        "physical": false,
+        "adapter_pin": {
+          "header": "JP1",
+          "pin": 2,
+          "x": 3.81,
+          "z": 0.0,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "Device on bottom Q1 only; Q2 and top U$1 empty"
+        }
+      },
+      "stage": 4,
+      "status": "named terminals; physical mapping required",
+      "note": "Chip pin numbering is not adapter header numbering; verify the soldered adapter. Adapter header is now CAD-mapped; solder orientation and continuity must be checked. See adapter-assembly.md."
+    },
+    {
+      "id": "system-39",
+      "net": "3V0A",
+      "a": {
+        "module": "BB1",
+        "terminal": "h10",
+        "physical": true,
+        "hole": "h10"
+      },
+      "b": {
+        "module": "clamp1",
+        "terminal": "CHIP_PAD_2 \u2192 JP1.3",
+        "physical": false,
+        "adapter_pin": {
+          "header": "JP1",
+          "pin": 3,
+          "x": 3.81,
+          "z": 2.54,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "Device on bottom Q1 only; Q2 and top U$1 empty"
+        }
+      },
+      "stage": 4,
+      "status": "named terminals; physical mapping required",
+      "note": "Chip pin numbering is not adapter header numbering; verify the soldered adapter. Adapter header is now CAD-mapped; solder orientation and continuity must be checked. See adapter-assembly.md."
+    },
+    {
+      "id": "system-40",
+      "net": "RC0A",
+      "a": {
+        "module": "BB1",
+        "terminal": "d4",
+        "physical": true,
+        "hole": "d4"
+      },
+      "b": {
+        "module": "clamp1",
+        "terminal": "CHIP_PAD_3 \u2192 JP2.3",
+        "physical": false,
+        "adapter_pin": {
+          "header": "JP2",
+          "pin": 3,
+          "x": -3.81,
+          "z": 2.54,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "Device on bottom Q1 only; Q2 and top U$1 empty"
+        }
+      },
+      "stage": 4,
+      "status": "named terminals; physical mapping required",
+      "note": "Chip pin numbering is not adapter header numbering; verify the soldered adapter. Adapter header is now CAD-mapped; solder orientation and continuity must be checked. See adapter-assembly.md."
+    },
+    {
+      "id": "system-41",
+      "net": "AIN1P",
+      "a": {
+        "module": "BB2",
+        "terminal": "c28",
+        "physical": true,
+        "hole": "c28"
+      },
+      "b": {
+        "module": "adc",
+        "terminal": "AIN1P",
+        "physical": false
+      },
+      "stage": 5,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-42",
+      "net": "AIN1N",
+      "a": {
+        "module": "BB2",
+        "terminal": "c32",
+        "physical": true,
+        "hole": "c32"
+      },
+      "b": {
+        "module": "adc",
+        "terminal": "AIN1N",
+        "physical": false
+      },
+      "stage": 5,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-43",
+      "net": "RAW1",
+      "a": {
+        "module": "myo2",
+        "terminal": "RAW (not ENV)",
+        "physical": false
+      },
+      "b": {
+        "module": "BB2",
+        "terminal": "b2",
+        "physical": true,
+        "hole": "b2"
+      },
+      "stage": 10,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-44",
+      "net": "3V0A",
+      "a": {
+        "module": "ldo",
+        "terminal": "OUT pin5 / 3.0V \u2192 JP1.1",
+        "physical": false,
+        "adapter_pin": {
+          "header": "JP1",
+          "pin": 1,
+          "x": 3.81,
+          "z": -2.54,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "TPS7A2030 on top U$1; carrier pad 5 unused"
+        }
+      },
+      "b": {
+        "module": "myo2",
+        "terminal": "VIN",
+        "physical": false
+      },
+      "stage": 10,
+      "status": "named terminals; physical mapping required",
+      "note": "Adapter header is now CAD-mapped; solder orientation and continuity must be checked. See adapter-assembly.md."
+    },
+    {
+      "id": "system-45",
+      "net": "GND",
+      "a": {
+        "module": "reg3",
+        "terminal": "GND",
+        "physical": false
+      },
+      "b": {
+        "module": "myo2",
+        "terminal": "GND",
+        "physical": false
+      },
+      "stage": 10,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-46",
+      "net": "GND",
+      "a": {
+        "module": "BB2",
+        "terminal": "d6",
+        "physical": true,
+        "hole": "d6"
+      },
+      "b": {
+        "module": "clamp2",
+        "terminal": "CHIP_PAD_1 \u2192 JP1.2",
+        "physical": false,
+        "adapter_pin": {
+          "header": "JP1",
+          "pin": 2,
+          "x": 3.81,
+          "z": 0.0,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "Device on bottom Q1 only; Q2 and top U$1 empty"
+        }
+      },
+      "stage": 5,
+      "status": "named terminals; physical mapping required",
+      "note": "Chip pin numbering is not adapter header numbering; verify the soldered adapter. Adapter header is now CAD-mapped; solder orientation and continuity must be checked. See adapter-assembly.md."
+    },
+    {
+      "id": "system-47",
+      "net": "3V0A",
+      "a": {
+        "module": "BB2",
+        "terminal": "h10",
+        "physical": true,
+        "hole": "h10"
+      },
+      "b": {
+        "module": "clamp2",
+        "terminal": "CHIP_PAD_2 \u2192 JP1.3",
+        "physical": false,
+        "adapter_pin": {
+          "header": "JP1",
+          "pin": 3,
+          "x": 3.81,
+          "z": 2.54,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "Device on bottom Q1 only; Q2 and top U$1 empty"
+        }
+      },
+      "stage": 5,
+      "status": "named terminals; physical mapping required",
+      "note": "Chip pin numbering is not adapter header numbering; verify the soldered adapter. Adapter header is now CAD-mapped; solder orientation and continuity must be checked. See adapter-assembly.md."
+    },
+    {
+      "id": "system-48",
+      "net": "RC1A",
+      "a": {
+        "module": "BB2",
+        "terminal": "d4",
+        "physical": true,
+        "hole": "d4"
+      },
+      "b": {
+        "module": "clamp2",
+        "terminal": "CHIP_PAD_3 \u2192 JP2.3",
+        "physical": false,
+        "adapter_pin": {
+          "header": "JP2",
+          "pin": 3,
+          "x": -3.81,
+          "z": 2.54,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "Device on bottom Q1 only; Q2 and top U$1 empty"
+        }
+      },
+      "stage": 5,
+      "status": "named terminals; physical mapping required",
+      "note": "Chip pin numbering is not adapter header numbering; verify the soldered adapter. Adapter header is now CAD-mapped; solder orientation and continuity must be checked. See adapter-assembly.md."
+    },
+    {
+      "id": "system-49",
+      "net": "AIN2P",
+      "a": {
+        "module": "BB3",
+        "terminal": "c28",
+        "physical": true,
+        "hole": "c28"
+      },
+      "b": {
+        "module": "adc",
+        "terminal": "AIN2P",
+        "physical": false
+      },
+      "stage": 5,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-50",
+      "net": "AIN2N",
+      "a": {
+        "module": "BB3",
+        "terminal": "c32",
+        "physical": true,
+        "hole": "c32"
+      },
+      "b": {
+        "module": "adc",
+        "terminal": "AIN2N",
+        "physical": false
+      },
+      "stage": 5,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-51",
+      "net": "RAW2",
+      "a": {
+        "module": "myo3",
+        "terminal": "RAW (not ENV)",
+        "physical": false
+      },
+      "b": {
+        "module": "BB3",
+        "terminal": "b2",
+        "physical": true,
+        "hole": "b2"
+      },
+      "stage": 10,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-52",
+      "net": "3V0A",
+      "a": {
+        "module": "ldo",
+        "terminal": "OUT pin5 / 3.0V \u2192 JP1.1",
+        "physical": false,
+        "adapter_pin": {
+          "header": "JP1",
+          "pin": 1,
+          "x": 3.81,
+          "z": -2.54,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "TPS7A2030 on top U$1; carrier pad 5 unused"
+        }
+      },
+      "b": {
+        "module": "myo3",
+        "terminal": "VIN",
+        "physical": false
+      },
+      "stage": 10,
+      "status": "named terminals; physical mapping required",
+      "note": "Adapter header is now CAD-mapped; solder orientation and continuity must be checked. See adapter-assembly.md."
+    },
+    {
+      "id": "system-53",
+      "net": "GND",
+      "a": {
+        "module": "reg3",
+        "terminal": "GND",
+        "physical": false
+      },
+      "b": {
+        "module": "myo3",
+        "terminal": "GND",
+        "physical": false
+      },
+      "stage": 10,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-54",
+      "net": "GND",
+      "a": {
+        "module": "BB3",
+        "terminal": "d6",
+        "physical": true,
+        "hole": "d6"
+      },
+      "b": {
+        "module": "clamp3",
+        "terminal": "CHIP_PAD_1 \u2192 JP1.2",
+        "physical": false,
+        "adapter_pin": {
+          "header": "JP1",
+          "pin": 2,
+          "x": 3.81,
+          "z": 0.0,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "Device on bottom Q1 only; Q2 and top U$1 empty"
+        }
+      },
+      "stage": 5,
+      "status": "named terminals; physical mapping required",
+      "note": "Chip pin numbering is not adapter header numbering; verify the soldered adapter. Adapter header is now CAD-mapped; solder orientation and continuity must be checked. See adapter-assembly.md."
+    },
+    {
+      "id": "system-55",
+      "net": "3V0A",
+      "a": {
+        "module": "BB3",
+        "terminal": "h10",
+        "physical": true,
+        "hole": "h10"
+      },
+      "b": {
+        "module": "clamp3",
+        "terminal": "CHIP_PAD_2 \u2192 JP1.3",
+        "physical": false,
+        "adapter_pin": {
+          "header": "JP1",
+          "pin": 3,
+          "x": 3.81,
+          "z": 2.54,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "Device on bottom Q1 only; Q2 and top U$1 empty"
+        }
+      },
+      "stage": 5,
+      "status": "named terminals; physical mapping required",
+      "note": "Chip pin numbering is not adapter header numbering; verify the soldered adapter. Adapter header is now CAD-mapped; solder orientation and continuity must be checked. See adapter-assembly.md."
+    },
+    {
+      "id": "system-56",
+      "net": "RC2A",
+      "a": {
+        "module": "BB3",
+        "terminal": "d4",
+        "physical": true,
+        "hole": "d4"
+      },
+      "b": {
+        "module": "clamp3",
+        "terminal": "CHIP_PAD_3 \u2192 JP2.3",
+        "physical": false,
+        "adapter_pin": {
+          "header": "JP2",
+          "pin": 3,
+          "x": -3.81,
+          "z": 2.54,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "Device on bottom Q1 only; Q2 and top U$1 empty"
+        }
+      },
+      "stage": 5,
+      "status": "named terminals; physical mapping required",
+      "note": "Chip pin numbering is not adapter header numbering; verify the soldered adapter. Adapter header is now CAD-mapped; solder orientation and continuity must be checked. See adapter-assembly.md."
+    },
+    {
+      "id": "system-57",
+      "net": "AIN3P",
+      "a": {
+        "module": "BB4",
+        "terminal": "c28",
+        "physical": true,
+        "hole": "c28"
+      },
+      "b": {
+        "module": "adc",
+        "terminal": "AIN3P",
+        "physical": false
+      },
+      "stage": 5,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-58",
+      "net": "AIN3N",
+      "a": {
+        "module": "BB4",
+        "terminal": "c32",
+        "physical": true,
+        "hole": "c32"
+      },
+      "b": {
+        "module": "adc",
+        "terminal": "AIN3N",
+        "physical": false
+      },
+      "stage": 5,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-59",
+      "net": "RAW3",
+      "a": {
+        "module": "myo4",
+        "terminal": "RAW (not ENV)",
+        "physical": false
+      },
+      "b": {
+        "module": "BB4",
+        "terminal": "b2",
+        "physical": true,
+        "hole": "b2"
+      },
+      "stage": 10,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-60",
+      "net": "3V0A",
+      "a": {
+        "module": "ldo",
+        "terminal": "OUT pin5 / 3.0V \u2192 JP1.1",
+        "physical": false,
+        "adapter_pin": {
+          "header": "JP1",
+          "pin": 1,
+          "x": 3.81,
+          "z": -2.54,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "TPS7A2030 on top U$1; carrier pad 5 unused"
+        }
+      },
+      "b": {
+        "module": "myo4",
+        "terminal": "VIN",
+        "physical": false
+      },
+      "stage": 10,
+      "status": "named terminals; physical mapping required",
+      "note": "Adapter header is now CAD-mapped; solder orientation and continuity must be checked. See adapter-assembly.md."
+    },
+    {
+      "id": "system-61",
+      "net": "GND",
+      "a": {
+        "module": "reg3",
+        "terminal": "GND",
+        "physical": false
+      },
+      "b": {
+        "module": "myo4",
+        "terminal": "GND",
+        "physical": false
+      },
+      "stage": 10,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-62",
+      "net": "GND",
+      "a": {
+        "module": "BB4",
+        "terminal": "d6",
+        "physical": true,
+        "hole": "d6"
+      },
+      "b": {
+        "module": "clamp4",
+        "terminal": "CHIP_PAD_1 \u2192 JP1.2",
+        "physical": false,
+        "adapter_pin": {
+          "header": "JP1",
+          "pin": 2,
+          "x": 3.81,
+          "z": 0.0,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "Device on bottom Q1 only; Q2 and top U$1 empty"
+        }
+      },
+      "stage": 5,
+      "status": "named terminals; physical mapping required",
+      "note": "Chip pin numbering is not adapter header numbering; verify the soldered adapter. Adapter header is now CAD-mapped; solder orientation and continuity must be checked. See adapter-assembly.md."
+    },
+    {
+      "id": "system-63",
+      "net": "3V0A",
+      "a": {
+        "module": "BB4",
+        "terminal": "h10",
+        "physical": true,
+        "hole": "h10"
+      },
+      "b": {
+        "module": "clamp4",
+        "terminal": "CHIP_PAD_2 \u2192 JP1.3",
+        "physical": false,
+        "adapter_pin": {
+          "header": "JP1",
+          "pin": 3,
+          "x": 3.81,
+          "z": 2.54,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "Device on bottom Q1 only; Q2 and top U$1 empty"
+        }
+      },
+      "stage": 5,
+      "status": "named terminals; physical mapping required",
+      "note": "Chip pin numbering is not adapter header numbering; verify the soldered adapter. Adapter header is now CAD-mapped; solder orientation and continuity must be checked. See adapter-assembly.md."
+    },
+    {
+      "id": "system-64",
+      "net": "RC3A",
+      "a": {
+        "module": "BB4",
+        "terminal": "d4",
+        "physical": true,
+        "hole": "d4"
+      },
+      "b": {
+        "module": "clamp4",
+        "terminal": "CHIP_PAD_3 \u2192 JP2.3",
+        "physical": false,
+        "adapter_pin": {
+          "header": "JP2",
+          "pin": 3,
+          "x": -3.81,
+          "z": 2.54,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "Device on bottom Q1 only; Q2 and top U$1 empty"
+        }
+      },
+      "stage": 5,
+      "status": "named terminals; physical mapping required",
+      "note": "Chip pin numbering is not adapter header numbering; verify the soldered adapter. Adapter header is now CAD-mapped; solder orientation and continuity must be checked. See adapter-assembly.md."
+    },
+    {
+      "id": "system-65",
+      "net": "3V3D",
+      "a": {
+        "module": "reg3",
+        "terminal": "VOUT 3.3V",
+        "physical": false
+      },
+      "b": {
+        "module": "foot",
+        "terminal": "VCC / photo position 8",
+        "physical": false,
+        "photo_pin": {
+          "photo_header": "GY-521",
+          "label": "VCC",
+          "position_from_left": 8,
+          "x": 8.89,
+          "z": -8
+        }
+      },
+      "stage": 6,
+      "status": "photo-labeled endpoint; electrical continuity untested",
+      "note": "Measure chip supply and pull-up voltage before ESP connection."
+    },
+    {
+      "id": "system-66",
+      "net": "GND",
+      "a": {
+        "module": "reg3",
+        "terminal": "GND",
+        "physical": false
+      },
+      "b": {
+        "module": "foot",
+        "terminal": "GND / photo position 7",
+        "physical": false,
+        "photo_pin": {
+          "photo_header": "GY-521",
+          "label": "GND",
+          "position_from_left": 7,
+          "x": 6.35,
+          "z": -8
+        }
+      },
+      "stage": 6,
+      "status": "photo-labeled endpoint; electrical continuity untested",
+      "note": ""
+    },
+    {
+      "id": "system-67",
+      "net": "IMU_SDA",
+      "a": {
+        "module": "esp",
+        "terminal": "J1.4 / GPIO4",
+        "physical": true,
+        "header": "J1",
+        "pin": 4
+      },
+      "b": {
+        "module": "foot",
+        "terminal": "SDA / photo position 5",
+        "physical": false,
+        "photo_pin": {
+          "photo_header": "GY-521",
+          "label": "SDA",
+          "position_from_left": 5,
+          "x": 1.2699999999999996,
+          "z": -8
+        }
+      },
+      "stage": 6,
+      "status": "photo-labeled endpoint; electrical continuity untested",
+      "note": ""
+    },
+    {
+      "id": "system-68",
+      "net": "IMU_SCL",
+      "a": {
+        "module": "esp",
+        "terminal": "J1.6 / GPIO6",
+        "physical": true,
+        "header": "J1",
+        "pin": 6
+      },
+      "b": {
+        "module": "foot",
+        "terminal": "SCL / photo position 6",
+        "physical": false,
+        "photo_pin": {
+          "photo_header": "GY-521",
+          "label": "SCL",
+          "position_from_left": 6,
+          "x": 3.8099999999999987,
+          "z": -8
+        }
+      },
+      "stage": 6,
+      "status": "photo-labeled endpoint; electrical continuity untested",
+      "note": ""
+    },
+    {
+      "id": "system-69",
+      "net": "FOOT_AD0",
+      "a": {
+        "module": "esp",
+        "terminal": "J1.7 / GPIO7",
+        "physical": true,
+        "header": "J1",
+        "pin": 7
+      },
+      "b": {
+        "module": "foot",
+        "terminal": "AD0 / photo position 2",
+        "physical": false,
+        "photo_pin": {
+          "photo_header": "GY-521",
+          "label": "AD0",
+          "position_from_left": 2,
+          "x": -6.3500000000000005,
+          "z": -8
+        }
+      },
+      "stage": 6,
+      "status": "photo-labeled endpoint; electrical continuity untested",
+      "note": ""
+    },
+    {
+      "id": "system-70",
+      "net": "FOOT_INT",
+      "a": {
+        "module": "esp",
+        "terminal": "J1.9 / GPIO16",
+        "physical": true,
+        "header": "J1",
+        "pin": 9
+      },
+      "b": {
+        "module": "foot",
+        "terminal": "INT / photo position 1",
+        "physical": false,
+        "photo_pin": {
+          "photo_header": "GY-521",
+          "label": "INT",
+          "position_from_left": 1,
+          "x": -8.89,
+          "z": -8
+        }
+      },
+      "stage": 6,
+      "status": "photo-labeled endpoint; electrical continuity untested",
+      "note": ""
+    },
+    {
+      "id": "system-71",
+      "net": "3V3D",
+      "a": {
+        "module": "reg3",
+        "terminal": "VOUT 3.3V",
+        "physical": false
+      },
+      "b": {
+        "module": "foot-pullup",
+        "terminal": "1",
+        "physical": false
+      },
+      "stage": 6,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-72",
+      "net": "FOOT_AD0",
+      "a": {
+        "module": "foot-pullup",
+        "terminal": "2",
+        "physical": false
+      },
+      "b": {
+        "module": "esp",
+        "terminal": "J1.7 / GPIO7",
+        "physical": true,
+        "header": "J1",
+        "pin": 7
+      },
+      "stage": 6,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-73",
+      "net": "3V3D",
+      "a": {
+        "module": "reg3",
+        "terminal": "VOUT 3.3V",
+        "physical": false
+      },
+      "b": {
+        "module": "shank",
+        "terminal": "VCC / photo position 8",
+        "physical": false,
+        "photo_pin": {
+          "photo_header": "GY-521",
+          "label": "VCC",
+          "position_from_left": 8,
+          "x": 8.89,
+          "z": -8
+        }
+      },
+      "stage": 6,
+      "status": "photo-labeled endpoint; electrical continuity untested",
+      "note": "Measure chip supply and pull-up voltage before ESP connection."
+    },
+    {
+      "id": "system-74",
+      "net": "GND",
+      "a": {
+        "module": "reg3",
+        "terminal": "GND",
+        "physical": false
+      },
+      "b": {
+        "module": "shank",
+        "terminal": "GND / photo position 7",
+        "physical": false,
+        "photo_pin": {
+          "photo_header": "GY-521",
+          "label": "GND",
+          "position_from_left": 7,
+          "x": 6.35,
+          "z": -8
+        }
+      },
+      "stage": 6,
+      "status": "photo-labeled endpoint; electrical continuity untested",
+      "note": ""
+    },
+    {
+      "id": "system-75",
+      "net": "IMU_SDA",
+      "a": {
+        "module": "esp",
+        "terminal": "J1.4 / GPIO4",
+        "physical": true,
+        "header": "J1",
+        "pin": 4
+      },
+      "b": {
+        "module": "shank",
+        "terminal": "SDA / photo position 5",
+        "physical": false,
+        "photo_pin": {
+          "photo_header": "GY-521",
+          "label": "SDA",
+          "position_from_left": 5,
+          "x": 1.2699999999999996,
+          "z": -8
+        }
+      },
+      "stage": 6,
+      "status": "photo-labeled endpoint; electrical continuity untested",
+      "note": ""
+    },
+    {
+      "id": "system-76",
+      "net": "IMU_SCL",
+      "a": {
+        "module": "esp",
+        "terminal": "J1.6 / GPIO6",
+        "physical": true,
+        "header": "J1",
+        "pin": 6
+      },
+      "b": {
+        "module": "shank",
+        "terminal": "SCL / photo position 6",
+        "physical": false,
+        "photo_pin": {
+          "photo_header": "GY-521",
+          "label": "SCL",
+          "position_from_left": 6,
+          "x": 3.8099999999999987,
+          "z": -8
+        }
+      },
+      "stage": 6,
+      "status": "photo-labeled endpoint; electrical continuity untested",
+      "note": ""
+    },
+    {
+      "id": "system-77",
+      "net": "SHANK_AD0",
+      "a": {
+        "module": "esp",
+        "terminal": "J1.8 / GPIO15",
+        "physical": true,
+        "header": "J1",
+        "pin": 8
+      },
+      "b": {
+        "module": "shank",
+        "terminal": "AD0 / photo position 2",
+        "physical": false,
+        "photo_pin": {
+          "photo_header": "GY-521",
+          "label": "AD0",
+          "position_from_left": 2,
+          "x": -6.3500000000000005,
+          "z": -8
+        }
+      },
+      "stage": 6,
+      "status": "photo-labeled endpoint; electrical continuity untested",
+      "note": ""
+    },
+    {
+      "id": "system-78",
+      "net": "SHANK_INT",
+      "a": {
+        "module": "esp",
+        "terminal": "J1.10 / GPIO17",
+        "physical": true,
+        "header": "J1",
+        "pin": 10
+      },
+      "b": {
+        "module": "shank",
+        "terminal": "INT / photo position 1",
+        "physical": false,
+        "photo_pin": {
+          "photo_header": "GY-521",
+          "label": "INT",
+          "position_from_left": 1,
+          "x": -8.89,
+          "z": -8
+        }
+      },
+      "stage": 6,
+      "status": "photo-labeled endpoint; electrical continuity untested",
+      "note": ""
+    },
+    {
+      "id": "system-79",
+      "net": "3V3D",
+      "a": {
+        "module": "reg3",
+        "terminal": "VOUT 3.3V",
+        "physical": false
+      },
+      "b": {
+        "module": "shank-pullup",
+        "terminal": "1",
+        "physical": false
+      },
+      "stage": 6,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-80",
+      "net": "SHANK_AD0",
+      "a": {
+        "module": "shank-pullup",
+        "terminal": "2",
+        "physical": false
+      },
+      "b": {
+        "module": "esp",
+        "terminal": "J1.8 / GPIO15",
+        "physical": true,
+        "header": "J1",
+        "pin": 8
+      },
+      "stage": 6,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-81",
+      "net": "3V3D",
+      "a": {
+        "module": "reg3",
+        "terminal": "VOUT 3.3V",
+        "physical": false
+      },
+      "b": {
+        "module": "IMU_SDA-pullup",
+        "terminal": "1",
+        "physical": false
+      },
+      "stage": 6,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-82",
+      "net": "IMU_SDA",
+      "a": {
+        "module": "IMU_SDA-pullup",
+        "terminal": "2",
+        "physical": false
+      },
+      "b": {
+        "module": "esp",
+        "terminal": "J1.4 / GPIO4",
+        "physical": true,
+        "header": "J1",
+        "pin": 4
+      },
+      "stage": 6,
+      "status": "named terminals; physical mapping required",
+      "note": "Fit only after measuring onboard pull-ups; 2.2k is the effective target, not an extra resistor on every module."
+    },
+    {
+      "id": "system-83",
+      "net": "3V3D",
+      "a": {
+        "module": "reg3",
+        "terminal": "VOUT 3.3V",
+        "physical": false
+      },
+      "b": {
+        "module": "IMU_SCL-pullup",
+        "terminal": "1",
+        "physical": false
+      },
+      "stage": 6,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-84",
+      "net": "IMU_SCL",
+      "a": {
+        "module": "IMU_SCL-pullup",
+        "terminal": "2",
+        "physical": false
+      },
+      "b": {
+        "module": "esp",
+        "terminal": "J1.6 / GPIO6",
+        "physical": true,
+        "header": "J1",
+        "pin": 6
+      },
+      "stage": 6,
+      "status": "named terminals; physical mapping required",
+      "note": "Fit only after measuring onboard pull-ups; 2.2k is the effective target, not an extra resistor on every module."
+    },
+    {
+      "id": "system-85",
+      "net": "3V3D",
+      "a": {
+        "module": "reg3",
+        "terminal": "VOUT 3.3V",
+        "physical": false
+      },
+      "b": {
+        "module": "sd",
+        "terminal": "JP1.1 / 3V3",
+        "physical": true,
+        "sd_pin": 1
+      },
+      "stage": 7,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-86",
+      "net": "BUTTON",
+      "a": {
+        "module": "esp",
+        "terminal": "J1.11 / GPIO18",
+        "physical": true,
+        "header": "J1",
+        "pin": 11
+      },
+      "b": {
+        "module": "button",
+        "terminal": "contact A",
+        "physical": false
+      },
+      "stage": 2,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-87",
+      "net": "GND",
+      "a": {
+        "module": "button",
+        "terminal": "contact B",
+        "physical": false
+      },
+      "b": {
+        "module": "reg3",
+        "terminal": "GND",
+        "physical": false
+      },
+      "stage": 2,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-88",
+      "net": "3V3D",
+      "a": {
+        "module": "reg3",
+        "terminal": "VOUT 3.3V",
+        "physical": false
+      },
+      "b": {
+        "module": "button-pullup",
+        "terminal": "1",
+        "physical": false
+      },
+      "stage": 2,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-89",
+      "net": "BUTTON",
+      "a": {
+        "module": "button-pullup",
+        "terminal": "2",
+        "physical": false
+      },
+      "b": {
+        "module": "esp",
+        "terminal": "J1.11 / GPIO18",
+        "physical": true,
+        "header": "J1",
+        "pin": 11
+      },
+      "stage": 2,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-90",
+      "net": "LED_REC",
+      "a": {
+        "module": "esp",
+        "terminal": "J3.7 / GPIO41",
+        "physical": true,
+        "header": "J3",
+        "pin": 7
+      },
+      "b": {
+        "module": "rec-r",
+        "terminal": "1",
+        "physical": false
+      },
+      "stage": 2,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-91",
+      "net": "LED_REC_A",
+      "a": {
+        "module": "rec-r",
+        "terminal": "2",
+        "physical": false
+      },
+      "b": {
+        "module": "rec-led",
+        "terminal": "ANODE",
+        "physical": false
+      },
+      "stage": 2,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-92",
+      "net": "GND",
+      "a": {
+        "module": "rec-led",
+        "terminal": "CATHODE",
+        "physical": false
+      },
+      "b": {
+        "module": "reg3",
+        "terminal": "GND",
+        "physical": false
+      },
+      "stage": 2,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-93",
+      "net": "LED_ERR",
+      "a": {
+        "module": "esp",
+        "terminal": "J3.6 / GPIO42",
+        "physical": true,
+        "header": "J3",
+        "pin": 6
+      },
+      "b": {
+        "module": "err-r",
+        "terminal": "1",
+        "physical": false
+      },
+      "stage": 2,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-94",
+      "net": "LED_ERR_A",
+      "a": {
+        "module": "err-r",
+        "terminal": "2",
+        "physical": false
+      },
+      "b": {
+        "module": "err-led",
+        "terminal": "ANODE",
+        "physical": false
+      },
+      "stage": 2,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-95",
+      "net": "GND",
+      "a": {
+        "module": "err-led",
+        "terminal": "CATHODE",
+        "physical": false
+      },
+      "b": {
+        "module": "reg3",
+        "terminal": "GND",
+        "physical": false
+      },
+      "stage": 2,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-96",
+      "net": "LED_LOW",
+      "a": {
+        "module": "esp",
+        "terminal": "J3.5 / GPIO2",
+        "physical": true,
+        "header": "J3",
+        "pin": 5
+      },
+      "b": {
+        "module": "low-r",
+        "terminal": "1",
+        "physical": false
+      },
+      "stage": 2,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-97",
+      "net": "LED_LOW_A",
+      "a": {
+        "module": "low-r",
+        "terminal": "2",
+        "physical": false
+      },
+      "b": {
+        "module": "low-led",
+        "terminal": "ANODE",
+        "physical": false
+      },
+      "stage": 2,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-98",
+      "net": "GND",
+      "a": {
+        "module": "low-led",
+        "terminal": "CATHODE",
+        "physical": false
+      },
+      "b": {
+        "module": "reg3",
+        "terminal": "GND",
+        "physical": false
+      },
+      "stage": 2,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-99",
+      "net": "VBAT",
+      "a": {
+        "module": "power-switch",
+        "terminal": "OUT",
+        "physical": false
+      },
+      "b": {
+        "module": "bat-r-top",
+        "terminal": "1",
+        "physical": false
+      },
+      "stage": 2,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-100",
+      "net": "BAT_SENSE",
+      "a": {
+        "module": "bat-r-top",
+        "terminal": "2",
+        "physical": false
+      },
+      "b": {
+        "module": "esp",
+        "terminal": "J3.4 / GPIO1",
+        "physical": true,
+        "header": "J3",
+        "pin": 4
+      },
+      "stage": 2,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-101",
+      "net": "BAT_SENSE",
+      "a": {
+        "module": "bat-r-low",
+        "terminal": "1",
+        "physical": false
+      },
+      "b": {
+        "module": "esp",
+        "terminal": "J3.4 / GPIO1",
+        "physical": true,
+        "header": "J3",
+        "pin": 4
+      },
+      "stage": 2,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-102",
+      "net": "BAT_SENSE",
+      "a": {
+        "module": "bat-cap",
+        "terminal": "1",
+        "physical": false
+      },
+      "b": {
+        "module": "esp",
+        "terminal": "J3.4 / GPIO1",
+        "physical": true,
+        "header": "J3",
+        "pin": 4
+      },
+      "stage": 2,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-103",
+      "net": "GND",
+      "a": {
+        "module": "bat-r-low",
+        "terminal": "2",
+        "physical": false
+      },
+      "b": {
+        "module": "reg3",
+        "terminal": "GND",
+        "physical": false
+      },
+      "stage": 2,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-104",
+      "net": "GND",
+      "a": {
+        "module": "bat-cap",
+        "terminal": "2",
+        "physical": false
+      },
+      "b": {
+        "module": "reg3",
+        "terminal": "GND",
+        "physical": false
+      },
+      "stage": 2,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-105",
+      "net": "USB_VBUS",
+      "a": {
+        "module": "usb",
+        "terminal": "VBUS before DevKit power path",
+        "physical": false
+      },
+      "b": {
+        "module": "usb-r",
+        "terminal": "1",
+        "physical": false
+      },
+      "stage": 2,
+      "status": "named terminals; physical mapping required",
+      "note": "Never sense externally powered DevKit 5V as USB presence; a verified cable-side tap is required."
+    },
+    {
+      "id": "system-106",
+      "net": "GND",
+      "a": {
+        "module": "usb",
+        "terminal": "GND",
+        "physical": false
+      },
+      "b": {
+        "module": "reg3",
+        "terminal": "GND",
+        "physical": false
+      },
+      "stage": 2,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-107",
+      "net": "USB_GATE",
+      "a": {
+        "module": "usb-r",
+        "terminal": "2",
+        "physical": false
+      },
+      "b": {
+        "module": "usb-q",
+        "terminal": "GATE pin1 \u2192 JP1.2",
+        "physical": false,
+        "adapter_pin": {
+          "header": "JP1",
+          "pin": 2,
+          "x": 3.81,
+          "z": 0.0,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "Device on bottom Q1 only; Q2 and top U$1 empty"
+        }
+      },
+      "stage": 2,
+      "status": "named terminals; physical mapping required",
+      "note": "Adapter header is now CAD-mapped; solder orientation and continuity must be checked. See adapter-assembly.md."
+    },
+    {
+      "id": "system-108",
+      "net": "USB_GATE",
+      "a": {
+        "module": "usb-pd",
+        "terminal": "1",
+        "physical": false
+      },
+      "b": {
+        "module": "usb-q",
+        "terminal": "GATE pin1 \u2192 JP1.2",
+        "physical": false,
+        "adapter_pin": {
+          "header": "JP1",
+          "pin": 2,
+          "x": 3.81,
+          "z": 0.0,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "Device on bottom Q1 only; Q2 and top U$1 empty"
+        }
+      },
+      "stage": 2,
+      "status": "named terminals; physical mapping required",
+      "note": "Adapter header is now CAD-mapped; solder orientation and continuity must be checked. See adapter-assembly.md."
+    },
+    {
+      "id": "system-109",
+      "net": "GND",
+      "a": {
+        "module": "usb-pd",
+        "terminal": "2",
+        "physical": false
+      },
+      "b": {
+        "module": "reg3",
+        "terminal": "GND",
+        "physical": false
+      },
+      "stage": 2,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-110",
+      "net": "GND",
+      "a": {
+        "module": "usb-q",
+        "terminal": "SOURCE pin2 \u2192 JP1.3",
+        "physical": false,
+        "adapter_pin": {
+          "header": "JP1",
+          "pin": 3,
+          "x": 3.81,
+          "z": 2.54,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "Device on bottom Q1 only; Q2 and top U$1 empty"
+        }
+      },
+      "b": {
+        "module": "reg3",
+        "terminal": "GND",
+        "physical": false
+      },
+      "stage": 2,
+      "status": "named terminals; physical mapping required",
+      "note": "Adapter header is now CAD-mapped; solder orientation and continuity must be checked. See adapter-assembly.md."
+    },
+    {
+      "id": "system-111",
+      "net": "USB_PRESENT_N",
+      "a": {
+        "module": "usb-q",
+        "terminal": "DRAIN pin3 \u2192 JP2.3",
+        "physical": false,
+        "adapter_pin": {
+          "header": "JP2",
+          "pin": 3,
+          "x": -3.81,
+          "z": 2.54,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "Device on bottom Q1 only; Q2 and top U$1 empty"
+        }
+      },
+      "b": {
+        "module": "esp",
+        "terminal": "J3.18 / GPIO21",
+        "physical": true,
+        "header": "J3",
+        "pin": 18
+      },
+      "stage": 2,
+      "status": "named terminals; physical mapping required",
+      "note": "Adapter header is now CAD-mapped; solder orientation and continuity must be checked. See adapter-assembly.md."
+    },
+    {
+      "id": "system-112",
+      "net": "USB_PRESENT_N",
+      "a": {
+        "module": "usb-pu",
+        "terminal": "2",
+        "physical": false
+      },
+      "b": {
+        "module": "esp",
+        "terminal": "J3.18 / GPIO21",
+        "physical": true,
+        "header": "J3",
+        "pin": 18
+      },
+      "stage": 2,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    },
+    {
+      "id": "system-113",
+      "net": "3V3D",
+      "a": {
+        "module": "reg3",
+        "terminal": "VOUT 3.3V",
+        "physical": false
+      },
+      "b": {
+        "module": "usb-pu",
+        "terminal": "1",
+        "physical": false
+      },
+      "stage": 2,
+      "status": "named terminals; physical mapping required",
+      "note": ""
+    }
+  ],
+  "notes": [
+    "Named terminal panels are electrical connections, NOT inferred module header coordinates.",
+    "Bench power converters differ from compact PCB converters. This harness does not establish power-stage equivalence.",
+    "USB and external DevKit power are mutually exclusive; USB sense must monitor actual cable-side VBUS, not the powered 5V header."
+  ],
+  "coverage": {
+    "external_breadboard_leads_unmapped": [],
+    "system_connections": 113,
+    "physically_released": false
+  },
+  "adapter_header_mapping": "CAD-derived; assembled carriers not measured"
+}

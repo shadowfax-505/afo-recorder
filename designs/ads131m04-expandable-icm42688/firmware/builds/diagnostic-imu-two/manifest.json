@@ -1,0 +1,18 @@
+{
+  "adc": "afo-ads131m04",
+  "active_channels": 2,
+  "diagnostic_stage": 6,
+  "imu_count": 2,
+  "hardware": "pcb",
+  "hardware_tested": false,
+  "offsets": {
+    "bootloader.bin": "0x0",
+    "partition-table.bin": "0x8000",
+    "application.bin": "0x10000"
+  },
+  "sha256": {
+    "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+    "application.bin": "f418037e053466112d9c8729581afb7c813f09037c5a70c4ee78aea3c9310e46",
+    "bootloader.bin": "bf69972f0bc879e2294333ee3f6859d3b6f3583d443dd05d3d2dc7a1fbdc816a"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "adc": "afo-ad7606-two",
+  "active_channels": 2,
+  "diagnostic_stage": 6,
+  "imu_count": 2,
+  "hardware": "breadboard",
+  "wifi": 0,
+  "hardware_design": "AD7606_TWO_FIXED",
+  "hardware_tested": false,
+  "offsets": {
+    "bootloader.bin": "0x0",
+    "partition-table.bin": "0x8000",
+    "application.bin": "0x10000"
+  },
+  "sha256": {
+    "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+    "application.bin": "73a504d791bfe2c63f47f4781d96d2cc7c4907ca736ebabc9fdba7469ca04c4a",
+    "bootloader.bin": "d08d2bc3fd6c6c4a5d59d419789bc38744b7905ed6114bea69b5812f7cf991a1"
+  }
+}

@@ -1,0 +1,12 @@
+### Result
+{"gate":"You recorded FAIL. Correct the fault and repeat this stage before adding hardware.","exported":"afo-ad7606-two-mpu6050-build-results.json","restoredTestState":true}
+### Ran Playwright code
+```js
+await (async page => {await page.goto("http://127.0.0.1:8769/afo-recorder-project/designs/ad7606-two-channel-mpu6050/viewer/build.html?stage=7");await page.waitForFunction(()=>document.querySelector("#wires").textContent.includes("JP1.2"));const before=await page.evaluate(()=>localStorage.getItem("recorder-build-guide-afo-ad7606-two-mpu6050"));await page.locator("#outcome").selectOption("fail");await page.locator("#notes").fill("UI TEST ONLY — no hardware measurement");await page.locator("#record").click();await page.reload();await page.waitForFunction(()=>document.querySelector("#notes").value.includes("UI TEST"));const gate=await page.locator("#gate").innerText();const downloadPromise=page.waitForEvent("download");await page.locator("#export").click();const file=await downloadPromise;await file.saveAs("work/usability-review/test-results-export.json");await page.evaluate(v=>{const k="recorder-build-guide-afo-ad7606-two-mpu6050";v===null?localStorage.removeItem(k):localStorage.setItem(k,v)},before);await page.reload();await page.screenshot({path:"work/usability-review/guided-build.png",fullPage:true});return {gate,exported:file.suggestedFilename(),restoredTestState:true};})(page);
+```
+### Page
+- Page URL: http://127.0.0.1:8769/afo-recorder-project/designs/ad7606-two-channel-mpu6050/viewer/build.html?stage=7
+- Page Title: Build your recorder
+### Events
+- Downloading file afo-ad7606-two-mpu6050-build-results.json ...
+- Downloaded file afo-ad7606-two-mpu6050-build-results.json to ".playwright-cli/afo-ad7606-two-mpu6050-build-results.json"

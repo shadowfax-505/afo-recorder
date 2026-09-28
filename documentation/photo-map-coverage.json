@@ -1,0 +1,38 @@
+[
+  {
+    "design": "ad7606-expandable-icm42688",
+    "ad7606_photo_map": true,
+    "mpu6050_photo_map": false,
+    "updated": true
+  },
+  {
+    "design": "ad7606-expandable-mpu6050",
+    "ad7606_photo_map": true,
+    "mpu6050_photo_map": true,
+    "updated": true
+  },
+  {
+    "design": "ad7606-two-channel-icm42688",
+    "ad7606_photo_map": true,
+    "mpu6050_photo_map": false,
+    "updated": true
+  },
+  {
+    "design": "ad7606-two-channel-mpu6050",
+    "ad7606_photo_map": true,
+    "mpu6050_photo_map": true,
+    "updated": true
+  },
+  {
+    "design": "ads131m04-expandable-icm42688",
+    "ad7606_photo_map": false,
+    "mpu6050_photo_map": false,
+    "updated": false
+  },
+  {
+    "design": "ads131m04-expandable-mpu6050",
+    "ad7606_photo_map": false,
+    "mpu6050_photo_map": true,
+    "updated": true
+  }
+]

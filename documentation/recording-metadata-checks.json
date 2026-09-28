@@ -1,0 +1,142 @@
+[
+  {
+    "design": "ads131m04-expandable-mpu6050",
+    "hardware": "pcb",
+    "channels": 2,
+    "json_bytes": 1404,
+    "valid": true
+  },
+  {
+    "design": "ads131m04-expandable-mpu6050",
+    "hardware": "pcb",
+    "channels": 4,
+    "json_bytes": 1418,
+    "valid": true
+  },
+  {
+    "design": "ads131m04-expandable-mpu6050",
+    "hardware": "breadboard",
+    "channels": 2,
+    "json_bytes": 1411,
+    "valid": true
+  },
+  {
+    "design": "ads131m04-expandable-mpu6050",
+    "hardware": "breadboard",
+    "channels": 4,
+    "json_bytes": 1425,
+    "valid": true
+  },
+  {
+    "design": "ad7606-expandable-icm42688",
+    "hardware": "pcb",
+    "channels": 2,
+    "json_bytes": 1163,
+    "valid": true
+  },
+  {
+    "design": "ad7606-expandable-icm42688",
+    "hardware": "pcb",
+    "channels": 4,
+    "json_bytes": 1177,
+    "valid": true
+  },
+  {
+    "design": "ad7606-expandable-icm42688",
+    "hardware": "breadboard",
+    "channels": 2,
+    "json_bytes": 1170,
+    "valid": true
+  },
+  {
+    "design": "ad7606-expandable-icm42688",
+    "hardware": "breadboard",
+    "channels": 4,
+    "json_bytes": 1184,
+    "valid": true
+  },
+  {
+    "design": "ad7606-expandable-mpu6050",
+    "hardware": "pcb",
+    "channels": 2,
+    "json_bytes": 1435,
+    "valid": true
+  },
+  {
+    "design": "ad7606-expandable-mpu6050",
+    "hardware": "pcb",
+    "channels": 4,
+    "json_bytes": 1449,
+    "valid": true
+  },
+  {
+    "design": "ad7606-expandable-mpu6050",
+    "hardware": "breadboard",
+    "channels": 2,
+    "json_bytes": 1442,
+    "valid": true
+  },
+  {
+    "design": "ad7606-expandable-mpu6050",
+    "hardware": "breadboard",
+    "channels": 4,
+    "json_bytes": 1456,
+    "valid": true
+  },
+  {
+    "design": "ads131m04-expandable-icm42688",
+    "hardware": "pcb",
+    "channels": 2,
+    "json_bytes": 1132,
+    "valid": true
+  },
+  {
+    "design": "ads131m04-expandable-icm42688",
+    "hardware": "pcb",
+    "channels": 4,
+    "json_bytes": 1146,
+    "valid": true
+  },
+  {
+    "design": "ads131m04-expandable-icm42688",
+    "hardware": "breadboard",
+    "channels": 2,
+    "json_bytes": 1139,
+    "valid": true
+  },
+  {
+    "design": "ads131m04-expandable-icm42688",
+    "hardware": "breadboard",
+    "channels": 4,
+    "json_bytes": 1153,
+    "valid": true
+  },
+  {
+    "design": "ad7606-two-channel-mpu6050",
+    "hardware": "pcb",
+    "channels": 2,
+    "json_bytes": 1472,
+    "valid": true
+  },
+  {
+    "design": "ad7606-two-channel-mpu6050",
+    "hardware": "breadboard",
+    "channels": 2,
+    "json_bytes": 1479,
+    "valid": true
+  },
+  {
+    "design": "ad7606-two-channel-icm42688",
+    "hardware": "pcb",
+    "channels": 2,
+    "json_bytes": 1200,
+    "valid": true
+  },
+  {
+    "design": "ad7606-two-channel-icm42688",
+    "hardware": "breadboard",
+    "channels": 2,
+    "json_bytes": 1207,
+    "valid": true
+  }
+]

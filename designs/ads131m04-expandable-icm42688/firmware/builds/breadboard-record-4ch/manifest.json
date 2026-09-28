@@ -1,0 +1,23 @@
+{
+  "package": "ads131m04-expandable-icm42688",
+  "imu_model": "ICM42688P",
+  "active_channels": 4,
+  "hardware": "breadboard",
+  "diagnostic_stage": 0,
+  "imu_count": 2,
+  "wifi_enabled": true,
+  "sd_cmd_gpio": 47,
+  "sd_clk_gpio": 39,
+  "sd_d0_gpio": 40,
+  "hardware_tested": false,
+  "offsets": {
+    "bootloader.bin": "0x0",
+    "partition-table.bin": "0x8000",
+    "application.bin": "0x10000"
+  },
+  "sha256": {
+    "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+    "application.bin": "ed6e4141d7e06c9bd7fb11a5c61a54c667b4ce69ae92ee2f6983fa079a3f55d8",
+    "bootloader.bin": "f37bab4be692dc85080e6bc10f9f6a87313267dae8a8a26aabe7580d70c07043"
+  }
+}

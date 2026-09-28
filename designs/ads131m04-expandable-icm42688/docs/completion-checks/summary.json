@@ -1,0 +1,20 @@
+{
+  "design": "ads131m04-expandable-icm42688",
+  "hardware_measured": false,
+  "erc": {
+    "violations": 0,
+    "pass": true
+  },
+  "drc": {
+    "violations": 0,
+    "pass": true
+  },
+  "fresh_schematic_spec": {
+    "pins_checked": 389,
+    "mismatches": []
+  },
+  "host_tests": {
+    "pass": true,
+    "summary": "...................................\n----------------------------------------------------------------------\nRan 35 tests in 1.262s\n\nOK\n"
+  }
+}

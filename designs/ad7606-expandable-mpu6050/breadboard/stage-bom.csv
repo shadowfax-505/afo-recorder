@@ -1,0 +1,52 @@
+Stage,Reference,Value,Board,Note
+4,R100,3.3k,BB1,DIP/passive fixture; check package pinout
+4,R101,1M,BB1,DIP/passive fixture; check package pinout
+4,C100,47nF,BB1,DIP/passive fixture; check package pinout
+4,R102,3.3k,BB1,DIP/passive fixture; check package pinout
+4,C101,47nF,BB1,DIP/passive fixture; check package pinout
+4,R104,100,BB1,DIP/passive fixture; check package pinout
+4,C102,1nF,BB1,DIP/passive fixture; check package pinout
+4,UB1,MCP6002-I/P DIP8; same amplifier family as PCB MCP6004,BB1,DIP/passive fixture; check package pinout
+4,CB1,100nF local bypass,BB1,DIP/passive fixture; check package pinout
+5,R110,3.3k,BB2,DIP/passive fixture; check package pinout
+5,R111,1M,BB2,DIP/passive fixture; check package pinout
+5,C110,47nF,BB2,DIP/passive fixture; check package pinout
+5,R112,3.3k,BB2,DIP/passive fixture; check package pinout
+5,C111,47nF,BB2,DIP/passive fixture; check package pinout
+5,R114,100,BB2,DIP/passive fixture; check package pinout
+5,C112,1nF,BB2,DIP/passive fixture; check package pinout
+5,UB2,MCP6002-I/P DIP8; same amplifier family as PCB MCP6004,BB2,DIP/passive fixture; check package pinout
+5,CB2,100nF local bypass,BB2,DIP/passive fixture; check package pinout
+5,R120,3.3k,BB3,DIP/passive fixture; check package pinout
+5,R121,1M,BB3,DIP/passive fixture; check package pinout
+5,C120,47nF,BB3,DIP/passive fixture; check package pinout
+5,R122,3.3k,BB3,DIP/passive fixture; check package pinout
+5,C121,47nF,BB3,DIP/passive fixture; check package pinout
+5,R124,100,BB3,DIP/passive fixture; check package pinout
+5,C122,1nF,BB3,DIP/passive fixture; check package pinout
+5,UB3,MCP6002-I/P DIP8; same amplifier family as PCB MCP6004,BB3,DIP/passive fixture; check package pinout
+5,CB3,100nF local bypass,BB3,DIP/passive fixture; check package pinout
+5,R130,3.3k,BB4,DIP/passive fixture; check package pinout
+5,R131,1M,BB4,DIP/passive fixture; check package pinout
+5,C130,47nF,BB4,DIP/passive fixture; check package pinout
+5,R132,3.3k,BB4,DIP/passive fixture; check package pinout
+5,C131,47nF,BB4,DIP/passive fixture; check package pinout
+5,R134,100,BB4,DIP/passive fixture; check package pinout
+5,C132,1nF,BB4,DIP/passive fixture; check package pinout
+5,UB4,MCP6002-I/P DIP8; same amplifier family as PCB MCP6004,BB4,DIP/passive fixture; check package pinout
+5,CB4,100nF local bypass,BB4,DIP/passive fixture; check package pinout
+1,R40,10k,BB0,DIP/passive fixture; check package pinout
+1,R41,10k,BB0,DIP/passive fixture; check package pinout
+1,C30,1uF,BB0,DIP/passive fixture; check package pinout
+1,R42,100,BB0,DIP/passive fixture; check package pinout
+1,C31,1uF,BB0,DIP/passive fixture; check package pinout
+1,UB0,MCP6002-I/P midpoint; half B grounded follower,BB0,DIP/passive fixture; check package pinout
+1,CB0,100nF,BB0,DIP/passive fixture; check package pinout
+1,,Regulated supply + dummy loads,,Lab instrument substitution; final power converter unvalidated
+2,,ESP32-S3-N8R8 development board,,Exact SKU/header pending
+3,,"RoboticsBD RBD-3184, photo marked HW-AD7606-F4 with AD7606BSTZ",,Module wiring gate
+4,,BAV199 carrier,,One per analog path; verify chip pads
+6,,2 × GY-521/MPU-6050 I²C modules,,SKU and orientation pending
+7,,3.3 V microSD interface + card,,Match schematic
+9,,Protected 1S battery,,Capacity/runtime measured
+10,,2–4 MyoWare2.0 RAW,,Sensor integration last

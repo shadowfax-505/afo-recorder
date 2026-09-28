@@ -1,0 +1,21 @@
+ID,Net,X_mm,Y_mm,Side,Contact,Method
+TP01,GND,6.7304,37.7945,B.Cu,via,existing via; microprobe
+TP02,VBAT,10.0474,29.3253,B.Cu,via,existing via; microprobe
+TP03,3V3D,31.2082,8.7897,B.Cu,via,existing via; microprobe
+TP04,3V0A,55.8115,18.6556,B.Cu,via,existing via; microprobe
+TP05,VMID,72.2554,39.4467,B.Cu,via,existing via; microprobe
+TP06,ADC_CLK,52.4066,15.8305,B.Cu,via,existing via; microprobe
+TP07,ADC_DRDY,47.7249,25.5736,B.Cu,via,existing via; microprobe
+TP08,ADC_SCK,46.4612,22.2789,B.Cu,via,existing via; microprobe
+TP09,ADC_MISO,18.2337,23.6723,B.Cu,via,existing via; microprobe
+TP10,ADC_MOSI,48.5838,23.761,B.Cu,via,existing via; microprobe
+TP11,USB_PRESENT_N,15.3844,24.2941,B.Cu,via,existing via; microprobe
+TP12,BAT_SENSE,19.5343,9.01,B.Cu,via,existing via; microprobe
+TP13,BUF0A,54.175,10.25,F.Cu,R102.1,existing component pad; microprobe
+TP14,BUF0B,43.8634,16.9611,B.Cu,via,existing via; microprobe
+TP15,BUF1A,55.425,21.5,F.Cu,R112.1,existing component pad; microprobe
+TP16,BUF1B,53.7802,34.95,B.Cu,via,existing via; microprobe
+TP17,BUF2A,54.175,29.25,F.Cu,R122.1,existing component pad; microprobe
+TP18,BUF2B,46.2565,31.944,B.Cu,via,existing via; microprobe
+TP19,BUF3A,55.111,37.8161,B.Cu,via,existing via; microprobe
+TP20,BUF3B,44.6291,42.2101,B.Cu,via,existing via; microprobe

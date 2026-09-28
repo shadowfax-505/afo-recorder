@@ -1,0 +1,72 @@
+{
+  "source": "User supplied product photos, 2026-09-27; not measurements of received hardware",
+  "physical_continuity_verified": false,
+  "ad7606": {
+    "view": "UNDERSIDE: GND/+5V end at top, DB15/DB14 end at bottom; columns inner/edge",
+    "rows_inner_edge": [
+      [
+        "GND",
+        "+5V"
+      ],
+      [
+        "OS1",
+        "OS0"
+      ],
+      [
+        "RAGE",
+        "OS2"
+      ],
+      [
+        "CVB",
+        "CVA"
+      ],
+      [
+        "RD",
+        "RST"
+      ],
+      [
+        "BUSY",
+        "CS"
+      ],
+      [
+        "FRST",
+        "VIO"
+      ],
+      [
+        "DB1",
+        "DB0"
+      ],
+      [
+        "DB3",
+        "DB2"
+      ],
+      [
+        "DB5",
+        "DB4"
+      ],
+      [
+        "DB7",
+        "DB6"
+      ],
+      [
+        "DB9",
+        "DB8"
+      ],
+      [
+        "DB11",
+        "DB10"
+      ],
+      [
+        "DB13",
+        "DB12"
+      ],
+      [
+        "DB15",
+        "DB14"
+      ]
+    ],
+    "VIO_caution": "Photo label appears VO/VIO; verify continuity to AD7606 chip pin23 before supplying 3.3V.",
+    "strap_caution": "SP/8080 component-side selector visible; resistor connectivity not established."
+  },
+  "mpu6050": null
+}

@@ -1,0 +1,15 @@
+{
+  "common_firmware_sha256": {
+    "main.c": "ea8cd19307d927485a77e6b82c76b598e08cd99af36081707255eb7cd1ca8c9d",
+    "sensors.c": "f5c6034a43b260de6282d902a1d76d3e4db60bcbca64d364ebd34fc733df84c9",
+    "adc_ad7606.c": "a17495f9e6b02f8956291498fdf866a13232cd8be2cbcc802ae7b19db0cadb5d",
+    "adc_ads131m04.c": "914ffa6db82ed58aed9d4f0beb1ae05645ac6fb47097ace88e2be8b6a3c6b6aa",
+    "board.h": "8463e7f7189053ebc9f8d546aac992f3d937e169e6b457bcc0a01fc487f2de25",
+    "diagnostic.c": "7a19841347a47d5ade14da1648510fcb0735d8abf96d372a40fa95c28d97abc3",
+    "format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
+    "format.h": "58b01a597eaa2c70a918ad5ee3b71c9e26fe64aedefc91ffba7d96430510c47b",
+    "wifi_live.c": "e59426dd0bc9ff26c5e0053a4eaf6e10db1890fe61848a578259f6a5ae91342e"
+  },
+  "variant_selector": "firmware/main/variant.h",
+  "common_files_identical": true
+}

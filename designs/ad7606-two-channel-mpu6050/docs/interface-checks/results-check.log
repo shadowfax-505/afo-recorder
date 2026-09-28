@@ -1,0 +1,12 @@
+### Result
+{"saveReload":true,"export":"afo-ad7606-two-mpu6050-build-results.json"}
+### Ran Playwright code
+```js
+await (async page => { await page.setViewportSize({width:1440,height:900});await page.goto("http://127.0.0.1:8769/afo-recorder-project/designs/ad7606-two-channel-mpu6050/viewer/assembly.html?v=15");await page.waitForFunction(()=>document.querySelector("#parts").options.length>1);await page.screenshot({path:"work/interface-redesign/pcb.png",fullPage:true});await page.goto("http://127.0.0.1:8769/afo-recorder-project/designs/ad7606-two-channel-mpu6050/viewer/build.html?stage=1");await page.waitForFunction(()=>document.querySelector("#test").children.length>0);const before=await page.evaluate(()=>({...localStorage}));await page.locator("#notes").fill("Interface test only; no hardware measurement.");await page.locator("#record").click();await page.reload();await page.waitForFunction(()=>document.querySelector("#notes").value.includes("Interface test"));const download=page.waitForEvent("download");await page.locator("#export").click();const file=(await download).suggestedFilename();await page.evaluate(b=>{localStorage.clear();Object.entries(b).forEach(([k,v])=>localStorage.setItem(k,v))},before);return {saveReload:true,export:file}; })(page);
+```
+### Page
+- Page URL: http://127.0.0.1:8769/afo-recorder-project/designs/ad7606-two-channel-mpu6050/viewer/build.html?stage=1
+- Page Title: Build · AFO Research Recorder
+### Events
+- Downloading file afo-ad7606-two-mpu6050-build-results.json ...
+- Downloaded file afo-ad7606-two-mpu6050-build-results.json to ".playwright-cli/afo-ad7606-two-mpu6050-build-results.json"

@@ -1,0 +1,18 @@
+{
+  "source": "User supplied product photos, 2026-09-27; not measurements of received hardware",
+  "physical_continuity_verified": false,
+  "ad7606": null,
+  "mpu6050": {
+    "view": "COMPONENT SIDE, header above chip, MPU-6050 text below; left to right",
+    "pins_left_to_right": [
+      "INT",
+      "AD0",
+      "XCL",
+      "XDA",
+      "SDA",
+      "SCL",
+      "GND",
+      "VCC"
+    ]
+  }
+}

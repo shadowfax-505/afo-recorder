@@ -1,0 +1,14 @@
+{
+  "revision": 14,
+  "boards": 8,
+  "physical_wires": 212,
+  "hardware_measured": false,
+  "sd_required_terminals": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "sd_ground_added": true
+}

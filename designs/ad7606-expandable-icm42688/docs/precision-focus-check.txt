@@ -1,0 +1,9 @@
+### Result
+{"focus":"PASS","printRows":27}
+### Ran Playwright code
+```js
+await (async page => { await page.goto("http://127.0.0.1:8769/afo-ad7606-two/viewer/?v=2"); await page.locator("#steps button").first().waitFor(); await page.locator("#steps button").filter({hasText:"UB1 ·"}).click(); await page.locator("#focus").click(); await page.locator("#canvas").screenshot({path:"output/playwright/precision-detail.png"}); const count=await page.locator("#printTable tbody tr").count(); if(count!==await page.locator("#steps button").count()) throw Error("Print table mismatch"); await page.emulateMedia({media:"print"}); if(!await page.locator("#printTable").isVisible()) throw Error("Print table hidden"); await page.emulateMedia({media:"screen"}); return {focus:"PASS",printRows:count}; })(page);
+```
+### Page
+- Page URL: http://127.0.0.1:8769/afo-ad7606-two/viewer/?v=2
+- Page Title: Breadboard assembly workbench

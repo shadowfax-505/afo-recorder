@@ -1,0 +1,344 @@
+[
+  {
+    "scenario": "normal",
+    "active_channels": 2,
+    "produced": [
+      16000,
+      399,
+      399
+    ],
+    "queue_high_water": 1,
+    "queue_capacity": 2048,
+    "dropped": 0,
+    "stop_reason": 0,
+    "read_transfer_us": 18,
+    "independent_imu_ppm": [
+      70,
+      -110
+    ],
+    "no_detected_sample_loss": true,
+    "issues": []
+  },
+  {
+    "scenario": "delayed_write",
+    "active_channels": 2,
+    "produced": [
+      16000,
+      399,
+      399
+    ],
+    "queue_high_water": 1008,
+    "queue_capacity": 2048,
+    "dropped": 0,
+    "stop_reason": 0,
+    "read_transfer_us": 18,
+    "independent_imu_ppm": [
+      70,
+      -110
+    ],
+    "no_detected_sample_loss": true,
+    "issues": []
+  },
+  {
+    "scenario": "overflow",
+    "active_channels": 2,
+    "produced": [
+      5950,
+      148,
+      148
+    ],
+    "queue_high_water": 2048,
+    "queue_capacity": 2048,
+    "dropped": 1,
+    "stop_reason": 2,
+    "read_transfer_us": 18,
+    "independent_imu_ppm": [
+      70,
+      -110
+    ],
+    "no_detected_sample_loss": false,
+    "issues": [
+      {
+        "kind": "counter_mismatch",
+        "stream": "emg",
+        "reported": 5950,
+        "decoded": 5949
+      },
+      {
+        "kind": "abnormal_stop",
+        "reason": 2
+      }
+    ]
+  },
+  {
+    "scenario": "missing_imu",
+    "active_channels": 2,
+    "produced": [
+      16000,
+      399,
+      0
+    ],
+    "queue_high_water": 1,
+    "queue_capacity": 2048,
+    "dropped": 0,
+    "stop_reason": 0,
+    "read_transfer_us": 18,
+    "independent_imu_ppm": [
+      70,
+      -110
+    ],
+    "no_detected_sample_loss": false,
+    "issues": [
+      {
+        "kind": "missing_stream",
+        "stream": "shank"
+      }
+    ]
+  },
+  {
+    "scenario": "missing_emg",
+    "active_channels": 2,
+    "produced": [
+      15999,
+      399,
+      399
+    ],
+    "queue_high_water": 1,
+    "queue_capacity": 2048,
+    "dropped": 0,
+    "stop_reason": 0,
+    "read_transfer_us": 18,
+    "independent_imu_ppm": [
+      70,
+      -110
+    ],
+    "no_detected_sample_loss": false,
+    "issues": []
+  },
+  {
+    "scenario": "busy_timeout",
+    "active_channels": 2,
+    "produced": [
+      5999,
+      149,
+      149
+    ],
+    "queue_high_water": 1,
+    "queue_capacity": 2048,
+    "dropped": 0,
+    "stop_reason": 3,
+    "read_transfer_us": 18,
+    "independent_imu_ppm": [
+      70,
+      -110
+    ],
+    "no_detected_sample_loss": false,
+    "issues": [
+      {
+        "kind": "abnormal_stop",
+        "reason": 3
+      }
+    ]
+  },
+  {
+    "scenario": "interrupted",
+    "active_channels": 2,
+    "produced": [
+      9599,
+      239,
+      239
+    ],
+    "queue_high_water": 1,
+    "queue_capacity": 2048,
+    "dropped": 0,
+    "stop_reason": 0,
+    "read_transfer_us": 18,
+    "independent_imu_ppm": [
+      70,
+      -110
+    ],
+    "no_detected_sample_loss": false,
+    "issues": [
+      {
+        "kind": "corrupt_or_truncated_tail",
+        "start": 648320,
+        "end": 648337
+      },
+      {
+        "kind": "missing_end",
+        "message": "Unfinalized session; trailing samples may be lost."
+      }
+    ]
+  },
+  {
+    "scenario": "normal",
+    "active_channels": 4,
+    "produced": [
+      16000,
+      399,
+      399
+    ],
+    "queue_high_water": 1,
+    "queue_capacity": 2048,
+    "dropped": 0,
+    "stop_reason": 0,
+    "read_transfer_us": 18,
+    "independent_imu_ppm": [
+      70,
+      -110
+    ],
+    "no_detected_sample_loss": true,
+    "issues": []
+  },
+  {
+    "scenario": "delayed_write",
+    "active_channels": 4,
+    "produced": [
+      16000,
+      399,
+      399
+    ],
+    "queue_high_water": 1008,
+    "queue_capacity": 2048,
+    "dropped": 0,
+    "stop_reason": 0,
+    "read_transfer_us": 18,
+    "independent_imu_ppm": [
+      70,
+      -110
+    ],
+    "no_detected_sample_loss": true,
+    "issues": []
+  },
+  {
+    "scenario": "overflow",
+    "active_channels": 4,
+    "produced": [
+      5950,
+      148,
+      148
+    ],
+    "queue_high_water": 2048,
+    "queue_capacity": 2048,
+    "dropped": 1,
+    "stop_reason": 2,
+    "read_transfer_us": 18,
+    "independent_imu_ppm": [
+      70,
+      -110
+    ],
+    "no_detected_sample_loss": false,
+    "issues": [
+      {
+        "kind": "counter_mismatch",
+        "stream": "emg",
+        "reported": 5950,
+        "decoded": 5949
+      },
+      {
+        "kind": "abnormal_stop",
+        "reason": 2
+      }
+    ]
+  },
+  {
+    "scenario": "missing_imu",
+    "active_channels": 4,
+    "produced": [
+      16000,
+      399,
+      0
+    ],
+    "queue_high_water": 1,
+    "queue_capacity": 2048,
+    "dropped": 0,
+    "stop_reason": 0,
+    "read_transfer_us": 18,
+    "independent_imu_ppm": [
+      70,
+      -110
+    ],
+    "no_detected_sample_loss": false,
+    "issues": [
+      {
+        "kind": "missing_stream",
+        "stream": "shank"
+      }
+    ]
+  },
+  {
+    "scenario": "missing_emg",
+    "active_channels": 4,
+    "produced": [
+      15999,
+      399,
+      399
+    ],
+    "queue_high_water": 1,
+    "queue_capacity": 2048,
+    "dropped": 0,
+    "stop_reason": 0,
+    "read_transfer_us": 18,
+    "independent_imu_ppm": [
+      70,
+      -110
+    ],
+    "no_detected_sample_loss": false,
+    "issues": []
+  },
+  {
+    "scenario": "busy_timeout",
+    "active_channels": 4,
+    "produced": [
+      5999,
+      149,
+      149
+    ],
+    "queue_high_water": 1,
+    "queue_capacity": 2048,
+    "dropped": 0,
+    "stop_reason": 3,
+    "read_transfer_us": 18,
+    "independent_imu_ppm": [
+      70,
+      -110
+    ],
+    "no_detected_sample_loss": false,
+    "issues": [
+      {
+        "kind": "abnormal_stop",
+        "reason": 3
+      }
+    ]
+  },
+  {
+    "scenario": "interrupted",
+    "active_channels": 4,
+    "produced": [
+      9599,
+      239,
+      239
+    ],
+    "queue_high_water": 1,
+    "queue_capacity": 2048,
+    "dropped": 0,
+    "stop_reason": 0,
+    "read_transfer_us": 18,
+    "independent_imu_ppm": [
+      70,
+      -110
+    ],
+    "no_detected_sample_loss": false,
+    "issues": [
+      {
+        "kind": "corrupt_or_truncated_tail",
+        "start": 648320,
+        "end": 648337
+      },
+      {
+        "kind": "missing_end",
+        "message": "Unfinalized session; trailing samples may be lost."
+      }
+    ]
+  }
+]

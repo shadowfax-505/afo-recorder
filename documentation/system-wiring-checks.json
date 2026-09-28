@@ -1,0 +1,50 @@
+[
+  {
+    "design": "ads131m04-expandable-mpu6050",
+    "individual_system_wires": 113,
+    "firmware_gpio_endpoint_checks": 29,
+    "all_subsystems_represented": true,
+    "unmapped_analog_breadboard_nets": 0,
+    "physical_release": false
+  },
+  {
+    "design": "ad7606-expandable-icm42688",
+    "individual_system_wires": 136,
+    "firmware_gpio_endpoint_checks": 30,
+    "all_subsystems_represented": true,
+    "unmapped_analog_breadboard_nets": 0,
+    "physical_release": false
+  },
+  {
+    "design": "ad7606-expandable-mpu6050",
+    "individual_system_wires": 136,
+    "firmware_gpio_endpoint_checks": 30,
+    "all_subsystems_represented": true,
+    "unmapped_analog_breadboard_nets": 0,
+    "physical_release": false
+  },
+  {
+    "design": "ads131m04-expandable-icm42688",
+    "individual_system_wires": 113,
+    "firmware_gpio_endpoint_checks": 29,
+    "all_subsystems_represented": true,
+    "unmapped_analog_breadboard_nets": 0,
+    "physical_release": false
+  },
+  {
+    "design": "ad7606-two-channel-mpu6050",
+    "individual_system_wires": 122,
+    "firmware_gpio_endpoint_checks": 30,
+    "all_subsystems_represented": true,
+    "unmapped_analog_breadboard_nets": 0,
+    "physical_release": false
+  },
+  {
+    "design": "ad7606-two-channel-icm42688",
+    "individual_system_wires": 122,
+    "firmware_gpio_endpoint_checks": 30,
+    "all_subsystems_represented": true,
+    "unmapped_analog_breadboard_nets": 0,
+    "physical_release": false
+  }
+]

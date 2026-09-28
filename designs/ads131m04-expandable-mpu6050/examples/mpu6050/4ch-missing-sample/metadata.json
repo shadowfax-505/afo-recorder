@@ -1,0 +1,43 @@
+{
+  "recorded": {
+    "schema": "afo-recorder/2",
+    "adc_model": "ADS131M04",
+    "adc_bits": 24,
+    "adc_reference_mv": 1200,
+    "adc_pga": 1,
+    "adc_osr": 512,
+    "adc_clock_hz": 8192000,
+    "input_scale": 0.5,
+    "input_midpoint_mv": 1500,
+    "adc_sensor_crc_supported": true,
+    "emg_hz": 8000,
+    "imu_hz": 200,
+    "active_channel_count": 4,
+    "emg_channels": [
+      "EMG1",
+      "EMG2",
+      "EMG3",
+      "EMG4"
+    ],
+    "record_bytes": 64,
+    "calibration_state": "uncalibrated",
+    "accel_range_g": 16,
+    "gyro_range_dps": 2000,
+    "imu_model": "MPU6050",
+    "imu_packet_format": "mpu6050-fifo12-batch-v1",
+    "imu_timestamp_tick_us": null,
+    "imu_timing_method": "irq-anchor-nominal-period-estimate",
+    "imu_dlpf_cfg": 3,
+    "imu_sample_rate_divider": 4,
+    "imu_addresses": [
+      104,
+      105
+    ],
+    "accel_lsb_per_g": 2048,
+    "gyro_lsb_per_dps": 16.4,
+    "synthetic": true,
+    "hardware_variant": "afo-ads131m04-mpu6050",
+    "notes": "Synthetic software fixture; ADC serial CRC and hardware not exercised."
+  },
+  "operator_metadata": {}
+}

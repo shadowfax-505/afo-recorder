@@ -1,0 +1,64 @@
+AD7606 four-channel analog model
+VDD avdd 0 3
+VMID mid 0 1.5
+
+* Substitute closed-loop MCP600x approximation: 1 MHz pole, 1 ohm output,
+* 20mV assumed rail headroom. NOT a manufacturer macromodel.
+* Omits noise, bias/offset, current/slew limiting, PSRR, temperature and stability.
+.subckt buffer inp out
+Ein sense 0 inp 0 1
+Rbw sense pole 1k
+Cbw pole 0 159.154943p
+Blimit driver 0 V=min(max(V(pole),0.02),2.98)
+Ro driver out 1
+.ends
+
+Vin0 raw0 0 DC 1.5 AC 1
+Rb0 raw0 mid 1Meg
+Ra0 raw0 a0 3300
+Ca0 a0 0 4.7e-08
+Xa0 a0 ba0 buffer
+Rmix0 ba0 mix0 3300
+Cb0 mix0 0 4.7e-08
+Xb0 mix0 bb0 buffer
+Rp0 bb0 p0 100
+Vn0 n0 0 0
+Cd0 p0 n0 1n
+Rload0 p0 n0 1Meg
+Vin1 raw1 0 DC 1.5 AC 1
+Rb1 raw1 mid 1Meg
+Ra1 raw1 a1 3300
+Ca1 a1 0 4.7e-08
+Xa1 a1 ba1 buffer
+Rmix1 ba1 mix1 3300
+Cb1 mix1 0 4.7e-08
+Xb1 mix1 bb1 buffer
+Rp1 bb1 p1 100
+Vn1 n1 0 0
+Cd1 p1 n1 1n
+Rload1 p1 n1 1Meg
+Vin2 raw2 0 DC 1.5 AC 1
+Rb2 raw2 mid 1Meg
+Ra2 raw2 a2 3300
+Ca2 a2 0 4.7e-08
+Xa2 a2 ba2 buffer
+Rmix2 ba2 mix2 3300
+Cb2 mix2 0 4.7e-08
+Xb2 mix2 bb2 buffer
+Rp2 bb2 p2 100
+Vn2 n2 0 0
+Cd2 p2 n2 1n
+Rload2 p2 n2 1Meg
+Vin3 raw3 0 DC 1.5 AC 1
+Rb3 raw3 mid 1Meg
+Ra3 raw3 a3 3300
+Ca3 a3 0 4.7e-08
+Xa3 a3 ba3 buffer
+Rmix3 ba3 mix3 3300
+Cb3 mix3 0 4.7e-08
+Xb3 mix3 bb3 buffer
+Rp3 bb3 p3 100
+Vn3 n3 0 0
+Cd3 p3 n3 1n
+Rload3 p3 n3 1Meg
+.end

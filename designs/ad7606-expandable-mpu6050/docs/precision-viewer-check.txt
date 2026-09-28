@@ -1,0 +1,9 @@
+### Result
+[{"name":"afo-ad7606-two","boards":3,"orientation":"PASS","holeInspection":"PASS","jumperEndpoints":"PASS","unverifiedGate":"PASS"},{"name":"afo-ad7606","boards":5,"orientation":"PASS","holeInspection":"PASS","jumperEndpoints":"PASS","unverifiedGate":"PASS"},{"name":"afo-ads131m04","boards":5,"orientation":"PASS","holeInspection":"PASS","jumperEndpoints":"PASS","unverifiedGate":"PASS"}]
+### Ran Playwright code
+```js
+await (async page => { const results=[]; for(const [name,n] of [["afo-ad7606-two",3],["afo-ad7606",5],["afo-ads131m04",5]]) { await page.goto("http://127.0.0.1:8769/"+name+"/viewer/"); await page.locator("#steps button").first().waitFor(); await page.locator("#stage").selectOption("5"); if(await page.locator("#board option").count()!==n) throw Error("Board count"); await page.locator("#board").selectOption("BB1"); await page.locator("#steps button").filter({hasText:"UB1 ·"}).click(); if(!(await page.locator("#orientation").innerText()).includes("pin 1=e10")) throw Error("Orientation"); await page.locator("#map [data-hole=e10]").click(); if(!(await page.locator("#holeDetail").innerText()).includes("UB1.1")) throw Error("Hole binding"); await page.locator("#angle").click(); await page.screenshot({path:"output/playwright/"+name+"-precision.png"}); await page.locator("#steps button").filter({hasText:"Jumper ·"}).first().click(); if(await page.locator("#endpoints .endpoint").count()!==2) throw Error("Jumper endpoints"); await page.locator("#steps button.external").first().click(); if(!await page.locator("#done").isDisabled()) throw Error("Unverified lead can be checked"); results.push({name,boards:n,orientation:"PASS",holeInspection:"PASS",jumperEndpoints:"PASS",unverifiedGate:"PASS"}); } return results; })(page);
+```
+### Page
+- Page URL: http://127.0.0.1:8769/afo-ads131m04/viewer/
+- Page Title: Breadboard assembly workbench

@@ -1,0 +1,7 @@
+{
+  "unique_hole_check": "PASS",
+  "strip_short_check": "PASS",
+  "components": 43,
+  "jumper_connections": 84,
+  "module_header_verified": false
+}

@@ -1,0 +1,44 @@
+[
+  {
+    "name": "AD7606 \u00b7 Two EMG channels",
+    "imu": "icm42688",
+    "folder": "ad7606-two-channel-icm42688",
+    "source": "outputs/afo-ad7606-two",
+    "download": "ad7606-two-channel-icm42688.zip"
+  },
+  {
+    "name": "AD7606 \u00b7 Two EMG channels",
+    "imu": "mpu6050",
+    "folder": "ad7606-two-channel-mpu6050",
+    "source": "outputs/afo-ad7606-two-mpu6050",
+    "download": "ad7606-two-channel-mpu6050.zip"
+  },
+  {
+    "name": "AD7606 \u00b7 Two or four EMG channels",
+    "imu": "icm42688",
+    "folder": "ad7606-expandable-icm42688",
+    "source": "outputs/afo-ad7606",
+    "download": "ad7606-expandable-icm42688.zip"
+  },
+  {
+    "name": "AD7606 \u00b7 Two or four EMG channels",
+    "imu": "mpu6050",
+    "folder": "ad7606-expandable-mpu6050",
+    "source": "outputs/afo-ad7606-mpu6050",
+    "download": "ad7606-expandable-mpu6050.zip"
+  },
+  {
+    "name": "ADS131M04 \u00b7 Two or four EMG channels",
+    "imu": "icm42688",
+    "folder": "ads131m04-expandable-icm42688",
+    "source": "outputs/afo-ads131m04",
+    "download": "ads131m04-expandable-icm42688.zip"
+  },
+  {
+    "name": "ADS131M04 \u00b7 Two or four EMG channels",
+    "imu": "mpu6050",
+    "folder": "ads131m04-expandable-mpu6050",
+    "source": "outputs/afo-ads131m04-mpu6050",
+    "download": "ads131m04-expandable-mpu6050.zip"
+  }
+]

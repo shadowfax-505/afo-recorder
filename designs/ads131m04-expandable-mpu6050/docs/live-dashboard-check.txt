@@ -1,0 +1,9 @@
+### Result
+{"plots":4,"syntheticWarning":true}
+### Ran Playwright code
+```js
+await (async page => { const data=await (await page.request.get("http://127.0.0.1:8769/afo-ad7606/viewer/live-test.json")).text(); await page.route("**/api",r=>r.fulfill({contentType:"application/json",body:data})); await page.goto("http://127.0.0.1:8769/afo-ad7606/host/live_view.html"); await page.waitForSelector("#emg3"); await page.screenshot({path:"work/dual/live-four.png"}); return {plots:await page.locator("#plots canvas").count(),syntheticWarning:await page.locator("#demo").isVisible()}; })(page);
+```
+### Page
+- Page URL: http://127.0.0.1:8769/afo-ad7606/host/live_view.html
+- Page Title: AFO · Live acquisition

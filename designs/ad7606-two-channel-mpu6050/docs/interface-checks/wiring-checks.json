@@ -1,0 +1,74 @@
+[
+  {
+    "disconnected_named_nets": 0,
+    "design": "ads131m04-expandable-mpu6050",
+    "holes_checked": 536,
+    "wire_count": 179,
+    "gpio_checks": 23,
+    "shorts": 0,
+    "duplicate_holes": 0,
+    "duplicate_connector_contacts": 0,
+    "all_external_terminals_defined": true,
+    "hardware_tests": false
+  },
+  {
+    "disconnected_named_nets": 0,
+    "design": "ad7606-expandable-icm42688",
+    "holes_checked": 544,
+    "wire_count": 212,
+    "gpio_checks": 24,
+    "shorts": 0,
+    "duplicate_holes": 0,
+    "duplicate_connector_contacts": 0,
+    "all_external_terminals_defined": true,
+    "hardware_tests": false
+  },
+  {
+    "disconnected_named_nets": 0,
+    "design": "ad7606-expandable-mpu6050",
+    "holes_checked": 547,
+    "wire_count": 208,
+    "gpio_checks": 23,
+    "shorts": 0,
+    "duplicate_holes": 0,
+    "duplicate_connector_contacts": 0,
+    "all_external_terminals_defined": true,
+    "hardware_tests": false
+  },
+  {
+    "disconnected_named_nets": 0,
+    "design": "ads131m04-expandable-icm42688",
+    "holes_checked": 533,
+    "wire_count": 183,
+    "gpio_checks": 24,
+    "shorts": 0,
+    "duplicate_holes": 0,
+    "duplicate_connector_contacts": 0,
+    "all_external_terminals_defined": true,
+    "hardware_tests": false
+  },
+  {
+    "disconnected_named_nets": 0,
+    "design": "ad7606-two-channel-mpu6050",
+    "holes_checked": 405,
+    "wire_count": 180,
+    "gpio_checks": 23,
+    "shorts": 0,
+    "duplicate_holes": 0,
+    "duplicate_connector_contacts": 0,
+    "all_external_terminals_defined": true,
+    "hardware_tests": false
+  },
+  {
+    "disconnected_named_nets": 0,
+    "design": "ad7606-two-channel-icm42688",
+    "holes_checked": 402,
+    "wire_count": 184,
+    "gpio_checks": 24,
+    "shorts": 0,
+    "duplicate_holes": 0,
+    "duplicate_connector_contacts": 0,
+    "all_external_terminals_defined": true,
+    "hardware_tests": false
+  }
+]

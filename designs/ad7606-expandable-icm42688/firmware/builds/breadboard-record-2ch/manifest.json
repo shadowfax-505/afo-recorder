@@ -1,0 +1,23 @@
+{
+  "package": "ad7606-expandable-icm42688",
+  "imu_model": "ICM42688P",
+  "active_channels": 2,
+  "hardware": "breadboard",
+  "diagnostic_stage": 0,
+  "imu_count": 2,
+  "wifi_enabled": true,
+  "sd_cmd_gpio": 47,
+  "sd_clk_gpio": 39,
+  "sd_d0_gpio": 40,
+  "hardware_tested": false,
+  "offsets": {
+    "bootloader.bin": "0x0",
+    "partition-table.bin": "0x8000",
+    "application.bin": "0x10000"
+  },
+  "sha256": {
+    "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+    "application.bin": "edf9e1d2a5c8f1588fec85b0e2ef8c3ea6da37d4d0b43c8192f57816481c58d7",
+    "bootloader.bin": "680e6fa561d3886e7ed3173a3e5a7953c4ed64cfa28d023ba678533c2f34a4ac"
+  }
+}

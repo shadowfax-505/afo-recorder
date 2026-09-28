@@ -1,0 +1,20 @@
+{
+  "design": "ad7606-two-channel-icm42688",
+  "hardware_measured": false,
+  "erc": {
+    "violations": 0,
+    "pass": true
+  },
+  "drc": {
+    "violations": 0,
+    "pass": true
+  },
+  "fresh_schematic_spec": {
+    "pins_checked": 390,
+    "mismatches": []
+  },
+  "host_tests": {
+    "pass": true,
+    "summary": ".......................................\n----------------------------------------------------------------------\nRan 39 tests in 1.418s\n\nOK\n"
+  }
+}

@@ -1,0 +1,217 @@
+[
+  {
+    "package": "ads131m04-expandable-icm42688",
+    "imu_model": "ICM42688P",
+    "active_channels": 2,
+    "hardware": "breadboard",
+    "diagnostic_stage": 0,
+    "imu_count": 2,
+    "wifi_enabled": true,
+    "sd_cmd_gpio": 47,
+    "sd_clk_gpio": 39,
+    "sd_d0_gpio": 40,
+    "hardware_tested": false,
+    "offsets": {
+      "bootloader.bin": "0x0",
+      "partition-table.bin": "0x8000",
+      "application.bin": "0x10000"
+    },
+    "sha256": {
+      "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+      "application.bin": "c080bbd6d8f7313ecbfe75bb161ce70ae69651f5bf6a9c6df11221ce672f2d36",
+      "bootloader.bin": "f37bab4be692dc85080e6bc10f9f6a87313267dae8a8a26aabe7580d70c07043"
+    },
+    "profile": "breadboard-record-2ch"
+  },
+  {
+    "package": "ads131m04-expandable-icm42688",
+    "imu_model": "ICM42688P",
+    "active_channels": 4,
+    "hardware": "breadboard",
+    "diagnostic_stage": 0,
+    "imu_count": 2,
+    "wifi_enabled": true,
+    "sd_cmd_gpio": 47,
+    "sd_clk_gpio": 39,
+    "sd_d0_gpio": 40,
+    "hardware_tested": false,
+    "offsets": {
+      "bootloader.bin": "0x0",
+      "partition-table.bin": "0x8000",
+      "application.bin": "0x10000"
+    },
+    "sha256": {
+      "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+      "application.bin": "ed6e4141d7e06c9bd7fb11a5c61a54c667b4ce69ae92ee2f6983fa079a3f55d8",
+      "bootloader.bin": "f37bab4be692dc85080e6bc10f9f6a87313267dae8a8a26aabe7580d70c07043"
+    },
+    "profile": "breadboard-record-4ch"
+  },
+  {
+    "package": "ads131m04-expandable-icm42688",
+    "imu_model": "ICM42688P",
+    "active_channels": 2,
+    "hardware": "breadboard",
+    "diagnostic_stage": 0,
+    "imu_count": 2,
+    "wifi_enabled": false,
+    "sd_cmd_gpio": 47,
+    "sd_clk_gpio": 39,
+    "sd_d0_gpio": 40,
+    "hardware_tested": false,
+    "offsets": {
+      "bootloader.bin": "0x0",
+      "partition-table.bin": "0x8000",
+      "application.bin": "0x10000"
+    },
+    "sha256": {
+      "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+      "application.bin": "9c18784db53b8676c2b12b84762ed2760dec2e461530dfbde1d477a85d04cf9f",
+      "bootloader.bin": "f37bab4be692dc85080e6bc10f9f6a87313267dae8a8a26aabe7580d70c07043"
+    },
+    "profile": "breadboard-sd-only-2ch"
+  },
+  {
+    "adc": "afo-ads131m04",
+    "active_channels": 2,
+    "diagnostic_stage": 3,
+    "imu_count": 1,
+    "hardware": "pcb",
+    "hardware_tested": false,
+    "offsets": {
+      "bootloader.bin": "0x0",
+      "partition-table.bin": "0x8000",
+      "application.bin": "0x10000"
+    },
+    "sha256": {
+      "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+      "application.bin": "60ba2a25484629aaf948ee19e31cf8c3fe7b88af2ff8e2a50018bef1b359dc2b",
+      "bootloader.bin": "bf69972f0bc879e2294333ee3f6859d3b6f3583d443dd05d3d2dc7a1fbdc816a"
+    },
+    "profile": "diagnostic-adc-2ch"
+  },
+  {
+    "adc": "afo-ads131m04",
+    "active_channels": 4,
+    "diagnostic_stage": 3,
+    "imu_count": 1,
+    "hardware": "pcb",
+    "hardware_tested": false,
+    "offsets": {
+      "bootloader.bin": "0x0",
+      "partition-table.bin": "0x8000",
+      "application.bin": "0x10000"
+    },
+    "sha256": {
+      "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+      "application.bin": "c9b60ee8032edd706a891ad038bf554c290cc5c8ea3b11c639a1fcf35a23b2f2",
+      "bootloader.bin": "bf69972f0bc879e2294333ee3f6859d3b6f3583d443dd05d3d2dc7a1fbdc816a"
+    },
+    "profile": "diagnostic-adc-4ch"
+  },
+  {
+    "adc": "afo-ads131m04",
+    "active_channels": 2,
+    "diagnostic_stage": 2,
+    "imu_count": 1,
+    "hardware": "pcb",
+    "hardware_tested": false,
+    "offsets": {
+      "bootloader.bin": "0x0",
+      "partition-table.bin": "0x8000",
+      "application.bin": "0x10000"
+    },
+    "sha256": {
+      "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+      "application.bin": "2d7fe03bdd4177cb292c7ca09e91a45d177a46e500b723be49da87868a7f2bc3",
+      "bootloader.bin": "bf69972f0bc879e2294333ee3f6859d3b6f3583d443dd05d3d2dc7a1fbdc816a"
+    },
+    "profile": "diagnostic-controller"
+  },
+  {
+    "adc": "afo-ads131m04",
+    "active_channels": 2,
+    "diagnostic_stage": 6,
+    "imu_count": 1,
+    "hardware": "pcb",
+    "hardware_tested": false,
+    "offsets": {
+      "bootloader.bin": "0x0",
+      "partition-table.bin": "0x8000",
+      "application.bin": "0x10000"
+    },
+    "sha256": {
+      "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+      "application.bin": "e1a94c8aadaee7a13cad0adda73bb7c87ee49edb5b9e1b31befce61b6633b8b4",
+      "bootloader.bin": "bf69972f0bc879e2294333ee3f6859d3b6f3583d443dd05d3d2dc7a1fbdc816a"
+    },
+    "profile": "diagnostic-imu-one"
+  },
+  {
+    "adc": "afo-ads131m04",
+    "active_channels": 2,
+    "diagnostic_stage": 6,
+    "imu_count": 2,
+    "hardware": "pcb",
+    "hardware_tested": false,
+    "offsets": {
+      "bootloader.bin": "0x0",
+      "partition-table.bin": "0x8000",
+      "application.bin": "0x10000"
+    },
+    "sha256": {
+      "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+      "application.bin": "f418037e053466112d9c8729581afb7c813f09037c5a70c4ee78aea3c9310e46",
+      "bootloader.bin": "bf69972f0bc879e2294333ee3f6859d3b6f3583d443dd05d3d2dc7a1fbdc816a"
+    },
+    "profile": "diagnostic-imu-two"
+  },
+  {
+    "package": "ads131m04-expandable-icm42688",
+    "imu_model": "ICM42688P",
+    "active_channels": 2,
+    "hardware": "pcb",
+    "diagnostic_stage": 0,
+    "imu_count": 2,
+    "wifi_enabled": true,
+    "sd_cmd_gpio": 38,
+    "sd_clk_gpio": 39,
+    "sd_d0_gpio": 40,
+    "hardware_tested": false,
+    "offsets": {
+      "bootloader.bin": "0x0",
+      "partition-table.bin": "0x8000",
+      "application.bin": "0x10000"
+    },
+    "sha256": {
+      "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+      "application.bin": "72d436b1b069b22091fe28f643c5bc6b3726861e7a3ef76279dbb7b69caeb49e",
+      "bootloader.bin": "f37bab4be692dc85080e6bc10f9f6a87313267dae8a8a26aabe7580d70c07043"
+    },
+    "profile": "record-2ch"
+  },
+  {
+    "package": "ads131m04-expandable-icm42688",
+    "imu_model": "ICM42688P",
+    "active_channels": 4,
+    "hardware": "pcb",
+    "diagnostic_stage": 0,
+    "imu_count": 2,
+    "wifi_enabled": true,
+    "sd_cmd_gpio": 38,
+    "sd_clk_gpio": 39,
+    "sd_d0_gpio": 40,
+    "hardware_tested": false,
+    "offsets": {
+      "bootloader.bin": "0x0",
+      "partition-table.bin": "0x8000",
+      "application.bin": "0x10000"
+    },
+    "sha256": {
+      "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+      "application.bin": "cbcb68da2a30a5e19d0ad53584b53319488cc8511f23bfde6e9c0e251f58eae5",
+      "bootloader.bin": "f37bab4be692dc85080e6bc10f9f6a87313267dae8a8a26aabe7580d70c07043"
+    },
+    "profile": "record-4ch"
+  }
+]

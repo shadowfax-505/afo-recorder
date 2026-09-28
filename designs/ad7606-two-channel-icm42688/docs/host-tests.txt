@@ -1,0 +1,44 @@
+test_live_ad7606_sample_gap_without_packet_loss (test_ad7606.AD7606Tests.test_live_ad7606_sample_gap_without_packet_loss) ... ok
+test_no_chip_crc_claim (test_ad7606.AD7606Tests.test_no_chip_crc_claim) ... ok
+test_signed_limits_and_disabled (test_ad7606.AD7606Tests.test_signed_limits_and_disabled) ... ok
+test_four_channel_firmware_rejected (test_fixed_two.FixedTwoTests.test_four_channel_firmware_rejected) ... ok
+test_only_two_input_circuits (test_fixed_two.FixedTwoTests.test_only_two_input_circuits) ... ok
+test_unused_amplifiers_terminated (test_fixed_two.FixedTwoTests.test_unused_amplifiers_terminated) ... ok
+test_bad_lengths_and_counts (test_live.LiveTests.test_bad_lengths_and_counts) ... ok
+test_bad_packet_crc_rejected (test_live.LiveTests.test_bad_packet_crc_rejected) ... ok
+test_framing_and_original_record (test_live.LiveTests.test_framing_and_original_record) ... ok
+test_missing_and_duplicate_packets_visible (test_live.LiveTests.test_missing_and_duplicate_packets_visible) ... ok
+test_new_session_separate_file_and_voltage (test_live.LiveTests.test_new_session_separate_file_and_voltage) ... ok
+test_record_crc_checked_inside_valid_packet (test_live.LiveTests.test_record_crc_checked_inside_valid_packet) ... ok
+test_sample_gap_visible (test_live.LiveTests.test_sample_gap_visible) ... ok
+test_sequence_wrap (test_live.LiveTests.test_sequence_wrap) ... ok
+test_unknown_session_never_guesses_metadata (test_live.LiveTests.test_unknown_session_never_guesses_metadata) ... ok
+test_byte_insertion_resynchronizes (test_recorder.RecorderTests.test_byte_insertion_resynchronizes) ... ok
+test_clean_recording (test_recorder.RecorderTests.test_clean_recording) ... ok
+test_corrupt_header_is_not_recoverable (test_recorder.RecorderTests.test_corrupt_header_is_not_recoverable) ... ok
+test_crc_corruption_recovery (test_recorder.RecorderTests.test_crc_corruption_recovery) ... ok
+test_crc_corruption_strict (test_recorder.RecorderTests.test_crc_corruption_strict) ... ok
+test_crc_reference (test_recorder.RecorderTests.test_crc_reference) ... ok
+test_data_after_end_rejected (test_recorder.RecorderTests.test_data_after_end_rejected) ... ok
+test_emg_only_bench_mode (test_recorder.RecorderTests.test_emg_only_bench_mode) ... ok
+test_empty_file_rejected (test_recorder.RecorderTests.test_empty_file_rejected) ... ok
+test_fifo_invalid_marker (test_recorder.RecorderTests.test_fifo_invalid_marker) ... ok
+test_fifo_signed_values_and_timestamp (test_recorder.RecorderTests.test_fifo_signed_values_and_timestamp) ... ok
+test_future_record_type_rejected (test_recorder.RecorderTests.test_future_record_type_rejected) ... ok
+test_missing_end_on_record_boundary (test_recorder.RecorderTests.test_missing_end_on_record_boundary) ... ok
+test_no_overwrite (test_recorder.RecorderTests.test_no_overwrite) ... ok
+test_timer_gap_is_visible (test_recorder.RecorderTests.test_timer_gap_is_visible) ... ok
+test_timestamp_wrap (test_recorder.RecorderTests.test_timestamp_wrap) ... ok
+test_truncated_tail_recovery (test_recorder.RecorderTests.test_truncated_tail_recovery) ... ok
+test_unknown_version (test_recorder.RecorderTests.test_unknown_version) ... ok
+test_voltage_conversion_uses_adc_bin_width (test_recorder.RecorderTests.test_voltage_conversion_uses_adc_bin_width) ... ok
+test_csv_and_wifi_only_enabled_channels (test_revb.RevisionBTests.test_csv_and_wifi_only_enabled_channels) ... ok
+test_fault_exports (test_revb.RevisionBTests.test_fault_exports) ... ok
+test_metadata_rejects_unsupported_modes (test_revb.RevisionBTests.test_metadata_rejects_unsupported_modes) ... ok
+test_modes_and_disabled_channels (test_revb.RevisionBTests.test_modes_and_disabled_channels) ... ok
+test_record_crc_fault (test_revb.RevisionBTests.test_record_crc_fault) ... ok
+
+----------------------------------------------------------------------
+Ran 39 tests in 1.371s
+
+OK
