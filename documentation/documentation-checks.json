@@ -1,0 +1,15 @@
+{
+  "checked_at": "2026-09-29",
+  "html_pages_checked": 20,
+  "html_references_checked": 353,
+  "broken_local_html_references": 0,
+  "markdown_entry_files_checked": 24,
+  "broken_local_markdown_links": 0,
+  "viewer_pages_with_documentation_route": 18,
+  "desktop_visual_inspection": true,
+  "mobile_width_px": 390,
+  "mobile_horizontal_overflow": false,
+  "mobile_contents_menu": "passed",
+  "browser_console_errors": 0,
+  "physical_hardware_tests": false
+}

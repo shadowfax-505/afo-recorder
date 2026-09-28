@@ -9,3 +9,7 @@ The full detailed viewer models are included. All six complete ZIP packages are 
 GitHub Pages serves the static project interface, documentation and models. ESP32 data reception still uses the local laptop receiver; GitHub Pages does not receive a nearby ESP32 radio stream. Build checklists and entered results remain in each browser's local storage.
 
 Hardware validation remains pending. Publication does not certify the design for manufacture or human use.
+
+## Documentation update — 29 September 2026
+
+The public site now includes a dedicated project manual with configuration selection, architecture, staged assembly, firmware and data commands, validation evidence, safety boundaries and repository navigation. All six build, assembly and PCB views link back to the manual. The repository README and documentation index use the same evidence labels: verified in software, simulated, pending hardware and passed—measured.
