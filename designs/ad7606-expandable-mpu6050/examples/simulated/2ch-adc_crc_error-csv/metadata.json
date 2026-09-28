@@ -1,0 +1,34 @@
+{
+  "recorded": {
+    "schema": "afo-recorder/2",
+    "firmware": "B.0.1-software-model",
+    "synthetic": true,
+    "emg_hz": 8000,
+    "imu_hz": 200,
+    "imu_enabled": true,
+    "adc_bits": 24,
+    "adc_reference_mv": 1200,
+    "adc_reference_measured": false,
+    "active_channel_count": 2,
+    "emg_channels": [
+      "EMG1",
+      "EMG2"
+    ],
+    "adc_pga": 1,
+    "input_scale": 0.5,
+    "input_midpoint_mv": 1500,
+    "calibration_state": "uncalibrated",
+    "adc_clock_hz": 8192000,
+    "adc_osr": 512,
+    "adc_clock_register": 778,
+    "adc_mode_register": 273,
+    "adc_filter": "sinc3 OSR512 high-resolution",
+    "simultaneous": true,
+    "accel_range_g": 16,
+    "gyro_range_dps": 2000,
+    "imu_timestamp_tick_us": 1,
+    "record_bytes": 64,
+    "notes": "SYNTHETIC queue/clock model. No physical measurements. Channel labels are ports, not verified muscle placements."
+  },
+  "operator_metadata": {}
+}

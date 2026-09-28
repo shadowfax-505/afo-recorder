@@ -1,0 +1,57 @@
+{
+  "required_before_signal_wiring": true,
+  "settings": [
+    {
+      "id": "system-36",
+      "net": "3V3D",
+      "a": {
+        "module": "reg3",
+        "terminal": "VOUT 3.3V",
+        "physical": false
+      },
+      "b": {
+        "module": "adc",
+        "terminal": "PAR/SER = serial",
+        "physical": false
+      },
+      "stage": 3,
+      "status": "named terminals; physical mapping required",
+      "note": "May already be configured on module. Verify before adding jumper."
+    },
+    {
+      "id": "system-37",
+      "net": "3V3D",
+      "a": {
+        "module": "reg3",
+        "terminal": "VOUT 3.3V",
+        "physical": false
+      },
+      "b": {
+        "module": "adc",
+        "terminal": "REF SELECT = internal",
+        "physical": false
+      },
+      "stage": 3,
+      "status": "named terminals; physical mapping required",
+      "note": "May already be configured on module. Verify before adding jumper."
+    },
+    {
+      "id": "adc-standby-check",
+      "net": "3V3D",
+      "a": {
+        "module": "reg3",
+        "terminal": "VOUT 3.3V",
+        "physical": false
+      },
+      "b": {
+        "module": "adc",
+        "terminal": "STBY chip pin7 / onboard configuration",
+        "physical": false
+      },
+      "stage": 3,
+      "status": "onboard configuration check; no header identified",
+      "note": "Verify STBY high. Inspect existing module tie before any change; no header position is inferred."
+    }
+  ],
+  "verification": "Measure chip pins 6, 7 and 34. These are onboard states, not additional header jumpers."
+}

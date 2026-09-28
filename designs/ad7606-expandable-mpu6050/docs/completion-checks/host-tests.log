@@ -1,0 +1,8 @@
+............./Users/muttakinrahman/Documents/Codex/2026-09-12/i-want-to-do-a-research-2/outputs/afo-recorder-project/designs/ad7606-expandable-mpu6050/host/tests/test_mpu.py:28: ResourceWarning: unclosed file <_io.TextIOWrapper name='/var/folders/w5/b_txk1fj1gs03jrsn0275fth0000gn/T/tmpep0vk2uv/out/foot.csv' mode='r' encoding='UTF-8'>
+  row=next(csv.DictReader((p/'out/foot.csv').open()));self.assertEqual(row['sensor_timestamp_raw'],'');self.assertEqual(float(row['gx_dps']),-10);self.assertEqual(row['fifo_batch_count'],'1')
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+..............................
+----------------------------------------------------------------------
+Ran 43 tests in 1.137s
+
+OK

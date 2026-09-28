@@ -1,0 +1,125 @@
+{
+  "native_pin_and_metadata_checks": [
+    {
+      "design": "ads131m04-expandable-mpu6050",
+      "breadboard": false,
+      "metadata": {
+        "sd_cmd_gpio": 38,
+        "sd_clk_gpio": 39,
+        "sd_d0_gpio": 40,
+        "ok": true
+      }
+    },
+    {
+      "design": "ads131m04-expandable-mpu6050",
+      "breadboard": true,
+      "metadata": {
+        "sd_cmd_gpio": 47,
+        "sd_clk_gpio": 39,
+        "sd_d0_gpio": 40,
+        "ok": true
+      }
+    },
+    {
+      "design": "ad7606-expandable-icm42688",
+      "breadboard": false,
+      "metadata": {
+        "sd_cmd_gpio": 38,
+        "sd_clk_gpio": 39,
+        "sd_d0_gpio": 40,
+        "ok": true
+      }
+    },
+    {
+      "design": "ad7606-expandable-icm42688",
+      "breadboard": true,
+      "metadata": {
+        "sd_cmd_gpio": 47,
+        "sd_clk_gpio": 39,
+        "sd_d0_gpio": 40,
+        "ok": true
+      }
+    },
+    {
+      "design": "ad7606-expandable-mpu6050",
+      "breadboard": false,
+      "metadata": {
+        "sd_cmd_gpio": 38,
+        "sd_clk_gpio": 39,
+        "sd_d0_gpio": 40,
+        "ok": true
+      }
+    },
+    {
+      "design": "ad7606-expandable-mpu6050",
+      "breadboard": true,
+      "metadata": {
+        "sd_cmd_gpio": 47,
+        "sd_clk_gpio": 39,
+        "sd_d0_gpio": 40,
+        "ok": true
+      }
+    },
+    {
+      "design": "ads131m04-expandable-icm42688",
+      "breadboard": false,
+      "metadata": {
+        "sd_cmd_gpio": 38,
+        "sd_clk_gpio": 39,
+        "sd_d0_gpio": 40,
+        "ok": true
+      }
+    },
+    {
+      "design": "ads131m04-expandable-icm42688",
+      "breadboard": true,
+      "metadata": {
+        "sd_cmd_gpio": 47,
+        "sd_clk_gpio": 39,
+        "sd_d0_gpio": 40,
+        "ok": true
+      }
+    },
+    {
+      "design": "ad7606-two-channel-mpu6050",
+      "breadboard": false,
+      "metadata": {
+        "sd_cmd_gpio": 38,
+        "sd_clk_gpio": 39,
+        "sd_d0_gpio": 40,
+        "ok": true
+      }
+    },
+    {
+      "design": "ad7606-two-channel-mpu6050",
+      "breadboard": true,
+      "metadata": {
+        "sd_cmd_gpio": 47,
+        "sd_clk_gpio": 39,
+        "sd_d0_gpio": 40,
+        "ok": true
+      }
+    },
+    {
+      "design": "ad7606-two-channel-icm42688",
+      "breadboard": false,
+      "metadata": {
+        "sd_cmd_gpio": 38,
+        "sd_clk_gpio": 39,
+        "sd_d0_gpio": 40,
+        "ok": true
+      }
+    },
+    {
+      "design": "ad7606-two-channel-icm42688",
+      "breadboard": true,
+      "metadata": {
+        "sd_cmd_gpio": 47,
+        "sd_clk_gpio": 39,
+        "sd_d0_gpio": 40,
+        "ok": true
+      }
+    }
+  ],
+  "hardware_tested": false
+}

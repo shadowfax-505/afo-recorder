@@ -1,0 +1,1200 @@
+{
+  "adc": "ADS131M04",
+  "module": "ADS131M04 board - availability dependent",
+  "module_header_verified": false,
+  "boards": 5,
+  "components": [
+    {
+      "ref": "R100",
+      "board": "BB1",
+      "value": "3.3k",
+      "terminals": {
+        "1": "a2",
+        "2": "a4"
+      },
+      "stage": 4
+    },
+    {
+      "ref": "R101",
+      "board": "BB1",
+      "value": "1M",
+      "terminals": {
+        "1": "c2",
+        "2": "c8"
+      },
+      "stage": 4
+    },
+    {
+      "ref": "C100",
+      "board": "BB1",
+      "value": "47nF",
+      "terminals": {
+        "1": "b4",
+        "2": "b6"
+      },
+      "stage": 4
+    },
+    {
+      "ref": "R102",
+      "board": "BB1",
+      "value": "6.65k",
+      "terminals": {
+        "1": "a18",
+        "2": "a20"
+      },
+      "stage": 4
+    },
+    {
+      "ref": "C101",
+      "board": "BB1",
+      "value": "47nF",
+      "terminals": {
+        "1": "b20",
+        "2": "b24"
+      },
+      "stage": 4
+    },
+    {
+      "ref": "R104",
+      "board": "BB1",
+      "value": "100",
+      "terminals": {
+        "1": "a26",
+        "2": "a28"
+      },
+      "stage": 4
+    },
+    {
+      "ref": "C102",
+      "board": "BB1",
+      "value": "1nF",
+      "terminals": {
+        "1": "b28",
+        "2": "b32"
+      },
+      "stage": 4
+    },
+    {
+      "ref": "R103",
+      "board": "BB1",
+      "value": "6.65k",
+      "terminals": {
+        "1": "c22",
+        "2": "c20"
+      },
+      "stage": 4
+    },
+    {
+      "ref": "R105",
+      "board": "BB1",
+      "value": "100",
+      "terminals": {
+        "1": "a30",
+        "2": "a32"
+      },
+      "stage": 4
+    },
+    {
+      "ref": "UB1",
+      "board": "BB1",
+      "value": "MCP6002-I/P DIP8; same amplifier family as PCB MCP6004",
+      "terminals": {
+        "1": "e10",
+        "2": "e11",
+        "3": "e12",
+        "4": "e13",
+        "5": "f13",
+        "6": "f12",
+        "7": "f11",
+        "8": "f10"
+      },
+      "stage": 4
+    },
+    {
+      "ref": "CB1",
+      "board": "BB1",
+      "value": "100nF local bypass",
+      "terminals": {
+        "1": "j10",
+        "2": "j8"
+      },
+      "stage": 4
+    },
+    {
+      "ref": "R110",
+      "board": "BB2",
+      "value": "3.3k",
+      "terminals": {
+        "1": "a2",
+        "2": "a4"
+      },
+      "stage": 5
+    },
+    {
+      "ref": "R111",
+      "board": "BB2",
+      "value": "1M",
+      "terminals": {
+        "1": "c2",
+        "2": "c8"
+      },
+      "stage": 5
+    },
+    {
+      "ref": "C110",
+      "board": "BB2",
+      "value": "47nF",
+      "terminals": {
+        "1": "b4",
+        "2": "b6"
+      },
+      "stage": 5
+    },
+    {
+      "ref": "R112",
+      "board": "BB2",
+      "value": "6.65k",
+      "terminals": {
+        "1": "a18",
+        "2": "a20"
+      },
+      "stage": 5
+    },
+    {
+      "ref": "C111",
+      "board": "BB2",
+      "value": "47nF",
+      "terminals": {
+        "1": "b20",
+        "2": "b24"
+      },
+      "stage": 5
+    },
+    {
+      "ref": "R114",
+      "board": "BB2",
+      "value": "100",
+      "terminals": {
+        "1": "a26",
+        "2": "a28"
+      },
+      "stage": 5
+    },
+    {
+      "ref": "C112",
+      "board": "BB2",
+      "value": "1nF",
+      "terminals": {
+        "1": "b28",
+        "2": "b32"
+      },
+      "stage": 5
+    },
+    {
+      "ref": "R113",
+      "board": "BB2",
+      "value": "6.65k",
+      "terminals": {
+        "1": "c22",
+        "2": "c20"
+      },
+      "stage": 5
+    },
+    {
+      "ref": "R115",
+      "board": "BB2",
+      "value": "100",
+      "terminals": {
+        "1": "a30",
+        "2": "a32"
+      },
+      "stage": 5
+    },
+    {
+      "ref": "UB2",
+      "board": "BB2",
+      "value": "MCP6002-I/P DIP8; same amplifier family as PCB MCP6004",
+      "terminals": {
+        "1": "e10",
+        "2": "e11",
+        "3": "e12",
+        "4": "e13",
+        "5": "f13",
+        "6": "f12",
+        "7": "f11",
+        "8": "f10"
+      },
+      "stage": 5
+    },
+    {
+      "ref": "CB2",
+      "board": "BB2",
+      "value": "100nF local bypass",
+      "terminals": {
+        "1": "j10",
+        "2": "j8"
+      },
+      "stage": 5
+    },
+    {
+      "ref": "R120",
+      "board": "BB3",
+      "value": "3.3k",
+      "terminals": {
+        "1": "a2",
+        "2": "a4"
+      },
+      "stage": 5
+    },
+    {
+      "ref": "R121",
+      "board": "BB3",
+      "value": "1M",
+      "terminals": {
+        "1": "c2",
+        "2": "c8"
+      },
+      "stage": 5
+    },
+    {
+      "ref": "C120",
+      "board": "BB3",
+      "value": "47nF",
+      "terminals": {
+        "1": "b4",
+        "2": "b6"
+      },
+      "stage": 5
+    },
+    {
+      "ref": "R122",
+      "board": "BB3",
+      "value": "6.65k",
+      "terminals": {
+        "1": "a18",
+        "2": "a20"
+      },
+      "stage": 5
+    },
+    {
+      "ref": "C121",
+      "board": "BB3",
+      "value": "47nF",
+      "terminals": {
+        "1": "b20",
+        "2": "b24"
+      },
+      "stage": 5
+    },
+    {
+      "ref": "R124",
+      "board": "BB3",
+      "value": "100",
+      "terminals": {
+        "1": "a26",
+        "2": "a28"
+      },
+      "stage": 5
+    },
+    {
+      "ref": "C122",
+      "board": "BB3",
+      "value": "1nF",
+      "terminals": {
+        "1": "b28",
+        "2": "b32"
+      },
+      "stage": 5
+    },
+    {
+      "ref": "R123",
+      "board": "BB3",
+      "value": "6.65k",
+      "terminals": {
+        "1": "c22",
+        "2": "c20"
+      },
+      "stage": 5
+    },
+    {
+      "ref": "R125",
+      "board": "BB3",
+      "value": "100",
+      "terminals": {
+        "1": "a30",
+        "2": "a32"
+      },
+      "stage": 5
+    },
+    {
+      "ref": "UB3",
+      "board": "BB3",
+      "value": "MCP6002-I/P DIP8; same amplifier family as PCB MCP6004",
+      "terminals": {
+        "1": "e10",
+        "2": "e11",
+        "3": "e12",
+        "4": "e13",
+        "5": "f13",
+        "6": "f12",
+        "7": "f11",
+        "8": "f10"
+      },
+      "stage": 5
+    },
+    {
+      "ref": "CB3",
+      "board": "BB3",
+      "value": "100nF local bypass",
+      "terminals": {
+        "1": "j10",
+        "2": "j8"
+      },
+      "stage": 5
+    },
+    {
+      "ref": "R130",
+      "board": "BB4",
+      "value": "3.3k",
+      "terminals": {
+        "1": "a2",
+        "2": "a4"
+      },
+      "stage": 5
+    },
+    {
+      "ref": "R131",
+      "board": "BB4",
+      "value": "1M",
+      "terminals": {
+        "1": "c2",
+        "2": "c8"
+      },
+      "stage": 5
+    },
+    {
+      "ref": "C130",
+      "board": "BB4",
+      "value": "47nF",
+      "terminals": {
+        "1": "b4",
+        "2": "b6"
+      },
+      "stage": 5
+    },
+    {
+      "ref": "R132",
+      "board": "BB4",
+      "value": "6.65k",
+      "terminals": {
+        "1": "a18",
+        "2": "a20"
+      },
+      "stage": 5
+    },
+    {
+      "ref": "C131",
+      "board": "BB4",
+      "value": "47nF",
+      "terminals": {
+        "1": "b20",
+        "2": "b24"
+      },
+      "stage": 5
+    },
+    {
+      "ref": "R134",
+      "board": "BB4",
+      "value": "100",
+      "terminals": {
+        "1": "a26",
+        "2": "a28"
+      },
+      "stage": 5
+    },
+    {
+      "ref": "C132",
+      "board": "BB4",
+      "value": "1nF",
+      "terminals": {
+        "1": "b28",
+        "2": "b32"
+      },
+      "stage": 5
+    },
+    {
+      "ref": "R133",
+      "board": "BB4",
+      "value": "6.65k",
+      "terminals": {
+        "1": "c22",
+        "2": "c20"
+      },
+      "stage": 5
+    },
+    {
+      "ref": "R135",
+      "board": "BB4",
+      "value": "100",
+      "terminals": {
+        "1": "a30",
+        "2": "a32"
+      },
+      "stage": 5
+    },
+    {
+      "ref": "UB4",
+      "board": "BB4",
+      "value": "MCP6002-I/P DIP8; same amplifier family as PCB MCP6004",
+      "terminals": {
+        "1": "e10",
+        "2": "e11",
+        "3": "e12",
+        "4": "e13",
+        "5": "f13",
+        "6": "f12",
+        "7": "f11",
+        "8": "f10"
+      },
+      "stage": 5
+    },
+    {
+      "ref": "CB4",
+      "board": "BB4",
+      "value": "100nF local bypass",
+      "terminals": {
+        "1": "j10",
+        "2": "j8"
+      },
+      "stage": 5
+    },
+    {
+      "ref": "R40",
+      "board": "BB0",
+      "value": "10k",
+      "terminals": {
+        "1": "a2",
+        "2": "a4"
+      },
+      "stage": 1
+    },
+    {
+      "ref": "R41",
+      "board": "BB0",
+      "value": "10k",
+      "terminals": {
+        "1": "b4",
+        "2": "a6"
+      },
+      "stage": 1
+    },
+    {
+      "ref": "C30",
+      "board": "BB0",
+      "value": "1uF",
+      "terminals": {
+        "1": "c4",
+        "2": "b6"
+      },
+      "stage": 1
+    },
+    {
+      "ref": "R42",
+      "board": "BB0",
+      "value": "100",
+      "terminals": {
+        "1": "a18",
+        "2": "a20"
+      },
+      "stage": 1
+    },
+    {
+      "ref": "C31",
+      "board": "BB0",
+      "value": "1uF",
+      "terminals": {
+        "1": "b20",
+        "2": "a24"
+      },
+      "stage": 1
+    },
+    {
+      "ref": "UB0",
+      "board": "BB0",
+      "value": "MCP6002-I/P midpoint; half B grounded follower",
+      "terminals": {
+        "1": "e10",
+        "2": "e11",
+        "3": "e12",
+        "4": "e13",
+        "5": "f13",
+        "6": "f12",
+        "7": "f11",
+        "8": "f10"
+      },
+      "stage": 1
+    },
+    {
+      "ref": "CB0",
+      "board": "BB0",
+      "value": "100nF",
+      "terminals": {
+        "1": "j10",
+        "2": "j8"
+      },
+      "stage": 1
+    }
+  ],
+  "connections": [
+    {
+      "board": "BB1",
+      "net": "RAW0",
+      "from_hole": "b2",
+      "to_hole": "TERMINAL:RAW0",
+      "stage": 4
+    },
+    {
+      "board": "BB1",
+      "net": "RC0A",
+      "from_hole": "c4",
+      "to_hole": "a12",
+      "stage": 4
+    },
+    {
+      "board": "BB1",
+      "net": "VMID",
+      "from_hole": "a8",
+      "to_hole": "a22",
+      "stage": 4
+    },
+    {
+      "board": "BB1",
+      "net": "VMID",
+      "from_hole": "b22",
+      "to_hole": "b30",
+      "stage": 4
+    },
+    {
+      "board": "BB1",
+      "net": "VMID",
+      "from_hole": "b8",
+      "to_hole": "TERMINAL:VMID",
+      "stage": 4
+    },
+    {
+      "board": "BB1",
+      "net": "GND",
+      "from_hole": "a6",
+      "to_hole": "a24",
+      "stage": 4
+    },
+    {
+      "board": "BB1",
+      "net": "GND",
+      "from_hole": "c24",
+      "to_hole": "a13",
+      "stage": 4
+    },
+    {
+      "board": "BB1",
+      "net": "GND",
+      "from_hole": "b13",
+      "to_hole": "f8",
+      "stage": 4
+    },
+    {
+      "board": "BB1",
+      "net": "GND",
+      "from_hole": "c6",
+      "to_hole": "TERMINAL:GND",
+      "stage": 4
+    },
+    {
+      "board": "BB1",
+      "net": "BUF0A",
+      "from_hole": "b18",
+      "to_hole": "a10",
+      "stage": 4
+    },
+    {
+      "board": "BB1",
+      "net": "BUF0A",
+      "from_hole": "b10",
+      "to_hole": "a11",
+      "stage": 4
+    },
+    {
+      "board": "BB1",
+      "net": "RC0B",
+      "from_hole": "d20",
+      "to_hole": "g13",
+      "stage": 4
+    },
+    {
+      "board": "BB1",
+      "net": "BUF0B",
+      "from_hole": "b26",
+      "to_hole": "g12",
+      "stage": 4
+    },
+    {
+      "board": "BB1",
+      "net": "BUF0B",
+      "from_hole": "h12",
+      "to_hole": "g11",
+      "stage": 4
+    },
+    {
+      "board": "BB1",
+      "net": "AIN0P",
+      "from_hole": "c28",
+      "to_hole": "TERMINAL:AIN0P",
+      "stage": 4
+    },
+    {
+      "board": "BB1",
+      "net": "AIN0N",
+      "from_hole": "c32",
+      "to_hole": "TERMINAL:AIN0N",
+      "stage": 4
+    },
+    {
+      "board": "BB1",
+      "net": "3V0A",
+      "from_hole": "g10",
+      "to_hole": "TERMINAL:3V0A",
+      "stage": 4
+    },
+    {
+      "board": "BB1",
+      "net": "GND",
+      "from_hole": "d6",
+      "to_hole": "BAV199_CARRIER1:CHIP_PAD_1",
+      "stage": 4
+    },
+    {
+      "board": "BB1",
+      "net": "3V0A",
+      "from_hole": "h10",
+      "to_hole": "BAV199_CARRIER1:CHIP_PAD_2",
+      "stage": 4
+    },
+    {
+      "board": "BB1",
+      "net": "RC0A",
+      "from_hole": "d4",
+      "to_hole": "BAV199_CARRIER1:CHIP_PAD_3",
+      "stage": 4
+    },
+    {
+      "board": "BB2",
+      "net": "RAW1",
+      "from_hole": "b2",
+      "to_hole": "TERMINAL:RAW1",
+      "stage": 5
+    },
+    {
+      "board": "BB2",
+      "net": "RC1A",
+      "from_hole": "c4",
+      "to_hole": "a12",
+      "stage": 5
+    },
+    {
+      "board": "BB2",
+      "net": "VMID",
+      "from_hole": "a8",
+      "to_hole": "a22",
+      "stage": 5
+    },
+    {
+      "board": "BB2",
+      "net": "VMID",
+      "from_hole": "b22",
+      "to_hole": "b30",
+      "stage": 5
+    },
+    {
+      "board": "BB2",
+      "net": "VMID",
+      "from_hole": "b8",
+      "to_hole": "TERMINAL:VMID",
+      "stage": 5
+    },
+    {
+      "board": "BB2",
+      "net": "GND",
+      "from_hole": "a6",
+      "to_hole": "a24",
+      "stage": 5
+    },
+    {
+      "board": "BB2",
+      "net": "GND",
+      "from_hole": "c24",
+      "to_hole": "a13",
+      "stage": 5
+    },
+    {
+      "board": "BB2",
+      "net": "GND",
+      "from_hole": "b13",
+      "to_hole": "f8",
+      "stage": 5
+    },
+    {
+      "board": "BB2",
+      "net": "GND",
+      "from_hole": "c6",
+      "to_hole": "TERMINAL:GND",
+      "stage": 5
+    },
+    {
+      "board": "BB2",
+      "net": "BUF1A",
+      "from_hole": "b18",
+      "to_hole": "a10",
+      "stage": 5
+    },
+    {
+      "board": "BB2",
+      "net": "BUF1A",
+      "from_hole": "b10",
+      "to_hole": "a11",
+      "stage": 5
+    },
+    {
+      "board": "BB2",
+      "net": "RC1B",
+      "from_hole": "d20",
+      "to_hole": "g13",
+      "stage": 5
+    },
+    {
+      "board": "BB2",
+      "net": "BUF1B",
+      "from_hole": "b26",
+      "to_hole": "g12",
+      "stage": 5
+    },
+    {
+      "board": "BB2",
+      "net": "BUF1B",
+      "from_hole": "h12",
+      "to_hole": "g11",
+      "stage": 5
+    },
+    {
+      "board": "BB2",
+      "net": "AIN1P",
+      "from_hole": "c28",
+      "to_hole": "TERMINAL:AIN1P",
+      "stage": 5
+    },
+    {
+      "board": "BB2",
+      "net": "AIN1N",
+      "from_hole": "c32",
+      "to_hole": "TERMINAL:AIN1N",
+      "stage": 5
+    },
+    {
+      "board": "BB2",
+      "net": "3V0A",
+      "from_hole": "g10",
+      "to_hole": "TERMINAL:3V0A",
+      "stage": 5
+    },
+    {
+      "board": "BB2",
+      "net": "GND",
+      "from_hole": "d6",
+      "to_hole": "BAV199_CARRIER2:CHIP_PAD_1",
+      "stage": 5
+    },
+    {
+      "board": "BB2",
+      "net": "3V0A",
+      "from_hole": "h10",
+      "to_hole": "BAV199_CARRIER2:CHIP_PAD_2",
+      "stage": 5
+    },
+    {
+      "board": "BB2",
+      "net": "RC1A",
+      "from_hole": "d4",
+      "to_hole": "BAV199_CARRIER2:CHIP_PAD_3",
+      "stage": 5
+    },
+    {
+      "board": "BB3",
+      "net": "RAW2",
+      "from_hole": "b2",
+      "to_hole": "TERMINAL:RAW2",
+      "stage": 5
+    },
+    {
+      "board": "BB3",
+      "net": "RC2A",
+      "from_hole": "c4",
+      "to_hole": "a12",
+      "stage": 5
+    },
+    {
+      "board": "BB3",
+      "net": "VMID",
+      "from_hole": "a8",
+      "to_hole": "a22",
+      "stage": 5
+    },
+    {
+      "board": "BB3",
+      "net": "VMID",
+      "from_hole": "b22",
+      "to_hole": "b30",
+      "stage": 5
+    },
+    {
+      "board": "BB3",
+      "net": "VMID",
+      "from_hole": "b8",
+      "to_hole": "TERMINAL:VMID",
+      "stage": 5
+    },
+    {
+      "board": "BB3",
+      "net": "GND",
+      "from_hole": "a6",
+      "to_hole": "a24",
+      "stage": 5
+    },
+    {
+      "board": "BB3",
+      "net": "GND",
+      "from_hole": "c24",
+      "to_hole": "a13",
+      "stage": 5
+    },
+    {
+      "board": "BB3",
+      "net": "GND",
+      "from_hole": "b13",
+      "to_hole": "f8",
+      "stage": 5
+    },
+    {
+      "board": "BB3",
+      "net": "GND",
+      "from_hole": "c6",
+      "to_hole": "TERMINAL:GND",
+      "stage": 5
+    },
+    {
+      "board": "BB3",
+      "net": "BUF2A",
+      "from_hole": "b18",
+      "to_hole": "a10",
+      "stage": 5
+    },
+    {
+      "board": "BB3",
+      "net": "BUF2A",
+      "from_hole": "b10",
+      "to_hole": "a11",
+      "stage": 5
+    },
+    {
+      "board": "BB3",
+      "net": "RC2B",
+      "from_hole": "d20",
+      "to_hole": "g13",
+      "stage": 5
+    },
+    {
+      "board": "BB3",
+      "net": "BUF2B",
+      "from_hole": "b26",
+      "to_hole": "g12",
+      "stage": 5
+    },
+    {
+      "board": "BB3",
+      "net": "BUF2B",
+      "from_hole": "h12",
+      "to_hole": "g11",
+      "stage": 5
+    },
+    {
+      "board": "BB3",
+      "net": "AIN2P",
+      "from_hole": "c28",
+      "to_hole": "TERMINAL:AIN2P",
+      "stage": 5
+    },
+    {
+      "board": "BB3",
+      "net": "AIN2N",
+      "from_hole": "c32",
+      "to_hole": "TERMINAL:AIN2N",
+      "stage": 5
+    },
+    {
+      "board": "BB3",
+      "net": "3V0A",
+      "from_hole": "g10",
+      "to_hole": "TERMINAL:3V0A",
+      "stage": 5
+    },
+    {
+      "board": "BB3",
+      "net": "GND",
+      "from_hole": "d6",
+      "to_hole": "BAV199_CARRIER3:CHIP_PAD_1",
+      "stage": 5
+    },
+    {
+      "board": "BB3",
+      "net": "3V0A",
+      "from_hole": "h10",
+      "to_hole": "BAV199_CARRIER3:CHIP_PAD_2",
+      "stage": 5
+    },
+    {
+      "board": "BB3",
+      "net": "RC2A",
+      "from_hole": "d4",
+      "to_hole": "BAV199_CARRIER3:CHIP_PAD_3",
+      "stage": 5
+    },
+    {
+      "board": "BB4",
+      "net": "RAW3",
+      "from_hole": "b2",
+      "to_hole": "TERMINAL:RAW3",
+      "stage": 5
+    },
+    {
+      "board": "BB4",
+      "net": "RC3A",
+      "from_hole": "c4",
+      "to_hole": "a12",
+      "stage": 5
+    },
+    {
+      "board": "BB4",
+      "net": "VMID",
+      "from_hole": "a8",
+      "to_hole": "a22",
+      "stage": 5
+    },
+    {
+      "board": "BB4",
+      "net": "VMID",
+      "from_hole": "b22",
+      "to_hole": "b30",
+      "stage": 5
+    },
+    {
+      "board": "BB4",
+      "net": "VMID",
+      "from_hole": "b8",
+      "to_hole": "TERMINAL:VMID",
+      "stage": 5
+    },
+    {
+      "board": "BB4",
+      "net": "GND",
+      "from_hole": "a6",
+      "to_hole": "a24",
+      "stage": 5
+    },
+    {
+      "board": "BB4",
+      "net": "GND",
+      "from_hole": "c24",
+      "to_hole": "a13",
+      "stage": 5
+    },
+    {
+      "board": "BB4",
+      "net": "GND",
+      "from_hole": "b13",
+      "to_hole": "f8",
+      "stage": 5
+    },
+    {
+      "board": "BB4",
+      "net": "GND",
+      "from_hole": "c6",
+      "to_hole": "TERMINAL:GND",
+      "stage": 5
+    },
+    {
+      "board": "BB4",
+      "net": "BUF3A",
+      "from_hole": "b18",
+      "to_hole": "a10",
+      "stage": 5
+    },
+    {
+      "board": "BB4",
+      "net": "BUF3A",
+      "from_hole": "b10",
+      "to_hole": "a11",
+      "stage": 5
+    },
+    {
+      "board": "BB4",
+      "net": "RC3B",
+      "from_hole": "d20",
+      "to_hole": "g13",
+      "stage": 5
+    },
+    {
+      "board": "BB4",
+      "net": "BUF3B",
+      "from_hole": "b26",
+      "to_hole": "g12",
+      "stage": 5
+    },
+    {
+      "board": "BB4",
+      "net": "BUF3B",
+      "from_hole": "h12",
+      "to_hole": "g11",
+      "stage": 5
+    },
+    {
+      "board": "BB4",
+      "net": "AIN3P",
+      "from_hole": "c28",
+      "to_hole": "TERMINAL:AIN3P",
+      "stage": 5
+    },
+    {
+      "board": "BB4",
+      "net": "AIN3N",
+      "from_hole": "c32",
+      "to_hole": "TERMINAL:AIN3N",
+      "stage": 5
+    },
+    {
+      "board": "BB4",
+      "net": "3V0A",
+      "from_hole": "g10",
+      "to_hole": "TERMINAL:3V0A",
+      "stage": 5
+    },
+    {
+      "board": "BB4",
+      "net": "GND",
+      "from_hole": "d6",
+      "to_hole": "BAV199_CARRIER4:CHIP_PAD_1",
+      "stage": 5
+    },
+    {
+      "board": "BB4",
+      "net": "3V0A",
+      "from_hole": "h10",
+      "to_hole": "BAV199_CARRIER4:CHIP_PAD_2",
+      "stage": 5
+    },
+    {
+      "board": "BB4",
+      "net": "RC3A",
+      "from_hole": "d4",
+      "to_hole": "BAV199_CARRIER4:CHIP_PAD_3",
+      "stage": 5
+    },
+    {
+      "board": "BB0",
+      "net": "3V0A",
+      "from_hole": "b2",
+      "to_hole": "g10",
+      "stage": 1
+    },
+    {
+      "board": "BB0",
+      "net": "3V0A",
+      "from_hole": "c2",
+      "to_hole": "TERMINAL:3V0A",
+      "stage": 1
+    },
+    {
+      "board": "BB0",
+      "net": "VMID_DIV",
+      "from_hole": "d4",
+      "to_hole": "a12",
+      "stage": 1
+    },
+    {
+      "board": "BB0",
+      "net": "GND",
+      "from_hole": "c6",
+      "to_hole": "b24",
+      "stage": 1
+    },
+    {
+      "board": "BB0",
+      "net": "GND",
+      "from_hole": "c24",
+      "to_hole": "a13",
+      "stage": 1
+    },
+    {
+      "board": "BB0",
+      "net": "GND",
+      "from_hole": "b13",
+      "to_hole": "g13",
+      "stage": 1
+    },
+    {
+      "board": "BB0",
+      "net": "GND",
+      "from_hole": "h13",
+      "to_hole": "f8",
+      "stage": 1
+    },
+    {
+      "board": "BB0",
+      "net": "GND",
+      "from_hole": "d6",
+      "to_hole": "TERMINAL:GND",
+      "stage": 1
+    },
+    {
+      "board": "BB0",
+      "net": "VMID_BUF",
+      "from_hole": "b18",
+      "to_hole": "a10",
+      "stage": 1
+    },
+    {
+      "board": "BB0",
+      "net": "VMID_BUF",
+      "from_hole": "b10",
+      "to_hole": "a11",
+      "stage": 1
+    },
+    {
+      "board": "BB0",
+      "net": "VMID",
+      "from_hole": "c20",
+      "to_hole": "TERMINAL:VMID",
+      "stage": 1
+    },
+    {
+      "board": "BB0",
+      "net": "MID_UNUSED",
+      "from_hole": "g12",
+      "to_hole": "g11",
+      "stage": 1
+    }
+  ],
+  "limits": [
+    "Breadboard hole locations are specified for analog passives and DIP buffers only.",
+    "ADC/module terminal panels are logical labels, not physical header positions.",
+    "BAV199 and midpoint buffer require suitable carriers; verify carrier pin mapping.",
+    "PCB and DIP op-amp package parasitics differ; validate transfer/noise."
+  ]
+}

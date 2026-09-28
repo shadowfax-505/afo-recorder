@@ -1,0 +1,20 @@
+{
+  "design": "ad7606-two-channel-mpu6050",
+  "hardware_measured": false,
+  "erc": {
+    "violations": 0,
+    "pass": true
+  },
+  "drc": {
+    "violations": 0,
+    "pass": true
+  },
+  "fresh_schematic_spec": {
+    "pins_checked": 390,
+    "mismatches": []
+  },
+  "host_tests": {
+    "pass": true,
+    "summary": "8'>\n  row=next(csv.DictReader((p/'out/foot.csv').open()));self.assertEqual(row['sensor_timestamp_raw'],'');self.assertEqual(float(row['gx_dps']),-10);self.assertEqual(row['fifo_batch_count'],'1')\nResourceWarning: Enable tracemalloc to get the object allocation traceback\n..............................\n----------------------------------------------------------------------\nRan 47 tests in 1.472s\n\nOK\n"
+  }
+}

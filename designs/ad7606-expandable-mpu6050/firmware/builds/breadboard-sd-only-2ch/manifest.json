@@ -1,0 +1,23 @@
+{
+  "package": "ad7606-expandable-mpu6050",
+  "imu_model": "MPU6050",
+  "active_channels": 2,
+  "hardware": "breadboard",
+  "diagnostic_stage": 0,
+  "imu_count": 2,
+  "wifi_enabled": false,
+  "sd_cmd_gpio": 47,
+  "sd_clk_gpio": 39,
+  "sd_d0_gpio": 40,
+  "hardware_tested": false,
+  "offsets": {
+    "bootloader.bin": "0x0",
+    "partition-table.bin": "0x8000",
+    "application.bin": "0x10000"
+  },
+  "sha256": {
+    "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+    "application.bin": "5f783231a348f68a4be27472985d8784e8a091943680bd4e52b836ceea908742",
+    "bootloader.bin": "d66f90e73f0bea316916c3daa19e02de8d6e4aadf231e98959cb5e20d7ba7e8f"
+  }
+}

@@ -1,0 +1,128 @@
+Board,Step,Type,Part_or_net,Holes,Instruction,Orientation,External_header_verified
+BB0,1,component,R40 · 10k,a2; a4,"Insert R40: pin 1 → a2 (3V0A), pin 2 → a4 (VMID_DIV).",Resistor: non-polarized; bend leads to the specified holes.,not applicable
+BB0,2,component,R41 · 10k,b4; a6,"Insert R41: pin 1 → b4 (VMID_DIV), pin 2 → a6 (GND).",Resistor: non-polarized; bend leads to the specified holes.,not applicable
+BB0,3,component,C30 · 1uF,c4; b6,"Insert C30: pin 1 → c4 (VMID_DIV), pin 2 → b6 (GND).",Use a non-polarized capacitor of the specified value. Body/lead spacing must be checked against the actual purchased part.,not applicable
+BB0,4,component,R42 · 100,a18; a20,"Insert R42: pin 1 → a18 (VMID_BUF), pin 2 → a20 (VMID).",Resistor: non-polarized; bend leads to the specified holes.,not applicable
+BB0,5,component,C31 · 1uF,b20; a24,"Insert C31: pin 1 → b20 (VMID), pin 2 → a24 (GND).",Use a non-polarized capacitor of the specified value. Body/lead spacing must be checked against the actual purchased part.,not applicable
+BB0,6,component,UB0 · MCP6002-I/P midpoint; half B grounded follower,e10; e11; e12; e13; f13; f12; f11; f10,"Insert UB0: pin 1 → e10 (VMID_BUF), pin 2 → e11 (VMID_BUF), pin 3 → e12 (VMID_DIV), pin 4 → e13 (GND), pin 5 → f13 (GND), pin 6 → f12 (MID_UNUSED), pin 7 → f11 (MID_UNUSED), pin 8 → f10 (3V0A).","MCP6002 DIP-8: notch toward row 9; pin 1=e10, pins 1–4 down the left, pins 5–8 up the right. Do not rotate 180°.",not applicable
+BB0,7,component,CB0 · 100nF,j10; j8,"Insert CB0: pin 1 → j10 (3V0A), pin 2 → j8 (GND).",100 nF non-polarized bypass; fit close to IC supply connections.,not applicable
+BB0,8,jumper,Jumper · 3V0A,b2; g10,b2 → g10. Both jumper ends must occupy these exact holes.,,not applicable
+BB0,9,jumper,Jumper · VMID_DIV,d4; a12,d4 → a12. Both jumper ends must occupy these exact holes.,,not applicable
+BB0,10,jumper,Jumper · GND,c6; b24,c6 → b24. Both jumper ends must occupy these exact holes.,,not applicable
+BB0,11,jumper,Jumper · GND,c24; a13,c24 → a13. Both jumper ends must occupy these exact holes.,,not applicable
+BB0,12,jumper,Jumper · GND,b13; g13,b13 → g13. Both jumper ends must occupy these exact holes.,,not applicable
+BB0,13,jumper,Jumper · GND,h13; f8,h13 → f8. Both jumper ends must occupy these exact holes.,,not applicable
+BB0,14,jumper,Jumper · VMID_BUF,b18; a10,b18 → a10. Both jumper ends must occupy these exact holes.,,not applicable
+BB0,15,jumper,Jumper · VMID_BUF,b10; a11,b10 → a11. Both jumper ends must occupy these exact holes.,,not applicable
+BB0,16,jumper,Jumper · MID_UNUSED,g12; g11,g12 → g11. Both jumper ends must occupy these exact holes.,,not applicable
+BB0,17,external,External lead · 3V0A,c2,c2 → TERMINAL:3V0A (logical endpoint only; physical pin pending verification).,,NO
+BB0,18,external,External lead · GND,d6,d6 → TERMINAL:GND (logical endpoint only; physical pin pending verification).,,NO
+BB0,19,external,External lead · VMID,c20,c20 → TERMINAL:VMID (logical endpoint only; physical pin pending verification).,,NO
+BB1,1,component,R100 · 3.3k,a2; a4,"Insert R100: pin 1 → a2 (RAW0), pin 2 → a4 (RC0A).",Resistor: non-polarized; bend leads to the specified holes.,not applicable
+BB1,2,component,R101 · 1M,c2; c8,"Insert R101: pin 1 → c2 (RAW0), pin 2 → c8 (VMID).",Resistor: non-polarized; bend leads to the specified holes.,not applicable
+BB1,3,component,C100 · 47nF,b4; b6,"Insert C100: pin 1 → b4 (RC0A), pin 2 → b6 (GND).",Use a non-polarized capacitor of the specified value. Body/lead spacing must be checked against the actual purchased part.,not applicable
+BB1,4,component,R102 · 3.3k,a18; a20,"Insert R102: pin 1 → a18 (BUF0A), pin 2 → a20 (RC0B).",Resistor: non-polarized; bend leads to the specified holes.,not applicable
+BB1,5,component,C101 · 47nF,b20; b24,"Insert C101: pin 1 → b20 (RC0B), pin 2 → b24 (GND).",Use a non-polarized capacitor of the specified value. Body/lead spacing must be checked against the actual purchased part.,not applicable
+BB1,6,component,R104 · 100,a26; a28,"Insert R104: pin 1 → a26 (BUF0B), pin 2 → a28 (AIN0P).",Resistor: non-polarized; bend leads to the specified holes.,not applicable
+BB1,7,component,C102 · 1nF,b28; b32,"Insert C102: pin 1 → b28 (AIN0P), pin 2 → b32 (GND).",Use a non-polarized capacitor of the specified value. Body/lead spacing must be checked against the actual purchased part.,not applicable
+BB1,8,component,UB1 · MCP6002-I/P DIP8; same amplifier family as PCB MCP6004,e10; e11; e12; e13; f13; f12; f11; f10,"Insert UB1: pin 1 → e10 (BUF0A), pin 2 → e11 (BUF0A), pin 3 → e12 (RC0A), pin 4 → e13 (GND), pin 5 → f13 (RC0B), pin 6 → f12 (BUF0B), pin 7 → f11 (BUF0B), pin 8 → f10 (3V0A).","MCP6002 DIP-8: notch toward row 9; pin 1=e10, pins 1–4 down the left, pins 5–8 up the right. Do not rotate 180°.",not applicable
+BB1,9,component,CB1 · 100nF local bypass,j10; j8,"Insert CB1: pin 1 → j10 (3V0A), pin 2 → j8 (GND).",100 nF non-polarized bypass; fit close to IC supply connections.,not applicable
+BB1,10,jumper,Jumper · RC0A,c4; a12,c4 → a12. Both jumper ends must occupy these exact holes.,,not applicable
+BB1,11,jumper,Jumper · GND,a6; a24,a6 → a24. Both jumper ends must occupy these exact holes.,,not applicable
+BB1,12,jumper,Jumper · GND,c24; a32,c24 → a32. Both jumper ends must occupy these exact holes.,,not applicable
+BB1,13,jumper,Jumper · GND,c32; a13,c32 → a13. Both jumper ends must occupy these exact holes.,,not applicable
+BB1,14,jumper,Jumper · GND,b13; f8,b13 → f8. Both jumper ends must occupy these exact holes.,,not applicable
+BB1,15,jumper,Jumper · BUF0A,b18; a10,b18 → a10. Both jumper ends must occupy these exact holes.,,not applicable
+BB1,16,jumper,Jumper · BUF0A,b10; a11,b10 → a11. Both jumper ends must occupy these exact holes.,,not applicable
+BB1,17,jumper,Jumper · RC0B,c20; g13,c20 → g13. Both jumper ends must occupy these exact holes.,,not applicable
+BB1,18,jumper,Jumper · BUF0B,b26; g12,b26 → g12. Both jumper ends must occupy these exact holes.,,not applicable
+BB1,19,jumper,Jumper · BUF0B,h12; g11,h12 → g11. Both jumper ends must occupy these exact holes.,,not applicable
+BB1,20,external,External lead · RAW0,b2,b2 → TERMINAL:RAW0 (logical endpoint only; physical pin pending verification).,,NO
+BB1,21,external,External lead · VMID,a8,a8 → TERMINAL:VMID (logical endpoint only; physical pin pending verification).,,NO
+BB1,22,external,External lead · GND,c6,c6 → TERMINAL:GND (logical endpoint only; physical pin pending verification).,,NO
+BB1,23,external,External lead · AIN0P,c28,c28 → TERMINAL:AIN0P (logical endpoint only; physical pin pending verification).,,NO
+BB1,24,external,External lead · 3V0A,g10,g10 → TERMINAL:3V0A (logical endpoint only; physical pin pending verification).,,NO
+BB1,25,external,External lead · GND,d6,d6 → BAV199_CARRIER1:CHIP_PAD_1 (logical endpoint only; physical pin pending verification).,,NO
+BB1,26,external,External lead · 3V0A,h10,h10 → BAV199_CARRIER1:CHIP_PAD_2 (logical endpoint only; physical pin pending verification).,,NO
+BB1,27,external,External lead · RC0A,d4,d4 → BAV199_CARRIER1:CHIP_PAD_3 (logical endpoint only; physical pin pending verification).,,NO
+BB2,1,component,R110 · 3.3k,a2; a4,"Insert R110: pin 1 → a2 (RAW1), pin 2 → a4 (RC1A).",Resistor: non-polarized; bend leads to the specified holes.,not applicable
+BB2,2,component,R111 · 1M,c2; c8,"Insert R111: pin 1 → c2 (RAW1), pin 2 → c8 (VMID).",Resistor: non-polarized; bend leads to the specified holes.,not applicable
+BB2,3,component,C110 · 47nF,b4; b6,"Insert C110: pin 1 → b4 (RC1A), pin 2 → b6 (GND).",Use a non-polarized capacitor of the specified value. Body/lead spacing must be checked against the actual purchased part.,not applicable
+BB2,4,component,R112 · 3.3k,a18; a20,"Insert R112: pin 1 → a18 (BUF1A), pin 2 → a20 (RC1B).",Resistor: non-polarized; bend leads to the specified holes.,not applicable
+BB2,5,component,C111 · 47nF,b20; b24,"Insert C111: pin 1 → b20 (RC1B), pin 2 → b24 (GND).",Use a non-polarized capacitor of the specified value. Body/lead spacing must be checked against the actual purchased part.,not applicable
+BB2,6,component,R114 · 100,a26; a28,"Insert R114: pin 1 → a26 (BUF1B), pin 2 → a28 (AIN1P).",Resistor: non-polarized; bend leads to the specified holes.,not applicable
+BB2,7,component,C112 · 1nF,b28; b32,"Insert C112: pin 1 → b28 (AIN1P), pin 2 → b32 (GND).",Use a non-polarized capacitor of the specified value. Body/lead spacing must be checked against the actual purchased part.,not applicable
+BB2,8,component,UB2 · MCP6002-I/P DIP8; same amplifier family as PCB MCP6004,e10; e11; e12; e13; f13; f12; f11; f10,"Insert UB2: pin 1 → e10 (BUF1A), pin 2 → e11 (BUF1A), pin 3 → e12 (RC1A), pin 4 → e13 (GND), pin 5 → f13 (RC1B), pin 6 → f12 (BUF1B), pin 7 → f11 (BUF1B), pin 8 → f10 (3V0A).","MCP6002 DIP-8: notch toward row 9; pin 1=e10, pins 1–4 down the left, pins 5–8 up the right. Do not rotate 180°.",not applicable
+BB2,9,component,CB2 · 100nF local bypass,j10; j8,"Insert CB2: pin 1 → j10 (3V0A), pin 2 → j8 (GND).",100 nF non-polarized bypass; fit close to IC supply connections.,not applicable
+BB2,10,jumper,Jumper · RC1A,c4; a12,c4 → a12. Both jumper ends must occupy these exact holes.,,not applicable
+BB2,11,jumper,Jumper · GND,a6; a24,a6 → a24. Both jumper ends must occupy these exact holes.,,not applicable
+BB2,12,jumper,Jumper · GND,c24; a32,c24 → a32. Both jumper ends must occupy these exact holes.,,not applicable
+BB2,13,jumper,Jumper · GND,c32; a13,c32 → a13. Both jumper ends must occupy these exact holes.,,not applicable
+BB2,14,jumper,Jumper · GND,b13; f8,b13 → f8. Both jumper ends must occupy these exact holes.,,not applicable
+BB2,15,jumper,Jumper · BUF1A,b18; a10,b18 → a10. Both jumper ends must occupy these exact holes.,,not applicable
+BB2,16,jumper,Jumper · BUF1A,b10; a11,b10 → a11. Both jumper ends must occupy these exact holes.,,not applicable
+BB2,17,jumper,Jumper · RC1B,c20; g13,c20 → g13. Both jumper ends must occupy these exact holes.,,not applicable
+BB2,18,jumper,Jumper · BUF1B,b26; g12,b26 → g12. Both jumper ends must occupy these exact holes.,,not applicable
+BB2,19,jumper,Jumper · BUF1B,h12; g11,h12 → g11. Both jumper ends must occupy these exact holes.,,not applicable
+BB2,20,external,External lead · RAW1,b2,b2 → TERMINAL:RAW1 (logical endpoint only; physical pin pending verification).,,NO
+BB2,21,external,External lead · VMID,a8,a8 → TERMINAL:VMID (logical endpoint only; physical pin pending verification).,,NO
+BB2,22,external,External lead · GND,c6,c6 → TERMINAL:GND (logical endpoint only; physical pin pending verification).,,NO
+BB2,23,external,External lead · AIN1P,c28,c28 → TERMINAL:AIN1P (logical endpoint only; physical pin pending verification).,,NO
+BB2,24,external,External lead · 3V0A,g10,g10 → TERMINAL:3V0A (logical endpoint only; physical pin pending verification).,,NO
+BB2,25,external,External lead · GND,d6,d6 → BAV199_CARRIER2:CHIP_PAD_1 (logical endpoint only; physical pin pending verification).,,NO
+BB2,26,external,External lead · 3V0A,h10,h10 → BAV199_CARRIER2:CHIP_PAD_2 (logical endpoint only; physical pin pending verification).,,NO
+BB2,27,external,External lead · RC1A,d4,d4 → BAV199_CARRIER2:CHIP_PAD_3 (logical endpoint only; physical pin pending verification).,,NO
+BB3,1,component,R120 · 3.3k,a2; a4,"Insert R120: pin 1 → a2 (RAW2), pin 2 → a4 (RC2A).",Resistor: non-polarized; bend leads to the specified holes.,not applicable
+BB3,2,component,R121 · 1M,c2; c8,"Insert R121: pin 1 → c2 (RAW2), pin 2 → c8 (VMID).",Resistor: non-polarized; bend leads to the specified holes.,not applicable
+BB3,3,component,C120 · 47nF,b4; b6,"Insert C120: pin 1 → b4 (RC2A), pin 2 → b6 (GND).",Use a non-polarized capacitor of the specified value. Body/lead spacing must be checked against the actual purchased part.,not applicable
+BB3,4,component,R122 · 3.3k,a18; a20,"Insert R122: pin 1 → a18 (BUF2A), pin 2 → a20 (RC2B).",Resistor: non-polarized; bend leads to the specified holes.,not applicable
+BB3,5,component,C121 · 47nF,b20; b24,"Insert C121: pin 1 → b20 (RC2B), pin 2 → b24 (GND).",Use a non-polarized capacitor of the specified value. Body/lead spacing must be checked against the actual purchased part.,not applicable
+BB3,6,component,R124 · 100,a26; a28,"Insert R124: pin 1 → a26 (BUF2B), pin 2 → a28 (AIN2P).",Resistor: non-polarized; bend leads to the specified holes.,not applicable
+BB3,7,component,C122 · 1nF,b28; b32,"Insert C122: pin 1 → b28 (AIN2P), pin 2 → b32 (GND).",Use a non-polarized capacitor of the specified value. Body/lead spacing must be checked against the actual purchased part.,not applicable
+BB3,8,component,UB3 · MCP6002-I/P DIP8; same amplifier family as PCB MCP6004,e10; e11; e12; e13; f13; f12; f11; f10,"Insert UB3: pin 1 → e10 (BUF2A), pin 2 → e11 (BUF2A), pin 3 → e12 (RC2A), pin 4 → e13 (GND), pin 5 → f13 (RC2B), pin 6 → f12 (BUF2B), pin 7 → f11 (BUF2B), pin 8 → f10 (3V0A).","MCP6002 DIP-8: notch toward row 9; pin 1=e10, pins 1–4 down the left, pins 5–8 up the right. Do not rotate 180°.",not applicable
+BB3,9,component,CB3 · 100nF local bypass,j10; j8,"Insert CB3: pin 1 → j10 (3V0A), pin 2 → j8 (GND).",100 nF non-polarized bypass; fit close to IC supply connections.,not applicable
+BB3,10,jumper,Jumper · RC2A,c4; a12,c4 → a12. Both jumper ends must occupy these exact holes.,,not applicable
+BB3,11,jumper,Jumper · GND,a6; a24,a6 → a24. Both jumper ends must occupy these exact holes.,,not applicable
+BB3,12,jumper,Jumper · GND,c24; a32,c24 → a32. Both jumper ends must occupy these exact holes.,,not applicable
+BB3,13,jumper,Jumper · GND,c32; a13,c32 → a13. Both jumper ends must occupy these exact holes.,,not applicable
+BB3,14,jumper,Jumper · GND,b13; f8,b13 → f8. Both jumper ends must occupy these exact holes.,,not applicable
+BB3,15,jumper,Jumper · BUF2A,b18; a10,b18 → a10. Both jumper ends must occupy these exact holes.,,not applicable
+BB3,16,jumper,Jumper · BUF2A,b10; a11,b10 → a11. Both jumper ends must occupy these exact holes.,,not applicable
+BB3,17,jumper,Jumper · RC2B,c20; g13,c20 → g13. Both jumper ends must occupy these exact holes.,,not applicable
+BB3,18,jumper,Jumper · BUF2B,b26; g12,b26 → g12. Both jumper ends must occupy these exact holes.,,not applicable
+BB3,19,jumper,Jumper · BUF2B,h12; g11,h12 → g11. Both jumper ends must occupy these exact holes.,,not applicable
+BB3,20,external,External lead · RAW2,b2,b2 → TERMINAL:RAW2 (logical endpoint only; physical pin pending verification).,,NO
+BB3,21,external,External lead · VMID,a8,a8 → TERMINAL:VMID (logical endpoint only; physical pin pending verification).,,NO
+BB3,22,external,External lead · GND,c6,c6 → TERMINAL:GND (logical endpoint only; physical pin pending verification).,,NO
+BB3,23,external,External lead · AIN2P,c28,c28 → TERMINAL:AIN2P (logical endpoint only; physical pin pending verification).,,NO
+BB3,24,external,External lead · 3V0A,g10,g10 → TERMINAL:3V0A (logical endpoint only; physical pin pending verification).,,NO
+BB3,25,external,External lead · GND,d6,d6 → BAV199_CARRIER3:CHIP_PAD_1 (logical endpoint only; physical pin pending verification).,,NO
+BB3,26,external,External lead · 3V0A,h10,h10 → BAV199_CARRIER3:CHIP_PAD_2 (logical endpoint only; physical pin pending verification).,,NO
+BB3,27,external,External lead · RC2A,d4,d4 → BAV199_CARRIER3:CHIP_PAD_3 (logical endpoint only; physical pin pending verification).,,NO
+BB4,1,component,R130 · 3.3k,a2; a4,"Insert R130: pin 1 → a2 (RAW3), pin 2 → a4 (RC3A).",Resistor: non-polarized; bend leads to the specified holes.,not applicable
+BB4,2,component,R131 · 1M,c2; c8,"Insert R131: pin 1 → c2 (RAW3), pin 2 → c8 (VMID).",Resistor: non-polarized; bend leads to the specified holes.,not applicable
+BB4,3,component,C130 · 47nF,b4; b6,"Insert C130: pin 1 → b4 (RC3A), pin 2 → b6 (GND).",Use a non-polarized capacitor of the specified value. Body/lead spacing must be checked against the actual purchased part.,not applicable
+BB4,4,component,R132 · 3.3k,a18; a20,"Insert R132: pin 1 → a18 (BUF3A), pin 2 → a20 (RC3B).",Resistor: non-polarized; bend leads to the specified holes.,not applicable
+BB4,5,component,C131 · 47nF,b20; b24,"Insert C131: pin 1 → b20 (RC3B), pin 2 → b24 (GND).",Use a non-polarized capacitor of the specified value. Body/lead spacing must be checked against the actual purchased part.,not applicable
+BB4,6,component,R134 · 100,a26; a28,"Insert R134: pin 1 → a26 (BUF3B), pin 2 → a28 (AIN3P).",Resistor: non-polarized; bend leads to the specified holes.,not applicable
+BB4,7,component,C132 · 1nF,b28; b32,"Insert C132: pin 1 → b28 (AIN3P), pin 2 → b32 (GND).",Use a non-polarized capacitor of the specified value. Body/lead spacing must be checked against the actual purchased part.,not applicable
+BB4,8,component,UB4 · MCP6002-I/P DIP8; same amplifier family as PCB MCP6004,e10; e11; e12; e13; f13; f12; f11; f10,"Insert UB4: pin 1 → e10 (BUF3A), pin 2 → e11 (BUF3A), pin 3 → e12 (RC3A), pin 4 → e13 (GND), pin 5 → f13 (RC3B), pin 6 → f12 (BUF3B), pin 7 → f11 (BUF3B), pin 8 → f10 (3V0A).","MCP6002 DIP-8: notch toward row 9; pin 1=e10, pins 1–4 down the left, pins 5–8 up the right. Do not rotate 180°.",not applicable
+BB4,9,component,CB4 · 100nF local bypass,j10; j8,"Insert CB4: pin 1 → j10 (3V0A), pin 2 → j8 (GND).",100 nF non-polarized bypass; fit close to IC supply connections.,not applicable
+BB4,10,jumper,Jumper · RC3A,c4; a12,c4 → a12. Both jumper ends must occupy these exact holes.,,not applicable
+BB4,11,jumper,Jumper · GND,a6; a24,a6 → a24. Both jumper ends must occupy these exact holes.,,not applicable
+BB4,12,jumper,Jumper · GND,c24; a32,c24 → a32. Both jumper ends must occupy these exact holes.,,not applicable
+BB4,13,jumper,Jumper · GND,c32; a13,c32 → a13. Both jumper ends must occupy these exact holes.,,not applicable
+BB4,14,jumper,Jumper · GND,b13; f8,b13 → f8. Both jumper ends must occupy these exact holes.,,not applicable
+BB4,15,jumper,Jumper · BUF3A,b18; a10,b18 → a10. Both jumper ends must occupy these exact holes.,,not applicable
+BB4,16,jumper,Jumper · BUF3A,b10; a11,b10 → a11. Both jumper ends must occupy these exact holes.,,not applicable
+BB4,17,jumper,Jumper · RC3B,c20; g13,c20 → g13. Both jumper ends must occupy these exact holes.,,not applicable
+BB4,18,jumper,Jumper · BUF3B,b26; g12,b26 → g12. Both jumper ends must occupy these exact holes.,,not applicable
+BB4,19,jumper,Jumper · BUF3B,h12; g11,h12 → g11. Both jumper ends must occupy these exact holes.,,not applicable
+BB4,20,external,External lead · RAW3,b2,b2 → TERMINAL:RAW3 (logical endpoint only; physical pin pending verification).,,NO
+BB4,21,external,External lead · VMID,a8,a8 → TERMINAL:VMID (logical endpoint only; physical pin pending verification).,,NO
+BB4,22,external,External lead · GND,c6,c6 → TERMINAL:GND (logical endpoint only; physical pin pending verification).,,NO
+BB4,23,external,External lead · AIN3P,c28,c28 → TERMINAL:AIN3P (logical endpoint only; physical pin pending verification).,,NO
+BB4,24,external,External lead · 3V0A,g10,g10 → TERMINAL:3V0A (logical endpoint only; physical pin pending verification).,,NO
+BB4,25,external,External lead · GND,d6,d6 → BAV199_CARRIER4:CHIP_PAD_1 (logical endpoint only; physical pin pending verification).,,NO
+BB4,26,external,External lead · 3V0A,h10,h10 → BAV199_CARRIER4:CHIP_PAD_2 (logical endpoint only; physical pin pending verification).,,NO
+BB4,27,external,External lead · RC3A,d4,d4 → BAV199_CARRIER4:CHIP_PAD_3 (logical endpoint only; physical pin pending verification).,,NO

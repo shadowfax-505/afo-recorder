@@ -1,0 +1,7 @@
+{
+  "status": "PASS",
+  "checked_functional_pins": 390,
+  "errors": [],
+  "scope": "Schematic XML, actual PCB pad export, firmware GPIO map, breadboard values and hole occupancy. Not physical module header validation.",
+  "module_headers_verified": false
+}

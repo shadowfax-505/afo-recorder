@@ -1,0 +1,23 @@
+{
+  "package": "ad7606-two-channel-mpu6050",
+  "imu_model": "MPU6050",
+  "active_channels": 2,
+  "hardware": "breadboard",
+  "diagnostic_stage": 0,
+  "imu_count": 2,
+  "wifi_enabled": true,
+  "sd_cmd_gpio": 47,
+  "sd_clk_gpio": 39,
+  "sd_d0_gpio": 40,
+  "hardware_tested": false,
+  "offsets": {
+    "bootloader.bin": "0x0",
+    "partition-table.bin": "0x8000",
+    "application.bin": "0x10000"
+  },
+  "sha256": {
+    "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+    "application.bin": "6f76e20cfac7f10791e73f8abbde89a1bcb4e26801c4fa17f86ad274d0244f2b",
+    "bootloader.bin": "933ee905da40b385820630c0c6da332a0e0ce324fc059ac91fed2cbc85fd494b"
+  }
+}

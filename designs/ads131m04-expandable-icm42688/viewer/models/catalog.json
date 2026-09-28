@@ -1,0 +1,74 @@
+{
+  "reg5": {
+    "status": "Manufacturer STEP geometry",
+    "dimensions": "22.86 \u00d7 22.86 mm PCB",
+    "notes": "Pololu S13V30F5 #4082. 5 V output. Current capability depends on battery voltage and temperature.",
+    "source": "https://www.pololu.com/product/4082/resources"
+  },
+  "reg3": {
+    "status": "Manufacturer family STEP geometry",
+    "dimensions": "22.86 \u00d7 22.86 mm PCB",
+    "notes": "Pololu S13V25F3 #4980. 3.3 V output. Verify purchased variant.",
+    "source": "https://www.pololu.com/product/4980/resources"
+  },
+  "sd": {
+    "status": "Manufacturer STEP geometry",
+    "dimensions": "25.4 \u00d7 22.86 \u00d7 3.45 mm CAD bounds",
+    "notes": "Adafruit 4682, 3 V logic only; SPI or SDIO. Header installation not represented.",
+    "source": "https://www.adafruit.com/product/4682"
+  },
+  "esp": {
+    "status": "Dimensioned reconstruction; component positions approximate",
+    "dimensions": "25.40 \u00d7 62.74 mm; 2.54 mm header pitch",
+    "notes": "Confirmed N8R8; dimensioned reconstruction. Breadboard firmware uses GPIO47 (J3.17) for SD CMD to avoid the GPIO38 RGB LED on V1.1. Custom PCB firmware retains GPIO38. GPIO47 is reserved for SD in the breadboard and cannot also serve expansion SDA.",
+    "source": "https://docs.espressif.com/projects/esp-dev-kits/en/latest/esp32s3/esp32-s3-devkitc-1/user_guide_v1.1.html"
+  },
+  "battery": {
+    "status": "Published envelope; leads and connector approximate",
+    "dimensions": "50 \u00d7 60 \u00d7 7.3 mm",
+    "notes": "Adafruit 328 protected 1S 3.7 V 2500 mAh. Runtime requires measurement.",
+    "source": "https://www.adafruit.com/product/328"
+  },
+  "myo": {
+    "status": "Approximate outline and electrode locations",
+    "dimensions": "37.57 \u00d7 35.90 mm nominal envelope",
+    "notes": "Front-view solder pads labeled VIN/GND/RAW from manufacturer advanced guide. Use pad labels, not snap connectors or ENV. Coordinates illustrative.",
+    "source": "https://learn.sparkfun.com/tutorials/getting-started-with-the-myoware-20-muscle-sensor-ecosystem/all"
+  },
+  "ldo": {
+    "status": "Header coordinates and electrical mapping from manufacturer Eagle CAD",
+    "dimensions": "2.54 mm pin pitch; rows 7.62 mm apart; body illustrative",
+    "notes": "TPS7A2030PDBVR on top SOT23-6 footprint: chip pin 5 OUT lands on carrier pad 6, JP1.1; middle carrier pad 5 unused.",
+    "source": "../docs/adapter-assembly.md"
+  },
+  "adc": {
+    "status": "UNVERIFIED geometry \u2014 illustrative only",
+    "dimensions": "55 \u00d7 35 mm assumed, NOT measured",
+    "notes": "RoboticsBD RBD-3184 / HW-AD7606-F4. User photos show V1\u2013V8 / G analog labels. Digital-header labels, serial-mode selection, DOUTA terminal and dimensions remain unverified. Shipment dimensions are not PCB dimensions.",
+    "source": "https://store.roboticsbd.com/analog-digital-module/3184-16-bit-adc-8-channel-synchronization-ad7606-data-acquisition-module-200ksps-robotics-bangladesh.html"
+  },
+  "pending": {
+    "status": "UNSELECTED carrier \u2014 placeholder",
+    "dimensions": "22 \u00d7 20 mm illustrative only",
+    "notes": "Exact carrier SKU and mechanical drawing required before a physical wiring layout can be released.",
+    "source": ""
+  },
+  "adapter": {
+    "status": "Header coordinates and electrical mapping from manufacturer Eagle CAD",
+    "dimensions": "2.54 mm pin pitch; rows 7.62 mm apart; body illustrative",
+    "notes": "Adafruit 1230. Q1 bottom-side carrier for BAV199 or 2N7002; see adapter assembly drawing. Soldered units untested.",
+    "source": "../docs/adapter-assembly.md"
+  },
+  "icm": {
+    "status": "Selected MIKROE-4237; manufacturer STEP, DXF and schematic",
+    "dimensions": "CAD mesh bounds 25.78 \u00d7 42.93 \u00d7 12.19 mm including headers; web listing dimension differs",
+    "notes": "JP2-JP4 SPI 1-2. Header map from v100. Check received board revision and dimensional discrepancy before mounting. No board has been measured.",
+    "source": "https://www.mikroe.com/6dof-imu-14-click"
+  },
+  "ads-evm": {
+    "status": "Selected TI ADS131M04EVM; required rework documented",
+    "dimensions": "Body/positions illustrative; connector identities from TI manual",
+    "notes": "PHI removed. TP2=3.0 V; TP1=3.3 V. Follow EVM adaptation before use.",
+    "source": "../docs/ads-evm-adaptation.md"
+  }
+}

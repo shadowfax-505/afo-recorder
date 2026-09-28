@@ -1,0 +1,160 @@
+{
+  "signature": "Project lead: Muttakin Rahman",
+  "stages": [
+    {
+      "title": "Power and midpoint",
+      "purpose": "Establish stable supplies before connecting expensive modules.",
+      "add": [
+        "BB0 midpoint components; local regulator capacitors",
+        "Selected power regulators and an adjustable current-limited lab supply",
+        "Multimeter; dummy loads and oscilloscope for the load/ripple tests"
+      ],
+      "tests": [
+        "Check polarity and unpowered continuity. Leave battery, ESP32 and sensors disconnected.",
+        "Measure the selected rails and midpoint under the loads listed in the detailed procedure.",
+        "Record minimum/maximum voltages, current, startup, ripple and temperature."
+      ],
+      "troubleshoot": "Disconnect power; check polarity, resistor values, short circuits and supply current limit.",
+      "acceptance": "3.3 V digital 3.23\u20133.43 V; 3.0 V analog 2.94\u20133.06 V; midpoint 1.47\u20131.53 V. Test 0/100/300 mA digital and 0/20/50 mA analog. Ripple targets \u226450/10 mVpp (20 MHz bandwidth); step deviation \u22645%, recovery \u00b13% within10 ms. Temperature <60\u00b0C after10 min at20\u201330\u00b0C ambient. 5 V ADC:4.8\u20135.2 V at10\u201350 mA; verify never above5.25 V including startup."
+    },
+    {
+      "title": "Controller and controls",
+      "purpose": "Prove programming, reset and controls work before adding data acquisition.",
+      "add": [
+        "ESP32-S3-DevKitC-1 N8R8",
+        "Button, status LEDs, battery sense and USB detection components",
+        "External USB inlet; matching controller diagnostic firmware"
+      ],
+      "tests": [
+        "Flash the controller diagnostic profile only. Verify reset, buttons and LEDs.",
+        "Verify USB detection and the documented power arrangement. Both onboard USB sockets remain empty.",
+        "Record repeated programming/reset results and measured current."
+      ],
+      "troubleshoot": "Check 5 V/3.3 V rails, boot/reset state and USB wiring; do not bypass the attachment interlock.",
+      "acceptance": "20 program/reset cycles without failure. Buttons/LEDs respond. GPIO21 low when USB attached, high when absent. Recorder must refuse to start while USB attached; that interlock needs a repeat at stage7. Record measured current; no assumed universal current limit."
+    },
+    {
+      "title": "ADC and known voltages",
+      "purpose": "Confirm correct conversion and channel order using a known signal.",
+      "add": [
+        "Selected ADC module and its qualification instructions",
+        "ADC diagnostic firmware",
+        "Known DC source, multimeter and logic analyzer or oscilloscope"
+      ],
+      "tests": [
+        "Complete the module supply, logic-level and mode-selection checks first.",
+        "Use known DC inputs and compare measured codes against the detailed acceptance limits.",
+        "Check 8 kHz timing and error counters. Preserve raw traces and diagnostic logs."
+      ],
+      "troubleshoot": "Check mode straps, logic supply, reset, chip select and input reference; distinguish chip pins from carrier headers.",
+      "acceptance": "Conversion triggers125 \u00b5s\u00b11%;8 kHz\u00b10.1% averaged60 s. BUSY completes before next trigger; read all128 bits; no timeout/overrun in60 s. At input 0.5 / 1.5 / 2.5 V, ideal codes 3277 / 9830 / 16384; allow \u00b165 codes plus source uncertainty (10 mV project screen)."
+    },
+    {
+      "title": "First analog channel",
+      "purpose": "Test one full EMG input path with a synthetic signal.",
+      "add": [
+        "BB1 analog components and protection adapter",
+        "Signal generator and oscilloscope",
+        "ADC diagnostic firmware; no MyoWare or electrodes"
+      ],
+      "tests": [
+        "Use synthetic-input-tests.md for the exact signal and return connections.",
+        "Start at 1.5 V offset and 100 mVpp; verify voltage before connection.",
+        "Measure offset, frequency response, noise and unplugged bias using the detailed limits."
+      ],
+      "troubleshoot": "Inspect IC notch, component values, protection adapter orientation and signal-generator load setting.",
+      "acceptance": "DC gain1; two3.3k/47nF low-pass stages. Compare gain against simulations/results/response.csv tolerance envelope; allow additional\u00b10.5 dB measurement/model margin. Unplugged RAW\u21921.50 V\u00b130 mV after settling. Record RMS noise over20\u2013500 Hz; provisional target<2 mVrms input-referred, to be reviewed for research suitability. Check clipping using safe0.1\u20132.9 V sources, never\u00b15 V into3 V buffers."
+    },
+    {
+      "title": "Remaining analog inputs",
+      "purpose": "Verify each port independently before combining recordings.",
+      "add": [
+        "Remaining populated analog boards for this variant",
+        "Synthetic signal source and ADC diagnostic firmware"
+      ],
+      "tests": [
+        "Inject a distinct signal into one channel at a time and verify port identity.",
+        "Use each supported channel-count profile; disabled channels must not appear as valid muscle signals.",
+        "Measure crosstalk and run the continuity/timing checks in the detailed guide."
+      ],
+      "troubleshoot": "Check channel order, midpoint impedance and ground returns; verify you selected the correct firmware variant.",
+      "acceptance": "Enabled channels match physical ports; disabled channels absent from CSV/live display. Simultaneous channel samples share trigger/frame timestamp. Project crosstalk screen <\u221240 dB versus driven signal, with generator feedthrough measured separately. Zero unexplained errors in10 min."
+    },
+    {
+      "title": "Foot and shank motion sensors",
+      "purpose": "Bring up one sensor before connecting the second.",
+      "add": [
+        "First IMU, then second IMU",
+        "Matching one-IMU and two-IMU diagnostic builds",
+        "Logic analyzer; verified short signal cables"
+      ],
+      "tests": [
+        "Complete module-specific supply, interface and header checks.",
+        "Verify identity, axes, stationary readings and 200 Hz output.",
+        "Test the intended cable length, FIFO errors and timestamp behavior."
+      ],
+      "troubleshoot": "Check interface selection, addresses or chip selects, interrupt pins, supply and pull-ups.",
+      "acceptance": "WHO_AM_I0x47;200 Hz\u00b11% over60 s, no FIFO overflow/errors. Stationary gravity-axis within\u00b10.1g of\u00b11g; cross axes within\u00b10.1g, gyro per axis<5\u00b0/s before calibration. Verify axis signs and intended cable length."
+    },
+    {
+      "title": "SD recording",
+      "purpose": "Make reliable local recording work before enabling wireless reception.",
+      "add": [
+        "Adafruit 4682 SD interface and suitable microSD card",
+        "Breadboard SD-only recording firmware; GPIO47 is CMD"
+      ],
+      "tests": [
+        "Record synthetic signals for 60 minutes and convert the file.",
+        "Test missing/full card and interrupted recordings using expendable media.",
+        "Check sample counters, queue errors and USB-attachment recording inhibition."
+      ],
+      "troubleshoot": "Check the breadboard firmware profile, card wiring, rail droop and storage latency.",
+      "acceptance": "60 min, no unexplained SD sample loss, CRC errors or queue overflow. Refuse start without SD; report full-card stop. Recovery preserves complete valid records and reports truncated tail/missing END. Attach USB during synthetic recording: explicit stop."
+    },
+    {
+      "title": "Wi-Fi and SD",
+      "purpose": "Confirm wireless reception does not compromise the SD recording.",
+      "add": [
+        "Breadboard recording profile with Wi-Fi enabled",
+        "Laptop receiver and converter; existing SD setup"
+      ],
+      "tests": [
+        "Record to SD while receiving on the laptop for 60 minutes.",
+        "Disconnect and reconnect Wi-Fi and confirm visible wireless gaps.",
+        "Compare SD and received data; require no unexplained SD loss."
+      ],
+      "troubleshoot": "Check network selection, firewall, receiver port, supply stability and queue counters.",
+      "acceptance": "60 min with two channels: stage7 SD quality maintained; only enabled channels displayed; induced packet loss visible in counters/gaps. Compare SD versus laptop capture."
+    },
+    {
+      "title": "Battery operation",
+      "purpose": "Replace laboratory power and measure actual runtime.",
+      "add": [
+        "Protected battery with verified polarity",
+        "Complete recorder; lab supply disconnected at BOTH leads"
+      ],
+      "tests": [
+        "Check source polarity before attaching the battery. Never parallel it with the lab supply.",
+        "Record repeated startups and a continuous run of at least two hours.",
+        "Document battery identity, charge state, configuration, ambient temperature and shutdown behavior."
+      ],
+      "troubleshoot": "Check converter droop, battery protection and temperature. Do not infer runtime from nominal capacity alone.",
+      "acceptance": "Measured\u22652 h intended-use runtime;20 startup/shutdown cycles; successful60 min trial; no unexpected reset. Record pack capacity, age, voltage, configuration and ambient temperature."
+    },
+    {
+      "title": "MyoWare integration",
+      "purpose": "Replace synthetic inputs with the bare sensors only after acquisition passes.",
+      "add": [
+        "Two bare MyoWare 2.0 sensors initially",
+        "Verified VIN/GND/RAW wiring, strain relief and wearable mounting"
+      ],
+      "tests": [
+        "First connect sensors with no person attached; check power and RAW output.",
+        "Verify secure mounting and clearance around the AFO.",
+        "Supervised human recordings require institutional and electrical-safety approval; no USB, charging or mains-connected instruments while electrodes are attached."
+      ],
+      "troubleshoot": "Investigate saturation, wrong output pad, motion artifacts and cable strain before any wearable session.",
+      "acceptance": "Secure strain relief/mounting; no cable pull on electrodes. Institutional approval, consent and electrical-safety review completed before supervised human testing. No charging or mains/USB/instrument cables attached to a person."
+    }
+  ]
+}

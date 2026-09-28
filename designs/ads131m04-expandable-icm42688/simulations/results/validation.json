@@ -1,0 +1,27 @@
+{
+  "engine": "ngspice shared library",
+  "analytical_max_error_db": 0.00130435388838207,
+  "tolerance_corners": 32,
+  "resistor_tolerance_percent": 1,
+  "filter_capacitor_tolerance_percent": 10,
+  "all_four_channels_match": true,
+  "quantization_error_v": 7.150949118267524e-08,
+  "nominal_raw_input_range_v": [
+    0,
+    3
+  ],
+  "nominal_adc_diff_range_v": [
+    -0.75,
+    0.75
+  ],
+  "adc_full_scale_v": 1.2,
+  "model": "Substitute 1MHz closed-loop buffers; not vendor MCP6004 model",
+  "myoware": "Synthetic RAW output waveform; no validated MyoWare or physiological model",
+  "limitations": [
+    "No op-amp noise, offset, slew/current limit or PSRR; shared midpoint is ideal so crosstalk is not validated.",
+    "330k resistive ADC loading approximation; switched-capacitor transients and sinc3 response are not simulated in ngspice.",
+    "ADC quantization is an ideal separate software model; 24-bit word width does not imply 24 effective bits.",
+    "Rail clamps and ESD are not validated by this linear operating-range model.",
+    "Supply/reference ripple and battery runtime require physical tests."
+  ]
+}

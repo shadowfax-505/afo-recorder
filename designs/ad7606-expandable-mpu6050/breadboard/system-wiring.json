@@ -1,0 +1,5490 @@
+{
+  "revision": 14,
+  "physical_release": false,
+  "fixtures": [
+    {
+      "id": "power-switch",
+      "label": "POWER switch (SPST)",
+      "stage": 1,
+      "x": -220,
+      "z": 230
+    },
+    {
+      "id": "lab-supply",
+      "label": "Current-limited lab supply",
+      "stage": 1,
+      "x": -160,
+      "z": 230
+    },
+    {
+      "id": "cap-2",
+      "label": "LDO input 1uF",
+      "stage": 1,
+      "x": -100,
+      "z": 230
+    },
+    {
+      "id": "cap-3",
+      "label": "LDO output 1uF",
+      "stage": 1,
+      "x": -40,
+      "z": 230
+    },
+    {
+      "id": "clamp1",
+      "label": "BAV199 EMG1 adapter",
+      "stage": 4,
+      "x": 80,
+      "z": 230
+    },
+    {
+      "id": "clamp2",
+      "label": "BAV199 EMG2 adapter",
+      "stage": 5,
+      "x": 140,
+      "z": 230
+    },
+    {
+      "id": "clamp3",
+      "label": "BAV199 EMG3 adapter",
+      "stage": 5,
+      "x": 200,
+      "z": 230
+    },
+    {
+      "id": "clamp4",
+      "label": "BAV199 EMG4 adapter",
+      "stage": 5,
+      "x": -220,
+      "z": 295
+    },
+    {
+      "id": "button",
+      "label": "Start/stop NO button",
+      "stage": 2,
+      "x": 80,
+      "z": 295
+    },
+    {
+      "id": "usb",
+      "label": "Adafruit 1833 USB inlet",
+      "stage": 2,
+      "x": -220,
+      "z": 425
+    },
+    {
+      "id": "usb-q",
+      "label": "2N7002 adapter",
+      "stage": 2,
+      "x": -40,
+      "z": 425
+    },
+    {
+      "id": "usb-dm-r",
+      "label": "33 ohm USB DM inline resistor",
+      "stage": 2,
+      "x": 85,
+      "z": -135,
+      "inline": true
+    },
+    {
+      "id": "usb-dp-r",
+      "label": "33 ohm USB DP inline resistor",
+      "stage": 2,
+      "x": 85,
+      "z": -135,
+      "inline": true
+    }
+  ],
+  "connections": [
+    {
+      "id": "wire-001",
+      "net": "SOURCE_POS",
+      "a": {
+        "module": "battery",
+        "terminal": "JST-PH red + lead",
+        "physical": true,
+        "board_pin": {
+          "x": 10,
+          "y": 3,
+          "z": -45,
+          "source": "Adafruit 328 lead polarity; check connector before connecting"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "a1",
+        "hole": "a1",
+        "physical": true
+      },
+      "stage": 9,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Connect lab source OR battery, never both; remove both lab leads before battery attachment."
+    },
+    {
+      "id": "wire-002",
+      "net": "SOURCE_POS",
+      "a": {
+        "module": "power-switch",
+        "terminal": "SPST solder lug 1",
+        "physical": true,
+        "board_pin": {
+          "x": -3,
+          "y": 1.6,
+          "z": 0,
+          "source": "Two-lug SPST switch; continuity closes only in ON"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "b1",
+        "hole": "b1",
+        "physical": true
+      },
+      "stage": 1,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-003",
+      "net": "SOURCE_POS",
+      "a": {
+        "module": "lab-supply",
+        "terminal": "Red + binding post",
+        "physical": true,
+        "board_pin": {
+          "x": -6,
+          "y": 1.6,
+          "z": 0,
+          "source": "Instrument labeled binding posts; illustrative instrument body"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "c1",
+        "hole": "c1",
+        "physical": true
+      },
+      "stage": 1,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Connect lab source OR battery, never both; remove both lab leads before battery attachment."
+    },
+    {
+      "id": "wire-004",
+      "net": "GND",
+      "a": {
+        "module": "DIST1",
+        "terminal": "a2",
+        "hole": "a2",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "a3",
+        "hole": "a3",
+        "physical": true
+      },
+      "stage": 1,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-005",
+      "net": "GND",
+      "a": {
+        "module": "DIST1",
+        "terminal": "b3",
+        "hole": "b3",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "a4",
+        "hole": "a4",
+        "physical": true
+      },
+      "stage": 1,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-006",
+      "net": "GND",
+      "a": {
+        "module": "DIST1",
+        "terminal": "b4",
+        "hole": "b4",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "a5",
+        "hole": "a5",
+        "physical": true
+      },
+      "stage": 1,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-007",
+      "net": "GND",
+      "a": {
+        "module": "DIST1",
+        "terminal": "b5",
+        "hole": "b5",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "a6",
+        "hole": "a6",
+        "physical": true
+      },
+      "stage": 1,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-008",
+      "net": "GND",
+      "a": {
+        "module": "DIST1",
+        "terminal": "b6",
+        "hole": "b6",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "a7",
+        "hole": "a7",
+        "physical": true
+      },
+      "stage": 1,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-009",
+      "net": "GND",
+      "a": {
+        "module": "DIST1",
+        "terminal": "b7",
+        "hole": "b7",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "a8",
+        "hole": "a8",
+        "physical": true
+      },
+      "stage": 1,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-010",
+      "net": "GND",
+      "a": {
+        "module": "DIST1",
+        "terminal": "b8",
+        "hole": "b8",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "a9",
+        "hole": "a9",
+        "physical": true
+      },
+      "stage": 1,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-011",
+      "net": "GND",
+      "a": {
+        "module": "DIST1",
+        "terminal": "b9",
+        "hole": "b9",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "a10",
+        "hole": "a10",
+        "physical": true
+      },
+      "stage": 1,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-012",
+      "net": "GND",
+      "a": {
+        "module": "DIST1",
+        "terminal": "b10",
+        "hole": "b10",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "a11",
+        "hole": "a11",
+        "physical": true
+      },
+      "stage": 1,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-013",
+      "net": "GND",
+      "a": {
+        "module": "DIST1",
+        "terminal": "b11",
+        "hole": "b11",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "a12",
+        "hole": "a12",
+        "physical": true
+      },
+      "stage": 1,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-014",
+      "net": "GND",
+      "a": {
+        "module": "DIST1",
+        "terminal": "b12",
+        "hole": "b12",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "a13",
+        "hole": "a13",
+        "physical": true
+      },
+      "stage": 1,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-015",
+      "net": "GND",
+      "a": {
+        "module": "DIST1",
+        "terminal": "b13",
+        "hole": "b13",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "a14",
+        "hole": "a14",
+        "physical": true
+      },
+      "stage": 1,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-016",
+      "net": "GND",
+      "a": {
+        "module": "DIST1",
+        "terminal": "b14",
+        "hole": "b14",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "a15",
+        "hole": "a15",
+        "physical": true
+      },
+      "stage": 1,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-017",
+      "net": "GND",
+      "a": {
+        "module": "DIST1",
+        "terminal": "b15",
+        "hole": "b15",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "a16",
+        "hole": "a16",
+        "physical": true
+      },
+      "stage": 1,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-018",
+      "net": "GND",
+      "a": {
+        "module": "DIST1",
+        "terminal": "b16",
+        "hole": "b16",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "a17",
+        "hole": "a17",
+        "physical": true
+      },
+      "stage": 1,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-019",
+      "net": "GND",
+      "a": {
+        "module": "DIST1",
+        "terminal": "b17",
+        "hole": "b17",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "a18",
+        "hole": "a18",
+        "physical": true
+      },
+      "stage": 1,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-020",
+      "net": "GND",
+      "a": {
+        "module": "DIST1",
+        "terminal": "b18",
+        "hole": "b18",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "a19",
+        "hole": "a19",
+        "physical": true
+      },
+      "stage": 1,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-021",
+      "net": "GND",
+      "a": {
+        "module": "DIST1",
+        "terminal": "b19",
+        "hole": "b19",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "a20",
+        "hole": "a20",
+        "physical": true
+      },
+      "stage": 1,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-022",
+      "net": "GND",
+      "a": {
+        "module": "BB0",
+        "terminal": "e6",
+        "hole": "e6",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "b2",
+        "hole": "b2",
+        "physical": true
+      },
+      "stage": 1,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-023",
+      "net": "GND",
+      "a": {
+        "module": "BB1",
+        "terminal": "d6",
+        "hole": "d6",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "c2",
+        "hole": "c2",
+        "physical": true
+      },
+      "stage": 4,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-024",
+      "net": "GND",
+      "a": {
+        "module": "BB2",
+        "terminal": "d6",
+        "hole": "d6",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "d2",
+        "hole": "d2",
+        "physical": true
+      },
+      "stage": 5,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-025",
+      "net": "GND",
+      "a": {
+        "module": "BB3",
+        "terminal": "d6",
+        "hole": "d6",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "e2",
+        "hole": "e2",
+        "physical": true
+      },
+      "stage": 5,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-026",
+      "net": "GND",
+      "a": {
+        "module": "BB4",
+        "terminal": "d6",
+        "hole": "d6",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "c3",
+        "hole": "c3",
+        "physical": true
+      },
+      "stage": 5,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-027",
+      "net": "GND",
+      "a": {
+        "module": "AUX1",
+        "terminal": "g31",
+        "hole": "g31",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "d3",
+        "hole": "d3",
+        "physical": true
+      },
+      "stage": 2,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-028",
+      "net": "GND",
+      "a": {
+        "module": "AUX1",
+        "terminal": "g39",
+        "hole": "g39",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "e3",
+        "hole": "e3",
+        "physical": true
+      },
+      "stage": 2,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-029",
+      "net": "GND",
+      "a": {
+        "module": "AUX1",
+        "terminal": "g47",
+        "hole": "g47",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "c4",
+        "hole": "c4",
+        "physical": true
+      },
+      "stage": 2,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-030",
+      "net": "GND",
+      "a": {
+        "module": "AUX1",
+        "terminal": "g55",
+        "hole": "g55",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "d4",
+        "hole": "d4",
+        "physical": true
+      },
+      "stage": 2,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-031",
+      "net": "GND",
+      "a": {
+        "module": "AUX2",
+        "terminal": "g3",
+        "hole": "g3",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "e4",
+        "hole": "e4",
+        "physical": true
+      },
+      "stage": 2,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-032",
+      "net": "GND",
+      "a": {
+        "module": "AUX2",
+        "terminal": "g11",
+        "hole": "g11",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "c5",
+        "hole": "c5",
+        "physical": true
+      },
+      "stage": 2,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-033",
+      "net": "GND",
+      "a": {
+        "module": "lab-supply",
+        "terminal": "Black COM binding post",
+        "physical": true,
+        "board_pin": {
+          "x": 6,
+          "y": 1.6,
+          "z": 0,
+          "source": "Instrument labeled binding posts; illustrative instrument body"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "d5",
+        "hole": "d5",
+        "physical": true
+      },
+      "stage": 1,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Connect lab source OR battery, never both; remove both lab leads before battery attachment."
+    },
+    {
+      "id": "wire-034",
+      "net": "GND",
+      "a": {
+        "module": "reg3",
+        "terminal": "GND / 5-pin row 3",
+        "physical": true,
+        "board_pin": {
+          "x": 0.0,
+          "y": 1.6,
+          "z": 10.16,
+          "source": "Pololu dimension drawing, component side; EN,VIN,GND,GND,VOUT left to right"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "e5",
+        "hole": "e5",
+        "physical": true
+      },
+      "stage": 1,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-035",
+      "net": "GND",
+      "a": {
+        "module": "reg5",
+        "terminal": "GND / 5-pin row 3",
+        "physical": true,
+        "board_pin": {
+          "x": 0.0,
+          "y": 1.6,
+          "z": 10.16,
+          "source": "Pololu dimension drawing, component side; EN,VIN,GND,GND,VOUT left to right"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "c6",
+        "hole": "c6",
+        "physical": true
+      },
+      "stage": 1,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-036",
+      "net": "GND",
+      "a": {
+        "module": "battery",
+        "terminal": "JST-PH black \u2212 lead",
+        "physical": true,
+        "board_pin": {
+          "x": 14,
+          "y": 3,
+          "z": -45,
+          "source": "Adafruit 328 lead polarity; check connector before connecting"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "d6",
+        "hole": "d6",
+        "physical": true
+      },
+      "stage": 9,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Connect lab source OR battery, never both; remove both lab leads before battery attachment."
+    },
+    {
+      "id": "wire-037",
+      "net": "GND",
+      "a": {
+        "module": "esp",
+        "terminal": "J1.22 / GND",
+        "physical": true,
+        "header": "J1",
+        "pin": 22
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "e6",
+        "hole": "e6",
+        "physical": true
+      },
+      "stage": 2,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-038",
+      "net": "GND",
+      "a": {
+        "module": "ldo",
+        "terminal": "GND pin2 \u2192 JP2.2",
+        "physical": true,
+        "adapter_pin": {
+          "header": "JP2",
+          "pin": 2,
+          "x": -3.81,
+          "z": 0.0,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "TPS7A2030 on top U$1; carrier pad 5 unused"
+        },
+        "board_pin": {
+          "header": "JP2",
+          "pin": 2,
+          "x": -3.81,
+          "z": 0.0,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "TPS7A2030 on top U$1; carrier pad 5 unused",
+          "y": 1.6
+        },
+        "verification": "Manufacturer CAD map; inspect soldered assembly"
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "c7",
+        "hole": "c7",
+        "physical": true
+      },
+      "stage": 1,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Use the specified adapter pad-to-header mapping; check solder orientation and unpowered continuity."
+    },
+    {
+      "id": "wire-039",
+      "net": "GND",
+      "a": {
+        "module": "adc",
+        "terminal": "GND / CN1 photo label",
+        "physical": true,
+        "photo_pin": {
+          "photo_header": "CN1",
+          "label": "GND",
+          "row": 1,
+          "column": "inner",
+          "x": 17.78,
+          "z": -11.46
+        },
+        "verification": "Photo-labeled physical terminal; module qualification required",
+        "board_pin": {
+          "photo_header": "CN1",
+          "label": "GND",
+          "row": 1,
+          "column": "inner",
+          "x": 17.78,
+          "z": -11.46,
+          "y": 1.6,
+          "source": "User module photographs; coordinates approximate"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "d7",
+        "hole": "d7",
+        "physical": true
+      },
+      "stage": 3,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+    },
+    {
+      "id": "wire-040",
+      "net": "GND",
+      "a": {
+        "module": "adc",
+        "terminal": "OS0 / CN1 photo label",
+        "physical": true,
+        "photo_pin": {
+          "photo_header": "CN1",
+          "label": "OS0",
+          "row": 2,
+          "column": "edge",
+          "x": 15.240000000000002,
+          "z": -14
+        },
+        "verification": "Photo-labeled physical terminal; module qualification required",
+        "board_pin": {
+          "photo_header": "CN1",
+          "label": "OS0",
+          "row": 2,
+          "column": "edge",
+          "x": 15.240000000000002,
+          "z": -14,
+          "y": 1.6,
+          "source": "User module photographs; coordinates approximate"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "e7",
+        "hole": "e7",
+        "physical": true
+      },
+      "stage": 3,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+    },
+    {
+      "id": "wire-041",
+      "net": "GND",
+      "a": {
+        "module": "adc",
+        "terminal": "OS1 / CN1 photo label",
+        "physical": true,
+        "photo_pin": {
+          "photo_header": "CN1",
+          "label": "OS1",
+          "row": 2,
+          "column": "inner",
+          "x": 15.240000000000002,
+          "z": -11.46
+        },
+        "verification": "Photo-labeled physical terminal; module qualification required",
+        "board_pin": {
+          "photo_header": "CN1",
+          "label": "OS1",
+          "row": 2,
+          "column": "inner",
+          "x": 15.240000000000002,
+          "z": -11.46,
+          "y": 1.6,
+          "source": "User module photographs; coordinates approximate"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "c8",
+        "hole": "c8",
+        "physical": true
+      },
+      "stage": 3,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+    },
+    {
+      "id": "wire-042",
+      "net": "GND",
+      "a": {
+        "module": "adc",
+        "terminal": "OS2 / CN1 photo label",
+        "physical": true,
+        "photo_pin": {
+          "photo_header": "CN1",
+          "label": "OS2",
+          "row": 3,
+          "column": "edge",
+          "x": 12.700000000000001,
+          "z": -14
+        },
+        "verification": "Photo-labeled physical terminal; module qualification required",
+        "board_pin": {
+          "photo_header": "CN1",
+          "label": "OS2",
+          "row": 3,
+          "column": "edge",
+          "x": 12.700000000000001,
+          "z": -14,
+          "y": 1.6,
+          "source": "User module photographs; coordinates approximate"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "d8",
+        "hole": "d8",
+        "physical": true
+      },
+      "stage": 3,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+    },
+    {
+      "id": "wire-043",
+      "net": "GND",
+      "a": {
+        "module": "adc",
+        "terminal": "RAGE / CN1 photo label",
+        "physical": true,
+        "photo_pin": {
+          "photo_header": "CN1",
+          "label": "RAGE",
+          "row": 3,
+          "column": "inner",
+          "x": 12.700000000000001,
+          "z": -11.46
+        },
+        "verification": "Photo-labeled physical terminal; module qualification required",
+        "board_pin": {
+          "photo_header": "CN1",
+          "label": "RAGE",
+          "row": 3,
+          "column": "inner",
+          "x": 12.700000000000001,
+          "z": -11.46,
+          "y": 1.6,
+          "source": "User module photographs; coordinates approximate"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "e8",
+        "hole": "e8",
+        "physical": true
+      },
+      "stage": 3,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+    },
+    {
+      "id": "wire-044",
+      "net": "GND",
+      "a": {
+        "module": "adc",
+        "terminal": "DB15 / CN1 photo label",
+        "physical": true,
+        "photo_pin": {
+          "photo_header": "CN1",
+          "label": "DB15",
+          "row": 15,
+          "column": "inner",
+          "x": -17.78,
+          "z": -11.46
+        },
+        "verification": "Photo-labeled physical terminal; module qualification required",
+        "board_pin": {
+          "photo_header": "CN1",
+          "label": "DB15",
+          "row": 15,
+          "column": "inner",
+          "x": -17.78,
+          "z": -11.46,
+          "y": 1.6,
+          "source": "User module photographs; coordinates approximate"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "c9",
+        "hole": "c9",
+        "physical": true
+      },
+      "stage": 3,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+    },
+    {
+      "id": "wire-045",
+      "net": "GND",
+      "a": {
+        "module": "adc",
+        "terminal": "V5 unused input / CN2 photo label",
+        "physical": true,
+        "photo_pin": {
+          "photo_header": "CN2",
+          "label": "V5",
+          "x": -7.620000000000001,
+          "z": 14
+        },
+        "verification": "Photo-labeled physical terminal; module qualification required",
+        "board_pin": {
+          "photo_header": "CN2",
+          "label": "V5",
+          "x": -7.620000000000001,
+          "z": 14,
+          "y": 1.6,
+          "source": "User module photographs; coordinates approximate"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "d9",
+        "hole": "d9",
+        "physical": true
+      },
+      "stage": 3,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+    },
+    {
+      "id": "wire-046",
+      "net": "GND",
+      "a": {
+        "module": "adc",
+        "terminal": "V6 unused input / CN2 photo label",
+        "physical": true,
+        "photo_pin": {
+          "photo_header": "CN2",
+          "label": "V6",
+          "x": -5.080000000000002,
+          "z": 14
+        },
+        "verification": "Photo-labeled physical terminal; module qualification required",
+        "board_pin": {
+          "photo_header": "CN2",
+          "label": "V6",
+          "x": -5.080000000000002,
+          "z": 14,
+          "y": 1.6,
+          "source": "User module photographs; coordinates approximate"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "e9",
+        "hole": "e9",
+        "physical": true
+      },
+      "stage": 3,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+    },
+    {
+      "id": "wire-047",
+      "net": "GND",
+      "a": {
+        "module": "adc",
+        "terminal": "V7 unused input / CN2 photo label",
+        "physical": true,
+        "photo_pin": {
+          "photo_header": "CN2",
+          "label": "V7",
+          "x": -2.540000000000001,
+          "z": 14
+        },
+        "verification": "Photo-labeled physical terminal; module qualification required",
+        "board_pin": {
+          "photo_header": "CN2",
+          "label": "V7",
+          "x": -2.540000000000001,
+          "z": 14,
+          "y": 1.6,
+          "source": "User module photographs; coordinates approximate"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "c10",
+        "hole": "c10",
+        "physical": true
+      },
+      "stage": 3,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+    },
+    {
+      "id": "wire-048",
+      "net": "GND",
+      "a": {
+        "module": "adc",
+        "terminal": "V8 unused input / CN2 photo label",
+        "physical": true,
+        "photo_pin": {
+          "photo_header": "CN2",
+          "label": "V8",
+          "x": 0.0,
+          "z": 14
+        },
+        "verification": "Photo-labeled physical terminal; module qualification required",
+        "board_pin": {
+          "photo_header": "CN2",
+          "label": "V8",
+          "x": 0.0,
+          "z": 14,
+          "y": 1.6,
+          "source": "User module photographs; coordinates approximate"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "d10",
+        "hole": "d10",
+        "physical": true
+      },
+      "stage": 3,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+    },
+    {
+      "id": "wire-049",
+      "net": "GND",
+      "a": {
+        "module": "adc",
+        "terminal": "G beside V1 / CN2 photo label",
+        "physical": true,
+        "photo_pin": {
+          "photo_header": "CN2",
+          "label": "G for V1",
+          "x": -17.78,
+          "z": 11.46
+        },
+        "verification": "Photo-labeled physical terminal; module qualification required",
+        "board_pin": {
+          "photo_header": "CN2",
+          "label": "G for V1",
+          "x": -17.78,
+          "z": 11.46,
+          "y": 1.6,
+          "source": "User module photographs; coordinates approximate"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "e10",
+        "hole": "e10",
+        "physical": true
+      },
+      "stage": 3,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+    },
+    {
+      "id": "wire-050",
+      "net": "GND",
+      "a": {
+        "module": "myo1",
+        "terminal": "GND solder pad",
+        "physical": true,
+        "board_pin": {
+          "x": 0,
+          "y": 1.6,
+          "z": 15.2,
+          "source": "MyoWare advanced guide labeled pad; model position approximate, use silkscreen"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "c11",
+        "hole": "c11",
+        "physical": true
+      },
+      "stage": 10,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Use bare-sensor RAW, VIN and GND pads; no person attached during instrument tests."
+    },
+    {
+      "id": "wire-051",
+      "net": "GND",
+      "a": {
+        "module": "clamp1",
+        "terminal": "CHIP_PAD_1 \u2192 JP1.2",
+        "physical": true,
+        "adapter_pin": {
+          "header": "JP1",
+          "pin": 2,
+          "x": 3.81,
+          "z": 0.0,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "Device on bottom Q1 only; Q2 and top U$1 empty"
+        },
+        "board_pin": {
+          "header": "JP1",
+          "pin": 2,
+          "x": 3.81,
+          "z": 0.0,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "Device on bottom Q1 only; Q2 and top U$1 empty",
+          "y": 1.6
+        },
+        "verification": "Manufacturer CAD map; inspect soldered assembly"
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "d11",
+        "hole": "d11",
+        "physical": true
+      },
+      "stage": 4,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Use the specified adapter pad-to-header mapping; check solder orientation and unpowered continuity."
+    },
+    {
+      "id": "wire-052",
+      "net": "GND",
+      "a": {
+        "module": "adc",
+        "terminal": "G beside V2 / CN2 photo label",
+        "physical": true,
+        "photo_pin": {
+          "photo_header": "CN2",
+          "label": "G for V2",
+          "x": -15.240000000000002,
+          "z": 11.46
+        },
+        "verification": "Photo-labeled physical terminal; module qualification required",
+        "board_pin": {
+          "photo_header": "CN2",
+          "label": "G for V2",
+          "x": -15.240000000000002,
+          "z": 11.46,
+          "y": 1.6,
+          "source": "User module photographs; coordinates approximate"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "e11",
+        "hole": "e11",
+        "physical": true
+      },
+      "stage": 3,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+    },
+    {
+      "id": "wire-053",
+      "net": "GND",
+      "a": {
+        "module": "myo2",
+        "terminal": "GND solder pad",
+        "physical": true,
+        "board_pin": {
+          "x": 0,
+          "y": 1.6,
+          "z": 15.2,
+          "source": "MyoWare advanced guide labeled pad; model position approximate, use silkscreen"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "c12",
+        "hole": "c12",
+        "physical": true
+      },
+      "stage": 10,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Use bare-sensor RAW, VIN and GND pads; no person attached during instrument tests."
+    },
+    {
+      "id": "wire-054",
+      "net": "GND",
+      "a": {
+        "module": "clamp2",
+        "terminal": "CHIP_PAD_1 \u2192 JP1.2",
+        "physical": true,
+        "adapter_pin": {
+          "header": "JP1",
+          "pin": 2,
+          "x": 3.81,
+          "z": 0.0,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "Device on bottom Q1 only; Q2 and top U$1 empty"
+        },
+        "board_pin": {
+          "header": "JP1",
+          "pin": 2,
+          "x": 3.81,
+          "z": 0.0,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "Device on bottom Q1 only; Q2 and top U$1 empty",
+          "y": 1.6
+        },
+        "verification": "Manufacturer CAD map; inspect soldered assembly"
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "d12",
+        "hole": "d12",
+        "physical": true
+      },
+      "stage": 5,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Use the specified adapter pad-to-header mapping; check solder orientation and unpowered continuity."
+    },
+    {
+      "id": "wire-055",
+      "net": "GND",
+      "a": {
+        "module": "adc",
+        "terminal": "G beside V3 / CN2 photo label",
+        "physical": true,
+        "photo_pin": {
+          "photo_header": "CN2",
+          "label": "G for V3",
+          "x": -12.700000000000001,
+          "z": 11.46
+        },
+        "verification": "Photo-labeled physical terminal; module qualification required",
+        "board_pin": {
+          "photo_header": "CN2",
+          "label": "G for V3",
+          "x": -12.700000000000001,
+          "z": 11.46,
+          "y": 1.6,
+          "source": "User module photographs; coordinates approximate"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "e12",
+        "hole": "e12",
+        "physical": true
+      },
+      "stage": 3,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+    },
+    {
+      "id": "wire-056",
+      "net": "GND",
+      "a": {
+        "module": "myo3",
+        "terminal": "GND solder pad",
+        "physical": true,
+        "board_pin": {
+          "x": 0,
+          "y": 1.6,
+          "z": 15.2,
+          "source": "MyoWare advanced guide labeled pad; model position approximate, use silkscreen"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "c13",
+        "hole": "c13",
+        "physical": true
+      },
+      "stage": 10,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Use bare-sensor RAW, VIN and GND pads; no person attached during instrument tests."
+    },
+    {
+      "id": "wire-057",
+      "net": "GND",
+      "a": {
+        "module": "clamp3",
+        "terminal": "CHIP_PAD_1 \u2192 JP1.2",
+        "physical": true,
+        "adapter_pin": {
+          "header": "JP1",
+          "pin": 2,
+          "x": 3.81,
+          "z": 0.0,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "Device on bottom Q1 only; Q2 and top U$1 empty"
+        },
+        "board_pin": {
+          "header": "JP1",
+          "pin": 2,
+          "x": 3.81,
+          "z": 0.0,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "Device on bottom Q1 only; Q2 and top U$1 empty",
+          "y": 1.6
+        },
+        "verification": "Manufacturer CAD map; inspect soldered assembly"
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "d13",
+        "hole": "d13",
+        "physical": true
+      },
+      "stage": 5,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Use the specified adapter pad-to-header mapping; check solder orientation and unpowered continuity."
+    },
+    {
+      "id": "wire-058",
+      "net": "GND",
+      "a": {
+        "module": "adc",
+        "terminal": "G beside V4 / CN2 photo label",
+        "physical": true,
+        "photo_pin": {
+          "photo_header": "CN2",
+          "label": "G for V4",
+          "x": -10.16,
+          "z": 11.46
+        },
+        "verification": "Photo-labeled physical terminal; module qualification required",
+        "board_pin": {
+          "photo_header": "CN2",
+          "label": "G for V4",
+          "x": -10.16,
+          "z": 11.46,
+          "y": 1.6,
+          "source": "User module photographs; coordinates approximate"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "e13",
+        "hole": "e13",
+        "physical": true
+      },
+      "stage": 3,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+    },
+    {
+      "id": "wire-059",
+      "net": "GND",
+      "a": {
+        "module": "myo4",
+        "terminal": "GND solder pad",
+        "physical": true,
+        "board_pin": {
+          "x": 0,
+          "y": 1.6,
+          "z": 15.2,
+          "source": "MyoWare advanced guide labeled pad; model position approximate, use silkscreen"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "c14",
+        "hole": "c14",
+        "physical": true
+      },
+      "stage": 10,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Use bare-sensor RAW, VIN and GND pads; no person attached during instrument tests."
+    },
+    {
+      "id": "wire-060",
+      "net": "GND",
+      "a": {
+        "module": "clamp4",
+        "terminal": "CHIP_PAD_1 \u2192 JP1.2",
+        "physical": true,
+        "adapter_pin": {
+          "header": "JP1",
+          "pin": 2,
+          "x": 3.81,
+          "z": 0.0,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "Device on bottom Q1 only; Q2 and top U$1 empty"
+        },
+        "board_pin": {
+          "header": "JP1",
+          "pin": 2,
+          "x": 3.81,
+          "z": 0.0,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "Device on bottom Q1 only; Q2 and top U$1 empty",
+          "y": 1.6
+        },
+        "verification": "Manufacturer CAD map; inspect soldered assembly"
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "d14",
+        "hole": "d14",
+        "physical": true
+      },
+      "stage": 5,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Use the specified adapter pad-to-header mapping; check solder orientation and unpowered continuity."
+    },
+    {
+      "id": "wire-061",
+      "net": "GND",
+      "a": {
+        "module": "foot",
+        "terminal": "GND / photo position 7",
+        "physical": true,
+        "photo_pin": {
+          "photo_header": "GY-521",
+          "label": "GND",
+          "position_from_left": 7,
+          "x": 6.35,
+          "z": -8
+        },
+        "verification": "Photo-labeled physical terminal; module qualification required",
+        "board_pin": {
+          "photo_header": "GY-521",
+          "label": "GND",
+          "position_from_left": 7,
+          "x": 6.35,
+          "z": -8,
+          "y": 1.6,
+          "source": "User module photographs; coordinates approximate"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "e14",
+        "hole": "e14",
+        "physical": true
+      },
+      "stage": 6,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Complete IMU supply, interface and configuration checks before connecting."
+    },
+    {
+      "id": "wire-062",
+      "net": "GND",
+      "a": {
+        "module": "shank",
+        "terminal": "GND / photo position 7",
+        "physical": true,
+        "photo_pin": {
+          "photo_header": "GY-521",
+          "label": "GND",
+          "position_from_left": 7,
+          "x": 6.35,
+          "z": -8
+        },
+        "verification": "Photo-labeled physical terminal; module qualification required",
+        "board_pin": {
+          "photo_header": "GY-521",
+          "label": "GND",
+          "position_from_left": 7,
+          "x": 6.35,
+          "z": -8,
+          "y": 1.6,
+          "source": "User module photographs; coordinates approximate"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "c15",
+        "hole": "c15",
+        "physical": true
+      },
+      "stage": 6,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Complete IMU supply, interface and configuration checks before connecting."
+    },
+    {
+      "id": "wire-063",
+      "net": "GND",
+      "a": {
+        "module": "button",
+        "terminal": "NO contact 2",
+        "physical": true,
+        "board_pin": {
+          "x": 3,
+          "y": 1.6,
+          "z": 0,
+          "source": "Two-terminal normally-open momentary switch; continuity check before wiring"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "d15",
+        "hole": "d15",
+        "physical": true
+      },
+      "stage": 2,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-064",
+      "net": "GND",
+      "a": {
+        "module": "usb",
+        "terminal": "JP2.1 / GND",
+        "physical": true,
+        "board_pin": {
+          "x": -5.08,
+          "y": 1.6,
+          "z": 4.45,
+          "source": "Adafruit 1833 Eagle CAD"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "e15",
+        "hole": "e15",
+        "physical": true
+      },
+      "stage": 2,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "External USB inlet only; both DevKit USB sockets empty. VBUS is sense-only, never connected to recorder 5 V."
+    },
+    {
+      "id": "wire-065",
+      "net": "GND",
+      "a": {
+        "module": "usb-q",
+        "terminal": "SOURCE pin2 \u2192 JP1.3",
+        "physical": true,
+        "adapter_pin": {
+          "header": "JP1",
+          "pin": 3,
+          "x": 3.81,
+          "z": 2.54,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "Device on bottom Q1 only; Q2 and top U$1 empty"
+        },
+        "board_pin": {
+          "header": "JP1",
+          "pin": 3,
+          "x": 3.81,
+          "z": 2.54,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "Device on bottom Q1 only; Q2 and top U$1 empty",
+          "y": 1.6
+        },
+        "verification": "Manufacturer CAD map; inspect soldered assembly"
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "c16",
+        "hole": "c16",
+        "physical": true
+      },
+      "stage": 2,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Use the specified adapter pad-to-header mapping; check solder orientation and unpowered continuity."
+    },
+    {
+      "id": "wire-066",
+      "net": "GND",
+      "a": {
+        "module": "adc",
+        "terminal": "DB0 / CN1 photo label",
+        "physical": true,
+        "photo_pin": {
+          "photo_header": "CN1",
+          "label": "DB0",
+          "row": 8,
+          "column": "edge",
+          "x": 0.0,
+          "z": -14
+        },
+        "verification": "Photo-labeled physical terminal; module qualification required",
+        "board_pin": {
+          "photo_header": "CN1",
+          "label": "DB0",
+          "row": 8,
+          "column": "edge",
+          "x": 0.0,
+          "z": -14,
+          "y": 1.6,
+          "source": "User module photographs; coordinates approximate"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "d16",
+        "hole": "d16",
+        "physical": true
+      },
+      "stage": 3,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+    },
+    {
+      "id": "wire-067",
+      "net": "GND",
+      "a": {
+        "module": "adc",
+        "terminal": "DB1 / CN1 photo label",
+        "physical": true,
+        "photo_pin": {
+          "photo_header": "CN1",
+          "label": "DB1",
+          "row": 8,
+          "column": "inner",
+          "x": 0.0,
+          "z": -11.46
+        },
+        "verification": "Photo-labeled physical terminal; module qualification required",
+        "board_pin": {
+          "photo_header": "CN1",
+          "label": "DB1",
+          "row": 8,
+          "column": "inner",
+          "x": 0.0,
+          "z": -11.46,
+          "y": 1.6,
+          "source": "User module photographs; coordinates approximate"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "e16",
+        "hole": "e16",
+        "physical": true
+      },
+      "stage": 3,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+    },
+    {
+      "id": "wire-068",
+      "net": "GND",
+      "a": {
+        "module": "adc",
+        "terminal": "DB2 / CN1 photo label",
+        "physical": true,
+        "photo_pin": {
+          "photo_header": "CN1",
+          "label": "DB2",
+          "row": 9,
+          "column": "edge",
+          "x": -2.539999999999999,
+          "z": -14
+        },
+        "verification": "Photo-labeled physical terminal; module qualification required",
+        "board_pin": {
+          "photo_header": "CN1",
+          "label": "DB2",
+          "row": 9,
+          "column": "edge",
+          "x": -2.539999999999999,
+          "z": -14,
+          "y": 1.6,
+          "source": "User module photographs; coordinates approximate"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "c17",
+        "hole": "c17",
+        "physical": true
+      },
+      "stage": 3,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+    },
+    {
+      "id": "wire-069",
+      "net": "GND",
+      "a": {
+        "module": "adc",
+        "terminal": "DB3 / CN1 photo label",
+        "physical": true,
+        "photo_pin": {
+          "photo_header": "CN1",
+          "label": "DB3",
+          "row": 9,
+          "column": "inner",
+          "x": -2.539999999999999,
+          "z": -11.46
+        },
+        "verification": "Photo-labeled physical terminal; module qualification required",
+        "board_pin": {
+          "photo_header": "CN1",
+          "label": "DB3",
+          "row": 9,
+          "column": "inner",
+          "x": -2.539999999999999,
+          "z": -11.46,
+          "y": 1.6,
+          "source": "User module photographs; coordinates approximate"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "d17",
+        "hole": "d17",
+        "physical": true
+      },
+      "stage": 3,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+    },
+    {
+      "id": "wire-070",
+      "net": "GND",
+      "a": {
+        "module": "adc",
+        "terminal": "DB4 / CN1 photo label",
+        "physical": true,
+        "photo_pin": {
+          "photo_header": "CN1",
+          "label": "DB4",
+          "row": 10,
+          "column": "edge",
+          "x": -5.079999999999998,
+          "z": -14
+        },
+        "verification": "Photo-labeled physical terminal; module qualification required",
+        "board_pin": {
+          "photo_header": "CN1",
+          "label": "DB4",
+          "row": 10,
+          "column": "edge",
+          "x": -5.079999999999998,
+          "z": -14,
+          "y": 1.6,
+          "source": "User module photographs; coordinates approximate"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "e17",
+        "hole": "e17",
+        "physical": true
+      },
+      "stage": 3,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+    },
+    {
+      "id": "wire-071",
+      "net": "GND",
+      "a": {
+        "module": "adc",
+        "terminal": "DB5 / CN1 photo label",
+        "physical": true,
+        "photo_pin": {
+          "photo_header": "CN1",
+          "label": "DB5",
+          "row": 10,
+          "column": "inner",
+          "x": -5.079999999999998,
+          "z": -11.46
+        },
+        "verification": "Photo-labeled physical terminal; module qualification required",
+        "board_pin": {
+          "photo_header": "CN1",
+          "label": "DB5",
+          "row": 10,
+          "column": "inner",
+          "x": -5.079999999999998,
+          "z": -11.46,
+          "y": 1.6,
+          "source": "User module photographs; coordinates approximate"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "c18",
+        "hole": "c18",
+        "physical": true
+      },
+      "stage": 3,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+    },
+    {
+      "id": "wire-072",
+      "net": "GND",
+      "a": {
+        "module": "adc",
+        "terminal": "DB6 / CN1 photo label",
+        "physical": true,
+        "photo_pin": {
+          "photo_header": "CN1",
+          "label": "DB6",
+          "row": 11,
+          "column": "edge",
+          "x": -7.619999999999997,
+          "z": -14
+        },
+        "verification": "Photo-labeled physical terminal; module qualification required",
+        "board_pin": {
+          "photo_header": "CN1",
+          "label": "DB6",
+          "row": 11,
+          "column": "edge",
+          "x": -7.619999999999997,
+          "z": -14,
+          "y": 1.6,
+          "source": "User module photographs; coordinates approximate"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "d18",
+        "hole": "d18",
+        "physical": true
+      },
+      "stage": 3,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+    },
+    {
+      "id": "wire-073",
+      "net": "GND",
+      "a": {
+        "module": "adc",
+        "terminal": "DB9 / CN1 photo label",
+        "physical": true,
+        "photo_pin": {
+          "photo_header": "CN1",
+          "label": "DB9",
+          "row": 12,
+          "column": "inner",
+          "x": -10.16,
+          "z": -11.46
+        },
+        "verification": "Photo-labeled physical terminal; module qualification required",
+        "board_pin": {
+          "photo_header": "CN1",
+          "label": "DB9",
+          "row": 12,
+          "column": "inner",
+          "x": -10.16,
+          "z": -11.46,
+          "y": 1.6,
+          "source": "User module photographs; coordinates approximate"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "e18",
+        "hole": "e18",
+        "physical": true
+      },
+      "stage": 3,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+    },
+    {
+      "id": "wire-074",
+      "net": "GND",
+      "a": {
+        "module": "adc",
+        "terminal": "DB10 / CN1 photo label",
+        "physical": true,
+        "photo_pin": {
+          "photo_header": "CN1",
+          "label": "DB10",
+          "row": 13,
+          "column": "edge",
+          "x": -12.7,
+          "z": -14
+        },
+        "verification": "Photo-labeled physical terminal; module qualification required",
+        "board_pin": {
+          "photo_header": "CN1",
+          "label": "DB10",
+          "row": 13,
+          "column": "edge",
+          "x": -12.7,
+          "z": -14,
+          "y": 1.6,
+          "source": "User module photographs; coordinates approximate"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "c19",
+        "hole": "c19",
+        "physical": true
+      },
+      "stage": 3,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+    },
+    {
+      "id": "wire-075",
+      "net": "GND",
+      "a": {
+        "module": "adc",
+        "terminal": "DB11 / CN1 photo label",
+        "physical": true,
+        "photo_pin": {
+          "photo_header": "CN1",
+          "label": "DB11",
+          "row": 13,
+          "column": "inner",
+          "x": -12.7,
+          "z": -11.46
+        },
+        "verification": "Photo-labeled physical terminal; module qualification required",
+        "board_pin": {
+          "photo_header": "CN1",
+          "label": "DB11",
+          "row": 13,
+          "column": "inner",
+          "x": -12.7,
+          "z": -11.46,
+          "y": 1.6,
+          "source": "User module photographs; coordinates approximate"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "d19",
+        "hole": "d19",
+        "physical": true
+      },
+      "stage": 3,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+    },
+    {
+      "id": "wire-076",
+      "net": "GND",
+      "a": {
+        "module": "adc",
+        "terminal": "DB12 / CN1 photo label",
+        "physical": true,
+        "photo_pin": {
+          "photo_header": "CN1",
+          "label": "DB12",
+          "row": 14,
+          "column": "edge",
+          "x": -15.240000000000002,
+          "z": -14
+        },
+        "verification": "Photo-labeled physical terminal; module qualification required",
+        "board_pin": {
+          "photo_header": "CN1",
+          "label": "DB12",
+          "row": 14,
+          "column": "edge",
+          "x": -15.240000000000002,
+          "z": -14,
+          "y": 1.6,
+          "source": "User module photographs; coordinates approximate"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "e19",
+        "hole": "e19",
+        "physical": true
+      },
+      "stage": 3,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+    },
+    {
+      "id": "wire-077",
+      "net": "GND",
+      "a": {
+        "module": "adc",
+        "terminal": "DB13 / CN1 photo label",
+        "physical": true,
+        "photo_pin": {
+          "photo_header": "CN1",
+          "label": "DB13",
+          "row": 14,
+          "column": "inner",
+          "x": -15.240000000000002,
+          "z": -11.46
+        },
+        "verification": "Photo-labeled physical terminal; module qualification required",
+        "board_pin": {
+          "photo_header": "CN1",
+          "label": "DB13",
+          "row": 14,
+          "column": "inner",
+          "x": -15.240000000000002,
+          "z": -11.46,
+          "y": 1.6,
+          "source": "User module photographs; coordinates approximate"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "b20",
+        "hole": "b20",
+        "physical": true
+      },
+      "stage": 3,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+    },
+    {
+      "id": "wire-078",
+      "net": "GND",
+      "a": {
+        "module": "adc",
+        "terminal": "DB14 / CN1 photo label",
+        "physical": true,
+        "photo_pin": {
+          "photo_header": "CN1",
+          "label": "DB14",
+          "row": 15,
+          "column": "edge",
+          "x": -17.78,
+          "z": -14
+        },
+        "verification": "Photo-labeled physical terminal; module qualification required",
+        "board_pin": {
+          "photo_header": "CN1",
+          "label": "DB14",
+          "row": 15,
+          "column": "edge",
+          "x": -17.78,
+          "z": -14,
+          "y": 1.6,
+          "source": "User module photographs; coordinates approximate"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "c20",
+        "hole": "c20",
+        "physical": true
+      },
+      "stage": 3,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+    },
+    {
+      "id": "wire-079",
+      "net": "VBAT",
+      "a": {
+        "module": "AUX1",
+        "terminal": "a51",
+        "hole": "a51",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "a21",
+        "hole": "a21",
+        "physical": true
+      },
+      "stage": 2,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-080",
+      "net": "VBAT",
+      "a": {
+        "module": "power-switch",
+        "terminal": "SPST solder lug 2",
+        "physical": true,
+        "board_pin": {
+          "x": 3,
+          "y": 1.6,
+          "z": 0,
+          "source": "Two-lug SPST switch; continuity closes only in ON"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "b21",
+        "hole": "b21",
+        "physical": true
+      },
+      "stage": 1,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-081",
+      "net": "VBAT",
+      "a": {
+        "module": "reg5",
+        "terminal": "VIN / 5-pin row 2",
+        "physical": true,
+        "board_pin": {
+          "x": -2.54,
+          "y": 1.6,
+          "z": 10.16,
+          "source": "Pololu dimension drawing, component side; EN,VIN,GND,GND,VOUT left to right"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "c21",
+        "hole": "c21",
+        "physical": true
+      },
+      "stage": 1,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-082",
+      "net": "VBAT",
+      "a": {
+        "module": "reg3",
+        "terminal": "VIN / 5-pin row 2",
+        "physical": true,
+        "board_pin": {
+          "x": -2.54,
+          "y": 1.6,
+          "z": 10.16,
+          "source": "Pololu dimension drawing, component side; EN,VIN,GND,GND,VOUT left to right"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "d21",
+        "hole": "d21",
+        "physical": true
+      },
+      "stage": 1,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-083",
+      "net": "5V",
+      "a": {
+        "module": "reg5",
+        "terminal": "VOUT / 5-pin row 5",
+        "physical": true,
+        "board_pin": {
+          "x": 5.08,
+          "y": 1.6,
+          "z": 10.16,
+          "source": "Pololu dimension drawing, component side; EN,VIN,GND,GND,VOUT left to right"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "a22",
+        "hole": "a22",
+        "physical": true
+      },
+      "stage": 2,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-084",
+      "net": "5V",
+      "a": {
+        "module": "esp",
+        "terminal": "J1.21 / 5V",
+        "physical": true,
+        "header": "J1",
+        "pin": 21
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "b22",
+        "hole": "b22",
+        "physical": true
+      },
+      "stage": 2,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-085",
+      "net": "5V",
+      "a": {
+        "module": "adc",
+        "terminal": "+5V / CN1 photo label",
+        "physical": true,
+        "photo_pin": {
+          "photo_header": "CN1",
+          "label": "+5V",
+          "row": 1,
+          "column": "edge",
+          "x": 17.78,
+          "z": -14
+        },
+        "verification": "Photo-labeled physical terminal; module qualification required",
+        "board_pin": {
+          "photo_header": "CN1",
+          "label": "+5V",
+          "row": 1,
+          "column": "edge",
+          "x": 17.78,
+          "z": -14,
+          "y": 1.6,
+          "source": "User module photographs; coordinates approximate"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "c22",
+        "hole": "c22",
+        "physical": true
+      },
+      "stage": 3,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+    },
+    {
+      "id": "wire-086",
+      "net": "3V3D",
+      "a": {
+        "module": "DIST1",
+        "terminal": "a23",
+        "hole": "a23",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "a24",
+        "hole": "a24",
+        "physical": true
+      },
+      "stage": 1,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-087",
+      "net": "3V3D",
+      "a": {
+        "module": "DIST1",
+        "terminal": "b24",
+        "hole": "b24",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "a25",
+        "hole": "a25",
+        "physical": true
+      },
+      "stage": 1,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-088",
+      "net": "3V3D",
+      "a": {
+        "module": "DIST1",
+        "terminal": "b25",
+        "hole": "b25",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "a26",
+        "hole": "a26",
+        "physical": true
+      },
+      "stage": 1,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-089",
+      "net": "3V3D",
+      "a": {
+        "module": "AUX1",
+        "terminal": "a3",
+        "hole": "a3",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "b23",
+        "hole": "b23",
+        "physical": true
+      },
+      "stage": 3,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-090",
+      "net": "3V3D",
+      "a": {
+        "module": "AUX1",
+        "terminal": "a7",
+        "hole": "a7",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "c23",
+        "hole": "c23",
+        "physical": true
+      },
+      "stage": 6,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-091",
+      "net": "3V3D",
+      "a": {
+        "module": "AUX1",
+        "terminal": "a11",
+        "hole": "a11",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "d23",
+        "hole": "d23",
+        "physical": true
+      },
+      "stage": 6,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-092",
+      "net": "3V3D",
+      "a": {
+        "module": "AUX1",
+        "terminal": "a15",
+        "hole": "a15",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "e23",
+        "hole": "e23",
+        "physical": true
+      },
+      "stage": 6,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-093",
+      "net": "3V3D",
+      "a": {
+        "module": "AUX1",
+        "terminal": "a19",
+        "hole": "a19",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "c24",
+        "hole": "c24",
+        "physical": true
+      },
+      "stage": 6,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-094",
+      "net": "3V3D",
+      "a": {
+        "module": "AUX1",
+        "terminal": "a23",
+        "hole": "a23",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "d24",
+        "hole": "d24",
+        "physical": true
+      },
+      "stage": 2,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-095",
+      "net": "3V3D",
+      "a": {
+        "module": "AUX2",
+        "terminal": "a15",
+        "hole": "a15",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "e24",
+        "hole": "e24",
+        "physical": true
+      },
+      "stage": 2,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-096",
+      "net": "3V3D",
+      "a": {
+        "module": "reg3",
+        "terminal": "VOUT / 5-pin row 5",
+        "physical": true,
+        "board_pin": {
+          "x": 5.08,
+          "y": 1.6,
+          "z": 10.16,
+          "source": "Pololu dimension drawing, component side; EN,VIN,GND,GND,VOUT left to right"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "c25",
+        "hole": "c25",
+        "physical": true
+      },
+      "stage": 1,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-097",
+      "net": "3V3D",
+      "a": {
+        "module": "ldo",
+        "terminal": "IN pin1 \u2192 JP2.1",
+        "physical": true,
+        "adapter_pin": {
+          "header": "JP2",
+          "pin": 1,
+          "x": -3.81,
+          "z": -2.54,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "TPS7A2030 on top U$1; carrier pad 5 unused"
+        },
+        "board_pin": {
+          "header": "JP2",
+          "pin": 1,
+          "x": -3.81,
+          "z": -2.54,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "TPS7A2030 on top U$1; carrier pad 5 unused",
+          "y": 1.6
+        },
+        "verification": "Manufacturer CAD map; inspect soldered assembly"
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "d25",
+        "hole": "d25",
+        "physical": true
+      },
+      "stage": 1,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Use the specified adapter pad-to-header mapping; check solder orientation and unpowered continuity."
+    },
+    {
+      "id": "wire-098",
+      "net": "3V3D",
+      "a": {
+        "module": "ldo",
+        "terminal": "EN pin3 \u2192 JP2.3",
+        "physical": true,
+        "adapter_pin": {
+          "header": "JP2",
+          "pin": 3,
+          "x": -3.81,
+          "z": 2.54,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "TPS7A2030 on top U$1; carrier pad 5 unused"
+        },
+        "board_pin": {
+          "header": "JP2",
+          "pin": 3,
+          "x": -3.81,
+          "z": 2.54,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "TPS7A2030 on top U$1; carrier pad 5 unused",
+          "y": 1.6
+        },
+        "verification": "Manufacturer CAD map; inspect soldered assembly"
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "e25",
+        "hole": "e25",
+        "physical": true
+      },
+      "stage": 1,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Use the specified adapter pad-to-header mapping; check solder orientation and unpowered continuity."
+    },
+    {
+      "id": "wire-099",
+      "net": "3V3D",
+      "a": {
+        "module": "adc",
+        "terminal": "VIO / CN1 photo label",
+        "physical": true,
+        "photo_pin": {
+          "photo_header": "CN1",
+          "label": "VIO",
+          "row": 7,
+          "column": "edge",
+          "x": 2.540000000000001,
+          "z": -14
+        },
+        "verification": "Photo-labeled physical terminal; module qualification required",
+        "board_pin": {
+          "photo_header": "CN1",
+          "label": "VIO",
+          "row": 7,
+          "column": "edge",
+          "x": 2.540000000000001,
+          "z": -14,
+          "y": 1.6,
+          "source": "User module photographs; coordinates approximate"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "b26",
+        "hole": "b26",
+        "physical": true
+      },
+      "stage": 3,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+    },
+    {
+      "id": "wire-100",
+      "net": "3V3D",
+      "a": {
+        "module": "foot",
+        "terminal": "VCC / photo position 8",
+        "physical": true,
+        "photo_pin": {
+          "photo_header": "GY-521",
+          "label": "VCC",
+          "position_from_left": 8,
+          "x": 8.89,
+          "z": -8
+        },
+        "verification": "Photo-labeled physical terminal; module qualification required",
+        "board_pin": {
+          "photo_header": "GY-521",
+          "label": "VCC",
+          "position_from_left": 8,
+          "x": 8.89,
+          "z": -8,
+          "y": 1.6,
+          "source": "User module photographs; coordinates approximate"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "c26",
+        "hole": "c26",
+        "physical": true
+      },
+      "stage": 6,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Complete IMU supply, interface and configuration checks before connecting."
+    },
+    {
+      "id": "wire-101",
+      "net": "3V3D",
+      "a": {
+        "module": "shank",
+        "terminal": "VCC / photo position 8",
+        "physical": true,
+        "photo_pin": {
+          "photo_header": "GY-521",
+          "label": "VCC",
+          "position_from_left": 8,
+          "x": 8.89,
+          "z": -8
+        },
+        "verification": "Photo-labeled physical terminal; module qualification required",
+        "board_pin": {
+          "photo_header": "GY-521",
+          "label": "VCC",
+          "position_from_left": 8,
+          "x": 8.89,
+          "z": -8,
+          "y": 1.6,
+          "source": "User module photographs; coordinates approximate"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "d26",
+        "hole": "d26",
+        "physical": true
+      },
+      "stage": 6,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Complete IMU supply, interface and configuration checks before connecting."
+    },
+    {
+      "id": "wire-102",
+      "net": "3V3D",
+      "a": {
+        "module": "sd",
+        "terminal": "JP1.1 / 3V3",
+        "physical": true,
+        "sd_pin": 1
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "e26",
+        "hole": "e26",
+        "physical": true
+      },
+      "stage": 7,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-103",
+      "net": "3V0A",
+      "a": {
+        "module": "DIST1",
+        "terminal": "a27",
+        "hole": "a27",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "a28",
+        "hole": "a28",
+        "physical": true
+      },
+      "stage": 1,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-104",
+      "net": "3V0A",
+      "a": {
+        "module": "DIST1",
+        "terminal": "b28",
+        "hole": "b28",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "a29",
+        "hole": "a29",
+        "physical": true
+      },
+      "stage": 1,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-105",
+      "net": "3V0A",
+      "a": {
+        "module": "DIST1",
+        "terminal": "b29",
+        "hole": "b29",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "a30",
+        "hole": "a30",
+        "physical": true
+      },
+      "stage": 1,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-106",
+      "net": "3V0A",
+      "a": {
+        "module": "BB0",
+        "terminal": "d2",
+        "hole": "d2",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "b27",
+        "hole": "b27",
+        "physical": true
+      },
+      "stage": 1,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-107",
+      "net": "3V0A",
+      "a": {
+        "module": "BB1",
+        "terminal": "h10",
+        "hole": "h10",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "c27",
+        "hole": "c27",
+        "physical": true
+      },
+      "stage": 4,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-108",
+      "net": "3V0A",
+      "a": {
+        "module": "BB2",
+        "terminal": "h10",
+        "hole": "h10",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "d27",
+        "hole": "d27",
+        "physical": true
+      },
+      "stage": 5,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-109",
+      "net": "3V0A",
+      "a": {
+        "module": "BB3",
+        "terminal": "h10",
+        "hole": "h10",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "e27",
+        "hole": "e27",
+        "physical": true
+      },
+      "stage": 5,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-110",
+      "net": "3V0A",
+      "a": {
+        "module": "BB4",
+        "terminal": "h10",
+        "hole": "h10",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "c28",
+        "hole": "c28",
+        "physical": true
+      },
+      "stage": 5,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-111",
+      "net": "3V0A",
+      "a": {
+        "module": "ldo",
+        "terminal": "OUT pin5 / 3.0V \u2192 JP1.1",
+        "physical": true,
+        "adapter_pin": {
+          "header": "JP1",
+          "pin": 1,
+          "x": 3.81,
+          "z": -2.54,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "TPS7A2030 on top U$1; carrier pad 5 unused"
+        },
+        "board_pin": {
+          "header": "JP1",
+          "pin": 1,
+          "x": 3.81,
+          "z": -2.54,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "TPS7A2030 on top U$1; carrier pad 5 unused",
+          "y": 1.6
+        },
+        "verification": "Manufacturer CAD map; inspect soldered assembly"
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "d28",
+        "hole": "d28",
+        "physical": true
+      },
+      "stage": 1,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Use the specified adapter pad-to-header mapping; check solder orientation and unpowered continuity."
+    },
+    {
+      "id": "wire-112",
+      "net": "3V0A",
+      "a": {
+        "module": "myo1",
+        "terminal": "VIN solder pad",
+        "physical": true,
+        "board_pin": {
+          "x": 2.54,
+          "y": 1.6,
+          "z": 15.2,
+          "source": "MyoWare advanced guide labeled pad; model position approximate, use silkscreen"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "e28",
+        "hole": "e28",
+        "physical": true
+      },
+      "stage": 10,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Use bare-sensor RAW, VIN and GND pads; no person attached during instrument tests."
+    },
+    {
+      "id": "wire-113",
+      "net": "3V0A",
+      "a": {
+        "module": "clamp1",
+        "terminal": "CHIP_PAD_2 \u2192 JP1.3",
+        "physical": true,
+        "adapter_pin": {
+          "header": "JP1",
+          "pin": 3,
+          "x": 3.81,
+          "z": 2.54,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "Device on bottom Q1 only; Q2 and top U$1 empty"
+        },
+        "board_pin": {
+          "header": "JP1",
+          "pin": 3,
+          "x": 3.81,
+          "z": 2.54,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "Device on bottom Q1 only; Q2 and top U$1 empty",
+          "y": 1.6
+        },
+        "verification": "Manufacturer CAD map; inspect soldered assembly"
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "c29",
+        "hole": "c29",
+        "physical": true
+      },
+      "stage": 4,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Use the specified adapter pad-to-header mapping; check solder orientation and unpowered continuity."
+    },
+    {
+      "id": "wire-114",
+      "net": "3V0A",
+      "a": {
+        "module": "myo2",
+        "terminal": "VIN solder pad",
+        "physical": true,
+        "board_pin": {
+          "x": 2.54,
+          "y": 1.6,
+          "z": 15.2,
+          "source": "MyoWare advanced guide labeled pad; model position approximate, use silkscreen"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "d29",
+        "hole": "d29",
+        "physical": true
+      },
+      "stage": 10,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Use bare-sensor RAW, VIN and GND pads; no person attached during instrument tests."
+    },
+    {
+      "id": "wire-115",
+      "net": "3V0A",
+      "a": {
+        "module": "clamp2",
+        "terminal": "CHIP_PAD_2 \u2192 JP1.3",
+        "physical": true,
+        "adapter_pin": {
+          "header": "JP1",
+          "pin": 3,
+          "x": 3.81,
+          "z": 2.54,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "Device on bottom Q1 only; Q2 and top U$1 empty"
+        },
+        "board_pin": {
+          "header": "JP1",
+          "pin": 3,
+          "x": 3.81,
+          "z": 2.54,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "Device on bottom Q1 only; Q2 and top U$1 empty",
+          "y": 1.6
+        },
+        "verification": "Manufacturer CAD map; inspect soldered assembly"
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "e29",
+        "hole": "e29",
+        "physical": true
+      },
+      "stage": 5,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Use the specified adapter pad-to-header mapping; check solder orientation and unpowered continuity."
+    },
+    {
+      "id": "wire-116",
+      "net": "3V0A",
+      "a": {
+        "module": "myo3",
+        "terminal": "VIN solder pad",
+        "physical": true,
+        "board_pin": {
+          "x": 2.54,
+          "y": 1.6,
+          "z": 15.2,
+          "source": "MyoWare advanced guide labeled pad; model position approximate, use silkscreen"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "b30",
+        "hole": "b30",
+        "physical": true
+      },
+      "stage": 10,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Use bare-sensor RAW, VIN and GND pads; no person attached during instrument tests."
+    },
+    {
+      "id": "wire-117",
+      "net": "3V0A",
+      "a": {
+        "module": "clamp3",
+        "terminal": "CHIP_PAD_2 \u2192 JP1.3",
+        "physical": true,
+        "adapter_pin": {
+          "header": "JP1",
+          "pin": 3,
+          "x": 3.81,
+          "z": 2.54,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "Device on bottom Q1 only; Q2 and top U$1 empty"
+        },
+        "board_pin": {
+          "header": "JP1",
+          "pin": 3,
+          "x": 3.81,
+          "z": 2.54,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "Device on bottom Q1 only; Q2 and top U$1 empty",
+          "y": 1.6
+        },
+        "verification": "Manufacturer CAD map; inspect soldered assembly"
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "c30",
+        "hole": "c30",
+        "physical": true
+      },
+      "stage": 5,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Use the specified adapter pad-to-header mapping; check solder orientation and unpowered continuity."
+    },
+    {
+      "id": "wire-118",
+      "net": "3V0A",
+      "a": {
+        "module": "myo4",
+        "terminal": "VIN solder pad",
+        "physical": true,
+        "board_pin": {
+          "x": 2.54,
+          "y": 1.6,
+          "z": 15.2,
+          "source": "MyoWare advanced guide labeled pad; model position approximate, use silkscreen"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "d30",
+        "hole": "d30",
+        "physical": true
+      },
+      "stage": 10,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Use bare-sensor RAW, VIN and GND pads; no person attached during instrument tests."
+    },
+    {
+      "id": "wire-119",
+      "net": "3V0A",
+      "a": {
+        "module": "clamp4",
+        "terminal": "CHIP_PAD_2 \u2192 JP1.3",
+        "physical": true,
+        "adapter_pin": {
+          "header": "JP1",
+          "pin": 3,
+          "x": 3.81,
+          "z": 2.54,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "Device on bottom Q1 only; Q2 and top U$1 empty"
+        },
+        "board_pin": {
+          "header": "JP1",
+          "pin": 3,
+          "x": 3.81,
+          "z": 2.54,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "Device on bottom Q1 only; Q2 and top U$1 empty",
+          "y": 1.6
+        },
+        "verification": "Manufacturer CAD map; inspect soldered assembly"
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "e30",
+        "hole": "e30",
+        "physical": true
+      },
+      "stage": 5,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Use the specified adapter pad-to-header mapping; check solder orientation and unpowered continuity."
+    },
+    {
+      "id": "wire-120",
+      "net": "ADC_CS",
+      "a": {
+        "module": "AUX1",
+        "terminal": "g3",
+        "hole": "g3",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "a31",
+        "hole": "a31",
+        "physical": true
+      },
+      "stage": 3,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-121",
+      "net": "ADC_CS",
+      "a": {
+        "module": "esp",
+        "terminal": "J1.16 / GPIO10",
+        "physical": true,
+        "header": "J1",
+        "pin": 16
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "b31",
+        "hole": "b31",
+        "physical": true
+      },
+      "stage": 3,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-122",
+      "net": "ADC_CS",
+      "a": {
+        "module": "adc",
+        "terminal": "CS / CN1 photo label",
+        "physical": true,
+        "photo_pin": {
+          "photo_header": "CN1",
+          "label": "CS",
+          "row": 6,
+          "column": "edge",
+          "x": 5.080000000000002,
+          "z": -14
+        },
+        "verification": "Photo-labeled physical terminal; module qualification required",
+        "board_pin": {
+          "photo_header": "CN1",
+          "label": "CS",
+          "row": 6,
+          "column": "edge",
+          "x": 5.080000000000002,
+          "z": -14,
+          "y": 1.6,
+          "source": "User module photographs; coordinates approximate"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "c31",
+        "hole": "c31",
+        "physical": true
+      },
+      "stage": 3,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+    },
+    {
+      "id": "wire-123",
+      "net": "ADC_SCK",
+      "a": {
+        "module": "esp",
+        "terminal": "J1.18 / GPIO12",
+        "physical": true,
+        "header": "J1",
+        "pin": 18
+      },
+      "b": {
+        "module": "adc",
+        "terminal": "RD / CN1 photo label",
+        "physical": true,
+        "photo_pin": {
+          "photo_header": "CN1",
+          "label": "RD",
+          "row": 5,
+          "column": "inner",
+          "x": 7.620000000000001,
+          "z": -11.46
+        },
+        "verification": "Photo-labeled physical terminal; module qualification required",
+        "board_pin": {
+          "photo_header": "CN1",
+          "label": "RD",
+          "row": 5,
+          "column": "inner",
+          "x": 7.620000000000001,
+          "z": -11.46,
+          "y": 1.6,
+          "source": "User module photographs; coordinates approximate"
+        }
+      },
+      "stage": 3,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+    },
+    {
+      "id": "wire-124",
+      "net": "ADC_MISO",
+      "a": {
+        "module": "esp",
+        "terminal": "J1.19 / GPIO13",
+        "physical": true,
+        "header": "J1",
+        "pin": 19
+      },
+      "b": {
+        "module": "adc",
+        "terminal": "DB7 / CN1 photo label",
+        "physical": true,
+        "photo_pin": {
+          "photo_header": "CN1",
+          "label": "DB7",
+          "row": 11,
+          "column": "inner",
+          "x": -7.619999999999997,
+          "z": -11.46
+        },
+        "verification": "Photo-labeled physical terminal; module qualification required",
+        "board_pin": {
+          "photo_header": "CN1",
+          "label": "DB7",
+          "row": 11,
+          "column": "inner",
+          "x": -7.619999999999997,
+          "z": -11.46,
+          "y": 1.6,
+          "source": "User module photographs; coordinates approximate"
+        }
+      },
+      "stage": 3,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+    },
+    {
+      "id": "wire-125",
+      "net": "ADC_RESET",
+      "a": {
+        "module": "esp",
+        "terminal": "J1.15 / GPIO9",
+        "physical": true,
+        "header": "J1",
+        "pin": 15
+      },
+      "b": {
+        "module": "adc",
+        "terminal": "RST / CN1 photo label",
+        "physical": true,
+        "photo_pin": {
+          "photo_header": "CN1",
+          "label": "RST",
+          "row": 5,
+          "column": "edge",
+          "x": 7.620000000000001,
+          "z": -14
+        },
+        "verification": "Photo-labeled physical terminal; module qualification required",
+        "board_pin": {
+          "photo_header": "CN1",
+          "label": "RST",
+          "row": 5,
+          "column": "edge",
+          "x": 7.620000000000001,
+          "z": -14,
+          "y": 1.6,
+          "source": "User module photographs; coordinates approximate"
+        }
+      },
+      "stage": 3,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+    },
+    {
+      "id": "wire-126",
+      "net": "ADC_DRDY",
+      "a": {
+        "module": "esp",
+        "terminal": "J1.12 / GPIO8",
+        "physical": true,
+        "header": "J1",
+        "pin": 12
+      },
+      "b": {
+        "module": "adc",
+        "terminal": "BUSY / CN1 photo label",
+        "physical": true,
+        "photo_pin": {
+          "photo_header": "CN1",
+          "label": "BUSY",
+          "row": 6,
+          "column": "inner",
+          "x": 5.080000000000002,
+          "z": -11.46
+        },
+        "verification": "Photo-labeled physical terminal; module qualification required",
+        "board_pin": {
+          "photo_header": "CN1",
+          "label": "BUSY",
+          "row": 6,
+          "column": "inner",
+          "x": 5.080000000000002,
+          "z": -11.46,
+          "y": 1.6,
+          "source": "User module photographs; coordinates approximate"
+        }
+      },
+      "stage": 3,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+    },
+    {
+      "id": "wire-127",
+      "net": "ADC_CONVST",
+      "a": {
+        "module": "esp",
+        "terminal": "J1.17 / GPIO11",
+        "physical": true,
+        "header": "J1",
+        "pin": 17
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "a32",
+        "hole": "a32",
+        "physical": true
+      },
+      "stage": 3,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-128",
+      "net": "ADC_CONVST",
+      "a": {
+        "module": "adc",
+        "terminal": "CVA / CN1 photo label",
+        "physical": true,
+        "photo_pin": {
+          "photo_header": "CN1",
+          "label": "CVA",
+          "row": 4,
+          "column": "edge",
+          "x": 10.16,
+          "z": -14
+        },
+        "verification": "Photo-labeled physical terminal; module qualification required",
+        "board_pin": {
+          "photo_header": "CN1",
+          "label": "CVA",
+          "row": 4,
+          "column": "edge",
+          "x": 10.16,
+          "z": -14,
+          "y": 1.6,
+          "source": "User module photographs; coordinates approximate"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "b32",
+        "hole": "b32",
+        "physical": true
+      },
+      "stage": 3,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+    },
+    {
+      "id": "wire-129",
+      "net": "ADC_CONVST",
+      "a": {
+        "module": "adc",
+        "terminal": "CVB / CN1 photo label",
+        "physical": true,
+        "photo_pin": {
+          "photo_header": "CN1",
+          "label": "CVB",
+          "row": 4,
+          "column": "inner",
+          "x": 10.16,
+          "z": -11.46
+        },
+        "verification": "Photo-labeled physical terminal; module qualification required",
+        "board_pin": {
+          "photo_header": "CN1",
+          "label": "CVB",
+          "row": 4,
+          "column": "inner",
+          "x": 10.16,
+          "z": -11.46,
+          "y": 1.6,
+          "source": "User module photographs; coordinates approximate"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "c32",
+        "hole": "c32",
+        "physical": true
+      },
+      "stage": 3,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+    },
+    {
+      "id": "wire-130",
+      "net": "AIN0P",
+      "a": {
+        "module": "BB1",
+        "terminal": "c28",
+        "hole": "c28",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "a33",
+        "hole": "a33",
+        "physical": true
+      },
+      "stage": 4,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-131",
+      "net": "AIN0P",
+      "a": {
+        "module": "adc",
+        "terminal": "V1 / CN2 photo label",
+        "physical": true,
+        "photo_pin": {
+          "photo_header": "CN2",
+          "label": "V1",
+          "x": -17.78,
+          "z": 14
+        },
+        "verification": "Photo-labeled physical terminal; module qualification required",
+        "board_pin": {
+          "photo_header": "CN2",
+          "label": "V1",
+          "x": -17.78,
+          "z": 14,
+          "y": 1.6,
+          "source": "User module photographs; coordinates approximate"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "b33",
+        "hole": "b33",
+        "physical": true
+      },
+      "stage": 4,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+    },
+    {
+      "id": "wire-132",
+      "net": "RAW0",
+      "a": {
+        "module": "BB1",
+        "terminal": "b2",
+        "hole": "b2",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "a34",
+        "hole": "a34",
+        "physical": true
+      },
+      "stage": 10,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-133",
+      "net": "RAW0",
+      "a": {
+        "module": "myo1",
+        "terminal": "RAW solder pad",
+        "physical": true,
+        "board_pin": {
+          "x": 12.2,
+          "y": 1.6,
+          "z": 4.8,
+          "source": "MyoWare advanced guide labeled pad; model position approximate, use silkscreen"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "b34",
+        "hole": "b34",
+        "physical": true
+      },
+      "stage": 10,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Use bare-sensor RAW, VIN and GND pads; no person attached during instrument tests."
+    },
+    {
+      "id": "wire-134",
+      "net": "RC0A",
+      "a": {
+        "module": "BB1",
+        "terminal": "d4",
+        "hole": "d4",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "a35",
+        "hole": "a35",
+        "physical": true
+      },
+      "stage": 4,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-135",
+      "net": "RC0A",
+      "a": {
+        "module": "clamp1",
+        "terminal": "CHIP_PAD_3 \u2192 JP2.3",
+        "physical": true,
+        "adapter_pin": {
+          "header": "JP2",
+          "pin": 3,
+          "x": -3.81,
+          "z": 2.54,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "Device on bottom Q1 only; Q2 and top U$1 empty"
+        },
+        "board_pin": {
+          "header": "JP2",
+          "pin": 3,
+          "x": -3.81,
+          "z": 2.54,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "Device on bottom Q1 only; Q2 and top U$1 empty",
+          "y": 1.6
+        },
+        "verification": "Manufacturer CAD map; inspect soldered assembly"
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "b35",
+        "hole": "b35",
+        "physical": true
+      },
+      "stage": 4,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Use the specified adapter pad-to-header mapping; check solder orientation and unpowered continuity."
+    },
+    {
+      "id": "wire-136",
+      "net": "AIN1P",
+      "a": {
+        "module": "BB2",
+        "terminal": "c28",
+        "hole": "c28",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "a36",
+        "hole": "a36",
+        "physical": true
+      },
+      "stage": 5,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-137",
+      "net": "AIN1P",
+      "a": {
+        "module": "adc",
+        "terminal": "V2 / CN2 photo label",
+        "physical": true,
+        "photo_pin": {
+          "photo_header": "CN2",
+          "label": "V2",
+          "x": -15.240000000000002,
+          "z": 14
+        },
+        "verification": "Photo-labeled physical terminal; module qualification required",
+        "board_pin": {
+          "photo_header": "CN2",
+          "label": "V2",
+          "x": -15.240000000000002,
+          "z": 14,
+          "y": 1.6,
+          "source": "User module photographs; coordinates approximate"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "b36",
+        "hole": "b36",
+        "physical": true
+      },
+      "stage": 5,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+    },
+    {
+      "id": "wire-138",
+      "net": "RAW1",
+      "a": {
+        "module": "BB2",
+        "terminal": "b2",
+        "hole": "b2",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "a37",
+        "hole": "a37",
+        "physical": true
+      },
+      "stage": 10,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-139",
+      "net": "RAW1",
+      "a": {
+        "module": "myo2",
+        "terminal": "RAW solder pad",
+        "physical": true,
+        "board_pin": {
+          "x": 12.2,
+          "y": 1.6,
+          "z": 4.8,
+          "source": "MyoWare advanced guide labeled pad; model position approximate, use silkscreen"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "b37",
+        "hole": "b37",
+        "physical": true
+      },
+      "stage": 10,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Use bare-sensor RAW, VIN and GND pads; no person attached during instrument tests."
+    },
+    {
+      "id": "wire-140",
+      "net": "RC1A",
+      "a": {
+        "module": "BB2",
+        "terminal": "d4",
+        "hole": "d4",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "a38",
+        "hole": "a38",
+        "physical": true
+      },
+      "stage": 5,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-141",
+      "net": "RC1A",
+      "a": {
+        "module": "clamp2",
+        "terminal": "CHIP_PAD_3 \u2192 JP2.3",
+        "physical": true,
+        "adapter_pin": {
+          "header": "JP2",
+          "pin": 3,
+          "x": -3.81,
+          "z": 2.54,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "Device on bottom Q1 only; Q2 and top U$1 empty"
+        },
+        "board_pin": {
+          "header": "JP2",
+          "pin": 3,
+          "x": -3.81,
+          "z": 2.54,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "Device on bottom Q1 only; Q2 and top U$1 empty",
+          "y": 1.6
+        },
+        "verification": "Manufacturer CAD map; inspect soldered assembly"
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "b38",
+        "hole": "b38",
+        "physical": true
+      },
+      "stage": 5,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Use the specified adapter pad-to-header mapping; check solder orientation and unpowered continuity."
+    },
+    {
+      "id": "wire-142",
+      "net": "AIN2P",
+      "a": {
+        "module": "BB3",
+        "terminal": "c28",
+        "hole": "c28",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "a39",
+        "hole": "a39",
+        "physical": true
+      },
+      "stage": 5,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-143",
+      "net": "AIN2P",
+      "a": {
+        "module": "adc",
+        "terminal": "V3 / CN2 photo label",
+        "physical": true,
+        "photo_pin": {
+          "photo_header": "CN2",
+          "label": "V3",
+          "x": -12.700000000000001,
+          "z": 14
+        },
+        "verification": "Photo-labeled physical terminal; module qualification required",
+        "board_pin": {
+          "photo_header": "CN2",
+          "label": "V3",
+          "x": -12.700000000000001,
+          "z": 14,
+          "y": 1.6,
+          "source": "User module photographs; coordinates approximate"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "b39",
+        "hole": "b39",
+        "physical": true
+      },
+      "stage": 5,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+    },
+    {
+      "id": "wire-144",
+      "net": "RAW2",
+      "a": {
+        "module": "BB3",
+        "terminal": "b2",
+        "hole": "b2",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "a40",
+        "hole": "a40",
+        "physical": true
+      },
+      "stage": 10,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-145",
+      "net": "RAW2",
+      "a": {
+        "module": "myo3",
+        "terminal": "RAW solder pad",
+        "physical": true,
+        "board_pin": {
+          "x": 12.2,
+          "y": 1.6,
+          "z": 4.8,
+          "source": "MyoWare advanced guide labeled pad; model position approximate, use silkscreen"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "b40",
+        "hole": "b40",
+        "physical": true
+      },
+      "stage": 10,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Use bare-sensor RAW, VIN and GND pads; no person attached during instrument tests."
+    },
+    {
+      "id": "wire-146",
+      "net": "RC2A",
+      "a": {
+        "module": "BB3",
+        "terminal": "d4",
+        "hole": "d4",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "a41",
+        "hole": "a41",
+        "physical": true
+      },
+      "stage": 5,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-147",
+      "net": "RC2A",
+      "a": {
+        "module": "clamp3",
+        "terminal": "CHIP_PAD_3 \u2192 JP2.3",
+        "physical": true,
+        "adapter_pin": {
+          "header": "JP2",
+          "pin": 3,
+          "x": -3.81,
+          "z": 2.54,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "Device on bottom Q1 only; Q2 and top U$1 empty"
+        },
+        "board_pin": {
+          "header": "JP2",
+          "pin": 3,
+          "x": -3.81,
+          "z": 2.54,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "Device on bottom Q1 only; Q2 and top U$1 empty",
+          "y": 1.6
+        },
+        "verification": "Manufacturer CAD map; inspect soldered assembly"
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "b41",
+        "hole": "b41",
+        "physical": true
+      },
+      "stage": 5,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Use the specified adapter pad-to-header mapping; check solder orientation and unpowered continuity."
+    },
+    {
+      "id": "wire-148",
+      "net": "AIN3P",
+      "a": {
+        "module": "BB4",
+        "terminal": "c28",
+        "hole": "c28",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "a42",
+        "hole": "a42",
+        "physical": true
+      },
+      "stage": 5,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-149",
+      "net": "AIN3P",
+      "a": {
+        "module": "adc",
+        "terminal": "V4 / CN2 photo label",
+        "physical": true,
+        "photo_pin": {
+          "photo_header": "CN2",
+          "label": "V4",
+          "x": -10.16,
+          "z": 14
+        },
+        "verification": "Photo-labeled physical terminal; module qualification required",
+        "board_pin": {
+          "photo_header": "CN2",
+          "label": "V4",
+          "x": -10.16,
+          "z": 14,
+          "y": 1.6,
+          "source": "User module photographs; coordinates approximate"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "b42",
+        "hole": "b42",
+        "physical": true
+      },
+      "stage": 5,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+    },
+    {
+      "id": "wire-150",
+      "net": "RAW3",
+      "a": {
+        "module": "BB4",
+        "terminal": "b2",
+        "hole": "b2",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "a43",
+        "hole": "a43",
+        "physical": true
+      },
+      "stage": 10,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-151",
+      "net": "RAW3",
+      "a": {
+        "module": "myo4",
+        "terminal": "RAW solder pad",
+        "physical": true,
+        "board_pin": {
+          "x": 12.2,
+          "y": 1.6,
+          "z": 4.8,
+          "source": "MyoWare advanced guide labeled pad; model position approximate, use silkscreen"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "b43",
+        "hole": "b43",
+        "physical": true
+      },
+      "stage": 10,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Use bare-sensor RAW, VIN and GND pads; no person attached during instrument tests."
+    },
+    {
+      "id": "wire-152",
+      "net": "RC3A",
+      "a": {
+        "module": "BB4",
+        "terminal": "d4",
+        "hole": "d4",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "a44",
+        "hole": "a44",
+        "physical": true
+      },
+      "stage": 5,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-153",
+      "net": "RC3A",
+      "a": {
+        "module": "clamp4",
+        "terminal": "CHIP_PAD_3 \u2192 JP2.3",
+        "physical": true,
+        "adapter_pin": {
+          "header": "JP2",
+          "pin": 3,
+          "x": -3.81,
+          "z": 2.54,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "Device on bottom Q1 only; Q2 and top U$1 empty"
+        },
+        "board_pin": {
+          "header": "JP2",
+          "pin": 3,
+          "x": -3.81,
+          "z": 2.54,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "Device on bottom Q1 only; Q2 and top U$1 empty",
+          "y": 1.6
+        },
+        "verification": "Manufacturer CAD map; inspect soldered assembly"
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "b44",
+        "hole": "b44",
+        "physical": true
+      },
+      "stage": 5,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Use the specified adapter pad-to-header mapping; check solder orientation and unpowered continuity."
+    },
+    {
+      "id": "wire-154",
+      "net": "IMU_SDA",
+      "a": {
+        "module": "AUX1",
+        "terminal": "g15",
+        "hole": "g15",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "a45",
+        "hole": "a45",
+        "physical": true
+      },
+      "stage": 6,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-155",
+      "net": "IMU_SDA",
+      "a": {
+        "module": "esp",
+        "terminal": "J1.4 / GPIO4",
+        "physical": true,
+        "header": "J1",
+        "pin": 4
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "b45",
+        "hole": "b45",
+        "physical": true
+      },
+      "stage": 6,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-156",
+      "net": "IMU_SDA",
+      "a": {
+        "module": "foot",
+        "terminal": "SDA / photo position 5",
+        "physical": true,
+        "photo_pin": {
+          "photo_header": "GY-521",
+          "label": "SDA",
+          "position_from_left": 5,
+          "x": 1.2699999999999996,
+          "z": -8
+        },
+        "verification": "Photo-labeled physical terminal; module qualification required",
+        "board_pin": {
+          "photo_header": "GY-521",
+          "label": "SDA",
+          "position_from_left": 5,
+          "x": 1.2699999999999996,
+          "z": -8,
+          "y": 1.6,
+          "source": "User module photographs; coordinates approximate"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "c45",
+        "hole": "c45",
+        "physical": true
+      },
+      "stage": 6,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Complete IMU supply, interface and configuration checks before connecting."
+    },
+    {
+      "id": "wire-157",
+      "net": "IMU_SDA",
+      "a": {
+        "module": "shank",
+        "terminal": "SDA / photo position 5",
+        "physical": true,
+        "photo_pin": {
+          "photo_header": "GY-521",
+          "label": "SDA",
+          "position_from_left": 5,
+          "x": 1.2699999999999996,
+          "z": -8
+        },
+        "verification": "Photo-labeled physical terminal; module qualification required",
+        "board_pin": {
+          "photo_header": "GY-521",
+          "label": "SDA",
+          "position_from_left": 5,
+          "x": 1.2699999999999996,
+          "z": -8,
+          "y": 1.6,
+          "source": "User module photographs; coordinates approximate"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "d45",
+        "hole": "d45",
+        "physical": true
+      },
+      "stage": 6,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Complete IMU supply, interface and configuration checks before connecting."
+    },
+    {
+      "id": "wire-158",
+      "net": "IMU_SCL",
+      "a": {
+        "module": "AUX1",
+        "terminal": "g19",
+        "hole": "g19",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "a46",
+        "hole": "a46",
+        "physical": true
+      },
+      "stage": 6,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-159",
+      "net": "IMU_SCL",
+      "a": {
+        "module": "esp",
+        "terminal": "J1.6 / GPIO6",
+        "physical": true,
+        "header": "J1",
+        "pin": 6
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "b46",
+        "hole": "b46",
+        "physical": true
+      },
+      "stage": 6,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-160",
+      "net": "IMU_SCL",
+      "a": {
+        "module": "foot",
+        "terminal": "SCL / photo position 6",
+        "physical": true,
+        "photo_pin": {
+          "photo_header": "GY-521",
+          "label": "SCL",
+          "position_from_left": 6,
+          "x": 3.8099999999999987,
+          "z": -8
+        },
+        "verification": "Photo-labeled physical terminal; module qualification required",
+        "board_pin": {
+          "photo_header": "GY-521",
+          "label": "SCL",
+          "position_from_left": 6,
+          "x": 3.8099999999999987,
+          "z": -8,
+          "y": 1.6,
+          "source": "User module photographs; coordinates approximate"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "c46",
+        "hole": "c46",
+        "physical": true
+      },
+      "stage": 6,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Complete IMU supply, interface and configuration checks before connecting."
+    },
+    {
+      "id": "wire-161",
+      "net": "IMU_SCL",
+      "a": {
+        "module": "shank",
+        "terminal": "SCL / photo position 6",
+        "physical": true,
+        "photo_pin": {
+          "photo_header": "GY-521",
+          "label": "SCL",
+          "position_from_left": 6,
+          "x": 3.8099999999999987,
+          "z": -8
+        },
+        "verification": "Photo-labeled physical terminal; module qualification required",
+        "board_pin": {
+          "photo_header": "GY-521",
+          "label": "SCL",
+          "position_from_left": 6,
+          "x": 3.8099999999999987,
+          "z": -8,
+          "y": 1.6,
+          "source": "User module photographs; coordinates approximate"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "d46",
+        "hole": "d46",
+        "physical": true
+      },
+      "stage": 6,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Complete IMU supply, interface and configuration checks before connecting."
+    },
+    {
+      "id": "wire-162",
+      "net": "FOOT_AD0",
+      "a": {
+        "module": "AUX1",
+        "terminal": "g7",
+        "hole": "g7",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "a47",
+        "hole": "a47",
+        "physical": true
+      },
+      "stage": 6,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-163",
+      "net": "FOOT_AD0",
+      "a": {
+        "module": "esp",
+        "terminal": "J1.7 / GPIO7",
+        "physical": true,
+        "header": "J1",
+        "pin": 7
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "b47",
+        "hole": "b47",
+        "physical": true
+      },
+      "stage": 6,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-164",
+      "net": "FOOT_AD0",
+      "a": {
+        "module": "foot",
+        "terminal": "AD0 / photo position 2",
+        "physical": true,
+        "photo_pin": {
+          "photo_header": "GY-521",
+          "label": "AD0",
+          "position_from_left": 2,
+          "x": -6.3500000000000005,
+          "z": -8
+        },
+        "verification": "Photo-labeled physical terminal; module qualification required",
+        "board_pin": {
+          "photo_header": "GY-521",
+          "label": "AD0",
+          "position_from_left": 2,
+          "x": -6.3500000000000005,
+          "z": -8,
+          "y": 1.6,
+          "source": "User module photographs; coordinates approximate"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "c47",
+        "hole": "c47",
+        "physical": true
+      },
+      "stage": 6,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Complete IMU supply, interface and configuration checks before connecting."
+    },
+    {
+      "id": "wire-165",
+      "net": "FOOT_INT",
+      "a": {
+        "module": "esp",
+        "terminal": "J1.9 / GPIO16",
+        "physical": true,
+        "header": "J1",
+        "pin": 9
+      },
+      "b": {
+        "module": "foot",
+        "terminal": "INT / photo position 1",
+        "physical": true,
+        "photo_pin": {
+          "photo_header": "GY-521",
+          "label": "INT",
+          "position_from_left": 1,
+          "x": -8.89,
+          "z": -8
+        },
+        "verification": "Photo-labeled physical terminal; module qualification required",
+        "board_pin": {
+          "photo_header": "GY-521",
+          "label": "INT",
+          "position_from_left": 1,
+          "x": -8.89,
+          "z": -8,
+          "y": 1.6,
+          "source": "User module photographs; coordinates approximate"
+        }
+      },
+      "stage": 6,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Complete IMU supply, interface and configuration checks before connecting."
+    },
+    {
+      "id": "wire-166",
+      "net": "SHANK_AD0",
+      "a": {
+        "module": "AUX1",
+        "terminal": "g11",
+        "hole": "g11",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "a48",
+        "hole": "a48",
+        "physical": true
+      },
+      "stage": 6,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-167",
+      "net": "SHANK_AD0",
+      "a": {
+        "module": "esp",
+        "terminal": "J1.8 / GPIO15",
+        "physical": true,
+        "header": "J1",
+        "pin": 8
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "b48",
+        "hole": "b48",
+        "physical": true
+      },
+      "stage": 6,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-168",
+      "net": "SHANK_AD0",
+      "a": {
+        "module": "shank",
+        "terminal": "AD0 / photo position 2",
+        "physical": true,
+        "photo_pin": {
+          "photo_header": "GY-521",
+          "label": "AD0",
+          "position_from_left": 2,
+          "x": -6.3500000000000005,
+          "z": -8
+        },
+        "verification": "Photo-labeled physical terminal; module qualification required",
+        "board_pin": {
+          "photo_header": "GY-521",
+          "label": "AD0",
+          "position_from_left": 2,
+          "x": -6.3500000000000005,
+          "z": -8,
+          "y": 1.6,
+          "source": "User module photographs; coordinates approximate"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "c48",
+        "hole": "c48",
+        "physical": true
+      },
+      "stage": 6,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Complete IMU supply, interface and configuration checks before connecting."
+    },
+    {
+      "id": "wire-169",
+      "net": "SHANK_INT",
+      "a": {
+        "module": "esp",
+        "terminal": "J1.10 / GPIO17",
+        "physical": true,
+        "header": "J1",
+        "pin": 10
+      },
+      "b": {
+        "module": "shank",
+        "terminal": "INT / photo position 1",
+        "physical": true,
+        "photo_pin": {
+          "photo_header": "GY-521",
+          "label": "INT",
+          "position_from_left": 1,
+          "x": -8.89,
+          "z": -8
+        },
+        "verification": "Photo-labeled physical terminal; module qualification required",
+        "board_pin": {
+          "photo_header": "GY-521",
+          "label": "INT",
+          "position_from_left": 1,
+          "x": -8.89,
+          "z": -8,
+          "y": 1.6,
+          "source": "User module photographs; coordinates approximate"
+        }
+      },
+      "stage": 6,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Complete IMU supply, interface and configuration checks before connecting."
+    },
+    {
+      "id": "wire-170",
+      "net": "BUTTON",
+      "a": {
+        "module": "AUX1",
+        "terminal": "g23",
+        "hole": "g23",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "a49",
+        "hole": "a49",
+        "physical": true
+      },
+      "stage": 2,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-171",
+      "net": "BUTTON",
+      "a": {
+        "module": "esp",
+        "terminal": "J1.11 / GPIO18",
+        "physical": true,
+        "header": "J1",
+        "pin": 11
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "b49",
+        "hole": "b49",
+        "physical": true
+      },
+      "stage": 2,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-172",
+      "net": "BUTTON",
+      "a": {
+        "module": "button",
+        "terminal": "NO contact 1",
+        "physical": true,
+        "board_pin": {
+          "x": -3,
+          "y": 1.6,
+          "z": 0,
+          "source": "Two-terminal normally-open momentary switch; continuity check before wiring"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "c49",
+        "hole": "c49",
+        "physical": true
+      },
+      "stage": 2,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-173",
+      "net": "LED_REC",
+      "a": {
+        "module": "AUX1",
+        "terminal": "a27",
+        "hole": "a27",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "a50",
+        "hole": "a50",
+        "physical": true
+      },
+      "stage": 2,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-174",
+      "net": "LED_REC",
+      "a": {
+        "module": "esp",
+        "terminal": "J3.7 / GPIO41",
+        "physical": true,
+        "header": "J3",
+        "pin": 7
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "b50",
+        "hole": "b50",
+        "physical": true
+      },
+      "stage": 2,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-175",
+      "net": "LED_REC_A",
+      "a": {
+        "module": "AUX1",
+        "terminal": "g27",
+        "hole": "g27",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "a51",
+        "hole": "a51",
+        "physical": true
+      },
+      "stage": 2,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-176",
+      "net": "LED_REC_A",
+      "a": {
+        "module": "AUX1",
+        "terminal": "a31",
+        "hole": "a31",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "b51",
+        "hole": "b51",
+        "physical": true
+      },
+      "stage": 2,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-177",
+      "net": "LED_ERR",
+      "a": {
+        "module": "AUX1",
+        "terminal": "a35",
+        "hole": "a35",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "a52",
+        "hole": "a52",
+        "physical": true
+      },
+      "stage": 2,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-178",
+      "net": "LED_ERR",
+      "a": {
+        "module": "esp",
+        "terminal": "J3.6 / GPIO42",
+        "physical": true,
+        "header": "J3",
+        "pin": 6
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "b52",
+        "hole": "b52",
+        "physical": true
+      },
+      "stage": 2,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-179",
+      "net": "LED_ERR_A",
+      "a": {
+        "module": "AUX1",
+        "terminal": "g35",
+        "hole": "g35",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "a53",
+        "hole": "a53",
+        "physical": true
+      },
+      "stage": 2,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-180",
+      "net": "LED_ERR_A",
+      "a": {
+        "module": "AUX1",
+        "terminal": "a39",
+        "hole": "a39",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "b53",
+        "hole": "b53",
+        "physical": true
+      },
+      "stage": 2,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-181",
+      "net": "LED_LOW",
+      "a": {
+        "module": "AUX1",
+        "terminal": "a43",
+        "hole": "a43",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "a54",
+        "hole": "a54",
+        "physical": true
+      },
+      "stage": 2,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-182",
+      "net": "LED_LOW",
+      "a": {
+        "module": "esp",
+        "terminal": "J3.5 / GPIO2",
+        "physical": true,
+        "header": "J3",
+        "pin": 5
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "b54",
+        "hole": "b54",
+        "physical": true
+      },
+      "stage": 2,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-183",
+      "net": "LED_LOW_A",
+      "a": {
+        "module": "AUX1",
+        "terminal": "g43",
+        "hole": "g43",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "a55",
+        "hole": "a55",
+        "physical": true
+      },
+      "stage": 2,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-184",
+      "net": "LED_LOW_A",
+      "a": {
+        "module": "AUX1",
+        "terminal": "a47",
+        "hole": "a47",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "b55",
+        "hole": "b55",
+        "physical": true
+      },
+      "stage": 2,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-185",
+      "net": "BAT_SENSE",
+      "a": {
+        "module": "AUX1",
+        "terminal": "g51",
+        "hole": "g51",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "a56",
+        "hole": "a56",
+        "physical": true
+      },
+      "stage": 2,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-186",
+      "net": "BAT_SENSE",
+      "a": {
+        "module": "AUX1",
+        "terminal": "a55",
+        "hole": "a55",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "b56",
+        "hole": "b56",
+        "physical": true
+      },
+      "stage": 2,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-187",
+      "net": "BAT_SENSE",
+      "a": {
+        "module": "AUX2",
+        "terminal": "a3",
+        "hole": "a3",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "c56",
+        "hole": "c56",
+        "physical": true
+      },
+      "stage": 2,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-188",
+      "net": "BAT_SENSE",
+      "a": {
+        "module": "esp",
+        "terminal": "J3.4 / GPIO1",
+        "physical": true,
+        "header": "J3",
+        "pin": 4
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "d56",
+        "hole": "d56",
+        "physical": true
+      },
+      "stage": 2,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-189",
+      "net": "USB_VBUS",
+      "a": {
+        "module": "AUX2",
+        "terminal": "a7",
+        "hole": "a7",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "a57",
+        "hole": "a57",
+        "physical": true
+      },
+      "stage": 2,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-190",
+      "net": "USB_VBUS",
+      "a": {
+        "module": "usb",
+        "terminal": "JP2.5 / VBUS",
+        "physical": true,
+        "board_pin": {
+          "x": 5.08,
+          "y": 1.6,
+          "z": 4.45,
+          "source": "Adafruit 1833 Eagle CAD"
+        }
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "b57",
+        "hole": "b57",
+        "physical": true
+      },
+      "stage": 2,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "External USB inlet only; both DevKit USB sockets empty. VBUS is sense-only, never connected to recorder 5 V."
+    },
+    {
+      "id": "wire-191",
+      "net": "USB_GATE",
+      "a": {
+        "module": "AUX2",
+        "terminal": "g7",
+        "hole": "g7",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "a58",
+        "hole": "a58",
+        "physical": true
+      },
+      "stage": 2,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-192",
+      "net": "USB_GATE",
+      "a": {
+        "module": "AUX2",
+        "terminal": "a11",
+        "hole": "a11",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "b58",
+        "hole": "b58",
+        "physical": true
+      },
+      "stage": 2,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-193",
+      "net": "USB_GATE",
+      "a": {
+        "module": "usb-q",
+        "terminal": "GATE pin1 \u2192 JP1.2",
+        "physical": true,
+        "adapter_pin": {
+          "header": "JP1",
+          "pin": 2,
+          "x": 3.81,
+          "z": 0.0,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "Device on bottom Q1 only; Q2 and top U$1 empty"
+        },
+        "board_pin": {
+          "header": "JP1",
+          "pin": 2,
+          "x": 3.81,
+          "z": 0.0,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "Device on bottom Q1 only; Q2 and top U$1 empty",
+          "y": 1.6
+        },
+        "verification": "Manufacturer CAD map; inspect soldered assembly"
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "c58",
+        "hole": "c58",
+        "physical": true
+      },
+      "stage": 2,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Use the specified adapter pad-to-header mapping; check solder orientation and unpowered continuity."
+    },
+    {
+      "id": "wire-194",
+      "net": "USB_PRESENT_N",
+      "a": {
+        "module": "AUX2",
+        "terminal": "g15",
+        "hole": "g15",
+        "physical": true
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "a59",
+        "hole": "a59",
+        "physical": true
+      },
+      "stage": 2,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-195",
+      "net": "USB_PRESENT_N",
+      "a": {
+        "module": "usb-q",
+        "terminal": "DRAIN pin3 \u2192 JP2.3",
+        "physical": true,
+        "adapter_pin": {
+          "header": "JP2",
+          "pin": 3,
+          "x": -3.81,
+          "z": 2.54,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "Device on bottom Q1 only; Q2 and top U$1 empty"
+        },
+        "board_pin": {
+          "header": "JP2",
+          "pin": 3,
+          "x": -3.81,
+          "z": 2.54,
+          "source": "Adafruit 1230 manufacturer Eagle netlist",
+          "assembly": "Device on bottom Q1 only; Q2 and top U$1 empty",
+          "y": 1.6
+        },
+        "verification": "Manufacturer CAD map; inspect soldered assembly"
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "b59",
+        "hole": "b59",
+        "physical": true
+      },
+      "stage": 2,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Use the specified adapter pad-to-header mapping; check solder orientation and unpowered continuity."
+    },
+    {
+      "id": "wire-196",
+      "net": "USB_PRESENT_N",
+      "a": {
+        "module": "esp",
+        "terminal": "J3.18 / GPIO21",
+        "physical": true,
+        "header": "J3",
+        "pin": 18
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "c59",
+        "hole": "c59",
+        "physical": true
+      },
+      "stage": 2,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-197",
+      "net": "USB_DM",
+      "a": {
+        "module": "usb",
+        "terminal": "JP2.4 / D-",
+        "physical": true,
+        "board_pin": {
+          "x": 2.54,
+          "y": 1.6,
+          "z": 4.45,
+          "source": "Adafruit Eagle CAD"
+        }
+      },
+      "b": {
+        "module": "usb-dm-r",
+        "terminal": "lead 1",
+        "physical": true,
+        "board_pin": {
+          "x": -3,
+          "y": 1.6,
+          "z": 0,
+          "source": "33 ohm axial resistor soldered inline"
+        }
+      },
+      "stage": 2,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "External USB inlet only; both DevKit USB sockets empty. VBUS is sense-only, never connected to recorder 5 V."
+    },
+    {
+      "id": "wire-198",
+      "net": "USB_DM_MCU",
+      "a": {
+        "module": "usb-dm-r",
+        "terminal": "lead 2",
+        "physical": true,
+        "board_pin": {
+          "x": 3,
+          "y": 1.6,
+          "z": 0,
+          "source": "33 ohm axial resistor soldered inline"
+        }
+      },
+      "b": {
+        "module": "esp",
+        "terminal": "J3.20 / GPIO19",
+        "physical": true,
+        "header": "J3",
+        "pin": 20
+      },
+      "stage": 2,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "External USB inlet only; both DevKit USB sockets empty. VBUS is sense-only, never connected to recorder 5 V."
+    },
+    {
+      "id": "wire-199",
+      "net": "USB_DP",
+      "a": {
+        "module": "usb",
+        "terminal": "JP2.3 / D+",
+        "physical": true,
+        "board_pin": {
+          "x": 0.0,
+          "y": 1.6,
+          "z": 4.45,
+          "source": "Adafruit Eagle CAD"
+        }
+      },
+      "b": {
+        "module": "usb-dp-r",
+        "terminal": "lead 1",
+        "physical": true,
+        "board_pin": {
+          "x": -3,
+          "y": 1.6,
+          "z": 0,
+          "source": "33 ohm axial resistor soldered inline"
+        }
+      },
+      "stage": 2,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "External USB inlet only; both DevKit USB sockets empty. VBUS is sense-only, never connected to recorder 5 V."
+    },
+    {
+      "id": "wire-200",
+      "net": "USB_DP_MCU",
+      "a": {
+        "module": "usb-dp-r",
+        "terminal": "lead 2",
+        "physical": true,
+        "board_pin": {
+          "x": 3,
+          "y": 1.6,
+          "z": 0,
+          "source": "33 ohm axial resistor soldered inline"
+        }
+      },
+      "b": {
+        "module": "esp",
+        "terminal": "J3.19 / GPIO20",
+        "physical": true,
+        "header": "J3",
+        "pin": 19
+      },
+      "stage": 2,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "External USB inlet only; both DevKit USB sockets empty. VBUS is sense-only, never connected to recorder 5 V."
+    },
+    {
+      "id": "wire-201",
+      "net": "SD_CMD",
+      "a": {
+        "module": "esp",
+        "terminal": "J3.17 / GPIO47",
+        "physical": true,
+        "header": "J3",
+        "pin": 17
+      },
+      "b": {
+        "module": "sd",
+        "terminal": "JP1.5",
+        "physical": true,
+        "sd_pin": 5
+      },
+      "stage": 7,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-202",
+      "net": "SD_CLK",
+      "a": {
+        "module": "esp",
+        "terminal": "J3.9 / GPIO39",
+        "physical": true,
+        "header": "J3",
+        "pin": 9
+      },
+      "b": {
+        "module": "sd",
+        "terminal": "JP1.3",
+        "physical": true,
+        "sd_pin": 3
+      },
+      "stage": 7,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-203",
+      "net": "SD_D0",
+      "a": {
+        "module": "esp",
+        "terminal": "J3.8 / GPIO40",
+        "physical": true,
+        "header": "J3",
+        "pin": 8
+      },
+      "b": {
+        "module": "sd",
+        "terminal": "JP1.4",
+        "physical": true,
+        "sd_pin": 4
+      },
+      "stage": 7,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+    },
+    {
+      "id": "wire-204",
+      "net": "3V3D",
+      "a": {
+        "module": "cap-2",
+        "terminal": "lead 1",
+        "physical": true,
+        "board_pin": {
+          "x": -2,
+          "y": 1.6,
+          "z": 0,
+          "source": "1 uF X7R local bypass, soldered to regulator adapter; see adapter detail"
+        }
+      },
+      "b": {
+        "module": "ldo",
+        "terminal": "U$1.1 solder pad",
+        "physical": true,
+        "board_pin": {
+          "x": -1.3,
+          "y": 1.6,
+          "z": -0.442,
+          "source": "Adafruit Eagle footprint placement; short local capacitor leads"
+        }
+      },
+      "stage": 1,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Local soldered LDO bypass, short insulated leads; not a remote breadboard capacitor.",
+      "local_solder": true
+    },
+    {
+      "id": "wire-205",
+      "net": "GND",
+      "a": {
+        "module": "cap-2",
+        "terminal": "lead 2",
+        "physical": true,
+        "board_pin": {
+          "x": 2,
+          "y": 1.6,
+          "z": 0,
+          "source": "1 uF X7R local bypass, soldered to regulator adapter; see adapter detail"
+        }
+      },
+      "b": {
+        "module": "ldo",
+        "terminal": "U$1.2 solder pad",
+        "physical": true,
+        "board_pin": {
+          "x": -1.3,
+          "y": 1.6,
+          "z": 0.508,
+          "source": "Adafruit Eagle footprint placement; short local capacitor leads"
+        }
+      },
+      "stage": 1,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Local soldered LDO bypass, short insulated leads; not a remote breadboard capacitor.",
+      "local_solder": true
+    },
+    {
+      "id": "wire-206",
+      "net": "3V0A",
+      "a": {
+        "module": "cap-3",
+        "terminal": "lead 1",
+        "physical": true,
+        "board_pin": {
+          "x": -2,
+          "y": 1.6,
+          "z": 0,
+          "source": "1 uF X7R local bypass, soldered to regulator adapter; see adapter detail"
+        }
+      },
+      "b": {
+        "module": "ldo",
+        "terminal": "U$1.6 solder pad",
+        "physical": true,
+        "board_pin": {
+          "x": 1.3,
+          "y": 1.6,
+          "z": -0.442,
+          "source": "Adafruit Eagle footprint placement; short local capacitor leads"
+        }
+      },
+      "stage": 1,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Local soldered LDO bypass, short insulated leads; not a remote breadboard capacitor.",
+      "local_solder": true
+    },
+    {
+      "id": "wire-207",
+      "net": "GND",
+      "a": {
+        "module": "cap-3",
+        "terminal": "lead 2",
+        "physical": true,
+        "board_pin": {
+          "x": 2,
+          "y": 1.6,
+          "z": 0,
+          "source": "1 uF X7R local bypass, soldered to regulator adapter; see adapter detail"
+        }
+      },
+      "b": {
+        "module": "ldo",
+        "terminal": "U$1.2 solder pad",
+        "physical": true,
+        "board_pin": {
+          "x": -1.3,
+          "y": 1.6,
+          "z": 0.508,
+          "source": "Adafruit Eagle footprint placement; short local capacitor leads"
+        }
+      },
+      "stage": 1,
+      "status": "Terminal identities specified; received-hardware checks required",
+      "note": "Local soldered LDO bypass, short insulated leads; not a remote breadboard capacitor.",
+      "local_solder": true
+    },
+    {
+      "id": "wire-208",
+      "net": "GND",
+      "a": {
+        "module": "sd",
+        "terminal": "JP1.2 / GND",
+        "physical": true,
+        "sd_pin": 2
+      },
+      "b": {
+        "module": "DIST1",
+        "terminal": "d20",
+        "hole": "d20",
+        "physical": true
+      },
+      "stage": 7,
+      "status": "Manufacturer Eagle CAD terminal mapping",
+      "note": "microSD return lead; verified JP1 pad 2 belongs to GND in Adafruit SDIO microSD board CAD. Install with power off."
+    }
+  ],
+  "notes": [
+    "Named terminal panels are electrical connections, NOT inferred module header coordinates.",
+    "Bench power converters differ from compact PCB converters. This harness does not establish power-stage equivalence.",
+    "USB and external DevKit power are mutually exclusive; USB sense must monitor actual cable-side VBUS, not the powered 5V header."
+  ],
+  "coverage": {
+    "external_breadboard_leads_unmapped": [],
+    "system_connections": 208,
+    "physically_released": false
+  },
+  "adapter_header_mapping": "CAD-derived; assembled carriers not measured"
+}

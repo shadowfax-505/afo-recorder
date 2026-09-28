@@ -1,0 +1,7 @@
+{
+  "reg5.step": "https://www.pololu.com/file/0J1808/5v-step-up-step-down-voltage-regulator-s13v30f5.step",
+  "reg3.step": "https://www.pololu.com/file/0J1960/step-up-step-down-voltage-regulator-s13v25fx.step",
+  "sd.step": "https://raw.githubusercontent.com/adafruit/Adafruit_CAD_Parts/main/4682%20Micro%20SD%20Breakout/4682%20Micro%20SD%20Breakout.step",
+  "sd.brd": "https://raw.githubusercontent.com/adafruit/Adafruit-MicroSD-SPI-or-SDIO-card-breakout-PCB/master/Adafruit%20SDIO%20microSD.brd",
+  "adapter.brd": "https://raw.githubusercontent.com/adafruit/Adafruit-SMT-Breakout-PCBs/master/6-pin%20SOT-23.brd"
+}

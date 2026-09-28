@@ -1,0 +1,18 @@
+{
+  "adc": "afo-ad7606",
+  "active_channels": 4,
+  "diagnostic_stage": 3,
+  "imu_count": 1,
+  "hardware": "pcb",
+  "hardware_tested": false,
+  "offsets": {
+    "bootloader.bin": "0x0",
+    "partition-table.bin": "0x8000",
+    "application.bin": "0x10000"
+  },
+  "sha256": {
+    "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+    "application.bin": "b57dfc1bfcc5e3b1679a2d6201c776ac0184ab9e8c353bce28969f0e071b0050",
+    "bootloader.bin": "6005988fb7009c0b46d13345d224706631984d1dc5793aee3b85fa90f8a2aa29"
+  }
+}

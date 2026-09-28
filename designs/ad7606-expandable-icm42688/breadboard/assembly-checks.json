@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "boards": 5,
+  "occupied_holes_checked": 249,
+  "checks": [
+    "unique lead hole occupancy",
+    "no different nets sharing a five-hole strip",
+    "all same-named local nets connected through strips and jumpers",
+    "passive pin nets from circuit specification",
+    "DIP-8 pin order and 7.62 mm row gap"
+  ],
+  "limits": [
+    "Does not establish physical external-module header pins",
+    "Component body geometry and jumper bends are illustrative",
+    "Does not validate all system power/controller/module circuits or physical performance"
+  ]
+}

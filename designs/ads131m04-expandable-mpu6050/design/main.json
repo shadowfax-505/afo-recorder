@@ -1,0 +1,2110 @@
+{
+  "board": "main",
+  "width_mm": 75,
+  "height_mm": 50,
+  "parts": [
+    {
+      "ref": "U1",
+      "value": "ESP32-S3-WROOM-1-N8R8",
+      "footprint": "RF_Module:ESP32-S3-WROOM-1",
+      "pins": {
+        "1": "GND",
+        "2": "3V3D",
+        "3": "EN",
+        "40": "GND",
+        "41": "GND",
+        "4": "IMU_SDA",
+        "5": "IMU_RESERVED",
+        "6": "IMU_SCL",
+        "7": "FOOT_AD0",
+        "8": "SHANK_AD0",
+        "9": "FOOT_INT",
+        "10": "SHANK_INT",
+        "11": "BUTTON",
+        "12": "ADC_DRDY",
+        "13": "USB_DM_MCU",
+        "14": "USB_DP_MCU",
+        "15": null,
+        "16": null,
+        "17": "ADC_RESET",
+        "18": "ADC_CS",
+        "19": "ADC_MOSI",
+        "20": "ADC_SCK",
+        "21": "ADC_MISO",
+        "22": null,
+        "23": "USB_PRESENT_N",
+        "24": "EXP_SDA",
+        "25": "EXP_SCL",
+        "26": null,
+        "27": "BOOT",
+        "28": null,
+        "29": null,
+        "30": null,
+        "31": "SD_CMD",
+        "32": "SD_CLK_MCU",
+        "33": "SD_D0",
+        "34": "LED_REC",
+        "35": "LED_ERR",
+        "36": "UART_RX",
+        "37": "UART_TX",
+        "38": "LED_LOW",
+        "39": "BAT_SENSE"
+      },
+      "x": 12,
+      "y": 13,
+      "rotation": 0,
+      "mpn": "ESP32-S3-WROOM-1-N8R8",
+      "section": "Digital",
+      "names": {
+        "4": "GPIO4",
+        "5": "GPIO5",
+        "6": "GPIO6",
+        "7": "GPIO7",
+        "8": "GPIO15",
+        "9": "GPIO16",
+        "10": "GPIO17",
+        "11": "GPIO18",
+        "12": "GPIO8",
+        "13": "GPIO19",
+        "14": "GPIO20",
+        "15": "GPIO3",
+        "16": "GPIO46",
+        "17": "GPIO9",
+        "18": "GPIO10",
+        "19": "GPIO11",
+        "20": "GPIO12",
+        "21": "GPIO13",
+        "22": "GPIO14",
+        "23": "GPIO21",
+        "24": "GPIO47",
+        "25": "GPIO48",
+        "26": "GPIO45",
+        "27": "GPIO0",
+        "28": "GPIO35",
+        "29": "GPIO36",
+        "30": "GPIO37",
+        "31": "GPIO38",
+        "32": "GPIO39",
+        "33": "GPIO40",
+        "34": "GPIO41",
+        "35": "GPIO42",
+        "36": "GPIO44",
+        "37": "GPIO43",
+        "38": "GPIO2",
+        "39": "GPIO1",
+        "1": "GND",
+        "2": "3V3",
+        "3": "EN",
+        "40": "GND",
+        "41": "EP_GND"
+      }
+    },
+    {
+      "ref": "C1",
+      "value": "100nF",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "pins": {
+        "1": "3V3D",
+        "2": "GND"
+      },
+      "x": 11.5,
+      "y": 39.75,
+      "rotation": 0,
+      "mpn": "GRM188R71C104KA01D",
+      "section": "Digital",
+      "names": {}
+    },
+    {
+      "ref": "C2",
+      "value": "10uF",
+      "footprint": "Capacitor_SMD:C_0805_2012Metric",
+      "pins": {
+        "1": "3V3D",
+        "2": "GND"
+      },
+      "x": 4.25,
+      "y": 28.0,
+      "rotation": 0,
+      "mpn": "GRM21BR61A106KE19L",
+      "section": "Digital",
+      "names": {}
+    },
+    {
+      "ref": "R1",
+      "value": "10k",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "pins": {
+        "1": "3V3D",
+        "2": "EN"
+      },
+      "x": 24.0,
+      "y": 12.0,
+      "rotation": 0,
+      "mpn": "RC0603FR-0710KL",
+      "section": "Digital",
+      "names": {}
+    },
+    {
+      "ref": "C3",
+      "value": "1uF",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "pins": {
+        "1": "EN",
+        "2": "GND"
+      },
+      "x": 27.25,
+      "y": 12.0,
+      "rotation": 0,
+      "mpn": "GRM188R61A105KA61D",
+      "section": "Digital",
+      "names": {}
+    },
+    {
+      "ref": "R2",
+      "value": "10k",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "pins": {
+        "1": "3V3D",
+        "2": "BOOT"
+      },
+      "x": 24.0,
+      "y": 27.0,
+      "rotation": 0,
+      "mpn": "RC0603FR-0710KL",
+      "section": "Digital",
+      "names": {}
+    },
+    {
+      "ref": "R3",
+      "value": "10k",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "pins": {
+        "1": "3V3D",
+        "2": "BUTTON"
+      },
+      "x": 31.75,
+      "y": 27.0,
+      "rotation": 0,
+      "mpn": "RC0603FR-0710KL",
+      "section": "Digital",
+      "names": {}
+    },
+    {
+      "ref": "SW2",
+      "value": "BOOT",
+      "footprint": "Button_Switch_SMD:SW_SPST_TL3342",
+      "pins": {
+        "1": "BOOT",
+        "2": "GND"
+      },
+      "x": 26.25,
+      "y": 16.0,
+      "rotation": 0,
+      "mpn": "TL3342F160QG",
+      "section": "Digital",
+      "names": {}
+    },
+    {
+      "ref": "SW3",
+      "value": "EN",
+      "footprint": "Button_Switch_SMD:SW_SPST_TL3342",
+      "pins": {
+        "1": "EN",
+        "2": "GND"
+      },
+      "x": 26.25,
+      "y": 23.0,
+      "rotation": 0,
+      "mpn": "TL3342F160QG",
+      "section": "Digital",
+      "names": {}
+    },
+    {
+      "ref": "SW4",
+      "value": "BUTTON",
+      "footprint": "Button_Switch_SMD:SW_SPST_TL3342",
+      "pins": {
+        "1": "BUTTON",
+        "2": "GND"
+      },
+      "x": 23.5,
+      "y": 45.0,
+      "rotation": 0,
+      "mpn": "TL3342F160QG",
+      "section": "Digital",
+      "names": {}
+    },
+    {
+      "ref": "J2",
+      "value": "microSD",
+      "footprint": "Connector_Card:microSD_HC_Hirose_DM3AT-SF-PEJM5",
+      "pins": {
+        "1": "SD_D2",
+        "2": "SD_D3",
+        "3": "SD_CMD",
+        "4": "3V3D",
+        "5": "SD_CLK",
+        "6": "GND",
+        "7": "SD_D0",
+        "8": "SD_D1",
+        "9": null,
+        "10": null,
+        "SH": "GND"
+      },
+      "x": 36.0,
+      "y": 40.0,
+      "rotation": 0,
+      "mpn": "DM3AT-SF-PEJM5",
+      "section": "Digital",
+      "names": {}
+    },
+    {
+      "ref": "R10",
+      "value": "10k",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "pins": {
+        "1": "3V3D",
+        "2": "SD_CMD"
+      },
+      "x": 34.25,
+      "y": 29.0,
+      "rotation": 90,
+      "mpn": "RC0603FR-0710KL",
+      "section": "Digital",
+      "names": {}
+    },
+    {
+      "ref": "R11",
+      "value": "10k",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "pins": {
+        "1": "3V3D",
+        "2": "SD_D0"
+      },
+      "x": 36.0,
+      "y": 29.0,
+      "rotation": 90,
+      "mpn": "RC0603FR-0710KL",
+      "section": "Digital",
+      "names": {}
+    },
+    {
+      "ref": "R12",
+      "value": "10k",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "pins": {
+        "1": "3V3D",
+        "2": "SD_D1"
+      },
+      "x": 37.75,
+      "y": 29.0,
+      "rotation": 90,
+      "mpn": "RC0603FR-0710KL",
+      "section": "Digital",
+      "names": {}
+    },
+    {
+      "ref": "R13",
+      "value": "10k",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "pins": {
+        "1": "3V3D",
+        "2": "SD_D2"
+      },
+      "x": 39.5,
+      "y": 29.0,
+      "rotation": 90,
+      "mpn": "RC0603FR-0710KL",
+      "section": "Digital",
+      "names": {}
+    },
+    {
+      "ref": "R14",
+      "value": "10k",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "pins": {
+        "1": "3V3D",
+        "2": "SD_D3"
+      },
+      "x": 41.75,
+      "y": 27.0,
+      "rotation": 90,
+      "mpn": "RC0603FR-0710KL",
+      "section": "Digital",
+      "names": {}
+    },
+    {
+      "ref": "R15",
+      "value": "33",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "pins": {
+        "1": "SD_CLK_MCU",
+        "2": "SD_CLK"
+      },
+      "x": 20.75,
+      "y": 28.5,
+      "rotation": 0,
+      "mpn": "RC0603FR-0733RL",
+      "section": "Digital",
+      "names": {}
+    },
+    {
+      "ref": "C10",
+      "value": "100nF",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "pins": {
+        "1": "3V3D",
+        "2": "GND"
+      },
+      "x": 39.0,
+      "y": 26.5,
+      "rotation": 0,
+      "mpn": "GRM188R71C104KA01D",
+      "section": "Digital",
+      "names": {}
+    },
+    {
+      "ref": "C11",
+      "value": "22uF",
+      "footprint": "Capacitor_SMD:C_0805_2012Metric",
+      "pins": {
+        "1": "3V3D",
+        "2": "GND"
+      },
+      "x": 43.0,
+      "y": 29.75,
+      "rotation": 0,
+      "mpn": "GRM21BR61A226ME44L",
+      "section": "Digital",
+      "names": {}
+    },
+    {
+      "ref": "J1",
+      "value": "USB-C (battery powered)",
+      "footprint": "Connector_USB:USB_C_Receptacle_GCT_USB4105-xx-A_16P_TopMnt_Horizontal",
+      "pins": {
+        "A1": "GND",
+        "A12": "GND",
+        "B1": "GND",
+        "B12": "GND",
+        "SH": "GND",
+        "A4": "USB_VBUS",
+        "A9": "USB_VBUS",
+        "B4": "USB_VBUS",
+        "B9": "USB_VBUS",
+        "A5": "USB_CC1",
+        "B5": "USB_CC2",
+        "A6": "USB_DP",
+        "B6": "USB_DP",
+        "A7": "USB_DM",
+        "B7": "USB_DM",
+        "A8": null,
+        "B8": null
+      },
+      "x": 6.0,
+      "y": 45.5,
+      "rotation": 0,
+      "mpn": "USB4105-GF-A",
+      "section": "Digital",
+      "names": {}
+    },
+    {
+      "ref": "R20",
+      "value": "5.1k",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "pins": {
+        "1": "USB_CC1",
+        "2": "GND"
+      },
+      "x": 8.25,
+      "y": 38.5,
+      "rotation": 0,
+      "mpn": "RC0603FR-075K1L",
+      "section": "Digital",
+      "names": {}
+    },
+    {
+      "ref": "R21",
+      "value": "5.1k",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "pins": {
+        "1": "USB_CC2",
+        "2": "GND"
+      },
+      "x": 13.25,
+      "y": 41.5,
+      "rotation": 0,
+      "mpn": "RC0603FR-075K1L",
+      "section": "Digital",
+      "names": {}
+    },
+    {
+      "ref": "R22",
+      "value": "33",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "pins": {
+        "1": "USB_DP",
+        "2": "USB_DP_MCU"
+      },
+      "x": 20.75,
+      "y": 41.0,
+      "rotation": 0,
+      "mpn": "RC0603FR-0733RL",
+      "section": "Digital",
+      "names": {}
+    },
+    {
+      "ref": "R23",
+      "value": "33",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "pins": {
+        "1": "USB_DM",
+        "2": "USB_DM_MCU"
+      },
+      "x": 14.75,
+      "y": 27.5,
+      "rotation": 0,
+      "mpn": "RC0603FR-0733RL",
+      "section": "Digital",
+      "names": {}
+    },
+    {
+      "ref": "R24",
+      "value": "100k",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "pins": {
+        "1": "USB_VBUS",
+        "2": "USB_GATE"
+      },
+      "x": 20.75,
+      "y": 39.25,
+      "rotation": 0,
+      "mpn": "RC0603FR-07100KL",
+      "section": "Digital",
+      "names": {}
+    },
+    {
+      "ref": "R25",
+      "value": "1M",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "pins": {
+        "1": "USB_GATE",
+        "2": "GND"
+      },
+      "x": 24.0,
+      "y": 39.25,
+      "rotation": 0,
+      "mpn": "RC0603FR-071ML",
+      "section": "Digital",
+      "names": {}
+    },
+    {
+      "ref": "R26",
+      "value": "10k",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "pins": {
+        "1": "3V3D",
+        "2": "USB_PRESENT_N"
+      },
+      "x": 24.0,
+      "y": 41.0,
+      "rotation": 0,
+      "mpn": "RC0603FR-0710KL",
+      "section": "Digital",
+      "names": {}
+    },
+    {
+      "ref": "Q2",
+      "value": "2N7002",
+      "footprint": "Package_TO_SOT_SMD:SOT-23",
+      "pins": {
+        "1": "USB_GATE",
+        "2": "GND",
+        "3": "USB_PRESENT_N"
+      },
+      "x": 17.0,
+      "y": 40.75,
+      "rotation": 0,
+      "mpn": "2N7002,215",
+      "section": "Digital",
+      "names": {}
+    },
+    {
+      "ref": "C12",
+      "value": "10nF",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "pins": {
+        "1": "USB_GATE",
+        "2": "GND"
+      },
+      "x": 31.75,
+      "y": 30.0,
+      "rotation": 0,
+      "mpn": "GRM188R71H103KA01D",
+      "section": "Digital",
+      "names": {}
+    },
+    {
+      "ref": "D1",
+      "value": "USB ESD",
+      "footprint": "Package_TO_SOT_SMD:SOT-23-6",
+      "pins": {
+        "1": "USB_DP",
+        "2": "GND",
+        "3": "USB_DM",
+        "4": null,
+        "5": "USB_VBUS",
+        "6": null
+      },
+      "x": 3.75,
+      "y": 38.75,
+      "rotation": 0,
+      "mpn": "USBLC6-2SC6",
+      "section": "Digital",
+      "names": {}
+    },
+    {
+      "ref": "J3",
+      "value": "FOOT MPU6050",
+      "footprint": "Connector_JST:JST_GH_BM08B-GHS-TBT_1x08-1MP_P1.25mm_Vertical",
+      "pins": {
+        "1": "3V3D",
+        "2": "GND",
+        "3": "IMU_SCL",
+        "4": "IMU_SDA",
+        "5": "IMU_RESERVED",
+        "6": "FOOT_AD0",
+        "7": "FOOT_INT",
+        "8": "GND"
+      },
+      "x": 44.0,
+      "y": 3.75,
+      "rotation": 0,
+      "mpn": "BM08B-GHS-TBT(LF)(SN)",
+      "section": "Digital",
+      "names": {}
+    },
+    {
+      "ref": "J4",
+      "value": "SHANK MPU6050",
+      "footprint": "Connector_JST:JST_GH_BM08B-GHS-TBT_1x08-1MP_P1.25mm_Vertical",
+      "pins": {
+        "1": "3V3D",
+        "2": "GND",
+        "3": "IMU_SCL",
+        "4": "IMU_SDA",
+        "5": "IMU_RESERVED",
+        "6": "SHANK_AD0",
+        "7": "SHANK_INT",
+        "8": "GND"
+      },
+      "x": 61.0,
+      "y": 3.75,
+      "rotation": 0,
+      "mpn": "BM08B-GHS-TBT(LF)(SN)",
+      "section": "Digital",
+      "names": {}
+    },
+    {
+      "ref": "R30",
+      "value": "10k",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "pins": {
+        "1": "3V3D",
+        "2": "FOOT_AD0"
+      },
+      "x": 28.0,
+      "y": 10.0,
+      "rotation": 0,
+      "mpn": "RC0603FR-0710KL",
+      "section": "Digital",
+      "names": {}
+    },
+    {
+      "ref": "R31",
+      "value": "10k",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "pins": {
+        "1": "3V3D",
+        "2": "SHANK_AD0"
+      },
+      "x": 31.25,
+      "y": 9.5,
+      "rotation": 0,
+      "mpn": "RC0603FR-0710KL",
+      "section": "Digital",
+      "names": {}
+    },
+    {
+      "ref": "U2",
+      "value": "ADS131M04IPWR",
+      "footprint": "Package_SO:TSSOP-20_4.4x6.5mm_P0.65mm",
+      "pins": {
+        "1": "3V0A",
+        "2": "GND",
+        "3": "AIN0P",
+        "4": "AIN0N",
+        "5": "AIN1N",
+        "6": "AIN1P",
+        "7": "AIN2P",
+        "8": "AIN2N",
+        "9": "AIN3N",
+        "10": "AIN3P",
+        "11": "ADC_RESET",
+        "12": "ADC_CS",
+        "13": "ADC_DRDY",
+        "14": "ADC_SCK",
+        "15": "ADC_MISO",
+        "16": "ADC_MOSI",
+        "17": "ADC_CLK",
+        "18": "ADC_CAP",
+        "19": "GND",
+        "20": "3V3D"
+      },
+      "x": 47.0,
+      "y": 24.0,
+      "rotation": 0,
+      "mpn": "ADS131M04IPWR",
+      "section": "ADC",
+      "names": {
+        "1": "AVDD",
+        "2": "AGND",
+        "3": "AIN0P",
+        "4": "AIN0N",
+        "5": "AIN1N",
+        "6": "AIN1P",
+        "7": "AIN2P",
+        "8": "AIN2N",
+        "9": "AIN3N",
+        "10": "AIN3P",
+        "11": "SYNC_RESET_N",
+        "12": "CS_N",
+        "13": "DRDY_N",
+        "14": "SCLK",
+        "15": "DOUT",
+        "16": "DIN",
+        "17": "CLKIN",
+        "18": "CAP",
+        "19": "DGND",
+        "20": "DVDD"
+      }
+    },
+    {
+      "ref": "C20",
+      "value": "1uF",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "pins": {
+        "1": "3V0A",
+        "2": "GND"
+      },
+      "x": 41.0,
+      "y": 18.5,
+      "rotation": 0,
+      "mpn": "GRM188R61A105KA61D",
+      "section": "ADC",
+      "names": {}
+    },
+    {
+      "ref": "C21",
+      "value": "1uF",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "pins": {
+        "1": "3V3D",
+        "2": "GND"
+      },
+      "x": 52.25,
+      "y": 18.0,
+      "rotation": 0,
+      "mpn": "GRM188R61A105KA61D",
+      "section": "ADC",
+      "names": {}
+    },
+    {
+      "ref": "C22",
+      "value": "220nF",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "pins": {
+        "1": "ADC_CAP",
+        "2": "GND"
+      },
+      "x": 53.0,
+      "y": 21.0,
+      "rotation": 0,
+      "mpn": "GRM188R71C224KA01D",
+      "section": "ADC",
+      "names": {}
+    },
+    {
+      "ref": "Y1",
+      "value": "8.192 MHz",
+      "footprint": "Oscillator:Oscillator_SMD_Abracon_ASE-4Pin_3.2x2.5mm",
+      "pins": {
+        "1": "3V3D",
+        "2": "GND",
+        "3": "OSC_OUT",
+        "4": "3V3D"
+      },
+      "x": 51.0,
+      "y": 12.0,
+      "rotation": 0,
+      "mpn": "ASE-8.192MHZ-LC-T",
+      "section": "ADC",
+      "names": {}
+    },
+    {
+      "ref": "R32",
+      "value": "33",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "pins": {
+        "1": "OSC_OUT",
+        "2": "ADC_CLK"
+      },
+      "x": 51.0,
+      "y": 15.0,
+      "rotation": 0,
+      "mpn": "RC0603FR-0733RL",
+      "section": "ADC",
+      "names": {}
+    },
+    {
+      "ref": "C23",
+      "value": "100nF",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "pins": {
+        "1": "3V3D",
+        "2": "GND"
+      },
+      "x": 55.0,
+      "y": 12.0,
+      "rotation": 0,
+      "mpn": "GRM188R71C104KA01D",
+      "section": "ADC",
+      "names": {}
+    },
+    {
+      "ref": "R33",
+      "value": "10k",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "pins": {
+        "1": "3V3D",
+        "2": "ADC_CS"
+      },
+      "x": 44.75,
+      "y": 13.0,
+      "rotation": 0,
+      "mpn": "RC0603FR-0710KL",
+      "section": "ADC",
+      "names": {}
+    },
+    {
+      "ref": "R34",
+      "value": "10k",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "pins": {
+        "1": "3V3D",
+        "2": "ADC_RESET"
+      },
+      "x": 40.0,
+      "y": 9.5,
+      "rotation": 0,
+      "mpn": "RC0603FR-0710KL",
+      "section": "ADC",
+      "names": {}
+    },
+    {
+      "ref": "R40",
+      "value": "10k",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "pins": {
+        "1": "3V0A",
+        "2": "VMID_DIV"
+      },
+      "x": 56.0,
+      "y": 43.0,
+      "rotation": 0,
+      "mpn": "RC0603FR-0710KL",
+      "section": "Analog",
+      "names": {}
+    },
+    {
+      "ref": "R41",
+      "value": "10k",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "pins": {
+        "1": "VMID_DIV",
+        "2": "GND"
+      },
+      "x": 56.0,
+      "y": 46.0,
+      "rotation": 0,
+      "mpn": "RC0603FR-0710KL",
+      "section": "Analog",
+      "names": {}
+    },
+    {
+      "ref": "C30",
+      "value": "1uF",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "pins": {
+        "1": "VMID_DIV",
+        "2": "GND"
+      },
+      "x": 60.0,
+      "y": 47.75,
+      "rotation": 0,
+      "mpn": "GRM188R61A105KA61D",
+      "section": "Analog",
+      "names": {}
+    },
+    {
+      "ref": "U5",
+      "value": "MCP6001T-I/OT",
+      "footprint": "Package_TO_SOT_SMD:SOT-23-5",
+      "pins": {
+        "1": "VMID_BUF",
+        "2": "GND",
+        "3": "VMID_DIV",
+        "4": "VMID_BUF",
+        "5": "3V0A"
+      },
+      "x": 60.0,
+      "y": 45.0,
+      "rotation": 0,
+      "mpn": "MCP6001T-I/OT",
+      "section": "Analog",
+      "names": {}
+    },
+    {
+      "ref": "R42",
+      "value": "100",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "pins": {
+        "1": "VMID_BUF",
+        "2": "VMID"
+      },
+      "x": 64.0,
+      "y": 44.0,
+      "rotation": 0,
+      "mpn": "RC0603FR-07100RL",
+      "section": "Analog",
+      "names": {}
+    },
+    {
+      "ref": "C31",
+      "value": "1uF",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "pins": {
+        "1": "VMID",
+        "2": "GND"
+      },
+      "x": 64.25,
+      "y": 45.75,
+      "rotation": 0,
+      "mpn": "GRM188R61A105KA61D",
+      "section": "Analog",
+      "names": {}
+    },
+    {
+      "ref": "C32",
+      "value": "100nF",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "pins": {
+        "1": "3V0A",
+        "2": "GND"
+      },
+      "x": 60.0,
+      "y": 37.0,
+      "rotation": 0,
+      "mpn": "GRM188R71C104KA01D",
+      "section": "Analog",
+      "names": {}
+    },
+    {
+      "ref": "U3",
+      "value": "MCP6004T-I/ST",
+      "footprint": "Package_SO:TSSOP-14_4.4x5mm_P0.65mm",
+      "pins": {
+        "4": "3V0A",
+        "11": "GND",
+        "3": "RC0A",
+        "2": "BUF0A",
+        "1": "BUF0A",
+        "5": "RC1A",
+        "6": "BUF1A",
+        "7": "BUF1A",
+        "10": "RC2A",
+        "9": "BUF2A",
+        "8": "BUF2A",
+        "12": "RC3A",
+        "13": "BUF3A",
+        "14": "BUF3A"
+      },
+      "x": 58.0,
+      "y": 16.0,
+      "rotation": 0,
+      "mpn": "MCP6004T-I/ST",
+      "section": "Analog",
+      "names": {}
+    },
+    {
+      "ref": "U4",
+      "value": "MCP6004T-I/ST",
+      "footprint": "Package_SO:TSSOP-14_4.4x5mm_P0.65mm",
+      "pins": {
+        "4": "3V0A",
+        "11": "GND",
+        "3": "RC0B",
+        "2": "BUF0B",
+        "1": "BUF0B",
+        "5": "RC1B",
+        "6": "BUF1B",
+        "7": "BUF1B",
+        "10": "RC2B",
+        "9": "BUF2B",
+        "8": "BUF2B",
+        "12": "RC3B",
+        "13": "BUF3B",
+        "14": "BUF3B"
+      },
+      "x": 58.0,
+      "y": 33.0,
+      "rotation": 0,
+      "mpn": "MCP6004T-I/ST",
+      "section": "Analog",
+      "names": {}
+    },
+    {
+      "ref": "C33",
+      "value": "100nF",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "pins": {
+        "1": "3V0A",
+        "2": "GND"
+      },
+      "x": 56.25,
+      "y": 19.75,
+      "rotation": 0,
+      "mpn": "GRM188R71C104KA01D",
+      "section": "Analog",
+      "names": {}
+    },
+    {
+      "ref": "C34",
+      "value": "100nF",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "pins": {
+        "1": "3V0A",
+        "2": "GND"
+      },
+      "x": 52.25,
+      "y": 32.0,
+      "rotation": 0,
+      "mpn": "GRM188R71C104KA01D",
+      "section": "Analog",
+      "names": {}
+    },
+    {
+      "ref": "J5",
+      "value": "EMG1",
+      "footprint": "Connector_JST:JST_GH_BM03B-GHS-TBT_1x03-1MP_P1.25mm_Vertical",
+      "pins": {
+        "1": "3V0A",
+        "2": "GND",
+        "3": "RAW0"
+      },
+      "x": 70.25,
+      "y": 13.0,
+      "rotation": 0,
+      "mpn": "BM03B-GHS-TBT(LF)(SN)",
+      "section": "Analog",
+      "names": {}
+    },
+    {
+      "ref": "R100",
+      "value": "3.3k",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "pins": {
+        "1": "RAW0",
+        "2": "RC0A"
+      },
+      "x": 69.25,
+      "y": 7.75,
+      "rotation": 90,
+      "mpn": "RC0603FR-073K3L",
+      "section": "Analog",
+      "names": {}
+    },
+    {
+      "ref": "R101",
+      "value": "1M",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "pins": {
+        "1": "RAW0",
+        "2": "VMID"
+      },
+      "x": 71.75,
+      "y": 8.5,
+      "rotation": 0,
+      "mpn": "RC0603FR-071ML",
+      "section": "Analog",
+      "names": {}
+    },
+    {
+      "ref": "C100",
+      "value": "47nF",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "pins": {
+        "1": "RC0A",
+        "2": "GND"
+      },
+      "x": 60.75,
+      "y": 10.0,
+      "rotation": 90,
+      "mpn": "GRM188R71H473KA61D",
+      "section": "Analog",
+      "names": {}
+    },
+    {
+      "ref": "D10",
+      "value": "BAV199",
+      "footprint": "Package_TO_SOT_SMD:SOT-23",
+      "pins": {
+        "1": "GND",
+        "2": "3V0A",
+        "3": "RC0A"
+      },
+      "x": 63.75,
+      "y": 11.25,
+      "rotation": 0,
+      "mpn": "BAV199,215",
+      "section": "Analog",
+      "names": {}
+    },
+    {
+      "ref": "R102",
+      "value": "6.65k",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "pins": {
+        "1": "BUF0A",
+        "2": "RC0B"
+      },
+      "x": 55.0,
+      "y": 10.25,
+      "rotation": 0,
+      "mpn": "RC0603FR-076K65L",
+      "section": "Analog",
+      "names": {}
+    },
+    {
+      "ref": "R103",
+      "value": "6.65k",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "pins": {
+        "1": "VMID",
+        "2": "RC0B"
+      },
+      "x": 58.25,
+      "y": 12.25,
+      "rotation": 0,
+      "mpn": "RC0603FR-076K65L",
+      "section": "Analog",
+      "names": {}
+    },
+    {
+      "ref": "C101",
+      "value": "47nF",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "pins": {
+        "1": "RC0B",
+        "2": "GND"
+      },
+      "x": 59.0,
+      "y": 9.75,
+      "rotation": 90,
+      "mpn": "GRM188R71H473KA61D",
+      "section": "Analog",
+      "names": {}
+    },
+    {
+      "ref": "R104",
+      "value": "100",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "pins": {
+        "1": "BUF0B",
+        "2": "AIN0P"
+      },
+      "x": 44.75,
+      "y": 16.0,
+      "rotation": 0,
+      "mpn": "RC0603FR-07100RL",
+      "section": "Analog",
+      "names": {}
+    },
+    {
+      "ref": "R105",
+      "value": "100",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "pins": {
+        "1": "VMID",
+        "2": "AIN0N"
+      },
+      "x": 44.25,
+      "y": 18.5,
+      "rotation": 0,
+      "mpn": "RC0603FR-07100RL",
+      "section": "Analog",
+      "names": {}
+    },
+    {
+      "ref": "C102",
+      "value": "1nF",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "pins": {
+        "1": "AIN0P",
+        "2": "AIN0N"
+      },
+      "x": 46.75,
+      "y": 18.5,
+      "rotation": 90,
+      "mpn": "GRM1885C1H102JA01D",
+      "section": "Analog",
+      "names": {}
+    },
+    {
+      "ref": "J6",
+      "value": "EMG2",
+      "footprint": "Connector_JST:JST_GH_BM03B-GHS-TBT_1x03-1MP_P1.25mm_Vertical",
+      "pins": {
+        "1": "3V0A",
+        "2": "GND",
+        "3": "RAW1"
+      },
+      "x": 70.25,
+      "y": 23.0,
+      "rotation": 0,
+      "mpn": "BM03B-GHS-TBT(LF)(SN)",
+      "section": "Analog",
+      "names": {}
+    },
+    {
+      "ref": "R110",
+      "value": "3.3k",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "pins": {
+        "1": "RAW1",
+        "2": "RC1A"
+      },
+      "x": 65.0,
+      "y": 18.5,
+      "rotation": 90,
+      "mpn": "RC0603FR-073K3L",
+      "section": "Analog",
+      "names": {}
+    },
+    {
+      "ref": "R111",
+      "value": "1M",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "pins": {
+        "1": "RAW1",
+        "2": "VMID"
+      },
+      "x": 71.0,
+      "y": 18.5,
+      "rotation": 0,
+      "mpn": "RC0603FR-071ML",
+      "section": "Analog",
+      "names": {}
+    },
+    {
+      "ref": "C110",
+      "value": "47nF",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "pins": {
+        "1": "RC1A",
+        "2": "GND"
+      },
+      "x": 63.0,
+      "y": 18.5,
+      "rotation": 90,
+      "mpn": "GRM188R71H473KA61D",
+      "section": "Analog",
+      "names": {}
+    },
+    {
+      "ref": "D11",
+      "value": "BAV199",
+      "footprint": "Package_TO_SOT_SMD:SOT-23",
+      "pins": {
+        "1": "GND",
+        "2": "3V0A",
+        "3": "RC1A"
+      },
+      "x": 63.75,
+      "y": 22.0,
+      "rotation": 0,
+      "mpn": "BAV199,215",
+      "section": "Analog",
+      "names": {}
+    },
+    {
+      "ref": "R112",
+      "value": "6.65k",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "pins": {
+        "1": "BUF1A",
+        "2": "RC1B"
+      },
+      "x": 56.25,
+      "y": 21.5,
+      "rotation": 0,
+      "mpn": "RC0603FR-076K65L",
+      "section": "Analog",
+      "names": {}
+    },
+    {
+      "ref": "R113",
+      "value": "6.65k",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "pins": {
+        "1": "VMID",
+        "2": "RC1B"
+      },
+      "x": 55.0,
+      "y": 23.25,
+      "rotation": 0,
+      "mpn": "RC0603FR-076K65L",
+      "section": "Analog",
+      "names": {}
+    },
+    {
+      "ref": "C111",
+      "value": "47nF",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "pins": {
+        "1": "RC1B",
+        "2": "GND"
+      },
+      "x": 59.0,
+      "y": 22.0,
+      "rotation": 90,
+      "mpn": "GRM188R71H473KA61D",
+      "section": "Analog",
+      "names": {}
+    },
+    {
+      "ref": "R114",
+      "value": "100",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "pins": {
+        "1": "BUF1B",
+        "2": "AIN1P"
+      },
+      "x": 46.5,
+      "y": 28.5,
+      "rotation": 0,
+      "mpn": "RC0603FR-07100RL",
+      "section": "Analog",
+      "names": {}
+    },
+    {
+      "ref": "R115",
+      "value": "100",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "pins": {
+        "1": "VMID",
+        "2": "AIN1N"
+      },
+      "x": 46.5,
+      "y": 30.25,
+      "rotation": 0,
+      "mpn": "RC0603FR-07100RL",
+      "section": "Analog",
+      "names": {}
+    },
+    {
+      "ref": "C112",
+      "value": "1nF",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "pins": {
+        "1": "AIN1P",
+        "2": "AIN1N"
+      },
+      "x": 42.0,
+      "y": 22.0,
+      "rotation": 90,
+      "mpn": "GRM1885C1H102JA01D",
+      "section": "Analog",
+      "names": {}
+    },
+    {
+      "ref": "J7",
+      "value": "EMG3",
+      "footprint": "Connector_JST:JST_GH_BM03B-GHS-TBT_1x03-1MP_P1.25mm_Vertical",
+      "pins": {
+        "1": "3V0A",
+        "2": "GND",
+        "3": "RAW2"
+      },
+      "x": 70.25,
+      "y": 33.0,
+      "rotation": 0,
+      "mpn": "BM03B-GHS-TBT(LF)(SN)",
+      "section": "Analog",
+      "names": {}
+    },
+    {
+      "ref": "R120",
+      "value": "3.3k",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "pins": {
+        "1": "RAW2",
+        "2": "RC2A"
+      },
+      "x": 65.0,
+      "y": 31.75,
+      "rotation": 90,
+      "mpn": "RC0603FR-073K3L",
+      "section": "Analog",
+      "names": {}
+    },
+    {
+      "ref": "R121",
+      "value": "1M",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "pins": {
+        "1": "RAW2",
+        "2": "VMID"
+      },
+      "x": 71.0,
+      "y": 28.5,
+      "rotation": 0,
+      "mpn": "RC0603FR-071ML",
+      "section": "Analog",
+      "names": {}
+    },
+    {
+      "ref": "C120",
+      "value": "47nF",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "pins": {
+        "1": "RC2A",
+        "2": "GND"
+      },
+      "x": 60.75,
+      "y": 28.0,
+      "rotation": 90,
+      "mpn": "GRM188R71H473KA61D",
+      "section": "Analog",
+      "names": {}
+    },
+    {
+      "ref": "D12",
+      "value": "BAV199",
+      "footprint": "Package_TO_SOT_SMD:SOT-23",
+      "pins": {
+        "1": "GND",
+        "2": "3V0A",
+        "3": "RC2A"
+      },
+      "x": 63.75,
+      "y": 28.25,
+      "rotation": 0,
+      "mpn": "BAV199,215",
+      "section": "Analog",
+      "names": {}
+    },
+    {
+      "ref": "R122",
+      "value": "6.65k",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "pins": {
+        "1": "BUF2A",
+        "2": "RC2B"
+      },
+      "x": 55.0,
+      "y": 29.25,
+      "rotation": 0,
+      "mpn": "RC0603FR-076K65L",
+      "section": "Analog",
+      "names": {}
+    },
+    {
+      "ref": "R123",
+      "value": "6.65k",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "pins": {
+        "1": "VMID",
+        "2": "RC2B"
+      },
+      "x": 52.25,
+      "y": 33.75,
+      "rotation": 0,
+      "mpn": "RC0603FR-076K65L",
+      "section": "Analog",
+      "names": {}
+    },
+    {
+      "ref": "C121",
+      "value": "47nF",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "pins": {
+        "1": "RC2B",
+        "2": "GND"
+      },
+      "x": 59.0,
+      "y": 28.5,
+      "rotation": 90,
+      "mpn": "GRM188R71H473KA61D",
+      "section": "Analog",
+      "names": {}
+    },
+    {
+      "ref": "R124",
+      "value": "100",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "pins": {
+        "1": "BUF2B",
+        "2": "AIN2P"
+      },
+      "x": 45.75,
+      "y": 34.0,
+      "rotation": 0,
+      "mpn": "RC0603FR-07100RL",
+      "section": "Analog",
+      "names": {}
+    },
+    {
+      "ref": "R125",
+      "value": "100",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "pins": {
+        "1": "VMID",
+        "2": "AIN2N"
+      },
+      "x": 45.75,
+      "y": 36.0,
+      "rotation": 0,
+      "mpn": "RC0603FR-07100RL",
+      "section": "Analog",
+      "names": {}
+    },
+    {
+      "ref": "C122",
+      "value": "1nF",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "pins": {
+        "1": "AIN2P",
+        "2": "AIN2N"
+      },
+      "x": 45.0,
+      "y": 38.5,
+      "rotation": 90,
+      "mpn": "GRM1885C1H102JA01D",
+      "section": "Analog",
+      "names": {}
+    },
+    {
+      "ref": "J8",
+      "value": "EMG4",
+      "footprint": "Connector_JST:JST_GH_BM03B-GHS-TBT_1x03-1MP_P1.25mm_Vertical",
+      "pins": {
+        "1": "3V0A",
+        "2": "GND",
+        "3": "RAW3"
+      },
+      "x": 70.25,
+      "y": 43.0,
+      "rotation": 0,
+      "mpn": "BM03B-GHS-TBT(LF)(SN)",
+      "section": "Analog",
+      "names": {}
+    },
+    {
+      "ref": "R130",
+      "value": "3.3k",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "pins": {
+        "1": "RAW3",
+        "2": "RC3A"
+      },
+      "x": 65.0,
+      "y": 36.25,
+      "rotation": 90,
+      "mpn": "RC0603FR-073K3L",
+      "section": "Analog",
+      "names": {}
+    },
+    {
+      "ref": "R131",
+      "value": "1M",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "pins": {
+        "1": "RAW3",
+        "2": "VMID"
+      },
+      "x": 71.0,
+      "y": 38.5,
+      "rotation": 0,
+      "mpn": "RC0603FR-071ML",
+      "section": "Analog",
+      "names": {}
+    },
+    {
+      "ref": "C130",
+      "value": "47nF",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "pins": {
+        "1": "RC3A",
+        "2": "GND"
+      },
+      "x": 63.0,
+      "y": 36.25,
+      "rotation": 90,
+      "mpn": "GRM188R71H473KA61D",
+      "section": "Analog",
+      "names": {}
+    },
+    {
+      "ref": "D13",
+      "value": "BAV199",
+      "footprint": "Package_TO_SOT_SMD:SOT-23",
+      "pins": {
+        "1": "GND",
+        "2": "3V0A",
+        "3": "RC3A"
+      },
+      "x": 58.5,
+      "y": 40.0,
+      "rotation": 0,
+      "mpn": "BAV199,215",
+      "section": "Analog",
+      "names": {}
+    },
+    {
+      "ref": "R132",
+      "value": "6.65k",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "pins": {
+        "1": "BUF3A",
+        "2": "RC3B"
+      },
+      "x": 54.75,
+      "y": 39.0,
+      "rotation": 0,
+      "mpn": "RC0603FR-076K65L",
+      "section": "Analog",
+      "names": {}
+    },
+    {
+      "ref": "R133",
+      "value": "6.65k",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "pins": {
+        "1": "VMID",
+        "2": "RC3B"
+      },
+      "x": 54.75,
+      "y": 41.0,
+      "rotation": 0,
+      "mpn": "RC0603FR-076K65L",
+      "section": "Analog",
+      "names": {}
+    },
+    {
+      "ref": "C131",
+      "value": "47nF",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "pins": {
+        "1": "RC3B",
+        "2": "GND"
+      },
+      "x": 53.5,
+      "y": 43.5,
+      "rotation": 90,
+      "mpn": "GRM188R71H473KA61D",
+      "section": "Analog",
+      "names": {}
+    },
+    {
+      "ref": "R134",
+      "value": "100",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "pins": {
+        "1": "BUF3B",
+        "2": "AIN3P"
+      },
+      "x": 45.75,
+      "y": 41.25,
+      "rotation": 0,
+      "mpn": "RC0603FR-07100RL",
+      "section": "Analog",
+      "names": {}
+    },
+    {
+      "ref": "R135",
+      "value": "100",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "pins": {
+        "1": "VMID",
+        "2": "AIN3N"
+      },
+      "x": 45.75,
+      "y": 46.75,
+      "rotation": 0,
+      "mpn": "RC0603FR-07100RL",
+      "section": "Analog",
+      "names": {}
+    },
+    {
+      "ref": "C132",
+      "value": "1nF",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "pins": {
+        "1": "AIN3P",
+        "2": "AIN3N"
+      },
+      "x": 45.0,
+      "y": 44.0,
+      "rotation": 90,
+      "mpn": "GRM1885C1H102JA01D",
+      "section": "Analog",
+      "names": {}
+    },
+    {
+      "ref": "J9",
+      "value": "PROTECTED 1S BATTERY",
+      "footprint": "Connector_JST:JST_GH_BM02B-GHS-TBT_1x02-1MP_P1.25mm_Vertical",
+      "pins": {
+        "1": "PACK_PLUS",
+        "2": "GND"
+      },
+      "x": 15.25,
+      "y": 46.0,
+      "rotation": 0,
+      "mpn": "BM02B-GHS-TBT(LF)(SN)",
+      "section": "Power",
+      "names": {}
+    },
+    {
+      "ref": "Q1",
+      "value": "DMP2035U",
+      "footprint": "Package_TO_SOT_SMD:SOT-23",
+      "pins": {
+        "1": "GND",
+        "2": "VBAT",
+        "3": "PACK_PLUS"
+      },
+      "x": 28.0,
+      "y": 29.0,
+      "rotation": 0,
+      "mpn": "DMP2035U-7",
+      "section": "Power",
+      "names": {}
+    },
+    {
+      "ref": "SW1",
+      "value": "POWER",
+      "footprint": "Button_Switch_SMD:SW_SPDT_CK_JS102011SAQN",
+      "pins": {
+        "1": "VBAT",
+        "2": "POWER_EN",
+        "3": "GND"
+      },
+      "x": 20.75,
+      "y": 34.0,
+      "rotation": 0,
+      "mpn": "JS102011SAQN",
+      "section": "Power",
+      "names": {}
+    },
+    {
+      "ref": "U6",
+      "value": "TPS63070RNMR",
+      "footprint": "RevB:TI_RNM0015A",
+      "pins": {
+        "1": "GND",
+        "2": "POWER_GOOD",
+        "3": "VAUX",
+        "4": "GND",
+        "5": "FB",
+        "6": "GND",
+        "7": "3V3D",
+        "8": "3V3D",
+        "9": "SW_L2",
+        "10": "GND",
+        "11": "SW_L1",
+        "12": "VBAT",
+        "13": "VBAT",
+        "14": "POWER_EN",
+        "15": "GND"
+      },
+      "x": 8.0,
+      "y": 31.0,
+      "rotation": 0,
+      "mpn": "TPS63070RNMR",
+      "section": "Power",
+      "names": {}
+    },
+    {
+      "ref": "L1",
+      "value": "1.5uH",
+      "footprint": "Inductor_SMD:L_Coilcraft_XAL4020-XXX",
+      "pins": {
+        "1": "SW_L1",
+        "2": "SW_L2"
+      },
+      "x": 13.0,
+      "y": 31.0,
+      "rotation": 0,
+      "mpn": "XAL4020-152MEC",
+      "section": "Power",
+      "names": {}
+    },
+    {
+      "ref": "C40",
+      "value": "22uF",
+      "footprint": "Capacitor_SMD:C_0805_2012Metric",
+      "pins": {
+        "1": "VBAT",
+        "2": "GND"
+      },
+      "x": 8.0,
+      "y": 27.75,
+      "rotation": 0,
+      "mpn": "GRM21BR61A226ME44L",
+      "section": "Power",
+      "names": {}
+    },
+    {
+      "ref": "C41",
+      "value": "22uF",
+      "footprint": "Capacitor_SMD:C_0805_2012Metric",
+      "pins": {
+        "1": "3V3D",
+        "2": "GND"
+      },
+      "x": 8.0,
+      "y": 34.25,
+      "rotation": 0,
+      "mpn": "GRM21BR61A226ME44L",
+      "section": "Power",
+      "names": {}
+    },
+    {
+      "ref": "C42",
+      "value": "22uF",
+      "footprint": "Capacitor_SMD:C_0805_2012Metric",
+      "pins": {
+        "1": "3V3D",
+        "2": "GND"
+      },
+      "x": 8.0,
+      "y": 36.5,
+      "rotation": 0,
+      "mpn": "GRM21BR61A226ME44L",
+      "section": "Power",
+      "names": {}
+    },
+    {
+      "ref": "C43",
+      "value": "100nF",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "pins": {
+        "1": "VAUX",
+        "2": "GND"
+      },
+      "x": 4.5,
+      "y": 31.0,
+      "rotation": 0,
+      "mpn": "GRM188R71C104KA01D",
+      "section": "Power",
+      "names": {}
+    },
+    {
+      "ref": "R50",
+      "value": "316k",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "pins": {
+        "1": "3V3D",
+        "2": "FB"
+      },
+      "x": 4.5,
+      "y": 34.0,
+      "rotation": 0,
+      "mpn": "RC0603FR-07316KL",
+      "section": "Power",
+      "names": {}
+    },
+    {
+      "ref": "R51",
+      "value": "100k",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "pins": {
+        "1": "FB",
+        "2": "GND"
+      },
+      "x": 4.5,
+      "y": 36.0,
+      "rotation": 0,
+      "mpn": "RC0603FR-07100KL",
+      "section": "Power",
+      "names": {}
+    },
+    {
+      "ref": "R52",
+      "value": "100k",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "pins": {
+        "1": "3V3D",
+        "2": "POWER_GOOD"
+      },
+      "x": 32.25,
+      "y": 25.25,
+      "rotation": 0,
+      "mpn": "RC0603FR-07100KL",
+      "section": "Power",
+      "names": {}
+    },
+    {
+      "ref": "R53",
+      "value": "100k",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "pins": {
+        "1": "VBAT",
+        "2": "BAT_SENSE"
+      },
+      "x": 11.5,
+      "y": 27.5,
+      "rotation": 0,
+      "mpn": "RC0603FR-07100KL",
+      "section": "Power",
+      "names": {}
+    },
+    {
+      "ref": "R54",
+      "value": "100k",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "pins": {
+        "1": "BAT_SENSE",
+        "2": "GND"
+      },
+      "x": 32.25,
+      "y": 23.5,
+      "rotation": 0,
+      "mpn": "RC0603FR-07100KL",
+      "section": "Power",
+      "names": {}
+    },
+    {
+      "ref": "C44",
+      "value": "100nF",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "pins": {
+        "1": "BAT_SENSE",
+        "2": "GND"
+      },
+      "x": 32.25,
+      "y": 21.75,
+      "rotation": 0,
+      "mpn": "GRM188R71C104KA01D",
+      "section": "Power",
+      "names": {}
+    },
+    {
+      "ref": "U7",
+      "value": "TPS7A2030PDBVR",
+      "footprint": "Package_TO_SOT_SMD:SOT-23-5",
+      "pins": {
+        "1": "3V3D",
+        "2": "GND",
+        "3": "3V3D",
+        "4": null,
+        "5": "3V0A"
+      },
+      "x": 49.0,
+      "y": 44.0,
+      "rotation": 0,
+      "mpn": "TPS7A2030PDBVR",
+      "section": "Power",
+      "names": {}
+    },
+    {
+      "ref": "C45",
+      "value": "1uF",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "pins": {
+        "1": "3V3D",
+        "2": "GND"
+      },
+      "x": 49.0,
+      "y": 41.25,
+      "rotation": 0,
+      "mpn": "GRM188R61A105KA61D",
+      "section": "Power",
+      "names": {}
+    },
+    {
+      "ref": "C46",
+      "value": "1uF",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "pins": {
+        "1": "3V0A",
+        "2": "GND"
+      },
+      "x": 52.0,
+      "y": 46.75,
+      "rotation": 0,
+      "mpn": "GRM188R61A105KA61D",
+      "section": "Power",
+      "names": {}
+    },
+    {
+      "ref": "R60",
+      "value": "1k",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "pins": {
+        "1": "LED_REC",
+        "2": "LED_REC_A"
+      },
+      "x": 30.0,
+      "y": 7.75,
+      "rotation": 0,
+      "mpn": "RC0603FR-071KL",
+      "section": "Digital",
+      "names": {}
+    },
+    {
+      "ref": "D20",
+      "value": "green",
+      "footprint": "LED_SMD:LED_0603_1608Metric",
+      "pins": {
+        "1": "GND",
+        "2": "LED_REC_A"
+      },
+      "x": 34.5,
+      "y": 9.5,
+      "rotation": 0,
+      "mpn": "LTST-C190KGKT",
+      "section": "Digital",
+      "names": {}
+    },
+    {
+      "ref": "R61",
+      "value": "1k",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "pins": {
+        "1": "LED_ERR",
+        "2": "LED_ERR_A"
+      },
+      "x": 35.0,
+      "y": 7.75,
+      "rotation": 0,
+      "mpn": "RC0603FR-071KL",
+      "section": "Digital",
+      "names": {}
+    },
+    {
+      "ref": "D21",
+      "value": "red",
+      "footprint": "LED_SMD:LED_0603_1608Metric",
+      "pins": {
+        "1": "GND",
+        "2": "LED_ERR_A"
+      },
+      "x": 35.0,
+      "y": 18.5,
+      "rotation": 0,
+      "mpn": "LTST-C190KRKT",
+      "section": "Digital",
+      "names": {}
+    },
+    {
+      "ref": "R62",
+      "value": "1k",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "pins": {
+        "1": "LED_LOW",
+        "2": "LED_LOW_A"
+      },
+      "x": 43.25,
+      "y": 9.5,
+      "rotation": 0,
+      "mpn": "RC0603FR-071KL",
+      "section": "Digital",
+      "names": {}
+    },
+    {
+      "ref": "D22",
+      "value": "amber",
+      "footprint": "LED_SMD:LED_0603_1608Metric",
+      "pins": {
+        "1": "GND",
+        "2": "LED_LOW_A"
+      },
+      "x": 44.75,
+      "y": 11.25,
+      "rotation": 0,
+      "mpn": "LTST-C190KSKT",
+      "section": "Digital",
+      "names": {}
+    },
+    {
+      "ref": "J10",
+      "value": "Expansion",
+      "footprint": "Connector_JST:JST_GH_BM06B-GHS-TBT_1x06-1MP_P1.25mm_Vertical",
+      "pins": {
+        "1": "3V3D",
+        "2": "GND",
+        "3": "EXP_SDA",
+        "4": "EXP_SCL",
+        "5": "UART_TX",
+        "6": "UART_RX"
+      },
+      "x": 37.0,
+      "y": 14.0,
+      "rotation": 0,
+      "mpn": "BM06B-GHS-TBT(LF)(SN)",
+      "section": "Digital",
+      "names": {}
+    },
+    {
+      "ref": "H1",
+      "value": "M2 mounting",
+      "footprint": "MountingHole:MountingHole_2.2mm_M2",
+      "pins": {},
+      "x": 12.5,
+      "y": 36.25,
+      "rotation": 0,
+      "mpn": "MECHANICAL",
+      "section": "Mechanical",
+      "names": {}
+    },
+    {
+      "ref": "H2",
+      "value": "M2 mounting",
+      "footprint": "MountingHole:MountingHole_2.2mm_M2",
+      "pins": {},
+      "x": 72.0,
+      "y": 3.0,
+      "rotation": 0,
+      "mpn": "MECHANICAL",
+      "section": "Mechanical",
+      "names": {}
+    },
+    {
+      "ref": "H3",
+      "value": "M2 mounting",
+      "footprint": "MountingHole:MountingHole_2.2mm_M2",
+      "pins": {},
+      "x": 63.25,
+      "y": 40.5,
+      "rotation": 0,
+      "mpn": "MECHANICAL",
+      "section": "Mechanical",
+      "names": {}
+    }
+  ],
+  "imu_model": "MPU6050",
+  "imu_interface": "I2C"
+}

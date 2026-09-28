@@ -1,0 +1,128 @@
+[
+  {
+    "design": "ad7606-expandable-icm42688",
+    "adapter_endpoints_mapped": 25,
+    "breadboard_leads_relocated": [
+      {
+        "wire": "system-17",
+        "board": "BB0",
+        "old": "c2",
+        "new": "d2"
+      },
+      {
+        "wire": "system-18",
+        "board": "BB0",
+        "old": "d6",
+        "new": "e6"
+      }
+    ],
+    "unique_holes": 260,
+    "duplicate_insertions": 0,
+    "physical_tests_performed": false
+  },
+  {
+    "design": "ad7606-expandable-mpu6050",
+    "adapter_endpoints_mapped": 25,
+    "breadboard_leads_relocated": [
+      {
+        "wire": "system-17",
+        "board": "BB0",
+        "old": "c2",
+        "new": "d2"
+      },
+      {
+        "wire": "system-18",
+        "board": "BB0",
+        "old": "d6",
+        "new": "e6"
+      }
+    ],
+    "unique_holes": 260,
+    "duplicate_insertions": 0,
+    "physical_tests_performed": false
+  },
+  {
+    "design": "ad7606-two-channel-icm42688",
+    "adapter_endpoints_mapped": 17,
+    "breadboard_leads_relocated": [
+      {
+        "wire": "system-17",
+        "board": "BB0",
+        "old": "c2",
+        "new": "d2"
+      },
+      {
+        "wire": "system-18",
+        "board": "BB0",
+        "old": "d6",
+        "new": "e6"
+      }
+    ],
+    "unique_holes": 150,
+    "duplicate_insertions": 0,
+    "physical_tests_performed": false
+  },
+  {
+    "design": "ad7606-two-channel-mpu6050",
+    "adapter_endpoints_mapped": 17,
+    "breadboard_leads_relocated": [
+      {
+        "wire": "system-17",
+        "board": "BB0",
+        "old": "c2",
+        "new": "d2"
+      },
+      {
+        "wire": "system-18",
+        "board": "BB0",
+        "old": "d6",
+        "new": "e6"
+      }
+    ],
+    "unique_holes": 150,
+    "duplicate_insertions": 0,
+    "physical_tests_performed": false
+  },
+  {
+    "design": "ads131m04-expandable-icm42688",
+    "adapter_endpoints_mapped": 26,
+    "breadboard_leads_relocated": [
+      {
+        "wire": "system-17",
+        "board": "BB0",
+        "old": "c2",
+        "new": "d2"
+      },
+      {
+        "wire": "system-18",
+        "board": "BB0",
+        "old": "d6",
+        "new": "e6"
+      }
+    ],
+    "unique_holes": 288,
+    "duplicate_insertions": 0,
+    "physical_tests_performed": false
+  },
+  {
+    "design": "ads131m04-expandable-mpu6050",
+    "adapter_endpoints_mapped": 26,
+    "breadboard_leads_relocated": [
+      {
+        "wire": "system-17",
+        "board": "BB0",
+        "old": "c2",
+        "new": "d2"
+      },
+      {
+        "wire": "system-18",
+        "board": "BB0",
+        "old": "d6",
+        "new": "e6"
+      }
+    ],
+    "unique_holes": 288,
+    "duplicate_insertions": 0,
+    "physical_tests_performed": false
+  }
+]

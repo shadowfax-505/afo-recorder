@@ -1,0 +1,8 @@
+{
+  "design": "ad7606-expandable-icm42688",
+  "individual_system_wires": 134,
+  "firmware_gpio_endpoint_checks": 30,
+  "all_subsystems_represented": true,
+  "unmapped_analog_breadboard_nets": 0,
+  "physical_release": false
+}

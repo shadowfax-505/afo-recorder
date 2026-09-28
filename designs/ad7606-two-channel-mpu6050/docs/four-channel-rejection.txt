@@ -1,0 +1,5 @@
+In file included from outputs/afo-ad7606-two/host/tests/format_golden.c:2:
+outputs/afo-ad7606-two/firmware/main/board.h:13:2: error: "This hardware has exactly two EMG inputs"
+   13 | #error "This hardware has exactly two EMG inputs"
+      |  ^
+1 error generated.

@@ -1,0 +1,30 @@
+[
+  {
+    "profile": "diagnostic-adc",
+    "binary_hashes_verified": 3
+  },
+  {
+    "profile": "record-2ch",
+    "binary_hashes_verified": 3
+  },
+  {
+    "profile": "diagnostic-imu-two",
+    "binary_hashes_verified": 3
+  },
+  {
+    "profile": "diagnostic-imu-one",
+    "binary_hashes_verified": 3
+  },
+  {
+    "profile": "diagnostic-controller",
+    "binary_hashes_verified": 3
+  },
+  {
+    "profile": "breadboard-record-2ch",
+    "binary_hashes_verified": 3
+  },
+  {
+    "profile": "breadboard-sd-only-2ch",
+    "binary_hashes_verified": 3
+  }
+]

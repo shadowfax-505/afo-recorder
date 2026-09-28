@@ -1,0 +1,6 @@
+### Result
+{"labels":["EMG1 · ADC input voltage","EMG2 · ADC input voltage"],"gaps":"355","syntheticBanner":true}
+### Ran Playwright code
+```js
+await (async page => { const n=await page.locator("#plots figure").count(); if(n!==2) throw new Error("Expected two plots: "+n); const labels=await page.locator("figcaption").allTextContents(); const gaps=await page.locator("#gaps").innerText(); if(Number(gaps)<=0) throw new Error("Injected gaps missing"); await page.screenshot({path:"output/playwright/two-live.png"}); return {labels,gaps,syntheticBanner:await page.locator("#demo").isVisible()}; })(page);
+```

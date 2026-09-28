@@ -1,0 +1,23 @@
+{
+  "package": "ad7606-two-channel-icm42688",
+  "imu_model": "ICM42688P",
+  "active_channels": 2,
+  "hardware": "breadboard",
+  "diagnostic_stage": 0,
+  "imu_count": 2,
+  "wifi_enabled": true,
+  "sd_cmd_gpio": 47,
+  "sd_clk_gpio": 39,
+  "sd_d0_gpio": 40,
+  "hardware_tested": false,
+  "offsets": {
+    "bootloader.bin": "0x0",
+    "partition-table.bin": "0x8000",
+    "application.bin": "0x10000"
+  },
+  "sha256": {
+    "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+    "application.bin": "809dab3fd8410e853cc2208674b0e966b6189a0ef8dc0c506bb988ef3e475e09",
+    "bootloader.bin": "6f3b00bcf80442affe509d3074616bfe24777e8b22d95e68f0185c875f62e566"
+  }
+}

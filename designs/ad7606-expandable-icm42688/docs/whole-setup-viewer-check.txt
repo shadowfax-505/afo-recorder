@@ -1,0 +1,9 @@
+### Result
+[{"name":"afo-ad7606-two","defaultWhole":true,"detailSwitch":true,"boards":3},{"name":"afo-ad7606","defaultWhole":true,"detailSwitch":true,"boards":5},{"name":"afo-ads131m04","defaultWhole":true,"detailSwitch":true,"boards":5}]
+### Ran Playwright code
+```js
+await (async page => { const out=[]; for(const name of ["afo-ad7606-two","afo-ad7606","afo-ads131m04"]){ await page.goto("http://127.0.0.1:8769/"+name+"/viewer/?v=3"); await page.locator("#steps button").first().waitFor(); if(await page.locator("#view").inputValue()!=="whole")throw Error("Not whole"); if(await page.locator("#stage").inputValue()!=="10")throw Error("Incomplete stage"); await page.locator("#canvas").screenshot({path:"output/playwright/"+name+"-whole.png"}); await page.locator("#board").selectOption("BB1"); if(await page.locator("#view").inputValue()!=="detail")throw Error("Detail switch"); await page.locator("#view").selectOption("whole"); out.push({name,defaultWhole:true,detailSwitch:true,boards:await page.locator("#board option").count()}); }return out; })(page);
+```
+### Page
+- Page URL: http://127.0.0.1:8769/afo-ads131m04/viewer/?v=3
+- Page Title: Breadboard assembly workbench

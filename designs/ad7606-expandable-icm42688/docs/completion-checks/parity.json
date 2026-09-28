@@ -1,0 +1,4928 @@
+{
+    "$schema": "https://schemas.kicad.org/drc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-09-28T15:36:33",
+    "ignored_checks": [
+        {
+            "description": "Footprint has no courtyard defined",
+            "key": "missing_courtyard"
+        },
+        {
+            "description": "Track endpoint not centered on via",
+            "key": "track_not_centered_on_via"
+        },
+        {
+            "description": "Tuning profile track geometries",
+            "key": "tuning_profile_track_geometries"
+        },
+        {
+            "description": "Footprint doesn't match symbol's footprint filters",
+            "key": "footprint_filters_mismatch"
+        },
+        {
+            "description": "Footprint component type doesn't match footprint pads",
+            "key": "footprint_type_mismatch"
+        }
+    ],
+    "included_severities": [
+        "error",
+        "warning",
+        "exclusion"
+    ],
+    "kicad_version": "10.0.6",
+    "schematic_parity": [
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint C1",
+                    "pos": {
+                        "x": 11.5,
+                        "y": 39.75
+                    },
+                    "uuid": "95501a75-f2d3-4b2d-8b49-983b54b08810"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (3V3D) doesn't match net given by schematic (/3V3D)",
+            "items": [
+                {
+                    "description": "Pad 1 [3V3D] of C1 on F.Cu",
+                    "pos": {
+                        "x": 10.725,
+                        "y": 39.75
+                    },
+                    "uuid": "1034de81-12d1-44bd-b400-71d9247af8ed"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 2 [GND] of C1 on F.Cu",
+                    "pos": {
+                        "x": 12.275,
+                        "y": 39.75
+                    },
+                    "uuid": "f5477064-d9bb-457e-81dc-2d692b658bba"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint C2",
+                    "pos": {
+                        "x": 4.25,
+                        "y": 28.0
+                    },
+                    "uuid": "92838c66-0b35-41ac-b0d5-1f6a393a164f"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (3V3D) doesn't match net given by schematic (/3V3D)",
+            "items": [
+                {
+                    "description": "Pad 1 [3V3D] of C2 on F.Cu",
+                    "pos": {
+                        "x": 3.3,
+                        "y": 28.0
+                    },
+                    "uuid": "59cca1a1-9f40-4e0e-87a1-1788302d0590"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 2 [GND] of C2 on F.Cu",
+                    "pos": {
+                        "x": 5.2,
+                        "y": 28.0
+                    },
+                    "uuid": "6ddcb6db-6f1e-46d8-b5c0-aedfa8dbf9bc"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint C3",
+                    "pos": {
+                        "x": 24.25,
+                        "y": 10.25
+                    },
+                    "uuid": "5cef9787-2f6f-4758-9de1-6caa31c25d1c"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (EN) doesn't match net given by schematic (/EN)",
+            "items": [
+                {
+                    "description": "Pad 1 [EN] of C3 on F.Cu",
+                    "pos": {
+                        "x": 23.475,
+                        "y": 10.25
+                    },
+                    "uuid": "fa27c53e-09a1-4004-b24f-cc8968e3de0a"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 2 [GND] of C3 on F.Cu",
+                    "pos": {
+                        "x": 25.025,
+                        "y": 10.25
+                    },
+                    "uuid": "e22f8dcd-af73-4659-ab79-16de15416fa2"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint C10",
+                    "pos": {
+                        "x": 37.0,
+                        "y": 26.5
+                    },
+                    "uuid": "92b344ea-e32b-4a27-bd43-8d6c17e64a6c"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (3V3D) doesn't match net given by schematic (/3V3D)",
+            "items": [
+                {
+                    "description": "Pad 1 [3V3D] of C10 on F.Cu",
+                    "pos": {
+                        "x": 36.225,
+                        "y": 26.5
+                    },
+                    "uuid": "00e5000f-8b59-4432-949a-6b5b42bba0b7"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 2 [GND] of C10 on F.Cu",
+                    "pos": {
+                        "x": 37.775,
+                        "y": 26.5
+                    },
+                    "uuid": "9b594d41-0eed-460f-b83b-3e407e1ce57f"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint C11",
+                    "pos": {
+                        "x": 41.25,
+                        "y": 29.75
+                    },
+                    "uuid": "8e8b0dd7-28f7-4877-a67e-95080454e32c"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (3V3D) doesn't match net given by schematic (/3V3D)",
+            "items": [
+                {
+                    "description": "Pad 1 [3V3D] of C11 on F.Cu",
+                    "pos": {
+                        "x": 40.3,
+                        "y": 29.75
+                    },
+                    "uuid": "4ad4cca5-d483-4236-92fa-120dcfd95f68"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 2 [GND] of C11 on F.Cu",
+                    "pos": {
+                        "x": 42.2,
+                        "y": 29.75
+                    },
+                    "uuid": "3e16f361-09ef-44e9-a057-a23a383939bb"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint C12",
+                    "pos": {
+                        "x": 32.25,
+                        "y": 20.0
+                    },
+                    "uuid": "edfbcb10-8a8e-47b0-a6e9-77f6d840b1a5"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (USB_GATE) doesn't match net given by schematic (/USB_GATE)",
+            "items": [
+                {
+                    "description": "Pad 1 [USB_GATE] of C12 on F.Cu",
+                    "pos": {
+                        "x": 31.475,
+                        "y": 20.0
+                    },
+                    "uuid": "570196b1-3d0f-4373-b7f2-c8bc0a880ede"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 2 [GND] of C12 on F.Cu",
+                    "pos": {
+                        "x": 33.025,
+                        "y": 20.0
+                    },
+                    "uuid": "3252828c-0ba5-4825-9a5b-422518b50a70"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint C30",
+                    "pos": {
+                        "x": 60.0,
+                        "y": 47.75
+                    },
+                    "uuid": "e5c5eaf7-2792-4115-857d-06cd72a96dbe"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (VMID_DIV) doesn't match net given by schematic (/VMID_DIV)",
+            "items": [
+                {
+                    "description": "Pad 1 [VMID_DIV] of C30 on F.Cu",
+                    "pos": {
+                        "x": 59.225,
+                        "y": 47.75
+                    },
+                    "uuid": "26ce4167-3708-4545-a39d-cfa3e11d2c11"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 2 [GND] of C30 on F.Cu",
+                    "pos": {
+                        "x": 60.775,
+                        "y": 47.75
+                    },
+                    "uuid": "509e0aa6-b36e-4acd-a038-f2d4b55ef7d6"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint C31",
+                    "pos": {
+                        "x": 64.25,
+                        "y": 45.75
+                    },
+                    "uuid": "21803ca0-9f1b-4d17-b909-29c6af8247c2"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (VMID) doesn't match net given by schematic (/VMID)",
+            "items": [
+                {
+                    "description": "Pad 1 [VMID] of C31 on F.Cu",
+                    "pos": {
+                        "x": 63.475,
+                        "y": 45.75
+                    },
+                    "uuid": "59111365-76ce-4eaa-a6eb-fced342e63be"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 2 [GND] of C31 on F.Cu",
+                    "pos": {
+                        "x": 65.025,
+                        "y": 45.75
+                    },
+                    "uuid": "12e912ec-3bca-40d5-9be6-3625370ed917"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint C32",
+                    "pos": {
+                        "x": 63.75,
+                        "y": 37.0
+                    },
+                    "uuid": "805ffb18-a7dc-4bcc-8bc3-84f4fd7dea57"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (3V0A) doesn't match net given by schematic (/3V0A)",
+            "items": [
+                {
+                    "description": "Pad 1 [3V0A] of C32 on F.Cu",
+                    "pos": {
+                        "x": 62.975,
+                        "y": 37.0
+                    },
+                    "uuid": "91d7d811-dc0b-49c9-b27e-17655c5ade93"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 2 [GND] of C32 on F.Cu",
+                    "pos": {
+                        "x": 64.525,
+                        "y": 37.0
+                    },
+                    "uuid": "eb6bfcf3-f03c-4ae8-b1b8-cf9558355a8b"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint C33",
+                    "pos": {
+                        "x": 61.75,
+                        "y": 18.25
+                    },
+                    "uuid": "d0160d1e-3ccb-4fda-ba18-087bcb291375"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (3V0A) doesn't match net given by schematic (/3V0A)",
+            "items": [
+                {
+                    "description": "Pad 1 [3V0A] of C33 on F.Cu",
+                    "pos": {
+                        "x": 60.975,
+                        "y": 18.25
+                    },
+                    "uuid": "3bed4cae-3a62-43d6-b618-3503314ced02"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 2 [GND] of C33 on F.Cu",
+                    "pos": {
+                        "x": 62.525,
+                        "y": 18.25
+                    },
+                    "uuid": "9f880a37-7130-4fb5-8de4-399672a50f92"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint C34",
+                    "pos": {
+                        "x": 48.5,
+                        "y": 36.25
+                    },
+                    "uuid": "7561a1a5-2d5f-4ca0-a138-d1a4b3f85fd9"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (3V0A) doesn't match net given by schematic (/3V0A)",
+            "items": [
+                {
+                    "description": "Pad 1 [3V0A] of C34 on F.Cu",
+                    "pos": {
+                        "x": 47.725,
+                        "y": 36.25
+                    },
+                    "uuid": "0ac9bdee-9503-4d4d-b1a1-a7bf0033b0e0"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 2 [GND] of C34 on F.Cu",
+                    "pos": {
+                        "x": 49.275,
+                        "y": 36.25
+                    },
+                    "uuid": "d6463c61-8482-46f2-bbd6-e8fc8e8cd32b"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint C40",
+                    "pos": {
+                        "x": 8.0,
+                        "y": 27.75
+                    },
+                    "uuid": "7b9edd38-5aa4-478e-8f23-e59e98766b84"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (VBAT) doesn't match net given by schematic (/VBAT)",
+            "items": [
+                {
+                    "description": "Pad 1 [VBAT] of C40 on F.Cu",
+                    "pos": {
+                        "x": 7.05,
+                        "y": 27.75
+                    },
+                    "uuid": "23805975-1a27-4b96-8424-d9a03344557a"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 2 [GND] of C40 on F.Cu",
+                    "pos": {
+                        "x": 8.95,
+                        "y": 27.75
+                    },
+                    "uuid": "50c0879d-7d47-458f-a8c3-a9a0ec50cee3"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint C41",
+                    "pos": {
+                        "x": 8.0,
+                        "y": 34.25
+                    },
+                    "uuid": "4a0162ba-3538-405f-8de8-6ef45e18fdea"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (3V3D) doesn't match net given by schematic (/3V3D)",
+            "items": [
+                {
+                    "description": "Pad 1 [3V3D] of C41 on F.Cu",
+                    "pos": {
+                        "x": 7.05,
+                        "y": 34.25
+                    },
+                    "uuid": "d88d036a-a50e-43d7-b9ec-6b118f1aa9b6"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 2 [GND] of C41 on F.Cu",
+                    "pos": {
+                        "x": 8.95,
+                        "y": 34.25
+                    },
+                    "uuid": "6370fb92-1e6a-4e8e-81bb-d05371ec6e14"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint C42",
+                    "pos": {
+                        "x": 8.0,
+                        "y": 36.5
+                    },
+                    "uuid": "9376912c-a4e1-4de5-920e-6054f18d6d0f"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (3V3D) doesn't match net given by schematic (/3V3D)",
+            "items": [
+                {
+                    "description": "Pad 1 [3V3D] of C42 on F.Cu",
+                    "pos": {
+                        "x": 7.05,
+                        "y": 36.5
+                    },
+                    "uuid": "161ff157-890f-472c-9d07-d7c14b668092"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 2 [GND] of C42 on F.Cu",
+                    "pos": {
+                        "x": 8.95,
+                        "y": 36.5
+                    },
+                    "uuid": "48ed3339-7089-47c9-bb3f-73f44d194b84"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint C43",
+                    "pos": {
+                        "x": 4.5,
+                        "y": 31.0
+                    },
+                    "uuid": "77fe0f93-8749-4be7-a244-425f50f6cf87"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (VAUX) doesn't match net given by schematic (/VAUX)",
+            "items": [
+                {
+                    "description": "Pad 1 [VAUX] of C43 on F.Cu",
+                    "pos": {
+                        "x": 3.725,
+                        "y": 31.0
+                    },
+                    "uuid": "2a0ae75e-ba0d-45fc-b690-70ff3944efb2"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 2 [GND] of C43 on F.Cu",
+                    "pos": {
+                        "x": 5.275,
+                        "y": 31.0
+                    },
+                    "uuid": "63e3dd5a-1ac3-472a-a101-a6ab88a44fec"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint C44",
+                    "pos": {
+                        "x": 31.25,
+                        "y": 7.75
+                    },
+                    "uuid": "117390b5-e30a-40dc-bf61-7f057aa815db"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (BAT_SENSE) doesn't match net given by schematic (/BAT_SENSE)",
+            "items": [
+                {
+                    "description": "Pad 1 [BAT_SENSE] of C44 on F.Cu",
+                    "pos": {
+                        "x": 30.475,
+                        "y": 7.75
+                    },
+                    "uuid": "aef2b116-1315-4f08-b630-5dbaa5f3fb59"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 2 [GND] of C44 on F.Cu",
+                    "pos": {
+                        "x": 32.025,
+                        "y": 7.75
+                    },
+                    "uuid": "c76debcd-85a0-48c7-a135-cec4a144ed74"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint C45",
+                    "pos": {
+                        "x": 49.0,
+                        "y": 41.25
+                    },
+                    "uuid": "6fe205de-c4dd-4762-ace9-9dc153cfe5c4"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (3V3D) doesn't match net given by schematic (/3V3D)",
+            "items": [
+                {
+                    "description": "Pad 1 [3V3D] of C45 on F.Cu",
+                    "pos": {
+                        "x": 48.225,
+                        "y": 41.25
+                    },
+                    "uuid": "57507d57-0c87-4149-a6fc-5b0667fd6255"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 2 [GND] of C45 on F.Cu",
+                    "pos": {
+                        "x": 49.775,
+                        "y": 41.25
+                    },
+                    "uuid": "3a465168-6eff-40b7-aaa1-e844df94dc81"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint C46",
+                    "pos": {
+                        "x": 52.0,
+                        "y": 46.75
+                    },
+                    "uuid": "6a87f168-f339-46e3-b2a9-edf52670b210"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (3V0A) doesn't match net given by schematic (/3V0A)",
+            "items": [
+                {
+                    "description": "Pad 1 [3V0A] of C46 on F.Cu",
+                    "pos": {
+                        "x": 51.225,
+                        "y": 46.75
+                    },
+                    "uuid": "ce9c88b8-847d-474d-85f9-2b6a88297140"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 2 [GND] of C46 on F.Cu",
+                    "pos": {
+                        "x": 52.775,
+                        "y": 46.75
+                    },
+                    "uuid": "651769d6-454f-4afb-bf40-b495d7c3660e"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint C100",
+                    "pos": {
+                        "x": 60.75,
+                        "y": 9.75
+                    },
+                    "uuid": "55f3f037-691b-496a-b6ea-805afa8b5e23"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (RC0A) doesn't match net given by schematic (/RC0A)",
+            "items": [
+                {
+                    "description": "Pad 1 [RC0A] of C100 on F.Cu",
+                    "pos": {
+                        "x": 60.75,
+                        "y": 10.525
+                    },
+                    "uuid": "f0b3695f-c4a0-44bb-b50a-071c73c58ac0"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 2 [GND] of C100 on F.Cu",
+                    "pos": {
+                        "x": 60.75,
+                        "y": 8.975
+                    },
+                    "uuid": "3bd1ae60-fa62-4a15-911f-91de41740763"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint C101",
+                    "pos": {
+                        "x": 59.0,
+                        "y": 9.75
+                    },
+                    "uuid": "6dacace1-5f48-430a-b727-6435fdba25fb"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (RC0B) doesn't match net given by schematic (/RC0B)",
+            "items": [
+                {
+                    "description": "Pad 1 [RC0B] of C101 on F.Cu",
+                    "pos": {
+                        "x": 59.0,
+                        "y": 10.525
+                    },
+                    "uuid": "5defd9d3-6e8e-44ad-b2ee-73064d353fe4"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 2 [GND] of C101 on F.Cu",
+                    "pos": {
+                        "x": 59.0,
+                        "y": 8.975
+                    },
+                    "uuid": "12132b59-3f85-4301-80b6-a691cb5d1229"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint C102",
+                    "pos": {
+                        "x": 47.25,
+                        "y": 15.5
+                    },
+                    "uuid": "1bde1667-d2d1-4ce3-888b-fdd2a1af8866"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (AIN0P) doesn't match net given by schematic (/AIN0P)",
+            "items": [
+                {
+                    "description": "Pad 1 [AIN0P] of C102 on F.Cu",
+                    "pos": {
+                        "x": 47.25,
+                        "y": 16.275
+                    },
+                    "uuid": "3d0c57b0-6387-44fc-9231-459d74c81ad9"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 2 [GND] of C102 on F.Cu",
+                    "pos": {
+                        "x": 47.25,
+                        "y": 14.725
+                    },
+                    "uuid": "90c78cb5-5e57-4da1-b5de-610294460b5f"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint C110",
+                    "pos": {
+                        "x": 63.0,
+                        "y": 15.75
+                    },
+                    "uuid": "a7474ea4-6399-41bc-aba1-f4a5fd6a017d"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (RC1A) doesn't match net given by schematic (/RC1A)",
+            "items": [
+                {
+                    "description": "Pad 1 [RC1A] of C110 on F.Cu",
+                    "pos": {
+                        "x": 63.0,
+                        "y": 16.525
+                    },
+                    "uuid": "7f063a80-d29c-4221-81b4-a12af7927327"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 2 [GND] of C110 on F.Cu",
+                    "pos": {
+                        "x": 63.0,
+                        "y": 14.975
+                    },
+                    "uuid": "9d11de85-187a-44dc-9fd9-587495fbe7b7"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint C111",
+                    "pos": {
+                        "x": 58.25,
+                        "y": 29.0
+                    },
+                    "uuid": "e23ca29b-cd37-47cd-a697-9de04d64cd57"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (RC1B) doesn't match net given by schematic (/RC1B)",
+            "items": [
+                {
+                    "description": "Pad 1 [RC1B] of C111 on F.Cu",
+                    "pos": {
+                        "x": 58.25,
+                        "y": 29.775
+                    },
+                    "uuid": "bded80c2-1dfd-49f8-b11e-f84bf42fcf44"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 2 [GND] of C111 on F.Cu",
+                    "pos": {
+                        "x": 58.25,
+                        "y": 28.225
+                    },
+                    "uuid": "c9ec5554-f892-44d5-96c4-93754061a811"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint C112",
+                    "pos": {
+                        "x": 42.25,
+                        "y": 22.75
+                    },
+                    "uuid": "f6c7f0c2-29da-4069-ba1f-34c5e52f90fc"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (AIN1P) doesn't match net given by schematic (/AIN1P)",
+            "items": [
+                {
+                    "description": "Pad 1 [AIN1P] of C112 on F.Cu",
+                    "pos": {
+                        "x": 42.25,
+                        "y": 23.525
+                    },
+                    "uuid": "56217d4d-27cf-4763-877d-8ee94abd4e72"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 2 [GND] of C112 on F.Cu",
+                    "pos": {
+                        "x": 42.25,
+                        "y": 21.975
+                    },
+                    "uuid": "ad170049-c0fa-40ed-b23f-bd84d12950de"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint C120",
+                    "pos": {
+                        "x": 64.25,
+                        "y": 28.0
+                    },
+                    "uuid": "316b44c0-2478-458e-99be-becfed00953d"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (RC2A) doesn't match net given by schematic (/RC2A)",
+            "items": [
+                {
+                    "description": "Pad 1 [RC2A] of C120 on F.Cu",
+                    "pos": {
+                        "x": 64.25,
+                        "y": 28.775
+                    },
+                    "uuid": "bdd5e81a-8a45-4bf6-a58f-b27dde11f1d0"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 2 [GND] of C120 on F.Cu",
+                    "pos": {
+                        "x": 64.25,
+                        "y": 27.225
+                    },
+                    "uuid": "5781b3aa-afb3-49db-b1bf-50264542742f"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint C121",
+                    "pos": {
+                        "x": 63.0,
+                        "y": 31.25
+                    },
+                    "uuid": "6874d0b3-86c5-4928-b8bb-e69fc9c1c581"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (RC2B) doesn't match net given by schematic (/RC2B)",
+            "items": [
+                {
+                    "description": "Pad 1 [RC2B] of C121 on F.Cu",
+                    "pos": {
+                        "x": 63.0,
+                        "y": 32.025
+                    },
+                    "uuid": "3c0c6eb7-c7df-4a79-8ffc-40898860cd23"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 2 [GND] of C121 on F.Cu",
+                    "pos": {
+                        "x": 63.0,
+                        "y": 30.475
+                    },
+                    "uuid": "19fba52b-394e-4a2b-a5ed-103d3f5034c8"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint C122",
+                    "pos": {
+                        "x": 45.0,
+                        "y": 38.5
+                    },
+                    "uuid": "dd9bda28-5d9f-47eb-af5f-6eadd0933777"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (AIN2P) doesn't match net given by schematic (/AIN2P)",
+            "items": [
+                {
+                    "description": "Pad 1 [AIN2P] of C122 on F.Cu",
+                    "pos": {
+                        "x": 45.0,
+                        "y": 39.275
+                    },
+                    "uuid": "cf258805-2295-4424-8c55-3adede96b57a"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 2 [GND] of C122 on F.Cu",
+                    "pos": {
+                        "x": 45.0,
+                        "y": 37.725
+                    },
+                    "uuid": "d61068aa-9a7b-4fb7-8400-8982c37e35ea"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint C130",
+                    "pos": {
+                        "x": 55.5,
+                        "y": 38.25
+                    },
+                    "uuid": "5636d9b7-1e70-4c38-9fb7-15c2b4a59ff2"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (RC3A) doesn't match net given by schematic (/RC3A)",
+            "items": [
+                {
+                    "description": "Pad 1 [RC3A] of C130 on F.Cu",
+                    "pos": {
+                        "x": 55.5,
+                        "y": 39.025
+                    },
+                    "uuid": "25e97021-4d8b-4e87-9a61-c1f3d5f35437"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 2 [GND] of C130 on F.Cu",
+                    "pos": {
+                        "x": 55.5,
+                        "y": 37.475
+                    },
+                    "uuid": "1102040e-65e9-4e19-8e9d-7ef4e7736ac6"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint C131",
+                    "pos": {
+                        "x": 52.75,
+                        "y": 43.5
+                    },
+                    "uuid": "6658f3f9-e6fb-403a-b402-8e2e8bddbd0c"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (RC3B) doesn't match net given by schematic (/RC3B)",
+            "items": [
+                {
+                    "description": "Pad 1 [RC3B] of C131 on F.Cu",
+                    "pos": {
+                        "x": 52.75,
+                        "y": 44.275
+                    },
+                    "uuid": "c4d6f651-e81e-4900-8219-b9c8582518c1"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 2 [GND] of C131 on F.Cu",
+                    "pos": {
+                        "x": 52.75,
+                        "y": 42.725
+                    },
+                    "uuid": "4ffa3816-d3ec-4386-9273-577125e012f5"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint C132",
+                    "pos": {
+                        "x": 45.0,
+                        "y": 44.0
+                    },
+                    "uuid": "ed2051bc-fbfa-42df-8b7d-0ced950a8ba2"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (AIN3P) doesn't match net given by schematic (/AIN3P)",
+            "items": [
+                {
+                    "description": "Pad 1 [AIN3P] of C132 on F.Cu",
+                    "pos": {
+                        "x": 45.0,
+                        "y": 44.775
+                    },
+                    "uuid": "f34f16d3-e892-4da3-a1e9-338ee68fdecf"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 2 [GND] of C132 on F.Cu",
+                    "pos": {
+                        "x": 45.0,
+                        "y": 43.225
+                    },
+                    "uuid": "f754847f-760a-4a1e-aab4-e12221919e07"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint C200",
+                    "pos": {
+                        "x": 41.5,
+                        "y": 20.25
+                    },
+                    "uuid": "f6166215-d77d-4020-ba76-325c920fe063"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (5V_ADC) doesn't match net given by schematic (/5V_ADC)",
+            "items": [
+                {
+                    "description": "Pad 1 [5V_ADC] of C200 on F.Cu",
+                    "pos": {
+                        "x": 40.725,
+                        "y": 20.25
+                    },
+                    "uuid": "63c4f021-746f-46b8-a041-70ec001db617"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 2 [GND] of C200 on F.Cu",
+                    "pos": {
+                        "x": 42.275,
+                        "y": 20.25
+                    },
+                    "uuid": "a69534f7-016a-4b2b-9383-19e0945af00c"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint C201",
+                    "pos": {
+                        "x": 61.75,
+                        "y": 26.5
+                    },
+                    "uuid": "9035376f-60a6-4a17-930c-948e73d1345d"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (5V_ADC) doesn't match net given by schematic (/5V_ADC)",
+            "items": [
+                {
+                    "description": "Pad 1 [5V_ADC] of C201 on F.Cu",
+                    "pos": {
+                        "x": 60.975,
+                        "y": 26.5
+                    },
+                    "uuid": "3a75241e-669e-42ad-b3e8-3778f5c4a441"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 2 [GND] of C201 on F.Cu",
+                    "pos": {
+                        "x": 62.525,
+                        "y": 26.5
+                    },
+                    "uuid": "29a9237d-a93c-4725-8b71-17bfabd2ecc8"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint C202",
+                    "pos": {
+                        "x": 58.5,
+                        "y": 18.25
+                    },
+                    "uuid": "ef785b65-c8ed-4b93-8912-00e3638d8f92"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (5V_ADC) doesn't match net given by schematic (/5V_ADC)",
+            "items": [
+                {
+                    "description": "Pad 1 [5V_ADC] of C202 on F.Cu",
+                    "pos": {
+                        "x": 57.725,
+                        "y": 18.25
+                    },
+                    "uuid": "a1c6d1f8-0cef-439e-a9eb-e2493bd74301"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 2 [GND] of C202 on F.Cu",
+                    "pos": {
+                        "x": 59.275,
+                        "y": 18.25
+                    },
+                    "uuid": "4653ec96-c04b-4a2e-87d8-72ff885987db"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint C203",
+                    "pos": {
+                        "x": 61.0,
+                        "y": 28.5
+                    },
+                    "uuid": "49b81ef2-e7ea-4237-9fb7-39efc7fd8665"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (5V_ADC) doesn't match net given by schematic (/5V_ADC)",
+            "items": [
+                {
+                    "description": "Pad 1 [5V_ADC] of C203 on F.Cu",
+                    "pos": {
+                        "x": 60.05,
+                        "y": 28.5
+                    },
+                    "uuid": "1208f389-c3f8-447e-8f3f-53bca17aff8d"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 2 [GND] of C203 on F.Cu",
+                    "pos": {
+                        "x": 61.95,
+                        "y": 28.5
+                    },
+                    "uuid": "a071c5b6-783a-45cd-ab6a-8bc41bf91c5b"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint C204",
+                    "pos": {
+                        "x": 49.25,
+                        "y": 32.0
+                    },
+                    "uuid": "66646288-7b3f-4e83-bf69-95b185c7b6de"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (3V3D) doesn't match net given by schematic (/3V3D)",
+            "items": [
+                {
+                    "description": "Pad 1 [3V3D] of C204 on F.Cu",
+                    "pos": {
+                        "x": 48.475,
+                        "y": 32.0
+                    },
+                    "uuid": "59e3af5b-a9ba-46d6-8727-9a74d2b2eb49"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 2 [GND] of C204 on F.Cu",
+                    "pos": {
+                        "x": 50.025,
+                        "y": 32.0
+                    },
+                    "uuid": "0b1100be-f146-43b6-8a33-a2a6d882a3ad"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint C205",
+                    "pos": {
+                        "x": 58.5,
+                        "y": 26.5
+                    },
+                    "uuid": "82ffa05f-5e57-4793-838f-51b0385b6b90"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (REGCAP_A) doesn't match net given by schematic (/REGCAP_A)",
+            "items": [
+                {
+                    "description": "Pad 1 [REGCAP_A] of C205 on F.Cu",
+                    "pos": {
+                        "x": 57.725,
+                        "y": 26.5
+                    },
+                    "uuid": "7cdefaa7-df96-4424-874c-3e7781b41861"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 2 [GND] of C205 on F.Cu",
+                    "pos": {
+                        "x": 59.275,
+                        "y": 26.5
+                    },
+                    "uuid": "57c3357c-e9b6-46b7-9058-7cbf04fe53f9"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint C206",
+                    "pos": {
+                        "x": 58.5,
+                        "y": 24.5
+                    },
+                    "uuid": "433d41ee-1034-4d73-9c6e-6472ef4722e2"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (REGCAP_B) doesn't match net given by schematic (/REGCAP_B)",
+            "items": [
+                {
+                    "description": "Pad 1 [REGCAP_B] of C206 on F.Cu",
+                    "pos": {
+                        "x": 57.725,
+                        "y": 24.5
+                    },
+                    "uuid": "7301a479-d253-47e7-b589-8bf4da948d8c"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 2 [GND] of C206 on F.Cu",
+                    "pos": {
+                        "x": 59.275,
+                        "y": 24.5
+                    },
+                    "uuid": "aebf9914-f831-4179-9260-5fb64a0557ca"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint C207",
+                    "pos": {
+                        "x": 58.75,
+                        "y": 22.5
+                    },
+                    "uuid": "db71b079-3694-495a-9fb0-1097256503a5"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (ADC_REF) doesn't match net given by schematic (/ADC_REF)",
+            "items": [
+                {
+                    "description": "Pad 1 [ADC_REF] of C207 on F.Cu",
+                    "pos": {
+                        "x": 57.8,
+                        "y": 22.5
+                    },
+                    "uuid": "79a4ebf4-4903-4293-b478-6a19c67e035e"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 2 [GND] of C207 on F.Cu",
+                    "pos": {
+                        "x": 59.7,
+                        "y": 22.5
+                    },
+                    "uuid": "d7c945e1-b1d1-4994-844e-5f9067b3a159"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint C208",
+                    "pos": {
+                        "x": 58.75,
+                        "y": 20.25
+                    },
+                    "uuid": "e6b736c2-63d9-4d65-8a2a-2f142b0c7be7"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (ADC_REFCAP) doesn't match net given by schematic (/ADC_REFCAP)",
+            "items": [
+                {
+                    "description": "Pad 1 [ADC_REFCAP] of C208 on F.Cu",
+                    "pos": {
+                        "x": 57.8,
+                        "y": 20.25
+                    },
+                    "uuid": "9fd5f020-b077-44ea-9559-a57d36431148"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 2 [GND] of C208 on F.Cu",
+                    "pos": {
+                        "x": 59.7,
+                        "y": 20.25
+                    },
+                    "uuid": "0ddf2997-db9e-44cb-ae0f-72f8d9bde228"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint C210",
+                    "pos": {
+                        "x": 32.25,
+                        "y": 21.75
+                    },
+                    "uuid": "6b75cd74-f6af-4fd8-96d4-365f6d90ad0e"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (3V3D) doesn't match net given by schematic (/3V3D)",
+            "items": [
+                {
+                    "description": "Pad 1 [3V3D] of C210 on F.Cu",
+                    "pos": {
+                        "x": 31.475,
+                        "y": 21.75
+                    },
+                    "uuid": "3d9f31df-1f99-4b21-a947-07ece79f2e27"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 2 [GND] of C210 on F.Cu",
+                    "pos": {
+                        "x": 33.025,
+                        "y": 21.75
+                    },
+                    "uuid": "f7a4242e-02cc-4361-9abf-47b3705e19f3"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint C211",
+                    "pos": {
+                        "x": 30.0,
+                        "y": 27.0
+                    },
+                    "uuid": "3ce3c405-de0c-4b1d-b8e4-c3a6044e1aa2"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (5V_ADC) doesn't match net given by schematic (/5V_ADC)",
+            "items": [
+                {
+                    "description": "Pad 1 [5V_ADC] of C211 on F.Cu",
+                    "pos": {
+                        "x": 29.225,
+                        "y": 27.0
+                    },
+                    "uuid": "611f0f3f-64b0-4788-bb47-08f864998b79"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 2 [GND] of C211 on F.Cu",
+                    "pos": {
+                        "x": 30.775,
+                        "y": 27.0
+                    },
+                    "uuid": "07703ee6-c627-4ef5-a478-be96cd4c9436"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint C212",
+                    "pos": {
+                        "x": 36.5,
+                        "y": 24.0
+                    },
+                    "uuid": "71b6f276-5aa3-498b-94ad-1dab2140089a"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (CP_PLUS) doesn't match net given by schematic (/CP_PLUS)",
+            "items": [
+                {
+                    "description": "Pad 1 [CP_PLUS] of C212 on F.Cu",
+                    "pos": {
+                        "x": 35.725,
+                        "y": 24.0
+                    },
+                    "uuid": "11780d88-ed79-41cf-97f8-7d59f8c6b1ee"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (CP_MINUS) doesn't match net given by schematic (/CP_MINUS)",
+            "items": [
+                {
+                    "description": "Pad 2 [CP_MINUS] of C212 on F.Cu",
+                    "pos": {
+                        "x": 37.275,
+                        "y": 24.0
+                    },
+                    "uuid": "af80e15b-8475-4fe0-933b-1c181b896676"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint D1",
+                    "pos": {
+                        "x": 3.75,
+                        "y": 38.75
+                    },
+                    "uuid": "3be670b9-19ca-4acf-8f42-1a5753bfbd33"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (USB_DP) doesn't match net given by schematic (/USB_DP)",
+            "items": [
+                {
+                    "description": "Pad 1 [USB_DP] of D1 on F.Cu",
+                    "pos": {
+                        "x": 2.6125,
+                        "y": 37.8
+                    },
+                    "uuid": "325a81a0-d74e-4cc4-947a-2cc1d7cadb42"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 2 [GND] of D1 on F.Cu",
+                    "pos": {
+                        "x": 2.6125,
+                        "y": 38.75
+                    },
+                    "uuid": "84f57323-259c-4c07-ac06-c8101c9ccda5"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (USB_DM) doesn't match net given by schematic (/USB_DM)",
+            "items": [
+                {
+                    "description": "Pad 3 [USB_DM] of D1 on F.Cu",
+                    "pos": {
+                        "x": 2.6125,
+                        "y": 39.7
+                    },
+                    "uuid": "55d41171-2b7c-482d-85d5-7478d26d20c2"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad missing net given by schematic (unconnected-(D1-NC-Pad4))",
+            "items": [
+                {
+                    "description": "Pad 4 [<no net>] of D1 on F.Cu",
+                    "pos": {
+                        "x": 4.8875,
+                        "y": 39.7
+                    },
+                    "uuid": "377e312a-9ac1-4842-9acd-565d45b99092"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (USB_VBUS) doesn't match net given by schematic (/USB_VBUS)",
+            "items": [
+                {
+                    "description": "Pad 5 [USB_VBUS] of D1 on F.Cu",
+                    "pos": {
+                        "x": 4.8875,
+                        "y": 38.75
+                    },
+                    "uuid": "54d018be-0be6-4b97-bd22-02f3a6d7317e"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad missing net given by schematic (unconnected-(D1-NC-Pad6))",
+            "items": [
+                {
+                    "description": "Pad 6 [<no net>] of D1 on F.Cu",
+                    "pos": {
+                        "x": 4.8875,
+                        "y": 37.8
+                    },
+                    "uuid": "3ffe0fc5-d0e4-4f5c-812d-8c9f8372bb64"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint D10",
+                    "pos": {
+                        "x": 63.75,
+                        "y": 9.5
+                    },
+                    "uuid": "6dcdf6f8-6572-46a4-900a-1528d3848b30"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 1 [GND] of D10 on F.Cu",
+                    "pos": {
+                        "x": 62.8125,
+                        "y": 8.55
+                    },
+                    "uuid": "e6c96506-b7df-49d2-963c-c0d08fc2a46d"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (3V0A) doesn't match net given by schematic (/3V0A)",
+            "items": [
+                {
+                    "description": "Pad 2 [3V0A] of D10 on F.Cu",
+                    "pos": {
+                        "x": 62.8125,
+                        "y": 10.45
+                    },
+                    "uuid": "6a67a1dc-8c89-4796-bd37-6c628ce0147f"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (RC0A) doesn't match net given by schematic (/RC0A)",
+            "items": [
+                {
+                    "description": "Pad 3 [RC0A] of D10 on F.Cu",
+                    "pos": {
+                        "x": 64.6875,
+                        "y": 9.5
+                    },
+                    "uuid": "e0c5295a-fd2b-426f-bcc8-b84039639531"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint D11",
+                    "pos": {
+                        "x": 63.75,
+                        "y": 22.0
+                    },
+                    "uuid": "7af8ea5b-bdf5-423f-99a2-8b0dbe811d79"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 1 [GND] of D11 on F.Cu",
+                    "pos": {
+                        "x": 62.8125,
+                        "y": 21.05
+                    },
+                    "uuid": "bb5d6ec2-cc1b-42b5-8b5f-fe9ab7e2b17c"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (3V0A) doesn't match net given by schematic (/3V0A)",
+            "items": [
+                {
+                    "description": "Pad 2 [3V0A] of D11 on F.Cu",
+                    "pos": {
+                        "x": 62.8125,
+                        "y": 22.95
+                    },
+                    "uuid": "aeb23539-9cfa-44a4-8f56-304079704a07"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (RC1A) doesn't match net given by schematic (/RC1A)",
+            "items": [
+                {
+                    "description": "Pad 3 [RC1A] of D11 on F.Cu",
+                    "pos": {
+                        "x": 64.6875,
+                        "y": 22.0
+                    },
+                    "uuid": "abdf0ab1-63ee-438e-8653-906f8d7c6562"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint D12",
+                    "pos": {
+                        "x": 58.5,
+                        "y": 38.5
+                    },
+                    "uuid": "d08eb6ac-31ac-4ec2-a9b6-5016fca1763d"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 1 [GND] of D12 on F.Cu",
+                    "pos": {
+                        "x": 57.5625,
+                        "y": 37.55
+                    },
+                    "uuid": "27ac50a7-78d5-4bc8-9586-48be1dde6c1d"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (3V0A) doesn't match net given by schematic (/3V0A)",
+            "items": [
+                {
+                    "description": "Pad 2 [3V0A] of D12 on F.Cu",
+                    "pos": {
+                        "x": 57.5625,
+                        "y": 39.45
+                    },
+                    "uuid": "6b852476-f066-40c3-806c-1b6d3b732920"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (RC2A) doesn't match net given by schematic (/RC2A)",
+            "items": [
+                {
+                    "description": "Pad 3 [RC2A] of D12 on F.Cu",
+                    "pos": {
+                        "x": 59.4375,
+                        "y": 38.5
+                    },
+                    "uuid": "b93f71fe-c445-4ab7-963f-4f632971ae8e"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint D13",
+                    "pos": {
+                        "x": 55.75,
+                        "y": 42.25
+                    },
+                    "uuid": "6e57d6ed-8b34-4546-96a2-40fa27f7d8ad"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 1 [GND] of D13 on F.Cu",
+                    "pos": {
+                        "x": 54.8125,
+                        "y": 41.3
+                    },
+                    "uuid": "d4534785-75c4-4b9e-9392-77fa86303a2e"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (3V0A) doesn't match net given by schematic (/3V0A)",
+            "items": [
+                {
+                    "description": "Pad 2 [3V0A] of D13 on F.Cu",
+                    "pos": {
+                        "x": 54.8125,
+                        "y": 43.2
+                    },
+                    "uuid": "8320443b-ce91-42f6-8501-c66a806f955a"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (RC3A) doesn't match net given by schematic (/RC3A)",
+            "items": [
+                {
+                    "description": "Pad 3 [RC3A] of D13 on F.Cu",
+                    "pos": {
+                        "x": 56.6875,
+                        "y": 42.25
+                    },
+                    "uuid": "87f6140c-ab3d-4d25-beed-d65563b0980a"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint D20",
+                    "pos": {
+                        "x": 35.0,
+                        "y": 9.5
+                    },
+                    "uuid": "a2513fef-0c96-4c04-af97-62b02b1a2ba5"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 1 [GND] of D20 on F.Cu",
+                    "pos": {
+                        "x": 34.2125,
+                        "y": 9.5
+                    },
+                    "uuid": "8fa9a90a-bcaf-464c-84d1-5b3d6e8c8314"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (LED_REC_A) doesn't match net given by schematic (/LED_REC_A)",
+            "items": [
+                {
+                    "description": "Pad 2 [LED_REC_A] of D20 on F.Cu",
+                    "pos": {
+                        "x": 35.7875,
+                        "y": 9.5
+                    },
+                    "uuid": "ab0a445d-0094-4520-89ff-523bb856658d"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint D21",
+                    "pos": {
+                        "x": 35.5,
+                        "y": 18.5
+                    },
+                    "uuid": "9f1dd986-766f-45f7-9fa7-99ced30c6b2d"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 1 [GND] of D21 on F.Cu",
+                    "pos": {
+                        "x": 34.7125,
+                        "y": 18.5
+                    },
+                    "uuid": "213e22d5-6f2f-44fc-a378-e22a09b1712f"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (LED_ERR_A) doesn't match net given by schematic (/LED_ERR_A)",
+            "items": [
+                {
+                    "description": "Pad 2 [LED_ERR_A] of D21 on F.Cu",
+                    "pos": {
+                        "x": 36.2875,
+                        "y": 18.5
+                    },
+                    "uuid": "8f5a3e73-e0b9-4df4-83d6-d8f6566d7d99"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint D22",
+                    "pos": {
+                        "x": 44.75,
+                        "y": 11.25
+                    },
+                    "uuid": "ff1dd1e6-e9fe-46b7-8624-8fa88be7839f"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 1 [GND] of D22 on F.Cu",
+                    "pos": {
+                        "x": 43.9625,
+                        "y": 11.25
+                    },
+                    "uuid": "3cca5140-3499-46e9-b5b8-e078c1a068cf"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (LED_LOW_A) doesn't match net given by schematic (/LED_LOW_A)",
+            "items": [
+                {
+                    "description": "Pad 2 [LED_LOW_A] of D22 on F.Cu",
+                    "pos": {
+                        "x": 45.5375,
+                        "y": 11.25
+                    },
+                    "uuid": "6fce423d-12e5-43e7-a8f3-413d407f0435"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Footprint attributes don't match symbol: 'Exclude from bill of materials' settings differ",
+            "items": [
+                {
+                    "description": "Footprint H1",
+                    "pos": {
+                        "x": 12.5,
+                        "y": 36.25
+                    },
+                    "uuid": "669677fc-b871-4a83-9f9c-14797edb8f63"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_mismatch"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint H1",
+                    "pos": {
+                        "x": 12.5,
+                        "y": 36.25
+                    },
+                    "uuid": "669677fc-b871-4a83-9f9c-14797edb8f63"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Footprint attributes don't match symbol: 'Exclude from bill of materials' settings differ",
+            "items": [
+                {
+                    "description": "Footprint H2",
+                    "pos": {
+                        "x": 72.0,
+                        "y": 3.0
+                    },
+                    "uuid": "ea66327f-6368-47e8-b04d-0b50dc760199"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_mismatch"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint H2",
+                    "pos": {
+                        "x": 72.0,
+                        "y": 3.0
+                    },
+                    "uuid": "ea66327f-6368-47e8-b04d-0b50dc760199"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Footprint attributes don't match symbol: 'Exclude from bill of materials' settings differ",
+            "items": [
+                {
+                    "description": "Footprint H3",
+                    "pos": {
+                        "x": 63.25,
+                        "y": 40.5
+                    },
+                    "uuid": "85cb7870-2936-4c66-b5e4-afaab38dc496"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_mismatch"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint H3",
+                    "pos": {
+                        "x": 63.25,
+                        "y": 40.5
+                    },
+                    "uuid": "85cb7870-2936-4c66-b5e4-afaab38dc496"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint J1",
+                    "pos": {
+                        "x": 6.0,
+                        "y": 45.5
+                    },
+                    "uuid": "8a48af8f-ebed-43f1-91eb-96941f82c899"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad A1 [GND] of J1 on F.Cu",
+                    "pos": {
+                        "x": 2.8,
+                        "y": 41.82
+                    },
+                    "uuid": "fd1a60c4-7c35-431f-8400-05c9ed92bc99"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (USB_VBUS) doesn't match net given by schematic (/USB_VBUS)",
+            "items": [
+                {
+                    "description": "Pad A4 [USB_VBUS] of J1 on F.Cu",
+                    "pos": {
+                        "x": 3.6,
+                        "y": 41.82
+                    },
+                    "uuid": "ea868f61-1c92-4c6b-b6d6-6a2baceeaa35"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (USB_CC1) doesn't match net given by schematic (/USB_CC1)",
+            "items": [
+                {
+                    "description": "Pad A5 [USB_CC1] of J1 on F.Cu",
+                    "pos": {
+                        "x": 4.75,
+                        "y": 41.82
+                    },
+                    "uuid": "a472e829-592d-406b-bbf4-b37faebf36f5"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (USB_DP) doesn't match net given by schematic (/USB_DP)",
+            "items": [
+                {
+                    "description": "Pad A6 [USB_DP] of J1 on F.Cu",
+                    "pos": {
+                        "x": 5.75,
+                        "y": 41.82
+                    },
+                    "uuid": "fc21479e-11d6-4c30-b3b6-f3cb7632af7d"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (USB_DM) doesn't match net given by schematic (/USB_DM)",
+            "items": [
+                {
+                    "description": "Pad A7 [USB_DM] of J1 on F.Cu",
+                    "pos": {
+                        "x": 6.25,
+                        "y": 41.82
+                    },
+                    "uuid": "fa1272ac-7684-4161-97f4-e8fac0c52ca1"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad missing net given by schematic (unconnected-(J1-NC-PadA8))",
+            "items": [
+                {
+                    "description": "Pad A8 [<no net>] of J1 on F.Cu",
+                    "pos": {
+                        "x": 7.25,
+                        "y": 41.82
+                    },
+                    "uuid": "996b5aeb-0a59-4ddc-a2a5-cd5a22f232fc"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (USB_VBUS) doesn't match net given by schematic (/USB_VBUS)",
+            "items": [
+                {
+                    "description": "Pad A9 [USB_VBUS] of J1 on F.Cu",
+                    "pos": {
+                        "x": 8.4,
+                        "y": 41.82
+                    },
+                    "uuid": "3dc45158-121f-451e-9661-90309b92dda2"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad A12 [GND] of J1 on F.Cu",
+                    "pos": {
+                        "x": 9.2,
+                        "y": 41.82
+                    },
+                    "uuid": "affbe6cf-a207-49ae-a20a-b64f9c726b27"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad B1 [GND] of J1 on F.Cu",
+                    "pos": {
+                        "x": 9.2,
+                        "y": 41.82
+                    },
+                    "uuid": "1d2ba86a-d471-4d0a-aa2b-38ad57c6e03e"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (USB_VBUS) doesn't match net given by schematic (/USB_VBUS)",
+            "items": [
+                {
+                    "description": "Pad B4 [USB_VBUS] of J1 on F.Cu",
+                    "pos": {
+                        "x": 8.4,
+                        "y": 41.82
+                    },
+                    "uuid": "d0a3b0b6-1b52-496c-bab3-adc613103069"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (USB_CC2) doesn't match net given by schematic (/USB_CC2)",
+            "items": [
+                {
+                    "description": "Pad B5 [USB_CC2] of J1 on F.Cu",
+                    "pos": {
+                        "x": 7.75,
+                        "y": 41.82
+                    },
+                    "uuid": "45844df8-c15c-4ec4-9400-d47c8f8b1e64"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (USB_DP) doesn't match net given by schematic (/USB_DP)",
+            "items": [
+                {
+                    "description": "Pad B6 [USB_DP] of J1 on F.Cu",
+                    "pos": {
+                        "x": 6.75,
+                        "y": 41.82
+                    },
+                    "uuid": "0c4e20a2-a336-42ec-8003-18f0121791f6"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (USB_DM) doesn't match net given by schematic (/USB_DM)",
+            "items": [
+                {
+                    "description": "Pad B7 [USB_DM] of J1 on F.Cu",
+                    "pos": {
+                        "x": 5.25,
+                        "y": 41.82
+                    },
+                    "uuid": "74aff3e9-d9e0-462a-97ec-c8f88a38298a"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad missing net given by schematic (unconnected-(J1-NC-PadB8))",
+            "items": [
+                {
+                    "description": "Pad B8 [<no net>] of J1 on F.Cu",
+                    "pos": {
+                        "x": 4.25,
+                        "y": 41.82
+                    },
+                    "uuid": "17909fa1-a6bf-4532-a9dc-9c5d1d4d822c"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (USB_VBUS) doesn't match net given by schematic (/USB_VBUS)",
+            "items": [
+                {
+                    "description": "Pad B9 [USB_VBUS] of J1 on F.Cu",
+                    "pos": {
+                        "x": 3.6,
+                        "y": 41.82
+                    },
+                    "uuid": "5187fc6c-2e94-4803-94bf-d1c5e207e0fb"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad B12 [GND] of J1 on F.Cu",
+                    "pos": {
+                        "x": 2.8,
+                        "y": 41.82
+                    },
+                    "uuid": "be0967e6-7098-4a04-8641-bc7c81c6bd51"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "PTH pad SH [GND] of J1",
+                    "pos": {
+                        "x": 1.68,
+                        "y": 42.395
+                    },
+                    "uuid": "4f8c40c8-c8d7-4248-b4ea-1df22c1c75fd"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "PTH pad SH [GND] of J1",
+                    "pos": {
+                        "x": 1.68,
+                        "y": 46.575
+                    },
+                    "uuid": "c15a3f84-bb7f-426d-8099-e1f8b8bee4ee"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "PTH pad SH [GND] of J1",
+                    "pos": {
+                        "x": 10.32,
+                        "y": 42.395
+                    },
+                    "uuid": "c12fab43-eb30-4a44-bc74-f78cd1aa3451"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "PTH pad SH [GND] of J1",
+                    "pos": {
+                        "x": 10.32,
+                        "y": 46.575
+                    },
+                    "uuid": "1d985cd6-6eee-45fa-9ce8-28a8fb9929b3"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint J2",
+                    "pos": {
+                        "x": 36.0,
+                        "y": 40.0
+                    },
+                    "uuid": "09bed9c7-d13b-4503-a2fc-5888f7f9509e"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (SD_D2) doesn't match net given by schematic (/SD_D2)",
+            "items": [
+                {
+                    "description": "Pad 1 [SD_D2] of J2 on F.Cu",
+                    "pos": {
+                        "x": 38.775,
+                        "y": 32.275
+                    },
+                    "uuid": "51bc7539-16eb-4015-9af8-3e764fd5e79e"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (SD_D3) doesn't match net given by schematic (/SD_D3)",
+            "items": [
+                {
+                    "description": "Pad 2 [SD_D3] of J2 on F.Cu",
+                    "pos": {
+                        "x": 37.675,
+                        "y": 32.275
+                    },
+                    "uuid": "9856f39b-3b33-48cf-b6ec-dcc745e772c8"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (SD_CMD) doesn't match net given by schematic (/SD_CMD)",
+            "items": [
+                {
+                    "description": "Pad 3 [SD_CMD] of J2 on F.Cu",
+                    "pos": {
+                        "x": 36.575,
+                        "y": 32.275
+                    },
+                    "uuid": "a8467e2e-ed33-4598-9577-8f2617af30d9"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (3V3D) doesn't match net given by schematic (/3V3D)",
+            "items": [
+                {
+                    "description": "Pad 4 [3V3D] of J2 on F.Cu",
+                    "pos": {
+                        "x": 35.475,
+                        "y": 32.275
+                    },
+                    "uuid": "482d01a0-4b40-4a3f-b4c1-f948cdd64977"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (SD_CLK) doesn't match net given by schematic (/SD_CLK)",
+            "items": [
+                {
+                    "description": "Pad 5 [SD_CLK] of J2 on F.Cu",
+                    "pos": {
+                        "x": 34.375,
+                        "y": 32.275
+                    },
+                    "uuid": "43126691-3250-4aad-934a-dae6f9d0401f"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 6 [GND] of J2 on F.Cu",
+                    "pos": {
+                        "x": 33.275,
+                        "y": 32.275
+                    },
+                    "uuid": "02e7c18a-387c-4330-a7a1-4ad33f58c341"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (SD_D0) doesn't match net given by schematic (/SD_D0)",
+            "items": [
+                {
+                    "description": "Pad 7 [SD_D0] of J2 on F.Cu",
+                    "pos": {
+                        "x": 32.175,
+                        "y": 32.275
+                    },
+                    "uuid": "479122db-d934-41a4-91d4-8d0a2543bc88"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (SD_D1) doesn't match net given by schematic (/SD_D1)",
+            "items": [
+                {
+                    "description": "Pad 8 [SD_D1] of J2 on F.Cu",
+                    "pos": {
+                        "x": 31.075,
+                        "y": 32.275
+                    },
+                    "uuid": "c482e94e-1a0c-4f10-8ee0-d702f68c6b9c"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad missing net given by schematic (unconnected-(J2-NC-Pad9))",
+            "items": [
+                {
+                    "description": "Pad 9 [<no net>] of J2 on F.Cu",
+                    "pos": {
+                        "x": 30.125,
+                        "y": 32.275
+                    },
+                    "uuid": "6129d982-377b-4db6-ac9e-b7d53dd3ea5c"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad missing net given by schematic (unconnected-(J2-NC-Pad10))",
+            "items": [
+                {
+                    "description": "Pad 10 [<no net>] of J2 on F.Cu",
+                    "pos": {
+                        "x": 29.175,
+                        "y": 42.775
+                    },
+                    "uuid": "4880e952-7f63-48f4-8294-22254ac7560e"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad SH [GND] of J2 on F.Cu",
+                    "pos": {
+                        "x": 29.175,
+                        "y": 36.575
+                    },
+                    "uuid": "19deaa7c-cebd-4216-b1b6-945b94176ad3"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad SH [GND] of J2 on F.Cu",
+                    "pos": {
+                        "x": 29.175,
+                        "y": 46.925
+                    },
+                    "uuid": "6dbda963-13ce-4db3-a897-02d3e21d648a"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad SH [GND] of J2 on F.Cu",
+                    "pos": {
+                        "x": 40.325,
+                        "y": 32.275
+                    },
+                    "uuid": "d4c2c4a6-dd05-4ea7-bdd4-3b7361d31124"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad SH [GND] of J2 on F.Cu",
+                    "pos": {
+                        "x": 42.675,
+                        "y": 47.375
+                    },
+                    "uuid": "9edeff4e-beda-4818-97f5-2922c6267722"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint J3",
+                    "pos": {
+                        "x": 44.0,
+                        "y": 3.75
+                    },
+                    "uuid": "20e3eee8-687c-404b-9a07-7202e372142c"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (3V3D) doesn't match net given by schematic (/3V3D)",
+            "items": [
+                {
+                    "description": "Pad 1 [3V3D] of J3 on F.Cu",
+                    "pos": {
+                        "x": 39.625,
+                        "y": 5.7
+                    },
+                    "uuid": "abb6fbea-9005-4459-b0b3-dcb5a7f50c56"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 2 [GND] of J3 on F.Cu",
+                    "pos": {
+                        "x": 40.875,
+                        "y": 5.7
+                    },
+                    "uuid": "e2602f13-5a73-407b-ad74-8e27fd63709f"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (IMU_SCK) doesn't match net given by schematic (/IMU_SCK)",
+            "items": [
+                {
+                    "description": "Pad 3 [IMU_SCK] of J3 on F.Cu",
+                    "pos": {
+                        "x": 42.125,
+                        "y": 5.7
+                    },
+                    "uuid": "1e9f121e-f2e7-4142-8330-7e1ff99c0d77"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (IMU_MOSI) doesn't match net given by schematic (/IMU_MOSI)",
+            "items": [
+                {
+                    "description": "Pad 4 [IMU_MOSI] of J3 on F.Cu",
+                    "pos": {
+                        "x": 43.375,
+                        "y": 5.7
+                    },
+                    "uuid": "f46d0a3b-f9ad-43e1-b1ab-ad160214ddd4"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (IMU_MISO) doesn't match net given by schematic (/IMU_MISO)",
+            "items": [
+                {
+                    "description": "Pad 5 [IMU_MISO] of J3 on F.Cu",
+                    "pos": {
+                        "x": 44.625,
+                        "y": 5.7
+                    },
+                    "uuid": "92cb3584-2311-4e84-a4de-81e8fc7f9a13"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (FOOT_CS) doesn't match net given by schematic (/FOOT_CS)",
+            "items": [
+                {
+                    "description": "Pad 6 [FOOT_CS] of J3 on F.Cu",
+                    "pos": {
+                        "x": 45.875,
+                        "y": 5.7
+                    },
+                    "uuid": "f4db69f4-1be1-49b3-9f6b-970a2acac54b"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (FOOT_INT) doesn't match net given by schematic (/FOOT_INT)",
+            "items": [
+                {
+                    "description": "Pad 7 [FOOT_INT] of J3 on F.Cu",
+                    "pos": {
+                        "x": 47.125,
+                        "y": 5.7
+                    },
+                    "uuid": "a614c8f6-7b03-4e02-ae27-55f3eacd8caf"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 8 [GND] of J3 on F.Cu",
+                    "pos": {
+                        "x": 48.375,
+                        "y": 5.7
+                    },
+                    "uuid": "e7d5b9bf-fe05-4f54-8b3b-c59e9cd56379"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint J4",
+                    "pos": {
+                        "x": 61.0,
+                        "y": 3.75
+                    },
+                    "uuid": "550cabfd-6de3-41f5-8440-80f1506c3103"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (3V3D) doesn't match net given by schematic (/3V3D)",
+            "items": [
+                {
+                    "description": "Pad 1 [3V3D] of J4 on F.Cu",
+                    "pos": {
+                        "x": 56.625,
+                        "y": 5.7
+                    },
+                    "uuid": "77a27088-e1b5-4b6b-a7df-0fd59996a7b1"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 2 [GND] of J4 on F.Cu",
+                    "pos": {
+                        "x": 57.875,
+                        "y": 5.7
+                    },
+                    "uuid": "dcb04e41-1d6d-43f0-b69d-afdbdce2e16d"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (IMU_SCK) doesn't match net given by schematic (/IMU_SCK)",
+            "items": [
+                {
+                    "description": "Pad 3 [IMU_SCK] of J4 on F.Cu",
+                    "pos": {
+                        "x": 59.125,
+                        "y": 5.7
+                    },
+                    "uuid": "536346ec-98a6-440e-a25d-4ad662201876"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (IMU_MOSI) doesn't match net given by schematic (/IMU_MOSI)",
+            "items": [
+                {
+                    "description": "Pad 4 [IMU_MOSI] of J4 on F.Cu",
+                    "pos": {
+                        "x": 60.375,
+                        "y": 5.7
+                    },
+                    "uuid": "8822e584-0e36-4f50-b97e-72d1dfb1e0da"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (IMU_MISO) doesn't match net given by schematic (/IMU_MISO)",
+            "items": [
+                {
+                    "description": "Pad 5 [IMU_MISO] of J4 on F.Cu",
+                    "pos": {
+                        "x": 61.625,
+                        "y": 5.7
+                    },
+                    "uuid": "de26c445-2098-4494-9643-838ec6c521f4"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (SHANK_CS) doesn't match net given by schematic (/SHANK_CS)",
+            "items": [
+                {
+                    "description": "Pad 6 [SHANK_CS] of J4 on F.Cu",
+                    "pos": {
+                        "x": 62.875,
+                        "y": 5.7
+                    },
+                    "uuid": "d9ca9927-1dc7-4af5-b428-6a66c33364db"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (SHANK_INT) doesn't match net given by schematic (/SHANK_INT)",
+            "items": [
+                {
+                    "description": "Pad 7 [SHANK_INT] of J4 on F.Cu",
+                    "pos": {
+                        "x": 64.125,
+                        "y": 5.7
+                    },
+                    "uuid": "5eb15dd2-6b2d-4712-9589-24b2b0235b51"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 8 [GND] of J4 on F.Cu",
+                    "pos": {
+                        "x": 65.375,
+                        "y": 5.7
+                    },
+                    "uuid": "ddc42f32-1048-4e82-8abb-d6959d25f16a"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint J5",
+                    "pos": {
+                        "x": 70.25,
+                        "y": 13.0
+                    },
+                    "uuid": "bcc158cc-5732-4ddf-808d-b399bf5838f5"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (3V0A) doesn't match net given by schematic (/3V0A)",
+            "items": [
+                {
+                    "description": "Pad 1 [3V0A] of J5 on F.Cu",
+                    "pos": {
+                        "x": 69.0,
+                        "y": 14.95
+                    },
+                    "uuid": "2ec2e154-75a5-41f7-ad56-0430fa48673a"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 2 [GND] of J5 on F.Cu",
+                    "pos": {
+                        "x": 70.25,
+                        "y": 14.95
+                    },
+                    "uuid": "cf9ab4b3-2449-4b6c-a2bd-7b29d8c487fc"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (RAW0) doesn't match net given by schematic (/RAW0)",
+            "items": [
+                {
+                    "description": "Pad 3 [RAW0] of J5 on F.Cu",
+                    "pos": {
+                        "x": 71.5,
+                        "y": 14.95
+                    },
+                    "uuid": "aef8f50c-2389-4c1c-a911-4a099545c877"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint J6",
+                    "pos": {
+                        "x": 70.25,
+                        "y": 23.0
+                    },
+                    "uuid": "d9cc0439-bc10-401a-9908-266628ca1583"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (3V0A) doesn't match net given by schematic (/3V0A)",
+            "items": [
+                {
+                    "description": "Pad 1 [3V0A] of J6 on F.Cu",
+                    "pos": {
+                        "x": 69.0,
+                        "y": 24.95
+                    },
+                    "uuid": "cd5aff05-7631-4f96-8181-34708f0e9f7a"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 2 [GND] of J6 on F.Cu",
+                    "pos": {
+                        "x": 70.25,
+                        "y": 24.95
+                    },
+                    "uuid": "7073b7d1-5049-43fc-9be3-a23c800fdbe6"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (RAW1) doesn't match net given by schematic (/RAW1)",
+            "items": [
+                {
+                    "description": "Pad 3 [RAW1] of J6 on F.Cu",
+                    "pos": {
+                        "x": 71.5,
+                        "y": 24.95
+                    },
+                    "uuid": "9ddb8ba5-90ca-41e7-91e4-fedcdc5488e0"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint J7",
+                    "pos": {
+                        "x": 70.25,
+                        "y": 33.0
+                    },
+                    "uuid": "1b55dcc5-ebb6-4f2b-a176-653734619add"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (3V0A) doesn't match net given by schematic (/3V0A)",
+            "items": [
+                {
+                    "description": "Pad 1 [3V0A] of J7 on F.Cu",
+                    "pos": {
+                        "x": 69.0,
+                        "y": 34.95
+                    },
+                    "uuid": "d0b99082-0956-4330-9211-2dea11e1c5f3"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 2 [GND] of J7 on F.Cu",
+                    "pos": {
+                        "x": 70.25,
+                        "y": 34.95
+                    },
+                    "uuid": "477de41e-2c26-4e24-8760-f75b8896e5cd"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (RAW2) doesn't match net given by schematic (/RAW2)",
+            "items": [
+                {
+                    "description": "Pad 3 [RAW2] of J7 on F.Cu",
+                    "pos": {
+                        "x": 71.5,
+                        "y": 34.95
+                    },
+                    "uuid": "12e42405-72e9-405f-9f5b-f604e2e85d43"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint J8",
+                    "pos": {
+                        "x": 70.25,
+                        "y": 43.0
+                    },
+                    "uuid": "ea5e0874-f387-4668-9e37-d1ee9ff0c3a2"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (3V0A) doesn't match net given by schematic (/3V0A)",
+            "items": [
+                {
+                    "description": "Pad 1 [3V0A] of J8 on F.Cu",
+                    "pos": {
+                        "x": 69.0,
+                        "y": 44.95
+                    },
+                    "uuid": "fc5aa782-f876-42e1-915d-a97820acfa99"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 2 [GND] of J8 on F.Cu",
+                    "pos": {
+                        "x": 70.25,
+                        "y": 44.95
+                    },
+                    "uuid": "3c69af26-f1ee-49c0-b2bb-b8d7db61c02f"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (RAW3) doesn't match net given by schematic (/RAW3)",
+            "items": [
+                {
+                    "description": "Pad 3 [RAW3] of J8 on F.Cu",
+                    "pos": {
+                        "x": 71.5,
+                        "y": 44.95
+                    },
+                    "uuid": "856999be-b918-4e04-bca1-fc14a1af794d"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint J9",
+                    "pos": {
+                        "x": 15.25,
+                        "y": 46.0
+                    },
+                    "uuid": "e2a9dce4-4497-4781-a947-3a33ba97753d"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (PACK_PLUS) doesn't match net given by schematic (/PACK_PLUS)",
+            "items": [
+                {
+                    "description": "Pad 1 [PACK_PLUS] of J9 on F.Cu",
+                    "pos": {
+                        "x": 14.625,
+                        "y": 47.95
+                    },
+                    "uuid": "02a1dd69-0752-40d8-b07c-d7d40429d9e1"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 2 [GND] of J9 on F.Cu",
+                    "pos": {
+                        "x": 15.875,
+                        "y": 47.95
+                    },
+                    "uuid": "2c9ae27a-be05-44b9-83b4-307a73d59e8f"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint J10",
+                    "pos": {
+                        "x": 37.0,
+                        "y": 14.0
+                    },
+                    "uuid": "1697f981-0783-40cd-9684-803ba85b698b"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (3V3D) doesn't match net given by schematic (/3V3D)",
+            "items": [
+                {
+                    "description": "Pad 1 [3V3D] of J10 on F.Cu",
+                    "pos": {
+                        "x": 33.875,
+                        "y": 15.95
+                    },
+                    "uuid": "f60f2061-b969-4172-9526-0891cb101939"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 2 [GND] of J10 on F.Cu",
+                    "pos": {
+                        "x": 35.125,
+                        "y": 15.95
+                    },
+                    "uuid": "2afeda89-eaaf-4bdb-a2b8-a7f92aa3ce41"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (EXP_SDA) doesn't match net given by schematic (/EXP_SDA)",
+            "items": [
+                {
+                    "description": "Pad 3 [EXP_SDA] of J10 on F.Cu",
+                    "pos": {
+                        "x": 36.375,
+                        "y": 15.95
+                    },
+                    "uuid": "113c9505-42a6-412e-b388-93dbf0ad4296"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (EXP_SCL) doesn't match net given by schematic (/EXP_SCL)",
+            "items": [
+                {
+                    "description": "Pad 4 [EXP_SCL] of J10 on F.Cu",
+                    "pos": {
+                        "x": 37.625,
+                        "y": 15.95
+                    },
+                    "uuid": "1ca0a2b9-c705-42bc-baf5-82d45fb7eb6a"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (UART_TX) doesn't match net given by schematic (/UART_TX)",
+            "items": [
+                {
+                    "description": "Pad 5 [UART_TX] of J10 on F.Cu",
+                    "pos": {
+                        "x": 38.875,
+                        "y": 15.95
+                    },
+                    "uuid": "1e9efeff-d99e-4c40-aec1-fc362d191bb0"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (UART_RX) doesn't match net given by schematic (/UART_RX)",
+            "items": [
+                {
+                    "description": "Pad 6 [UART_RX] of J10 on F.Cu",
+                    "pos": {
+                        "x": 40.125,
+                        "y": 15.95
+                    },
+                    "uuid": "c776a574-6491-4e66-9340-8c27721bc4e2"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint L1",
+                    "pos": {
+                        "x": 13.0,
+                        "y": 31.0
+                    },
+                    "uuid": "6843ae10-c65d-4a02-ad24-c79254cba234"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (SW_L1) doesn't match net given by schematic (/SW_L1)",
+            "items": [
+                {
+                    "description": "Pad 1 [SW_L1] of L1 on F.Cu",
+                    "pos": {
+                        "x": 11.815,
+                        "y": 31.0
+                    },
+                    "uuid": "cac3ad2d-0550-450b-95d4-5f6e98886cda"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (SW_L2) doesn't match net given by schematic (/SW_L2)",
+            "items": [
+                {
+                    "description": "Pad 2 [SW_L2] of L1 on F.Cu",
+                    "pos": {
+                        "x": 14.185,
+                        "y": 31.0
+                    },
+                    "uuid": "9595b32c-1909-446f-9362-36f64c0497fc"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint Q1",
+                    "pos": {
+                        "x": 28.0,
+                        "y": 11.0
+                    },
+                    "uuid": "de73a2f2-d7e4-4d3e-85eb-ac68b07b6156"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 1 [GND] of Q1 on F.Cu",
+                    "pos": {
+                        "x": 27.0625,
+                        "y": 10.05
+                    },
+                    "uuid": "f2919a2b-5ea9-4970-b54e-e83045ae4982"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (VBAT) doesn't match net given by schematic (/VBAT)",
+            "items": [
+                {
+                    "description": "Pad 2 [VBAT] of Q1 on F.Cu",
+                    "pos": {
+                        "x": 27.0625,
+                        "y": 11.95
+                    },
+                    "uuid": "900024c7-acde-4039-b8c2-d930c467328e"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (PACK_PLUS) doesn't match net given by schematic (/PACK_PLUS)",
+            "items": [
+                {
+                    "description": "Pad 3 [PACK_PLUS] of Q1 on F.Cu",
+                    "pos": {
+                        "x": 28.9375,
+                        "y": 11.0
+                    },
+                    "uuid": "9909a691-ff58-4b2e-acfa-928994c5a6ac"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint Q2",
+                    "pos": {
+                        "x": 17.0,
+                        "y": 40.75
+                    },
+                    "uuid": "4a5553cd-35da-44e0-a47f-bca97224377c"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (USB_GATE) doesn't match net given by schematic (/USB_GATE)",
+            "items": [
+                {
+                    "description": "Pad 1 [USB_GATE] of Q2 on F.Cu",
+                    "pos": {
+                        "x": 16.0625,
+                        "y": 39.8
+                    },
+                    "uuid": "f44830a2-f006-40c8-9daf-6e09e317cd2b"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (GND) doesn't match net given by schematic (/GND)",
+            "items": [
+                {
+                    "description": "Pad 2 [GND] of Q2 on F.Cu",
+                    "pos": {
+                        "x": 16.0625,
+                        "y": 41.7
+                    },
+                    "uuid": "69061b35-a32d-4109-81c2-7d8d9bfa4f71"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (USB_PRESENT_N) doesn't match net given by schematic (/USB_PRESENT_N)",
+            "items": [
+                {
+                    "description": "Pad 3 [USB_PRESENT_N] of Q2 on F.Cu",
+                    "pos": {
+                        "x": 17.9375,
+                        "y": 40.75
+                    },
+                    "uuid": "cc7a99d0-2e8c-4339-9a98-8c7d2da1a7aa"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint R1",
+                    "pos": {
+                        "x": 24.0,
+                        "y": 12.0
+                    },
+                    "uuid": "7c138687-2053-4c69-b912-a7cc3547a77d"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (3V3D) doesn't match net given by schematic (/3V3D)",
+            "items": [
+                {
+                    "description": "Pad 1 [3V3D] of R1 on F.Cu",
+                    "pos": {
+                        "x": 23.175,
+                        "y": 12.0
+                    },
+                    "uuid": "00713ded-81b0-4213-a39b-06201c3a25f1"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (EN) doesn't match net given by schematic (/EN)",
+            "items": [
+                {
+                    "description": "Pad 2 [EN] of R1 on F.Cu",
+                    "pos": {
+                        "x": 24.825,
+                        "y": 12.0
+                    },
+                    "uuid": "eb769308-6f75-436f-9067-23f696a9e4cd"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint R2",
+                    "pos": {
+                        "x": 12.0,
+                        "y": 27.5
+                    },
+                    "uuid": "d7cb1c6b-d04b-432d-882b-854cc27c9f4c"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (3V3D) doesn't match net given by schematic (/3V3D)",
+            "items": [
+                {
+                    "description": "Pad 1 [3V3D] of R2 on F.Cu",
+                    "pos": {
+                        "x": 11.175,
+                        "y": 27.5
+                    },
+                    "uuid": "7d66bc13-d1f3-4f50-a212-1ba0e62a4906"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (BOOT) doesn't match net given by schematic (/BOOT)",
+            "items": [
+                {
+                    "description": "Pad 2 [BOOT] of R2 on F.Cu",
+                    "pos": {
+                        "x": 12.825,
+                        "y": 27.5
+                    },
+                    "uuid": "04047fe3-3f92-4d29-a202-3d8a361f46fe"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint R3",
+                    "pos": {
+                        "x": 33.25,
+                        "y": 26.25
+                    },
+                    "uuid": "a3f0d0a7-0b36-4cc5-813a-8d1521e53887"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (3V3D) doesn't match net given by schematic (/3V3D)",
+            "items": [
+                {
+                    "description": "Pad 1 [3V3D] of R3 on F.Cu",
+                    "pos": {
+                        "x": 32.425,
+                        "y": 26.25
+                    },
+                    "uuid": "7b1cbc9b-12a6-421f-88d1-4650ddb1e6d6"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (BUTTON) doesn't match net given by schematic (/BUTTON)",
+            "items": [
+                {
+                    "description": "Pad 2 [BUTTON] of R3 on F.Cu",
+                    "pos": {
+                        "x": 34.075,
+                        "y": 26.25
+                    },
+                    "uuid": "a599e198-a518-4f3d-86e8-7295a8315328"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint R10",
+                    "pos": {
+                        "x": 34.25,
+                        "y": 29.0
+                    },
+                    "uuid": "03576c91-2680-46cb-a877-a223f1a0a266"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (3V3D) doesn't match net given by schematic (/3V3D)",
+            "items": [
+                {
+                    "description": "Pad 1 [3V3D] of R10 on F.Cu",
+                    "pos": {
+                        "x": 34.25,
+                        "y": 29.825
+                    },
+                    "uuid": "d2d49a51-35c8-48e7-859e-4a7fabb9cbde"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (SD_CMD) doesn't match net given by schematic (/SD_CMD)",
+            "items": [
+                {
+                    "description": "Pad 2 [SD_CMD] of R10 on F.Cu",
+                    "pos": {
+                        "x": 34.25,
+                        "y": 28.175
+                    },
+                    "uuid": "1b72f97f-6348-4a40-ab15-62c7cfaa4625"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint R11",
+                    "pos": {
+                        "x": 36.0,
+                        "y": 29.0
+                    },
+                    "uuid": "3ef06bf4-eec8-4983-a0d1-c3b9530b0eae"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (3V3D) doesn't match net given by schematic (/3V3D)",
+            "items": [
+                {
+                    "description": "Pad 1 [3V3D] of R11 on F.Cu",
+                    "pos": {
+                        "x": 36.0,
+                        "y": 29.825
+                    },
+                    "uuid": "811cec19-7f48-46ec-820f-5b6e0d33cf1b"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (SD_D0) doesn't match net given by schematic (/SD_D0)",
+            "items": [
+                {
+                    "description": "Pad 2 [SD_D0] of R11 on F.Cu",
+                    "pos": {
+                        "x": 36.0,
+                        "y": 28.175
+                    },
+                    "uuid": "e9c7a3ed-66dd-4fc1-8079-1aac97e63eac"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint R12",
+                    "pos": {
+                        "x": 37.75,
+                        "y": 29.0
+                    },
+                    "uuid": "3a0decf7-3070-47a9-99ea-55b4caf4a3e2"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (3V3D) doesn't match net given by schematic (/3V3D)",
+            "items": [
+                {
+                    "description": "Pad 1 [3V3D] of R12 on F.Cu",
+                    "pos": {
+                        "x": 37.75,
+                        "y": 29.825
+                    },
+                    "uuid": "f7149711-268d-4c47-ab23-5217a2a94ee7"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Pad net (SD_D1) doesn't match net given by schematic (/SD_D1)",
+            "items": [
+                {
+                    "description": "Pad 2 [SD_D1] of R12 on F.Cu",
+                    "pos": {
+                        "x": 37.75,
+                        "y": 28.175
+                    },
+                    "uuid": "22d58818-97aa-4f03-a967-6fc552cb9d55"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint R13",
+                    "pos": {
+                        "x": 39.5,
+                        "y": 27.0
+                    },
+                    "uuid": "3f44836c-dd3a-474f-a08c-3b9c6c871fb8"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Pad net (3V3D) doesn't match net given by schematic (/3V3D)",
+            "items": [
+                {
+                    "description": "Pad 1 [3V3D] of R13 on F.Cu",
+                    "pos": {
+                        "x": 39.5,
+                        "y": 27.825
+                    },
+                    "uuid": "b9b883c2-1063-4e90-aa1c-cf0c556dcc4d"
+                }
+            ],
+            "severity": "warning",
+            "type": "net_conflict"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint R14",
+                    "pos": {
+                        "x": 41.75,
+                        "y": 27.0
+                    },
+                    "uuid": "7d21e51e-41cd-488f-835c-545795e5db2c"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint R15",
+                    "pos": {
+                        "x": 20.75,
+                        "y": 39.25
+                    },
+                    "uuid": "58be8226-d3d8-490d-98d3-117389a2e758"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint R20",
+                    "pos": {
+                        "x": 8.25,
+                        "y": 38.5
+                    },
+                    "uuid": "4f4ee322-3624-4f5f-b9cb-707b82df892d"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint R21",
+                    "pos": {
+                        "x": 13.25,
+                        "y": 41.5
+                    },
+                    "uuid": "925589b2-5482-447f-aceb-51b321179af3"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint R22",
+                    "pos": {
+                        "x": 20.75,
+                        "y": 41.0
+                    },
+                    "uuid": "e5333222-a200-4d7e-82e6-15f65a659d9f"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint R23",
+                    "pos": {
+                        "x": 24.0,
+                        "y": 39.25
+                    },
+                    "uuid": "9b91e746-b65f-4ff7-8fe5-6b05c7d4a1b3"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint R24",
+                    "pos": {
+                        "x": 24.0,
+                        "y": 41.0
+                    },
+                    "uuid": "29aa1486-983a-4101-9761-33b30e3ba9b1"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint R25",
+                    "pos": {
+                        "x": 35.5,
+                        "y": 21.75
+                    },
+                    "uuid": "7e740e1c-dc06-443f-a6fc-bf3397cb7d56"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint R26",
+                    "pos": {
+                        "x": 38.75,
+                        "y": 22.25
+                    },
+                    "uuid": "cfb7382e-daaa-4814-b62e-b6195b763fbe"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint R30",
+                    "pos": {
+                        "x": 28.0,
+                        "y": 8.25
+                    },
+                    "uuid": "41709dcd-0702-41c3-bde3-c68214d1d2e5"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint R31",
+                    "pos": {
+                        "x": 31.75,
+                        "y": 9.5
+                    },
+                    "uuid": "85d127aa-dae9-4cd8-813b-137dccff335c"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint R33",
+                    "pos": {
+                        "x": 44.75,
+                        "y": 13.0
+                    },
+                    "uuid": "e6f1275c-8127-47f2-9516-d28daadb309e"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint R40",
+                    "pos": {
+                        "x": 56.0,
+                        "y": 45.0
+                    },
+                    "uuid": "cbd02e99-8268-41a8-8b87-71816392f59f"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint R41",
+                    "pos": {
+                        "x": 56.0,
+                        "y": 46.75
+                    },
+                    "uuid": "c0ef3742-0a58-427a-b020-a76b65da0d97"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint R42",
+                    "pos": {
+                        "x": 64.0,
+                        "y": 44.0
+                    },
+                    "uuid": "f286e341-32e1-4499-b39b-f68bd559ce45"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint R50",
+                    "pos": {
+                        "x": 4.5,
+                        "y": 34.0
+                    },
+                    "uuid": "b2a80816-da43-434f-9b1b-9d4fa189633b"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint R51",
+                    "pos": {
+                        "x": 4.5,
+                        "y": 36.0
+                    },
+                    "uuid": "e0196228-165e-4035-a891-d841c85dcda8"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint R52",
+                    "pos": {
+                        "x": 26.75,
+                        "y": 27.0
+                    },
+                    "uuid": "8f60ab75-0238-47e5-a3b0-97fd29738062"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint R53",
+                    "pos": {
+                        "x": 23.5,
+                        "y": 8.5
+                    },
+                    "uuid": "09282e03-8bd9-4921-b0c8-5a4b2b64c83d"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint R54",
+                    "pos": {
+                        "x": 28.5,
+                        "y": 28.75
+                    },
+                    "uuid": "3dadec16-b236-48ca-9583-87eca22bd94e"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint R60",
+                    "pos": {
+                        "x": 34.5,
+                        "y": 7.75
+                    },
+                    "uuid": "9a3cf77e-ab08-43db-b06f-8e6eff5a4ddf"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint R61",
+                    "pos": {
+                        "x": 38.25,
+                        "y": 8.25
+                    },
+                    "uuid": "7a6b28ed-bd4c-4dcc-aff5-6890af4065d5"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint R62",
+                    "pos": {
+                        "x": 43.25,
+                        "y": 9.5
+                    },
+                    "uuid": "05d07412-4658-4f0a-b94f-55abe875aa99"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint R100",
+                    "pos": {
+                        "x": 69.25,
+                        "y": 7.75
+                    },
+                    "uuid": "c2a9fadb-b09b-4cf0-956e-4fafa8803f64"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint R101",
+                    "pos": {
+                        "x": 71.75,
+                        "y": 8.5
+                    },
+                    "uuid": "2b75f19f-5e95-4d69-a8b6-c2a7d475dcb6"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint R102",
+                    "pos": {
+                        "x": 55.0,
+                        "y": 10.25
+                    },
+                    "uuid": "05ca3549-c58e-4478-97b4-c0e7c838a89c"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint R104",
+                    "pos": {
+                        "x": 44.75,
+                        "y": 16.0
+                    },
+                    "uuid": "130a314a-a0ae-4f58-a900-6c1bdb1510a7"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint R110",
+                    "pos": {
+                        "x": 65.0,
+                        "y": 18.5
+                    },
+                    "uuid": "b796d891-97a5-41c4-bfd1-b4a268b1fb30"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint R111",
+                    "pos": {
+                        "x": 71.0,
+                        "y": 18.5
+                    },
+                    "uuid": "c867b45e-6768-40f8-b7e5-25aa171cab19"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint R112",
+                    "pos": {
+                        "x": 61.75,
+                        "y": 24.75
+                    },
+                    "uuid": "80d0ff09-e8e8-4b6a-ad8e-17d109823580"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint R114",
+                    "pos": {
+                        "x": 46.0,
+                        "y": 31.75
+                    },
+                    "uuid": "7d1cfc26-3ae7-457b-bfd9-cc06ed8d51b2"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint R120",
+                    "pos": {
+                        "x": 65.0,
+                        "y": 31.75
+                    },
+                    "uuid": "9f09c87c-1add-469a-91d1-1e0ff2d35d60"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint R121",
+                    "pos": {
+                        "x": 71.0,
+                        "y": 28.5
+                    },
+                    "uuid": "73af7c9a-7d4f-4929-a567-8853308898df"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint R122",
+                    "pos": {
+                        "x": 66.75,
+                        "y": 27.5
+                    },
+                    "uuid": "cdaba6c6-d4bc-4d49-b7f8-8b3536592673"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint R124",
+                    "pos": {
+                        "x": 45.75,
+                        "y": 34.0
+                    },
+                    "uuid": "e6894f60-b0e4-4b77-9875-96aca1ea4255"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint R130",
+                    "pos": {
+                        "x": 63.25,
+                        "y": 34.5
+                    },
+                    "uuid": "7b6b4a45-c202-44d4-bb91-f2b46f3fb958"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint R131",
+                    "pos": {
+                        "x": 71.0,
+                        "y": 38.5
+                    },
+                    "uuid": "80f4c663-7696-4d67-a188-c0562af81c93"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint R132",
+                    "pos": {
+                        "x": 53.0,
+                        "y": 39.0
+                    },
+                    "uuid": "7ff3f6fd-3ac3-4da1-ad18-87ba48ad0149"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint R134",
+                    "pos": {
+                        "x": 45.75,
+                        "y": 41.25
+                    },
+                    "uuid": "374d262e-0469-46da-99a4-861359ceafb7"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint SW1",
+                    "pos": {
+                        "x": 20.75,
+                        "y": 34.0
+                    },
+                    "uuid": "90a1f761-8d77-4e17-a339-6a87af813293"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint SW2",
+                    "pos": {
+                        "x": 26.25,
+                        "y": 16.0
+                    },
+                    "uuid": "92d3b05e-f151-4806-a8f3-dd52d1e0f7e4"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint SW3",
+                    "pos": {
+                        "x": 26.25,
+                        "y": 23.0
+                    },
+                    "uuid": "433d306d-b49a-4e68-86ef-bceeb9fbd248"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint SW4",
+                    "pos": {
+                        "x": 23.5,
+                        "y": 45.0
+                    },
+                    "uuid": "8877c0b8-6581-44fa-938f-7e49baa8e369"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint U1",
+                    "pos": {
+                        "x": 12.0,
+                        "y": 13.0
+                    },
+                    "uuid": "ed65dfd4-895c-4f3c-9e6c-fc50e33e0ae6"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint U2",
+                    "pos": {
+                        "x": 50.0,
+                        "y": 24.0
+                    },
+                    "uuid": "ac3f54e7-9280-4a63-9e6a-95a205235ef8"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint U3",
+                    "pos": {
+                        "x": 58.0,
+                        "y": 14.25
+                    },
+                    "uuid": "59ffebf5-11a9-4c45-8102-1c7335c0d70e"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint U4",
+                    "pos": {
+                        "x": 58.0,
+                        "y": 33.75
+                    },
+                    "uuid": "41504bbe-3249-4a7e-9a79-b8e3bdf66ff1"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint U5",
+                    "pos": {
+                        "x": 60.0,
+                        "y": 45.0
+                    },
+                    "uuid": "52039797-c736-4f26-a419-d5b28e7f093c"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint U6",
+                    "pos": {
+                        "x": 8.0,
+                        "y": 31.0
+                    },
+                    "uuid": "f0dcf4ac-1a07-49a2-b1f0-5a1b3fc61dcd"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint U7",
+                    "pos": {
+                        "x": 49.0,
+                        "y": 44.0
+                    },
+                    "uuid": "1fe39b57-a2bd-47eb-aad8-ee28376f3c1d"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        },
+        {
+            "description": "Missing symbol field 'MPN' in footprint",
+            "items": [
+                {
+                    "description": "Footprint U8",
+                    "pos": {
+                        "x": 33.0,
+                        "y": 24.0
+                    },
+                    "uuid": "5b207c94-f74c-4467-9750-0bb38742e66d"
+                }
+            ],
+            "severity": "warning",
+            "type": "footprint_symbol_field_mismatch"
+        }
+    ],
+    "source": "afo_revb_main.kicad_pcb",
+    "unconnected_items": [],
+    "violations": []
+}

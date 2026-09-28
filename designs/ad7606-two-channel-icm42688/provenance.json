@@ -1,0 +1,108 @@
+{
+  "project_lead": "Muttakin Rahman",
+  "public_distribution_cleared": false,
+  "assets": [
+    {
+      "path": "hardware/module-models/sources.json",
+      "sha256": "53eea33ed86b5d4f25f3bfc6ac53f71fe52e382c0981018b717b648cd7e8f992",
+      "source": "See hardware/module-models/sources.json",
+      "redistribution": "Unconfirmed asset-specific redistribution terms"
+    },
+    {
+      "path": "hardware/module-models/reg3.step",
+      "sha256": "803f33521f95ad01363d7024f3f57d4af19c296782f86b900c8d9e761540fc1c",
+      "source": "See hardware/module-models/sources.json",
+      "redistribution": "Unconfirmed asset-specific redistribution terms"
+    },
+    {
+      "path": "hardware/module-models/reg5.step",
+      "sha256": "6daa3aed7237d86456a1540f35f7e13183961d6601f1a65cde67840c8a0c02dc",
+      "source": "See hardware/module-models/sources.json",
+      "redistribution": "Unconfirmed asset-specific redistribution terms"
+    },
+    {
+      "path": "hardware/module-models/sd.step",
+      "sha256": "195927fa6892b80caf19cd01887e84f1202026665b393f9c8c9f399fa6b4d6e8",
+      "source": "See hardware/module-models/sources.json",
+      "redistribution": "Unconfirmed asset-specific redistribution terms"
+    },
+    {
+      "path": "viewer/models/icm.json",
+      "sha256": "364a5a8c8eb4197b4dac2b5a2bc5ffe02b8a5bc48ad03f56c46eb99f59fcb9c2",
+      "source": "Catalog and source STEP references; some files are derived meshes",
+      "redistribution": "Derived geometry: preserve original ownership; terms need asset-specific review"
+    },
+    {
+      "path": "viewer/models/sd.json",
+      "sha256": "386a928f421a300b15ce1496e8c32973d3de217a6010b4f754270316ac6245e1",
+      "source": "Catalog and source STEP references; some files are derived meshes",
+      "redistribution": "Derived geometry: preserve original ownership; terms need asset-specific review"
+    },
+    {
+      "path": "viewer/models/reg5.json",
+      "sha256": "70d465050f54759d982d946609b058d16714184dfdbe02c3e2ba9e71145621f0",
+      "source": "Catalog and source STEP references; some files are derived meshes",
+      "redistribution": "Derived geometry: preserve original ownership; terms need asset-specific review"
+    },
+    {
+      "path": "viewer/models/reg3.json",
+      "sha256": "571fc377b524013e5dc2230245c994b49ecbbf307e2df8dbd5805e2ce3ee53b9",
+      "source": "Catalog and source STEP references; some files are derived meshes",
+      "redistribution": "Derived geometry: preserve original ownership; terms need asset-specific review"
+    },
+    {
+      "path": "viewer/models/catalog.json",
+      "sha256": "84226dfd515e10f1eca8e05c23661dda892b76be6b227a9717614868ec84ee07",
+      "source": "Catalog and source STEP references; some files are derived meshes",
+      "redistribution": "Derived geometry: preserve original ownership; terms need asset-specific review"
+    },
+    {
+      "path": "docs/pinmap-evidence/icm-module.step",
+      "sha256": "ab4d20d603272d5e1e7dfdff241ae805e9b8a70b2d1736b138975eb669be4ed0",
+      "source": "Manufacturer CAD or user-supplied supplier photographs; see accompanying guide",
+      "redistribution": "Mixed sources; preserve original marks and establish licence before redistribution"
+    },
+    {
+      "path": "docs/pinmap-evidence/adapter.brd",
+      "sha256": "f09add1582d0042843bfa29f87294578c49fb9986953684c94908389f351ae46",
+      "source": "Manufacturer CAD or user-supplied supplier photographs; see accompanying guide",
+      "redistribution": "Mixed sources; preserve original marks and establish licence before redistribution"
+    },
+    {
+      "path": "docs/pinmap-evidence/icm-module.dxf",
+      "sha256": "0898b00fd683ee955b099b1b256b477da993985a5677ef81bac06e55f6633be6",
+      "source": "Manufacturer CAD or user-supplied supplier photographs; see accompanying guide",
+      "redistribution": "Mixed sources; preserve original marks and establish licence before redistribution"
+    },
+    {
+      "path": "docs/pinmap-evidence/header-map.html",
+      "sha256": "9efae4ee4bb72218e8d83c41892ae79cfe4b3065f3946598dde2da62cc6b28c4",
+      "source": "Manufacturer CAD or user-supplied supplier photographs; see accompanying guide",
+      "redistribution": "Mixed sources; preserve original marks and establish licence before redistribution"
+    },
+    {
+      "path": "docs/pinmap-evidence/ad7606-underside.png",
+      "sha256": "545f8065b090f29a9db7f46bbf78a1a7d5fda83596e9c0e0edace901f676208e",
+      "source": "Manufacturer CAD or user-supplied supplier photographs; see accompanying guide",
+      "redistribution": "Mixed sources; preserve original marks and establish licence before redistribution"
+    },
+    {
+      "path": "docs/pinmap-evidence/icm-schematic.pdf",
+      "sha256": "4e4a00a4f51e4eebdf30d814bce55e6fa3bd7c08020d188a489d5380dcd9748e",
+      "source": "Manufacturer CAD or user-supplied supplier photographs; see accompanying guide",
+      "redistribution": "Mixed sources; preserve original marks and establish licence before redistribution"
+    },
+    {
+      "path": "docs/pinmap-evidence/photo-pinmaps.json",
+      "sha256": "1bdba3f8d2980adbb5cf7782497203a2a001e0358b07b32b0a4ed82f79526530",
+      "source": "Manufacturer CAD or user-supplied supplier photographs; see accompanying guide",
+      "redistribution": "Mixed sources; preserve original marks and establish licence before redistribution"
+    },
+    {
+      "path": "docs/pinmap-evidence/ad7606-component-side.png",
+      "sha256": "6cfe5fe97f6c926db83f12972c86a97be0fa9bddc379e0b74f39e75f2ee3044e",
+      "source": "Manufacturer CAD or user-supplied supplier photographs; see accompanying guide",
+      "redistribution": "Mixed sources; preserve original marks and establish licence before redistribution"
+    }
+  ]
+}

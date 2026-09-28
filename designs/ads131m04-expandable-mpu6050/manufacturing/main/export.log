@@ -1,0 +1,43 @@
+ENGINEERING PROTOTYPE — pending physical validation and assembly review
+pcb export gerbers --layers F.Cu,B.Cu,In1.Cu,In2.Cu,F.Paste,B.Paste,F.Mask,B.Mask,F.SilkS,B.SilkS,Edge.Cuts -o <project-workspace>/outputs/afo-ads131m04-mpu6050/manufacturing/main/gerbers/ <project-workspace>/outputs/afo-ads131m04-mpu6050/hardware/main/afo_revb_main.kicad_pcb
+Plotted to '<project-workspace>/outputs/afo-ads131m04-mpu6050/manufacturing/main/gerbers/afo_revb_main-F_Cu.gtl'.
+Plotted to '<project-workspace>/outputs/afo-ads131m04-mpu6050/manufacturing/main/gerbers/afo_revb_main-In1_Cu.g1'.
+Plotted to '<project-workspace>/outputs/afo-ads131m04-mpu6050/manufacturing/main/gerbers/afo_revb_main-In2_Cu.g2'.
+Plotted to '<project-workspace>/outputs/afo-ads131m04-mpu6050/manufacturing/main/gerbers/afo_revb_main-B_Cu.gbl'.
+Plotted to '<project-workspace>/outputs/afo-ads131m04-mpu6050/manufacturing/main/gerbers/afo_revb_main-F_Paste.gtp'.
+Plotted to '<project-workspace>/outputs/afo-ads131m04-mpu6050/manufacturing/main/gerbers/afo_revb_main-B_Paste.gbp'.
+Plotted to '<project-workspace>/outputs/afo-ads131m04-mpu6050/manufacturing/main/gerbers/afo_revb_main-F_Silkscreen.gto'.
+Plotted to '<project-workspace>/outputs/afo-ads131m04-mpu6050/manufacturing/main/gerbers/afo_revb_main-B_Silkscreen.gbo'.
+Plotted to '<project-workspace>/outputs/afo-ads131m04-mpu6050/manufacturing/main/gerbers/afo_revb_main-F_Mask.gts'.
+Plotted to '<project-workspace>/outputs/afo-ads131m04-mpu6050/manufacturing/main/gerbers/afo_revb_main-B_Mask.gbs'.
+Plotted to '<project-workspace>/outputs/afo-ads131m04-mpu6050/manufacturing/main/gerbers/afo_revb_main-Edge_Cuts.gm1'.
+
+pcb export drill --format excellon --generate-map --map-format svg -o <project-workspace>/outputs/afo-ads131m04-mpu6050/manufacturing/main/drill/ <project-workspace>/outputs/afo-ads131m04-mpu6050/hardware/main/afo_revb_main.kicad_pcb
+Created file '<project-workspace>/outputs/afo-ads131m04-mpu6050/manufacturing/main/drill/afo_revb_main.drl'
+Created file '<project-workspace>/outputs/afo-ads131m04-mpu6050/manufacturing/main/drill/afo_revb_main-drl_map.svg'.
+Done.
+
+pcb export pos --format csv --units mm --side both -o <project-workspace>/outputs/afo-ads131m04-mpu6050/manufacturing/main/placement.csv <project-workspace>/outputs/afo-ads131m04-mpu6050/hardware/main/afo_revb_main.kicad_pcb
+Wrote position data to '<project-workspace>/outputs/afo-ads131m04-mpu6050/manufacturing/main/placement.csv'.
+
+pcb export svg --layers F.Fab,Edge.Cuts --mode-single --fit-page-to-board --exclude-drawing-sheet --sketch-pads-on-fab-layers -o <project-workspace>/outputs/afo-ads131m04-mpu6050/manufacturing/main/assembly.svg <project-workspace>/outputs/afo-ads131m04-mpu6050/hardware/main/afo_revb_main.kicad_pcb
+Plotted to '<project-workspace>/outputs/afo-ads131m04-mpu6050/manufacturing/main/assembly.svg'.
+Done.
+
+sch export netlist --format kicadxml -o <project-workspace>/outputs/afo-ads131m04-mpu6050/hardware/main/netlist.xml <project-workspace>/outputs/afo-ads131m04-mpu6050/hardware/main/afo_revb_main.kicad_sch
+
+sch export svg -o <project-workspace>/outputs/afo-ads131m04-mpu6050/manufacturing/main/schematic/ <project-workspace>/outputs/afo-ads131m04-mpu6050/hardware/main/afo_revb_main.kicad_sch
+Plotted to '<project-workspace>/outputs/afo-ads131m04-mpu6050/manufacturing/main/schematic/afo_revb_main.svg'.
+Done.
+
+pcb export step --subst-models --force -o <project-workspace>/outputs/afo-ads131m04-mpu6050/manufacturing/main/afo_revb_main.step <project-workspace>/outputs/afo-ads131m04-mpu6050/hardware/main/afo_revb_main.kicad_pcb
+2026-09-27 12:07:27.565 kicad-cli[6617:5593362] Error retrieving source file attributes: Error Domain=NSCocoaErrorDomain Code=260 "The file “afo_revb_main.step” couldn’t be opened because there is no such file." UserInfo={NSFilePath=<project-workspace>/outputs/afo-ads131m04-mpu6050/manufacturing/main/afo_revb_main.step, NSURL=file://<project-workspace>/outputs/afo-ads131m04-mpu6050/manufacturing/main/afo_revb_main.step, NSUnderlyingError=0x761018390 {Error Domain=NSPOSIXErrorDomain Code=2 "No such file or directory"}}
+STEP file '<project-workspace>/outputs/afo-ads131m04-mpu6050/manufacturing/main/afo_revb_main.step' created.
+
+Export time 2.626 s
+
+pcb export glb --subst-models --include-tracks --include-pads --force -o <project-workspace>/outputs/afo-ads131m04-mpu6050/viewer/main.glb <project-workspace>/outputs/afo-ads131m04-mpu6050/hardware/main/afo_revb_main.kicad_pcb
+Binary GLTF file '<project-workspace>/outputs/afo-ads131m04-mpu6050/viewer/main.glb' created.
+
+Export time 6.279 s
+

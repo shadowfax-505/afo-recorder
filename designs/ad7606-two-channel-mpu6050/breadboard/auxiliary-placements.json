@@ -1,0 +1,290 @@
+[
+  {
+    "component": "adc-cs-pullup",
+    "component_pin": "1",
+    "module": "AUX1",
+    "terminal": "e3",
+    "hole": "e3",
+    "physical": true
+  },
+  {
+    "component": "adc-cs-pullup",
+    "component_pin": "2",
+    "module": "AUX1",
+    "terminal": "f3",
+    "hole": "f3",
+    "physical": true
+  },
+  {
+    "component": "foot-pullup",
+    "component_pin": "1",
+    "module": "AUX1",
+    "terminal": "e7",
+    "hole": "e7",
+    "physical": true
+  },
+  {
+    "component": "foot-pullup",
+    "component_pin": "2",
+    "module": "AUX1",
+    "terminal": "f7",
+    "hole": "f7",
+    "physical": true
+  },
+  {
+    "component": "shank-pullup",
+    "component_pin": "1",
+    "module": "AUX1",
+    "terminal": "e11",
+    "hole": "e11",
+    "physical": true
+  },
+  {
+    "component": "shank-pullup",
+    "component_pin": "2",
+    "module": "AUX1",
+    "terminal": "f11",
+    "hole": "f11",
+    "physical": true
+  },
+  {
+    "component": "IMU_SDA-pullup",
+    "component_pin": "1",
+    "module": "AUX1",
+    "terminal": "e15",
+    "hole": "e15",
+    "physical": true
+  },
+  {
+    "component": "IMU_SDA-pullup",
+    "component_pin": "2",
+    "module": "AUX1",
+    "terminal": "f15",
+    "hole": "f15",
+    "physical": true
+  },
+  {
+    "component": "IMU_SCL-pullup",
+    "component_pin": "1",
+    "module": "AUX1",
+    "terminal": "e19",
+    "hole": "e19",
+    "physical": true
+  },
+  {
+    "component": "IMU_SCL-pullup",
+    "component_pin": "2",
+    "module": "AUX1",
+    "terminal": "f19",
+    "hole": "f19",
+    "physical": true
+  },
+  {
+    "component": "button-pullup",
+    "component_pin": "1",
+    "module": "AUX1",
+    "terminal": "e23",
+    "hole": "e23",
+    "physical": true
+  },
+  {
+    "component": "button-pullup",
+    "component_pin": "2",
+    "module": "AUX1",
+    "terminal": "f23",
+    "hole": "f23",
+    "physical": true
+  },
+  {
+    "component": "rec-r",
+    "component_pin": "1",
+    "module": "AUX1",
+    "terminal": "e27",
+    "hole": "e27",
+    "physical": true
+  },
+  {
+    "component": "rec-r",
+    "component_pin": "2",
+    "module": "AUX1",
+    "terminal": "f27",
+    "hole": "f27",
+    "physical": true
+  },
+  {
+    "component": "rec-led",
+    "component_pin": "ANODE",
+    "module": "AUX1",
+    "terminal": "e31",
+    "hole": "e31",
+    "physical": true
+  },
+  {
+    "component": "rec-led",
+    "component_pin": "CATHODE",
+    "module": "AUX1",
+    "terminal": "f31",
+    "hole": "f31",
+    "physical": true
+  },
+  {
+    "component": "err-r",
+    "component_pin": "1",
+    "module": "AUX1",
+    "terminal": "e35",
+    "hole": "e35",
+    "physical": true
+  },
+  {
+    "component": "err-r",
+    "component_pin": "2",
+    "module": "AUX1",
+    "terminal": "f35",
+    "hole": "f35",
+    "physical": true
+  },
+  {
+    "component": "err-led",
+    "component_pin": "ANODE",
+    "module": "AUX1",
+    "terminal": "e39",
+    "hole": "e39",
+    "physical": true
+  },
+  {
+    "component": "err-led",
+    "component_pin": "CATHODE",
+    "module": "AUX1",
+    "terminal": "f39",
+    "hole": "f39",
+    "physical": true
+  },
+  {
+    "component": "low-r",
+    "component_pin": "1",
+    "module": "AUX1",
+    "terminal": "e43",
+    "hole": "e43",
+    "physical": true
+  },
+  {
+    "component": "low-r",
+    "component_pin": "2",
+    "module": "AUX1",
+    "terminal": "f43",
+    "hole": "f43",
+    "physical": true
+  },
+  {
+    "component": "low-led",
+    "component_pin": "ANODE",
+    "module": "AUX1",
+    "terminal": "e47",
+    "hole": "e47",
+    "physical": true
+  },
+  {
+    "component": "low-led",
+    "component_pin": "CATHODE",
+    "module": "AUX1",
+    "terminal": "f47",
+    "hole": "f47",
+    "physical": true
+  },
+  {
+    "component": "bat-r-top",
+    "component_pin": "1",
+    "module": "AUX1",
+    "terminal": "e51",
+    "hole": "e51",
+    "physical": true
+  },
+  {
+    "component": "bat-r-top",
+    "component_pin": "2",
+    "module": "AUX1",
+    "terminal": "f51",
+    "hole": "f51",
+    "physical": true
+  },
+  {
+    "component": "bat-r-low",
+    "component_pin": "1",
+    "module": "AUX1",
+    "terminal": "e55",
+    "hole": "e55",
+    "physical": true
+  },
+  {
+    "component": "bat-r-low",
+    "component_pin": "2",
+    "module": "AUX1",
+    "terminal": "f55",
+    "hole": "f55",
+    "physical": true
+  },
+  {
+    "component": "bat-cap",
+    "component_pin": "1",
+    "module": "AUX2",
+    "terminal": "e3",
+    "hole": "e3",
+    "physical": true
+  },
+  {
+    "component": "bat-cap",
+    "component_pin": "2",
+    "module": "AUX2",
+    "terminal": "f3",
+    "hole": "f3",
+    "physical": true
+  },
+  {
+    "component": "usb-r",
+    "component_pin": "1",
+    "module": "AUX2",
+    "terminal": "e7",
+    "hole": "e7",
+    "physical": true
+  },
+  {
+    "component": "usb-r",
+    "component_pin": "2",
+    "module": "AUX2",
+    "terminal": "f7",
+    "hole": "f7",
+    "physical": true
+  },
+  {
+    "component": "usb-pd",
+    "component_pin": "1",
+    "module": "AUX2",
+    "terminal": "e11",
+    "hole": "e11",
+    "physical": true
+  },
+  {
+    "component": "usb-pd",
+    "component_pin": "2",
+    "module": "AUX2",
+    "terminal": "f11",
+    "hole": "f11",
+    "physical": true
+  },
+  {
+    "component": "usb-pu",
+    "component_pin": "1",
+    "module": "AUX2",
+    "terminal": "e15",
+    "hole": "e15",
+    "physical": true
+  },
+  {
+    "component": "usb-pu",
+    "component_pin": "2",
+    "module": "AUX2",
+    "terminal": "f15",
+    "hole": "f15",
+    "physical": true
+  }
+]

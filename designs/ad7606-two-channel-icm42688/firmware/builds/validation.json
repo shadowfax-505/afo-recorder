@@ -1,0 +1,158 @@
+[
+  {
+    "package": "ad7606-two-channel-icm42688",
+    "imu_model": "ICM42688P",
+    "active_channels": 2,
+    "hardware": "breadboard",
+    "diagnostic_stage": 0,
+    "imu_count": 2,
+    "wifi_enabled": true,
+    "sd_cmd_gpio": 47,
+    "sd_clk_gpio": 39,
+    "sd_d0_gpio": 40,
+    "hardware_tested": false,
+    "offsets": {
+      "bootloader.bin": "0x0",
+      "partition-table.bin": "0x8000",
+      "application.bin": "0x10000"
+    },
+    "sha256": {
+      "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+      "application.bin": "809dab3fd8410e853cc2208674b0e966b6189a0ef8dc0c506bb988ef3e475e09",
+      "bootloader.bin": "6f3b00bcf80442affe509d3074616bfe24777e8b22d95e68f0185c875f62e566"
+    },
+    "profile": "breadboard-record-2ch"
+  },
+  {
+    "package": "ad7606-two-channel-icm42688",
+    "imu_model": "ICM42688P",
+    "active_channels": 2,
+    "hardware": "breadboard",
+    "diagnostic_stage": 0,
+    "imu_count": 2,
+    "wifi_enabled": false,
+    "sd_cmd_gpio": 47,
+    "sd_clk_gpio": 39,
+    "sd_d0_gpio": 40,
+    "hardware_tested": false,
+    "offsets": {
+      "bootloader.bin": "0x0",
+      "partition-table.bin": "0x8000",
+      "application.bin": "0x10000"
+    },
+    "sha256": {
+      "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+      "application.bin": "30a84aa4cfa94823e5aebae46967e08df97ddc561e91b583cd8831d16ea50bb6",
+      "bootloader.bin": "6f3b00bcf80442affe509d3074616bfe24777e8b22d95e68f0185c875f62e566"
+    },
+    "profile": "breadboard-sd-only-2ch"
+  },
+  {
+    "adc": "afo-ad7606-two",
+    "active_channels": 2,
+    "diagnostic_stage": 3,
+    "imu_count": 1,
+    "hardware": "breadboard",
+    "wifi": 0,
+    "hardware_design": "AD7606_TWO_FIXED",
+    "hardware_tested": false,
+    "offsets": {
+      "bootloader.bin": "0x0",
+      "partition-table.bin": "0x8000",
+      "application.bin": "0x10000"
+    },
+    "sha256": {
+      "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+      "application.bin": "dfb6b78d0f942188b36c2683c7ab19f708d78e8fca5d073bc99ccaa83f65734f",
+      "bootloader.bin": "d08d2bc3fd6c6c4a5d59d419789bc38744b7905ed6114bea69b5812f7cf991a1"
+    },
+    "profile": "diagnostic-adc"
+  },
+  {
+    "adc": "afo-ad7606-two",
+    "active_channels": 2,
+    "diagnostic_stage": 2,
+    "imu_count": 1,
+    "hardware": "breadboard",
+    "wifi": 0,
+    "hardware_design": "AD7606_TWO_FIXED",
+    "hardware_tested": false,
+    "offsets": {
+      "bootloader.bin": "0x0",
+      "partition-table.bin": "0x8000",
+      "application.bin": "0x10000"
+    },
+    "sha256": {
+      "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+      "application.bin": "87b8cdf80ec72e7a88d75a344d48e48a59c34c48ef3e999655a3d35671ec4016",
+      "bootloader.bin": "d08d2bc3fd6c6c4a5d59d419789bc38744b7905ed6114bea69b5812f7cf991a1"
+    },
+    "profile": "diagnostic-controller"
+  },
+  {
+    "adc": "afo-ad7606-two",
+    "active_channels": 2,
+    "diagnostic_stage": 6,
+    "imu_count": 1,
+    "hardware": "breadboard",
+    "wifi": 0,
+    "hardware_design": "AD7606_TWO_FIXED",
+    "hardware_tested": false,
+    "offsets": {
+      "bootloader.bin": "0x0",
+      "partition-table.bin": "0x8000",
+      "application.bin": "0x10000"
+    },
+    "sha256": {
+      "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+      "application.bin": "8d1ace8b13e7489ffee9b720506f28bfab0e9222395f4a56d7e75f8d727e428b",
+      "bootloader.bin": "d08d2bc3fd6c6c4a5d59d419789bc38744b7905ed6114bea69b5812f7cf991a1"
+    },
+    "profile": "diagnostic-imu-one"
+  },
+  {
+    "adc": "afo-ad7606-two",
+    "active_channels": 2,
+    "diagnostic_stage": 6,
+    "imu_count": 2,
+    "hardware": "breadboard",
+    "wifi": 0,
+    "hardware_design": "AD7606_TWO_FIXED",
+    "hardware_tested": false,
+    "offsets": {
+      "bootloader.bin": "0x0",
+      "partition-table.bin": "0x8000",
+      "application.bin": "0x10000"
+    },
+    "sha256": {
+      "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+      "application.bin": "73a504d791bfe2c63f47f4781d96d2cc7c4907ca736ebabc9fdba7469ca04c4a",
+      "bootloader.bin": "d08d2bc3fd6c6c4a5d59d419789bc38744b7905ed6114bea69b5812f7cf991a1"
+    },
+    "profile": "diagnostic-imu-two"
+  },
+  {
+    "package": "ad7606-two-channel-icm42688",
+    "imu_model": "ICM42688P",
+    "active_channels": 2,
+    "hardware": "pcb",
+    "diagnostic_stage": 0,
+    "imu_count": 2,
+    "wifi_enabled": true,
+    "sd_cmd_gpio": 38,
+    "sd_clk_gpio": 39,
+    "sd_d0_gpio": 40,
+    "hardware_tested": false,
+    "offsets": {
+      "bootloader.bin": "0x0",
+      "partition-table.bin": "0x8000",
+      "application.bin": "0x10000"
+    },
+    "sha256": {
+      "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+      "application.bin": "3dab4f6a1a56ec3f322e54060ed124c9f53cc0eabf790c3f51a374403299dbc8",
+      "bootloader.bin": "6f3b00bcf80442affe509d3074616bfe24777e8b22d95e68f0185c875f62e566"
+    },
+    "profile": "record-2ch"
+  }
+]

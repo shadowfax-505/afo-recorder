@@ -1,0 +1,4936 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="E">
+  <design>
+    <source>/Users/muttakinrahman/Documents/Codex/2026-09-12/i-want-to-do-a-research-2/outputs/afo-ad7606-two/hardware/main/afo_revb_main.kicad_sch</source>
+    <date>2026-09-26T21:00:07</date>
+    <tool>Eeschema 10.0.6</tool>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title>AFO Revision B main</title>
+        <company/>
+        <rev>B engineering prototype</rev>
+        <date/>
+        <source>afo_revb_main.kicad_sch</source>
+        <comment number="1" value="Named nets connect all matching labels; physical package pin numbers."/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="C1">
+      <value>100nF</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRM188R71C104KA01D</field>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="C1" description=""/>
+      <property name="MPN" value="GRM188R71C104KA01D"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>f0e6da7e-bb01-570f-b8d7-7ef76807725c</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C2">
+      <value>10uF</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <fields>
+        <field name="MPN">GRM21BR61A106KE19L</field>
+        <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="C2" description=""/>
+      <property name="MPN" value="GRM21BR61A106KE19L"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>f74f4b10-dfaa-5b9f-9c87-40157ea326a7</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C3">
+      <value>1uF</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRM188R61A105KA61D</field>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="C3" description=""/>
+      <property name="MPN" value="GRM188R61A105KA61D"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>f2c02d0c-f0b3-500e-b709-16d593533599</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C10">
+      <value>100nF</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRM188R71C104KA01D</field>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="C10" description=""/>
+      <property name="MPN" value="GRM188R71C104KA01D"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>c997d027-0f15-528c-a403-fab1106c43d3</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C11">
+      <value>22uF</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <fields>
+        <field name="MPN">GRM21BR61A226ME44L</field>
+        <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="C11" description=""/>
+      <property name="MPN" value="GRM21BR61A226ME44L"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>1290f896-be50-5d8f-b127-29850de454e2</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C12">
+      <value>10nF</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRM188R71H103KA01D</field>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="C12" description=""/>
+      <property name="MPN" value="GRM188R71H103KA01D"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>26312460-7713-5d9a-8099-92a727babfed</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C30">
+      <value>1uF</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRM188R61A105KA61D</field>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="C30" description=""/>
+      <property name="MPN" value="GRM188R61A105KA61D"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>c8f101bc-b848-5050-af85-ceec6674afa1</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C31">
+      <value>1uF</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRM188R61A105KA61D</field>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="C31" description=""/>
+      <property name="MPN" value="GRM188R61A105KA61D"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>46e93f11-e5ac-521b-a1cf-4f0afe142f8d</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C32">
+      <value>100nF</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRM188R71C104KA01D</field>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="C32" description=""/>
+      <property name="MPN" value="GRM188R71C104KA01D"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>f506a4b0-ece2-5d34-a035-f574e9da0f04</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C33">
+      <value>100nF</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRM188R71C104KA01D</field>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="C33" description=""/>
+      <property name="MPN" value="GRM188R71C104KA01D"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>0d28b43e-fd8f-5dac-b06b-90ceb2227b11</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C34">
+      <value>100nF</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRM188R71C104KA01D</field>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="C34" description=""/>
+      <property name="MPN" value="GRM188R71C104KA01D"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>215f6cfd-0aea-5015-b740-be498084ee16</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C40">
+      <value>22uF</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <fields>
+        <field name="MPN">GRM21BR61A226ME44L</field>
+        <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="C40" description=""/>
+      <property name="MPN" value="GRM21BR61A226ME44L"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>c748d686-9fb7-5b24-b3e8-1643a3a66aed</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C41">
+      <value>22uF</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <fields>
+        <field name="MPN">GRM21BR61A226ME44L</field>
+        <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="C41" description=""/>
+      <property name="MPN" value="GRM21BR61A226ME44L"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>3094d657-2c41-5b70-8b20-cf398ed8aff2</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C42">
+      <value>22uF</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <fields>
+        <field name="MPN">GRM21BR61A226ME44L</field>
+        <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="C42" description=""/>
+      <property name="MPN" value="GRM21BR61A226ME44L"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>a5191dc4-5a87-5a2c-b140-0dfc3c0cc2a0</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C43">
+      <value>100nF</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRM188R71C104KA01D</field>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="C43" description=""/>
+      <property name="MPN" value="GRM188R71C104KA01D"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>302962d8-134b-5aa0-bcd6-1eba83b0a773</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C44">
+      <value>100nF</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRM188R71C104KA01D</field>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="C44" description=""/>
+      <property name="MPN" value="GRM188R71C104KA01D"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>8f9754fc-9fd3-57cb-a874-170e040bec43</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C45">
+      <value>1uF</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRM188R61A105KA61D</field>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="C45" description=""/>
+      <property name="MPN" value="GRM188R61A105KA61D"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>e02424c9-9bea-5ede-a173-2aaa7665610f</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C46">
+      <value>1uF</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRM188R61A105KA61D</field>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="C46" description=""/>
+      <property name="MPN" value="GRM188R61A105KA61D"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>062b86a0-6be9-5644-a8d9-685bdcc7fe84</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C100">
+      <value>47nF</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRM188R71H473KA61D</field>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="C100" description=""/>
+      <property name="MPN" value="GRM188R71H473KA61D"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>5783ee35-02fe-5c7b-8a9e-8af55f3bdaf0</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C101">
+      <value>47nF</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRM188R71H473KA61D</field>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="C101" description=""/>
+      <property name="MPN" value="GRM188R71H473KA61D"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>8757aadd-65a5-51f5-808b-0d7374e785a8</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C102">
+      <value>1nF</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRM1885C1H102JA01D</field>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="C102" description=""/>
+      <property name="MPN" value="GRM1885C1H102JA01D"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>767002dc-1775-52c9-8260-9fe7a82e2c1c</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C110">
+      <value>47nF</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRM188R71H473KA61D</field>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="C110" description=""/>
+      <property name="MPN" value="GRM188R71H473KA61D"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>7732916a-c6c5-5dd5-b550-b9fb79b1cdc3</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C111">
+      <value>47nF</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRM188R71H473KA61D</field>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="C111" description=""/>
+      <property name="MPN" value="GRM188R71H473KA61D"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>7e37f50a-5e57-5522-b8f0-2b0106273e2d</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C112">
+      <value>1nF</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRM1885C1H102JA01D</field>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="C112" description=""/>
+      <property name="MPN" value="GRM1885C1H102JA01D"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>6fc9ce41-841b-5178-ae8f-5aa5251f6472</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C200">
+      <value>100nF</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRM188R71C104KA01D</field>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="C200" description=""/>
+      <property name="MPN" value="GRM188R71C104KA01D"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>0277fccf-3a93-5575-9c1c-6f6f1437b5fe</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C201">
+      <value>100nF</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRM188R71C104KA01D</field>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="C201" description=""/>
+      <property name="MPN" value="GRM188R71C104KA01D"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>37520ecb-822f-5446-8b07-dbba6dac9e75</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C202">
+      <value>100nF</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRM188R71C104KA01D</field>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="C202" description=""/>
+      <property name="MPN" value="GRM188R71C104KA01D"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>0d4ce9f4-5bd9-579c-b25f-9a77866fc3aa</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C203">
+      <value>10uF</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <fields>
+        <field name="MPN">GRM21BR61A106KE19L</field>
+        <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="C203" description=""/>
+      <property name="MPN" value="GRM21BR61A106KE19L"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>03bf341a-e3b1-526a-9401-2fbec6da6cd0</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C204">
+      <value>100nF</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRM188R71C104KA01D</field>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="C204" description=""/>
+      <property name="MPN" value="GRM188R71C104KA01D"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>9b352912-16e7-5f95-977c-eb94ff57cbf4</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C205">
+      <value>1uF</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRM188R61A105KA61D</field>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="C205" description=""/>
+      <property name="MPN" value="GRM188R61A105KA61D"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>3c609959-fda3-5096-8486-1a8f3e82034b</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C206">
+      <value>1uF</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRM188R61A105KA61D</field>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="C206" description=""/>
+      <property name="MPN" value="GRM188R61A105KA61D"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>10eae816-530c-520d-9613-b58271b949f5</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C207">
+      <value>10uF</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <fields>
+        <field name="MPN">GRM21BR61A106KE19L</field>
+        <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="C207" description=""/>
+      <property name="MPN" value="GRM21BR61A106KE19L"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>0b0ca4b3-a932-5c29-9676-39b140a264ab</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C208">
+      <value>10uF</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <fields>
+        <field name="MPN">GRM21BR61A106KE19L</field>
+        <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="C208" description=""/>
+      <property name="MPN" value="GRM21BR61A106KE19L"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>93ffb472-ad60-5b6f-852c-f7790f614fd2</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C210">
+      <value>2.2uF</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRM188R61A225KE15D</field>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="C210" description=""/>
+      <property name="MPN" value="GRM188R61A225KE15D"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>6f4a2168-8a02-52d7-a47c-e9050db4f1a1</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C211">
+      <value>2.2uF</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRM188R61A225KE15D</field>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="C211" description=""/>
+      <property name="MPN" value="GRM188R61A225KE15D"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>c9202fb9-e2ff-537b-9840-5af81cdd5454</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C212">
+      <value>1uF</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">GRM188R61A105KA61D</field>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="C212" description=""/>
+      <property name="MPN" value="GRM188R61A105KA61D"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>3967a1b7-3b9a-5c72-9a90-85b139312c71</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="D1">
+      <value>USB ESD</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23-6</footprint>
+      <fields>
+        <field name="MPN">USBLC6-2SC6</field>
+        <field name="Footprint">Package_TO_SOT_SMD:SOT-23-6</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="D1" description=""/>
+      <property name="MPN" value="USBLC6-2SC6"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>62e375bd-dbb5-56c3-a468-11c7a7df0a70</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+            <pin num="3"/>
+            <pin num="4"/>
+            <pin num="5"/>
+            <pin num="6"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="D10">
+      <value>BAV199</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23</footprint>
+      <fields>
+        <field name="MPN">BAV199,215</field>
+        <field name="Footprint">Package_TO_SOT_SMD:SOT-23</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="D10" description=""/>
+      <property name="MPN" value="BAV199,215"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>b34aa6c3-3623-5ce7-b725-67127a407455</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+            <pin num="3"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="D11">
+      <value>BAV199</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23</footprint>
+      <fields>
+        <field name="MPN">BAV199,215</field>
+        <field name="Footprint">Package_TO_SOT_SMD:SOT-23</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="D11" description=""/>
+      <property name="MPN" value="BAV199,215"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>1801b81a-26b0-56c5-a96a-a6bcb17189ab</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+            <pin num="3"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="D20">
+      <value>green</value>
+      <footprint>LED_SMD:LED_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">LTST-C190KGKT</field>
+        <field name="Footprint">LED_SMD:LED_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="D20" description=""/>
+      <property name="MPN" value="LTST-C190KGKT"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>7083623b-1bfe-545c-a963-f1662c97069f</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="D21">
+      <value>red</value>
+      <footprint>LED_SMD:LED_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">LTST-C190KRKT</field>
+        <field name="Footprint">LED_SMD:LED_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="D21" description=""/>
+      <property name="MPN" value="LTST-C190KRKT"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>3eac11f9-1bb9-5d24-af6b-201477c3eedd</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="D22">
+      <value>amber</value>
+      <footprint>LED_SMD:LED_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">LTST-C190KSKT</field>
+        <field name="Footprint">LED_SMD:LED_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="D22" description=""/>
+      <property name="MPN" value="LTST-C190KSKT"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>5b997c10-56e9-5fa1-aa9b-f0f3d1fbe2ef</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="H1">
+      <value>M2 mounting</value>
+      <footprint>MountingHole:MountingHole_2.2mm_M2</footprint>
+      <fields>
+        <field name="MPN">MECHANICAL</field>
+        <field name="Footprint">MountingHole:MountingHole_2.2mm_M2</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="H1" description=""/>
+      <property name="MPN" value="MECHANICAL"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>3d11fd24-abcb-568b-a185-5e7dbb2507f0</tstamps>
+      <units>
+        <unit name="A">
+          <pins/>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="H2">
+      <value>M2 mounting</value>
+      <footprint>MountingHole:MountingHole_2.2mm_M2</footprint>
+      <fields>
+        <field name="MPN">MECHANICAL</field>
+        <field name="Footprint">MountingHole:MountingHole_2.2mm_M2</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="H2" description=""/>
+      <property name="MPN" value="MECHANICAL"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>25e99f98-1f6b-5279-ac6c-027f2b6f9846</tstamps>
+      <units>
+        <unit name="A">
+          <pins/>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="H3">
+      <value>M2 mounting</value>
+      <footprint>MountingHole:MountingHole_2.2mm_M2</footprint>
+      <fields>
+        <field name="MPN">MECHANICAL</field>
+        <field name="Footprint">MountingHole:MountingHole_2.2mm_M2</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="H3" description=""/>
+      <property name="MPN" value="MECHANICAL"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>8b00f1cd-43dd-5f90-a2ee-fc07bc9c1bc4</tstamps>
+      <units>
+        <unit name="A">
+          <pins/>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="J1">
+      <value>USB-C (battery powered)</value>
+      <footprint>Connector_USB:USB_C_Receptacle_GCT_USB4105-xx-A_16P_TopMnt_Horizontal</footprint>
+      <fields>
+        <field name="MPN">USB4105-GF-A</field>
+        <field name="Footprint">Connector_USB:USB_C_Receptacle_GCT_USB4105-xx-A_16P_TopMnt_Horizontal</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="J1" description=""/>
+      <property name="MPN" value="USB4105-GF-A"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>a54a4933-72d1-5130-817f-dfc1a391703d</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="A1"/>
+            <pin num="A12"/>
+            <pin num="B1"/>
+            <pin num="B12"/>
+            <pin num="SH"/>
+            <pin num="A4"/>
+            <pin num="A9"/>
+            <pin num="B4"/>
+            <pin num="B9"/>
+            <pin num="A5"/>
+            <pin num="B5"/>
+            <pin num="A6"/>
+            <pin num="B6"/>
+            <pin num="A7"/>
+            <pin num="B7"/>
+            <pin num="A8"/>
+            <pin num="B8"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="J2">
+      <value>microSD</value>
+      <footprint>Connector_Card:microSD_HC_Hirose_DM3AT-SF-PEJM5</footprint>
+      <fields>
+        <field name="MPN">DM3AT-SF-PEJM5</field>
+        <field name="Footprint">Connector_Card:microSD_HC_Hirose_DM3AT-SF-PEJM5</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="J2" description=""/>
+      <property name="MPN" value="DM3AT-SF-PEJM5"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>b5c50270-fba4-5bcc-aa95-8f39c725045d</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+            <pin num="3"/>
+            <pin num="4"/>
+            <pin num="5"/>
+            <pin num="6"/>
+            <pin num="7"/>
+            <pin num="8"/>
+            <pin num="9"/>
+            <pin num="10"/>
+            <pin num="SH"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="J3">
+      <value>FOOT IMU</value>
+      <footprint>Connector_JST:JST_GH_BM08B-GHS-TBT_1x08-1MP_P1.25mm_Vertical</footprint>
+      <fields>
+        <field name="MPN">BM08B-GHS-TBT(LF)(SN)</field>
+        <field name="Footprint">Connector_JST:JST_GH_BM08B-GHS-TBT_1x08-1MP_P1.25mm_Vertical</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="J3" description=""/>
+      <property name="MPN" value="BM08B-GHS-TBT(LF)(SN)"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>2a00153c-27c0-5812-9c64-0e8ebaa989cd</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+            <pin num="3"/>
+            <pin num="4"/>
+            <pin num="5"/>
+            <pin num="6"/>
+            <pin num="7"/>
+            <pin num="8"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="J4">
+      <value>SHANK IMU</value>
+      <footprint>Connector_JST:JST_GH_BM08B-GHS-TBT_1x08-1MP_P1.25mm_Vertical</footprint>
+      <fields>
+        <field name="MPN">BM08B-GHS-TBT(LF)(SN)</field>
+        <field name="Footprint">Connector_JST:JST_GH_BM08B-GHS-TBT_1x08-1MP_P1.25mm_Vertical</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="J4" description=""/>
+      <property name="MPN" value="BM08B-GHS-TBT(LF)(SN)"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>affcd691-2da2-554d-99ef-53987882a6df</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+            <pin num="3"/>
+            <pin num="4"/>
+            <pin num="5"/>
+            <pin num="6"/>
+            <pin num="7"/>
+            <pin num="8"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="J5">
+      <value>EMG1</value>
+      <footprint>Connector_JST:JST_GH_BM03B-GHS-TBT_1x03-1MP_P1.25mm_Vertical</footprint>
+      <fields>
+        <field name="MPN">BM03B-GHS-TBT(LF)(SN)</field>
+        <field name="Footprint">Connector_JST:JST_GH_BM03B-GHS-TBT_1x03-1MP_P1.25mm_Vertical</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="J5" description=""/>
+      <property name="MPN" value="BM03B-GHS-TBT(LF)(SN)"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>d3d84575-415f-5a8d-821b-524bc4e8115d</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+            <pin num="3"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="J6">
+      <value>EMG2</value>
+      <footprint>Connector_JST:JST_GH_BM03B-GHS-TBT_1x03-1MP_P1.25mm_Vertical</footprint>
+      <fields>
+        <field name="MPN">BM03B-GHS-TBT(LF)(SN)</field>
+        <field name="Footprint">Connector_JST:JST_GH_BM03B-GHS-TBT_1x03-1MP_P1.25mm_Vertical</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="J6" description=""/>
+      <property name="MPN" value="BM03B-GHS-TBT(LF)(SN)"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>4c6f6012-a147-5c92-b854-d56843e24fdd</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+            <pin num="3"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="J9">
+      <value>PROTECTED 1S BATTERY</value>
+      <footprint>Connector_JST:JST_GH_BM02B-GHS-TBT_1x02-1MP_P1.25mm_Vertical</footprint>
+      <fields>
+        <field name="MPN">BM02B-GHS-TBT(LF)(SN)</field>
+        <field name="Footprint">Connector_JST:JST_GH_BM02B-GHS-TBT_1x02-1MP_P1.25mm_Vertical</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="J9" description=""/>
+      <property name="MPN" value="BM02B-GHS-TBT(LF)(SN)"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>101e4cc0-ebca-50d0-9510-f9f73f7238ca</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="J10">
+      <value>Expansion</value>
+      <footprint>Connector_JST:JST_GH_BM06B-GHS-TBT_1x06-1MP_P1.25mm_Vertical</footprint>
+      <fields>
+        <field name="MPN">BM06B-GHS-TBT(LF)(SN)</field>
+        <field name="Footprint">Connector_JST:JST_GH_BM06B-GHS-TBT_1x06-1MP_P1.25mm_Vertical</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="J10" description=""/>
+      <property name="MPN" value="BM06B-GHS-TBT(LF)(SN)"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>620422fc-dbd4-5515-a89a-2957cf01ea60</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+            <pin num="3"/>
+            <pin num="4"/>
+            <pin num="5"/>
+            <pin num="6"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="L1">
+      <value>1.5uH</value>
+      <footprint>Inductor_SMD:L_Coilcraft_XAL4020-XXX</footprint>
+      <fields>
+        <field name="MPN">XAL4020-152MEC</field>
+        <field name="Footprint">Inductor_SMD:L_Coilcraft_XAL4020-XXX</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="L1" description=""/>
+      <property name="MPN" value="XAL4020-152MEC"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>0dd6410f-ff09-5faf-88e1-686d6797a317</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="Q1">
+      <value>DMP2035U</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23</footprint>
+      <fields>
+        <field name="MPN">DMP2035U-7</field>
+        <field name="Footprint">Package_TO_SOT_SMD:SOT-23</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="Q1" description=""/>
+      <property name="MPN" value="DMP2035U-7"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>c0233b52-6cbd-5a17-8bf4-96fc42f4028b</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+            <pin num="3"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="Q2">
+      <value>2N7002</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23</footprint>
+      <fields>
+        <field name="MPN">2N7002,215</field>
+        <field name="Footprint">Package_TO_SOT_SMD:SOT-23</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="Q2" description=""/>
+      <property name="MPN" value="2N7002,215"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>db4f000b-ff3a-59b3-9ab0-179e2f53d477</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+            <pin num="3"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R1">
+      <value>10k</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-0710KL</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="R1" description=""/>
+      <property name="MPN" value="RC0603FR-0710KL"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>24cbbb6f-59e3-5b58-bd0a-85a827f51291</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R2">
+      <value>10k</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-0710KL</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="R2" description=""/>
+      <property name="MPN" value="RC0603FR-0710KL"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>3ee28679-44ce-5e07-8414-5906f131045f</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R3">
+      <value>10k</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-0710KL</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="R3" description=""/>
+      <property name="MPN" value="RC0603FR-0710KL"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>0981b352-a35f-5f57-af9c-a80d8e789016</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R10">
+      <value>10k</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-0710KL</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="R10" description=""/>
+      <property name="MPN" value="RC0603FR-0710KL"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>2223f338-ff24-5e7e-bd0d-0b96546e404b</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R11">
+      <value>10k</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-0710KL</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="R11" description=""/>
+      <property name="MPN" value="RC0603FR-0710KL"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>04563a2a-4289-5361-80df-09ca481a1b45</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R12">
+      <value>10k</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-0710KL</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="R12" description=""/>
+      <property name="MPN" value="RC0603FR-0710KL"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>0d3a2f94-5dab-5a19-8020-aeb2ee6e63c8</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R13">
+      <value>10k</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-0710KL</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="R13" description=""/>
+      <property name="MPN" value="RC0603FR-0710KL"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>98284018-9436-5af9-b3ec-b561050112fe</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R14">
+      <value>10k</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-0710KL</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="R14" description=""/>
+      <property name="MPN" value="RC0603FR-0710KL"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>4043d523-0b4a-510d-9d39-5105c5c9baf2</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R15">
+      <value>33</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-0733RL</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="R15" description=""/>
+      <property name="MPN" value="RC0603FR-0733RL"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>b6c45215-d3be-5003-bfd0-99f1245b9627</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R20">
+      <value>5.1k</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-075K1L</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="R20" description=""/>
+      <property name="MPN" value="RC0603FR-075K1L"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>2a573fb4-6d4d-5485-8f23-98a32ee6a99b</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R21">
+      <value>5.1k</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-075K1L</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="R21" description=""/>
+      <property name="MPN" value="RC0603FR-075K1L"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>d0b8c86f-a737-5be1-87ba-56558157d89e</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R22">
+      <value>33</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-0733RL</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="R22" description=""/>
+      <property name="MPN" value="RC0603FR-0733RL"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>a7372580-f0b5-5e18-b581-1155b893e3b6</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R23">
+      <value>33</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-0733RL</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="R23" description=""/>
+      <property name="MPN" value="RC0603FR-0733RL"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>4446eb16-ffc4-5697-a90e-35d09d8cf97d</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R24">
+      <value>100k</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-07100KL</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="R24" description=""/>
+      <property name="MPN" value="RC0603FR-07100KL"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>6a4830a7-d9c7-54a5-8dba-59112c19d637</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R25">
+      <value>1M</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-071ML</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="R25" description=""/>
+      <property name="MPN" value="RC0603FR-071ML"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>244e6803-331e-5d42-b5b3-d2bddc0fb7bc</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R26">
+      <value>10k</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-0710KL</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="R26" description=""/>
+      <property name="MPN" value="RC0603FR-0710KL"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>8de08aa0-d548-57d5-8609-13f0d13a6583</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R30">
+      <value>10k</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-0710KL</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="R30" description=""/>
+      <property name="MPN" value="RC0603FR-0710KL"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>101fbfa1-559a-54f5-967b-ecffc3a81121</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R31">
+      <value>10k</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-0710KL</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="R31" description=""/>
+      <property name="MPN" value="RC0603FR-0710KL"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>13b96c08-71ce-55c8-8410-0733c1b6f614</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R33">
+      <value>10k</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-0710KL</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="R33" description=""/>
+      <property name="MPN" value="RC0603FR-0710KL"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>10001269-073b-52f6-8040-14da00b129c0</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R40">
+      <value>10k</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-0710KL</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="R40" description=""/>
+      <property name="MPN" value="RC0603FR-0710KL"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>af795494-3491-5638-b41f-a789984bd175</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R41">
+      <value>10k</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-0710KL</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="R41" description=""/>
+      <property name="MPN" value="RC0603FR-0710KL"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>3e94f16c-1c5e-5484-8157-00d2d9f302bb</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R42">
+      <value>100</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-07100RL</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="R42" description=""/>
+      <property name="MPN" value="RC0603FR-07100RL"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>9ab011a8-ea56-5710-beb6-304ba6f366fa</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R50">
+      <value>316k</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-07316KL</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="R50" description=""/>
+      <property name="MPN" value="RC0603FR-07316KL"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>fa7fe16d-7c03-574c-b714-0c1da4b1e1c1</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R51">
+      <value>100k</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-07100KL</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="R51" description=""/>
+      <property name="MPN" value="RC0603FR-07100KL"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>61d4feff-4784-594d-86fb-74c1760f3a61</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R52">
+      <value>100k</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-07100KL</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="R52" description=""/>
+      <property name="MPN" value="RC0603FR-07100KL"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>6c22868c-1271-558e-8d2e-67fd3b45d626</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R53">
+      <value>100k</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-07100KL</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="R53" description=""/>
+      <property name="MPN" value="RC0603FR-07100KL"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>d511e86d-f3ae-5b31-9cfb-67928444ac75</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R54">
+      <value>100k</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-07100KL</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="R54" description=""/>
+      <property name="MPN" value="RC0603FR-07100KL"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>9d42f222-d7d0-5b8b-97f6-943b1740e698</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R60">
+      <value>1k</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-071KL</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="R60" description=""/>
+      <property name="MPN" value="RC0603FR-071KL"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>823515c2-fc39-5907-bda7-9bd66d4dc998</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R61">
+      <value>1k</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-071KL</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="R61" description=""/>
+      <property name="MPN" value="RC0603FR-071KL"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>e027570e-ba92-592d-9fb5-e3aa09996202</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R62">
+      <value>1k</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-071KL</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="R62" description=""/>
+      <property name="MPN" value="RC0603FR-071KL"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>d5569f28-1bee-5f3a-ae28-51128dfa22d3</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R100">
+      <value>3.3k</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-073K3L</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="R100" description=""/>
+      <property name="MPN" value="RC0603FR-073K3L"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>cc076604-37b2-5330-afea-a2c3f5b543e2</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R101">
+      <value>1M</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-071ML</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="R101" description=""/>
+      <property name="MPN" value="RC0603FR-071ML"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>af3486e0-4382-5e56-b284-3e311cb4a1cf</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R102">
+      <value>3.3k</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-073K3L</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="R102" description=""/>
+      <property name="MPN" value="RC0603FR-073K3L"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>07cffd53-13c3-5c9a-974b-bce9e3141809</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R104">
+      <value>100</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-07100RL</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="R104" description=""/>
+      <property name="MPN" value="RC0603FR-07100RL"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>476514ae-2d05-5814-881c-5d4f8daee6f9</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R110">
+      <value>3.3k</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-073K3L</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="R110" description=""/>
+      <property name="MPN" value="RC0603FR-073K3L"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>644968af-a3ec-521d-ab7a-fb0e6c995337</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R111">
+      <value>1M</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-071ML</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="R111" description=""/>
+      <property name="MPN" value="RC0603FR-071ML"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>dd6d2c9d-2f7d-51e9-80a3-8774a30e5d75</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R112">
+      <value>3.3k</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-073K3L</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="R112" description=""/>
+      <property name="MPN" value="RC0603FR-073K3L"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>da93a937-d1bf-5599-9cc8-9f7534f68023</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R114">
+      <value>100</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
+      <fields>
+        <field name="MPN">RC0603FR-07100RL</field>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="R114" description=""/>
+      <property name="MPN" value="RC0603FR-07100RL"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>704b40e2-265d-5521-96af-b2287267cfa7</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="SW1">
+      <value>POWER</value>
+      <footprint>Button_Switch_SMD:SW_SPDT_CK_JS102011SAQN</footprint>
+      <fields>
+        <field name="MPN">JS102011SAQN</field>
+        <field name="Footprint">Button_Switch_SMD:SW_SPDT_CK_JS102011SAQN</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="SW1" description=""/>
+      <property name="MPN" value="JS102011SAQN"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>cb3e6011-ae1e-5276-9bb8-0ed353790453</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+            <pin num="3"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="SW2">
+      <value>BOOT</value>
+      <footprint>Button_Switch_SMD:SW_SPST_TL3342</footprint>
+      <fields>
+        <field name="MPN">TL3342F160QG</field>
+        <field name="Footprint">Button_Switch_SMD:SW_SPST_TL3342</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="SW2" description=""/>
+      <property name="MPN" value="TL3342F160QG"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>6d580e3d-6e00-57ad-8e39-677c57003c7b</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="SW3">
+      <value>EN</value>
+      <footprint>Button_Switch_SMD:SW_SPST_TL3342</footprint>
+      <fields>
+        <field name="MPN">TL3342F160QG</field>
+        <field name="Footprint">Button_Switch_SMD:SW_SPST_TL3342</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="SW3" description=""/>
+      <property name="MPN" value="TL3342F160QG"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>172db54f-7ee2-535a-84f1-9e83e20dba7d</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="SW4">
+      <value>BUTTON</value>
+      <footprint>Button_Switch_SMD:SW_SPST_TL3342</footprint>
+      <fields>
+        <field name="MPN">TL3342F160QG</field>
+        <field name="Footprint">Button_Switch_SMD:SW_SPST_TL3342</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="SW4" description=""/>
+      <property name="MPN" value="TL3342F160QG"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>be968754-03c2-588b-b265-2be22da60525</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="U1">
+      <value>ESP32-S3-WROOM-1-N8R8</value>
+      <footprint>RF_Module:ESP32-S3-WROOM-1</footprint>
+      <fields>
+        <field name="MPN">ESP32-S3-WROOM-1-N8R8</field>
+        <field name="Footprint">RF_Module:ESP32-S3-WROOM-1</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="U1" description=""/>
+      <property name="MPN" value="ESP32-S3-WROOM-1-N8R8"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>7dff2580-555b-56bf-9262-ff9c0f61a4b9</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+            <pin num="3"/>
+            <pin num="40"/>
+            <pin num="41"/>
+            <pin num="4"/>
+            <pin num="5"/>
+            <pin num="6"/>
+            <pin num="7"/>
+            <pin num="8"/>
+            <pin num="9"/>
+            <pin num="10"/>
+            <pin num="11"/>
+            <pin num="12"/>
+            <pin num="13"/>
+            <pin num="14"/>
+            <pin num="15"/>
+            <pin num="16"/>
+            <pin num="17"/>
+            <pin num="18"/>
+            <pin num="19"/>
+            <pin num="20"/>
+            <pin num="21"/>
+            <pin num="22"/>
+            <pin num="23"/>
+            <pin num="24"/>
+            <pin num="25"/>
+            <pin num="26"/>
+            <pin num="27"/>
+            <pin num="28"/>
+            <pin num="29"/>
+            <pin num="30"/>
+            <pin num="31"/>
+            <pin num="32"/>
+            <pin num="33"/>
+            <pin num="34"/>
+            <pin num="35"/>
+            <pin num="36"/>
+            <pin num="37"/>
+            <pin num="38"/>
+            <pin num="39"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="U2">
+      <value>AD7606BSTZ</value>
+      <footprint>Package_QFP:LQFP-64_10x10mm_P0.5mm</footprint>
+      <fields>
+        <field name="MPN">AD7606BSTZ</field>
+        <field name="Footprint">Package_QFP:LQFP-64_10x10mm_P0.5mm</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="U2" description=""/>
+      <property name="MPN" value="AD7606BSTZ"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>848203b7-af17-57e2-a5e5-9e1bc09a3692</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+            <pin num="3"/>
+            <pin num="4"/>
+            <pin num="5"/>
+            <pin num="6"/>
+            <pin num="7"/>
+            <pin num="8"/>
+            <pin num="9"/>
+            <pin num="10"/>
+            <pin num="11"/>
+            <pin num="12"/>
+            <pin num="13"/>
+            <pin num="14"/>
+            <pin num="15"/>
+            <pin num="16"/>
+            <pin num="17"/>
+            <pin num="18"/>
+            <pin num="19"/>
+            <pin num="20"/>
+            <pin num="21"/>
+            <pin num="22"/>
+            <pin num="23"/>
+            <pin num="24"/>
+            <pin num="25"/>
+            <pin num="26"/>
+            <pin num="27"/>
+            <pin num="28"/>
+            <pin num="29"/>
+            <pin num="30"/>
+            <pin num="31"/>
+            <pin num="32"/>
+            <pin num="33"/>
+            <pin num="34"/>
+            <pin num="35"/>
+            <pin num="36"/>
+            <pin num="37"/>
+            <pin num="38"/>
+            <pin num="39"/>
+            <pin num="40"/>
+            <pin num="41"/>
+            <pin num="42"/>
+            <pin num="43"/>
+            <pin num="44"/>
+            <pin num="45"/>
+            <pin num="46"/>
+            <pin num="47"/>
+            <pin num="48"/>
+            <pin num="49"/>
+            <pin num="50"/>
+            <pin num="51"/>
+            <pin num="52"/>
+            <pin num="53"/>
+            <pin num="54"/>
+            <pin num="55"/>
+            <pin num="56"/>
+            <pin num="57"/>
+            <pin num="58"/>
+            <pin num="59"/>
+            <pin num="60"/>
+            <pin num="61"/>
+            <pin num="62"/>
+            <pin num="63"/>
+            <pin num="64"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="U3">
+      <value>MCP6004T-I/ST</value>
+      <footprint>Package_SO:TSSOP-14_4.4x5mm_P0.65mm</footprint>
+      <fields>
+        <field name="MPN">MCP6004T-I/ST</field>
+        <field name="Footprint">Package_SO:TSSOP-14_4.4x5mm_P0.65mm</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="U3" description=""/>
+      <property name="MPN" value="MCP6004T-I/ST"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>5f14dcab-4ec7-53c2-b606-15a4231b6413</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="4"/>
+            <pin num="11"/>
+            <pin num="3"/>
+            <pin num="2"/>
+            <pin num="1"/>
+            <pin num="5"/>
+            <pin num="6"/>
+            <pin num="7"/>
+            <pin num="10"/>
+            <pin num="9"/>
+            <pin num="8"/>
+            <pin num="12"/>
+            <pin num="13"/>
+            <pin num="14"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="U4">
+      <value>MCP6004T-I/ST</value>
+      <footprint>Package_SO:TSSOP-14_4.4x5mm_P0.65mm</footprint>
+      <fields>
+        <field name="MPN">MCP6004T-I/ST</field>
+        <field name="Footprint">Package_SO:TSSOP-14_4.4x5mm_P0.65mm</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="U4" description=""/>
+      <property name="MPN" value="MCP6004T-I/ST"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>19376b88-4726-5e26-aef9-e44428dc12c6</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="4"/>
+            <pin num="11"/>
+            <pin num="3"/>
+            <pin num="2"/>
+            <pin num="1"/>
+            <pin num="5"/>
+            <pin num="6"/>
+            <pin num="7"/>
+            <pin num="10"/>
+            <pin num="9"/>
+            <pin num="8"/>
+            <pin num="12"/>
+            <pin num="13"/>
+            <pin num="14"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="U5">
+      <value>MCP6001T-I/OT</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23-5</footprint>
+      <fields>
+        <field name="MPN">MCP6001T-I/OT</field>
+        <field name="Footprint">Package_TO_SOT_SMD:SOT-23-5</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="U5" description=""/>
+      <property name="MPN" value="MCP6001T-I/OT"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>0d649d9b-8f0a-5bba-8976-bdb32a07d23c</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+            <pin num="3"/>
+            <pin num="4"/>
+            <pin num="5"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="U6">
+      <value>TPS63070RNMR</value>
+      <footprint>RevB:TI_RNM0015A</footprint>
+      <fields>
+        <field name="MPN">TPS63070RNMR</field>
+        <field name="Footprint">RevB:TI_RNM0015A</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="U6" description=""/>
+      <property name="MPN" value="TPS63070RNMR"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>fbc14355-d345-583b-bf43-3e803eef59ff</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+            <pin num="3"/>
+            <pin num="4"/>
+            <pin num="5"/>
+            <pin num="6"/>
+            <pin num="7"/>
+            <pin num="8"/>
+            <pin num="9"/>
+            <pin num="10"/>
+            <pin num="11"/>
+            <pin num="12"/>
+            <pin num="13"/>
+            <pin num="14"/>
+            <pin num="15"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="U7">
+      <value>TPS7A2030PDBVR</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23-5</footprint>
+      <fields>
+        <field name="MPN">TPS7A2030PDBVR</field>
+        <field name="Footprint">Package_TO_SOT_SMD:SOT-23-5</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="U7" description=""/>
+      <property name="MPN" value="TPS7A2030PDBVR"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>52e15d5d-7d51-56de-94f3-20d34288873d</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+            <pin num="3"/>
+            <pin num="4"/>
+            <pin num="5"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="U8">
+      <value>TPS60150DRVR</value>
+      <footprint>RevB:TPS60150_DRV0006D</footprint>
+      <fields>
+        <field name="MPN">TPS60150DRVR</field>
+        <field name="Footprint">RevB:TPS60150_DRV0006D</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="RevB" part="U8" description=""/>
+      <property name="MPN" value="TPS60150DRVR"/>
+      <property name="Sheetname" value="afo_revb_main"/>
+      <property name="Sheetfile" value="afo_revb_main.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>85ff52d0-4931-5231-ab16-b4fd67c006bd</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+            <pin num="3"/>
+            <pin num="4"/>
+            <pin num="5"/>
+            <pin num="6"/>
+            <pin num="7"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="RevB" part="C1">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">100nF</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="3V3D" type="passive"/>
+        <pin num="2" name="GND" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="C10">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">100nF</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="3V3D" type="passive"/>
+        <pin num="2" name="GND" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="C100">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">47nF</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="RC0A" type="passive"/>
+        <pin num="2" name="GND" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="C101">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">47nF</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="RC0B" type="passive"/>
+        <pin num="2" name="GND" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="C102">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">1nF</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="AIN0P" type="passive"/>
+        <pin num="2" name="GND" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="C11">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">22uF</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="3V3D" type="passive"/>
+        <pin num="2" name="GND" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="C110">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">47nF</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="RC1A" type="passive"/>
+        <pin num="2" name="GND" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="C111">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">47nF</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="RC1B" type="passive"/>
+        <pin num="2" name="GND" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="C112">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">1nF</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="AIN1P" type="passive"/>
+        <pin num="2" name="GND" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="C12">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">10nF</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="USB_GATE" type="passive"/>
+        <pin num="2" name="GND" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="C2">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">10uF</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="3V3D" type="passive"/>
+        <pin num="2" name="GND" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="C200">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">100nF</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="5V_ADC" type="passive"/>
+        <pin num="2" name="GND" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="C201">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">100nF</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="5V_ADC" type="passive"/>
+        <pin num="2" name="GND" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="C202">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">100nF</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="5V_ADC" type="passive"/>
+        <pin num="2" name="GND" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="C203">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">10uF</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="5V_ADC" type="passive"/>
+        <pin num="2" name="GND" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="C204">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">100nF</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="3V3D" type="passive"/>
+        <pin num="2" name="GND" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="C205">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">1uF</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="REGCAP_A" type="passive"/>
+        <pin num="2" name="GND" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="C206">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">1uF</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="REGCAP_B" type="passive"/>
+        <pin num="2" name="GND" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="C207">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">10uF</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="ADC_REF" type="passive"/>
+        <pin num="2" name="GND" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="C208">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">10uF</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="ADC_REFCAP" type="passive"/>
+        <pin num="2" name="GND" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="C210">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">2.2uF</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="3V3D" type="passive"/>
+        <pin num="2" name="GND" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="C211">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">2.2uF</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="5V_ADC" type="passive"/>
+        <pin num="2" name="GND" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="C212">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">1uF</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="CP_PLUS" type="passive"/>
+        <pin num="2" name="CP_MINUS" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="C3">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">1uF</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="EN" type="passive"/>
+        <pin num="2" name="GND" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="C30">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">1uF</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="VMID_DIV" type="passive"/>
+        <pin num="2" name="GND" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="C31">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">1uF</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="VMID" type="passive"/>
+        <pin num="2" name="GND" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="C32">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">100nF</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="3V0A" type="passive"/>
+        <pin num="2" name="GND" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="C33">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">100nF</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="3V0A" type="passive"/>
+        <pin num="2" name="GND" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="C34">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">100nF</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="3V0A" type="passive"/>
+        <pin num="2" name="GND" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="C40">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">22uF</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="VBAT" type="passive"/>
+        <pin num="2" name="GND" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="C41">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">22uF</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="3V3D" type="passive"/>
+        <pin num="2" name="GND" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="C42">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">22uF</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="3V3D" type="passive"/>
+        <pin num="2" name="GND" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="C43">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">100nF</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="VAUX" type="passive"/>
+        <pin num="2" name="GND" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="C44">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">100nF</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="BAT_SENSE" type="passive"/>
+        <pin num="2" name="GND" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="C45">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">1uF</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="3V3D" type="passive"/>
+        <pin num="2" name="GND" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="C46">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">1uF</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="3V0A" type="passive"/>
+        <pin num="2" name="GND" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="D1">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">USB ESD</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="USB_DP" type="passive"/>
+        <pin num="2" name="GND" type="passive"/>
+        <pin num="3" name="USB_DM" type="passive"/>
+        <pin num="4" name="NC" type="passive"/>
+        <pin num="5" name="USB_VBUS" type="passive"/>
+        <pin num="6" name="NC" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="D10">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">BAV199</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="GND" type="passive"/>
+        <pin num="2" name="3V0A" type="passive"/>
+        <pin num="3" name="RC0A" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="D11">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">BAV199</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="GND" type="passive"/>
+        <pin num="2" name="3V0A" type="passive"/>
+        <pin num="3" name="RC1A" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="D20">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">green</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="GND" type="passive"/>
+        <pin num="2" name="LED_REC_A" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="D21">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">red</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="GND" type="passive"/>
+        <pin num="2" name="LED_ERR_A" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="D22">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">amber</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="GND" type="passive"/>
+        <pin num="2" name="LED_LOW_A" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="H1">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">M2 mounting</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+    </libpart>
+    <libpart lib="RevB" part="H2">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">M2 mounting</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+    </libpart>
+    <libpart lib="RevB" part="H3">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">M2 mounting</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+    </libpart>
+    <libpart lib="RevB" part="J1">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">USB-C (battery powered)</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="A1" name="GND" type="passive"/>
+        <pin num="A4" name="USB_VBUS" type="passive"/>
+        <pin num="A5" name="USB_CC1" type="passive"/>
+        <pin num="A6" name="USB_DP" type="passive"/>
+        <pin num="A7" name="USB_DM" type="passive"/>
+        <pin num="A8" name="NC" type="passive"/>
+        <pin num="A9" name="USB_VBUS" type="passive"/>
+        <pin num="A12" name="GND" type="passive"/>
+        <pin num="B1" name="GND" type="passive"/>
+        <pin num="B4" name="USB_VBUS" type="passive"/>
+        <pin num="B5" name="USB_CC2" type="passive"/>
+        <pin num="B6" name="USB_DP" type="passive"/>
+        <pin num="B7" name="USB_DM" type="passive"/>
+        <pin num="B8" name="NC" type="passive"/>
+        <pin num="B9" name="USB_VBUS" type="passive"/>
+        <pin num="B12" name="GND" type="passive"/>
+        <pin num="SH" name="GND" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="J10">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">Expansion</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="3V3D" type="passive"/>
+        <pin num="2" name="GND" type="passive"/>
+        <pin num="3" name="EXP_SDA" type="passive"/>
+        <pin num="4" name="EXP_SCL" type="passive"/>
+        <pin num="5" name="UART_TX" type="passive"/>
+        <pin num="6" name="UART_RX" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="J2">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">microSD</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="SD_D2" type="passive"/>
+        <pin num="2" name="SD_D3" type="passive"/>
+        <pin num="3" name="SD_CMD" type="passive"/>
+        <pin num="4" name="3V3D" type="passive"/>
+        <pin num="5" name="SD_CLK" type="passive"/>
+        <pin num="6" name="GND" type="passive"/>
+        <pin num="7" name="SD_D0" type="passive"/>
+        <pin num="8" name="SD_D1" type="passive"/>
+        <pin num="9" name="NC" type="passive"/>
+        <pin num="10" name="NC" type="passive"/>
+        <pin num="SH" name="GND" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="J3">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">FOOT IMU</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="3V3D" type="passive"/>
+        <pin num="2" name="GND" type="passive"/>
+        <pin num="3" name="IMU_SCK" type="passive"/>
+        <pin num="4" name="IMU_MOSI" type="passive"/>
+        <pin num="5" name="IMU_MISO" type="passive"/>
+        <pin num="6" name="FOOT_CS" type="passive"/>
+        <pin num="7" name="FOOT_INT" type="passive"/>
+        <pin num="8" name="GND" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="J4">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">SHANK IMU</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="3V3D" type="passive"/>
+        <pin num="2" name="GND" type="passive"/>
+        <pin num="3" name="IMU_SCK" type="passive"/>
+        <pin num="4" name="IMU_MOSI" type="passive"/>
+        <pin num="5" name="IMU_MISO" type="passive"/>
+        <pin num="6" name="SHANK_CS" type="passive"/>
+        <pin num="7" name="SHANK_INT" type="passive"/>
+        <pin num="8" name="GND" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="J5">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">EMG1</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="3V0A" type="passive"/>
+        <pin num="2" name="GND" type="passive"/>
+        <pin num="3" name="RAW0" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="J6">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">EMG2</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="3V0A" type="passive"/>
+        <pin num="2" name="GND" type="passive"/>
+        <pin num="3" name="RAW1" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="J9">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">PROTECTED 1S BATTERY</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="PACK_PLUS" type="passive"/>
+        <pin num="2" name="GND" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="L1">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">1.5uH</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="SW_L1" type="passive"/>
+        <pin num="2" name="SW_L2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="Q1">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">DMP2035U</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="GND" type="passive"/>
+        <pin num="2" name="VBAT" type="passive"/>
+        <pin num="3" name="PACK_PLUS" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="Q2">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">2N7002</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="USB_GATE" type="passive"/>
+        <pin num="2" name="GND" type="passive"/>
+        <pin num="3" name="USB_PRESENT_N" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="R1">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">10k</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="3V3D" type="passive"/>
+        <pin num="2" name="EN" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="R10">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">10k</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="3V3D" type="passive"/>
+        <pin num="2" name="SD_CMD" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="R100">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">3.3k</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="RAW0" type="passive"/>
+        <pin num="2" name="RC0A" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="R101">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">1M</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="RAW0" type="passive"/>
+        <pin num="2" name="VMID" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="R102">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">3.3k</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="BUF0A" type="passive"/>
+        <pin num="2" name="RC0B" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="R104">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">100</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="BUF0B" type="passive"/>
+        <pin num="2" name="AIN0P" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="R11">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">10k</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="3V3D" type="passive"/>
+        <pin num="2" name="SD_D0" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="R110">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">3.3k</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="RAW1" type="passive"/>
+        <pin num="2" name="RC1A" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="R111">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">1M</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="RAW1" type="passive"/>
+        <pin num="2" name="VMID" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="R112">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">3.3k</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="BUF1A" type="passive"/>
+        <pin num="2" name="RC1B" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="R114">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">100</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="BUF1B" type="passive"/>
+        <pin num="2" name="AIN1P" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="R12">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">10k</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="3V3D" type="passive"/>
+        <pin num="2" name="SD_D1" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="R13">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">10k</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="3V3D" type="passive"/>
+        <pin num="2" name="SD_D2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="R14">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">10k</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="3V3D" type="passive"/>
+        <pin num="2" name="SD_D3" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="R15">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">33</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="SD_CLK_MCU" type="passive"/>
+        <pin num="2" name="SD_CLK" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="R2">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">10k</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="3V3D" type="passive"/>
+        <pin num="2" name="BOOT" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="R20">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">5.1k</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="USB_CC1" type="passive"/>
+        <pin num="2" name="GND" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="R21">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">5.1k</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="USB_CC2" type="passive"/>
+        <pin num="2" name="GND" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="R22">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">33</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="USB_DP" type="passive"/>
+        <pin num="2" name="USB_DP_MCU" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="R23">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">33</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="USB_DM" type="passive"/>
+        <pin num="2" name="USB_DM_MCU" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="R24">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">100k</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="USB_VBUS" type="passive"/>
+        <pin num="2" name="USB_GATE" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="R25">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">1M</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="USB_GATE" type="passive"/>
+        <pin num="2" name="GND" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="R26">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">10k</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="3V3D" type="passive"/>
+        <pin num="2" name="USB_PRESENT_N" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="R3">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">10k</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="3V3D" type="passive"/>
+        <pin num="2" name="BUTTON" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="R30">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">10k</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="3V3D" type="passive"/>
+        <pin num="2" name="FOOT_CS" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="R31">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">10k</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="3V3D" type="passive"/>
+        <pin num="2" name="SHANK_CS" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="R33">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">10k</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="3V3D" type="passive"/>
+        <pin num="2" name="ADC_CS" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="R40">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">10k</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="3V0A" type="passive"/>
+        <pin num="2" name="VMID_DIV" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="R41">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">10k</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="VMID_DIV" type="passive"/>
+        <pin num="2" name="GND" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="R42">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">100</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="VMID_BUF" type="passive"/>
+        <pin num="2" name="VMID" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="R50">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">316k</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="3V3D" type="passive"/>
+        <pin num="2" name="FB" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="R51">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">100k</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="FB" type="passive"/>
+        <pin num="2" name="GND" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="R52">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">100k</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="3V3D" type="passive"/>
+        <pin num="2" name="POWER_GOOD" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="R53">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">100k</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="VBAT" type="passive"/>
+        <pin num="2" name="BAT_SENSE" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="R54">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">100k</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="BAT_SENSE" type="passive"/>
+        <pin num="2" name="GND" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="R60">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">1k</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="LED_REC" type="passive"/>
+        <pin num="2" name="LED_REC_A" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="R61">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">1k</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="LED_ERR" type="passive"/>
+        <pin num="2" name="LED_ERR_A" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="R62">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">1k</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="LED_LOW" type="passive"/>
+        <pin num="2" name="LED_LOW_A" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="SW1">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">POWER</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="VBAT" type="passive"/>
+        <pin num="2" name="POWER_EN" type="passive"/>
+        <pin num="3" name="GND" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="SW2">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">BOOT</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="BOOT" type="passive"/>
+        <pin num="2" name="GND" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="SW3">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">EN</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="EN" type="passive"/>
+        <pin num="2" name="GND" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="SW4">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">BUTTON</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="BUTTON" type="passive"/>
+        <pin num="2" name="GND" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="U1">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">ESP32-S3-WROOM-1-N8R8</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="GND" type="power_in"/>
+        <pin num="2" name="3V3" type="power_in"/>
+        <pin num="3" name="EN" type="input"/>
+        <pin num="4" name="GPIO4" type="output"/>
+        <pin num="5" name="GPIO5" type="input"/>
+        <pin num="6" name="GPIO6" type="output"/>
+        <pin num="7" name="GPIO7" type="output"/>
+        <pin num="8" name="GPIO15" type="output"/>
+        <pin num="9" name="GPIO16" type="input"/>
+        <pin num="10" name="GPIO17" type="input"/>
+        <pin num="11" name="GPIO18" type="input"/>
+        <pin num="12" name="GPIO8" type="input"/>
+        <pin num="13" name="GPIO19" type="bidirectional"/>
+        <pin num="14" name="GPIO20" type="bidirectional"/>
+        <pin num="15" name="GPIO3" type="bidirectional"/>
+        <pin num="16" name="GPIO46" type="bidirectional"/>
+        <pin num="17" name="GPIO9" type="output"/>
+        <pin num="18" name="GPIO10" type="output"/>
+        <pin num="19" name="GPIO11" type="output"/>
+        <pin num="20" name="GPIO12" type="output"/>
+        <pin num="21" name="GPIO13" type="input"/>
+        <pin num="22" name="GPIO14" type="bidirectional"/>
+        <pin num="23" name="GPIO21" type="input"/>
+        <pin num="24" name="GPIO47" type="bidirectional"/>
+        <pin num="25" name="GPIO48" type="bidirectional"/>
+        <pin num="26" name="GPIO45" type="bidirectional"/>
+        <pin num="27" name="GPIO0" type="input"/>
+        <pin num="28" name="GPIO35" type="bidirectional"/>
+        <pin num="29" name="GPIO36" type="bidirectional"/>
+        <pin num="30" name="GPIO37" type="bidirectional"/>
+        <pin num="31" name="GPIO38" type="bidirectional"/>
+        <pin num="32" name="GPIO39" type="output"/>
+        <pin num="33" name="GPIO40" type="bidirectional"/>
+        <pin num="34" name="GPIO41" type="output"/>
+        <pin num="35" name="GPIO42" type="output"/>
+        <pin num="36" name="GPIO44" type="input"/>
+        <pin num="37" name="GPIO43" type="output"/>
+        <pin num="38" name="GPIO2" type="output"/>
+        <pin num="39" name="GPIO1" type="input"/>
+        <pin num="40" name="GND" type="power_in"/>
+        <pin num="41" name="EP_GND" type="power_in"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="U2">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">AD7606BSTZ</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="AVCC" type="power_in"/>
+        <pin num="2" name="GND" type="power_in"/>
+        <pin num="3" name="GND" type="input"/>
+        <pin num="4" name="GND" type="input"/>
+        <pin num="5" name="GND" type="input"/>
+        <pin num="6" name="PAR_SER" type="input"/>
+        <pin num="7" name="STBY_N" type="input"/>
+        <pin num="8" name="RANGE" type="input"/>
+        <pin num="9" name="CONVST_A" type="input"/>
+        <pin num="10" name="CONVST_B" type="input"/>
+        <pin num="11" name="RESET" type="input"/>
+        <pin num="12" name="SCLK" type="input"/>
+        <pin num="13" name="CS_N" type="input"/>
+        <pin num="14" name="BUSY" type="output"/>
+        <pin num="15" name="FRSTDATA" type="no_connect"/>
+        <pin num="16" name="GND" type="input"/>
+        <pin num="17" name="GND" type="input"/>
+        <pin num="18" name="GND" type="input"/>
+        <pin num="19" name="GND" type="input"/>
+        <pin num="20" name="GND" type="input"/>
+        <pin num="21" name="GND" type="input"/>
+        <pin num="22" name="GND" type="input"/>
+        <pin num="23" name="VDRIVE" type="power_in"/>
+        <pin num="24" name="DOUTA" type="output"/>
+        <pin num="25" name="DOUTB" type="no_connect"/>
+        <pin num="26" name="GND" type="power_in"/>
+        <pin num="27" name="GND" type="input"/>
+        <pin num="28" name="GND" type="input"/>
+        <pin num="29" name="GND" type="input"/>
+        <pin num="30" name="GND" type="input"/>
+        <pin num="31" name="GND" type="input"/>
+        <pin num="32" name="GND" type="input"/>
+        <pin num="33" name="GND" type="input"/>
+        <pin num="34" name="REF_SELECT" type="input"/>
+        <pin num="35" name="GND" type="power_in"/>
+        <pin num="36" name="REGCAP_A" type="power_out"/>
+        <pin num="37" name="5V_ADC" type="power_in"/>
+        <pin num="38" name="5V_ADC" type="power_in"/>
+        <pin num="39" name="REGCAP_B" type="power_out"/>
+        <pin num="40" name="GND" type="power_in"/>
+        <pin num="41" name="GND" type="power_in"/>
+        <pin num="42" name="REFIN_OUT" type="power_out"/>
+        <pin num="43" name="GND" type="power_in"/>
+        <pin num="44" name="REFCAP_A" type="power_out"/>
+        <pin num="45" name="REFCAP_B" type="passive"/>
+        <pin num="46" name="GND" type="power_in"/>
+        <pin num="47" name="GND" type="power_in"/>
+        <pin num="48" name="5V_ADC" type="power_in"/>
+        <pin num="49" name="AIN0P" type="input"/>
+        <pin num="50" name="GND" type="input"/>
+        <pin num="51" name="AIN1P" type="input"/>
+        <pin num="52" name="GND" type="input"/>
+        <pin num="53" name="GND" type="input"/>
+        <pin num="54" name="GND" type="input"/>
+        <pin num="55" name="GND" type="input"/>
+        <pin num="56" name="GND" type="input"/>
+        <pin num="57" name="GND" type="input"/>
+        <pin num="58" name="GND" type="input"/>
+        <pin num="59" name="GND" type="input"/>
+        <pin num="60" name="GND" type="input"/>
+        <pin num="61" name="GND" type="input"/>
+        <pin num="62" name="GND" type="input"/>
+        <pin num="63" name="GND" type="input"/>
+        <pin num="64" name="GND" type="input"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="U3">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">MCP6004T-I/ST</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="BUF0A" type="output"/>
+        <pin num="2" name="BUF0A" type="input"/>
+        <pin num="3" name="RC0A" type="input"/>
+        <pin num="4" name="3V0A" type="power_in"/>
+        <pin num="5" name="RC1A" type="input"/>
+        <pin num="6" name="BUF1A" type="input"/>
+        <pin num="7" name="BUF1A" type="output"/>
+        <pin num="8" name="U3_UNUSED_C" type="output"/>
+        <pin num="9" name="U3_UNUSED_C" type="input"/>
+        <pin num="10" name="GND" type="input"/>
+        <pin num="11" name="GND" type="power_in"/>
+        <pin num="12" name="GND" type="input"/>
+        <pin num="13" name="U3_UNUSED_D" type="input"/>
+        <pin num="14" name="U3_UNUSED_D" type="output"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="U4">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">MCP6004T-I/ST</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="BUF0B" type="output"/>
+        <pin num="2" name="BUF0B" type="input"/>
+        <pin num="3" name="RC0B" type="input"/>
+        <pin num="4" name="3V0A" type="power_in"/>
+        <pin num="5" name="RC1B" type="input"/>
+        <pin num="6" name="BUF1B" type="input"/>
+        <pin num="7" name="BUF1B" type="output"/>
+        <pin num="8" name="U4_UNUSED_C" type="output"/>
+        <pin num="9" name="U4_UNUSED_C" type="input"/>
+        <pin num="10" name="GND" type="input"/>
+        <pin num="11" name="GND" type="power_in"/>
+        <pin num="12" name="GND" type="input"/>
+        <pin num="13" name="U4_UNUSED_D" type="input"/>
+        <pin num="14" name="U4_UNUSED_D" type="output"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="U5">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">MCP6001T-I/OT</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="VMID_BUF" type="output"/>
+        <pin num="2" name="GND" type="power_in"/>
+        <pin num="3" name="VMID_DIV" type="input"/>
+        <pin num="4" name="VMID_BUF" type="input"/>
+        <pin num="5" name="3V0A" type="power_in"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="U6">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">TPS63070RNMR</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="GND" type="input"/>
+        <pin num="2" name="POWER_GOOD" type="open_collector"/>
+        <pin num="3" name="VAUX" type="power_out"/>
+        <pin num="4" name="GND" type="power_in"/>
+        <pin num="5" name="FB" type="input"/>
+        <pin num="6" name="GND" type="power_in"/>
+        <pin num="7" name="3V3D" type="power_out"/>
+        <pin num="8" name="3V3D" type="power_in"/>
+        <pin num="9" name="SW_L2" type="bidirectional"/>
+        <pin num="10" name="GND" type="power_in"/>
+        <pin num="11" name="SW_L1" type="bidirectional"/>
+        <pin num="12" name="VBAT" type="power_in"/>
+        <pin num="13" name="VBAT" type="power_in"/>
+        <pin num="14" name="POWER_EN" type="input"/>
+        <pin num="15" name="GND" type="input"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="U7">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">TPS7A2030PDBVR</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="3V3D" type="power_in"/>
+        <pin num="2" name="GND" type="power_in"/>
+        <pin num="3" name="3V3D" type="input"/>
+        <pin num="4" name="NC" type="no_connect"/>
+        <pin num="5" name="3V0A" type="power_out"/>
+      </pins>
+    </libpart>
+    <libpart lib="RevB" part="U8">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">TPS60150DRVR</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="GND" type="power_in"/>
+        <pin num="2" name="3V3D" type="power_in"/>
+        <pin num="3" name="5V_ADC" type="power_out"/>
+        <pin num="4" name="CP_PLUS" type="passive"/>
+        <pin num="5" name="CP_MINUS" type="passive"/>
+        <pin num="6" name="3V3D" type="input"/>
+        <pin num="7" name="GND" type="power_in"/>
+      </pins>
+    </libpart>
+  </libparts>
+  <libraries>
+    <library logical="RevB">
+      <uri>${KIPRJMOD}/RevB.kicad_sym</uri>
+    </library>
+  </libraries>
+  <nets>
+    <net code="1" name="/3V0A" class="Default">
+      <node ref="C32" pin="1" pinfunction="3V0A_1" pintype="passive"/>
+      <node ref="C33" pin="1" pinfunction="3V0A_1" pintype="passive"/>
+      <node ref="C34" pin="1" pinfunction="3V0A_1" pintype="passive"/>
+      <node ref="C46" pin="1" pinfunction="3V0A_1" pintype="passive"/>
+      <node ref="D10" pin="2" pinfunction="3V0A_2" pintype="passive"/>
+      <node ref="D11" pin="2" pinfunction="3V0A_2" pintype="passive"/>
+      <node ref="J5" pin="1" pinfunction="3V0A_1" pintype="passive"/>
+      <node ref="J6" pin="1" pinfunction="3V0A_1" pintype="passive"/>
+      <node ref="R40" pin="1" pinfunction="3V0A_1" pintype="passive"/>
+      <node ref="U3" pin="4" pinfunction="3V0A_4" pintype="power_in"/>
+      <node ref="U4" pin="4" pinfunction="3V0A_4" pintype="power_in"/>
+      <node ref="U5" pin="5" pinfunction="3V0A_5" pintype="power_in"/>
+      <node ref="U7" pin="5" pinfunction="3V0A_5" pintype="power_out"/>
+    </net>
+    <net code="2" name="/3V3D" class="Default">
+      <node ref="C1" pin="1" pinfunction="3V3D_1" pintype="passive"/>
+      <node ref="C10" pin="1" pinfunction="3V3D_1" pintype="passive"/>
+      <node ref="C11" pin="1" pinfunction="3V3D_1" pintype="passive"/>
+      <node ref="C2" pin="1" pinfunction="3V3D_1" pintype="passive"/>
+      <node ref="C204" pin="1" pinfunction="3V3D_1" pintype="passive"/>
+      <node ref="C210" pin="1" pinfunction="3V3D_1" pintype="passive"/>
+      <node ref="C41" pin="1" pinfunction="3V3D_1" pintype="passive"/>
+      <node ref="C42" pin="1" pinfunction="3V3D_1" pintype="passive"/>
+      <node ref="C45" pin="1" pinfunction="3V3D_1" pintype="passive"/>
+      <node ref="J10" pin="1" pinfunction="3V3D_1" pintype="passive"/>
+      <node ref="J2" pin="4" pinfunction="3V3D_4" pintype="passive"/>
+      <node ref="J3" pin="1" pinfunction="3V3D_1" pintype="passive"/>
+      <node ref="J4" pin="1" pinfunction="3V3D_1" pintype="passive"/>
+      <node ref="R1" pin="1" pinfunction="3V3D_1" pintype="passive"/>
+      <node ref="R10" pin="1" pinfunction="3V3D_1" pintype="passive"/>
+      <node ref="R11" pin="1" pinfunction="3V3D_1" pintype="passive"/>
+      <node ref="R12" pin="1" pinfunction="3V3D_1" pintype="passive"/>
+      <node ref="R13" pin="1" pinfunction="3V3D_1" pintype="passive"/>
+      <node ref="R14" pin="1" pinfunction="3V3D_1" pintype="passive"/>
+      <node ref="R2" pin="1" pinfunction="3V3D_1" pintype="passive"/>
+      <node ref="R26" pin="1" pinfunction="3V3D_1" pintype="passive"/>
+      <node ref="R3" pin="1" pinfunction="3V3D_1" pintype="passive"/>
+      <node ref="R30" pin="1" pinfunction="3V3D_1" pintype="passive"/>
+      <node ref="R31" pin="1" pinfunction="3V3D_1" pintype="passive"/>
+      <node ref="R33" pin="1" pinfunction="3V3D_1" pintype="passive"/>
+      <node ref="R50" pin="1" pinfunction="3V3D_1" pintype="passive"/>
+      <node ref="R52" pin="1" pinfunction="3V3D_1" pintype="passive"/>
+      <node ref="U1" pin="2" pinfunction="3V3_2" pintype="power_in"/>
+      <node ref="U2" pin="23" pinfunction="VDRIVE_23" pintype="power_in"/>
+      <node ref="U2" pin="34" pinfunction="REF_SELECT_34" pintype="input"/>
+      <node ref="U2" pin="6" pinfunction="PAR_SER_6" pintype="input"/>
+      <node ref="U2" pin="7" pinfunction="STBY_N_7" pintype="input"/>
+      <node ref="U6" pin="7" pinfunction="3V3D_7" pintype="power_out"/>
+      <node ref="U6" pin="8" pinfunction="3V3D_8" pintype="power_in"/>
+      <node ref="U7" pin="1" pinfunction="3V3D_1" pintype="power_in"/>
+      <node ref="U7" pin="3" pinfunction="3V3D_3" pintype="input"/>
+      <node ref="U8" pin="2" pinfunction="3V3D_2" pintype="power_in"/>
+      <node ref="U8" pin="6" pinfunction="3V3D_6" pintype="input"/>
+    </net>
+    <net code="3" name="/5V_ADC" class="Default">
+      <node ref="C200" pin="1" pinfunction="5V_ADC_1" pintype="passive"/>
+      <node ref="C201" pin="1" pinfunction="5V_ADC_1" pintype="passive"/>
+      <node ref="C202" pin="1" pinfunction="5V_ADC_1" pintype="passive"/>
+      <node ref="C203" pin="1" pinfunction="5V_ADC_1" pintype="passive"/>
+      <node ref="C211" pin="1" pinfunction="5V_ADC_1" pintype="passive"/>
+      <node ref="U2" pin="1" pinfunction="AVCC_1" pintype="power_in"/>
+      <node ref="U2" pin="37" pinfunction="5V_ADC_37" pintype="power_in"/>
+      <node ref="U2" pin="38" pinfunction="5V_ADC_38" pintype="power_in"/>
+      <node ref="U2" pin="48" pinfunction="5V_ADC_48" pintype="power_in"/>
+      <node ref="U8" pin="3" pinfunction="5V_ADC_3" pintype="power_out"/>
+    </net>
+    <net code="4" name="/ADC_CONVST" class="Default">
+      <node ref="U1" pin="19" pinfunction="GPIO11_19" pintype="output"/>
+      <node ref="U2" pin="10" pinfunction="CONVST_B_10" pintype="input"/>
+      <node ref="U2" pin="9" pinfunction="CONVST_A_9" pintype="input"/>
+    </net>
+    <net code="5" name="/ADC_CS" class="Default">
+      <node ref="R33" pin="2" pinfunction="ADC_CS_2" pintype="passive"/>
+      <node ref="U1" pin="18" pinfunction="GPIO10_18" pintype="output"/>
+      <node ref="U2" pin="13" pinfunction="CS_N_13" pintype="input"/>
+    </net>
+    <net code="6" name="/ADC_DRDY" class="Default">
+      <node ref="U1" pin="12" pinfunction="GPIO8_12" pintype="input"/>
+      <node ref="U2" pin="14" pinfunction="BUSY_14" pintype="output"/>
+    </net>
+    <net code="7" name="/ADC_MISO" class="Default">
+      <node ref="U1" pin="21" pinfunction="GPIO13_21" pintype="input"/>
+      <node ref="U2" pin="24" pinfunction="DOUTA_24" pintype="output"/>
+    </net>
+    <net code="8" name="/ADC_REF" class="Default">
+      <node ref="C207" pin="1" pinfunction="ADC_REF_1" pintype="passive"/>
+      <node ref="U2" pin="42" pinfunction="REFIN_OUT_42" pintype="power_out"/>
+    </net>
+    <net code="9" name="/ADC_REFCAP" class="Default">
+      <node ref="C208" pin="1" pinfunction="ADC_REFCAP_1" pintype="passive"/>
+      <node ref="U2" pin="44" pinfunction="REFCAP_A_44" pintype="power_out"/>
+      <node ref="U2" pin="45" pinfunction="REFCAP_B_45" pintype="passive"/>
+    </net>
+    <net code="10" name="/ADC_RESET" class="Default">
+      <node ref="U1" pin="17" pinfunction="GPIO9_17" pintype="output"/>
+      <node ref="U2" pin="11" pinfunction="RESET_11" pintype="input"/>
+    </net>
+    <net code="11" name="/ADC_SCK" class="Default">
+      <node ref="U1" pin="20" pinfunction="GPIO12_20" pintype="output"/>
+      <node ref="U2" pin="12" pinfunction="SCLK_12" pintype="input"/>
+    </net>
+    <net code="12" name="/AIN0P" class="Default">
+      <node ref="C102" pin="1" pinfunction="AIN0P_1" pintype="passive"/>
+      <node ref="R104" pin="2" pinfunction="AIN0P_2" pintype="passive"/>
+      <node ref="U2" pin="49" pinfunction="AIN0P_49" pintype="input"/>
+    </net>
+    <net code="13" name="/AIN1P" class="Default">
+      <node ref="C112" pin="1" pinfunction="AIN1P_1" pintype="passive"/>
+      <node ref="R114" pin="2" pinfunction="AIN1P_2" pintype="passive"/>
+      <node ref="U2" pin="51" pinfunction="AIN1P_51" pintype="input"/>
+    </net>
+    <net code="14" name="/BAT_SENSE" class="Default">
+      <node ref="C44" pin="1" pinfunction="BAT_SENSE_1" pintype="passive"/>
+      <node ref="R53" pin="2" pinfunction="BAT_SENSE_2" pintype="passive"/>
+      <node ref="R54" pin="1" pinfunction="BAT_SENSE_1" pintype="passive"/>
+      <node ref="U1" pin="39" pinfunction="GPIO1_39" pintype="input"/>
+    </net>
+    <net code="15" name="/BOOT" class="Default">
+      <node ref="R2" pin="2" pinfunction="BOOT_2" pintype="passive"/>
+      <node ref="SW2" pin="1" pinfunction="BOOT_1" pintype="passive"/>
+      <node ref="U1" pin="27" pinfunction="GPIO0_27" pintype="input"/>
+    </net>
+    <net code="16" name="/BUF0A" class="Default">
+      <node ref="R102" pin="1" pinfunction="BUF0A_1" pintype="passive"/>
+      <node ref="U3" pin="1" pinfunction="BUF0A_1" pintype="output"/>
+      <node ref="U3" pin="2" pinfunction="BUF0A_2" pintype="input"/>
+    </net>
+    <net code="17" name="/BUF0B" class="Default">
+      <node ref="R104" pin="1" pinfunction="BUF0B_1" pintype="passive"/>
+      <node ref="U4" pin="1" pinfunction="BUF0B_1" pintype="output"/>
+      <node ref="U4" pin="2" pinfunction="BUF0B_2" pintype="input"/>
+    </net>
+    <net code="18" name="/BUF1A" class="Default">
+      <node ref="R112" pin="1" pinfunction="BUF1A_1" pintype="passive"/>
+      <node ref="U3" pin="6" pinfunction="BUF1A_6" pintype="input"/>
+      <node ref="U3" pin="7" pinfunction="BUF1A_7" pintype="output"/>
+    </net>
+    <net code="19" name="/BUF1B" class="Default">
+      <node ref="R114" pin="1" pinfunction="BUF1B_1" pintype="passive"/>
+      <node ref="U4" pin="6" pinfunction="BUF1B_6" pintype="input"/>
+      <node ref="U4" pin="7" pinfunction="BUF1B_7" pintype="output"/>
+    </net>
+    <net code="20" name="/BUTTON" class="Default">
+      <node ref="R3" pin="2" pinfunction="BUTTON_2" pintype="passive"/>
+      <node ref="SW4" pin="1" pinfunction="BUTTON_1" pintype="passive"/>
+      <node ref="U1" pin="11" pinfunction="GPIO18_11" pintype="input"/>
+    </net>
+    <net code="21" name="/CP_MINUS" class="Default">
+      <node ref="C212" pin="2" pinfunction="CP_MINUS_2" pintype="passive"/>
+      <node ref="U8" pin="5" pinfunction="CP_MINUS_5" pintype="passive"/>
+    </net>
+    <net code="22" name="/CP_PLUS" class="Default">
+      <node ref="C212" pin="1" pinfunction="CP_PLUS_1" pintype="passive"/>
+      <node ref="U8" pin="4" pinfunction="CP_PLUS_4" pintype="passive"/>
+    </net>
+    <net code="23" name="/EN" class="Default">
+      <node ref="C3" pin="1" pinfunction="EN_1" pintype="passive"/>
+      <node ref="R1" pin="2" pinfunction="EN_2" pintype="passive"/>
+      <node ref="SW3" pin="1" pinfunction="EN_1" pintype="passive"/>
+      <node ref="U1" pin="3" pinfunction="EN_3" pintype="input"/>
+    </net>
+    <net code="24" name="/EXP_SCL" class="Default">
+      <node ref="J10" pin="4" pinfunction="EXP_SCL_4" pintype="passive"/>
+      <node ref="U1" pin="25" pinfunction="GPIO48_25" pintype="bidirectional"/>
+    </net>
+    <net code="25" name="/EXP_SDA" class="Default">
+      <node ref="J10" pin="3" pinfunction="EXP_SDA_3" pintype="passive"/>
+      <node ref="U1" pin="24" pinfunction="GPIO47_24" pintype="bidirectional"/>
+    </net>
+    <net code="26" name="/FB" class="Default">
+      <node ref="R50" pin="2" pinfunction="FB_2" pintype="passive"/>
+      <node ref="R51" pin="1" pinfunction="FB_1" pintype="passive"/>
+      <node ref="U6" pin="5" pinfunction="FB_5" pintype="input"/>
+    </net>
+    <net code="27" name="/FOOT_CS" class="Default">
+      <node ref="J3" pin="6" pinfunction="FOOT_CS_6" pintype="passive"/>
+      <node ref="R30" pin="2" pinfunction="FOOT_CS_2" pintype="passive"/>
+      <node ref="U1" pin="7" pinfunction="GPIO7_7" pintype="output"/>
+    </net>
+    <net code="28" name="/FOOT_INT" class="Default">
+      <node ref="J3" pin="7" pinfunction="FOOT_INT_7" pintype="passive"/>
+      <node ref="U1" pin="9" pinfunction="GPIO16_9" pintype="input"/>
+    </net>
+    <net code="29" name="/GND" class="Default">
+      <node ref="C1" pin="2" pinfunction="GND_2" pintype="passive"/>
+      <node ref="C10" pin="2" pinfunction="GND_2" pintype="passive"/>
+      <node ref="C100" pin="2" pinfunction="GND_2" pintype="passive"/>
+      <node ref="C101" pin="2" pinfunction="GND_2" pintype="passive"/>
+      <node ref="C102" pin="2" pinfunction="GND_2" pintype="passive"/>
+      <node ref="C11" pin="2" pinfunction="GND_2" pintype="passive"/>
+      <node ref="C110" pin="2" pinfunction="GND_2" pintype="passive"/>
+      <node ref="C111" pin="2" pinfunction="GND_2" pintype="passive"/>
+      <node ref="C112" pin="2" pinfunction="GND_2" pintype="passive"/>
+      <node ref="C12" pin="2" pinfunction="GND_2" pintype="passive"/>
+      <node ref="C2" pin="2" pinfunction="GND_2" pintype="passive"/>
+      <node ref="C200" pin="2" pinfunction="GND_2" pintype="passive"/>
+      <node ref="C201" pin="2" pinfunction="GND_2" pintype="passive"/>
+      <node ref="C202" pin="2" pinfunction="GND_2" pintype="passive"/>
+      <node ref="C203" pin="2" pinfunction="GND_2" pintype="passive"/>
+      <node ref="C204" pin="2" pinfunction="GND_2" pintype="passive"/>
+      <node ref="C205" pin="2" pinfunction="GND_2" pintype="passive"/>
+      <node ref="C206" pin="2" pinfunction="GND_2" pintype="passive"/>
+      <node ref="C207" pin="2" pinfunction="GND_2" pintype="passive"/>
+      <node ref="C208" pin="2" pinfunction="GND_2" pintype="passive"/>
+      <node ref="C210" pin="2" pinfunction="GND_2" pintype="passive"/>
+      <node ref="C211" pin="2" pinfunction="GND_2" pintype="passive"/>
+      <node ref="C3" pin="2" pinfunction="GND_2" pintype="passive"/>
+      <node ref="C30" pin="2" pinfunction="GND_2" pintype="passive"/>
+      <node ref="C31" pin="2" pinfunction="GND_2" pintype="passive"/>
+      <node ref="C32" pin="2" pinfunction="GND_2" pintype="passive"/>
+      <node ref="C33" pin="2" pinfunction="GND_2" pintype="passive"/>
+      <node ref="C34" pin="2" pinfunction="GND_2" pintype="passive"/>
+      <node ref="C40" pin="2" pinfunction="GND_2" pintype="passive"/>
+      <node ref="C41" pin="2" pinfunction="GND_2" pintype="passive"/>
+      <node ref="C42" pin="2" pinfunction="GND_2" pintype="passive"/>
+      <node ref="C43" pin="2" pinfunction="GND_2" pintype="passive"/>
+      <node ref="C44" pin="2" pinfunction="GND_2" pintype="passive"/>
+      <node ref="C45" pin="2" pinfunction="GND_2" pintype="passive"/>
+      <node ref="C46" pin="2" pinfunction="GND_2" pintype="passive"/>
+      <node ref="D1" pin="2" pinfunction="GND_2" pintype="passive"/>
+      <node ref="D10" pin="1" pinfunction="GND_1" pintype="passive"/>
+      <node ref="D11" pin="1" pinfunction="GND_1" pintype="passive"/>
+      <node ref="D20" pin="1" pinfunction="GND_1" pintype="passive"/>
+      <node ref="D21" pin="1" pinfunction="GND_1" pintype="passive"/>
+      <node ref="D22" pin="1" pinfunction="GND_1" pintype="passive"/>
+      <node ref="J1" pin="A1" pinfunction="GND_A1" pintype="passive"/>
+      <node ref="J1" pin="A12" pinfunction="GND_A12" pintype="passive"/>
+      <node ref="J1" pin="B1" pinfunction="GND_B1" pintype="passive"/>
+      <node ref="J1" pin="B12" pinfunction="GND_B12" pintype="passive"/>
+      <node ref="J1" pin="SH" pinfunction="GND_SH" pintype="passive"/>
+      <node ref="J10" pin="2" pinfunction="GND_2" pintype="passive"/>
+      <node ref="J2" pin="6" pinfunction="GND_6" pintype="passive"/>
+      <node ref="J2" pin="SH" pinfunction="GND_SH" pintype="passive"/>
+      <node ref="J3" pin="2" pinfunction="GND_2" pintype="passive"/>
+      <node ref="J3" pin="8" pinfunction="GND_8" pintype="passive"/>
+      <node ref="J4" pin="2" pinfunction="GND_2" pintype="passive"/>
+      <node ref="J4" pin="8" pinfunction="GND_8" pintype="passive"/>
+      <node ref="J5" pin="2" pinfunction="GND_2" pintype="passive"/>
+      <node ref="J6" pin="2" pinfunction="GND_2" pintype="passive"/>
+      <node ref="J9" pin="2" pinfunction="GND_2" pintype="passive"/>
+      <node ref="Q1" pin="1" pinfunction="GND_1" pintype="passive"/>
+      <node ref="Q2" pin="2" pinfunction="GND_2" pintype="passive"/>
+      <node ref="R20" pin="2" pinfunction="GND_2" pintype="passive"/>
+      <node ref="R21" pin="2" pinfunction="GND_2" pintype="passive"/>
+      <node ref="R25" pin="2" pinfunction="GND_2" pintype="passive"/>
+      <node ref="R41" pin="2" pinfunction="GND_2" pintype="passive"/>
+      <node ref="R51" pin="2" pinfunction="GND_2" pintype="passive"/>
+      <node ref="R54" pin="2" pinfunction="GND_2" pintype="passive"/>
+      <node ref="SW1" pin="3" pinfunction="GND_3" pintype="passive"/>
+      <node ref="SW2" pin="2" pinfunction="GND_2" pintype="passive"/>
+      <node ref="SW3" pin="2" pinfunction="GND_2" pintype="passive"/>
+      <node ref="SW4" pin="2" pinfunction="GND_2" pintype="passive"/>
+      <node ref="U1" pin="1" pinfunction="GND_1" pintype="power_in"/>
+      <node ref="U1" pin="40" pinfunction="GND_40" pintype="power_in"/>
+      <node ref="U1" pin="41" pinfunction="EP_GND_41" pintype="power_in"/>
+      <node ref="U2" pin="16" pinfunction="GND_16" pintype="input"/>
+      <node ref="U2" pin="17" pinfunction="GND_17" pintype="input"/>
+      <node ref="U2" pin="18" pinfunction="GND_18" pintype="input"/>
+      <node ref="U2" pin="19" pinfunction="GND_19" pintype="input"/>
+      <node ref="U2" pin="2" pinfunction="GND_2" pintype="power_in"/>
+      <node ref="U2" pin="20" pinfunction="GND_20" pintype="input"/>
+      <node ref="U2" pin="21" pinfunction="GND_21" pintype="input"/>
+      <node ref="U2" pin="22" pinfunction="GND_22" pintype="input"/>
+      <node ref="U2" pin="26" pinfunction="GND_26" pintype="power_in"/>
+      <node ref="U2" pin="27" pinfunction="GND_27" pintype="input"/>
+      <node ref="U2" pin="28" pinfunction="GND_28" pintype="input"/>
+      <node ref="U2" pin="29" pinfunction="GND_29" pintype="input"/>
+      <node ref="U2" pin="3" pinfunction="GND_3" pintype="input"/>
+      <node ref="U2" pin="30" pinfunction="GND_30" pintype="input"/>
+      <node ref="U2" pin="31" pinfunction="GND_31" pintype="input"/>
+      <node ref="U2" pin="32" pinfunction="GND_32" pintype="input"/>
+      <node ref="U2" pin="33" pinfunction="GND_33" pintype="input"/>
+      <node ref="U2" pin="35" pinfunction="GND_35" pintype="power_in"/>
+      <node ref="U2" pin="4" pinfunction="GND_4" pintype="input"/>
+      <node ref="U2" pin="40" pinfunction="GND_40" pintype="power_in"/>
+      <node ref="U2" pin="41" pinfunction="GND_41" pintype="power_in"/>
+      <node ref="U2" pin="43" pinfunction="GND_43" pintype="power_in"/>
+      <node ref="U2" pin="46" pinfunction="GND_46" pintype="power_in"/>
+      <node ref="U2" pin="47" pinfunction="GND_47" pintype="power_in"/>
+      <node ref="U2" pin="5" pinfunction="GND_5" pintype="input"/>
+      <node ref="U2" pin="50" pinfunction="GND_50" pintype="input"/>
+      <node ref="U2" pin="52" pinfunction="GND_52" pintype="input"/>
+      <node ref="U2" pin="53" pinfunction="GND_53" pintype="input"/>
+      <node ref="U2" pin="54" pinfunction="GND_54" pintype="input"/>
+      <node ref="U2" pin="55" pinfunction="GND_55" pintype="input"/>
+      <node ref="U2" pin="56" pinfunction="GND_56" pintype="input"/>
+      <node ref="U2" pin="57" pinfunction="GND_57" pintype="input"/>
+      <node ref="U2" pin="58" pinfunction="GND_58" pintype="input"/>
+      <node ref="U2" pin="59" pinfunction="GND_59" pintype="input"/>
+      <node ref="U2" pin="60" pinfunction="GND_60" pintype="input"/>
+      <node ref="U2" pin="61" pinfunction="GND_61" pintype="input"/>
+      <node ref="U2" pin="62" pinfunction="GND_62" pintype="input"/>
+      <node ref="U2" pin="63" pinfunction="GND_63" pintype="input"/>
+      <node ref="U2" pin="64" pinfunction="GND_64" pintype="input"/>
+      <node ref="U2" pin="8" pinfunction="RANGE_8" pintype="input"/>
+      <node ref="U3" pin="10" pinfunction="GND_10" pintype="input"/>
+      <node ref="U3" pin="11" pinfunction="GND_11" pintype="power_in"/>
+      <node ref="U3" pin="12" pinfunction="GND_12" pintype="input"/>
+      <node ref="U4" pin="10" pinfunction="GND_10" pintype="input"/>
+      <node ref="U4" pin="11" pinfunction="GND_11" pintype="power_in"/>
+      <node ref="U4" pin="12" pinfunction="GND_12" pintype="input"/>
+      <node ref="U5" pin="2" pinfunction="GND_2" pintype="power_in"/>
+      <node ref="U6" pin="1" pinfunction="GND_1" pintype="input"/>
+      <node ref="U6" pin="10" pinfunction="GND_10" pintype="power_in"/>
+      <node ref="U6" pin="15" pinfunction="GND_15" pintype="input"/>
+      <node ref="U6" pin="4" pinfunction="GND_4" pintype="power_in"/>
+      <node ref="U6" pin="6" pinfunction="GND_6" pintype="power_in"/>
+      <node ref="U7" pin="2" pinfunction="GND_2" pintype="power_in"/>
+      <node ref="U8" pin="1" pinfunction="GND_1" pintype="power_in"/>
+      <node ref="U8" pin="7" pinfunction="GND_7" pintype="power_in"/>
+    </net>
+    <net code="30" name="/IMU_MISO" class="Default">
+      <node ref="J3" pin="5" pinfunction="IMU_MISO_5" pintype="passive"/>
+      <node ref="J4" pin="5" pinfunction="IMU_MISO_5" pintype="passive"/>
+      <node ref="U1" pin="5" pinfunction="GPIO5_5" pintype="input"/>
+    </net>
+    <net code="31" name="/IMU_MOSI" class="Default">
+      <node ref="J3" pin="4" pinfunction="IMU_MOSI_4" pintype="passive"/>
+      <node ref="J4" pin="4" pinfunction="IMU_MOSI_4" pintype="passive"/>
+      <node ref="U1" pin="4" pinfunction="GPIO4_4" pintype="output"/>
+    </net>
+    <net code="32" name="/IMU_SCK" class="Default">
+      <node ref="J3" pin="3" pinfunction="IMU_SCK_3" pintype="passive"/>
+      <node ref="J4" pin="3" pinfunction="IMU_SCK_3" pintype="passive"/>
+      <node ref="U1" pin="6" pinfunction="GPIO6_6" pintype="output"/>
+    </net>
+    <net code="33" name="/LED_ERR" class="Default">
+      <node ref="R61" pin="1" pinfunction="LED_ERR_1" pintype="passive"/>
+      <node ref="U1" pin="35" pinfunction="GPIO42_35" pintype="output"/>
+    </net>
+    <net code="34" name="/LED_ERR_A" class="Default">
+      <node ref="D21" pin="2" pinfunction="LED_ERR_A_2" pintype="passive"/>
+      <node ref="R61" pin="2" pinfunction="LED_ERR_A_2" pintype="passive"/>
+    </net>
+    <net code="35" name="/LED_LOW" class="Default">
+      <node ref="R62" pin="1" pinfunction="LED_LOW_1" pintype="passive"/>
+      <node ref="U1" pin="38" pinfunction="GPIO2_38" pintype="output"/>
+    </net>
+    <net code="36" name="/LED_LOW_A" class="Default">
+      <node ref="D22" pin="2" pinfunction="LED_LOW_A_2" pintype="passive"/>
+      <node ref="R62" pin="2" pinfunction="LED_LOW_A_2" pintype="passive"/>
+    </net>
+    <net code="37" name="/LED_REC" class="Default">
+      <node ref="R60" pin="1" pinfunction="LED_REC_1" pintype="passive"/>
+      <node ref="U1" pin="34" pinfunction="GPIO41_34" pintype="output"/>
+    </net>
+    <net code="38" name="/LED_REC_A" class="Default">
+      <node ref="D20" pin="2" pinfunction="LED_REC_A_2" pintype="passive"/>
+      <node ref="R60" pin="2" pinfunction="LED_REC_A_2" pintype="passive"/>
+    </net>
+    <net code="39" name="/PACK_PLUS" class="Default">
+      <node ref="J9" pin="1" pinfunction="PACK_PLUS_1" pintype="passive"/>
+      <node ref="Q1" pin="3" pinfunction="PACK_PLUS_3" pintype="passive"/>
+    </net>
+    <net code="40" name="/POWER_EN" class="Default">
+      <node ref="SW1" pin="2" pinfunction="POWER_EN_2" pintype="passive"/>
+      <node ref="U6" pin="14" pinfunction="POWER_EN_14" pintype="input"/>
+    </net>
+    <net code="41" name="/POWER_GOOD" class="Default">
+      <node ref="R52" pin="2" pinfunction="POWER_GOOD_2" pintype="passive"/>
+      <node ref="U6" pin="2" pinfunction="POWER_GOOD_2" pintype="open_collector"/>
+    </net>
+    <net code="42" name="/RAW0" class="Default">
+      <node ref="J5" pin="3" pinfunction="RAW0_3" pintype="passive"/>
+      <node ref="R100" pin="1" pinfunction="RAW0_1" pintype="passive"/>
+      <node ref="R101" pin="1" pinfunction="RAW0_1" pintype="passive"/>
+    </net>
+    <net code="43" name="/RAW1" class="Default">
+      <node ref="J6" pin="3" pinfunction="RAW1_3" pintype="passive"/>
+      <node ref="R110" pin="1" pinfunction="RAW1_1" pintype="passive"/>
+      <node ref="R111" pin="1" pinfunction="RAW1_1" pintype="passive"/>
+    </net>
+    <net code="44" name="/RC0A" class="Default">
+      <node ref="C100" pin="1" pinfunction="RC0A_1" pintype="passive"/>
+      <node ref="D10" pin="3" pinfunction="RC0A_3" pintype="passive"/>
+      <node ref="R100" pin="2" pinfunction="RC0A_2" pintype="passive"/>
+      <node ref="U3" pin="3" pinfunction="RC0A_3" pintype="input"/>
+    </net>
+    <net code="45" name="/RC0B" class="Default">
+      <node ref="C101" pin="1" pinfunction="RC0B_1" pintype="passive"/>
+      <node ref="R102" pin="2" pinfunction="RC0B_2" pintype="passive"/>
+      <node ref="U4" pin="3" pinfunction="RC0B_3" pintype="input"/>
+    </net>
+    <net code="46" name="/RC1A" class="Default">
+      <node ref="C110" pin="1" pinfunction="RC1A_1" pintype="passive"/>
+      <node ref="D11" pin="3" pinfunction="RC1A_3" pintype="passive"/>
+      <node ref="R110" pin="2" pinfunction="RC1A_2" pintype="passive"/>
+      <node ref="U3" pin="5" pinfunction="RC1A_5" pintype="input"/>
+    </net>
+    <net code="47" name="/RC1B" class="Default">
+      <node ref="C111" pin="1" pinfunction="RC1B_1" pintype="passive"/>
+      <node ref="R112" pin="2" pinfunction="RC1B_2" pintype="passive"/>
+      <node ref="U4" pin="5" pinfunction="RC1B_5" pintype="input"/>
+    </net>
+    <net code="48" name="/REGCAP_A" class="Default">
+      <node ref="C205" pin="1" pinfunction="REGCAP_A_1" pintype="passive"/>
+      <node ref="U2" pin="36" pinfunction="REGCAP_A_36" pintype="power_out"/>
+    </net>
+    <net code="49" name="/REGCAP_B" class="Default">
+      <node ref="C206" pin="1" pinfunction="REGCAP_B_1" pintype="passive"/>
+      <node ref="U2" pin="39" pinfunction="REGCAP_B_39" pintype="power_out"/>
+    </net>
+    <net code="50" name="/SD_CLK" class="Default">
+      <node ref="J2" pin="5" pinfunction="SD_CLK_5" pintype="passive"/>
+      <node ref="R15" pin="2" pinfunction="SD_CLK_2" pintype="passive"/>
+    </net>
+    <net code="51" name="/SD_CLK_MCU" class="Default">
+      <node ref="R15" pin="1" pinfunction="SD_CLK_MCU_1" pintype="passive"/>
+      <node ref="U1" pin="32" pinfunction="GPIO39_32" pintype="output"/>
+    </net>
+    <net code="52" name="/SD_CMD" class="Default">
+      <node ref="J2" pin="3" pinfunction="SD_CMD_3" pintype="passive"/>
+      <node ref="R10" pin="2" pinfunction="SD_CMD_2" pintype="passive"/>
+      <node ref="U1" pin="31" pinfunction="GPIO38_31" pintype="bidirectional"/>
+    </net>
+    <net code="53" name="/SD_D0" class="Default">
+      <node ref="J2" pin="7" pinfunction="SD_D0_7" pintype="passive"/>
+      <node ref="R11" pin="2" pinfunction="SD_D0_2" pintype="passive"/>
+      <node ref="U1" pin="33" pinfunction="GPIO40_33" pintype="bidirectional"/>
+    </net>
+    <net code="54" name="/SD_D1" class="Default">
+      <node ref="J2" pin="8" pinfunction="SD_D1_8" pintype="passive"/>
+      <node ref="R12" pin="2" pinfunction="SD_D1_2" pintype="passive"/>
+    </net>
+    <net code="55" name="/SD_D2" class="Default">
+      <node ref="J2" pin="1" pinfunction="SD_D2_1" pintype="passive"/>
+      <node ref="R13" pin="2" pinfunction="SD_D2_2" pintype="passive"/>
+    </net>
+    <net code="56" name="/SD_D3" class="Default">
+      <node ref="J2" pin="2" pinfunction="SD_D3_2" pintype="passive"/>
+      <node ref="R14" pin="2" pinfunction="SD_D3_2" pintype="passive"/>
+    </net>
+    <net code="57" name="/SHANK_CS" class="Default">
+      <node ref="J4" pin="6" pinfunction="SHANK_CS_6" pintype="passive"/>
+      <node ref="R31" pin="2" pinfunction="SHANK_CS_2" pintype="passive"/>
+      <node ref="U1" pin="8" pinfunction="GPIO15_8" pintype="output"/>
+    </net>
+    <net code="58" name="/SHANK_INT" class="Default">
+      <node ref="J4" pin="7" pinfunction="SHANK_INT_7" pintype="passive"/>
+      <node ref="U1" pin="10" pinfunction="GPIO17_10" pintype="input"/>
+    </net>
+    <net code="59" name="/SW_L1" class="Default">
+      <node ref="L1" pin="1" pinfunction="SW_L1_1" pintype="passive"/>
+      <node ref="U6" pin="11" pinfunction="SW_L1_11" pintype="bidirectional"/>
+    </net>
+    <net code="60" name="/SW_L2" class="Default">
+      <node ref="L1" pin="2" pinfunction="SW_L2_2" pintype="passive"/>
+      <node ref="U6" pin="9" pinfunction="SW_L2_9" pintype="bidirectional"/>
+    </net>
+    <net code="61" name="/U3_UNUSED_C" class="Default">
+      <node ref="U3" pin="8" pinfunction="U3_UNUSED_C_8" pintype="output"/>
+      <node ref="U3" pin="9" pinfunction="U3_UNUSED_C_9" pintype="input"/>
+    </net>
+    <net code="62" name="/U3_UNUSED_D" class="Default">
+      <node ref="U3" pin="13" pinfunction="U3_UNUSED_D_13" pintype="input"/>
+      <node ref="U3" pin="14" pinfunction="U3_UNUSED_D_14" pintype="output"/>
+    </net>
+    <net code="63" name="/U4_UNUSED_C" class="Default">
+      <node ref="U4" pin="8" pinfunction="U4_UNUSED_C_8" pintype="output"/>
+      <node ref="U4" pin="9" pinfunction="U4_UNUSED_C_9" pintype="input"/>
+    </net>
+    <net code="64" name="/U4_UNUSED_D" class="Default">
+      <node ref="U4" pin="13" pinfunction="U4_UNUSED_D_13" pintype="input"/>
+      <node ref="U4" pin="14" pinfunction="U4_UNUSED_D_14" pintype="output"/>
+    </net>
+    <net code="65" name="/UART_RX" class="Default">
+      <node ref="J10" pin="6" pinfunction="UART_RX_6" pintype="passive"/>
+      <node ref="U1" pin="36" pinfunction="GPIO44_36" pintype="input"/>
+    </net>
+    <net code="66" name="/UART_TX" class="Default">
+      <node ref="J10" pin="5" pinfunction="UART_TX_5" pintype="passive"/>
+      <node ref="U1" pin="37" pinfunction="GPIO43_37" pintype="output"/>
+    </net>
+    <net code="67" name="/USB_CC1" class="Default">
+      <node ref="J1" pin="A5" pinfunction="USB_CC1_A5" pintype="passive"/>
+      <node ref="R20" pin="1" pinfunction="USB_CC1_1" pintype="passive"/>
+    </net>
+    <net code="68" name="/USB_CC2" class="Default">
+      <node ref="J1" pin="B5" pinfunction="USB_CC2_B5" pintype="passive"/>
+      <node ref="R21" pin="1" pinfunction="USB_CC2_1" pintype="passive"/>
+    </net>
+    <net code="69" name="/USB_DM" class="Default">
+      <node ref="D1" pin="3" pinfunction="USB_DM_3" pintype="passive"/>
+      <node ref="J1" pin="A7" pinfunction="USB_DM_A7" pintype="passive"/>
+      <node ref="J1" pin="B7" pinfunction="USB_DM_B7" pintype="passive"/>
+      <node ref="R23" pin="1" pinfunction="USB_DM_1" pintype="passive"/>
+    </net>
+    <net code="70" name="/USB_DM_MCU" class="Default">
+      <node ref="R23" pin="2" pinfunction="USB_DM_MCU_2" pintype="passive"/>
+      <node ref="U1" pin="13" pinfunction="GPIO19_13" pintype="bidirectional"/>
+    </net>
+    <net code="71" name="/USB_DP" class="Default">
+      <node ref="D1" pin="1" pinfunction="USB_DP_1" pintype="passive"/>
+      <node ref="J1" pin="A6" pinfunction="USB_DP_A6" pintype="passive"/>
+      <node ref="J1" pin="B6" pinfunction="USB_DP_B6" pintype="passive"/>
+      <node ref="R22" pin="1" pinfunction="USB_DP_1" pintype="passive"/>
+    </net>
+    <net code="72" name="/USB_DP_MCU" class="Default">
+      <node ref="R22" pin="2" pinfunction="USB_DP_MCU_2" pintype="passive"/>
+      <node ref="U1" pin="14" pinfunction="GPIO20_14" pintype="bidirectional"/>
+    </net>
+    <net code="73" name="/USB_GATE" class="Default">
+      <node ref="C12" pin="1" pinfunction="USB_GATE_1" pintype="passive"/>
+      <node ref="Q2" pin="1" pinfunction="USB_GATE_1" pintype="passive"/>
+      <node ref="R24" pin="2" pinfunction="USB_GATE_2" pintype="passive"/>
+      <node ref="R25" pin="1" pinfunction="USB_GATE_1" pintype="passive"/>
+    </net>
+    <net code="74" name="/USB_PRESENT_N" class="Default">
+      <node ref="Q2" pin="3" pinfunction="USB_PRESENT_N_3" pintype="passive"/>
+      <node ref="R26" pin="2" pinfunction="USB_PRESENT_N_2" pintype="passive"/>
+      <node ref="U1" pin="23" pinfunction="GPIO21_23" pintype="input"/>
+    </net>
+    <net code="75" name="/USB_VBUS" class="Default">
+      <node ref="D1" pin="5" pinfunction="USB_VBUS_5" pintype="passive"/>
+      <node ref="J1" pin="A4" pinfunction="USB_VBUS_A4" pintype="passive"/>
+      <node ref="J1" pin="A9" pinfunction="USB_VBUS_A9" pintype="passive"/>
+      <node ref="J1" pin="B4" pinfunction="USB_VBUS_B4" pintype="passive"/>
+      <node ref="J1" pin="B9" pinfunction="USB_VBUS_B9" pintype="passive"/>
+      <node ref="R24" pin="1" pinfunction="USB_VBUS_1" pintype="passive"/>
+    </net>
+    <net code="76" name="/VAUX" class="Default">
+      <node ref="C43" pin="1" pinfunction="VAUX_1" pintype="passive"/>
+      <node ref="U6" pin="3" pinfunction="VAUX_3" pintype="power_out"/>
+    </net>
+    <net code="77" name="/VBAT" class="Default">
+      <node ref="C40" pin="1" pinfunction="VBAT_1" pintype="passive"/>
+      <node ref="Q1" pin="2" pinfunction="VBAT_2" pintype="passive"/>
+      <node ref="R53" pin="1" pinfunction="VBAT_1" pintype="passive"/>
+      <node ref="SW1" pin="1" pinfunction="VBAT_1" pintype="passive"/>
+      <node ref="U6" pin="12" pinfunction="VBAT_12" pintype="power_in"/>
+      <node ref="U6" pin="13" pinfunction="VBAT_13" pintype="power_in"/>
+    </net>
+    <net code="78" name="/VMID" class="Default">
+      <node ref="C31" pin="1" pinfunction="VMID_1" pintype="passive"/>
+      <node ref="R101" pin="2" pinfunction="VMID_2" pintype="passive"/>
+      <node ref="R111" pin="2" pinfunction="VMID_2" pintype="passive"/>
+      <node ref="R42" pin="2" pinfunction="VMID_2" pintype="passive"/>
+    </net>
+    <net code="79" name="/VMID_BUF" class="Default">
+      <node ref="R42" pin="1" pinfunction="VMID_BUF_1" pintype="passive"/>
+      <node ref="U5" pin="1" pinfunction="VMID_BUF_1" pintype="output"/>
+      <node ref="U5" pin="4" pinfunction="VMID_BUF_4" pintype="input"/>
+    </net>
+    <net code="80" name="/VMID_DIV" class="Default">
+      <node ref="C30" pin="1" pinfunction="VMID_DIV_1" pintype="passive"/>
+      <node ref="R40" pin="2" pinfunction="VMID_DIV_2" pintype="passive"/>
+      <node ref="R41" pin="1" pinfunction="VMID_DIV_1" pintype="passive"/>
+      <node ref="U5" pin="3" pinfunction="VMID_DIV_3" pintype="input"/>
+    </net>
+    <net code="81" name="unconnected-(D1-NC-Pad4)" class="Default">
+      <node ref="D1" pin="4" pinfunction="NC_4" pintype="passive+no_connect"/>
+    </net>
+    <net code="82" name="unconnected-(D1-NC-Pad6)" class="Default">
+      <node ref="D1" pin="6" pinfunction="NC_6" pintype="passive+no_connect"/>
+    </net>
+    <net code="83" name="unconnected-(J1-NC-PadA8)" class="Default">
+      <node ref="J1" pin="A8" pinfunction="NC_A8" pintype="passive+no_connect"/>
+    </net>
+    <net code="84" name="unconnected-(J1-NC-PadB8)" class="Default">
+      <node ref="J1" pin="B8" pinfunction="NC_B8" pintype="passive+no_connect"/>
+    </net>
+    <net code="85" name="unconnected-(J2-NC-Pad9)" class="Default">
+      <node ref="J2" pin="9" pinfunction="NC_9" pintype="passive+no_connect"/>
+    </net>
+    <net code="86" name="unconnected-(J2-NC-Pad10)" class="Default">
+      <node ref="J2" pin="10" pinfunction="NC_10" pintype="passive+no_connect"/>
+    </net>
+    <net code="87" name="unconnected-(U1-GPIO3-Pad15)" class="Default">
+      <node ref="U1" pin="15" pinfunction="GPIO3_15" pintype="bidirectional+no_connect"/>
+    </net>
+    <net code="88" name="unconnected-(U1-GPIO14-Pad22)" class="Default">
+      <node ref="U1" pin="22" pinfunction="GPIO14_22" pintype="bidirectional+no_connect"/>
+    </net>
+    <net code="89" name="unconnected-(U1-GPIO35-Pad28)" class="Default">
+      <node ref="U1" pin="28" pinfunction="GPIO35_28" pintype="bidirectional+no_connect"/>
+    </net>
+    <net code="90" name="unconnected-(U1-GPIO36-Pad29)" class="Default">
+      <node ref="U1" pin="29" pinfunction="GPIO36_29" pintype="bidirectional+no_connect"/>
+    </net>
+    <net code="91" name="unconnected-(U1-GPIO37-Pad30)" class="Default">
+      <node ref="U1" pin="30" pinfunction="GPIO37_30" pintype="bidirectional+no_connect"/>
+    </net>
+    <net code="92" name="unconnected-(U1-GPIO45-Pad26)" class="Default">
+      <node ref="U1" pin="26" pinfunction="GPIO45_26" pintype="bidirectional+no_connect"/>
+    </net>
+    <net code="93" name="unconnected-(U1-GPIO46-Pad16)" class="Default">
+      <node ref="U1" pin="16" pinfunction="GPIO46_16" pintype="bidirectional+no_connect"/>
+    </net>
+    <net code="94" name="unconnected-(U2-DOUTB-Pad25)" class="Default">
+      <node ref="U2" pin="25" pinfunction="DOUTB_25" pintype="no_connect"/>
+    </net>
+    <net code="95" name="unconnected-(U2-FRSTDATA-Pad15)" class="Default">
+      <node ref="U2" pin="15" pinfunction="FRSTDATA_15" pintype="no_connect"/>
+    </net>
+    <net code="96" name="unconnected-(U7-NC-Pad4)" class="Default">
+      <node ref="U7" pin="4" pinfunction="NC_4" pintype="no_connect"/>
+    </net>
+  </nets>
+</export>

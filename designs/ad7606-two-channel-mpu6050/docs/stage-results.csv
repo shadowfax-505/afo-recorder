@@ -1,0 +1,11 @@
+Stage,Test,Unit_serial,Date,Instrument_calibration,Measured_values,Evidence_files,Pass_fail,Reviewer,Notes
+1,Power and midpoint,,,,,,NOT TESTED,,
+2,ESP32 controller,,,,,,NOT TESTED,,
+3,ADC timing and DC,,,,,,NOT TESTED,,
+4,First EMG channel,,,,,,NOT TESTED,,
+5,Second EMG channel,,,,,,NOT TESTED,,
+6,Foot and shank IMUs,,,,,,NOT TESTED,,
+7,SD recording,,,,,,NOT TESTED,,
+8,Wi-Fi and SD,,,,,,NOT TESTED,,
+9,Battery runtime,,,,,,NOT TESTED,,
+10,Two MyoWare sensors,,,,,,NOT TESTED,,

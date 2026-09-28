@@ -1,0 +1,20 @@
+{
+  "package": "afo-ad7606-two-mpu6050",
+  "imu_model": "MPU6050",
+  "active_channels": 2,
+  "diagnostic_stage": 3,
+  "imu_count": 1,
+  "hardware": "pcb",
+  "wifi_enabled": true,
+  "hardware_tested": false,
+  "offsets": {
+    "bootloader.bin": "0x0",
+    "partition-table.bin": "0x8000",
+    "application.bin": "0x10000"
+  },
+  "sha256": {
+    "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+    "application.bin": "ab90ea6fa2fe4f1f6f41d5e3f9eaf079f6209d3116270ad36dfb1dd9dc3101bd",
+    "bootloader.bin": "a6081255e623d701646458ad09c0adcca3aa9adfa885d6e198445c7b476111b0"
+  }
+}

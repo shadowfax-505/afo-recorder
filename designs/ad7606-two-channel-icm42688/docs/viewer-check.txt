@@ -1,0 +1,6 @@
+### Result
+{"channels":"Exactly 2 EMG inputs","detail":"{\n  \"name\": \"R10 10k\",\n  \"role\": \"Digital\",\n  \"terminals\": [\n    {\n      \"pin\": \"1\",\n      \"net\": \"3V3D\",\n      \"x\": 34.25,\n      \"y\": 29.825\n    },\n    {\n      \"pin\": \"2\",\n      \"net\": \"SD_CMD\",\n      \"x\": 34.25,\n      \"y\": 28.175\n    }\n  ]\n}"}
+### Ran Playwright code
+```js
+await (async page => { await page.locator("#stage").fill("10"); await page.locator("#stage").dispatchEvent("input"); const text = await page.locator("#parts").innerText(); if(text.includes("BB3") || text.includes("MyoWare 3")) throw new Error("Unexpected extra channel"); await page.locator("#parts").selectOption({label:"Net RAW0"}); if(!(await page.locator("#detail").innerText()).includes("RAW0")) throw new Error("Selection failed"); await page.screenshot({path:"output/playwright/two-breadboard.png"}); await page.locator("#mode").selectOption("pcb"); await page.locator("#explode").fill("10"); await page.locator("#explode").dispatchEvent("input"); await page.locator("#parts").selectOption({index:1}); await page.screenshot({path:"output/playwright/two-pcb.png"}); return {channels:await page.locator("#channels").innerText(), detail:await page.locator("#detail").innerText()}; })(page);
+```

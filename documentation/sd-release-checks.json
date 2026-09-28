@@ -1,0 +1,11 @@
+{
+  "recording_profiles_compiled": 26,
+  "esp_idf": "v5.4.2",
+  "breadboard_sd_cmd_gpio": 47,
+  "pcb_sd_cmd_gpio": 38,
+  "native_pin_and_metadata_checks": 12,
+  "viewer_checks": 6,
+  "host_suites_passed": 6,
+  "physical_sd_tests": "pending",
+  "cad_unchanged": true
+}

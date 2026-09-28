@@ -1,0 +1,227 @@
+[
+  {
+    "package": "ad7606-expandable-mpu6050",
+    "imu_model": "MPU6050",
+    "active_channels": 2,
+    "hardware": "breadboard",
+    "diagnostic_stage": 0,
+    "imu_count": 2,
+    "wifi_enabled": true,
+    "sd_cmd_gpio": 47,
+    "sd_clk_gpio": 39,
+    "sd_d0_gpio": 40,
+    "hardware_tested": false,
+    "offsets": {
+      "bootloader.bin": "0x0",
+      "partition-table.bin": "0x8000",
+      "application.bin": "0x10000"
+    },
+    "sha256": {
+      "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+      "application.bin": "9a0f4e31d6bcd973612dc6d82ed27f4ee552d18b1aee47fb9b4c721973a24a2b",
+      "bootloader.bin": "d66f90e73f0bea316916c3daa19e02de8d6e4aadf231e98959cb5e20d7ba7e8f"
+    },
+    "profile": "breadboard-record-2ch"
+  },
+  {
+    "package": "ad7606-expandable-mpu6050",
+    "imu_model": "MPU6050",
+    "active_channels": 4,
+    "hardware": "breadboard",
+    "diagnostic_stage": 0,
+    "imu_count": 2,
+    "wifi_enabled": true,
+    "sd_cmd_gpio": 47,
+    "sd_clk_gpio": 39,
+    "sd_d0_gpio": 40,
+    "hardware_tested": false,
+    "offsets": {
+      "bootloader.bin": "0x0",
+      "partition-table.bin": "0x8000",
+      "application.bin": "0x10000"
+    },
+    "sha256": {
+      "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+      "application.bin": "597b71babc758cc28957b7a8cd51b0d4bd325c10176754ba57aca7072edebad7",
+      "bootloader.bin": "d66f90e73f0bea316916c3daa19e02de8d6e4aadf231e98959cb5e20d7ba7e8f"
+    },
+    "profile": "breadboard-record-4ch"
+  },
+  {
+    "package": "ad7606-expandable-mpu6050",
+    "imu_model": "MPU6050",
+    "active_channels": 2,
+    "hardware": "breadboard",
+    "diagnostic_stage": 0,
+    "imu_count": 2,
+    "wifi_enabled": false,
+    "sd_cmd_gpio": 47,
+    "sd_clk_gpio": 39,
+    "sd_d0_gpio": 40,
+    "hardware_tested": false,
+    "offsets": {
+      "bootloader.bin": "0x0",
+      "partition-table.bin": "0x8000",
+      "application.bin": "0x10000"
+    },
+    "sha256": {
+      "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+      "application.bin": "5f783231a348f68a4be27472985d8784e8a091943680bd4e52b836ceea908742",
+      "bootloader.bin": "d66f90e73f0bea316916c3daa19e02de8d6e4aadf231e98959cb5e20d7ba7e8f"
+    },
+    "profile": "breadboard-sd-only-2ch"
+  },
+  {
+    "package": "afo-ad7606-mpu6050",
+    "imu_model": "MPU6050",
+    "active_channels": 2,
+    "diagnostic_stage": 3,
+    "imu_count": 1,
+    "hardware": "pcb",
+    "wifi_enabled": true,
+    "hardware_tested": false,
+    "offsets": {
+      "bootloader.bin": "0x0",
+      "partition-table.bin": "0x8000",
+      "application.bin": "0x10000"
+    },
+    "sha256": {
+      "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+      "application.bin": "a41cd69f91d55a1122d58378a0279984bf4a0e3ae894c29c5a51ae9893aa714b",
+      "bootloader.bin": "82181cbacf350640aeba0fee8d010efdcd911aaad08339888fe30219edbeb0c2"
+    },
+    "profile": "diagnostic-adc-2ch"
+  },
+  {
+    "package": "afo-ad7606-mpu6050",
+    "imu_model": "MPU6050",
+    "active_channels": 4,
+    "diagnostic_stage": 3,
+    "imu_count": 1,
+    "hardware": "pcb",
+    "wifi_enabled": true,
+    "hardware_tested": false,
+    "offsets": {
+      "bootloader.bin": "0x0",
+      "partition-table.bin": "0x8000",
+      "application.bin": "0x10000"
+    },
+    "sha256": {
+      "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+      "application.bin": "642abf1e68fadb2a9e3f4f23449f21dd543a1ce531e19bdaf64f8e10cd5b65e2",
+      "bootloader.bin": "82181cbacf350640aeba0fee8d010efdcd911aaad08339888fe30219edbeb0c2"
+    },
+    "profile": "diagnostic-adc-4ch"
+  },
+  {
+    "package": "afo-ad7606-mpu6050",
+    "imu_model": "MPU6050",
+    "active_channels": 2,
+    "diagnostic_stage": 2,
+    "imu_count": 1,
+    "hardware": "pcb",
+    "wifi_enabled": true,
+    "hardware_tested": false,
+    "offsets": {
+      "bootloader.bin": "0x0",
+      "partition-table.bin": "0x8000",
+      "application.bin": "0x10000"
+    },
+    "sha256": {
+      "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+      "application.bin": "f83a669678d37f545e2bdcb061832df4fd663f16f63d0e3220aef28a22f87ca1",
+      "bootloader.bin": "82181cbacf350640aeba0fee8d010efdcd911aaad08339888fe30219edbeb0c2"
+    },
+    "profile": "diagnostic-controller"
+  },
+  {
+    "package": "afo-ad7606-mpu6050",
+    "imu_model": "MPU6050",
+    "active_channels": 2,
+    "diagnostic_stage": 6,
+    "imu_count": 1,
+    "hardware": "pcb",
+    "wifi_enabled": true,
+    "hardware_tested": false,
+    "offsets": {
+      "bootloader.bin": "0x0",
+      "partition-table.bin": "0x8000",
+      "application.bin": "0x10000"
+    },
+    "sha256": {
+      "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+      "application.bin": "647686da68193018309dd58ed14c6b8d0daacc7026175800b5287e7eb5748d6a",
+      "bootloader.bin": "82181cbacf350640aeba0fee8d010efdcd911aaad08339888fe30219edbeb0c2"
+    },
+    "profile": "diagnostic-imu-one"
+  },
+  {
+    "package": "afo-ad7606-mpu6050",
+    "imu_model": "MPU6050",
+    "active_channels": 2,
+    "diagnostic_stage": 6,
+    "imu_count": 2,
+    "hardware": "pcb",
+    "wifi_enabled": true,
+    "hardware_tested": false,
+    "offsets": {
+      "bootloader.bin": "0x0",
+      "partition-table.bin": "0x8000",
+      "application.bin": "0x10000"
+    },
+    "sha256": {
+      "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+      "application.bin": "03323b5b2bbbf973d319277265d709a166712176c10e41dcb04bf5229a9acd76",
+      "bootloader.bin": "82181cbacf350640aeba0fee8d010efdcd911aaad08339888fe30219edbeb0c2"
+    },
+    "profile": "diagnostic-imu-two"
+  },
+  {
+    "package": "ad7606-expandable-mpu6050",
+    "imu_model": "MPU6050",
+    "active_channels": 2,
+    "hardware": "pcb",
+    "diagnostic_stage": 0,
+    "imu_count": 2,
+    "wifi_enabled": true,
+    "sd_cmd_gpio": 38,
+    "sd_clk_gpio": 39,
+    "sd_d0_gpio": 40,
+    "hardware_tested": false,
+    "offsets": {
+      "bootloader.bin": "0x0",
+      "partition-table.bin": "0x8000",
+      "application.bin": "0x10000"
+    },
+    "sha256": {
+      "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+      "application.bin": "9fb405b2d02278bb59cd2a1227e2040ba0f725203b9f4ff94bcb2a0c332f6330",
+      "bootloader.bin": "d66f90e73f0bea316916c3daa19e02de8d6e4aadf231e98959cb5e20d7ba7e8f"
+    },
+    "profile": "record-2ch"
+  },
+  {
+    "package": "ad7606-expandable-mpu6050",
+    "imu_model": "MPU6050",
+    "active_channels": 4,
+    "hardware": "pcb",
+    "diagnostic_stage": 0,
+    "imu_count": 2,
+    "wifi_enabled": true,
+    "sd_cmd_gpio": 38,
+    "sd_clk_gpio": 39,
+    "sd_d0_gpio": 40,
+    "hardware_tested": false,
+    "offsets": {
+      "bootloader.bin": "0x0",
+      "partition-table.bin": "0x8000",
+      "application.bin": "0x10000"
+    },
+    "sha256": {
+      "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+      "application.bin": "e31d2f3c46518e5360516a9d447a9268af7800b00bdfa26e47b4c0ffcb8189d3",
+      "bootloader.bin": "d66f90e73f0bea316916c3daa19e02de8d6e4aadf231e98959cb5e20d7ba7e8f"
+    },
+    "profile": "record-4ch"
+  }
+]

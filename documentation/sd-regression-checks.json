@@ -1,0 +1,32 @@
+[
+  {
+    "design": "ad7606-expandable-icm42688",
+    "cad_files_preserved": 27,
+    "host_tests": "PASS"
+  },
+  {
+    "design": "ad7606-expandable-mpu6050",
+    "cad_files_preserved": 27,
+    "host_tests": "PASS"
+  },
+  {
+    "design": "ad7606-two-channel-icm42688",
+    "cad_files_preserved": 27,
+    "host_tests": "PASS"
+  },
+  {
+    "design": "ad7606-two-channel-mpu6050",
+    "cad_files_preserved": 27,
+    "host_tests": "PASS"
+  },
+  {
+    "design": "ads131m04-expandable-icm42688",
+    "cad_files_preserved": 26,
+    "host_tests": "PASS"
+  },
+  {
+    "design": "ads131m04-expandable-mpu6050",
+    "cad_files_preserved": 26,
+    "host_tests": "PASS"
+  }
+]

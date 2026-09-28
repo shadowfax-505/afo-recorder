@@ -1,0 +1,20 @@
+{
+  "package": "afo-ads131m04-mpu6050",
+  "imu_model": "MPU6050",
+  "active_channels": 2,
+  "diagnostic_stage": 6,
+  "imu_count": 1,
+  "hardware": "pcb",
+  "wifi_enabled": true,
+  "hardware_tested": false,
+  "offsets": {
+    "bootloader.bin": "0x0",
+    "partition-table.bin": "0x8000",
+    "application.bin": "0x10000"
+  },
+  "sha256": {
+    "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+    "application.bin": "2c47c3a1ee464502b22ce979413082b281362231f81c9fb443377d206adb28f9",
+    "bootloader.bin": "a5b88c6f2522321322ce09afb649bf7b812b50457a9dd4b0c2b034197670eba2"
+  }
+}

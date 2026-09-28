@@ -1,0 +1,1 @@
+PASS: actual firmware FIFO and timing helpers (10 assertions)

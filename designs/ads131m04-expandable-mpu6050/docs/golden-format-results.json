@@ -1,0 +1,46 @@
+[
+  {
+    "adc": "afo-ad7606",
+    "channels": 2,
+    "kind": 7,
+    "codes": [
+      32767,
+      -32768
+    ],
+    "crc": "PASS"
+  },
+  {
+    "adc": "afo-ad7606",
+    "channels": 4,
+    "kind": 7,
+    "codes": [
+      32767,
+      -32768,
+      -1,
+      1234
+    ],
+    "crc": "PASS"
+  },
+  {
+    "adc": "afo-ads131m04",
+    "channels": 2,
+    "kind": 6,
+    "codes": [
+      123456,
+      -765432
+    ],
+    "crc": "PASS"
+  },
+  {
+    "adc": "afo-ads131m04",
+    "channels": 4,
+    "kind": 6,
+    "codes": [
+      123456,
+      -765432,
+      -1,
+      8388607
+    ],
+    "crc": "PASS"
+  }
+]

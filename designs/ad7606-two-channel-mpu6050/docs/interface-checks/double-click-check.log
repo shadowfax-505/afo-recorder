@@ -1,0 +1,9 @@
+### Result
+[{"slug":"ad7606-expandable-icm42688","singleClickStaysWhole":true,"doubleClickOpensBoard":true},{"slug":"ad7606-expandable-mpu6050","singleClickStaysWhole":true,"doubleClickOpensBoard":true},{"slug":"ad7606-two-channel-icm42688","singleClickStaysWhole":true,"doubleClickOpensBoard":true},{"slug":"ad7606-two-channel-mpu6050","singleClickStaysWhole":true,"doubleClickOpensBoard":true},{"slug":"ads131m04-expandable-icm42688","singleClickStaysWhole":true,"doubleClickOpensBoard":true},{"slug":"ads131m04-expandable-mpu6050","singleClickStaysWhole":true,"doubleClickOpensBoard":true}]
+### Ran Playwright code
+```js
+await (async page=>{const results=[];await page.setViewportSize({width:1440,height:900});for(const slug of ['ad7606-expandable-icm42688','ad7606-expandable-mpu6050','ad7606-two-channel-icm42688','ad7606-two-channel-mpu6050','ads131m04-expandable-icm42688','ads131m04-expandable-mpu6050']){await page.goto('http://127.0.0.1:8769/afo-recorder-project/designs/'+slug+'/viewer/?v=16&stage=5');await page.waitForFunction(()=>window.assemblyWorkbench);const rect=await page.locator('#canvas canvas').boundingBox();let found=false;for(const yf of [.5,.6,.4,.7,.3]){for(const xf of [.5,.4,.6,.3,.7]){const x=rect.x+rect.width*xf,y=rect.y+rect.height*yf;await page.mouse.click(x,y);if(await page.locator('#view').inputValue()!=='whole')throw Error('Single click opened board '+slug);await page.mouse.dblclick(x,y);if(await page.locator('#view').inputValue()==='detail'){found=true;break;}}if(found)break;}if(!found)throw Error('No double-click board hit '+slug);results.push({slug,singleClickStaysWhole:true,doubleClickOpensBoard:true});}return results})(page);
+```
+### Page
+- Page URL: http://127.0.0.1:8769/afo-recorder-project/designs/ads131m04-expandable-mpu6050/viewer/?v=16&stage=5
+- Page Title: Assembly · AFO Research Recorder

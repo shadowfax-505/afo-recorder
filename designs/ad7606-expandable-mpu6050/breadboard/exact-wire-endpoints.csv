@@ -1,0 +1,209 @@
+Wire,Stage,Net,From,To,Instructions
+wire-001,9,SOURCE_POS,battery:JST-PH red + lead,DIST1:a1,"Connect lab source OR battery, never both; remove both lab leads before battery attachment."
+wire-002,1,SOURCE_POS,power-switch:SPST solder lug 1,DIST1:b1,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-003,1,SOURCE_POS,lab-supply:Red + binding post,DIST1:c1,"Connect lab source OR battery, never both; remove both lab leads before battery attachment."
+wire-004,1,GND,DIST1:a2,DIST1:a3,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-005,1,GND,DIST1:b3,DIST1:a4,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-006,1,GND,DIST1:b4,DIST1:a5,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-007,1,GND,DIST1:b5,DIST1:a6,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-008,1,GND,DIST1:b6,DIST1:a7,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-009,1,GND,DIST1:b7,DIST1:a8,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-010,1,GND,DIST1:b8,DIST1:a9,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-011,1,GND,DIST1:b9,DIST1:a10,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-012,1,GND,DIST1:b10,DIST1:a11,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-013,1,GND,DIST1:b11,DIST1:a12,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-014,1,GND,DIST1:b12,DIST1:a13,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-015,1,GND,DIST1:b13,DIST1:a14,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-016,1,GND,DIST1:b14,DIST1:a15,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-017,1,GND,DIST1:b15,DIST1:a16,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-018,1,GND,DIST1:b16,DIST1:a17,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-019,1,GND,DIST1:b17,DIST1:a18,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-020,1,GND,DIST1:b18,DIST1:a19,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-021,1,GND,DIST1:b19,DIST1:a20,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-022,1,GND,BB0:e6,DIST1:b2,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-023,4,GND,BB1:d6,DIST1:c2,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-024,5,GND,BB2:d6,DIST1:d2,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-025,5,GND,BB3:d6,DIST1:e2,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-026,5,GND,BB4:d6,DIST1:c3,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-027,2,GND,AUX1:g31,DIST1:d3,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-028,2,GND,AUX1:g39,DIST1:e3,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-029,2,GND,AUX1:g47,DIST1:c4,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-030,2,GND,AUX1:g55,DIST1:d4,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-031,2,GND,AUX2:g3,DIST1:e4,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-032,2,GND,AUX2:g11,DIST1:c5,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-033,1,GND,lab-supply:Black COM binding post,DIST1:d5,"Connect lab source OR battery, never both; remove both lab leads before battery attachment."
+wire-034,1,GND,reg3:GND / 5-pin row 3,DIST1:e5,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-035,1,GND,reg5:GND / 5-pin row 3,DIST1:c6,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-036,9,GND,battery:JST-PH black − lead,DIST1:d6,"Connect lab source OR battery, never both; remove both lab leads before battery attachment."
+wire-037,2,GND,esp:J1.22 / GND,DIST1:e6,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-038,1,GND,ldo:GND pin2 → JP2.2,DIST1:c7,Use the specified adapter pad-to-header mapping; check solder orientation and unpowered continuity.
+wire-039,3,GND,adc:GND / CN1 photo label,DIST1:d7,"Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+wire-040,3,GND,adc:OS0 / CN1 photo label,DIST1:e7,"Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+wire-041,3,GND,adc:OS1 / CN1 photo label,DIST1:c8,"Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+wire-042,3,GND,adc:OS2 / CN1 photo label,DIST1:d8,"Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+wire-043,3,GND,adc:RAGE / CN1 photo label,DIST1:e8,"Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+wire-044,3,GND,adc:DB15 / CN1 photo label,DIST1:c9,"Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+wire-045,3,GND,adc:V5 unused input / CN2 photo label,DIST1:d9,"Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+wire-046,3,GND,adc:V6 unused input / CN2 photo label,DIST1:e9,"Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+wire-047,3,GND,adc:V7 unused input / CN2 photo label,DIST1:c10,"Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+wire-048,3,GND,adc:V8 unused input / CN2 photo label,DIST1:d10,"Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+wire-049,3,GND,adc:G beside V1 / CN2 photo label,DIST1:e10,"Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+wire-050,10,GND,myo1:GND solder pad,DIST1:c11,"Use bare-sensor RAW, VIN and GND pads; no person attached during instrument tests."
+wire-051,4,GND,clamp1:CHIP_PAD_1 → JP1.2,DIST1:d11,Use the specified adapter pad-to-header mapping; check solder orientation and unpowered continuity.
+wire-052,3,GND,adc:G beside V2 / CN2 photo label,DIST1:e11,"Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+wire-053,10,GND,myo2:GND solder pad,DIST1:c12,"Use bare-sensor RAW, VIN and GND pads; no person attached during instrument tests."
+wire-054,5,GND,clamp2:CHIP_PAD_1 → JP1.2,DIST1:d12,Use the specified adapter pad-to-header mapping; check solder orientation and unpowered continuity.
+wire-055,3,GND,adc:G beside V3 / CN2 photo label,DIST1:e12,"Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+wire-056,10,GND,myo3:GND solder pad,DIST1:c13,"Use bare-sensor RAW, VIN and GND pads; no person attached during instrument tests."
+wire-057,5,GND,clamp3:CHIP_PAD_1 → JP1.2,DIST1:d13,Use the specified adapter pad-to-header mapping; check solder orientation and unpowered continuity.
+wire-058,3,GND,adc:G beside V4 / CN2 photo label,DIST1:e13,"Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+wire-059,10,GND,myo4:GND solder pad,DIST1:c14,"Use bare-sensor RAW, VIN and GND pads; no person attached during instrument tests."
+wire-060,5,GND,clamp4:CHIP_PAD_1 → JP1.2,DIST1:d14,Use the specified adapter pad-to-header mapping; check solder orientation and unpowered continuity.
+wire-061,6,GND,foot:GND / photo position 7,DIST1:e14,"Complete IMU supply, interface and configuration checks before connecting."
+wire-062,6,GND,shank:GND / photo position 7,DIST1:c15,"Complete IMU supply, interface and configuration checks before connecting."
+wire-063,2,GND,button:NO contact 2,DIST1:d15,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-064,2,GND,usb:JP2.1 / GND,DIST1:e15,"External USB inlet only; both DevKit USB sockets empty. VBUS is sense-only, never connected to recorder 5 V."
+wire-065,2,GND,usb-q:SOURCE pin2 → JP1.3,DIST1:c16,Use the specified adapter pad-to-header mapping; check solder orientation and unpowered continuity.
+wire-066,3,GND,adc:DB0 / CN1 photo label,DIST1:d16,"Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+wire-067,3,GND,adc:DB1 / CN1 photo label,DIST1:e16,"Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+wire-068,3,GND,adc:DB2 / CN1 photo label,DIST1:c17,"Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+wire-069,3,GND,adc:DB3 / CN1 photo label,DIST1:d17,"Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+wire-070,3,GND,adc:DB4 / CN1 photo label,DIST1:e17,"Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+wire-071,3,GND,adc:DB5 / CN1 photo label,DIST1:c18,"Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+wire-072,3,GND,adc:DB6 / CN1 photo label,DIST1:d18,"Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+wire-073,3,GND,adc:DB9 / CN1 photo label,DIST1:e18,"Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+wire-074,3,GND,adc:DB10 / CN1 photo label,DIST1:c19,"Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+wire-075,3,GND,adc:DB11 / CN1 photo label,DIST1:d19,"Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+wire-076,3,GND,adc:DB12 / CN1 photo label,DIST1:e19,"Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+wire-077,3,GND,adc:DB13 / CN1 photo label,DIST1:b20,"Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+wire-078,3,GND,adc:DB14 / CN1 photo label,DIST1:c20,"Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+wire-079,2,VBAT,AUX1:a51,DIST1:a21,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-080,1,VBAT,power-switch:SPST solder lug 2,DIST1:b21,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-081,1,VBAT,reg5:VIN / 5-pin row 2,DIST1:c21,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-082,1,VBAT,reg3:VIN / 5-pin row 2,DIST1:d21,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-083,2,5V,reg5:VOUT / 5-pin row 5,DIST1:a22,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-084,2,5V,esp:J1.21 / 5V,DIST1:b22,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-085,3,5V,adc:+5V / CN1 photo label,DIST1:c22,"Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+wire-086,1,3V3D,DIST1:a23,DIST1:a24,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-087,1,3V3D,DIST1:b24,DIST1:a25,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-088,1,3V3D,DIST1:b25,DIST1:a26,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-089,3,3V3D,AUX1:a3,DIST1:b23,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-090,6,3V3D,AUX1:a7,DIST1:c23,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-091,6,3V3D,AUX1:a11,DIST1:d23,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-092,6,3V3D,AUX1:a15,DIST1:e23,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-093,6,3V3D,AUX1:a19,DIST1:c24,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-094,2,3V3D,AUX1:a23,DIST1:d24,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-095,2,3V3D,AUX2:a15,DIST1:e24,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-096,1,3V3D,reg3:VOUT / 5-pin row 5,DIST1:c25,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-097,1,3V3D,ldo:IN pin1 → JP2.1,DIST1:d25,Use the specified adapter pad-to-header mapping; check solder orientation and unpowered continuity.
+wire-098,1,3V3D,ldo:EN pin3 → JP2.3,DIST1:e25,Use the specified adapter pad-to-header mapping; check solder orientation and unpowered continuity.
+wire-099,3,3V3D,adc:VIO / CN1 photo label,DIST1:b26,"Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+wire-100,6,3V3D,foot:VCC / photo position 8,DIST1:c26,"Complete IMU supply, interface and configuration checks before connecting."
+wire-101,6,3V3D,shank:VCC / photo position 8,DIST1:d26,"Complete IMU supply, interface and configuration checks before connecting."
+wire-102,7,3V3D,sd:JP1.1 / 3V3,DIST1:e26,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-103,1,3V0A,DIST1:a27,DIST1:a28,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-104,1,3V0A,DIST1:b28,DIST1:a29,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-105,1,3V0A,DIST1:b29,DIST1:a30,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-106,1,3V0A,BB0:d2,DIST1:b27,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-107,4,3V0A,BB1:h10,DIST1:c27,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-108,5,3V0A,BB2:h10,DIST1:d27,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-109,5,3V0A,BB3:h10,DIST1:e27,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-110,5,3V0A,BB4:h10,DIST1:c28,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-111,1,3V0A,ldo:OUT pin5 / 3.0V → JP1.1,DIST1:d28,Use the specified adapter pad-to-header mapping; check solder orientation and unpowered continuity.
+wire-112,10,3V0A,myo1:VIN solder pad,DIST1:e28,"Use bare-sensor RAW, VIN and GND pads; no person attached during instrument tests."
+wire-113,4,3V0A,clamp1:CHIP_PAD_2 → JP1.3,DIST1:c29,Use the specified adapter pad-to-header mapping; check solder orientation and unpowered continuity.
+wire-114,10,3V0A,myo2:VIN solder pad,DIST1:d29,"Use bare-sensor RAW, VIN and GND pads; no person attached during instrument tests."
+wire-115,5,3V0A,clamp2:CHIP_PAD_2 → JP1.3,DIST1:e29,Use the specified adapter pad-to-header mapping; check solder orientation and unpowered continuity.
+wire-116,10,3V0A,myo3:VIN solder pad,DIST1:b30,"Use bare-sensor RAW, VIN and GND pads; no person attached during instrument tests."
+wire-117,5,3V0A,clamp3:CHIP_PAD_2 → JP1.3,DIST1:c30,Use the specified adapter pad-to-header mapping; check solder orientation and unpowered continuity.
+wire-118,10,3V0A,myo4:VIN solder pad,DIST1:d30,"Use bare-sensor RAW, VIN and GND pads; no person attached during instrument tests."
+wire-119,5,3V0A,clamp4:CHIP_PAD_2 → JP1.3,DIST1:e30,Use the specified adapter pad-to-header mapping; check solder orientation and unpowered continuity.
+wire-120,3,ADC_CS,AUX1:g3,DIST1:a31,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-121,3,ADC_CS,esp:J1.16 / GPIO10,DIST1:b31,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-122,3,ADC_CS,adc:CS / CN1 photo label,DIST1:c31,"Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+wire-123,3,ADC_SCK,esp:J1.18 / GPIO12,adc:RD / CN1 photo label,"Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+wire-124,3,ADC_MISO,esp:J1.19 / GPIO13,adc:DB7 / CN1 photo label,"Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+wire-125,3,ADC_RESET,esp:J1.15 / GPIO9,adc:RST / CN1 photo label,"Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+wire-126,3,ADC_DRDY,esp:J1.12 / GPIO8,adc:BUSY / CN1 photo label,"Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+wire-127,3,ADC_CONVST,esp:J1.17 / GPIO11,DIST1:a32,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-128,3,ADC_CONVST,adc:CVA / CN1 photo label,DIST1:b32,"Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+wire-129,3,ADC_CONVST,adc:CVB / CN1 photo label,DIST1:c32,"Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+wire-130,4,AIN0P,BB1:c28,DIST1:a33,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-131,4,AIN0P,adc:V1 / CN2 photo label,DIST1:b33,"Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+wire-132,10,RAW0,BB1:b2,DIST1:a34,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-133,10,RAW0,myo1:RAW solder pad,DIST1:b34,"Use bare-sensor RAW, VIN and GND pads; no person attached during instrument tests."
+wire-134,4,RC0A,BB1:d4,DIST1:a35,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-135,4,RC0A,clamp1:CHIP_PAD_3 → JP2.3,DIST1:b35,Use the specified adapter pad-to-header mapping; check solder orientation and unpowered continuity.
+wire-136,5,AIN1P,BB2:c28,DIST1:a36,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-137,5,AIN1P,adc:V2 / CN2 photo label,DIST1:b36,"Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+wire-138,10,RAW1,BB2:b2,DIST1:a37,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-139,10,RAW1,myo2:RAW solder pad,DIST1:b37,"Use bare-sensor RAW, VIN and GND pads; no person attached during instrument tests."
+wire-140,5,RC1A,BB2:d4,DIST1:a38,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-141,5,RC1A,clamp2:CHIP_PAD_3 → JP2.3,DIST1:b38,Use the specified adapter pad-to-header mapping; check solder orientation and unpowered continuity.
+wire-142,5,AIN2P,BB3:c28,DIST1:a39,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-143,5,AIN2P,adc:V3 / CN2 photo label,DIST1:b39,"Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+wire-144,10,RAW2,BB3:b2,DIST1:a40,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-145,10,RAW2,myo3:RAW solder pad,DIST1:b40,"Use bare-sensor RAW, VIN and GND pads; no person attached during instrument tests."
+wire-146,5,RC2A,BB3:d4,DIST1:a41,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-147,5,RC2A,clamp3:CHIP_PAD_3 → JP2.3,DIST1:b41,Use the specified adapter pad-to-header mapping; check solder orientation and unpowered continuity.
+wire-148,5,AIN3P,BB4:c28,DIST1:a42,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-149,5,AIN3P,adc:V4 / CN2 photo label,DIST1:b42,"Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+wire-150,10,RAW3,BB4:b2,DIST1:a43,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-151,10,RAW3,myo4:RAW solder pad,DIST1:b43,"Use bare-sensor RAW, VIN and GND pads; no person attached during instrument tests."
+wire-152,5,RC3A,BB4:d4,DIST1:a44,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-153,5,RC3A,clamp4:CHIP_PAD_3 → JP2.3,DIST1:b44,Use the specified adapter pad-to-header mapping; check solder orientation and unpowered continuity.
+wire-154,6,IMU_SDA,AUX1:g15,DIST1:a45,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-155,6,IMU_SDA,esp:J1.4 / GPIO4,DIST1:b45,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-156,6,IMU_SDA,foot:SDA / photo position 5,DIST1:c45,"Complete IMU supply, interface and configuration checks before connecting."
+wire-157,6,IMU_SDA,shank:SDA / photo position 5,DIST1:d45,"Complete IMU supply, interface and configuration checks before connecting."
+wire-158,6,IMU_SCL,AUX1:g19,DIST1:a46,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-159,6,IMU_SCL,esp:J1.6 / GPIO6,DIST1:b46,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-160,6,IMU_SCL,foot:SCL / photo position 6,DIST1:c46,"Complete IMU supply, interface and configuration checks before connecting."
+wire-161,6,IMU_SCL,shank:SCL / photo position 6,DIST1:d46,"Complete IMU supply, interface and configuration checks before connecting."
+wire-162,6,FOOT_AD0,AUX1:g7,DIST1:a47,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-163,6,FOOT_AD0,esp:J1.7 / GPIO7,DIST1:b47,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-164,6,FOOT_AD0,foot:AD0 / photo position 2,DIST1:c47,"Complete IMU supply, interface and configuration checks before connecting."
+wire-165,6,FOOT_INT,esp:J1.9 / GPIO16,foot:INT / photo position 1,"Complete IMU supply, interface and configuration checks before connecting."
+wire-166,6,SHANK_AD0,AUX1:g11,DIST1:a48,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-167,6,SHANK_AD0,esp:J1.8 / GPIO15,DIST1:b48,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-168,6,SHANK_AD0,shank:AD0 / photo position 2,DIST1:c48,"Complete IMU supply, interface and configuration checks before connecting."
+wire-169,6,SHANK_INT,esp:J1.10 / GPIO17,shank:INT / photo position 1,"Complete IMU supply, interface and configuration checks before connecting."
+wire-170,2,BUTTON,AUX1:g23,DIST1:a49,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-171,2,BUTTON,esp:J1.11 / GPIO18,DIST1:b49,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-172,2,BUTTON,button:NO contact 1,DIST1:c49,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-173,2,LED_REC,AUX1:a27,DIST1:a50,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-174,2,LED_REC,esp:J3.7 / GPIO41,DIST1:b50,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-175,2,LED_REC_A,AUX1:g27,DIST1:a51,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-176,2,LED_REC_A,AUX1:a31,DIST1:b51,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-177,2,LED_ERR,AUX1:a35,DIST1:a52,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-178,2,LED_ERR,esp:J3.6 / GPIO42,DIST1:b52,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-179,2,LED_ERR_A,AUX1:g35,DIST1:a53,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-180,2,LED_ERR_A,AUX1:a39,DIST1:b53,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-181,2,LED_LOW,AUX1:a43,DIST1:a54,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-182,2,LED_LOW,esp:J3.5 / GPIO2,DIST1:b54,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-183,2,LED_LOW_A,AUX1:g43,DIST1:a55,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-184,2,LED_LOW_A,AUX1:a47,DIST1:b55,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-185,2,BAT_SENSE,AUX1:g51,DIST1:a56,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-186,2,BAT_SENSE,AUX1:a55,DIST1:b56,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-187,2,BAT_SENSE,AUX2:a3,DIST1:c56,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-188,2,BAT_SENSE,esp:J3.4 / GPIO1,DIST1:d56,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-189,2,USB_VBUS,AUX2:a7,DIST1:a57,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-190,2,USB_VBUS,usb:JP2.5 / VBUS,DIST1:b57,"External USB inlet only; both DevKit USB sockets empty. VBUS is sense-only, never connected to recorder 5 V."
+wire-191,2,USB_GATE,AUX2:g7,DIST1:a58,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-192,2,USB_GATE,AUX2:a11,DIST1:b58,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-193,2,USB_GATE,usb-q:GATE pin1 → JP1.2,DIST1:c58,Use the specified adapter pad-to-header mapping; check solder orientation and unpowered continuity.
+wire-194,2,USB_PRESENT_N,AUX2:g15,DIST1:a59,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-195,2,USB_PRESENT_N,usb-q:DRAIN pin3 → JP2.3,DIST1:b59,Use the specified adapter pad-to-header mapping; check solder orientation and unpowered continuity.
+wire-196,2,USB_PRESENT_N,esp:J3.18 / GPIO21,DIST1:c59,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-197,2,USB_DM,usb:JP2.4 / D-,usb-dm-r:lead 1,"External USB inlet only; both DevKit USB sockets empty. VBUS is sense-only, never connected to recorder 5 V."
+wire-198,2,USB_DM_MCU,usb-dm-r:lead 2,esp:J3.20 / GPIO19,"External USB inlet only; both DevKit USB sockets empty. VBUS is sense-only, never connected to recorder 5 V."
+wire-199,2,USB_DP,usb:JP2.3 / D+,usb-dp-r:lead 1,"External USB inlet only; both DevKit USB sockets empty. VBUS is sense-only, never connected to recorder 5 V."
+wire-200,2,USB_DP_MCU,usb-dp-r:lead 2,esp:J3.19 / GPIO20,"External USB inlet only; both DevKit USB sockets empty. VBUS is sense-only, never connected to recorder 5 V."
+wire-201,7,SD_CMD,esp:J3.17 / GPIO47,sd:JP1.5,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-202,7,SD_CLK,esp:J3.9 / GPIO39,sd:JP1.3,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-203,7,SD_D0,esp:J3.8 / GPIO40,sd:JP1.4,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-204,1,3V3D,cap-2:lead 1,ldo:U$1.1 solder pad,"Local soldered LDO bypass, short insulated leads; not a remote breadboard capacitor."
+wire-205,1,GND,cap-2:lead 2,ldo:U$1.2 solder pad,"Local soldered LDO bypass, short insulated leads; not a remote breadboard capacitor."
+wire-206,1,3V0A,cap-3:lead 1,ldo:U$1.6 solder pad,"Local soldered LDO bypass, short insulated leads; not a remote breadboard capacitor."
+wire-207,1,GND,cap-3:lead 2,ldo:U$1.2 solder pad,"Local soldered LDO bypass, short insulated leads; not a remote breadboard capacitor."
+wire-208,7,GND,sd:JP1.2 / GND,DIST1:d20,microSD return lead; verified JP1 pad 2 belongs to GND in Adafruit SDIO microSD board CAD. Install with power off.
