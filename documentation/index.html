@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f5f4f0">
+  <meta name="description" content="Build, configure, and validate the AFO EMG and IMU research recorder.">
+  <title>Documentation · AFO Research Recorder</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../assets/ui.css?v=17">
+  <link rel="stylesheet" href="docs.css?v=17">
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to documentation</a>
+  <header class="topbar">
+    <a class="brand" href="../index.html"><span class="brandmark">A/</span>AFO <span>/ Research recorder</span></a>
+    <nav class="topnav" aria-label="Main navigation">
+      <a href="../index.html#library">Configurations</a>
+      <a class="active" href="index.html">Documentation</a>
+      <a href="https://github.com/shadowfax-505/afo-recorder">GitHub ↗</a>
+    </nav>
+    <div class="identity">
+      <button class="docs-menu" type="button" aria-expanded="false" aria-controls="docs-navigation">Contents</button>
+      <span class="status">ENGINEERING PROTOTYPE</span>
+      <span class="owner-name">Muttakin Rahman</span>
+      <span class="avatar" title="Project lead: Muttakin Rahman">MR</span>
+    </div>
+  </header>
+
+  <div class="docs-shell">
+    <nav class="docs-nav" id="docs-navigation" aria-label="Documentation sections">
+      <span class="eyebrow">Project manual</span>
+      <div class="nav-group">Orientation</div>
+      <a class="current" href="#overview">Overview</a>
+      <a href="#choose">Choose a configuration</a>
+      <a href="#architecture">System architecture</a>
+      <div class="nav-group">Implementation</div>
+      <a href="#build">Build sequence</a>
+      <a href="#firmware">Firmware and data</a>
+      <a href="#validation">Validation status</a>
+      <a href="#safety">Safety boundary</a>
+      <div class="nav-group">Reference</div>
+      <a href="#files">Repository map</a>
+      <a href="#references">Detailed documents</a>
+      <a class="repo-link" href="../index.html">← All configurations</a>
+    </nav>
+
+    <main class="docs-main" id="content">
+      <header class="docs-hero" id="overview">
+        <div class="eyebrow">Documentation / Release 0.1 engineering preview</div>
+        <h1>Build the recorder with evidence.</h1>
+        <p class="lead">A practical guide to choosing one hardware configuration, assembling it in controlled stages, recording synchronized EMG and motion data, and keeping software evidence separate from physical measurements.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#choose">Choose a setup ↓</a>
+          <a class="button" href="../designs/ad7606-two-channel-mpu6050/viewer/build.html">Open guided build ↗</a>
+          <a class="button" href="https://github.com/shadowfax-505/afo-recorder/releases/tag/v0.1.0">Download packages ↗</a>
+        </div>
+        <div class="doc-status">
+          <div class="status-card ok"><strong>Design and software checks recorded</strong><span>Firmware builds, host tests, PCB rules, metadata, wiring data, and viewer flows have saved evidence.</span></div>
+          <div class="status-card pending"><strong>Physical validation still required</strong><span>No completed power, noise, timing, storage endurance, radio coexistence, or battery-runtime measurements.</span></div>
+        </div>
+      </header>
+
+      <section id="choose">
+        <div class="section-label">01 / Configuration</div>
+        <h2>Choose one complete setup</h2>
+        <p>Every package combines one ADC choice, one EMG capacity, and one IMU family. Use its breadboard plan, firmware, converter, PCB, and documentation together. Mixing packages can silently change GPIOs, bus protocols, timing records, and channel rules.</p>
+
+        <div class="callout info"><strong>Current-parts path:</strong> if you have the RoboticsBD AD7606 module, two bare MyoWare 2.0 sensors, two GY-521 boards, and need exactly two EMG channels, use the fixed-two AD7606 / MPU-6050 package shown first.</div>
+
+        <div class="config-grid">
+          <article class="config-card recommended">
+            <h3>AD7606 · fixed two · MPU-6050</h3>
+            <p>Direct path for the identified local ADC and IMU modules. Four-channel firmware is intentionally rejected.</p>
+            <div class="tags"><span class="tag">16-bit</span><span class="tag">2 EMG</span><span class="tag">I²C IMUs</span></div>
+            <div class="card-links"><a href="../designs/ad7606-two-channel-mpu6050/viewer/build.html">Guided build ↗</a><a href="../designs/ad7606-two-channel-mpu6050/viewer/index.html?v=16&stage=10">3D assembly</a></div>
+          </article>
+          <article class="config-card">
+            <h3>AD7606 · fixed two · ICM-42688-P</h3>
+            <p>Same two-channel scope with SPI motion sensors and timestamp-bearing sensor packets.</p>
+            <div class="tags"><span class="tag">16-bit</span><span class="tag">2 EMG</span><span class="tag">SPI IMUs</span></div>
+            <div class="card-links"><a href="../designs/ad7606-two-channel-icm42688/viewer/build.html">Guided build ↗</a><a href="../designs/ad7606-two-channel-icm42688/viewer/index.html?v=16&stage=10">3D assembly</a></div>
+          </article>
+          <article class="config-card">
+            <h3>AD7606 · expandable · MPU or ICM</h3>
+            <p>Four populated analog inputs. Firmware enables either two or four simultaneous 8 kHz channels.</p>
+            <div class="tags"><span class="tag">16-bit</span><span class="tag">2 or 4 EMG</span><span class="tag">2 IMUs</span></div>
+            <div class="card-links"><a href="../index.html#library">Compare both variants ↗</a></div>
+          </article>
+          <article class="config-card">
+            <h3>ADS131M04 · expandable · MPU or ICM</h3>
+            <p>Twenty-four-bit ADC design with external clock and ADC-specific CRC/status handling. Lab carrier availability remains a dependency.</p>
+            <div class="tags"><span class="tag">24-bit</span><span class="tag">2 or 4 EMG</span><span class="tag">2 IMUs</span></div>
+            <div class="card-links"><a href="../index.html#library">Compare both variants ↗</a></div>
+          </article>
+        </div>
+
+        <div class="decision" role="region" aria-label="Hardware decision table" tabindex="0">
+          <table>
+            <thead><tr><th>Decision</th><th>AD7606</th><th>ADS131M04</th><th>ICM-42688-P</th><th>MPU-6050</th></tr></thead>
+            <tbody>
+              <tr><td>Interface</td><td>Simultaneous ADC, serial readout</td><td>Simultaneous delta-sigma ADC</td><td>SPI</td><td>I²C with FIFO</td></tr>
+              <tr><td>Recorded precision</td><td>16-bit signed codes</td><td>24-bit signed codes</td><td>Sensor timestamp retained</td><td>ESP32 interrupt/FIFO estimate</td></tr>
+              <tr><td>Lab dependency</td><td>Qualify exact seller module</td><td>Obtain and adapt a carrier</td><td>Select exact carrier</td><td>Qualify GY-521 power and pull-ups</td></tr>
+              <tr><td>Key open test</td><td>Mode straps, VIO, header and codes</td><td>Input loading, clock, CRC and noise</td><td>Carrier mapping and clock alignment</td><td>Rise time, FIFO timing and drift</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="architecture">
+        <div class="section-label">02 / Architecture</div>
+        <h2>One recorder, two acquisition paths</h2>
+        <p>EMG and motion enter the ESP32-S3 through different hardware paths. The controller adds its timing evidence, writes the authoritative recording to microSD, and optionally forwards a best-effort copy over Wi-Fi.</p>
+
+        <div class="flow" aria-label="Signal path">
+          <div class="flow-node"><strong>MyoWare RAW</strong><span>2 default / 4 optional</span></div><div class="flow-arrow">→</div>
+          <div class="flow-node"><strong>Protected analog</strong><span>bias · buffer · filter</span></div><div class="flow-arrow">→</div>
+          <div class="flow-node"><strong>Simultaneous ADC</strong><span>AD7606 or ADS131M04</span></div><div class="flow-arrow">→</div>
+          <div class="flow-node"><strong>ESP32-S3</strong><span>counter · time · faults</span></div>
+        </div>
+
+        <div class="architecture-branches">
+          <div class="mini-panel"><h3>Motion path</h3><p>Foot and shank IMUs connect by SPI or shared I²C. ICM packets retain sensor timing; MPU packets retain FIFO order and ESP32 timing estimates.</p></div>
+          <div class="mini-panel"><h3>Output path</h3><p>microSD is the primary recording. Wi-Fi is a live convenience copy whose gaps remain visible rather than being hidden or filled.</p></div>
+        </div>
+
+        <h3>Timing is evidence, not magic</h3>
+        <p>ADC frames are simultaneous within the selected converter, but EMG and IMU clocks are independent. The recording preserves counters, trigger or data-ready timing, FIFO order, and read timing so alignment can be characterized later. Filtering and analog stages also introduce delay that must be measured before interpreting millisecond relationships.</p>
+
+        <div class="callout warning"><strong>Breadboard and compact PCB are electrically aligned at the functional level, but physically different.</strong> Development-board regulators, carrier pull-ups, wire length, connector parasitics, and layout noise mean a successful breadboard test does not prove the compact PCB's noise or radio performance.</div>
+      </section>
+
+      <section id="build">
+        <div class="section-label">03 / Laboratory build</div>
+        <h2>Advance through ten measured gates</h2>
+        <p>Build one block at a time. Later diagnostics preserve earlier stages, so a failure can be isolated without guessing across the complete system.</p>
+
+        <div class="stage-list">
+          <div class="stage-row"><strong>Power and midpoint</strong><p>Verify polarity, regulated rails, startup, ripple, load response, and temperature with current limiting and dummy loads.</p></div>
+          <div class="stage-row"><strong>Controller</strong><p>Verify programming, reset, buttons, LEDs, current, USB detection, and recording inhibition.</p></div>
+          <div class="stage-row"><strong>ADC and timing</strong><p>Check communication or status, conversion timing, known DC codes, simultaneous frames, counters, and faults.</p></div>
+          <div class="stage-row"><strong>First EMG input</strong><p>Use a synthetic source to measure offset, scaling, passband, baseline noise, clipping, and unplugged bias.</p></div>
+          <div class="stage-row"><strong>Remaining inputs</strong><p>Verify identity, two/four-channel rules, disabled-channel handling, timing, and crosstalk.</p></div>
+          <div class="stage-row"><strong>Motion sensors</strong><p>Add one IMU, then two. Verify identity, orientation, 200 Hz rate, stationary readings, timing evidence, and cable behavior.</p></div>
+          <div class="stage-row"><strong>microSD</strong><p>Record continuously, convert data, test storage errors, fill behavior, and interrupted-file recovery.</p></div>
+          <div class="stage-row"><strong>Wi-Fi + SD</strong><p>Observe explicit wireless gaps while confirming the primary SD file has no unexplained loss under radio load.</p></div>
+          <div class="stage-row"><strong>Battery system</strong><p>Measure startup/shutdown, one-hour recording behavior, rail stability, temperature, and at least two hours of runtime.</p></div>
+          <div class="stage-row"><strong>MyoWare and wearable</strong><p>Check mounting, motion artifact, cable security, AFO clearance, ethics, consent, and electrical safety before supervised recording.</p></div>
+        </div>
+
+        <div class="callout warning"><strong>Stop at a failed gate.</strong> Browsing a later stage is harmless; physically adding its hardware before the current stage passes makes fault isolation harder and invalidates the intended evidence chain.</div>
+        <p><a class="button primary" href="../designs/ad7606-two-channel-mpu6050/viewer/build.html">Open an interactive staged build ↗</a> <a class="button" href="lab-build-guide.md">Read the detailed Markdown guide</a></p>
+      </section>
+
+      <section id="firmware">
+        <div class="section-label">04 / Firmware and data</div>
+        <h2>Build and analyze the matching profile</h2>
+        <p>Run commands from the selected design package. Expandable packages accept two or four EMG channels; fixed-two packages accept only two. Breadboard builds use GPIO47 for SD CMD, while compact-PCB builds use GPIO38.</p>
+
+        <h3>Build a two-channel breadboard recorder</h3>
+        <pre class="code"><code>cd designs/&lt;selected-configuration&gt;/firmware
+idf.py -B build-breadboard-2 \
+  -DEMG_CHANNEL_COUNT=2 \
+  -DAFO_HARDWARE=breadboard \
+  -DAFO_WIFI=1 \
+  -DAFO_DIAGNOSTIC_STAGE=0 \
+  -DAFO_IMU_COUNT=2 build</code></pre>
+
+        <h3>Convert a recording</h3>
+        <pre class="code"><code>cd designs/&lt;selected-configuration&gt;
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r host/requirements.txt
+python host/convert.py trial.afolog --out exported-trial</code></pre>
+
+        <h3>Receive the best-effort Wi-Fi copy</h3>
+        <pre class="code"><code>python host/live_receiver.py --help
+# Join the recorder access point, start the receiver,
+# then start recording on the device.</code></pre>
+
+        <p>The converter exports timestamped EMG and IMU tables, metadata, quality findings, and basic plots. Recovery mode salvages valid records from an interrupted file and reports damage; it does not invent missing samples. Keep the original binary recording unchanged.</p>
+        <div class="callout info"><strong>GitHub Pages hosts documentation only.</strong> A browser page on this public site cannot connect directly to a nearby ESP32 access point. Live reception runs on the laptop using the package's local receiver.</div>
+      </section>
+
+      <section id="validation">
+        <div class="section-label">05 / Evidence</div>
+        <h2>What has passed—and what has not</h2>
+        <p>The repository preserves raw JSON, logs, reports, and manifests. The summary below is intentionally split by evidence type.</p>
+
+        <div class="evidence-grid">
+          <div class="evidence"><b>6 / 6</b><span>Host suites passed</span></div>
+          <div class="evidence"><b>242</b><span>Host tests in release summary</span></div>
+          <div class="evidence"><b>26</b><span>Recording profiles compiled</span></div>
+          <div class="evidence"><b>0</b><span>Physical recorders measured</span></div>
+        </div>
+
+        <div class="legend-list">
+          <div class="legend-item verified"><strong>Verified in software</strong>Six automated host suites, binary compatibility, metadata checks, fault conversion, navigation, wiring consistency, and recorded ERC/DRC reports.</div>
+          <div class="legend-item simulated"><strong>Simulated</strong>Analog response and acquisition/storage fault scenarios using generated inputs. These exercise models and data paths.</div>
+          <div class="legend-item pending"><strong>Pending hardware</strong>Rail behavior, ADC accuracy/noise, timing drift, crosstalk, cable integrity, storage endurance, radio coexistence, thermal behavior, and runtime.</div>
+          <div class="legend-item measured"><strong>Passed — measured</strong>Reserved for a result entered after a documented lab procedure with instruments, settings, readings, limits, and evidence files.</div>
+        </div>
+
+        <h3>Open release gates</h3>
+        <ul>
+          <li>Qualify the exact AD7606 or ADS131M04 lab carrier, including power, modes, logic levels, and loading.</li>
+          <li>Measure analog passband, clipping, baseline noise, channel crosstalk, and ADC code scaling.</li>
+          <li>Measure IMU rate, drift, interrupt timing, orientation, pull-ups, and cable reliability under SD/Wi-Fi load.</li>
+          <li>Complete full-card, write interruption, sustained recording, thermal, and battery-runtime tests.</li>
+          <li>Review the compact PCB after the breadboard gates pass; ERC/DRC alone is not an order recommendation.</li>
+        </ul>
+        <p><a href="validation-status.md">Detailed validation status</a> · <a href="fresh-checks-20260928.json">Per-design automated results (JSON)</a> · <a href="physical-wiring-validation.json">Wiring validation (JSON)</a></p>
+      </section>
+
+      <section id="safety">
+        <div class="section-label">06 / Safety boundary</div>
+        <h2>Keep bench power away from participants</h2>
+        <div class="callout warning"><strong>Never attach a person during an instrument-connected electrical test.</strong> Disconnect charging, USB, the lab supply, oscilloscope grounds, and signal-generator grounds before electrodes are applied.</div>
+        <p>Human recording is a separate research activity. It requires institutional approval appropriate to the study, informed consent, exclusion and stop criteria, an electrical-safety review, a supervised procedure, and a plan for pseudonymous data handling.</p>
+        <p>The leg and AFO views illustrate placement only. They do not establish patient fit, pressure safety, comfort, biomechanics, or clinical benefit.</p>
+      </section>
+
+      <section id="files">
+        <div class="section-label">07 / Repository</div>
+        <h2>Find the right artifact quickly</h2>
+        <div class="file-tree">designs/&lt;configuration&gt;/
+├── breadboard/      hole-level placements and named wire endpoints
+├── firmware/        ESP-IDF source, profiles, and manifests
+├── hardware/        KiCad source and component references
+├── host/            converter, live receiver, plots, and tests
+├── manufacturing/   Gerber, drill, BOM, placement, assembly, STEP
+├── simulations/     analog models and acquisition fault scenarios
+├── docs/            package-specific guides and evidence
+└── viewer/          guided build, detailed assembly, PCB preview
+
+documentation/       project-wide manual and evidence summaries
+validation/          bench-session records
+design-catalog.json  machine-readable configuration index</div>
+        <p>Package-specific documentation takes priority for exact component values, terminals, build profiles, and numerical limits. Project-level pages explain the shared workflow and evidence boundary.</p>
+      </section>
+
+      <section id="references">
+        <div class="section-label">08 / Reference</div>
+        <h2>Detailed documents</h2>
+        <div class="config-grid">
+          <article class="config-card"><h3>Implementation</h3><p>System architecture, staged build, firmware profiles, SD differences, and recording workflow.</p><div class="card-links"><a href="system-architecture.md">Architecture</a><a href="firmware-build-guide.md">Firmware</a><a href="recording-and-analysis.md">Data</a></div></article>
+          <article class="config-card"><h3>Evidence</h3><p>Current readiness, detailed validation, wiring coverage, and machine-readable results.</p><div class="card-links"><a href="implementation-readiness.md">Readiness</a><a href="validation-status.md">Validation</a><a href="wiring-status.md">Wiring</a></div></article>
+          <article class="config-card"><h3>Sources</h3><p>Manufacturer documents, third-party notices, publication record, and provenance boundary.</p><div class="card-links"><a href="manufacturer-evidence.md">Sources</a><a href="../THIRD_PARTY_NOTICES.md">Notices</a><a href="publication.md">Publication</a></div></article>
+          <article class="config-card"><h3>Project participation</h3><p>How to preserve configuration consistency, evidence, and attribution when proposing changes.</p><div class="card-links"><a href="../CONTRIBUTING.md">Contributing</a><a href="project-status.md">Project status</a></div></article>
+        </div>
+      </section>
+    </main>
+
+    <aside class="docs-outline" aria-label="Page summary">
+      <b>On this page</b>
+      <a href="#choose">Configuration</a>
+      <a href="#architecture">Architecture</a>
+      <a href="#build">Build stages</a>
+      <a href="#firmware">Firmware & data</a>
+      <a href="#validation">Evidence</a>
+      <a href="#safety">Safety</a>
+      <div class="doc-updated">UPDATED 29 SEP 2026<br>PROJECT LEAD<br>MUTTAKIN RAHMAN</div>
+    </aside>
+  </div>
+
+  <footer class="docs-footer"><span>Project lead: Muttakin Rahman · AFO Research Recorder</span><span>Engineering prototype · Physical validation pending · <a href="../THIRD_PARTY_NOTICES.md">Sources & attribution</a></span></footer>
+  <script src="docs.js?v=17"></script>
+</body>
+</html>
