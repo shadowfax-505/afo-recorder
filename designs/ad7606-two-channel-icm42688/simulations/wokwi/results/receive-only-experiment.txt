@@ -1,0 +1,7 @@
+Isolated experiment: SPI_DEVICE_HALFDUPLEX | SPI_DEVICE_NO_DUMMY, rxlength=128, no TX phase.
+Same SPI2 MISO contention occurred. Experiment was reverted; release driver retains its original full-duplex read.
+[  121366ms] [WARNING] Short circuit! pins: "$mcu:spi3$slvmiso" and "foot:SDO" @ https://wokwi.com/_next/static/chunks/626-9b84a4593dfb3700.js:163
+[  121366ms] [WARNING] Short circuit! pins: "$mcu:spi3$slvmiso" and "foot:SDO" @ https://wokwi.com/_next/static/chunks/626-9b84a4593dfb3700.js:163
+[  121367ms] [WARNING] Short circuit! pins: "$mcu:spi3$slvmiso" and "foot:SDO" @ https://wokwi.com/_next/static/chunks/626-9b84a4593dfb3700.js:163
+[  121367ms] [WARNING] Short circuit! pins: "$mcu:spi3$slvmiso" and "foot:SDO" @ https://wokwi.com/_next/static/chunks/626-9b84a4593dfb3700.js:163
+[  121368ms] [WARNING] Short circuit! pins: "$mcu:spi3$slvmiso" and "foot:SDO" @ https://wokwi.com/_next/static/chunks/626-9b84a4593dfb3700.js:163

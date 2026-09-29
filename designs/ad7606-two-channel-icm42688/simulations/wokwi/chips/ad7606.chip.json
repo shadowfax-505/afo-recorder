@@ -1,0 +1,13 @@
+{
+  "name": "ad7606 behavioral model",
+  "author": "AFO Recorder project",
+  "pins": [
+    "CS",
+    "CONVST",
+    "RESET",
+    "BUSY",
+    "SCLK",
+    "DOUTA"
+  ],
+  "controls": []
+}

@@ -17,6 +17,7 @@ static uint64_t trigger_stamp;
 static portMUX_TYPE stamp_lock=portMUX_INITIALIZER_UNLOCKED;
 static bool tick(gptimer_handle_t t,const gptimer_alarm_event_data_t *event,void *ctx){
     (void)t;(void)event;(void)ctx;
+    if(atomic_load(&stream_fault))return false;
     // Do not overwrite an unread conversion. Stop rather than relabel old data.
     if(atomic_load(&pending)||gpio_get_level(ADC_DRDY)){atomic_store(&stream_fault,true);return false;}
     atomic_store(&pending,true);

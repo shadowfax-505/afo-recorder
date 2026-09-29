@@ -1,0 +1,15 @@
+Actual merged ESP-IDF diagnostic firmware uploaded through Wokwi browser UI.
+Simulation did not complete. Browser became unresponsive; owned browser terminated.
+Observed emulator warnings (first ten):
+[14947658ms] [WARNING] Short circuit! pins: "$mcu:spi3$slvmiso" and "foot:SDO" @ https://wokwi.com/_next/static/chunks/626-9b84a4593dfb3700.js:163
+[14947658ms] [WARNING] Short circuit! pins: "$mcu:spi3$slvmiso" and "foot:SDO" @ https://wokwi.com/_next/static/chunks/626-9b84a4593dfb3700.js:163
+[14947662ms] [WARNING] Short circuit! pins: "$mcu:spi3$slvmiso" and "foot:SDO" @ https://wokwi.com/_next/static/chunks/626-9b84a4593dfb3700.js:163
+[14947662ms] [WARNING] Short circuit! pins: "$mcu:spi3$slvmiso" and "foot:SDO" @ https://wokwi.com/_next/static/chunks/626-9b84a4593dfb3700.js:163
+[14947665ms] [WARNING] Short circuit! pins: "$mcu:spi3$slvmiso" and "foot:SDO" @ https://wokwi.com/_next/static/chunks/626-9b84a4593dfb3700.js:163
+[14947669ms] [WARNING] Short circuit! pins: "$mcu:spi3$slvmiso" and "foot:SDO" @ https://wokwi.com/_next/static/chunks/626-9b84a4593dfb3700.js:163
+[14947672ms] [WARNING] Short circuit! pins: "$mcu:spi3$slvmiso" and "foot:SDO" @ https://wokwi.com/_next/static/chunks/626-9b84a4593dfb3700.js:163
+[14947672ms] [WARNING] Short circuit! pins: "$mcu:spi3$slvmiso" and "foot:SDO" @ https://wokwi.com/_next/static/chunks/626-9b84a4593dfb3700.js:163
+[14947674ms] [WARNING] Short circuit! pins: "$mcu:spi3$slvmiso" and "foot:SDO" @ https://wokwi.com/_next/static/chunks/626-9b84a4593dfb3700.js:163
+[14947675ms] [WARNING] Short circuit! pins: "$mcu:spi3$slvmiso" and "foot:SDO" @ https://wokwi.com/_next/static/chunks/626-9b84a4593dfb3700.js:163
+Total such warnings: 70290
+No passing firmware result or logic trace obtained.

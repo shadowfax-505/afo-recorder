@@ -1,0 +1,42 @@
+[
+  {
+    "id": "analog-description",
+    "status": "corrected",
+    "detail": "Metadata now matches both buffered RC stages; reconstruction offset remains zero."
+  },
+  {
+    "id": "busy-timeout",
+    "status": "corrected",
+    "detail": "Missing BUSY interrupts fail the diagnostic rather than waiting indefinitely."
+  },
+  {
+    "id": "latched-adc-fault",
+    "status": "corrected",
+    "detail": "Timer suppresses later triggers until restart."
+  },
+  {
+    "id": "diagnostic-contention",
+    "status": "corrected",
+    "detail": "Logging is outside measurement windows; IMU FIFO service uses a separate task."
+  },
+  {
+    "id": "first-imu-interrupt",
+    "status": "corrected",
+    "detail": "Recorder waits up to 100ms for first interrupt before draining FIFO."
+  },
+  {
+    "id": "model-fifo-prefetch",
+    "status": "corrected",
+    "detail": "Native model test checks exact byte consumption."
+  },
+  {
+    "id": "wokwi-system-run",
+    "status": "unresolved",
+    "detail": "Actual diagnostic boots and initializes IMUs, but SPI2 MISO contention stalls acquisition. Receive-only experiment also failed and was reverted. No passing system trace."
+  },
+  {
+    "id": "physical-qualification",
+    "status": "pending-measurement",
+    "detail": "Received board straps, logic levels, reference, supply/noise/timing/SD/Wi-Fi/runtime remain unmeasured."
+  }
+]

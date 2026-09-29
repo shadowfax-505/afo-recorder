@@ -1,0 +1,3 @@
+Native C model unit tests. No ESP32 or Wokwi execution.
+PASS AD7606 model: 8-word order, signed codes, serial-mode fault, reset, BUSY
+PASS ICM model: identity/readback, FIFO byte order, no prefetched-byte loss, overflow, absent sensor, missed interrupt

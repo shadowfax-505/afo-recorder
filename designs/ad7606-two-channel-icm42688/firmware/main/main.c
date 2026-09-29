@@ -100,10 +100,17 @@ static void emg_task(void *arg) {
 }
 static void imu_task(void *arg) {
     (void)arg; uint8_t data[2048];uint32_t seq[2]={0};
+    const uint64_t started=esp_timer_get_time();
     while(atomic_load(&running)) {
         for(unsigned id=0;id<2;id++) {
             uint64_t anchor,after_time;uint32_t before,after;
             irq_snapshot(id,&anchor,&before);
+            // The second IMU may have entered stream mode less than one 5ms
+            // sample period ago. Wait for its first interrupt before draining.
+            if(!anchor){
+                if((uint64_t)esp_timer_get_time()-started>100000){imu_errors++;set_fault(STOP_SENSOR);}
+                continue;
+            }
             uint64_t t0=esp_timer_get_time();size_t packets;bool overflow;
             esp_err_t e=imu_fifo(id,data,sizeof(data),&packets,&overflow);
             uint64_t t1=esp_timer_get_time();irq_snapshot(id,&after_time,&after);
@@ -201,7 +208,7 @@ static void record_session(void) {
     char meta[2048];
     snprintf(meta,sizeof(meta),
       "{" AFO_ADC_METADATA AFO_SD_METADATA
-      "\"firmware\":\"dual-1.1\",\"hardware_variant\":\"" HARDWARE_VARIANT "\","
+      "\"firmware\":\"ad7606-2ch-1.2\",\"hardware_variant\":\"" HARDWARE_VARIANT "\","
       "\"synthetic\":false,\"trial_id\":\"%s\",\"clock\":\"esp_timer_boot_us\","
       "\"emg_hz\":8000,\"imu_hz\":200,\"imu_enabled\":true,"
       "\"active_channel_count\":%d,\"emg_channels\":%s,"
@@ -209,7 +216,8 @@ static void record_session(void) {
       "\"accel_range_g\":16,\"gyro_range_dps\":2000,\"imu_timestamp_tick_us\":1,"
       "\"imu_timing_calibrated\":false,\"imu_locations\":[\"foot\",\"shank\"],"
       "\"placement_verified\":false,\"record_bytes\":64,\"usb_recording_inhibit\":true,"
-      "\"analog_filter\":\"3.3k/47nF buffer; equal 6.65k RAW/VMID mixer and 47nF buffer; 100R per ADC leg and 1nF differential\","
+      "\"analog_filter\":\"two cascaded 3.3k/47nF low-pass sections, each unity buffered; 100R series output, 1nF to ground; single-ended ADC\","
+      "\"unplugged_input_bias_mv\":1500,\"unplugged_input_bias_ohm\":1000000,"
       "\"clock_or_filter_delay_correction\":\"none\",\"notes\":\"Engineering prototype; physical validation pending\"}",
       strrchr(path,'/')+1,EMG_CHANNEL_COUNT,
       EMG_CHANNEL_COUNT==2?"[\"EMG1\",\"EMG2\"]":"[\"EMG1\",\"EMG2\",\"EMG3\",\"EMG4\"]");
