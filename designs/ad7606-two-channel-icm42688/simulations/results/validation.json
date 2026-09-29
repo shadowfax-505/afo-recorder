@@ -19,7 +19,7 @@
   "myoware": "Synthetic RAW output waveform; no validated MyoWare or physiological model",
   "limitations": [
     "No op-amp noise, offset, slew/current limit or PSRR; shared midpoint is ideal so crosstalk is not validated.",
-    "1Meg resistive ADC loading approximation; switched-capacitor transients and sinc3 response are not simulated in ngspice.",
+    "1Meg resistive ADC loading approximation; internal input filter dynamics and switching transients are not simulated in ngspice.",
     "ADC quantization is an ideal separate software model; 16-bit word width does not imply 16 effective bits.",
     "Rail clamps and ESD are not validated by this linear operating-range model.",
     "Supply/reference ripple and battery runtime require physical tests."

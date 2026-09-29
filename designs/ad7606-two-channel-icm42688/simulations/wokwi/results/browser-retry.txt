@@ -1,0 +1,96 @@
+Retry with serialInterface=USB_SERIAL_JTAG and corrected FIFO model.
+Actual firmware booted and reached stage 6 initialization. No completed measurement window.
+Browser became unresponsive with SPI2 slave-MISO contention; owned browser terminated.
+
+[  433009ms] [LOG] [Serial] %c%s color: blue ESP-ROM:esp32s3-20210327
+[  433009ms] [LOG] [Serial] %c%s color: blue Build:Mar 27 2021
+[  433009ms] [LOG] [Serial] %c%s color: blue rst:0x1 (POWERON),boot:0x8 (SPI_FAST_FLASH_BOOT)
+[  433009ms] [LOG] [Serial] %c%s color: blue SPIWP:0xee
+[  433009ms] [LOG] [Serial] %c%s color: blue mode:DIO, clock div:1
+[  433010ms] [LOG] [Serial] %c%s color: blue load:0x3fce2820,len:0x1564
+[  433010ms] [LOG] [Serial] %c%s color: blue load:0x403c8700,len:0x4
+[  433010ms] [LOG] [Serial] %c%s color: blue load:0x403c8704,len:0xc80
+[  433010ms] [LOG] [Serial] %c%s color: blue load:0x403cb700,len:0x2ee0
+[  433010ms] [LOG] [Serial] %c%s color: blue entry 0x403c8914
+[  433010ms] [LOG] [Serial] %c%s color: blue I (6) boot: ESP-IDF v5.4.2 2nd stage bootloader
+[  433010ms] [LOG] [Serial] %c%s color: blue I (6) boot: compile time Sep 30 2026 03:35:16
+[  433010ms] [LOG] [Serial] %c%s color: blue I (6) boot: Multicore bootloader
+[  433010ms] [LOG] [Serial] %c%s color: blue I (7) boot: chip revision: v0.0
+[  433010ms] [LOG] [Serial] %c%s color: blue I (7) boot: efuse block revision: v1.0
+[  433011ms] [LOG] [Serial] %c%s color: blue I (7) boot.esp32s3: Boot SPI Speed : 80MHz
+[  433012ms] [LOG] [Serial] %c%s color: blue I (7) boot.esp32s3: SPI Mode       : DIO
+[  433012ms] [LOG] [Serial] %c%s color: blue I (8) boot.esp32s3: SPI Flash Size : 8MB
+[  433012ms] [LOG] [Serial] %c%s color: blue I (8) boot: Enabling RNG early entropy source...
+[  433012ms] [LOG] [Serial] %c%s color: blue I (8) boot: Partition Table:
+[  433012ms] [LOG] [Serial] %c%s color: blue I (8) boot: ## Label            Usage          Type ST Offset   Length
+[  433012ms] [LOG] [Serial] %c%s color: blue I (9) boot:  0 nvs              WiFi data        01 02 00009000 00006000
+[  433012ms] [LOG] [Serial] %c%s color: blue I (9) boot:  1 phy_init         RF data          01 01 0000f000 00001000
+[  433012ms] [LOG] [Serial] %c%s color: blue I (10) boot:  2 factory          factory app      00 00 00010000 00100000
+[  433012ms] [LOG] [Serial] %c%s color: blue I (11) boot: End of partition table
+[  433012ms] [LOG] [Serial] %c%s color: blue I (11) esp_image: segment 0: paddr=00010020 vaddr=3c020020 size=0ca64h ( 51812) map
+[  433508ms] [LOG] [Serial] %c%s color: blue I (18) esp_image: segment 1: paddr=0001ca8c vaddr=3fc94900 size=02e6ch ( 11884) load
+[  433509ms] [LOG] [Serial] %c%s color: blue I (19) esp_image: segment 2: paddr=0001f900 vaddr=40374000 size=00718h (  1816) load
+[  433509ms] [LOG] [Serial] %c%s color: blue I (20) esp_image: segment 3: paddr=00020020 vaddr=42000020 size=1c33ch (115516) map
+[  433509ms] [LOG] [Serial] %c%s color: blue I (27) esp_image: segment 4: paddr=0003c364 vaddr=40374718 size=10104h ( 65796) load
+[  433509ms] [LOG] [Serial] %c%s color: blue I (33) esp_image: segment 5: paddr=0004c470 vaddr=600fe000 size=0001ch (    28) load
+[  433509ms] [LOG] [Serial] %c%s color: blue I (36) boot: Loaded app from partition at offset 0x10000
+[  433509ms] [LOG] [Serial] %c%s color: blue I (36) boot: Disabling RNG early entropy source...
+[  433509ms] [LOG] [Serial] %c%s color: blue I (36) octal_psram: vendor id    : 0x0d (AP)
+[  433509ms] [LOG] [Serial] %c%s color: blue I (37) octal_psram: dev id       : 0x02 (generation 3)
+[  433509ms] [LOG] [Serial] %c%s color: blue I (37) octal_psram: density      : 0x03 (64 Mbit)
+[  433510ms] [LOG] [Serial] %c%s color: blue I (37) octal_psram: good-die     : 0x01 (Pass)
+[  433510ms] [LOG] [Serial] %c%s color: blue I (37) octal_psram: Latency      : 0x01 (Fixed)
+[  433510ms] [LOG] [Serial] %c%s color: blue I (37) octal_psram: VCC          : 0x01 (3V)
+[  433510ms] [LOG] [Serial] %c%s color: blue I (37) octal_psram: SRF          : 0x01 (Fast Refresh)
+[  433510ms] [LOG] [Serial] %c%s color: blue I (37) octal_psram: BurstType    : 0x01 (Hybrid Wrap)
+[  433510ms] [LOG] [Serial] %c%s color: blue I (38) octal_psram: BurstLen     : 0x01 (32 Byte)
+[  433510ms] [LOG] [Serial] %c%s color: blue I (38) octal_psram: Readlatency  : 0x02 (10 cycles@Fixed)
+[  433510ms] [LOG] [Serial] %c%s color: blue I (38) octal_psram: DriveStrength: 0x00 (1/1)
+[  433510ms] [LOG] [Serial] %c%s color: blue W (38) MSPI Timing: tuning fail, best point is fallen back to index 5
+[  433510ms] [LOG] [Serial] %c%s color: blue I (39) MSPI Timing: PSRAM timing tuning index: 5
+[  433510ms] [LOG] [Serial] %c%s color: blue I (39) esp_psram: Found 8MB PSRAM device
+[  433510ms] [LOG] [Serial] %c%s color: blue I (39) esp_psram: Speed: 80MHz
+[  433510ms] [LOG] [Serial] %c%s color: blue I (39) cpu_start: Multicore app
+[  433812ms] [LOG] [Serial] %c%s color: blue I (79) esp_psram: SPI SRAM memory test OK
+[  434103ms] [LOG] [Serial] %c%s color: blue I (29) cpu_start: Pro cpu start user code
+[  434103ms] [LOG] [Serial] %c%s color: blue I (29) cpu_start: cpu freq: 240000000 Hz
+[  434103ms] [LOG] [Serial] %c%s color: blue I (29) app_init: Application information:
+[  434103ms] [LOG] [Serial] %c%s color: blue I (29) app_init: Project name:     afo_recorder
+[  434103ms] [LOG] [Serial] %c%s color: blue I (29) app_init: App version:      0.1.0
+[  434103ms] [LOG] [Serial] %c%s color: blue I (29) app_init: Compile time:     Sep 29 2026 23:35:52
+[  434103ms] [LOG] [Serial] %c%s color: blue I (30) app_init: ELF file SHA256:  cbe3a2839...
+[  434103ms] [LOG] [Serial] %c%s color: blue I (30) app_init: ESP-IDF:          v5.4.2
+[  434103ms] [LOG] [Serial] %c%s color: blue I (30) efuse_init: Min chip rev:     v0.0
+[  434104ms] [LOG] [Serial] %c%s color: blue I (30) efuse_init: Max chip rev:     v0.99 
+[  434104ms] [LOG] [Serial] %c%s color: blue I (30) efuse_init: Chip rev:         v0.0
+[  434104ms] [LOG] [Serial] %c%s color: blue I (30) heap_init: Initializing. RAM available for dynamic allocation:
+[  434104ms] [LOG] [Serial] %c%s color: blue I (31) heap_init: At 3FC98130 len 000515E0 (325 KiB): RAM
+[  434104ms] [LOG] [Serial] %c%s color: blue I (31) heap_init: At 3FCE9710 len 00005724 (21 KiB): RAM
+[  434104ms] [LOG] [Serial] %c%s color: blue I (31) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM
+[  434105ms] [LOG] [Serial] %c%s color: blue I (31) heap_init: At 600FE01C len 00001FCC (7 KiB): RTCRAM
+[  434105ms] [LOG] [Serial] %c%s color: blue I (32) esp_psram: Adding pool of 8192K of PSRAM memory to heap allocator
+[  434105ms] [LOG] [Serial] %c%s color: blue I (32) spi_flash: detected chip: winbond
+[  434105ms] [LOG] [Serial] %c%s color: blue I (32) spi_flash: flash io: dio
+[  434105ms] [LOG] [Serial] %c%s color: blue I (33) sleep_gpio: Configure to isolate all GPIO pins in sleep state
+[  434105ms] [LOG] [Serial] %c%s color: blue I (33) sleep_gpio: Enable automatic switching of GPIO sleep configuration
+[  434105ms] [LOG] [Serial] %c%s color: blue I (34) main_task: Started on CPU0
+[  434105ms] [LOG] [Serial] %c%s color: blue I (34) esp_psram: Reserving pool of 32K of internal memory for DMA/internal allocations
+[  434105ms] [LOG] [Serial] %c%s color: blue I (35) main_task: Calling app_main()
+[  434106ms] [LOG] [Serial] %c%s color: blue I (35) gpio: GPIO[2]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 
+[  434106ms] [LOG] [Serial] %c%s color: blue I (35) gpio: GPIO[41]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 
+[  434106ms] [LOG] [Serial] %c%s color: blue I (35) gpio: GPIO[42]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 
+[  434106ms] [LOG] [Serial] %c%s color: blue I (35) gpio: GPIO[18]| InputEn: 1| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 
+[  434106ms] [LOG] [Serial] %c%s color: blue I (36) gpio: GPIO[21]| InputEn: 1| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 
+[  434106ms] [LOG] [Serial] %c%s color: blue BENCH ONLY; NO ELECTRODES. stage=6 hardware=breadboard channels=2
+[  434106ms] [LOG] [Serial] %c%s color: blue I (36) gpio: GPIO[9]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 
+[  434107ms] [LOG] [Serial] %c%s color: blue I (37) gpio: GPIO[11]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 
+[  434107ms] [LOG] [Serial] %c%s color: blue I (47) gpio: GPIO[8]| InputEn: 1| OutputEn: 0| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:2 
+[  436344ms] [LOG] [Serial] %c%s color: blue I (68) gpio: GPIO[16]| InputEn: 1| OutputEn: 0| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:1 
+[  436386ms] [LOG] [Serial] %c%s color: blue I (120) gpio: GPIO[17]| InputEn: 1| OutputEn: 0| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:1 
+
+First contention warnings:
+[  434088ms] [WARNING] Short circuit! pins: "$mcu:spi3$slvmiso" and "foot:SDO" @ https://wokwi.com/_next/static/chunks/626-9b84a4593dfb3700.js:163
+[  434088ms] [WARNING] Short circuit! pins: "$mcu:spi3$slvmiso" and "foot:SDO" @ https://wokwi.com/_next/static/chunks/626-9b84a4593dfb3700.js:163
+[  434090ms] [WARNING] Short circuit! pins: "$mcu:spi3$slvmiso" and "foot:SDO" @ https://wokwi.com/_next/static/chunks/626-9b84a4593dfb3700.js:163
+[  434090ms] [WARNING] Short circuit! pins: "$mcu:spi3$slvmiso" and "foot:SDO" @ https://wokwi.com/_next/static/chunks/626-9b84a4593dfb3700.js:163
+[  434091ms] [WARNING] Short circuit! pins: "$mcu:spi3$slvmiso" and "foot:SDO" @ https://wokwi.com/_next/static/chunks/626-9b84a4593dfb3700.js:163

@@ -36,3 +36,7 @@ JSON and log files in this directory are machine-readable evidence, not prose do
 - `recording-metadata-checks.json` — metadata checks across recording configurations.
 
 Every one of these evidence files marks or implies that physical hardware measurements remain pending. Do not convert a software pass into a bench-test pass.
+
+## Focused circuit audit
+
+[AD7606, two channels, ICM-42688-P: audit and evidence](../designs/ad7606-two-channel-icm42688/docs/circuit-audit.md) · [short lab guide](../designs/ad7606-two-channel-icm42688/docs/lab-quickstart.md). The Wokwi system gate remains unresolved.

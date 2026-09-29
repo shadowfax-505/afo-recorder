@@ -1,5 +1,13 @@
 # Changelog
 
+## Two-channel AD7606 / ICM refinement — 30 September 2026
+
+- Corrected analog metadata, ADC fault handling, diagnostic acquisition windows and the initial IMU interrupt grace period.
+- Rebuilt the selected variant's seven firmware profiles and regenerated manufacturing exports.
+- Added a direct schematic/PCB/GPIO audit, expanded ngspice checks, a RAW-voltage regression test, Wokwi behavioral models and a shorter lab guide.
+- Wokwi firmware execution remains unresolved after SPI2 MISO contention; native model checks and firmware compilation are not a passing virtual recorder test. Physical measurements remain pending.
+- Other five design packages remain unchanged.
+
 ## Documentation update — 29 September 2026
 
 - Rewrote the repository README around scope, configuration choice, build order, validation language, safety, and repository navigation.

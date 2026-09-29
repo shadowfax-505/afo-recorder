@@ -1,0 +1,16 @@
+{
+  "hardware_measured": false,
+  "checks": {
+    "erc": {
+      "violations": 0
+    },
+    "drc": {
+      "violations": 0
+    },
+    "direct_schematic_and_pcb_pins": 390,
+    "pcb_firmware_gpio_count": 22,
+    "breadboard_firmware_gpio_count": 22
+  },
+  "errors": [],
+  "status": "PASS"
+}

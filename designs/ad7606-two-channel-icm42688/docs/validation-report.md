@@ -1,4 +1,12 @@
-# Current validation status — 28 September 2026
+# Current validation status — 30 September 2026
+
+Read the [focused circuit audit](circuit-audit.md) and [short staged guide](lab-quickstart.md). Fresh ERC/DRC and 390 direct pin comparisons pass, as do 40 host tests and seven software acquisition scenarios. Seven firmware profiles were rebuilt. Analog response, tolerance and DC/loading simulations pass under the documented surrogate models. **Wokwi system scenarios and logic traces remain unresolved; physical testing has not been performed. The complete acceptance gate is not passed.**
+
+The history below describes the earlier review, not the current firmware/build status.
+
+---
+
+# Validation history — 28 September 2026
 
 Fresh checks: schematic-to-PCB parity and all-severity DRC (including excluded findings) pass; KiCad ERC and DRC completed with zero reported violations and zero unconnected items; freshly exported schematic connections match the circuit specification. Host regression tests pass. Detailed commands/results are in completion-checks/. These tests do not prove component ratings, manufacturing suitability or physical performance.
 

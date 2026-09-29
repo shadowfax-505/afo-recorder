@@ -1,0 +1,125 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><link rel="icon" href="data:,"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Build one working stage at a time</title><style>body{margin:0;background:#f4f3ee;color:#172523;font:17px/1.65 system-ui}main{max-width:1060px;margin:auto;padding:48px 28px}h1{font-size:2.4rem;line-height:1.15}h2{margin-top:2.5em}a{color:#176454}table{border-collapse:collapse;font-size:14px;display:block;overflow:auto}td,th{padding:12px;border:1px solid #ccd4ce;text-align:left;vertical-align:top}th{background:#e2eae4}code{font-size:.9em}p{max-width:85ch}nav{font-size:14px;border-bottom:1px solid #ccd4ce;padding-bottom:16px}@media print{body{background:white}main{padding:0}table{display:table;font-size:10px}}</style><main><nav><a href="../viewer/build.html">Assembly workspace</a> / <a href="circuit-audit.html">Circuit audit</a> / <a href="lab-quickstart.html">Lab sequence</a></nav><h1>Build one working stage at a time</h1>
+<p><strong>This guide is only for AD7606 + two MyoWare RAW inputs + two ICM-42688-P carriers.</strong> Use the <a href="build-guide.html">exact hole/contact tables</a> beside the <a href="../viewer/build.html">interactive build view</a>. Power off before each addition. Record the result before continuing; an empty results cell means untested.</p>
+<p>The numerical limits below are integration gates, not a calibration certificate or guaranteed performance. The filter envelope comes from <code>simulations/results/response.csv</code>; power, noise and timing still require measurements. Until virtual execution is resolved, see the <a href="circuit-audit.html">audit status</a> before purchasing or ordering.</p>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Add only this</th>
+<th>Instrument / check</th>
+<th>Continue when</th>
+<th>If it fails</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Selected regulators and midpoint breadboard</td>
+<td>DMM at rails; scope with short ground spring; current-limited supply and dummy loads</td>
+<td>Digital rail 3.20–3.45 V; analog rail 2.94–3.06 V; ADC rail 4.75–5.25 V; midpoint 0.49–0.51 × measured analog rail. Check 5 V at 30 mA load as well as idle</td>
+<td>Disconnect loads; confirm regulator type, polarity, grounds and local capacitors. Do not increase current limit to hide a short</td>
+</tr>
+<tr>
+<td>2</td>
+<td>ESP32, controls and USB detection</td>
+<td>Flash <code>diagnostic-controller</code>; view USB serial; DMM on GPIO21</td>
+<td>Repeat 10 resets; button and LEDs match output; USB attached reports 1, removed reports 0; 3.3 V rail stays in range</td>
+<td>Check common ground, pull-ups and Q2 orientation; use external sense-only USB wiring, not an unintended DevKit power path</td>
+</tr>
+<tr>
+<td>3a</td>
+<td>AD7606 module, <strong>without ESP32 signal leads</strong></td>
+<td>Unpowered continuity plus DMM/scope on VIO, AVCC, reference and mode strap</td>
+<td>Serial mode confirmed to the chip, VIO 3.20–3.45 V, AVCC 4.75–5.25 V; reference matches its selected mode; BUSY/DOUT never exceed the ESP32 input limit</td>
+<td>Follow <a href="module-qualification.md">module qualification</a>; stop if strap identity or supply routing differs</td>
+</tr>
+<tr>
+<td>3b</td>
+<td>ADC signal wires, inputs at known DC</td>
+<td><code>diagnostic-adc</code>; scope CONVST/BUSY/CS/SCLK; voltages 1 V on V1 and 2 V on V2</td>
+<td>125 µs trigger period, 1 µs high pulse, BUSY normally within the 4.2 µs datasheet limit; 128 serial clocks; codes approximately 6554 / 13107, swapped voltages swap channels; error within ±64 codes with a suitable calibrated source/meter; no FAIL output</td>
+<td>Wrong order/scale: check range, DOUTA, mode and grounds. Missing edges: check CVA/CVB/BUSY. Late-read error: inspect scope and firmware load</td>
+</tr>
+<tr>
+<td>4</td>
+<td>First complete analog path</td>
+<td>Generator 1.5 V bias + 100 mVpp sine; probe RAW and ADC input</td>
+<td>20, 100 and 500 Hz gains within simulated tolerance envelope plus instrument uncertainty; 500 Hz nominal about −1.85 dB. Unplugged input settles near midpoint. Never drive below 0 or above 3 V in this test</td>
+<td>Check both 3.3 kΩ and 47 nF stages, buffer orientation, supply and ground. Do not mistake bias voltage for muscle activity</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Second analog path</td>
+<td>Repeat step 4; drive one input while holding the other at midpoint</td>
+<td>Both identities correct; no swapped inputs or clipping in intended signal range. Save noise and crosstalk measurements; set study-specific limits before claiming research suitability</td>
+<td>Separate cables, inspect common impedance and analog supply; repeat with Wi-Fi disabled</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Foot carrier, then shank carrier</td>
+<td><code>diagnostic-imu-one</code>, then <code>diagnostic-imu-two</code>; scope both INT1 lines</td>
+<td>WHO_AM_I/readback pass; both FIFO counts and interrupt counts advance about 200/s; at rest one axis near ±1 g, remaining axes near 0 g; no overflow or missing-interrupt failure</td>
+<td>Verify SPI jumpers, CS identities, INT1, 3.3 V and orientation. First-interrupt grace is 100 ms; it is not permission for a missing wire</td>
+</tr>
+<tr>
+<td>7</td>
+<td>SD adapter/card</td>
+<td><code>breadboard-sd-only-2ch</code>; record synthetic inputs, convert file</td>
+<td>A 60-minute run has no unexplained counter gaps; metadata names two inputs; full-card and power-cut tests report errors or recover only verified records</td>
+<td>Check GPIO47 CMD, GPIO39 CLK, GPIO40 D0, all five adapter contacts, pull-ups and card supply</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Wi-Fi enabled</td>
+<td><code>breadboard-record-2ch</code>; run laptop viewer while SD continues</td>
+<td>Only EMG1/2 shown; lost Wi-Fi packets visible; SD conversion still passes counter/CRC checks</td>
+<td>Wireless gaps are not SD gaps; compare both logs. Reduce preview load only after identifying the bottleneck</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Protected battery</td>
+<td>Repeat full load, unplug all mains/USB; log supply and runtime</td>
+<td>At least two hours measured runtime; 10 repeatable starts/stops; safe pack cutoff and no hot components</td>
+<td>Record actual current, temperature and low-battery events; simulator power estimates cannot replace this</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Bare MyoWare sensors and mounting</td>
+<td>First test sensors electrically with no person attached; then follow institutional supervised protocol</td>
+<td>Clearance, retention, cable strain and artifacts checked; required consent/safety review complete</td>
+<td>Return to the last passing stage. Never attach a person while using lab instruments, charging, USB or mains-connected cables</td>
+</tr>
+</tbody>
+</table>
+<p>For steps 3–6, diagnostic acquisition runs in approximately one-second windows and stops ADC triggering before printing. <strong>The spaces between diagnostic windows are intentional.</strong> Use the recording builds for continuous capture and endurance tests.</p>
+<p>Use <code>record-2ch</code> only on the custom PCB (SD CMD GPIO38). It is not interchangeable with the breadboard image. Flash all three files at the addresses in the chosen manifest.</p>
+<h2>Results sheet</h2>
+<p>Copy one row per test; include failures and retests. Do not prefill these with simulator output.</p>
+<table>
+<thead>
+<tr>
+<th>Date / operator</th>
+<th>Stage / firmware SHA-256</th>
+<th>Module serial or photo</th>
+<th>Instrument / calibration</th>
+<th>Applied stimulus / load</th>
+<th>Measured value</th>
+<th>Limit / uncertainty</th>
+<th>Pass/fail / notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>After all laboratory stages, the final PCB still needs power startup, switching ripple, antenna/USB, thermal, noise, crosstalk and sustained recording checks. Breadboards validate the logical signal path, not the final board layout.</p>
+</main></html>

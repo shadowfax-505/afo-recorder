@@ -1,0 +1,14 @@
+[
+  {
+    "disconnected_named_nets": 0,
+    "design": "ad7606-two-channel-icm42688",
+    "holes_checked": 402,
+    "wire_count": 184,
+    "gpio_checks": 24,
+    "shorts": 0,
+    "duplicate_holes": 0,
+    "duplicate_connector_contacts": 0,
+    "all_external_terminals_defined": true,
+    "hardware_tests": false
+  }
+]

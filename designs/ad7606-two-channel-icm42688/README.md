@@ -8,7 +8,9 @@ Start with [the guided build](viewer/build.html). The [source and licence notice
 
 [Open the assembly viewer](viewer/index.html) · [Build guide](docs/staged-build-guide.md) · [Wiring guide](docs/breadboard-assembly.md)
 
-This copy preserves the original ICM design behavior. Original package files remain separately preserved in outputs.
+This focused revision corrects diagnostics and metadata for the fixed two-input ICM build. Other variants are unchanged.
+
+Start with the [circuit audit and verification limits](docs/circuit-audit.md), [short lab sequence](docs/lab-quickstart.md), and [Wokwi package](simulations/wokwi/README.md). Wokwi system execution remains pending; no physical validation is claimed.
 
 Serve this folder over HTTP; opening the viewer directly as a local HTML file will block asset fetches in most browsers. Standard filenames such as CMakeLists.txt, main.c, index.html and KiCad project members are retained for tool compatibility.
 

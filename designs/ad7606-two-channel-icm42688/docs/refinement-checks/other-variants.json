@@ -1,0 +1,10 @@
+{
+  "unchanged_against_git_head": [
+    "ads131m04-expandable-mpu6050",
+    "ad7606-expandable-icm42688",
+    "ad7606-expandable-mpu6050",
+    "ads131m04-expandable-icm42688",
+    "ad7606-two-channel-mpu6050"
+  ],
+  "pass": true
+}

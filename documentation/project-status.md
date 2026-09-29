@@ -1,5 +1,9 @@
 # Project status
 
+## Focused refinement — 30 September 2026
+
+The [fixed two-channel AD7606 / ICM build](../designs/ad7606-two-channel-icm42688/docs/circuit-audit.html) now has corrected diagnostics/metadata, fresh circuit checks, expanded analog simulations and a shorter lab guide. Wokwi system execution remains unresolved; it is not a passed hardware or complete virtual-validation gate. Other five packages are unchanged. The sections below describe the earlier six-package release.
+
 ## Completed
 
 The six-setups implementation is complete as editable engineering deliverables: three original ICM variants plus three independent MPU alternatives. The MPU firmware, data tools, CAD checks, exports, examples and viewers are verified at software/design level. Original ICM source packages are preserved.

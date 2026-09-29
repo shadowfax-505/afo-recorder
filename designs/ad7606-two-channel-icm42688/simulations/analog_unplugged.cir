@@ -1,0 +1,40 @@
+AD7606 two-channel analog model
+VDD avdd 0 3
+VMID mid 0 1.5
+
+* Substitute closed-loop MCP600x approximation: 1 MHz pole, 1 ohm output,
+* 20mV assumed rail headroom. NOT a manufacturer macromodel.
+* Omits noise, bias/offset, current/slew limiting, PSRR, temperature and stability.
+.subckt buffer inp out
+Ein sense 0 inp 0 1
+Rbw sense pole 1k
+Cbw pole 0 159.154943p
+Blimit driver 0 V=min(max(V(pole),0.02),2.98)
+Ro driver out 1
+.ends
+
+* Sensor unplugged: 1Meg to midpoint remains
+Rb0 raw0 mid 1Meg
+Ra0 raw0 a0 3300
+Ca0 a0 0 4.7e-08
+Xa0 a0 ba0 buffer
+Rmix0 ba0 mix0 3300
+Cb0 mix0 0 4.7e-08
+Xb0 mix0 bb0 buffer
+Rp0 bb0 p0 100
+Vn0 n0 0 0
+Cd0 p0 n0 1n
+Rload0 p0 n0 1Meg
+* Sensor unplugged: 1Meg to midpoint remains
+Rb1 raw1 mid 1Meg
+Ra1 raw1 a1 3300
+Ca1 a1 0 4.7e-08
+Xa1 a1 ba1 buffer
+Rmix1 ba1 mix1 3300
+Cb1 mix1 0 4.7e-08
+Xb1 mix1 bb1 buffer
+Rp1 bb1 p1 100
+Vn1 n1 0 0
+Cd1 p1 n1 1n
+Rload1 p1 n1 1Meg
+.end

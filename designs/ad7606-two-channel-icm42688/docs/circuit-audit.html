@@ -1,0 +1,134 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><link rel="icon" href="data:,"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Circuit review: AD7606, two EMG inputs, ICM-42688-P</title><style>body{margin:0;background:#f4f3ee;color:#172523;font:17px/1.65 system-ui}main{max-width:1060px;margin:auto;padding:48px 28px}h1{font-size:2.4rem;line-height:1.15}h2{margin-top:2.5em}a{color:#176454}table{border-collapse:collapse;font-size:14px;display:block;overflow:auto}td,th{padding:12px;border:1px solid #ccd4ce;text-align:left;vertical-align:top}th{background:#e2eae4}code{font-size:.9em}p{max-width:85ch}nav{font-size:14px;border-bottom:1px solid #ccd4ce;padding-bottom:16px}@media print{body{background:white}main{padding:0}table{display:table;font-size:10px}}</style><main><nav><a href="../viewer/build.html">Assembly workspace</a> / <a href="circuit-audit.html">Circuit audit</a> / <a href="lab-quickstart.html">Lab sequence</a></nav><h1>Circuit review: AD7606, two EMG inputs, ICM-42688-P</h1>
+<p>Project lead: Muttakin Rahman · Review: 30 September 2026</p>
+<p><strong>The intended signal path is logically consistent, and fresh connectivity and software checks pass. This is not a fully verified recorder.</strong> Wokwi system execution remains unresolved; no physical recorder has been measured. Do not interpret the manufacturing exports as an order recommendation.</p>
+<h2>What changed</h2>
+<table>
+<thead>
+<tr>
+<th>Finding</th>
+<th>Correction</th>
+<th>Evidence / remaining limit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Recording metadata described a RAW/VMID mixing circuit absent from the schematic</td>
+<td>Describe the two buffered 3.3 kΩ/47 nF sections and single-ended output; add separate unplugged-bias metadata</td>
+<td>No binary format change; firmware label is ad7606-2ch-1.2; converter/legacy tests pass</td>
+</tr>
+<tr>
+<td>ADC diagnostic could wait indefinitely for BUSY</td>
+<td>Fail explicitly after 100 ms without a falling edge</td>
+<td>Cross-compiled; full Wokwi fault execution pending</td>
+</tr>
+<tr>
+<td>ADC timer could issue later triggers after a latched timing fault</td>
+<td>Suppress triggers until stream restart</td>
+<td>Source review; real interrupt latency still unmeasured</td>
+</tr>
+<tr>
+<td>Diagnostics printed while acquisition remained active and polled IMUs in the ADC reader</td>
+<td>Use bounded measurement windows; stop ADC for reporting; separate lower-priority FIFO service</td>
+<td>Diagnostic output is discontinuous by design, not an endurance recording</td>
+</tr>
+<tr>
+<td>Recorder could fault before the second IMU produced its first interrupt</td>
+<td>Allow up to 100 ms for the first interrupt before draining that FIFO</td>
+<td>Fixes the startup race; stale interrupts still trigger a fault</td>
+</tr>
+<tr>
+<td>Analog model limitation mentioned an unrelated sinc3 response</td>
+<td>Correct limitation for original AD7606, oversampling off</td>
+<td>Does not model the ADC's internal analog filter</td>
+</tr>
+<tr>
+<td>Custom IMU model could consume a prefetched FIFO byte</td>
+<td>Consume only transferred bytes; distinguish FIFO reads from count-register reads</td>
+<td>Native model test verifies no extra byte loss</td>
+</tr>
+</tbody>
+</table>
+<h2>Circuit traced</h2>
+<p>The authoritative source remains <code>design/circuit-spec.json</code>. <code>design/audit_connections.py</code> exports a fresh KiCad XML netlist and independently reads the PCB with pcbnew. It compares every connected spec pin directly against both; it preprocesses both firmware GPIO profiles instead of trusting a stale viewer export.</p>
+<table>
+<thead>
+<tr>
+<th>Check</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>KiCad ERC / DRC</td>
+<td>0 violations / 0 violations; no unconnected items</td>
+</tr>
+<tr>
+<td>Connected schematic and actual PCB pads</td>
+<td>390 compared; 0 mismatches</td>
+</tr>
+<tr>
+<td>Firmware GPIOs</td>
+<td>22 per profile; 0 mismatches</td>
+</tr>
+<tr>
+<td>Breadboard topology</td>
+<td>184 wires, 402 occupied holes, 24 GPIO endpoint checks; 0 named-net splits, shorts, duplicate holes or connector contacts</td>
+</tr>
+<tr>
+<td>Host conversion / legacy / live reception</td>
+<td>40 tests pass</td>
+</tr>
+<tr>
+<td>Software acquisition faults</td>
+<td>7 scenarios pass, including overflow, missing samples and interrupted file recovery</td>
+</tr>
+<tr>
+<td>Firmware</td>
+<td>Seven profiles cross-compiled with ESP-IDF v5.4.2; manifests contain new binary hashes</td>
+</tr>
+<tr>
+<td>ngspice</td>
+<td>Both channels; 16 tolerance corners; 54 DC/loading cases; unplugged-bias case; transient/ideal quantization checks</td>
+</tr>
+<tr>
+<td>Wokwi models</td>
+<td>Both compile to WASM; native model unit tests pass</td>
+</tr>
+<tr>
+<td>Wokwi ESP32 execution</td>
+<td><strong>Unresolved.</strong> Browser attempt stalled with emulated SPI2 MISO contention. CLI requires a token; no passing VCD trace obtained</td>
+</tr>
+<tr>
+<td>Physical tests</td>
+<td>None performed</td>
+</tr>
+</tbody>
+</table>
+<p>Evidence: <a href="refinement-checks/connectivity.json">fresh checks</a>, <a href="refinement-checks/breadboard-wiring.json">breadboard</a>, <a href="refinement-checks/host-tests.log">host log</a>, <a href="refinement-checks/firmware-builds.json">builds</a>, <a href="../simulations/results/validation.json">analog results</a>, <a href="../simulations/results/operating-points.json">operating points</a>, <a href="../simulations/wokwi/README.md">Wokwi status</a>. The broad historical reports remain available but do not supersede these limitations.</p>
+<h2>EMG path and scaling</h2>
+<p>Each bare MyoWare RAW output feeds a 3.3 kΩ/47 nF low-pass section, a unity buffer, a second 3.3 kΩ/47 nF section, another unity buffer, then 100 Ω series resistance and 1 nF to ground at the ADC input. AD7606 V1/V2 are single-ended; their return pins are ground. V3–V8 and their returns are grounded on this fixed two-input PCB. All eight conversion words are clocked out; only V1 and V2 are exported as measurements.</p>
+<p>A 1 MΩ resistor biases each unplugged RAW port toward the buffered 1.5 V midpoint. This bias is not an additive 1.5 V offset stage. <code>input_scale=1</code> and <code>input_midpoint_mv=0</code> correctly reconstruct connector RAW voltage. <code>unplugged_input_bias_mv=1500</code> describes the separate bias. Do not subtract 1.5 V in the converter under the existing field name. Mean removal for an analysis is a separate, documented processing step.</p>
+<p>Each nominal RC pole is about 1026 Hz; the combined response is about −1.85 dB at 500 Hz and −3 dB near 660 Hz. The new ngspice response differs from the corresponding analytical model by at most 0.00263 dB below 20 kHz. Two 1 MHz closed-loop buffer surrogates include assumed 20 mV rail headroom and 1 Ω output resistance. They are <strong>not manufacturer MCP6004 macromodels</strong>. Neither that headroom nor the plotted clipping threshold is a guaranteed device specification. Noise, offset, bias current, PSRR, slew/current limits, supply coupling and protection-diode stress remain unvalidated.</p>
+<p>The BAV199 orientation is ground → junction → 3V0A, with the junction at the first filter node. A diode drop can exceed an amplifier's permitted input overdrive; these clamps and the series resistor do not make the MyoWare connector tolerant of arbitrary ±5 V or ±10 V signals. Keep tests within the intended 0–3 V source domain. Validate overload/current behavior before claiming protection performance.</p>
+<p>Original AD7606 ±5 V coding gives 152.588 µV/code. A 0–3 V sensor uses only about 30% of the total bipolar code range; “16-bit” describes the word, not 16 effective bits at the muscle sensor. Reference, gain, bias, ADC offset and analog noise require calibration. Synthetic waveforms do not establish physiological performance.</p>
+<h2>ADC protocol and board differences</h2>
+<p>On the custom PCB: AVCC is 5V_ADC; VDRIVE is 3V3D. PAR/SER and STBY are high; RANGE and OS0–OS2 are low. CVA and CVB share GPIO11. GPIO8 monitors BUSY; GPIO9 resets. SPI2 uses GPIO12 SCLK, GPIO13 DOUTA and GPIO10 CS at 8 MHz, idle-high/falling-edge sampling (mode 2). A 1 µs CONVST pulse exceeds the specified 25 ns minimum. Eight words require 128 clocks (16 µs); maximum listed conversion time with oversampling off is 4.2 µs. This fits a 125 µs period arithmetically, but does not prove ESP32 task latency under SD/Wi-Fi load.</p>
+<p>The AD7606 has no identification/configuration register readback and no sensor-frame CRC. File/container CRC protects transport/storage bytes only. Wrong range, mode or wiring can produce plausible data: apply two different known voltages and verify both codes, ground and polarity before recording sensors. A late conversion or unread previous result stops the driver instead of assigning a new timestamp to old data.</p>
+<p>The received HW-AD7606-F4/RBD-3184 module's labelled header is documented, but a photograph cannot prove its serial strap, VIO routing, reference choice or component substitutions. Verify the module electrically. The single-chip PCB does not reproduce undocumented breakout-board internals. See <a href="bench-pcb-differences.md">bench/PCB differences</a> and <a href="module-qualification.md">module qualification</a>.</p>
+<h2>Power, reference and controls</h2>
+<ul>
+<li>A protected single-cell pack enters through the reverse-polarity P-channel MOSFET. Its body-diode orientation allows the intended initial feed; its gate is referenced to ground. Reverse-polarity behavior and off-state leakage still need low-energy bench testing.</li>
+<li>TPS63070 feedback 316 kΩ/100 kΩ gives nominal 3.328 V using its 0.8 V reference. Local inductor and capacitor loops belong on the PCB. Breadboard regulator modules validate rail behavior, not these switching loops.</li>
+<li>TPS7A2030 derives 3V0A. Verify dropout margin, stability and ripple with both MyoWare sensors and buffers connected, including radio/SD load steps.</li>
+<li>TPS60150 generates the ADC rail. Its conservative low-input capability is 50 mA; original AD7606 maximum listed operating total is 27 mA, leaving nominal current margin. This arithmetic does not validate startup charging, capacitor derating, ripple or thermal behavior. Verify AVCC remains 4.75–5.25 V. Do not assume a breakout's additional load equals bare-chip current.</li>
+<li>AD7606 REGCAP nodes each have 1 µF to ground; REFIN/REFOUT has 10 µF; REFCAPA/B are joined and have 10 µF. They are decoupling/reference nodes, not general-purpose supply outputs. The selected capacitors' voltage rating is adequate for the nominal rails; effective capacitance after DC bias, placement and tolerances needs assembly review and measurement.</li>
+<li>USB VBUS is sense-only. The 100 kΩ/1 MΩ gate network drives a 2N7002; a 10 kΩ pull-up produces active-low GPIO21 detection. VBUS has no intentional power-feed path into the battery/digital rail. Ground, data and ESD connections are not galvanic isolation. Firmware refuses recording while USB is detected.</li>
+<li>The development-board SD command is GPIO47; the custom PCB uses GPIO38. This documented exception avoids the DevKit's RGB LED load. Use the matching build. CLK is GPIO39 and D0 is GPIO40; selected adapter contacts and return lead are checked separately.</li>
+</ul>
+<h2>IMU path and timing</h2>
+<p>Use the selected MIKROE-4237 carrier with JP2–JP4 in SPI position (pads 1–2), 3.3 V power and the specified mikroBUS header orientation. SPI3 is shared on GPIO4/5/6 (MOSI/MISO/SCLK); separate CS GPIO7/15 and INT1 GPIO16/17 identify foot/shank. Verify carrier solder bridges, supply and connector orientation on the received parts.</p>
+<p>The firmware checks WHO_AM_I=0x47 and configuration readback, selects 200 Hz accel/gyro, ±16 g/±2000 dps, standard 16-byte FIFO records and 1 µs sensor timestamps. Byte order is big-endian. It detects full FIFO, invalid packet headers and missing/stale interrupt anchors. Sensor clocks are independent; FIFO timestamps wrap. ESP32 interrupt times and FIFO read windows are preserved, and reconstructed sample times remain explicitly uncertain. No claim of calibrated EMG-to-IMU alignment is made.</p>
+<h2>Sources and release gate</h2>
+<p>Primary references: <a href="https://www.analog.com/media/en/technical-documentation/data-sheets/AD7606_7606-6_7606-4.pdf">ADI AD7606 Rev G, Tables 2–3 and serial-interface sections</a>, <a href="https://www.invensense.tdk.com/en-us/products/6-axis/icm-42688-p">TDK ICM-42688-P</a>, <a href="https://www.mikroe.com/6dof-imu-14-click">MikroE carrier</a>, <a href="https://www.ti.com/product/TPS60150">TI TPS60150</a>, <a href="https://www.ti.com/product/TPS63070">TI TPS63070</a>, <a href="https://www.microchip.com/en-us/product/mcp6004">Microchip MCP6004</a>, <a href="https://assets.nexperia.com/documents/data-sheet/BAV199-Q.pdf">Nexperia BAV199</a>, <a href="https://docs.wokwi.com/guides/esp32">Wokwi ESP32 support</a>, <a href="https://docs.wokwi.com/chips-api/getting-started">Wokwi Chips API</a>.</p>
+<p>The virtual acceptance gate is <strong>not complete</strong> while Wokwi scenarios and traces are outstanding. Physical gates include received-module qualification, power/startup/ripple, analog noise/clipping/crosstalk, cable integrity, actual 8 kHz timing, sustained SD/Wi-Fi recording, battery runtime and final PCB layout review. No board order or human-use approval follows from this report.</p>
+</main></html>
