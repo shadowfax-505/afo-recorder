@@ -1,29 +1,36 @@
-# Current recording-control follow-up — 30 September 2026
+# Current validation — AD7606 / two EMG / ICM-42688-P
 
-Thirty-eight native cases execute the production recorder with task/filesystem API shims for both hardware profiles. Three recording images rebuilt as ad7606-2ch-1.4. Three hundred task lifecycle cycles also pass actual ESP-IDF FreeRTOS on Wokwi. Read the [recording verification report](recording-verification.html) for exact scope and persistence limits. The four diagnostics and seven prior ADC/IMU Wokwi scenarios are unchanged. Physical tests remain pending; the earlier evidence below is retained for traceability.
+Project lead: Muttakin Rahman · 1 October 2026
 
-# Current validation status — 30 September 2026
+Current recording firmware **ad7606-2ch-1.6** retains the ADC task wake-up and FIFO-burst timestamp corrections found during v1.5 integrated execution, and now rejects missing BUSY assertion/ignored CONVST before accepting stale ADC words. The [integrated verification report](integrated-verification.html) is the current evidence entrypoint. **The whole-system virtual matrix and physical acceptance have not passed.**
 
-Read the [focused circuit audit](circuit-audit.md) and [short staged guide](lab-quickstart.md). Fresh ERC/DRC and 390 direct pin comparisons pass, as do 40 host tests and seven software acquisition scenarios. Seven firmware profiles were rebuilt. Analog response, tolerance and DC/loading simulations pass under the documented surrogate models. **Seven actual-firmware Wokwi scenarios now pass serial and VCD protocol checks. The specified virtual gate passes within model/capture limits; physical testing has not been performed.** See the [execution report](virtual-verification.md).
+| Evidence | Current result |
+|---|---|
+| Preserved v1.5 production firmware, FreeRTOS, FatFS and lwIP on Wokwi | Ten complete CLI/firmware passes; nominal firmware/file/UDP checks also pass with optional trace-download failure |
+| Current v1.6 whole-system Wokwi execution | All 18 candidate cases unexecuted; one attempt refused by exhausted CI quota. [v1.5 exact tested source/image snapshot](../simulations/integrated-recorder/tested-source-1.5/manifest.json) is retained |
+| Remaining integrated cases | Battery export partial; four cases unexecuted because monthly CI quota was exhausted |
+| KiCad / independent pin comparison | Clean ERC/DRC; 390 pins and 22 GPIOs per profile compared without mismatches |
+| Current v1.6 laboratory firmware | All seven profiles cross-compiled; current diagnostic images not rerun in Wokwi |
+| Native actual ADC driver / IMU timing helper | 16 / eight groups pass |
+| Native production recorder control | 38 cases pass across PCB and breadboard profiles |
+| Host converter / live / legacy | 40 tests pass |
+| Integrated evidence runner | 16 tests pass |
+| Current behavioral ADC model | 12 native groups pass under address/undefined sanitizers; no Wokwi/WASM execution |
+| Captured timing audit | Nine post-processing tests pass on v1.5 evidence; no new firmware execution |
+| Laptop receiver / HTTP / live browser / archive | Two actual local-socket cases pass using preserved v1.5 datagrams; no RF link |
+| Actual C analog-to-file pipeline | 60 seconds, 480,000 EMG / 12,009 foot / 12,001 shank; 916/915 counter rollovers; correct codes; zero regressions or unexplained loss; pending foot packet counted |
+| Analog surrogate | Two channels; 16 tolerance corners; 54 DC/loading cases; analytical response comparison passes |
+| Queue capacity model | Four assumed one-hour writer cases pass; stall/throughput faults overflow explicitly. No firmware endurance or card measurement |
+| Physical tests | None performed |
 
-The history below describes the earlier review, not the current firmware/build status.
+Read the [circuit audit](circuit-audit.html), [recording/recovery guide](recording-verification.html), [module qualification](module-qualification.md) and [short staged guide](lab-quickstart.html). Current manufacturing files remain engineering-prototype outputs; bench results and final review precede any order recommendation.
 
----
+## Historical execution retained
 
-# Validation history — 28 September 2026
+The [seven earlier diagnostic Wokwi scenarios](virtual-verification.html) passed serial/VCD checks on their preserved tested image. Three hundred FreeRTOS join/lifecycle cycles also passed on an earlier v1.4 lifecycle image with stub peripherals. Both source/image histories are retained. Neither is a rerun of all current v1.6 profiles.
 
-Fresh checks: schematic-to-PCB parity and all-severity DRC (including excluded findings) pass; KiCad ERC and DRC completed with zero reported violations and zero unconnected items; freshly exported schematic connections match the circuit specification. Host regression tests pass. Detailed commands/results are in completion-checks/. These tests do not prove component ratings, manufacturing suitability or physical performance.
+## Earlier assembly review — 28 September 2026
 
-Breadboard checking additionally verifies unique insertion holes, no conflicting named nets, connected named nets including the adapter's known internal copper, single-contact wiring and GPIO labels. Stage dependencies now defer module wires until their module is installed. Viewer interactions were checked separately.
+Fresh schematic-to-PCB parity, all-severity DRC and ERC passed. Assembly checks additionally verified unique insertion holes, named-net continuity, connector contacts and stage dependencies. The missing SD module ground lead at JP1.2 was added and checked. These checks establish topology, not physical SD operation.
 
-Physical terminal maps are specified. Remaining qualification is received-board inspection and measurement, not a request for another user design choice. Perform module-qualification.md and staged-build-guide.md. No hardware has been flashed or measured here. No human-use or manufacturing release is claimed. See bench-pcb-differences.md.
-
-Firmware source/binaries and manufacturing geometry are unchanged in this review; previous successful build records remain in their manifests/logs. Fresh ERC/DRC is included, but cross-compilation was not repeated without a firmware change.
-
-## Assembly review correction
-
-Added the missing SD module ground lead at JP1.2 in the breadboard plan. The independent check now requires all five SDIO contacts and supply/ground presence for core modules. Prior net-short/occupancy checks could not detect an entirely omitted terminal. Current wiring checks pass; physical SD operation remains untested. PCB circuitry and firmware are unchanged by this correction.
-
-## Follow-up: verification safeguards and driver logic
-
-Fifteen synthetic runner regression tests now reject stale files, partial windows, wrong sample rates/channel values and empty traces. Ten native C test groups also execute the production AD7606 driver against mocked timer, BUSY and SPI APIs, including late-read and unread-conversion faults. These are separate from the 40 host/converter tests. They do not emulate ESP32 concurrency or measure physical timing. See `simulations/driver-tests/` and `simulations/wokwi/tests/`. Seven Wokwi execution scenarios pass; physical acceptance remains pending.
+Physical terminal maps are specified; remaining qualification is received-board inspection and measurement. Follow [bench/PCB differences](bench-pcb-differences.md) and the staged guide. Empty measured-results cells remain untested. Earlier report dates and binary hashes identify their own evidence and do not supersede the current integrated ledger.

@@ -1,5 +1,13 @@
 # Validation status
 
+## Integrated AD7606 / two-channel / ICM verification — 1 October 2026
+
+The [integrated report](../designs/ad7606-two-channel-icm42688/docs/integrated-verification.html) supersedes earlier current-firmware summaries for this configuration. Version `ad7606-2ch-1.5` fixes delayed ADC servicing and IMU timestamp regressions found during actual ESP-IDF execution. All seven laboratory profiles recompile; the fresh connection audit reports zero ERC/DRC violations and zero mismatches across 390 functional pins.
+
+Ten integrated Wokwi cases completed with passing checks. The nominal run produced 10,041 EMG records with a complete file and no detected sample loss; its optional trace download failed after the firmware completed. Four cases were refused by the monthly cloud quota, and the low-battery run stopped correctly but did not finish exporting its UDP evidence. The full 16-case matrix has not passed. Storage uses a PSRAM block medium with real FatFS; controls and battery are fixture values; UDP uses loopback. These substitutions do not validate physical SDMMC, radio, power or battery performance.
+
+Current v1.6 rejects ADC conversions whose BUSY signal never asserts. Local coverage includes 16 ADC driver groups, eight IMU clock groups, 38 recording-control cases, 40 converter/live/legacy tests, and a 60-second production-driver pipeline with 480,000 EMG records from repeated ngspice-derived signals. Sixteen integrated-runner tests, nine capture-timing tests and twelve independent ADC model groups pass. Two laptop replays pass real UDP, HTTP, browser and archive checks. All eighteen current v1.6 cloud cases remain unexecuted after one quota-refused attempt; earlier v1.5 captures do not establish v1.6 execution. Historical seven-case diagnostic and 300-cycle lifecycle results retain their original tested binaries and sources; they are not executions of the newly rebuilt images. Other five packages are unchanged by this focused refinement.
+
 ## Completed for the three MPU derivatives
 
 - 27 firmware profiles cross-compiled: 7 fixed-two AD7606, 10 expandable AD7606 and 10 ADS131M04.

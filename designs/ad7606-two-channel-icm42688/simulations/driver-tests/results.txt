@@ -1,9 +1,15 @@
 PASS SPI mode primed during RESET before any measured conversion
 PASS no read before conversion
 PASS 128-clock read, signed order, disabled channels and trigger timestamp
+PASS ordinary BUSY assertion is confirmed; complete conversion precedes the 16us serial read
+PASS disconnected or stuck-low BUSY faults before plausible stale codes can be read
+PASS ignored CONVST is detected and later conversion pulses remain inhibited
+PASS intentional restart after a missing BUSY assertion requires a fresh accepted conversion
 PASS preexisting BUSY inhibits trigger and latches fault
 PASS unread conversion is never overwritten or relabeled
 PASS stuck BUSY blocks reads and further conversions
+PASS timer notification occurs once per accepted trigger; BUSY completion precedes read
+PASS 80us BUSY timeout prevents reading incomplete conversion
 PASS late SPI completion returns error and stops subsequent triggers
 PASS SPI error propagates and unread frame faults next deadline
 PASS explicit restart clears latched fault

@@ -1,0 +1,12 @@
+{
+  "engine": "native C compiler and mocked ESP-IDF peripheral APIs",
+  "groups_passed": 12,
+  "production_source_sha256": "e15a72673a306a369f2b687da5e39dc734935d3429911b8b058495c94155a330",
+  "esp32_executed": false,
+  "hardware_measured": false,
+  "limits": [
+    "No scheduler, interrupt concurrency or GPIO electrical model",
+    "No ESP-IDF API implementation or actual SPI edge timing",
+    "Does not replace Wokwi system or physical tests"
+  ]
+}

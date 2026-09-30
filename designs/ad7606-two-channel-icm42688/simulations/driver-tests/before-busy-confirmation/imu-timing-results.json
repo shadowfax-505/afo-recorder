@@ -1,0 +1,10 @@
+{
+  "engine": "native C compiler; production imu_timing.h",
+  "groups_passed": 8,
+  "production_source_sha256": "787dcb29ba8319d5d9e8f9ef4477268f3f2c4da0dd05da3ccbfcc3b4258b5c01",
+  "hardware_measured": false,
+  "esp32_executed": false,
+  "limits": [
+    "Synthetic timestamp and read observations; no measured clock calibration or interrupt latency"
+  ]
+}

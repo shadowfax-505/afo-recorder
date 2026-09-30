@@ -1,12 +1,12 @@
-# ESP32-S3 virtual verification report
+# Historical ESP32-S3 diagnostic verification
 
 Project lead: Muttakin Rahman · 30 September 2026 · AD7606 / two EMG inputs / ICM-42688-P
 
-**Seven scenarios pass using the actual ESP-IDF v5.4.2 stage-6 diagnostic binary in Wokwi CLI 0.27.1.** This establishes the modeled digital behavior; physical hardware has not been measured. [Machine-readable results](../simulations/wokwi/results/scenarios.json).
+**Seven scenarios passed using the earlier actual ESP-IDF v5.4.2 stage-6 diagnostic binary in Wokwi CLI 0.27.1.** Its [tested source/image snapshot](../simulations/wokwi/tested-diagnostic-20260930/manifest.json) is preserved. The current diagnostic binaries were recompiled after current acquisition changes and have not been rerun because cloud CI quota was exhausted. This report establishes only the historical image’s modeled digital behavior; physical hardware has not been measured. For current recorder/FatFS/UDP execution, use the [integrated verification report](integrated-verification.html). [Machine-readable results](../simulations/wokwi/results/scenarios.json).
 
 ## Corrections found by execution
 
-The first ADC read had a one-bit shift during initial mode-2 clock setup. The driver now makes a discarded SPI read while AD7606 RESET is asserted, before any conversion trigger or sample counter. Both measured windows then contain exact channel codes 6554 / 13107. This initialization is included in all seven rebuilt profiles. The received ADC chip/module still needs a scope check at first startup.
+The first ADC read had a one-bit shift during initial mode-2 clock setup. The driver now makes a discarded SPI read while AD7606 RESET is asserted, before any conversion trigger or sample counter. Both measured windows then contain exact channel codes 6554 / 13107. This initialization remains included in all seven current recompiled profiles. The received ADC chip/module still needs a scope check at first startup.
 
 A FIFO-overflow error in the diagnostic worker previously allowed the main task to restart acquisition and print a later window. A shared atomic fault latch now stops both tasks and preserves the first error. FIFO overflow produces one explicit failure with no later completed window.
 
@@ -38,8 +38,8 @@ The analyzer buffer ends at about 0.659 s of simulator time, covering initializa
 
 ## Reproduce
 
-See [Wokwi instructions](../simulations/wokwi/README.md). `run_scenarios.py` creates a fresh evidence directory, checks the serial logs and calls `verify_trace.py`. `plot_trace.py` uses Matplotlib to recreate the figure. Fifteen synthetic runner regression tests and ten native production-driver test groups also pass; their scope is documented separately.
+See [Wokwi instructions](../simulations/wokwi/README.md). `run_scenarios.py` creates a fresh evidence directory, checks the serial logs and calls `verify_trace.py`. `plot_trace.py` uses Matplotlib to recreate the figure. The diagnostic runner has 15 synthetic evidence tests. Current separate checks include 16 ADC driver groups, eight IMU timing groups and 16 integrated-runner tests; their scope is documented in the [current integrated report](integrated-verification.html). Re-executing this historical matrix requires selecting the preserved tested image, or recording a fresh result for the current image.
 
 ## Remaining physical gates
 
-Wokwi uses project behavioral ADC/IMU models rather than manufacturer models. It does not prove received module straps, reference/logic levels, analog noise, crosstalk, temperature, cable integrity or regulator operation. SDMMC and Wi-Fi are outside this sensor simulation. The [recording control report](recording-verification.html) adds 38 native production-code cases and separate RTOS lifecycle execution; physical card and radio performance remain unmeasured. Sustained 8 kHz recording, radio load, 60-minute continuity and two-hour battery runtime remain physical tests. Board ordering still follows module qualification, staged lab testing and final review.
+Wokwi uses project behavioral ADC/IMU models rather than manufacturer models. It does not prove received module straps, reference/logic levels, analog noise, crosstalk, temperature, cable integrity or regulator operation. SDMMC and Wi-Fi are outside this historical sensor simulation. The current integrated harness exercises production Wi-Fi/lwIP and FatFS with a loopback subscriber and substitute block medium; it still does not validate SDMMC transport or radio hardware. The [recording control report](recording-verification.html) adds 38 native production-code cases and separate RTOS lifecycle execution; physical card and radio performance remain unmeasured. Sustained 8 kHz recording, radio load, 60-minute continuity and two-hour battery runtime remain physical tests. Board ordering still follows module qualification, staged lab testing and final review.

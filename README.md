@@ -67,6 +67,8 @@ design-catalog.json  machine-readable list of all six configurations
 
 ## Validation language
 
+The focused **AD7606 / fixed two-channel / ICM-42688-P** build has an [integrated verification report](designs/ad7606-two-channel-icm42688/docs/integrated-verification.md). Actual ESP-IDF acquisition, FreeRTOS tasks, FatFS recording and UDP code ran together in Wokwi with documented peripheral substitutes. The preserved v1.5 baseline has ten complete cases plus passing nominal file/data/UDP checks; its optional trace download failed, the battery export is partial, and four cases did not execute. Current v1.6 also rejects conversions whose BUSY signal never asserts. It passes 16 native ADC groups and a 60-second production-driver pipeline with 480,000 synthetic EMG records. Its full 18-case cloud rerun remains pending because of the quota. The laptop receiver also passes real socket/API/browser checks on captured data. The full virtual matrix remains open. The other five designs retain their earlier evidence.
+
 - **Verified in software** means a check, build, simulation, or test has a saved result in this repository.
 - **Simulated** means generated inputs exercised a model or data path; it is not a hardware measurement.
 - **Pending hardware** means the result must be measured on the assembled module, breadboard, or PCB.

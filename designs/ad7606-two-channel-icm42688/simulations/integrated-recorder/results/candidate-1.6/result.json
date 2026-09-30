@@ -1,0 +1,7 @@
+{
+  "case": "adc-busy-stays-low",
+  "pass": null,
+  "exit_code": 1,
+  "status": "not_run_quota",
+  "error": "Wokwi monthly CI quota exhausted"
+}

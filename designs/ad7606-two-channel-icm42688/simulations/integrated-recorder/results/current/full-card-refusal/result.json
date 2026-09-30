@@ -1,0 +1,9 @@
+{
+  "case": "full-card-refusal",
+  "hardware_measured": false,
+  "pass": null,
+  "firmware_checks_pass": false,
+  "trace_artifact": false,
+  "status": "not_run_quota",
+  "reason": "Wokwi monthly CI quota exhausted; no firmware execution for this case"
+}

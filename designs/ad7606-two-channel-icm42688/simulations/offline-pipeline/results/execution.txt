@@ -1,0 +1,7 @@
+PASS configured converter, independent IMUs and calibrated-voltage API path
+PASS IMU configuration readback rejects mismatch
+PASS overflow status, full FIFO and insufficient receive capacity
+PASS filtered input -> real C drivers -> timestamp helper -> serializer; emg=16000,foot=410,shank=399
+MODEL {"sample_count":16000,"duration_us":2000000,"foot":{"saved":410,"generated":411,"generated_before_capture":11,"pending_at_stop":1,"counter_rollovers":31},"shank":{"saved":399,"generated":400,"generated_before_capture":0,"pending_at_stop":1,"counter_rollovers":30}}
+PASS wrong serial mode can produce plausible -1 codes; known-input qualification is essential
+PASS ignored conversion trigger or BUSY stuck low is rejected, not saved as a stale valid frame

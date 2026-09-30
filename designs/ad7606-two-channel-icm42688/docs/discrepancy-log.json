@@ -68,5 +68,40 @@
     "id": "premature-wireless-end",
     "status": "corrected-and-tested",
     "detail": "Wireless END follows final write/sync/close checks. Failure emits storage reason 1. SD END alone cannot certify persistence after a late filesystem error."
+  },
+  {
+    "id": "recording-adc-interrupt-latency",
+    "status": "corrected-and-simulated",
+    "detail": "Production ADC task now wakes directly from the conversion timer callback on core 1 and bounds BUSY polling to 80 us. Previous BUSY IRQ delay violated the 125 us slot in integrated execution; fault evidence is preserved."
+  },
+  {
+    "id": "imu-fifo-reanchor-regression",
+    "status": "corrected-and-simulated",
+    "detail": "Anchor each IMU clock once, then advance by FIFO timestamp deltas; nominal integrated exports have zero timestamp regressions. Estimated time, drift and startup alignment remain uncalibrated."
+  },
+  {
+    "id": "imu-read-race-false-gap",
+    "status": "corrected-and-simulated",
+    "detail": "An interrupt during a read marks timing uncertainty; it no longer alone creates a sample-gap claim. Counter deltas and missing data remain explicit."
+  },
+  {
+    "id": "wifi-short-batching",
+    "status": "tested-in-integrated-simulation",
+    "detail": "Actual UDP code collects short batches with a 2 ms target to reduce packet traffic. Delivery and END remain best-effort; packets/records can be dropped without corrupting SD."
+  },
+  {
+    "id": "wireless-lost-end-test-expectation",
+    "status": "test-gate-corrected",
+    "detail": "Packet-loss fixture discarded END. Receiver correctly reports ended=false and unknown stop reason; corrected assertion no longer requires delivery or invents an END."
+  },
+  {
+    "id": "integrated-cloud-quota",
+    "status": "pending-execution",
+    "detail": "Four cases were refused by monthly CI quota. Low-battery export and nominal trace capture are incomplete; full matrix pass remains false."
+  },
+  {
+    "id": "missing-busy-assertion",
+    "status": "corrected-locally-cloud-rerun-pending",
+    "detail": "v1.6 requires BUSY high after the 1 us CONVST pulse. Previously missing/disconnected BUSY or ignored CONVST could accept plausible stale ADC words. Sixteen native ADC groups and six native pipeline groups pass; full v1.6 integrated 18-case cloud execution remains pending."
   }
 ]

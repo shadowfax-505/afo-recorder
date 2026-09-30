@@ -1,0 +1,5 @@
+PASS configured converter, independent IMUs and calibrated-voltage API path
+PASS IMU configuration readback rejects mismatch
+PASS overflow status, full FIFO and insufficient receive capacity
+PASS filtered input -> real C drivers -> timestamp helper -> serializer; emg=16000,foot=410,shank=399
+PASS wrong serial mode can produce plausible -1 codes; known-input qualification is essential

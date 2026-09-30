@@ -1,3 +1,5 @@
+> Historical assembly review from 28 September. Read the [current integrated status](integrated-verification.html) and [validation ledger](validation-report.md) for current firmware, current builds and incomplete virtual cases.
+
 # Current validation status — 28 September 2026
 
 Fresh checks: KiCad ERC and DRC completed with zero reported violations and zero unconnected items; freshly exported schematic connections match the circuit specification. Host regression tests pass. Detailed commands/results are in completion-checks/. These tests do not prove component ratings, manufacturing suitability or physical performance.

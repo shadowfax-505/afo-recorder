@@ -1,0 +1,145 @@
+{
+  "case": "normal",
+  "pass": true,
+  "hardware_measured": false,
+  "source_udp_sha256": "02930e7dc7dd5ec40227c2d51e0778b65a5e2f36ab64b7abb768afe71b9c7eda",
+  "source_packet_count": 1124,
+  "record_count": 10558,
+  "stats": {
+    "packets": 1124,
+    "packet_gaps": 0,
+    "reordered_or_duplicate": 0,
+    "invalid_packets": 0,
+    "unknown_session_packets": 0,
+    "device_queue_drops": 0
+  },
+  "sequence_gaps": {},
+  "ended": true,
+  "stop_reason": 0,
+  "enabled_channels": [
+    "EMG1",
+    "EMG2"
+  ],
+  "channel_volts": [
+    1.00006103515625,
+    1.999969482421875
+  ],
+  "imu": {
+    "foot": {
+      "accel_g": [
+        0.00048828125,
+        0.0,
+        1.0
+      ],
+      "gyro_dps": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "sequence": 263,
+      "timestamp_us": 2185001,
+      "flags": 2
+    },
+    "shank": {
+      "accel_g": [
+        0.0009765625,
+        0.0,
+        1.0
+      ],
+      "gyro_dps": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "sequence": 252,
+      "timestamp_us": 2185002,
+      "flags": 2
+    }
+  },
+  "health": {
+    "timer_missed": 0,
+    "queue_dropped": 0,
+    "imu_errors": 0,
+    "fifo_overflows": 0,
+    "adc_errors": 0,
+    "emg_records": 10041,
+    "foot_records": 263,
+    "shank_records": 252,
+    "battery_mv": 3800,
+    "queue_high_water": 61
+  },
+  "browser": {
+    "pass": true,
+    "snapshot": {
+      "title": "AFO \u00b7 Live acquisition",
+      "state": "Recording ended",
+      "synthetic": true,
+      "records": "10,558",
+      "gaps": "0",
+      "notice": "Wireless END received. Stop this laptop receiver to finalize its files, then run the converter.",
+      "labels": [
+        "EMG1 \u00b7 ADC input voltage",
+        "EMG2 \u00b7 ADC input voltage"
+      ],
+      "foot": "Acceleration [g]: 0.000 / 0.000 / 1.000 \u00b7 Angular velocity [\u00b0/s]: 0.00 / 0.00 / 0.00 \u00b7 Sample 263 \u00b7 Timing flags 2",
+      "shank": "Acceleration [g]: 0.001 / 0.000 / 1.000 \u00b7 Angular velocity [\u00b0/s]: 0.00 / 0.00 / 0.00 \u00b7 Sample 252 \u00b7 Timing flags 2",
+      "canvas": [
+        1688,
+        1689
+      ]
+    },
+    "screenshot": "output/playwright/normal.png",
+    "console_error_free": true,
+    "stale_link_state": "Waiting / link unavailable"
+  },
+  "fault_rejection": {
+    "invalid_packets": 1,
+    "duplicates": 1,
+    "measurements_unchanged": true
+  },
+  "archived_measurements_byte_exact": true,
+  "archived_measurements_sha256": "ac730539dc5fc122d7e0e010190546efc784bc8f6a4bd000344ebfe0b3d55a42",
+  "laptop_finalization": {
+    "transport": "wifi_udp",
+    "not_a_replacement_for_sd": true,
+    "statistics": {
+      "packets": 1130,
+      "packet_gaps": 0,
+      "reordered_or_duplicate": 1,
+      "invalid_packets": 1,
+      "unknown_session_packets": 0,
+      "device_queue_drops": 0
+    },
+    "sessions": {
+      "0370b454-18b586d5": {
+        "records": 10558,
+        "ended": true,
+        "first_sequence": {
+          "2": 1,
+          "7": 1,
+          "3": 1
+        },
+        "sequence_gaps": {}
+      }
+    }
+  },
+  "converter": {
+    "returncode": 0,
+    "counts": {
+      "emg": 10041,
+      "foot": 263,
+      "shank": 252,
+      "status": 1,
+      "end": 1
+    },
+    "session_finalized": true,
+    "no_detected_sample_loss": true,
+    "signal_checks_pass": true,
+    "research_ready": false,
+    "sequence_gaps": {
+      "emg": 0,
+      "foot": 0,
+      "shank": 0
+    }
+  }
+}

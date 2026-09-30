@@ -1,9 +1,33 @@
 {
   "engine": "native C compiler and mocked ESP-IDF peripheral APIs",
-  "groups_passed": 10,
-  "production_source_sha256": "b620a4e99f5e495702f1b745623499c1ae2802b687d55713e6140e150d7dd817",
+  "groups_passed": 16,
+  "production_source_sha256": "77164ec74b6c574a64885a44e9117409f2edaaaf90a82cb737c3834f4672b5e8",
+  "test_source_sha256": "7bfaf684365be7eaf67b730d1504e7272a74de3e2975a1d6ea78df676670e9c4",
+  "compiler_flags": [
+    "-std=c11",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-fsanitize=address,undefined",
+    "-fno-omit-frame-pointer"
+  ],
+  "sanitizers": [
+    "address",
+    "undefined"
+  ],
   "esp32_executed": false,
   "hardware_measured": false,
+  "fixture": {
+    "ordinary_busy_duration_us": 4,
+    "serial_transfer_duration_us": 16,
+    "independent_faults": [
+      "disconnected/stuck-low BUSY",
+      "ignored CONVST",
+      "stuck-high BUSY",
+      "late read",
+      "SPI API failure"
+    ]
+  },
   "limits": [
     "No scheduler, interrupt concurrency or GPIO electrical model",
     "No ESP-IDF API implementation or actual SPI edge timing",

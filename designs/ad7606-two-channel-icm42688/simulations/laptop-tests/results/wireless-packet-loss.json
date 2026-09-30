@@ -1,0 +1,153 @@
+{
+  "case": "wireless-packet-loss",
+  "pass": true,
+  "hardware_measured": false,
+  "source_udp_sha256": "f574467cc7e15bf823ddc9a65d45098d3824f41ee4dde0ee58bc6f551d3c6c7f",
+  "source_packet_count": 961,
+  "record_count": 9029,
+  "stats": {
+    "packets": 961,
+    "packet_gaps": 158,
+    "reordered_or_duplicate": 0,
+    "invalid_packets": 0,
+    "unknown_session_packets": 0,
+    "device_queue_drops": 1
+  },
+  "sequence_gaps": {
+    "7": 1449,
+    "2": 38,
+    "3": 38
+  },
+  "ended": false,
+  "stop_reason": null,
+  "enabled_channels": [
+    "EMG1",
+    "EMG2"
+  ],
+  "channel_volts": [
+    1.00006103515625,
+    1.999969482421875
+  ],
+  "imu": {
+    "foot": {
+      "accel_g": [
+        0.00048828125,
+        0.0,
+        1.0
+      ],
+      "gyro_dps": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "sequence": 263,
+      "timestamp_us": 2185001,
+      "flags": 2
+    },
+    "shank": {
+      "accel_g": [
+        0.0009765625,
+        0.0,
+        1.0
+      ],
+      "gyro_dps": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "sequence": 251,
+      "timestamp_us": 2180002,
+      "flags": 2
+    }
+  },
+  "health": {
+    "timer_missed": 0,
+    "queue_dropped": 0,
+    "imu_errors": 0,
+    "fifo_overflows": 0,
+    "adc_errors": 0,
+    "emg_records": 8036,
+    "foot_records": 212,
+    "shank_records": 201,
+    "battery_mv": 3800,
+    "queue_high_water": 61
+  },
+  "browser": {
+    "pass": true,
+    "snapshot": {
+      "title": "AFO \u00b7 Live acquisition",
+      "state": "Connected \u00b7 no fresh samples",
+      "synthetic": true,
+      "records": "9,029",
+      "gaps": "158",
+      "notice": "Loss or irregular delivery detected. Inspect the quality report and compare with the SD file.",
+      "labels": [
+        "EMG1 \u00b7 ADC input voltage",
+        "EMG2 \u00b7 ADC input voltage"
+      ],
+      "foot": "Acceleration [g]: 0.000 / 0.000 / 1.000 \u00b7 Angular velocity [\u00b0/s]: 0.00 / 0.00 / 0.00 \u00b7 Sample 263 \u00b7 Timing flags 2",
+      "shank": "Acceleration [g]: 0.001 / 0.000 / 1.000 \u00b7 Angular velocity [\u00b0/s]: 0.00 / 0.00 / 0.00 \u00b7 Sample 251 \u00b7 Timing flags 2",
+      "canvas": [
+        1400,
+        1421
+      ]
+    },
+    "screenshot": "output/playwright/wireless-packet-loss.png",
+    "console_error_free": true,
+    "stale_link_state": "Waiting / link unavailable"
+  },
+  "fault_rejection": {
+    "invalid_packets": 1,
+    "duplicates": 1,
+    "measurements_unchanged": true
+  },
+  "archived_measurements_byte_exact": true,
+  "archived_measurements_sha256": "2480200c58619f288d1edcb29371ab24af03fc895e712bdf7c46f4678c74898f",
+  "laptop_finalization": {
+    "transport": "wifi_udp",
+    "not_a_replacement_for_sd": true,
+    "statistics": {
+      "packets": 967,
+      "packet_gaps": 158,
+      "reordered_or_duplicate": 1,
+      "invalid_packets": 1,
+      "unknown_session_packets": 0,
+      "device_queue_drops": 1
+    },
+    "sessions": {
+      "38b1e738-4f2fd3c9": {
+        "records": 9029,
+        "ended": false,
+        "first_sequence": {
+          "2": 1,
+          "7": 1,
+          "3": 1
+        },
+        "sequence_gaps": {
+          "7": 1449,
+          "2": 38,
+          "3": 38
+        }
+      }
+    }
+  },
+  "converter": {
+    "returncode": 2,
+    "counts": {
+      "emg": 8590,
+      "foot": 225,
+      "shank": 213,
+      "status": 1,
+      "end": 0
+    },
+    "session_finalized": false,
+    "no_detected_sample_loss": false,
+    "signal_checks_pass": false,
+    "research_ready": false,
+    "sequence_gaps": {
+      "emg": 1449,
+      "foot": 38,
+      "shank": 38
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "synthetic": true,
+  "engine": "ngspice shared library",
+  "library": "/Applications/KiCad/KiCad.app/Contents/Frameworks/libngspice.0.dylib",
+  "input": "Synthetic MyoWare RAW-like voltages; not a MyoWare circuit model",
+  "analog": "Two 3.3k/47nF buffered poles, 100R/1nF output, 1Meg ADC loading",
+  "buffer": "Substitute 1MHz/1ohm/20mV-headroom unity buffer; not manufacturer MCP6004 model",
+  "adc": "Ideal signed 16-bit quantization, +/-5V, zero offset; no measured ADC errors",
+  "samples": 8000,
+  "nominal_hz": 8000,
+  "loop_period_s": 1,
+  "voltage_range": [
+    [
+      0.9169454638588558,
+      2.082812772112381
+    ],
+    [
+      0.9158177280297268,
+      2.0481210368208793
+    ]
+  ],
+  "max_quantization_error_v": 7.629263988229162e-05,
+  "circuit_sha256": "9c86ed3310c0776db41d01e2d91283b9f10830ddce2da6170fec43a251653b33",
+  "samples_sha256": "c2d23fb153e84391c9d15172b9170dca5ed42f85f21512dfd61f593e45669e72",
+  "physical_measurements": false,
+  "limits": [
+    "No electrode/body model",
+    "No measured noise, offset, reference drift, PSRR or thermal behavior",
+    "Wokwi receives precomputed codes; analog integration is offline, not a live mixed-signal simulator"
+  ]
+}

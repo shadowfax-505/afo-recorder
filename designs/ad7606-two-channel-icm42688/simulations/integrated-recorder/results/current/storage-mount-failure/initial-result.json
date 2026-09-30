@@ -1,0 +1,6 @@
+{
+  "case": "storage-mount-failure",
+  "pass": false,
+  "exit_code": 1,
+  "error": "ValueError: Wokwi did not complete successfully"
+}

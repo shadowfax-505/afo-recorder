@@ -74,7 +74,11 @@ static void live_task(void *arg) {
         if(has_pending){item=pending;has_pending=false;}
         else if(xQueueReceive(live_queue,&item,pdMS_TO_TICKS(2))!=pdTRUE)continue;
         uint32_t sid=item.session; afo_record_t records[BATCH];records[0]=item.record;unsigned count=1;
-        while(count<BATCH&&xQueueReceive(live_queue,&item,0)==pdTRUE) {
+        // Let a short batch form instead of sending a UDP datagram for almost
+        // every 125us EMG frame. Keep the preview delay bounded at 2ms.
+        int64_t batch_deadline=esp_timer_get_time()+2000;
+        while(count<BATCH&&esp_timer_get_time()<batch_deadline&&
+              xQueueReceive(live_queue,&item,pdMS_TO_TICKS(1))==pdTRUE) {
             if(item.session!=sid){pending=item;has_pending=true;break;}
             records[count++]=item.record;
         }

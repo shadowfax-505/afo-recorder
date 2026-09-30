@@ -1,0 +1,33 @@
+{
+  "engine": "native C compiler; current behavioral AD7606 chip with independent API stubs",
+  "groups_passed": 12,
+  "hardware_measured": false,
+  "esp32_executed": false,
+  "wasm_executed": false,
+  "compiler_flags": [
+    "-std=c11",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-Wno-unknown-attributes",
+    "-Wno-unused-function",
+    "-fsanitize=address,undefined",
+    "-fno-omit-frame-pointer"
+  ],
+  "sanitizers": [
+    "address",
+    "undefined"
+  ],
+  "sha256": {
+    "chips/ad7606.chip.c": "4f51a81decf39f12a1a78911bf40c12b8628a9e31fb80afeee7db95613714cf7",
+    "chips/stimulus.h": "61ddf5ba66c9c3f234279bf82dec12f848fa73b2b09d66980c193959b7234717",
+    "chips/wokwi-api.h": "f72cbb878f7b54017b3eae0450a410905759934e00fbb508cad198951a016c57",
+    "tests/test_ad7606_model.c": "d8634b7d517532ae71a1dd75d2ad38e5de5ee998687674877cba45a13a138305",
+    "tests/run_model_tests.py": "fe1d6d6bf2e773df44b49eb7a5b3d86444f1b8cfbce94339162fdc1b3b94a164"
+  },
+  "limits": [
+    "Manual pin changes and timer completion invoke the actual C callbacks without the Wokwi runtime.",
+    "Checks behavioral-model consistency, not manufacturer silicon, voltage levels or analog timing.",
+    "No actual firmware acquisition, RTOS scheduler, SPI wire edges or complete system execution."
+  ]
+}

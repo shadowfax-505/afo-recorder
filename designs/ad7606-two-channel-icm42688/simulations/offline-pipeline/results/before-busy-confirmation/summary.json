@@ -1,0 +1,71 @@
+{
+  "pass": true,
+  "hardware_measured": false,
+  "esp32_executed": false,
+  "production_sources_sha256": {
+    "adc_ad7606.c": "e15a72673a306a369f2b687da5e39dc734935d3429911b8b058495c94155a330",
+    "sensors.c": "f5c6034a43b260de6282d902a1d76d3e4db60bcbca64d364ebd34fc733df84c9",
+    "sensors.h": "880b651acda742396e7da66f113f6ad27022abc4db84a93f9fff6a162e32ff43",
+    "imu_timing.h": "787dcb29ba8319d5d9e8f9ef4477268f3f2c4da0dd05da3ccbfcc3b4258b5c01",
+    "format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
+    "format.h": "58b01a597eaa2c70a918ad5ee3b71c9e26fe64aedefc91ffba7d96430510c47b",
+    "board.h": "11f3f4d30c3b70410810426ffe6371088ed250903c7e569ba36858d6248439cc",
+    "variant.h": "55c2cdaef8b2d56e2ced2aa23984a289038adc6caaf9d164c92830c24b8cffb9"
+  },
+  "stimulus_sha256": "c2d23fb153e84391c9d15172b9170dca5ed42f85f21512dfd61f593e45669e72",
+  "groups_passed": 5,
+  "quality": {
+    "source_sha256": "08cb014d3c6621a52a8e3ca8beedeac1605021830ba7566b1b0983a52764bdf8",
+    "synthetic": true,
+    "counts": {
+      "emg": 16000,
+      "foot": 410,
+      "shank": 399,
+      "status": 0,
+      "end": 1
+    },
+    "session_finalized": true,
+    "structurally_complete": true,
+    "no_detected_sample_loss": true,
+    "signal_checks_pass": true,
+    "research_ready": false,
+    "sequence_gaps": {
+      "emg": 0,
+      "foot": 0,
+      "shank": 0
+    },
+    "anomalies": {
+      "sequence_regressions": 0,
+      "timestamp_regressions": 0,
+      "emg_clipped_samples": 0,
+      "emg_out_of_range": 0,
+      "imu_invalid_samples": 0,
+      "imu_timestamp_anomalies": 0,
+      "timing_uncertain_records": 809,
+      "flagged_gap_records": 0
+    },
+    "emg_observed_skipped_slots": 0,
+    "emg_rate_from_host_timestamps_hz": 8000.0,
+    "last_status": {
+      "timer_missed": 0,
+      "queue_dropped": 0,
+      "imu_errors": 0,
+      "fifo_overflows": 0,
+      "adc_errors": 0,
+      "emg_records": 16000,
+      "foot_records": 410,
+      "shank_records": 399,
+      "battery_mv": 3800,
+      "queue_high_water": 0
+    },
+    "issues": [],
+    "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
+    "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
+  },
+  "limits": [
+    "Ideal peripheral API behavior; ordered native C execution",
+    "Independent modeled IMU clocks; no calibrated physical alignment",
+    "No RTOS scheduler, CPU contention, GPIO electrical levels, SDMMC or RF transport",
+    "Ngspice input source and op-amp are approximations, not measured sensor/board behavior"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "title": "AFO \u00b7 Live acquisition",
+  "state": "Recording ended",
+  "synthetic": true,
+  "records": "10,558",
+  "gaps": "0",
+  "notice": "Wireless END received. Stop this laptop receiver to finalize its files, then run the converter.",
+  "labels": [
+    "EMG1 \u00b7 ADC input voltage",
+    "EMG2 \u00b7 ADC input voltage"
+  ],
+  "foot": "Acceleration [g]: 0.000 / 0.000 / 1.000 \u00b7 Angular velocity [\u00b0/s]: 0.00 / 0.00 / 0.00 \u00b7 Sample 263 \u00b7 Timing flags 2",
+  "shank": "Acceleration [g]: 0.001 / 0.000 / 1.000 \u00b7 Angular velocity [\u00b0/s]: 0.00 / 0.00 / 0.00 \u00b7 Sample 252 \u00b7 Timing flags 2",
+  "canvas": [
+    1688,
+    1689
+  ]
+}

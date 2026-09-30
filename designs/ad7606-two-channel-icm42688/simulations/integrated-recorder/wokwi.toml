@@ -1,0 +1,16 @@
+[wokwi]
+version = 1
+firmware = "firmware/merged.bin"
+elf = "firmware/integrated_recorder.elf"
+
+[[chip]]
+name = "ad7606"
+binary = "chips/ad7606.chip.wasm"
+
+[[chip]]
+name = "icm42688"
+binary = "chips/icm42688.chip.wasm"
+
+[[chip]]
+name = "fixture"
+binary = "chips/fixture.chip.wasm"

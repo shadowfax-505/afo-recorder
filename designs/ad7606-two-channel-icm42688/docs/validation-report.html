@@ -1,0 +1,84 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><link rel="icon" href="data:,"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Current validation — AD7606 / two EMG / ICM-42688-P — AD7606 two-channel</title><style>body{margin:0;background:#f4f3ee;color:#172523;font:17px/1.65 system-ui}main{max-width:1060px;margin:auto;padding:48px 28px}h1{font-size:2.4rem;line-height:1.15}h2{margin-top:2.5em}a{color:#176454}table{border-collapse:collapse;font-size:14px;display:block;overflow:auto}td,th{padding:12px;border:1px solid #ccd4ce;text-align:left;vertical-align:top}th{background:#e2eae4}code{font-size:.9em}pre{overflow:auto;padding:16px;background:#e2eae4;border-radius:6px}p{max-width:85ch}img{max-width:100%;height:auto}nav{font-size:14px;border-bottom:1px solid #ccd4ce;padding-bottom:16px}blockquote{border-left:3px solid #809c8a;margin-left:0;padding-left:20px}@media(max-width:640px){main{padding:28px 18px}h1{font-size:1.9rem}}@media print{body{background:white}main{padding:0}table{display:table;font-size:10px}}</style></head><body><main><nav><a href="../viewer/build.html">Assembly workspace</a> / <a href="integrated-verification.html">Integrated verification</a> / <a href="circuit-audit.html">Circuit audit</a> / <a href="lab-quickstart.html">Lab sequence</a> / <a href="recording-verification.html">Recording/recovery</a></nav><h1>Current validation — AD7606 / two EMG / ICM-42688-P</h1>
+<p>Project lead: Muttakin Rahman · 1 October 2026</p>
+<p>Current recording firmware <strong>ad7606-2ch-1.6</strong> retains the ADC task wake-up and FIFO-burst timestamp corrections found during v1.5 integrated execution, and now rejects missing BUSY assertion/ignored CONVST before accepting stale ADC words. The <a href="integrated-verification.html">integrated verification report</a> is the current evidence entrypoint. <strong>The whole-system virtual matrix and physical acceptance have not passed.</strong></p>
+<table>
+<thead>
+<tr>
+<th>Evidence</th>
+<th>Current result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Preserved v1.5 production firmware, FreeRTOS, FatFS and lwIP on Wokwi</td>
+<td>Ten complete CLI/firmware passes; nominal firmware/file/UDP checks also pass with optional trace-download failure</td>
+</tr>
+<tr>
+<td>Current v1.6 whole-system Wokwi execution</td>
+<td>All 18 candidate cases unexecuted; one attempt refused by exhausted CI quota. <a href="../simulations/integrated-recorder/tested-source-1.5/manifest.json">v1.5 exact tested source/image snapshot</a> is retained</td>
+</tr>
+<tr>
+<td>Remaining integrated cases</td>
+<td>Battery export partial; four cases unexecuted because monthly CI quota was exhausted</td>
+</tr>
+<tr>
+<td>KiCad / independent pin comparison</td>
+<td>Clean ERC/DRC; 390 pins and 22 GPIOs per profile compared without mismatches</td>
+</tr>
+<tr>
+<td>Current v1.6 laboratory firmware</td>
+<td>All seven profiles cross-compiled; current diagnostic images not rerun in Wokwi</td>
+</tr>
+<tr>
+<td>Native actual ADC driver / IMU timing helper</td>
+<td>16 / eight groups pass</td>
+</tr>
+<tr>
+<td>Native production recorder control</td>
+<td>38 cases pass across PCB and breadboard profiles</td>
+</tr>
+<tr>
+<td>Host converter / live / legacy</td>
+<td>40 tests pass</td>
+</tr>
+<tr>
+<td>Integrated evidence runner</td>
+<td>16 tests pass</td>
+</tr>
+<tr>
+<td>Current behavioral ADC model</td>
+<td>12 native groups pass under address/undefined sanitizers; no Wokwi/WASM execution</td>
+</tr>
+<tr>
+<td>Captured timing audit</td>
+<td>Nine post-processing tests pass on v1.5 evidence; no new firmware execution</td>
+</tr>
+<tr>
+<td>Laptop receiver / HTTP / live browser / archive</td>
+<td>Two actual local-socket cases pass using preserved v1.5 datagrams; no RF link</td>
+</tr>
+<tr>
+<td>Actual C analog-to-file pipeline</td>
+<td>60 seconds, 480,000 EMG / 12,009 foot / 12,001 shank; 916/915 counter rollovers; correct codes; zero regressions or unexplained loss; pending foot packet counted</td>
+</tr>
+<tr>
+<td>Analog surrogate</td>
+<td>Two channels; 16 tolerance corners; 54 DC/loading cases; analytical response comparison passes</td>
+</tr>
+<tr>
+<td>Queue capacity model</td>
+<td>Four assumed one-hour writer cases pass; stall/throughput faults overflow explicitly. No firmware endurance or card measurement</td>
+</tr>
+<tr>
+<td>Physical tests</td>
+<td>None performed</td>
+</tr>
+</tbody>
+</table>
+<p>Read the <a href="circuit-audit.html">circuit audit</a>, <a href="recording-verification.html">recording/recovery guide</a>, <a href="module-qualification.md">module qualification</a> and <a href="lab-quickstart.html">short staged guide</a>. Current manufacturing files remain engineering-prototype outputs; bench results and final review precede any order recommendation.</p>
+<h2>Historical execution retained</h2>
+<p>The <a href="virtual-verification.html">seven earlier diagnostic Wokwi scenarios</a> passed serial/VCD checks on their preserved tested image. Three hundred FreeRTOS join/lifecycle cycles also passed on an earlier v1.4 lifecycle image with stub peripherals. Both source/image histories are retained. Neither is a rerun of all current v1.6 profiles.</p>
+<h2>Earlier assembly review — 28 September 2026</h2>
+<p>Fresh schematic-to-PCB parity, all-severity DRC and ERC passed. Assembly checks additionally verified unique insertion holes, named-net continuity, connector contacts and stage dependencies. The missing SD module ground lead at JP1.2 was added and checked. These checks establish topology, not physical SD operation.</p>
+<p>Physical terminal maps are specified; remaining qualification is received-board inspection and measurement. Follow <a href="bench-pcb-differences.md">bench/PCB differences</a> and the staged guide. Empty measured-results cells remain untested. Earlier report dates and binary hashes identify their own evidence and do not supersede the current integrated ledger.</p>
+</main></body></html>

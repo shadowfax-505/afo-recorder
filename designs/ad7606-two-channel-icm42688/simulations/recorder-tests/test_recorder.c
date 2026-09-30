@@ -133,6 +133,10 @@ void vTaskSuspend(TaskHandle_t task) {
 eTaskState eTaskGetState(TaskHandle_t task) {assert(task);return task->state;}
 
 esp_err_t sensors_init(void) {return ESP_OK;}
+void adc_set_trigger_callback(bool (*callback)(void *),void *context) {(void)callback;(void)context;}
+esp_err_t adc_bus_init(void) {return ESP_OK;}
+esp_err_t imu_bus_init(unsigned count) {(void)count;return ESP_OK;}
+TaskHandle_t xTaskGetCurrentTaskHandle(void) {return NULL;}
 esp_err_t battery_init(void) {return ESP_OK;}
 int battery_mv(void) {return is("battery-low")&&stream_started?3200:3800;}
 esp_err_t adc_configure(void) {return ESP_OK;}

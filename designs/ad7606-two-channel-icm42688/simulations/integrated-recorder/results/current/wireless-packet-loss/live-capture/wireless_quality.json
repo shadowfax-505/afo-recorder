@@ -1,0 +1,28 @@
+{
+  "transport": "wifi_udp",
+  "not_a_replacement_for_sd": true,
+  "statistics": {
+    "packets": 961,
+    "packet_gaps": 158,
+    "reordered_or_duplicate": 0,
+    "invalid_packets": 0,
+    "unknown_session_packets": 0,
+    "device_queue_drops": 1
+  },
+  "sessions": {
+    "38b1e738-4f2fd3c9": {
+      "records": 9029,
+      "ended": false,
+      "first_sequence": {
+        "2": 1,
+        "7": 1,
+        "3": 1
+      },
+      "sequence_gaps": {
+        "7": 1449,
+        "2": 38,
+        "3": 38
+      }
+    }
+  }
+}
