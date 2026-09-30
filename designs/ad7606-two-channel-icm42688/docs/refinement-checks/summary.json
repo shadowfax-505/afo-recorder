@@ -21,5 +21,7 @@
     "Wokwi execution/fault traces",
     "Received-module strap and voltage qualification",
     "Physical analog, timing, power, storage, radio and runtime tests"
-  ]
+  ],
+  "simulation_runner_regression_tests_passed": 14,
+  "native_production_adc_driver_test_groups_passed": 9
 }

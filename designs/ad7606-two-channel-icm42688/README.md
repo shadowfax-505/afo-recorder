@@ -15,3 +15,5 @@ Start with the [circuit audit and verification limits](docs/circuit-audit.md), [
 Serve this folder over HTTP; opening the viewer directly as a local HTML file will block asset fetches in most browsers. Standard filenames such as CMakeLists.txt, main.c, index.html and KiCad project members are retained for tool compatibility.
 
 All hardware remains an engineering prototype pending physical validation. Module pin positions and outstanding wiring gates are documented; no board order is implied.
+
+Additional checks: [production ADC driver host tests](simulations/driver-tests/README.md) and [simulation evidence safeguards](simulations/wokwi/README.md#evidence-safeguards). Neither is a completed ESP32 simulator run.

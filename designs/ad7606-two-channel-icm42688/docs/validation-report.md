@@ -19,3 +19,7 @@ Firmware source/binaries and manufacturing geometry are unchanged in this review
 ## Assembly review correction
 
 Added the missing SD module ground lead at JP1.2 in the breadboard plan. The independent check now requires all five SDIO contacts and supply/ground presence for core modules. Prior net-short/occupancy checks could not detect an entirely omitted terminal. Current wiring checks pass; physical SD operation remains untested. PCB circuitry and firmware are unchanged by this correction.
+
+## Follow-up: verification safeguards and driver logic
+
+Fourteen synthetic runner regression tests now reject stale files, partial windows, wrong sample rates/channel values and empty traces. Nine native C test groups also execute the unchanged production AD7606 driver against mocked timer, BUSY and SPI APIs, including late-read and unread-conversion faults. These are separate from the 40 host/converter tests. They do not emulate ESP32 concurrency or measure physical timing. See `simulations/driver-tests/` and `simulations/wokwi/tests/`. The Wokwi system acceptance gate remains unresolved.
