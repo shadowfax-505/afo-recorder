@@ -26,3 +26,9 @@
 - Published all six configurations and the static project site.
 - Attached complete ZIP packages to the `v0.1.0` prerelease.
 - Preserved third-party notices, source references, and validation limits.
+
+### Simulation evidence safeguards — 30 September 2026
+
+The selected two-channel AD7606/ICM runner now uses fresh output directories and rejects stale or partial results, incorrect sample/channel checks and empty traces. Fourteen synthetic evidence-gate regression tests pass. These are not additional hardware or ESP32 simulation passes; the Wokwi SPI contention remains unresolved. Firmware and PCB files are unchanged from v0.1.1.
+
+Nine native test groups execute the unchanged production ADC driver with mocked timer/BUSY/SPI events; all pass. Real-time concurrency and electrical behavior remain outside this test.

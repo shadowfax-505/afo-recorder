@@ -1,0 +1,19 @@
+test_empty_or_header_only_trace_rejected (test_runner.EvidenceTests.test_empty_or_header_only_trace_rejected) ... ok
+test_fault_must_be_a_diagnostic_line (test_runner.EvidenceTests.test_fault_must_be_a_diagnostic_line) ... ok
+test_mean_cannot_hide_wrong_samples (test_runner.EvidenceTests.test_mean_cannot_hide_wrong_samples) ... ok
+test_nonzero_exit_cannot_pass (test_runner.EvidenceTests.test_nonzero_exit_cannot_pass) ... ok
+test_reject_later_failure (test_runner.EvidenceTests.test_reject_later_failure) ... ok
+test_reject_missing_conversion (test_runner.EvidenceTests.test_reject_missing_conversion) ... ok
+test_reject_partial_or_extra_window (test_runner.EvidenceTests.test_reject_partial_or_extra_window) ... ok
+test_reject_slow_acquisition (test_runner.EvidenceTests.test_reject_slow_acquisition) ... ok
+test_reject_slow_imu (test_runner.EvidenceTests.test_reject_slow_imu) ... ok
+test_reject_stale_imu_identity (test_runner.EvidenceTests.test_reject_stale_imu_identity) ... ok
+test_stale_files_cannot_pass (test_runner.EvidenceTests.test_stale_files_cannot_pass) ... ok
+test_timeout_and_missing_cli_report_failure (test_runner.EvidenceTests.test_timeout_and_missing_cli_report_failure) ... ok
+test_valid_normal (test_runner.EvidenceTests.test_valid_normal) ... ok
+test_wrong_mode_requires_exact_model_signature (test_runner.EvidenceTests.test_wrong_mode_requires_exact_model_signature) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 0.005s
+
+OK

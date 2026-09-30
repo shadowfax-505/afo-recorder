@@ -8,7 +8,7 @@ This project uses the **actual stage-6 ESP-IDF diagnostic firmware**, not an Ard
 
 1. Install [Wokwi CLI](https://github.com/wokwi/wokwi-cli). Configure `WOKWI_CLI_TOKEN` locally using the [Wokwi CI dashboard](https://wokwi.com/dashboard/ci). Never put the token in the repository.
 2. From this directory run `wokwi-cli chip compile chips/ad7606.chip.c -o chips/ad7606.chip.wasm` and the corresponding command for `icm42688.chip.c`.
-3. Run `python3 run_scenarios.py`. It creates serial logs, VCD traces and expected-versus-observed results. Missing output is a failure. A full successful run is required before changing this status.
+3. Run `python3 run_scenarios.py`. It creates serial logs, VCD traces and expected-versus-observed results in a fresh `results/run-*` directory for each invocation. Missing output is a failure. A full successful run is required before changing this status.
 4. For manual browser use, create an ESP32-S3 project; upload both `.chip.c`/`.chip.json` pairs, replace `diagram.json`, then use F1 → **Upload Firmware and Start Simulation** with `firmware/merged.bin`. USB serial/JTAG must be selected in the diagram. Do not press the Arduino build button and mistake that output for the diagnostic binary.
 
 ## Limits
@@ -24,3 +24,11 @@ This project uses the **actual stage-6 ESP-IDF diagnostic firmware**, not an Ard
 Compile `tests/chips_test.c` with a C compiler, once with `-DADC_MODEL` and once without. `-Wno-unknown-attributes` silences Wokwi WASM annotations when using native Clang. These tests use mock Wokwi callbacks and exercise the actual model sources; they do not run ESP-IDF.
 
 The API header was downloaded from [Wokwi's official Chips API](https://wokwi.com/api/chips/wokwi-api.h). Keep its provenance distinct from project code.
+
+## Evidence safeguards
+
+The runner rejects stale files, partial windows, missing conversions, incorrect channel extrema, incorrect IMU identity or rate, empty/header-only VCD files, nonzero process exits and timeouts. Nominal gates are 8 kHz ±1% over a roughly one-second window and 195–205 IMU samples/interrupts per window. The serial-disabled case requires the model's exact all-ones signature; arbitrary incorrect data is not sufficient.
+
+VCD validation currently proves **signal activity only**, not correct clock edges, 128-clock frame length or BUSY timing. Those still need protocol-level trace inspection after Wokwi completes a run. Simulator failure remains unresolved and no passing ESP32 system test is claimed.
+
+Run `python3 -m unittest discover -s tests -p 'test_*.py' -v` here to reproduce the 14 runner regression tests. These use synthetic logs and traces to test the evidence gate; they are separate from the 40 converter/host tests and do not validate physical electronics or simulator execution.

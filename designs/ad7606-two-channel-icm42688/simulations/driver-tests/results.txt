@@ -1,0 +1,9 @@
+PASS no read before conversion
+PASS 128-clock read, signed order, disabled channels and trigger timestamp
+PASS preexisting BUSY inhibits trigger and latches fault
+PASS unread conversion is never overwritten or relabeled
+PASS stuck BUSY blocks reads and further conversions
+PASS late SPI completion returns error and stops subsequent triggers
+PASS SPI error propagates and unread frame faults next deadline
+PASS explicit restart clears latched fault
+PASS bus initialization error propagates

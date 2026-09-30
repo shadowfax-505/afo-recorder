@@ -18,3 +18,7 @@ Project organization and first documentation set are complete in this folder. De
 4. Review the final PCB for ordering after successful bench tests.
 
 Do not repeat completed software work or imply physical measurements from synthetic tests. No hardware order is pending. Continuation automation can stop after final organized-release checks pass; further changes should follow new user input or lab evidence.
+
+## Wokwi runner follow-up
+
+Fourteen synthetic regression tests now protect against false-positive simulation results, including stale output files, wrong channel extrema, incorrect sample rates and header-only traces. Wokwi ESP32 acquisition remains unverified because of the unresolved SPI contention. The runner needs a locally configured `WOKWI_CLI_TOKEN` for automated execution; no token belongs in this repository.
