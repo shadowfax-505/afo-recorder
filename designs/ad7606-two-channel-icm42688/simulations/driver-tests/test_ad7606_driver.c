@@ -28,6 +28,7 @@ esp_err_t spi_bus_add_device(int host,const spi_device_interface_config_t *d,spi
 }
 esp_err_t spi_device_polling_transmit(spi_device_handle_t handle,spi_transaction_t *t){
  assert(handle&&t->length==128);reads++;
+ if(levels[ADC_RESET])assert(!levels[ADC_CONVST]&&pulses==0);
  if(read_error)return read_error;
  uint8_t *rx=t->rx_buffer;
  for(unsigned i=0;i<8;i++){uint16_t w=(uint16_t)words[i];rx[i*2]=w>>8;rx[i*2+1]=w;}
@@ -44,11 +45,13 @@ esp_err_t gptimer_stop(gptimer_handle_t h){(void)h;return ESP_OK;}
 static void reset_case(void){
  memset(levels,0,sizeof(levels));pulses=reads=0;clock_us=0;
  late_during_read=false;read_error=bus_error=ESP_OK;
- assert(adc_bus_init()==ESP_OK);assert(adc_stream_start()==ESP_OK);
+ assert(adc_bus_init()==ESP_OK);assert(reads==1&&pulses==0&&!levels[ADC_RESET]);
+ reads=0;assert(adc_stream_start()==ESP_OK);
 }
 static void trigger(void){clock_us+=125;callback.on_alarm(timer,NULL,NULL);}
 int main(void){
  int32_t codes[4];uint16_t status,crc;
+ reset_case();puts("PASS SPI mode primed during RESET before any measured conversion");
  reset_case();assert(emg_frame(codes,&status,&crc)==ESP_ERR_INVALID_STATE&&reads==0);
  puts("PASS no read before conversion");
  words[0]=6554;words[1]=-1234;words[2]=32767;words[3]=-32768;

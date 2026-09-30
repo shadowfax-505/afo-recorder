@@ -5,6 +5,7 @@ import os
 import re
 import subprocess
 import tempfile
+from verify_trace import verify
 from pathlib import Path
 
 P = Path(__file__).resolve().parent
@@ -88,12 +89,18 @@ def run_case(name, out, execute=subprocess.run):
            '--timeout-exit-code', '0', '--serial-log-file', str(serial), '--vcd-file', str(vcd)]
     result = {'case': name, 'expected': EXPECTED[name], 'pass': False}
     try:
-        process = execute(cmd, capture_output=True, text=True, timeout=120)
+        process = execute(cmd, capture_output=True, text=True, timeout=180)
         (out / f'{name}.cli.txt').write_text(process.stdout + process.stderr)
         text = serial.read_text() if serial.exists() else ''
         result.update(exit_code=process.returncode, serial_pass=assess(name, text),
                       trace_activity=trace_has_activity(vcd))
-        result['pass'] = process.returncode == 0 and result['serial_pass'] and result['trace_activity']
+        if result['trace_activity']:
+            trace = verify(vcd, name)
+            (out / f'{name}.trace.json').write_text(json.dumps(trace, indent=2) + '\n')
+            result['trace_protocol_pass'] = trace['pass']
+        else:
+            result['trace_protocol_pass'] = False
+        result['pass'] = process.returncode == 0 and result['serial_pass'] and result['trace_protocol_pass']
     except (subprocess.TimeoutExpired, OSError) as error:
         result['error'] = type(error).__name__ + ': ' + str(error)
     return result
@@ -106,10 +113,15 @@ def main():
     root = P / 'results'
     root.mkdir(exist_ok=True)
     out = Path(tempfile.mkdtemp(prefix='run-', dir=root))
-    results = [run_case(name, out) for name in EXPECTED]
+    results = []
+    for name in EXPECTED:
+        print('Running ' + name, flush=True)
+        result = run_case(name, out)
+        results.append(result)
+        print(json.dumps(result), flush=True)
     (out / 'scenarios.json').write_text(json.dumps({
         'engine': 'Wokwi ESP32-S3', 'hardware_measured': False,
-        'trace_check': 'activity only; full protocol/timing review remains required',
+        'trace_check': '128-clock frames, signed word order, conversion/BUSY timing and fault signatures',
         'cases': results}, indent=2) + '\n')
     print(out)
     return 0 if all(case['pass'] for case in results) else 1

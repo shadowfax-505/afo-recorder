@@ -31,12 +31,27 @@
   },
   {
     "id": "wokwi-system-run",
-    "status": "unresolved",
-    "detail": "Actual diagnostic boots and initializes IMUs, but SPI2 MISO contention stalls acquisition. Receive-only experiment also failed and was reverted. No passing system trace."
+    "status": "verified-in-behavioral-simulation",
+    "detail": "CLI executes actual diagnostic firmware; seven scenarios pass after startup SPI initialization and shared diagnostic fault-latch corrections. Browser contention warning alone did not establish failure. Physical checks remain pending."
   },
   {
     "id": "physical-qualification",
     "status": "pending-measurement",
     "detail": "Received board straps, logic levels, reference, supply/noise/timing/SD/Wi-Fi/runtime remain unmeasured."
+  },
+  {
+    "id": "first-adc-read-shift",
+    "status": "corrected-and-simulated",
+    "detail": "Establish mode-2 SPI with a discarded reset-time read before conversion triggers; first counted frame now has expected codes. Received chip startup still requires bench scope verification."
+  },
+  {
+    "id": "diagnostic-worker-fault-restart",
+    "status": "corrected-and-simulated",
+    "detail": "Shared atomic fault latch prevents main diagnostic task from reporting further windows after IMU worker fault."
+  },
+  {
+    "id": "missing-interrupt-trace-target",
+    "status": "corrected",
+    "detail": "Verifier checks the foot sensor selected by scenario configuration; regression test protects role mapping."
   }
 ]

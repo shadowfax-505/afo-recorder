@@ -1,0 +1,76 @@
+{
+  "engine": "Wokwi ESP32-S3",
+  "cli_version": "0.27.1",
+  "date": "2026-09-30",
+  "hardware_measured": false,
+  "actual_esp_idf_diagnostic_executed": true,
+  "firmware_sha256": "42a0e75c7a8e3f8707446313990df5ae82b8ac62d8b586f8c585df593f1f7a88",
+  "all_cases_pass": true,
+  "trace_check": "128 clocks, all eight signed words, modeled BUSY duration, trigger timing and injected faults",
+  "trace_coverage": "1,000,000-event analyzer buffer; startup and initial acquisition captured, ending before 2.5-second serial test; partial final SPI frame excluded",
+  "cases": [
+    {
+      "case": "normal",
+      "expected": "WINDOW_COMPLETE",
+      "pass": true,
+      "exit_code": 0,
+      "serial_pass": true,
+      "trace_activity": true,
+      "trace_protocol_pass": true
+    },
+    {
+      "case": "stuck-busy",
+      "expected": "FAIL,ADC BUSY edge timeout",
+      "pass": true,
+      "exit_code": 0,
+      "serial_pass": true,
+      "trace_activity": true,
+      "trace_protocol_pass": true
+    },
+    {
+      "case": "delayed-busy",
+      "expected": "FAIL,ADC late conversion/read",
+      "pass": true,
+      "exit_code": 0,
+      "serial_pass": true,
+      "trace_activity": true,
+      "trace_protocol_pass": true
+    },
+    {
+      "case": "incorrect-mode",
+      "expected": "codes differ from known stimulus",
+      "pass": true,
+      "exit_code": 0,
+      "serial_pass": true,
+      "trace_activity": true,
+      "trace_protocol_pass": true
+    },
+    {
+      "case": "absent-shank",
+      "expected": "FAIL,IMU init/identity/readback",
+      "pass": true,
+      "exit_code": 0,
+      "serial_pass": true,
+      "trace_activity": true,
+      "trace_protocol_pass": true
+    },
+    {
+      "case": "fifo-overflow",
+      "expected": "FAIL,IMU FIFO/read",
+      "pass": true,
+      "exit_code": 0,
+      "serial_pass": true,
+      "trace_activity": true,
+      "trace_protocol_pass": true
+    },
+    {
+      "case": "missed-interrupt",
+      "expected": "FAIL,IMU missing interrupts/data",
+      "pass": true,
+      "exit_code": 0,
+      "serial_pass": true,
+      "trace_activity": true,
+      "trace_protocol_pass": true
+    }
+  ]
+}

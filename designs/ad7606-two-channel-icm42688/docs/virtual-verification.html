@@ -1,0 +1,73 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><link rel="icon" href="data:,"><meta name="viewport" content="width=device-width, initial-scale=1"><title>ESP32-S3 virtual verification — AD7606 two-channel recorder</title><style>body{margin:0;background:#f4f3ee;color:#172523;font:17px/1.65 system-ui}main{max-width:1060px;margin:auto;padding:48px 28px}h1{font-size:2.4rem;line-height:1.15}h2{margin-top:2.5em}a{color:#176454}table{border-collapse:collapse;font-size:14px;display:block;overflow:auto}td,th{padding:12px;border:1px solid #ccd4ce;text-align:left;vertical-align:top}th{background:#e2eae4}code{font-size:.9em}p{max-width:85ch}nav{font-size:14px;border-bottom:1px solid #ccd4ce;padding-bottom:16px}@media print{body{background:white}main{padding:0}table{display:table;font-size:10px}}</style><main><nav><a href="../viewer/build.html">Assembly workspace</a> / <a href="circuit-audit.html">Circuit audit</a> / <a href="lab-quickstart.html">Lab sequence</a></nav><h1>ESP32-S3 virtual verification report</h1>
+<p>Project lead: Muttakin Rahman · 30 September 2026 · AD7606 / two EMG inputs / ICM-42688-P</p>
+<p><strong>Seven scenarios pass using the actual ESP-IDF v5.4.2 stage-6 diagnostic binary in Wokwi CLI 0.27.1.</strong> This establishes the modeled digital behavior; physical hardware has not been measured. <a href="../simulations/wokwi/results/scenarios.json">Machine-readable results</a>.</p>
+<h2>Corrections found by execution</h2>
+<p>The first ADC read had a one-bit shift during initial mode-2 clock setup. The driver now makes a discarded SPI read while AD7606 RESET is asserted, before any conversion trigger or sample counter. Both measured windows then contain exact channel codes 6554 / 13107. This initialization is included in all seven rebuilt profiles. The received ADC chip/module still needs a scope check at first startup.</p>
+<p>A FIFO-overflow error in the diagnostic worker previously allowed the main task to restart acquisition and print a later window. A shared atomic fault latch now stops both tasks and preserves the first error. FIFO overflow produces one explicit failure with no later completed window.</p>
+<p>The browser warning was insufficient evidence of a permanent stall: the authenticated CLI runs complete. The large analyzer-buffer experiment disconnected while exporting the trace; the released setup uses the working one-million-event buffer.</p>
+<h2>Expected and observed</h2>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Expected observation</th>
+<th>Serial check</th>
+<th>VCD check</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>normal</td>
+<td>WINDOW_COMPLETE</td>
+<td>PASS</td>
+<td><a href="../simulations/wokwi/results/normal.trace.json">PASS trace analysis</a> · <a href="../simulations/wokwi/results/normal.vcd.gz">VCD.gz</a></td>
+</tr>
+<tr>
+<td>stuck-busy</td>
+<td>FAIL,ADC BUSY edge timeout</td>
+<td>PASS</td>
+<td><a href="../simulations/wokwi/results/stuck-busy.trace.json">PASS trace analysis</a> · <a href="../simulations/wokwi/results/stuck-busy.vcd.gz">VCD.gz</a></td>
+</tr>
+<tr>
+<td>delayed-busy</td>
+<td>FAIL,ADC late conversion/read</td>
+<td>PASS</td>
+<td><a href="../simulations/wokwi/results/delayed-busy.trace.json">PASS trace analysis</a> · <a href="../simulations/wokwi/results/delayed-busy.vcd.gz">VCD.gz</a></td>
+</tr>
+<tr>
+<td>incorrect-mode</td>
+<td>codes differ from known stimulus</td>
+<td>PASS</td>
+<td><a href="../simulations/wokwi/results/incorrect-mode.trace.json">PASS trace analysis</a> · <a href="../simulations/wokwi/results/incorrect-mode.vcd.gz">VCD.gz</a></td>
+</tr>
+<tr>
+<td>absent-shank</td>
+<td>FAIL,IMU init/identity/readback</td>
+<td>PASS</td>
+<td><a href="../simulations/wokwi/results/absent-shank.trace.json">PASS trace analysis</a> · <a href="../simulations/wokwi/results/absent-shank.vcd.gz">VCD.gz</a></td>
+</tr>
+<tr>
+<td>fifo-overflow</td>
+<td>FAIL,IMU FIFO/read</td>
+<td>PASS</td>
+<td><a href="../simulations/wokwi/results/fifo-overflow.trace.json">PASS trace analysis</a> · <a href="../simulations/wokwi/results/fifo-overflow.vcd.gz">VCD.gz</a></td>
+</tr>
+<tr>
+<td>missed-interrupt</td>
+<td>FAIL,IMU missing interrupts/data</td>
+<td>PASS</td>
+<td><a href="../simulations/wokwi/results/missed-interrupt.trace.json">PASS trace analysis</a> · <a href="../simulations/wokwi/results/missed-interrupt.vcd.gz">VCD.gz</a></td>
+</tr>
+</tbody>
+</table>
+<p>The normal run completes two measurement windows, each with 7,984 good ADC frames and the same number of BUSY notifications over approximately 1.000038 s. Both means/minima/maxima match their prescribed codes. Foot/shank FIFO and separate interrupt counts advance near 200 Hz, with distinct X-axis markers and correct Z/gyro ordering.</p>
+<h2>What the trace proves</h2>
+<p>The normal trace contains 3,275 complete measured ADC reads plus one initialization read. Each measured read has 128 rising and 128 falling clocks and the expected eight signed words. BUSY is 4,000 ns in this behavioral model. CONVST high time is 1,379–1,380 ns. Captured trigger intervals range from 124,204 to 126,846 ns; median 125,250 ns. The virtual mean rate is about 7.984 kHz.</p>
+<p>The serial rate gate is 8 kHz ±1%; the trace sanity gate allows individual trigger intervals of 125 µs ±5 µs. These are prototype integration criteria, not clinical timing guarantees or measured hardware jitter. Known-code checks are exact because the digital model injects constant integer codes without analog noise.</p>
+<p><img src="../simulations/wokwi/results/first-conversion.svg" alt="First modeled conversion" /></p>
+<p>The analyzer buffer ends at about 0.659 s of simulator time, covering initialization and roughly 0.410 s of active acquisition. Its last incomplete SPI frame is excluded from decoding and reported explicitly. Serial logs cover the full requested 2.5 s. No claim is made that every SPI bit throughout the full run has been captured. Decompress <code>.vcd.gz</code> with a gzip utility before opening it in a waveform viewer.</p>
+<h2>Reproduce</h2>
+<p>See <a href="../simulations/wokwi/README.md">Wokwi instructions</a>. <code>run_scenarios.py</code> creates a fresh evidence directory, checks the serial logs and calls <code>verify_trace.py</code>. <code>plot_trace.py</code> uses Matplotlib to recreate the figure. Fifteen synthetic runner regression tests and ten native production-driver test groups also pass; their scope is documented separately.</p>
+<h2>Remaining physical gates</h2>
+<p>Wokwi uses project behavioral ADC/IMU models rather than manufacturer models. It does not prove received module straps, reference/logic levels, analog noise, crosstalk, temperature, cable integrity or regulator operation. SDMMC and Wi-Fi are outside this simulation; existing software fault tests are their current virtual evidence. Sustained 8 kHz recording, radio load, 60-minute continuity and two-hour battery runtime remain physical tests. Board ordering still follows module qualification, staged lab testing and final review.</p>
+</main></html>

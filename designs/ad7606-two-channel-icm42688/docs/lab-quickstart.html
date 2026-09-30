@@ -1,6 +1,6 @@
 <!doctype html><html lang="en"><meta charset="utf-8"><link rel="icon" href="data:,"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Build one working stage at a time</title><style>body{margin:0;background:#f4f3ee;color:#172523;font:17px/1.65 system-ui}main{max-width:1060px;margin:auto;padding:48px 28px}h1{font-size:2.4rem;line-height:1.15}h2{margin-top:2.5em}a{color:#176454}table{border-collapse:collapse;font-size:14px;display:block;overflow:auto}td,th{padding:12px;border:1px solid #ccd4ce;text-align:left;vertical-align:top}th{background:#e2eae4}code{font-size:.9em}p{max-width:85ch}nav{font-size:14px;border-bottom:1px solid #ccd4ce;padding-bottom:16px}@media print{body{background:white}main{padding:0}table{display:table;font-size:10px}}</style><main><nav><a href="../viewer/build.html">Assembly workspace</a> / <a href="circuit-audit.html">Circuit audit</a> / <a href="lab-quickstart.html">Lab sequence</a></nav><h1>Build one working stage at a time</h1>
 <p><strong>This guide is only for AD7606 + two MyoWare RAW inputs + two ICM-42688-P carriers.</strong> Use the <a href="build-guide.html">exact hole/contact tables</a> beside the <a href="../viewer/build.html">interactive build view</a>. Power off before each addition. Record the result before continuing; an empty results cell means untested.</p>
-<p>The numerical limits below are integration gates, not a calibration certificate or guaranteed performance. The filter envelope comes from <code>simulations/results/response.csv</code>; power, noise and timing still require measurements. Until virtual execution is resolved, see the <a href="circuit-audit.html">audit status</a> before purchasing or ordering.</p>
+<p>The numerical limits below are integration gates, not a calibration certificate or guaranteed performance. The filter envelope comes from <code>simulations/results/response.csv</code>; power, noise and timing still require measurements. Read the <a href="virtual-verification.md">virtual verification results and limits</a>, then complete the physical gates below before ordering the compact PCB.</p>
 <table>
 <thead>
 <tr>
@@ -37,7 +37,7 @@
 <td>3b</td>
 <td>ADC signal wires, inputs at known DC</td>
 <td><code>diagnostic-adc</code>; scope CONVST/BUSY/CS/SCLK; voltages 1 V on V1 and 2 V on V2</td>
-<td>125 µs trigger period, 1 µs high pulse, BUSY normally within the 4.2 µs datasheet limit; 128 serial clocks; codes approximately 6554 / 13107, swapped voltages swap channels; error within ±64 codes with a suitable calibrated source/meter; no FAIL output</td>
+<td>125 µs nominal trigger period; scope and log jitter, nominal 1 µs high pulse (at least 25 ns), BUSY normally within the 4.2 µs datasheet limit; 128 serial clocks; codes approximately 6554 / 13107, swapped voltages swap channels; error within ±64 codes with a suitable calibrated source/meter; no FAIL output</td>
 <td>Wrong order/scale: check range, DOUTA, mode and grounds. Missing edges: check CVA/CVB/BUSY. Late-read error: inspect scope and firmware load</td>
 </tr>
 <tr>
@@ -122,4 +122,5 @@
 </tbody>
 </table>
 <p>After all laboratory stages, the final PCB still needs power startup, switching ripple, antenna/USB, thermal, noise, crosstalk and sustained recording checks. Breadboards validate the logical signal path, not the final board layout.</p>
+<p>At ADC initialization the firmware clocks a discarded read during RESET to establish SPI mode. No acquisition trigger or counted sample occurs during that read. Identify it separately on the scope; the first counted conversion must have the expected DC codes. A diagnostic failure latches and requires reset/restart after correcting the cause.</p>
 </main></html>

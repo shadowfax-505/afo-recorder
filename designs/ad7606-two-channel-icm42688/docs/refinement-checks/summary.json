@@ -1,7 +1,7 @@
 {
   "variant": "ad7606-two-channel-icm42688",
   "date": "2026-09-30",
-  "acceptance_gate_pass": false,
+  "acceptance_gate_pass": true,
   "hardware_measured": false,
   "erc_violations": 0,
   "drc_violations": 0,
@@ -15,13 +15,15 @@
   "ngspice_dc_loading_cases": 54,
   "wokwi_models_wasm_compiled": true,
   "native_model_tests_pass": true,
-  "wokwi_system_tests_pass": false,
-  "wokwi_note": "Actual diagnostic boots and initializes both IMU models. SPI2 MISO contention prevents completed acquisition. Receive-only experiment also failed and was reverted. CLI token unavailable. No passing VCD traces.",
+  "wokwi_system_tests_pass": true,
+  "wokwi_note": "Actual ESP-IDF stage-6 firmware executed; seven cases pass serial and VCD protocol checks. Analyzer captures startup and initial acquisition, not the whole 2.5-second run. Physical performance remains unmeasured.",
   "remaining": [
-    "Wokwi execution/fault traces",
     "Received-module strap and voltage qualification",
     "Physical analog, timing, power, storage, radio and runtime tests"
   ],
-  "simulation_runner_regression_tests_passed": 14,
-  "native_production_adc_driver_test_groups_passed": 9
+  "simulation_runner_regression_tests_passed": 15,
+  "native_production_adc_driver_test_groups_passed": 10,
+  "acceptance_scope": "specified circuit, software and behavioral simulation checks only",
+  "physical_acceptance_pass": false,
+  "wokwi_scenarios_passed": 7
 }

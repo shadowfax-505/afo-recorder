@@ -1,0 +1,30 @@
+{
+  "case": "missed-interrupt",
+  "pass": true,
+  "hardware_measured": false,
+  "engine": "Wokwi ESP32-S3 VCD protocol analysis",
+  "priming_reads": 1,
+  "conversion_triggers": 3277,
+  "complete_adc_frames": 3276,
+  "partial_frame_at_trace_end": true,
+  "trace_end_ns": 659086812,
+  "pulse_width_ns": {
+    "min": 1379,
+    "max": 1380
+  },
+  "busy_width_ns": [
+    4000
+  ],
+  "conversion_period_ns": {
+    "min": 124204,
+    "median": 125250.0,
+    "max": 126846
+  },
+  "coverage_note": "Analyzer buffer may end before serial run; partial final SPI frame is excluded from decoding",
+  "imu_rising_edges": [
+    0,
+    82
+  ],
+  "errors": [],
+  "total_errors": 0
+}

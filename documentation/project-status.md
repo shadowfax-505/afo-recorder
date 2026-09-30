@@ -2,7 +2,7 @@
 
 ## Focused refinement — 30 September 2026
 
-The [fixed two-channel AD7606 / ICM build](../designs/ad7606-two-channel-icm42688/docs/circuit-audit.html) now has corrected diagnostics/metadata, fresh circuit checks, expanded analog simulations and a shorter lab guide. Wokwi system execution remains unresolved; it is not a passed hardware or complete virtual-validation gate. Other five packages are unchanged. The sections below describe the earlier six-package release.
+The [fixed two-channel AD7606 / ICM build](../designs/ad7606-two-channel-icm42688/docs/circuit-audit.html) passes seven actual ESP-IDF diagnostic scenarios in Wokwi, with serial logs and decoded VCD evidence. SPI startup and diagnostic fault-latch issues were corrected, and all seven firmware profiles rebuilt. Read the [execution report](../designs/ad7606-two-channel-icm42688/docs/virtual-verification.html) for model and capture limits. Physical power/noise/timing/storage/radio/runtime tests remain pending. Other five packages are unchanged. The sections below describe the earlier six-package release.
 
 ## Completed
 
@@ -21,4 +21,4 @@ Do not repeat completed software work or imply physical measurements from synthe
 
 ## Wokwi runner follow-up
 
-Fourteen synthetic regression tests now protect against false-positive simulation results, including stale output files, wrong channel extrema, incorrect sample rates and header-only traces. Wokwi ESP32 acquisition remains unverified because of the unresolved SPI contention. The runner needs a locally configured `WOKWI_CLI_TOKEN` for automated execution; no token belongs in this repository.
+Fifteen synthetic regression tests reject false-positive simulation results, and ten native C test groups check the production ADC driver. Seven Wokwi actual-firmware scenarios separately pass serial and protocol checks. Credentials are configured locally and are not part of any package.

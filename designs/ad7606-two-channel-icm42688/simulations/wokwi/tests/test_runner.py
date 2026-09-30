@@ -1,10 +1,12 @@
 """Evidence-gate tests with synthetic logs; these do not run ESP32 firmware."""
 import importlib.util
+import sys
 from pathlib import Path
 import subprocess
 import tempfile
 import unittest
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 spec = importlib.util.spec_from_file_location('runner', Path(__file__).resolve().parents[1] / 'run_scenarios.py')
 runner = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(runner)
@@ -50,6 +52,23 @@ class EvidenceTests(unittest.TestCase):
         self.assertTrue(runner.assess('stuck-busy', 'FAIL,ADC BUSY edge timeout,ESP_ERR_TIMEOUT\n'))
         self.assertFalse(runner.assess('stuck-busy', 'expected FAIL,ADC BUSY edge timeout\n'))
         self.assertFalse(runner.assess('stuck-busy', 'FAIL,ADC BUSY edge timeout,ESP_ERR_TIMEOUT\nFAIL,unrelated,ERR\n'))
+
+    def test_interrupt_trace_checks_the_injected_foot_sensor(self):
+        from verify_trace import verify
+        header = '$timescale 1ns $end\n' + ''.join(
+            f'$var wire 1 {chr(33+i)} D{i} $end\n' for i in range(8))
+        trace = header + '$enddefinitions $end\n#0\n' + ''.join(
+            f'{1 if i==2 else 0}{chr(33+i)}\n' for i in range(8))
+        trace += '#100\n0#\n'
+        for bit in range(128):
+            trace += f'#{200+bit*200}\n1$\n#{300+bit*200}\n0$\n'
+        trace += '#30000\n1#\n#5000000\n1\'\n#5000010\n0\'\n'
+        with tempfile.TemporaryDirectory() as d:
+            p = Path(d) / 'fault.vcd'
+            p.write_text(trace)
+            self.assertTrue(verify(p, 'missed-interrupt')['pass'])
+            p.write_text(trace + '#6000000\n1&\n')
+            self.assertFalse(verify(p, 'missed-interrupt')['pass'])
 
     def test_empty_or_header_only_trace_rejected(self):
         with tempfile.TemporaryDirectory() as d:

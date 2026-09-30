@@ -1,6 +1,6 @@
 # Current validation status — 30 September 2026
 
-Read the [focused circuit audit](circuit-audit.md) and [short staged guide](lab-quickstart.md). Fresh ERC/DRC and 390 direct pin comparisons pass, as do 40 host tests and seven software acquisition scenarios. Seven firmware profiles were rebuilt. Analog response, tolerance and DC/loading simulations pass under the documented surrogate models. **Wokwi system scenarios and logic traces remain unresolved; physical testing has not been performed. The complete acceptance gate is not passed.**
+Read the [focused circuit audit](circuit-audit.md) and [short staged guide](lab-quickstart.md). Fresh ERC/DRC and 390 direct pin comparisons pass, as do 40 host tests and seven software acquisition scenarios. Seven firmware profiles were rebuilt. Analog response, tolerance and DC/loading simulations pass under the documented surrogate models. **Seven actual-firmware Wokwi scenarios now pass serial and VCD protocol checks. The specified virtual gate passes within model/capture limits; physical testing has not been performed.** See the [execution report](virtual-verification.md).
 
 The history below describes the earlier review, not the current firmware/build status.
 
@@ -22,4 +22,4 @@ Added the missing SD module ground lead at JP1.2 in the breadboard plan. The ind
 
 ## Follow-up: verification safeguards and driver logic
 
-Fourteen synthetic runner regression tests now reject stale files, partial windows, wrong sample rates/channel values and empty traces. Nine native C test groups also execute the unchanged production AD7606 driver against mocked timer, BUSY and SPI APIs, including late-read and unread-conversion faults. These are separate from the 40 host/converter tests. They do not emulate ESP32 concurrency or measure physical timing. See `simulations/driver-tests/` and `simulations/wokwi/tests/`. The Wokwi system acceptance gate remains unresolved.
+Fifteen synthetic runner regression tests now reject stale files, partial windows, wrong sample rates/channel values and empty traces. Ten native C test groups also execute the production AD7606 driver against mocked timer, BUSY and SPI APIs, including late-read and unread-conversion faults. These are separate from the 40 host/converter tests. They do not emulate ESP32 concurrency or measure physical timing. See `simulations/driver-tests/` and `simulations/wokwi/tests/`. Seven Wokwi execution scenarios pass; physical acceptance remains pending.

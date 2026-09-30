@@ -2,14 +2,14 @@
 
 Project lead: Muttakin Rahman · Review: 30 September 2026
 
-**The intended signal path is logically consistent, and fresh connectivity and software checks pass. This is not a fully verified recorder.** Wokwi system execution remains unresolved; no physical recorder has been measured. Do not interpret the manufacturing exports as an order recommendation.
+**The intended signal path is logically consistent, and fresh connectivity and software checks pass. This is not a fully verified recorder.** Seven actual-firmware Wokwi scenarios pass under the documented behavioral models; no physical recorder has been measured. Do not interpret the manufacturing exports as an order recommendation.
 
 ## What changed
 
 | Finding | Correction | Evidence / remaining limit |
 |---|---|---|
-| Recording metadata described a RAW/VMID mixing circuit absent from the schematic | Describe the two buffered 3.3 kΩ/47 nF sections and single-ended output; add separate unplugged-bias metadata | No binary format change; firmware label is ad7606-2ch-1.2; converter/legacy tests pass |
-| ADC diagnostic could wait indefinitely for BUSY | Fail explicitly after 100 ms without a falling edge | Cross-compiled; full Wokwi fault execution pending |
+| Recording metadata described a RAW/VMID mixing circuit absent from the schematic | Describe the two buffered 3.3 kΩ/47 nF sections and single-ended output; add separate unplugged-bias metadata | No binary format change; firmware label is ad7606-2ch-1.3; converter/legacy tests pass |
+| ADC diagnostic could wait indefinitely for BUSY | Fail explicitly after 100 ms without a falling edge | Cross-compiled; stuck/delayed BUSY faults verified in Wokwi |
 | ADC timer could issue later triggers after a latched timing fault | Suppress triggers until stream restart | Source review; real interrupt latency still unmeasured |
 | Diagnostics printed while acquisition remained active and polled IMUs in the ADC reader | Use bounded measurement windows; stop ADC for reporting; separate lower-priority FIFO service | Diagnostic output is discontinuous by design, not an endurance recording |
 | Recorder could fault before the second IMU produced its first interrupt | Allow up to 100 ms for the first interrupt before draining that FIFO | Fixes the startup race; stale interrupts still trigger a fault |
@@ -31,7 +31,7 @@ The authoritative source remains `design/circuit-spec.json`. `design/audit_conne
 | Firmware | Seven profiles cross-compiled with ESP-IDF v5.4.2; manifests contain new binary hashes |
 | ngspice | Both channels; 16 tolerance corners; 54 DC/loading cases; unplugged-bias case; transient/ideal quantization checks |
 | Wokwi models | Both compile to WASM; native model unit tests pass |
-| Wokwi ESP32 execution | **Unresolved.** Browser attempt stalled with emulated SPI2 MISO contention. CLI requires a token; no passing VCD trace obtained |
+| Wokwi ESP32 execution | **PASS, scoped to modeled digital behavior.** Seven actual ESP-IDF scenarios pass serial and VCD checks; see the [execution report](virtual-verification.md) |
 | Physical tests | None performed |
 
 Evidence: [fresh checks](refinement-checks/connectivity.json), [breadboard](refinement-checks/breadboard-wiring.json), [host log](refinement-checks/host-tests.log), [builds](refinement-checks/firmware-builds.json), [analog results](../simulations/results/validation.json), [operating points](../simulations/results/operating-points.json), [Wokwi status](../simulations/wokwi/README.md). The broad historical reports remain available but do not supersede these limitations.
@@ -76,8 +76,12 @@ The firmware checks WHO_AM_I=0x47 and configuration readback, selects 200 Hz acc
 
 Primary references: [ADI AD7606 Rev G, Tables 2–3 and serial-interface sections](https://www.analog.com/media/en/technical-documentation/data-sheets/AD7606_7606-6_7606-4.pdf), [TDK ICM-42688-P](https://www.invensense.tdk.com/en-us/products/6-axis/icm-42688-p), [MikroE carrier](https://www.mikroe.com/6dof-imu-14-click), [TI TPS60150](https://www.ti.com/product/TPS60150), [TI TPS63070](https://www.ti.com/product/TPS63070), [Microchip MCP6004](https://www.microchip.com/en-us/product/mcp6004), [Nexperia BAV199](https://assets.nexperia.com/documents/data-sheet/BAV199-Q.pdf), [Wokwi ESP32 support](https://docs.wokwi.com/guides/esp32), [Wokwi Chips API](https://docs.wokwi.com/chips-api/getting-started).
 
-The virtual acceptance gate is **not complete** while Wokwi scenarios and traces are outstanding. Physical gates include received-module qualification, power/startup/ripple, analog noise/clipping/crosstalk, cable integrity, actual 8 kHz timing, sustained SD/Wi-Fi recording, battery runtime and final PCB layout review. No board order or human-use approval follows from this report.
+The specified virtual checks **pass under documented model assumptions and capture limits**. Physical gates include received-module qualification, power/startup/ripple, analog noise/clipping/crosstalk, cable integrity, actual 8 kHz timing, sustained SD/Wi-Fi recording, battery runtime and final PCB layout review. No board order or human-use approval follows from this report.
 
 ## Follow-up: verification safeguards and driver logic
 
-Fourteen synthetic runner regression tests now reject stale files, partial windows, wrong sample rates/channel values and empty traces. Nine native C test groups also execute the unchanged production AD7606 driver against mocked timer, BUSY and SPI APIs, including late-read and unread-conversion faults. These are separate from the 40 host/converter tests. They do not emulate ESP32 concurrency or measure physical timing. See `simulations/driver-tests/` and `simulations/wokwi/tests/`. The Wokwi system acceptance gate remains unresolved.
+Fifteen synthetic runner regression tests now reject stale files, partial windows, wrong sample rates/channel values and empty traces. Ten native C test groups also execute the production AD7606 driver against mocked timer, BUSY and SPI APIs, including late-read and unread-conversion faults. These are separate from the 40 host/converter tests. They do not emulate ESP32 concurrency or measure physical timing. See `simulations/driver-tests/` and `simulations/wokwi/tests/`. The [Wokwi execution report](virtual-verification.md) records the seven passing scenarios and capture limits.
+
+## Execution-driven corrections
+
+SPI mode is now initialized with a discarded read during RESET before the first measured conversion. A shared diagnostic fault latch stops all tasks after a worker error, preventing a subsequent plausible-looking window. Both changes are in the seven rebuilt profiles. The first measured frame and FIFO-overflow stop behavior pass Wokwi checks. Detailed results and the first-conversion waveform are in the [virtual verification report](virtual-verification.md).

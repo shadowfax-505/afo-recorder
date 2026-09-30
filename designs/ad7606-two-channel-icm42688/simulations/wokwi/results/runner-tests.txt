@@ -1,5 +1,6 @@
 test_empty_or_header_only_trace_rejected (test_runner.EvidenceTests.test_empty_or_header_only_trace_rejected) ... ok
 test_fault_must_be_a_diagnostic_line (test_runner.EvidenceTests.test_fault_must_be_a_diagnostic_line) ... ok
+test_interrupt_trace_checks_the_injected_foot_sensor (test_runner.EvidenceTests.test_interrupt_trace_checks_the_injected_foot_sensor) ... ok
 test_mean_cannot_hide_wrong_samples (test_runner.EvidenceTests.test_mean_cannot_hide_wrong_samples) ... ok
 test_nonzero_exit_cannot_pass (test_runner.EvidenceTests.test_nonzero_exit_cannot_pass) ... ok
 test_reject_later_failure (test_runner.EvidenceTests.test_reject_later_failure) ... ok
@@ -14,6 +15,6 @@ test_valid_normal (test_runner.EvidenceTests.test_valid_normal) ... ok
 test_wrong_mode_requires_exact_model_signature (test_runner.EvidenceTests.test_wrong_mode_requires_exact_model_signature) ... ok
 
 ----------------------------------------------------------------------
-Ran 14 tests in 0.005s
+Ran 15 tests in 0.059s
 
 OK

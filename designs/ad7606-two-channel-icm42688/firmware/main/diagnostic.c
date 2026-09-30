@@ -6,6 +6,7 @@
 #include <inttypes.h>
 #include <limits.h>
 #include <math.h>
+#include <stdatomic.h>
 #include "board.h"
 #include "sensors.h"
 #include "driver/gpio.h"
@@ -17,6 +18,7 @@ static portMUX_TYPE lock=portMUX_INITIALIZER_UNLOCKED;
 static uint32_t edges,imu_edges[2],imu_packets[2];
 static int16_t imu_last[2][6];
 static uint16_t imu_ticks[2];
+static atomic_bool diagnostic_fault;
 static void imu_irq(void *arg){
     unsigned id=(unsigned)(uintptr_t)arg;
     portENTER_CRITICAL_ISR(&lock);imu_edges[id]++;portEXIT_CRITICAL_ISR(&lock);
@@ -27,8 +29,10 @@ static void irq(void *arg) {
     if(wake)portYIELD_FROM_ISR();
 }
 static void fail(const char *step,esp_err_t e){
+    bool first=!atomic_exchange(&diagnostic_fault,true);
     adc_stream_stop();
-    printf("FAIL,%s,%s\n",step,esp_err_to_name(e));gpio_set_level(LED_ERROR,1);
+    if(first)printf("FAIL,%s,%s\n",step,esp_err_to_name(e));
+    gpio_set_level(LED_ERROR,1);
     while(1)vTaskDelay(pdMS_TO_TICKS(1000));
 }
 static void imu_reader(void *arg){
@@ -86,9 +90,11 @@ void app_main(void){
         portEXIT_CRITICAL(&lock);
         ulTaskNotifyTake(pdTRUE,0);
         portENTER_CRITICAL(&lock);edges=0;portEXIT_CRITICAL(&lock);
+        if(atomic_load(&diagnostic_fault))fail("latched diagnostic fault",ESP_ERR_INVALID_STATE);
         int64_t start=esp_timer_get_time();ESP_ERROR_CHECK(adc_stream_start());
         while(esp_timer_get_time()-start<1000000){
             uint32_t n=ulTaskNotifyTake(pdTRUE,pdMS_TO_TICKS(100));
+            if(atomic_load(&diagnostic_fault))fail("latched diagnostic fault",ESP_ERR_INVALID_STATE);
             if(!n)fail("ADC BUSY edge timeout",ESP_ERR_TIMEOUT);
             if(n!=1)fail("ADC missed notification",ESP_ERR_INVALID_STATE);
             int32_t code[4];uint16_t status,crc;e=emg_frame(code,&status,&crc);
@@ -100,6 +106,7 @@ void app_main(void){
             }
         }
         adc_stream_stop(); // UART printing is outside the acquisition window.
+        if(atomic_load(&diagnostic_fault))fail("latched diagnostic fault",ESP_ERR_INVALID_STATE);
         int64_t elapsed=esp_timer_get_time()-start;
         portENTER_CRITICAL(&lock);uint32_t count=edges;portEXIT_CRITICAL(&lock);
         printf("ADC,elapsed_us=%"PRId64",edges=%"PRIu32",good=%"PRIu32,elapsed,count,good);
