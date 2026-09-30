@@ -1,0 +1,39 @@
+{
+  "recorded": {
+    "hardware_design": "AD7606_TWO_FIXED",
+    "schema": "afo-recorder/3",
+    "adc_model": "AD7606",
+    "adc_sensor_crc_supported": false,
+    "timestamp_event": "conversion_trigger",
+    "firmware": "ad7606-2ch-1.5-driver-co-simulation",
+    "synthetic": true,
+    "emg_hz": 8000,
+    "imu_hz": 200,
+    "imu_enabled": true,
+    "adc_bits": 16,
+    "adc_reference_mv": 5000,
+    "adc_reference_measured": false,
+    "active_channel_count": 2,
+    "emg_channels": [
+      "EMG1",
+      "EMG2"
+    ],
+    "adc_pga": 1,
+    "input_scale": 1,
+    "input_midpoint_mv": 0,
+    "calibration_state": "uncalibrated",
+    "adc_clock_hz": 0,
+    "adc_osr": 1,
+    "adc_filter": "oversampling disabled; internal analog filter",
+    "simultaneous": true,
+    "accel_range_g": 16,
+    "gyro_range_dps": 2000,
+    "imu_timestamp_tick_us": 1,
+    "record_bytes": 64,
+    "notes": "No RTOS scheduler, SDMMC or radio execution; modeled SPI/read times",
+    "simulation_engine": "native C: real drivers/serializer; ideal peripheral API model",
+    "hardware_variant": "offline-co-simulation",
+    "imu_time": "modeled_fifo_delta"
+  },
+  "operator_metadata": {}
+}

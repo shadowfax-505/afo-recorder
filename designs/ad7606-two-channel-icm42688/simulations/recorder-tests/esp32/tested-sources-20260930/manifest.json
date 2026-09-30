@@ -1,0 +1,16 @@
+{
+  "historical_tested_image": true,
+  "source_set": "ad7606-2ch-1.4",
+  "hardware_measured": false,
+  "current_1_6_image_executed": false,
+  "source_sha256": {
+    "main.c": "69c47e82e2d51c3cb7672639211bec4680391f3cafc763d0cc1aa7ecea975697",
+    "lifecycle.c": "74f5594774cebbabe0983c328e3858ca3b66ec0b4523453982f9f740acaf7e7e"
+  },
+  "image_sha256": {
+    "merged.bin": "7d68440d9c2becdd82b8c0f28a2f11580621c62f46dbc3ac5f07dab6ced16a1b",
+    "recorder_lifecycle.elf": "b23ce4393599d9c5450d904975a9db7397d2176b2b742533f8fbb51f1cce0b23"
+  },
+  "image_directory": "../firmware/",
+  "results": "../results/summary.json"
+}

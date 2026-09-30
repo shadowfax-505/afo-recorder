@@ -1,0 +1,5 @@
+kind,sequence,timestamp_us,flags,timer_missed,queue_dropped,imu_errors,fifo_overflows,adc_errors,emg_records,foot_records,shank_records,battery_mv,queue_high_water
+status,1,1934714,0,0,0,0,0,0,8036,212,201,3200,61
+status,2,2934822,0,0,0,0,0,0,16021,412,401,3200,62
+status,3,3934850,0,0,0,0,0,0,24005,612,601,3200,62
+end,4,3935417,4,0,0,0,0,0,24005,612,601,3200,62

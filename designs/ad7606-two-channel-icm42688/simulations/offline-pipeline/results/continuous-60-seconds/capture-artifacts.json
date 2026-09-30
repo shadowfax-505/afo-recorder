@@ -1,0 +1,25 @@
+{
+  "artifacts": {
+    "synthetic.afolog": {
+      "bytes": 32260800,
+      "sha256": "de89ab070c08b96bfc1be8a49968566949f2a029636c120aac022aabfe604cbb"
+    },
+    "emg.csv": {
+      "bytes": 55373412,
+      "sha256": "b400de28a1ae4e92edacea73ffeacaed24d3a1771332969e8d0de31684795837"
+    },
+    "foot.csv": {
+      "bytes": 1381322,
+      "sha256": "a4a08ee93dfb5f06d85e1ac774b55e80f775508d7f60e0229bf13cc2d68caf50"
+    },
+    "shank.csv": {
+      "bytes": 1368475,
+      "sha256": "2964049c48fe9fd7d9a09a56b0d5d0c0bdf71cc973c50d50761f55c43ff774bb"
+    },
+    "status.csv": {
+      "bytes": 219,
+      "sha256": "002149f810b2920687ec3269cdbea01591334d031a2f4ea9b4077fbfb35ccfc9"
+    }
+  },
+  "storage": "Full binary and CSV evidence retained in the local run output directory; package contains their hashes and summaries."
+}

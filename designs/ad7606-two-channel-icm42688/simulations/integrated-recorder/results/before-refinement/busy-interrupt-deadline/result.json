@@ -1,0 +1,6 @@
+{
+  "case": "normal",
+  "pass": false,
+  "exit_code": 0,
+  "error": "ValueError: expected stop 0, got 6"
+}

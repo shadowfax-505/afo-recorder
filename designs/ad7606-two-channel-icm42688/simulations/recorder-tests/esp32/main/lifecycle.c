@@ -6,6 +6,9 @@
 #include <assert.h>
 
 esp_err_t sensors_init(void) {return ESP_FAIL;}
+void adc_set_trigger_callback(bool (*callback)(void *),void *context) {(void)callback;(void)context;}
+esp_err_t adc_bus_init(void) {return ESP_FAIL;}
+esp_err_t imu_bus_init(unsigned count) {(void)count;return ESP_FAIL;}
 esp_err_t battery_init(void) {return ESP_FAIL;}
 int battery_mv(void) {return 3800;}
 esp_err_t adc_configure(void) {return ESP_FAIL;}

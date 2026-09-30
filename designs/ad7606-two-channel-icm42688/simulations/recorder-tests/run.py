@@ -27,7 +27,7 @@ CASES = (
     'usb-during-recording', 'battery-low', 'card-full',
 )
 API_HEADERS = (
-    'esp_err.h', 'esp_vfs_fat.h', 'esp_timer.h', 'esp_random.h', 'esp_log.h',
+    'esp_err.h', 'esp_vfs_fat.h', 'esp_timer.h', 'esp_random.h', 'esp_log.h', 'esp_intr_alloc.h',
     'driver/gpio.h', 'driver/sdmmc_host.h', 'freertos/FreeRTOS.h',
     'freertos/task.h', 'freertos/queue.h', 'freertos/event_groups.h',
 )

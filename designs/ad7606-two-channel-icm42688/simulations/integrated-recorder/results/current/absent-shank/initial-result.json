@@ -1,0 +1,6 @@
+{
+  "case": "absent-shank",
+  "pass": false,
+  "exit_code": 1,
+  "error": "ValueError: Wokwi did not complete successfully"
+}

@@ -15,15 +15,45 @@ static gptimer_handle_t timer;
 static atomic_bool pending,stream_fault;
 static uint64_t trigger_stamp;
 static portMUX_TYPE stamp_lock=portMUX_INITIALIZER_UNLOCKED;
+static bool (*trigger_callback)(void *);
+static void *trigger_context;
+#ifdef AFO_ADC_TRACE
+volatile uint32_t adc_trace_reason;
+volatile uint64_t adc_trace_fault_at,adc_trace_read_start,adc_trace_read_end;
+extern volatile uint32_t emg_trace_phase;
+volatile uint32_t adc_trace_fault_phase;
+#endif
 static bool tick(gptimer_handle_t t,const gptimer_alarm_event_data_t *event,void *ctx){
     (void)t;(void)event;(void)ctx;
     if(atomic_load(&stream_fault))return false;
     // Do not overwrite an unread conversion. Stop rather than relabel old data.
-    if(atomic_load(&pending)||gpio_get_level(ADC_DRDY)){atomic_store(&stream_fault,true);return false;}
+    if(atomic_load(&pending)||gpio_get_level(ADC_DRDY)){
+#ifdef AFO_ADC_TRACE
+        adc_trace_reason=atomic_load(&pending)?1:2;adc_trace_fault_at=esp_timer_get_time();adc_trace_fault_phase=emg_trace_phase;
+#endif
+        atomic_store(&stream_fault,true);return false;
+    }
     atomic_store(&pending,true);
     portENTER_CRITICAL_ISR(&stamp_lock);trigger_stamp=esp_timer_get_time();
     gpio_set_level(ADC_CONVST,1);portEXIT_CRITICAL_ISR(&stamp_lock);
-    esp_rom_delay_us(1);gpio_set_level(ADC_CONVST,0);return false;
+    esp_rom_delay_us(1);
+    // AD7606 Rev. G Table 3: BUSY rises within 45 ns; conversion lasts
+    // at least 3.45 us with oversampling off. Confirm an accepted trigger
+    // inside the existing pulse, before a stale SPI word can be accepted.
+    // A delayed ISR that misses this window also stops rather than guessing.
+    bool accepted=gpio_get_level(ADC_DRDY)!=0;
+    gpio_set_level(ADC_CONVST,0);
+    if(!accepted){
+#ifdef AFO_ADC_TRACE
+        adc_trace_reason=3;adc_trace_fault_at=esp_timer_get_time();adc_trace_fault_phase=emg_trace_phase;
+#endif
+        atomic_store(&stream_fault,true);
+    }
+    return trigger_callback?trigger_callback(trigger_context):false;
+}
+void adc_set_trigger_callback(bool (*callback)(void *),void *context){
+    // Configure while the converter timer is stopped.
+    trigger_context=context;trigger_callback=callback;
 }
 uint64_t adc_sample_timestamp(void){portENTER_CRITICAL_ISR(&stamp_lock);uint64_t x=trigger_stamp;portEXIT_CRITICAL_ISR(&stamp_lock);return x;}
 esp_err_t adc_configure(void){
@@ -42,17 +72,36 @@ esp_err_t adc_bus_init(void){
     // AD7606 updates DOUT on rising SCLK; sample on falling edge, idle high (mode 2).
     spi_device_interface_config_t d={.clock_speed_hz=8000000,.mode=2,.spics_io_num=ADC_CS,.queue_size=1};
     TRY(spi_bus_add_device(SPI2_HOST,&d,&adc));TRY(adc_configure());
-    gptimer_config_t c={.clk_src=GPTIMER_CLK_SRC_DEFAULT,.direction=GPTIMER_COUNT_UP,.resolution_hz=1000000};TRY(gptimer_new_timer(&c,&timer));
+    gptimer_config_t c={.clk_src=GPTIMER_CLK_SRC_DEFAULT,.direction=GPTIMER_COUNT_UP,
+        .resolution_hz=1000000};TRY(gptimer_new_timer(&c,&timer));
     gptimer_event_callbacks_t cb={.on_alarm=tick};TRY(gptimer_register_event_callbacks(timer,&cb,NULL));
     gptimer_alarm_config_t a={.alarm_count=125,.reload_count=0,.flags.auto_reload_on_alarm=true};TRY(gptimer_set_alarm_action(timer,&a));return gptimer_enable(timer);
 }
 esp_err_t adc_stream_start(void){atomic_store(&pending,false);atomic_store(&stream_fault,false);TRY(gptimer_set_raw_count(timer,0));return gptimer_start(timer);}
 void adc_stream_stop(void){if(timer)gptimer_stop(timer);gpio_set_level(ADC_CONVST,0);}
 esp_err_t emg_frame(int32_t codes[4],uint16_t *status,uint16_t *crc){
-    if(atomic_load(&stream_fault)||!atomic_load(&pending)||gpio_get_level(ADC_DRDY))return ESP_ERR_INVALID_STATE;
+    if(atomic_load(&stream_fault))return ESP_ERR_TIMEOUT;
+    if(!atomic_load(&pending))return ESP_ERR_INVALID_STATE;
+    // The timer wakes the recorder immediately after CONVST. Wait for BUSY
+    // deassertion before SCLK, with a deadline that leaves room for the 16us read.
+    // Diagnostic builds may still call this after the falling BUSY interrupt.
+    const int64_t ready_deadline=esp_timer_get_time()+80;
+    while(gpio_get_level(ADC_DRDY)) {
+        if(atomic_load(&stream_fault)||esp_timer_get_time()>=ready_deadline){
+            atomic_store(&stream_fault,true);return ESP_ERR_TIMEOUT;
+        }
+        esp_rom_delay_us(1);
+    }
+#ifdef AFO_ADC_TRACE
+    adc_trace_read_start=esp_timer_get_time();
+#endif
     uint8_t rx[16]={0};spi_transaction_t t={.length=128,.rx_buffer=rx};TRY(spi_device_polling_transmit(adc,&t));
     for(unsigned i=0;i<4;i++){uint16_t u=((uint16_t)rx[2*i]<<8)|rx[2*i+1];codes[i]=i<EMG_CHANNEL_COUNT?(u&0x8000?(int32_t)u-65536:(int32_t)u):0;}
     *status=0;*crc=0; // Original AD7606 has no sensor-frame CRC. Container CRC is separate.
-    atomic_store(&pending,false);return atomic_load(&stream_fault)?ESP_ERR_TIMEOUT:ESP_OK;
+    atomic_store(&pending,false);
+#ifdef AFO_ADC_TRACE
+    adc_trace_read_end=esp_timer_get_time();
+#endif
+    return atomic_load(&stream_fault)?ESP_ERR_TIMEOUT:ESP_OK;
 }
 #endif

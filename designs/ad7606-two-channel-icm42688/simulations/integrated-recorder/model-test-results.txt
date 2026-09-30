@@ -1,0 +1,12 @@
+PASS custom chip initializes the single-output SPI mode-2 interface
+PASS normal conversion asserts BUSY and its 4us completion clears it
+PASS all eight signed serial words preserve byte order and channel identity
+PASS a second trigger while BUSY is high cannot advance the waveform
+PASS stuck-low BUSY fault still advances converter data without an observable BUSY pulse
+PASS ignored CONVST leaves BUSY low and retains plausible stale waveform words
+PASS removing ignored-trigger fault permits the next ordered waveform sample
+PASS RESET stops the completion timer and restarts waveform indexing
+PASS full stimulus table and rollover retain two-channel order and zero unused model inputs
+PASS stuck-high BUSY fault has no scheduled completion
+PASS delayed conversion schedules exactly 250us BUSY
+PASS wrong serial-mode model returns plausible signed minus-one codes

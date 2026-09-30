@@ -1,0 +1,6 @@
+{
+  "case": "normal",
+  "pass": false,
+  "exit_code": 0,
+  "error": "ValueError: normal recording has a quality failure"
+}

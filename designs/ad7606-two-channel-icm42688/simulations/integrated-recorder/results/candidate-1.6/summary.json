@@ -1,0 +1,119 @@
+{
+  "source_set": "ad7606-2ch-1.6",
+  "current_source_and_image_manifest": "../../firmware/manifest.json",
+  "hardware_measured": false,
+  "firmware_executed": false,
+  "full_matrix_pass": false,
+  "planned_cases": 18,
+  "cloud_attempts": 1,
+  "cases": [
+    {
+      "case": "normal",
+      "pass": null,
+      "status": "pending_cloud_execution",
+      "reason": "The current v1.6 attempt was refused by account monthly CI quota; this case has no v1.6 firmware execution evidence."
+    },
+    {
+      "case": "write-delay-50ms",
+      "pass": null,
+      "status": "pending_cloud_execution",
+      "reason": "The current v1.6 attempt was refused by account monthly CI quota; this case has no v1.6 firmware execution evidence."
+    },
+    {
+      "case": "queue-stall-350ms",
+      "pass": null,
+      "status": "pending_cloud_execution",
+      "reason": "The current v1.6 attempt was refused by account monthly CI quota; this case has no v1.6 firmware execution evidence."
+    },
+    {
+      "case": "storage-write-error",
+      "pass": null,
+      "status": "pending_cloud_execution",
+      "reason": "The current v1.6 attempt was refused by account monthly CI quota; this case has no v1.6 firmware execution evidence."
+    },
+    {
+      "case": "usb-attached-during-recording",
+      "pass": null,
+      "status": "pending_cloud_execution",
+      "reason": "The current v1.6 attempt was refused by account monthly CI quota; this case has no v1.6 firmware execution evidence."
+    },
+    {
+      "case": "battery-low",
+      "pass": null,
+      "status": "pending_cloud_execution",
+      "reason": "The current v1.6 attempt was refused by account monthly CI quota; this case has no v1.6 firmware execution evidence."
+    },
+    {
+      "case": "adc-stuck-busy",
+      "pass": null,
+      "status": "pending_cloud_execution",
+      "reason": "The current v1.6 attempt was refused by account monthly CI quota; this case has no v1.6 firmware execution evidence."
+    },
+    {
+      "case": "imu-fifo-overflow",
+      "pass": null,
+      "status": "pending_cloud_execution",
+      "reason": "The current v1.6 attempt was refused by account monthly CI quota; this case has no v1.6 firmware execution evidence."
+    },
+    {
+      "case": "imu-missing-interrupt",
+      "pass": null,
+      "status": "pending_cloud_execution",
+      "reason": "The current v1.6 attempt was refused by account monthly CI quota; this case has no v1.6 firmware execution evidence."
+    },
+    {
+      "case": "no-wireless-subscriber",
+      "pass": null,
+      "status": "pending_cloud_execution",
+      "reason": "The current v1.6 attempt was refused by account monthly CI quota; this case has no v1.6 firmware execution evidence."
+    },
+    {
+      "case": "wireless-packet-loss",
+      "pass": null,
+      "status": "pending_cloud_execution",
+      "reason": "The current v1.6 attempt was refused by account monthly CI quota; this case has no v1.6 firmware execution evidence."
+    },
+    {
+      "case": "interrupted-recording",
+      "pass": null,
+      "status": "pending_cloud_execution",
+      "reason": "The current v1.6 attempt was refused by account monthly CI quota; this case has no v1.6 firmware execution evidence."
+    },
+    {
+      "case": "storage-mount-failure",
+      "pass": null,
+      "status": "pending_cloud_execution",
+      "reason": "The current v1.6 attempt was refused by account monthly CI quota; this case has no v1.6 firmware execution evidence."
+    },
+    {
+      "case": "full-card-refusal",
+      "pass": null,
+      "status": "pending_cloud_execution",
+      "reason": "The current v1.6 attempt was refused by account monthly CI quota; this case has no v1.6 firmware execution evidence."
+    },
+    {
+      "case": "filtered-synthetic-emg",
+      "pass": null,
+      "status": "pending_cloud_execution",
+      "reason": "The current v1.6 attempt was refused by account monthly CI quota; this case has no v1.6 firmware execution evidence."
+    },
+    {
+      "case": "absent-shank",
+      "pass": null,
+      "status": "pending_cloud_execution",
+      "reason": "The current v1.6 attempt was refused by account monthly CI quota; this case has no v1.6 firmware execution evidence."
+    },
+    {
+      "case": "adc-busy-stays-low",
+      "pass": null,
+      "status": "not_run_quota",
+      "reason": "The current v1.6 attempt was refused by account monthly CI quota; this case has no v1.6 firmware execution evidence."
+    },
+    {
+      "case": "adc-trigger-ignored",
+      "pass": null,
+      "status": "pending_cloud_execution",
+      "reason": "The current v1.6 attempt was refused by account monthly CI quota; this case has no v1.6 firmware execution evidence."
+    }
+  ]
+}

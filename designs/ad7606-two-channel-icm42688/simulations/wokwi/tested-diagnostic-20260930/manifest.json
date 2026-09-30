@@ -1,0 +1,16 @@
+{
+  "historical_tested_image": true,
+  "hardware_measured": false,
+  "result_file": "../results/scenarios.json",
+  "sha256": {
+    "simulations/wokwi/firmware/afo_recorder.elf": "f692f43f679b2f93bffbd3c3c342bf41ae96365dcb65c46e972e8a1fde791e60",
+    "simulations/wokwi/firmware/merged.bin": "42a0e75c7a8e3f8707446313990df5ae82b8ac62d8b586f8c585df593f1f7a88",
+    "firmware/main/adc_ad7606.c": "b620a4e99f5e495702f1b745623499c1ae2802b687d55713e6140e150d7dd817",
+    "firmware/main/diagnostic.c": "5a46b93676fcec804c5d20d999d7c345bb13d95984d35628debad88b844c21cf",
+    "firmware/main/sensors.c": "f5c6034a43b260de6282d902a1d76d3e4db60bcbca64d364ebd34fc733df84c9",
+    "firmware/main/sensors.h": "ef7cdd16559c82d9f7552aeeb14e46400645ce694ec352da3cc8344fbc333dea",
+    "firmware/main/board.h": "11f3f4d30c3b70410810426ffe6371088ed250903c7e569ba36858d6248439cc",
+    "firmware/main/variant.h": "55c2cdaef8b2d56e2ced2aa23984a289038adc6caaf9d164c92830c24b8cffb9",
+    "firmware/sdkconfig.defaults": "25ced70d222b58f2da3c78dd365fc66b23cdb81b176bf36fdb173b9b266e588c"
+  }
+}

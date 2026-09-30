@@ -1,21 +1,17 @@
-# Project lead: Muttakin Rahman
+# AD7606 · Two EMG channels · ICM-42688-P
 
-Start with [the guided build](viewer/build.html). The [source and licence notices](THIRD_PARTY_NOTICES.md) distinguish project material from third-party assets.
+Project lead: Muttakin Rahman
 
-> Current assembly entrypoint: [complete build guide](docs/build-guide.html), [module qualification](docs/module-qualification.md), and [current validation](docs/validation-report.md). Historical reports and stage overview drawings are retained for traceability.
+[Open the assembly workspace](viewer/build.html) · [Short lab sequence](docs/lab-quickstart.html) · [Complete connection tables](docs/build-guide.html) · [Integrated verification](docs/integrated-verification.html)
 
-# AD7606 · Two EMG channels — ICM-42688-P
+This package is the fixed two-input recorder: two bare MyoWare 2.0 RAW sensors, an AD7606 and two ICM-42688-P carriers. Current recording firmware **ad7606-2ch-1.6** retains the ADC task wake-up and IMU timestamp corrections exposed by integrated execution, and additionally rejects a missing BUSY assertion after CONVST instead of accepting stale data. The electrical design and the five other configurations are unchanged.
 
-[Open the assembly viewer](viewer/index.html) · [Build guide](docs/staged-build-guide.md) · [Wiring guide](docs/breadboard-assembly.md)
+The preserved **v1.5** production recorder, sensor drivers, serializer and Wi-Fi code ran together in a Wokwi ESP32-S3 harness with real ESP-IDF FreeRTOS, FatFS and lwIP. Ten cases completed and passed both CLI and firmware checks; nominal recording/file/UDP checks also pass, with an optional trace download failure. The low-battery case is partial and four cases were not executed because the account's monthly CI quota was exhausted. **The full matrix has not passed.** The [exact tested v1.5 source/configuration/model/image snapshot](simulations/integrated-recorder/tested-source-1.5/manifest.json) is retained. Current v1.6 has an 18-case cloud candidate, including missing-BUSY and ignored-CONVST faults. All 18 remain unexecuted; one attempted case was refused because of monthly quota. Read the [current report and evidence limits](docs/integrated-verification.html) before interpreting these results.
 
-This focused revision corrects diagnostics and metadata for the fixed two-input ICM build. Other variants are unchanged.
+Local checks include clean KiCad ERC/DRC and independent connectivity comparison, seven recompiled laboratory profiles, 16 ADC driver groups, eight IMU timing groups, 38 recorder-control cases, 40 converter/live/legacy tests, 16 evidence-runner tests and 12 independent behavioral-ADC model groups. Nine timing-audit tests inspect the preserved capture, including its explicit 55,001 µs foot/shank startup estimate offset. Two laptop socket/API/browser/archive replays preserve correct identities, packet gaps and absent END. A separate 60-second native C pipeline processes 480,000 ngspice-filtered synthetic EMG frames, 12,009 foot and 12,001 shank samples through the actual drivers and recording format. Its modeled clocks cross more than 900 counter rollovers each; the remaining foot FIFO packet at stop is accounted for explicitly. These scopes are distinct; none constitutes a measured recorder.
 
-Start with the [circuit audit and verification limits](docs/circuit-audit.md), [short lab sequence](docs/lab-quickstart.md), and [Wokwi package](simulations/wokwi/README.md). Seven actual-firmware Wokwi scenarios pass; [execution results](docs/virtual-verification.md) state the capture/model limits. Physical validation remains outstanding.
+Use the [circuit audit](docs/circuit-audit.html) for the signal path and scaling, [recording/recovery guide](docs/recording-verification.html) for fault indications, and [module qualification](docs/module-qualification.md) before connecting a received AD7606 module to the ESP32. The [historical diagnostic report](docs/virtual-verification.html) retains the earlier seven Wokwi scenarios and their tested source/image snapshot. Earlier 300-cycle RTOS lifecycle results are also preserved; they are not reruns of every current image.
 
-Serve this folder over HTTP; opening the viewer directly as a local HTML file will block asset fetches in most browsers. Standard filenames such as CMakeLists.txt, main.c, index.html and KiCad project members are retained for tool compatibility.
+For reproduction, see the [integrated harness](simulations/integrated-recorder/README.md), [local pipeline](simulations/offline-pipeline/README.md), [native driver checks](simulations/driver-tests/README.md) and [recording tests](simulations/recorder-tests/README.md). Serve this folder over HTTP: direct local HTML access blocks viewer asset fetches in most browsers. Standard tool filenames are retained for compatibility.
 
-All hardware remains an engineering prototype pending physical validation. Module pin positions and outstanding wiring gates are documented; no board order is implied.
-
-Additional checks: [production ADC driver host tests](simulations/driver-tests/README.md) and [simulation evidence safeguards](simulations/wokwi/README.md#evidence-safeguards). The [Wokwi report](docs/virtual-verification.md) separately records actual ESP32 simulator execution.
-
-Recording firmware **ad7606-2ch-1.4** adds safe task ownership through shutdown and a final storage verdict before wireless END. [Recording verification](docs/recording-verification.html) documents 38 native control cases, RTOS lifecycle evidence, recovery limits and stop indications. Three recording images were rebuilt; four diagnostic images retain their prior tested binaries. No physical measurements or PCB order are implied.
+The [source and licence notices](THIRD_PARTY_NOTICES.md) distinguish project material from third-party assets. All hardware remains an engineering prototype pending physical validation; no board order or human-use approval is implied.

@@ -1,0 +1,243 @@
+{
+  "version": 1,
+  "author": "AFO Recorder project",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "board-esp32-s3-devkitc-1",
+      "id": "esp",
+      "top": 0,
+      "left": 0,
+      "attrs": {
+        "flashSize": "8",
+        "psramSize": "8",
+        "psramType": "octal",
+        "cpuFrequency": "max",
+        "serialInterface": "USB_SERIAL_JTAG"
+      }
+    },
+    {
+      "type": "chip-ad7606",
+      "id": "adc",
+      "top": 0,
+      "left": 350,
+      "attrs": {
+        "fault": "0"
+      }
+    },
+    {
+      "type": "chip-icm42688",
+      "id": "foot",
+      "top": 180,
+      "left": 350,
+      "attrs": {
+        "identity": "1",
+        "fault": "0"
+      }
+    },
+    {
+      "type": "chip-icm42688",
+      "id": "shank",
+      "top": 350,
+      "left": 350,
+      "attrs": {
+        "identity": "2",
+        "fault": "0"
+      }
+    },
+    {
+      "type": "chip-fixture",
+      "id": "fixture",
+      "top": -200,
+      "left": 350,
+      "attrs": {
+        "case": "12"
+      }
+    },
+    {
+      "type": "wokwi-logic-analyzer",
+      "id": "logic",
+      "top": 0,
+      "left": 650,
+      "attrs": {
+        "bufferSize": "1000000"
+      }
+    }
+  ],
+  "connections": [
+    [
+      "esp:10",
+      "adc:CS",
+      "green",
+      []
+    ],
+    [
+      "esp:11",
+      "adc:CONVST",
+      "green",
+      []
+    ],
+    [
+      "esp:9",
+      "adc:RESET",
+      "green",
+      []
+    ],
+    [
+      "esp:8",
+      "adc:BUSY",
+      "green",
+      []
+    ],
+    [
+      "esp:12",
+      "adc:SCLK",
+      "green",
+      []
+    ],
+    [
+      "esp:13",
+      "adc:DOUTA",
+      "green",
+      []
+    ],
+    [
+      "esp:7",
+      "foot:CS",
+      "green",
+      []
+    ],
+    [
+      "esp:6",
+      "foot:SCLK",
+      "green",
+      []
+    ],
+    [
+      "esp:4",
+      "foot:SDI",
+      "green",
+      []
+    ],
+    [
+      "esp:5",
+      "foot:SDO",
+      "green",
+      []
+    ],
+    [
+      "esp:16",
+      "foot:INT1",
+      "green",
+      []
+    ],
+    [
+      "esp:15",
+      "shank:CS",
+      "green",
+      []
+    ],
+    [
+      "esp:6",
+      "shank:SCLK",
+      "green",
+      []
+    ],
+    [
+      "esp:4",
+      "shank:SDI",
+      "green",
+      []
+    ],
+    [
+      "esp:5",
+      "shank:SDO",
+      "green",
+      []
+    ],
+    [
+      "esp:17",
+      "shank:INT1",
+      "green",
+      []
+    ],
+    [
+      "esp:3",
+      "fixture:CASE0",
+      "blue",
+      []
+    ],
+    [
+      "esp:14",
+      "fixture:CASE1",
+      "blue",
+      []
+    ],
+    [
+      "esp:46",
+      "fixture:CASE2",
+      "blue",
+      []
+    ],
+    [
+      "esp:48",
+      "fixture:CASE3",
+      "blue",
+      []
+    ],
+    [
+      "adc:CONVST",
+      "logic:D0",
+      "blue",
+      []
+    ],
+    [
+      "adc:BUSY",
+      "logic:D1",
+      "blue",
+      []
+    ],
+    [
+      "adc:CS",
+      "logic:D2",
+      "blue",
+      []
+    ],
+    [
+      "adc:SCLK",
+      "logic:D3",
+      "blue",
+      []
+    ],
+    [
+      "adc:DOUTA",
+      "logic:D4",
+      "blue",
+      []
+    ],
+    [
+      "foot:INT1",
+      "logic:D5",
+      "blue",
+      []
+    ],
+    [
+      "shank:INT1",
+      "logic:D6",
+      "blue",
+      []
+    ],
+    [
+      "foot:CS",
+      "logic:D7",
+      "blue",
+      []
+    ],
+    [
+      "esp:GND.1",
+      "logic:GND",
+      "black",
+      []
+    ]
+  ]
+}

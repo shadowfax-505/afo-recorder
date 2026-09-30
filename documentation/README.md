@@ -39,4 +39,4 @@ Every one of these evidence files marks or implies that physical hardware measur
 
 ## Focused circuit audit
 
-[AD7606, two channels, ICM-42688-P: audit and evidence](../designs/ad7606-two-channel-icm42688/docs/circuit-audit.md) · [short lab guide](../designs/ad7606-two-channel-icm42688/docs/lab-quickstart.md). The Wokwi system gate remains unresolved.
+[AD7606, two channels, ICM-42688-P: circuit audit](../designs/ad7606-two-channel-icm42688/docs/circuit-audit.md) · [integrated verification](../designs/ad7606-two-channel-icm42688/docs/integrated-verification.html) · [short lab guide](../designs/ad7606-two-channel-icm42688/docs/lab-quickstart.md). The integrated report lists completed executions, failed experiments, infrastructure failures and remaining cloud cases separately. Physical qualification remains pending.

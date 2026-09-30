@@ -1,0 +1,53 @@
+[
+  {
+    "command": [
+      "open",
+      "http://127.0.0.1:60151/"
+    ],
+    "returncode": 0,
+    "output": "### Browser `afo-laptop-wireless-packet-loss` opened with pid 1482.\n### Ran Playwright code\n```js\nawait page.goto('http://127.0.0.1:60151/');\n```\n### Page\n- Page URL: http://127.0.0.1:60151/\n- Page Title: AFO \u00b7 Live acquisition\n### Snapshot\n- [Snapshot](.playwright-cli/page-2026-09-30T20-49-59-413Z.yml)\n"
+  },
+  {
+    "command": [
+      "snapshot"
+    ],
+    "returncode": 0,
+    "output": "### Page\n- Page URL: http://127.0.0.1:60151/\n- Page Title: AFO \u00b7 Live acquisition\n### Snapshot\n```yaml\n- generic [active] [ref=e1]:\n  - banner [ref=e2]:\n    - generic [ref=e3]:\n      - generic [ref=e4]: AFO / LIVE ACQUISITION\n      - heading \"Your recorder, on your laptop.\" [level=1] [ref=e5]\n    - generic [ref=e6]: Waiting / link unavailable\n  - generic [ref=e7]: SYNTHETIC DEMO \u00b7 No physical ESP32 measurements\n  - main [ref=e8]:\n    - generic [ref=e9]:\n      - generic [ref=e10]:\n        - text: Wireless records received\n        - generic [ref=e11]: 9,029\n      - generic [ref=e12]:\n        - text: Missing UDP packets since connection\n        - generic [ref=e13]: \"158\"\n      - generic [ref=e14]:\n        - text: ESP32 preview queue drops / boot\n        - generic [ref=e15]: \"1\"\n      - generic [ref=e16]:\n        - text: Battery from device status\n        - generic [ref=e17]: 3.80 V\n    - generic [ref=e18]: Loss or irregular delivery detected. Inspect the quality report and compare with the SD file.\n    - generic [ref=e19]:\n      - figure \"EMG1 \u00b7 ADC input voltage\" [ref=e20]\n      - figure \"EMG2 \u00b7 ADC input voltage\" [ref=e23]\n    - generic [ref=e26]:\n      - generic [ref=e27]:\n        - heading \"Foot IMU\" [level=2] [ref=e28]\n        - generic [ref=e29]: \"Acceleration [g]: 0.000 / 0.000 / 1.000 \u00b7 Angular velocity [\u00b0/s]: 0.00 / 0.00 / 0.00 \u00b7 Sample 263 \u00b7 Timing flags 2\"\n      - generic [ref=e30]:\n        - heading \"Shank IMU\" [level=2] [ref=e31]\n        - generic [ref=e32]: \"Acceleration [g]: 0.001 / 0.000 / 1.000 \u00b7 Angular velocity [\u00b0/s]: 0.00 / 0.00 / 0.00 \u00b7 Sample 251 \u00b7 Timing flags 2\"\n    - generic [ref=e33]:\n      - heading \"Recording and link quality\" [level=2] [ref=e34]\n      - generic [ref=e35]: \"{ \\\"session\\\": \\\"38b1e738-4f2fd3c9\\\", \\\"stream\\\": \\\"SYNTHETIC\\\", \\\"packet_age_seconds\\\": 3.86, \\\"sample_age_seconds\\\": 7.96, \\\"first_sample_sequences\\\": { \\\"2\\\": 1, \\\"3\\\": 1, \\\"7\\\": 1 }, \\\"sample_sequence_gaps\\\": { \\\"2\\\": 38, \\\"3\\\": 38, \\\"7\\\": 1449 }, \\\"link\\\": { \\\"packets\\\": 963, \\\"packet_gaps\\\": 158, \\\"reordered_or_duplicate\\\": 0, \\\"invalid_packets\\\": 0, \\\"unknown_session_packets\\\": 0, \\\"device_queue_drops\\\": 1 }, \\\"device_health\\\": { \\\"timer_missed\\\": 0, \\\"queue_dropped\\\": 0, \\\"imu_errors\\\": 0, \\\"fifo_overflows\\\": 0, \\\"adc_errors\\\": 0, \\\"emg_records\\\": 8036, \\\"foot_records\\\": 212, \\\"shank_records\\\": 201, \\\"battery_mv\\\": 3800, \\\"queue_high_water\\\": 61 }, \\\"stop_reason\\\": null }\"\n    - generic [ref=e36]:\n      - text: \"SD remains the primary recording. Wireless packets can be lost. Receiving an END packet does not prove an SD flush succeeded. Wi-Fi timing, electrical noise, and battery runtime require physical validation.Saved on this laptop: /var/folders/w5/b_txk1fj1gs03jrsn0275fth0000gn/T/afo-laptop-synthetic-1l93pwrn/capture\"\n      - link \"Open the 3D prototype \u2197\" [ref=e37] [cursor=pointer]:\n        - /url: http://127.0.0.1:8769/afo-ad7606-two/viewer/\n```\n"
+  },
+  {
+    "command": [
+      "--raw",
+      "eval",
+      "JSON.stringify({title:document.title,state:document.getElementById('state').textContent,synthetic:getComputedStyle(document.getElementById('demo')).display!=='none',records:document.getElementById('records').textContent,gaps:document.getElementById('gaps').textContent,notice:document.getElementById('notice').textContent,labels:[...document.querySelectorAll('figcaption')].map(x=>x.textContent),foot:document.getElementById('foot').textContent,shank:document.getElementById('shank').textContent,canvas:[...document.querySelectorAll('canvas')].map(c=>{const p=c.getContext('2d').getImageData(0,0,c.width,c.height).data;let colored=0;for(let n=0;n<p.length;n+=4)if((p[n+1]>p[n]*1.15&&p[n+1]>p[n+2]*1.1)||(p[n]>p[n+1]*1.1&&p[n+1]>p[n+2]*1.2))colored++;return colored})})"
+    ],
+    "returncode": 0,
+    "output": "\"{\\\"title\\\":\\\"AFO \u00b7 Live acquisition\\\",\\\"state\\\":\\\"Connected \u00b7 no fresh samples\\\",\\\"synthetic\\\":true,\\\"records\\\":\\\"9,029\\\",\\\"gaps\\\":\\\"158\\\",\\\"notice\\\":\\\"Loss or irregular delivery detected. Inspect the quality report and compare with the SD file.\\\",\\\"labels\\\":[\\\"EMG1 \u00b7 ADC input voltage\\\",\\\"EMG2 \u00b7 ADC input voltage\\\"],\\\"foot\\\":\\\"Acceleration [g]: 0.000 / 0.000 / 1.000 \u00b7 Angular velocity [\u00b0/s]: 0.00 / 0.00 / 0.00 \u00b7 Sample 263 \u00b7 Timing flags 2\\\",\\\"shank\\\":\\\"Acceleration [g]: 0.001 / 0.000 / 1.000 \u00b7 Angular velocity [\u00b0/s]: 0.00 / 0.00 / 0.00 \u00b7 Sample 251 \u00b7 Timing flags 2\\\",\\\"canvas\\\":[1400,1421]}\"\n"
+  },
+  {
+    "command": [
+      "screenshot",
+      "--filename",
+      "/Users/muttakinrahman/Documents/Codex/2026-09-12/i-want-to-do-a-research-2/outputs/afo-recorder-project/designs/ad7606-two-channel-icm42688/simulations/laptop-tests/results/output/playwright/wireless-packet-loss.png",
+      "--full-page"
+    ],
+    "returncode": 0,
+    "output": "### Result\n- [Screenshot of full page](outputs/afo-recorder-project/designs/ad7606-two-channel-icm42688/simulations/laptop-tests/results/output/playwright/wireless-packet-loss.png)\n### Ran Playwright code\n```js\n// Screenshot full page and save it as outputs/afo-recorder-project/designs/ad7606-two-channel-icm42688/simulations/laptop-tests/results/output/playwright/wireless-packet-loss.png\nawait page.screenshot({\n  fullPage: true,\n  path: 'outputs/afo-recorder-project/designs/ad7606-two-channel-icm42688/simulations/laptop-tests/results/output/playwright/wireless-packet-loss.png',\n  scale: 'css',\n  type: 'png'\n});\n```\n"
+  },
+  {
+    "command": [
+      "console",
+      "error"
+    ],
+    "returncode": 0,
+    "output": "### Result\nTotal messages: 0 (Errors: 0, Warnings: 0)\n\n"
+  },
+  {
+    "command": [
+      "--raw",
+      "eval",
+      "document.getElementById('state').textContent"
+    ],
+    "returncode": 0,
+    "output": "\"Waiting / link unavailable\"\n"
+  }
+]

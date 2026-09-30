@@ -2,7 +2,7 @@
 
 **This guide is only for AD7606 + two MyoWare RAW inputs + two ICM-42688-P carriers.** Use the [exact hole/contact tables](build-guide.html) beside the [interactive build view](../viewer/build.html). Power off before each addition. Record the result before continuing; an empty results cell means untested.
 
-The numerical limits below are integration gates, not a calibration certificate or guaranteed performance. The filter envelope comes from `simulations/results/response.csv`; power, noise and timing still require measurements. Read the [virtual verification results and limits](virtual-verification.md), then complete the physical gates below before ordering the compact PCB.
+The numerical limits below are integration gates, not a calibration certificate or guaranteed performance. The filter envelope comes from `simulations/results/response.csv`; power, noise and timing still require measurements. Read the [current integrated results and incomplete cases](integrated-verification.html) and [historical diagnostic evidence](virtual-verification.html), then complete the physical gates below before ordering the compact PCB.
 
 | Step | Add only this | Instrument / check | Continue when | If it fails |
 |---|---|---|---|---|
@@ -36,4 +36,4 @@ At ADC initialization the firmware clocks a discarded read during RESET to estab
 
 ## Stopping and checking a recording
 
-For stages 7–9, wait for the recording LED to turn off before removing power or the SD card. An error LED, a nonzero wireless stop reason or a missing END packet requires investigation; do not label the trial successful from a visible filename. Convert the original SD file and keep its quality report with the measured results. A decoded END cannot certify persistence after a final sync/close error. See the [stop reasons and recovery checks](recording-verification.html). The recording images carry firmware identity `ad7606-2ch-1.4`; the four diagnostic images are unchanged.
+For stages 7–9, wait for the recording LED to turn off before removing power or the SD card. An error LED, a nonzero wireless stop reason or a missing END packet requires investigation; do not label the trial successful from a visible filename. Convert the original SD file and keep its quality report with the measured results. A decoded END cannot certify persistence after a final sync/close error. See the [stop reasons and recovery checks](recording-verification.html). The recording images carry firmware identity `ad7606-2ch-1.6`. All seven current v1.6 laboratory profiles were recompiled; the current diagnostic images have not been rerun in Wokwi. Preserve each measured run’s actual binary hash rather than substituting a simulator result.

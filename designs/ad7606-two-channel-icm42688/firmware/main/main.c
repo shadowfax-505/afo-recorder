@@ -9,6 +9,7 @@
 #include "board.h"
 #include "format.h"
 #include "sensors.h"
+#include "imu_timing.h"
 #include "wifi_live.h"
 #include "driver/gpio.h"
 
@@ -39,6 +40,10 @@ static uint64_t irq_time[2];
 static uint32_t irq_count[2];
 static int current_battery;
 static uint32_t status_seq;
+#ifdef AFO_ADC_TRACE
+volatile uint32_t emg_trace_phase,emg_trace_irq_phase;
+volatile uint64_t emg_trace_irq_entered;
+#endif
 static uint8_t block[8192];
 static size_t block_used;
 
@@ -78,13 +83,16 @@ static void enqueue(const afo_record_t *r) {
         while(n>old&&!atomic_compare_exchange_weak(&queue_high_water,&old,n)) {}
     }
 }
-static void adc_irq(void *arg) {
+static bool adc_trigger(void *arg) {
     (void)arg;BaseType_t wake=pdFALSE;
+#ifdef AFO_ADC_TRACE
+    emg_trace_irq_entered=esp_timer_get_time();emg_trace_irq_phase=emg_trace_phase;
+#endif
     portENTER_CRITICAL_ISR(&irq_lock);
     adc_irq_time=adc_sample_timestamp();adc_irq_count++;
     portEXIT_CRITICAL_ISR(&irq_lock);
     if(emg_task_handle)vTaskNotifyGiveFromISR(emg_task_handle,&wake);
-    if(wake)portYIELD_FROM_ISR();
+    return wake==pdTRUE;
 }
 static void imu_irq(void *arg) {
     unsigned id=(unsigned)(uintptr_t)arg;
@@ -99,7 +107,13 @@ static void irq_snapshot(unsigned id,uint64_t *time,uint32_t *count) {
 static void emg_task(void *arg) {
     (void)arg;uint32_t previous=0;
     while(atomic_load(&running)) {
+#ifdef AFO_ADC_TRACE
+        emg_trace_phase=1;
+#endif
         uint32_t n=ulTaskNotifyTake(pdTRUE,pdMS_TO_TICKS(20));
+#ifdef AFO_ADC_TRACE
+        emg_trace_phase=2;
+#endif
         if(!atomic_load(&running))break;
         if(!gpio_get_level(USB_PRESENT_PIN)){set_fault(STOP_USB);atomic_store(&running,false);break;}
         if(!n){set_fault(STOP_TIMING);break;}
@@ -113,18 +127,23 @@ static void emg_task(void *arg) {
         int32_t codes[4];uint16_t status,crc;
         esp_err_t e=emg_frame(codes,&status,&crc);
         p.read_duration_us=esp_timer_get_time()-p.read_start_us;
-        if(e!=ESP_OK){adc_errors++;set_fault(STOP_SENSOR);break;}
+        if(e!=ESP_OK){adc_errors++;set_fault(e==ESP_ERR_TIMEOUT?STOP_TIMING:STOP_SENSOR);break;}
         memcpy(p.codes,codes,sizeof(codes));p.adc_status=status;p.adc_crc=crc;
         portENTER_CRITICAL(&irq_lock);uint32_t after=adc_irq_count;portEXIT_CRITICAL(&irq_lock);
         uint8_t flags=slots>1?FLAG_GAP:0;
         if(after!=seq){flags|=FLAG_TIMING_UNCERTAIN;set_fault(STOP_TIMING);}
         afo_record_t r;afo_record_init(&r,AFO_EMG_RECORD_KIND,flags,seq,stamp,&p,sizeof(p));
-        emg_records++;enqueue(&r);
+        emg_records++;
+#ifdef AFO_ADC_TRACE
+        emg_trace_phase=3;
+#endif
+        enqueue(&r);
     }
     worker_finished(1);
 }
 static void imu_task(void *arg) {
     (void)arg; uint8_t data[2048];uint32_t seq[2]={0};
+    imu_clock_t clocks[2]={0};
     const uint64_t started=esp_timer_get_time();
     while(atomic_load(&running)) {
         for(unsigned id=0;id<2&&atomic_load(&running);id++) {
@@ -143,8 +162,8 @@ static void imu_task(void *arg) {
             if(overflow) { fifo_overflows++;set_fault(STOP_SENSOR);continue; }
             if(!anchor||t1-anchor>100000) { imu_errors++;set_fault(STOP_SENSOR);continue; }
             if(!packets) continue;
-            // Back-propagate FIFO intervals from the latest IRQ anchor. This is an
-            // estimate, not calibrated physical sample time; preserve all raw evidence.
+            // Back-propagation establishes the first estimate only. Subsequent
+            // samples follow the raw sensor counter, independent of IRQ races.
             uint64_t lag[128]={0};
             for(int k=(int)packets-2;k>=0;k--) {
                 uint16_t a=(data[k*16+14]<<8)|data[k*16+15];
@@ -158,10 +177,18 @@ static void imu_task(void *arg) {
                 imu_payload_t out;memcpy(out.fifo_packet,p,16);
                 out.read_start_us=t0;out.read_end_us=t1;out.irq_anchor_us=anchor;
                 uint8_t flags=FLAG_TIMING_UNCERTAIN;
-                if(after!=before||anchor<lag[k]) flags|=FLAG_GAP;
+                // An IRQ during a FIFO read makes the host anchor uncertain;
+                // it does not establish missing sensor samples. Counter gaps
+                // are checked separately by imu_clock_step below.
+                if(after!=before)flags|=FLAG_TIMING_UNCERTAIN;
+                if(!clocks[id].initialized&&anchor<lag[k])flags|=FLAG_GAP;
                 for(unsigned j=1;j<13;j+=2)
                     if(p[j]==0x80&&p[j+1]==0) flags|=FLAG_INVALID;
-                uint64_t estimate=anchor>=lag[k]?anchor-lag[k]:0;
+                uint64_t estimate;bool gap;
+                uint16_t ticks=((uint16_t)p[14]<<8)|p[15];
+                if(!imu_clock_step(&clocks[id],ticks,anchor>=lag[k]?anchor-lag[k]:0,
+                    t0,&estimate,&gap)) {imu_errors++;set_fault(STOP_TIMING);continue;}
+                if(gap)flags|=FLAG_GAP;
                 afo_record_t r;afo_record_init(&r,id?REC_SHANK:REC_FOOT,flags,
                     ++seq[id],estimate,&out,sizeof(out));
                 if(id)shank_records++;else foot_records++;
@@ -236,13 +263,14 @@ static void record_session(void) {
     char meta[2048];
     snprintf(meta,sizeof(meta),
       "{" AFO_ADC_METADATA AFO_SD_METADATA
-      "\"firmware\":\"ad7606-2ch-1.4\",\"hardware_variant\":\"" HARDWARE_VARIANT "\","
+      "\"firmware\":\"ad7606-2ch-1.6\",\"hardware_variant\":\"" HARDWARE_VARIANT "\","
       "\"synthetic\":false,\"trial_id\":\"%s\",\"clock\":\"esp_timer_boot_us\","
       "\"emg_hz\":8000,\"imu_hz\":200,\"imu_enabled\":true,"
       "\"active_channel_count\":%d,\"emg_channels\":%s,"
       "\"calibration_state\":\"uncalibrated\",\"simultaneous\":true,"
       "\"accel_range_g\":16,\"gyro_range_dps\":2000,\"imu_timestamp_tick_us\":1,"
       "\"imu_timing_calibrated\":false,\"imu_locations\":[\"foot\",\"shank\"],"
+      "\"imu_time\":\"fifo_delta_first_irq\","
       "\"placement_verified\":false,\"record_bytes\":64,\"usb_recording_inhibit\":true,"
       "\"analog_filter\":\"two cascaded 3.3k/47nF low-pass sections, each unity buffered; 100R series output, 1nF to ground; single-ended ADC\","
       "\"unplugged_input_bias_mv\":1500,\"unplugged_input_bias_ohm\":1000000,"
@@ -273,7 +301,6 @@ static void record_session(void) {
         stop_imus();gpio_intr_disable(FOOT_INT);gpio_intr_disable(SHANK_INT);
         close(fd);gpio_set_level(LED_ERROR,1);return;
     }
-    gpio_intr_enable(ADC_DRDY);
     if(adc_stream_start()!=ESP_OK)set_fault(STOP_SENSOR);
     gpio_set_level(LED_RECORD,1);ESP_LOGI(TAG,"Recording %s",path);
     int64_t start=esp_timer_get_time(),health=start;unsigned low_count=0;
@@ -318,6 +345,19 @@ static void record_session(void) {
     ESP_LOGI(TAG,"Stopped, reason=%d, finalized=%d, missed=%lu, dropped=%lu",reason,saved,
        (unsigned long)final.timer_missed,(unsigned long)final.queue_dropped);
 }
+static esp_err_t acquisition_init_result;
+static void acquisition_init_task(void *owner) {
+    // Allocate the GPIO and converter timer interrupts on the acquisition core.
+    // Initializing them from app_main would bind them to the storage/Wi-Fi core.
+    acquisition_init_result=gpio_install_isr_service(0);
+    if(acquisition_init_result==ESP_OK)acquisition_init_result=gpio_isr_handler_add(FOOT_INT,imu_irq,(void*)0);
+    if(acquisition_init_result==ESP_OK)acquisition_init_result=gpio_isr_handler_add(SHANK_INT,imu_irq,(void*)1);
+    adc_set_trigger_callback(adc_trigger,NULL);
+    gpio_intr_disable(FOOT_INT);gpio_intr_disable(SHANK_INT);gpio_intr_disable(ADC_DRDY);
+    if(acquisition_init_result==ESP_OK)acquisition_init_result=adc_bus_init();
+    xTaskNotifyGive((TaskHandle_t)owner);
+    vTaskDelete(NULL);
+}
 void app_main(void) {
     afo_format_init();
     gpio_config_t out={.pin_bit_mask=(1ULL<<LED_RECORD)|(1ULL<<LED_ERROR)|(1ULL<<LED_BATTERY),.mode=GPIO_MODE_OUTPUT};
@@ -325,17 +365,19 @@ void app_main(void) {
     gpio_config_t button={.pin_bit_mask=1ULL<<BUTTON_PIN,.mode=GPIO_MODE_INPUT,.pull_up_en=1};
     ESP_ERROR_CHECK(gpio_config(&button));
     gpio_config_t ints={.pin_bit_mask=(1ULL<<FOOT_INT)|(1ULL<<SHANK_INT),.mode=GPIO_MODE_INPUT,.intr_type=GPIO_INTR_POSEDGE};
-    ESP_ERROR_CHECK(gpio_config(&ints));ESP_ERROR_CHECK(gpio_install_isr_service(0));
-    ESP_ERROR_CHECK(gpio_isr_handler_add(FOOT_INT,imu_irq,(void*)0));
-    ESP_ERROR_CHECK(gpio_isr_handler_add(SHANK_INT,imu_irq,(void*)1));
-    gpio_intr_disable(FOOT_INT);gpio_intr_disable(SHANK_INT);
+    ESP_ERROR_CHECK(gpio_config(&ints));
     gpio_config_t usb={.pin_bit_mask=1ULL<<USB_PRESENT_PIN,.mode=GPIO_MODE_INPUT};
     ESP_ERROR_CHECK(gpio_config(&usb));
     gpio_config_t drdy={.pin_bit_mask=1ULL<<ADC_DRDY,.mode=GPIO_MODE_INPUT,.intr_type=GPIO_INTR_NEGEDGE};
-    ESP_ERROR_CHECK(gpio_config(&drdy));ESP_ERROR_CHECK(gpio_isr_handler_add(ADC_DRDY,adc_irq,NULL));
-    gpio_intr_disable(ADC_DRDY);
+    ESP_ERROR_CHECK(gpio_config(&drdy));
     queue=xQueueCreate(RECORD_QUEUE_LENGTH,sizeof(afo_record_t));done=xEventGroupCreate();
-    if(!queue||!done||sensors_init()!=ESP_OK||battery_init()!=ESP_OK)goto failed;
+    if(!queue||!done)goto failed;
+    if(xTaskCreatePinnedToCore(acquisition_init_task,"acquisition_init",8192,
+        xTaskGetCurrentTaskHandle(),5,NULL,1)!=pdPASS)goto failed;
+    ulTaskNotifyTake(pdTRUE,portMAX_DELAY);
+    // The IMU DMA bus belongs to the other core; keep its interrupt work away
+    // from the converter timer and BUSY notifications.
+    if(acquisition_init_result!=ESP_OK||imu_bus_init(IMU_COUNT)!=ESP_OK||battery_init()!=ESP_OK)goto failed;
     sdmmc_host_t host=SDMMC_HOST_DEFAULT();host.max_freq_khz=SDMMC_FREQ_DEFAULT;
     sdmmc_slot_config_t slot=SDMMC_SLOT_CONFIG_DEFAULT();
     slot.width=1;slot.clk=SD_CLK;slot.cmd=SD_CMD;slot.d0=SD_D0;

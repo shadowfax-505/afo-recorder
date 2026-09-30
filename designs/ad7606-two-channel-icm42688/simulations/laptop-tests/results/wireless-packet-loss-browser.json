@@ -1,0 +1,18 @@
+{
+  "title": "AFO \u00b7 Live acquisition",
+  "state": "Connected \u00b7 no fresh samples",
+  "synthetic": true,
+  "records": "9,029",
+  "gaps": "158",
+  "notice": "Loss or irregular delivery detected. Inspect the quality report and compare with the SD file.",
+  "labels": [
+    "EMG1 \u00b7 ADC input voltage",
+    "EMG2 \u00b7 ADC input voltage"
+  ],
+  "foot": "Acceleration [g]: 0.000 / 0.000 / 1.000 \u00b7 Angular velocity [\u00b0/s]: 0.00 / 0.00 / 0.00 \u00b7 Sample 263 \u00b7 Timing flags 2",
+  "shank": "Acceleration [g]: 0.001 / 0.000 / 1.000 \u00b7 Angular velocity [\u00b0/s]: 0.00 / 0.00 / 0.00 \u00b7 Sample 251 \u00b7 Timing flags 2",
+  "canvas": [
+    1400,
+    1421
+  ]
+}

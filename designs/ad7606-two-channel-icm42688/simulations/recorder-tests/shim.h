@@ -8,6 +8,8 @@
 typedef int esp_err_t;
 #define ESP_OK 0
 #define ESP_FAIL -1
+#define ESP_ERR_TIMEOUT 0x107
+#define ESP_INTR_FLAG_LEVEL2 (1<<2)
 #define ESP_ERROR_CHECK(e) ((void)(e))
 #define ESP_LOGI(...) ((void)0)
 #define ESP_LOGE(...) ((void)0)
@@ -63,6 +65,7 @@ BaseType_t xTaskCreatePinnedToCore(void (*entry)(void *),const char *name,
 void xTaskNotifyGive(TaskHandle_t task);
 void vTaskNotifyGiveFromISR(TaskHandle_t task,BaseType_t *wake);
 uint32_t ulTaskNotifyTake(BaseType_t clear,TickType_t wait);
+TaskHandle_t xTaskGetCurrentTaskHandle(void);
 void vTaskDelay(TickType_t ticks);
 void vTaskDelete(TaskHandle_t task);
 void vTaskSuspend(TaskHandle_t task);

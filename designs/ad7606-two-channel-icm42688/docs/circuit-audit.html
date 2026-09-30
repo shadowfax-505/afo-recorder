@@ -1,6 +1,6 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><link rel="icon" href="data:,"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Circuit review: AD7606, two EMG inputs, ICM-42688-P — AD7606 two-channel</title><style>body{margin:0;background:#f4f3ee;color:#172523;font:17px/1.65 system-ui}main{max-width:1060px;margin:auto;padding:48px 28px}h1{font-size:2.4rem;line-height:1.15}h2{margin-top:2.5em}a{color:#176454}table{border-collapse:collapse;font-size:14px;display:block;overflow:auto}td,th{padding:12px;border:1px solid #ccd4ce;text-align:left;vertical-align:top}th{background:#e2eae4}code{font-size:.9em}p{max-width:85ch}nav{font-size:14px;border-bottom:1px solid #ccd4ce;padding-bottom:16px}@media print{body{background:white}main{padding:0}table{display:table;font-size:10px}}</style><main><nav><a href="../viewer/build.html">Assembly workspace</a> / <a href="circuit-audit.html">Circuit audit</a> / <a href="lab-quickstart.html">Lab sequence</a> / <a href="recording-verification.html">Recording/recovery</a></nav><h1>Circuit review: AD7606, two EMG inputs, ICM-42688-P</h1>
-<p>Project lead: Muttakin Rahman · Review: 30 September 2026</p>
-<p><strong>The intended signal path is logically consistent, and fresh connectivity and software checks pass. This is not a fully verified recorder.</strong> Seven actual-firmware Wokwi scenarios pass under the documented behavioral models; no physical recorder has been measured. Do not interpret the manufacturing exports as an order recommendation.</p>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><link rel="icon" href="data:,"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Circuit review: AD7606, two EMG inputs, ICM-42688-P — AD7606 two-channel</title><style>body{margin:0;background:#f4f3ee;color:#172523;font:17px/1.65 system-ui}main{max-width:1060px;margin:auto;padding:48px 28px}h1{font-size:2.4rem;line-height:1.15}h2{margin-top:2.5em}a{color:#176454}table{border-collapse:collapse;font-size:14px;display:block;overflow:auto}td,th{padding:12px;border:1px solid #ccd4ce;text-align:left;vertical-align:top}th{background:#e2eae4}code{font-size:.9em}pre{overflow:auto;padding:16px;background:#e2eae4;border-radius:6px}p{max-width:85ch}img{max-width:100%;height:auto}nav{font-size:14px;border-bottom:1px solid #ccd4ce;padding-bottom:16px}blockquote{border-left:3px solid #809c8a;margin-left:0;padding-left:20px}@media(max-width:640px){main{padding:28px 18px}h1{font-size:1.9rem}}@media print{body{background:white}main{padding:0}table{display:table;font-size:10px}}</style></head><body><main><nav><a href="../viewer/build.html">Assembly workspace</a> / <a href="integrated-verification.html">Integrated verification</a> / <a href="circuit-audit.html">Circuit audit</a> / <a href="lab-quickstart.html">Lab sequence</a> / <a href="recording-verification.html">Recording/recovery</a></nav><h1>Circuit review: AD7606, two EMG inputs, ICM-42688-P</h1>
+<p>Project lead: Muttakin Rahman · Review: 1 October 2026</p>
+<p><strong>The intended signal path is logically consistent, and fresh connectivity and software checks pass. This is not a fully verified recorder.</strong> The <a href="integrated-verification.html">current integrated report</a> records ten complete CLI/firmware passes, an additional nominal firmware/file/UDP pass with trace-download failure, one partial case and four quota-blocked cases. The full matrix has not passed; no physical recorder has been measured. Do not interpret the manufacturing exports as an order recommendation.</p>
 <h2>What changed</h2>
 <table>
 <thead>
@@ -14,7 +14,7 @@
 <tr>
 <td>Recording metadata described a RAW/VMID mixing circuit absent from the schematic</td>
 <td>Describe the two buffered 3.3 kΩ/47 nF sections and single-ended output; add separate unplugged-bias metadata</td>
-<td>No binary format change; firmware label is ad7606-2ch-1.4; converter/legacy tests pass</td>
+<td>No binary format change; current recording label is ad7606-2ch-1.6; converter/legacy tests pass</td>
 </tr>
 <tr>
 <td>ADC diagnostic could wait indefinitely for BUSY</td>
@@ -84,7 +84,7 @@
 </tr>
 <tr>
 <td>Firmware</td>
-<td>Seven laboratory profiles available; three recording profiles rebuilt with ESP-IDF v5.4.2, four diagnostic images retained unchanged</td>
+<td>All seven v1.6 laboratory profiles recompiled with ESP-IDF v5.4.2; current diagnostic images have not been rerun in Wokwi</td>
 </tr>
 <tr>
 <td>ngspice</td>
@@ -95,16 +95,48 @@
 <td>Both compile to WASM; native model unit tests pass</td>
 </tr>
 <tr>
-<td>Wokwi ESP32 execution</td>
-<td><strong>PASS, scoped to modeled digital behavior.</strong> Seven actual ESP-IDF scenarios pass serial and VCD checks; see the <a href="virtual-verification.md">execution report</a></td>
+<td>Preserved v1.5 integrated Wokwi execution</td>
+<td>Ten complete CLI/firmware passes; nominal firmware/file/UDP passes with optional trace failure; battery partial; four cases unexecuted due to quota. <a href="../simulations/integrated-recorder/tested-source-1.5/manifest.json">Tested source/image snapshot</a></td>
+</tr>
+<tr>
+<td>Current v1.6 integrated cloud execution</td>
+<td>All 18 candidate cases unexecuted; one missing-BUSY attempt refused by quota. Preserved v1.5 results are not a current-image rerun</td>
+</tr>
+<tr>
+<td>Historical diagnostic Wokwi execution</td>
+<td>Seven cases passed on the preserved earlier image; <a href="../simulations/wokwi/tested-diagnostic-20260930/manifest.json">source/image snapshot</a></td>
+</tr>
+<tr>
+<td>Native driver/timing logic</td>
+<td>16 current ADC groups and eight IMU timestamp-helper groups pass</td>
+</tr>
+<tr>
+<td>Integrated evidence runner</td>
+<td>16 tests pass; partial/quota evidence is not counted as passed execution</td>
+</tr>
+<tr>
+<td>Current behavioral ADC model</td>
+<td>12 independent native groups pass with address/undefined sanitizers; no Wokwi runtime</td>
+</tr>
+<tr>
+<td>Native analog-to-file pipeline</td>
+<td>60 seconds: 480,000 EMG, 12,009 foot and 12,001 shank; 916/915 counter rollovers; no unexplained loss; pending FIFO data counted</td>
+</tr>
+<tr>
+<td>Captured timing audit</td>
+<td>Nine tests pass on preserved v1.5 captures; both modeled IMUs 200 Hz; explicit 55,001 µs startup estimate offset</td>
+</tr>
+<tr>
+<td>Laptop receiver/API/browser replay</td>
+<td>Two real loopback-socket cases pass on preserved v1.5 datagrams; packet gaps and absent END retained</td>
 </tr>
 <tr>
 <td>Recorder control logic</td>
 <td>38 native production-code cases pass; see the <a href="recording-verification.html">recording report</a></td>
 </tr>
 <tr>
-<td>FreeRTOS task lifecycle</td>
-<td>300 actual ESP32-S3 Wokwi cycles pass; peripheral functions stubbed</td>
+<td>Historical FreeRTOS task lifecycle</td>
+<td>300 cycles passed on the preserved earlier image; peripheral functions stubbed. This is not a current-image rerun</td>
 </tr>
 <tr>
 <td>Physical tests</td>
@@ -121,7 +153,7 @@
 <p>Original AD7606 ±5 V coding gives 152.588 µV/code. A 0–3 V sensor uses only about 30% of the total bipolar code range; “16-bit” describes the word, not 16 effective bits at the muscle sensor. Reference, gain, bias, ADC offset and analog noise require calibration. Synthetic waveforms do not establish physiological performance.</p>
 <h2>ADC protocol and board differences</h2>
 <p>On the custom PCB: AVCC is 5V_ADC; VDRIVE is 3V3D. PAR/SER and STBY are high; RANGE and OS0–OS2 are low. CVA and CVB share GPIO11. GPIO8 monitors BUSY; GPIO9 resets. SPI2 uses GPIO12 SCLK, GPIO13 DOUTA and GPIO10 CS at 8 MHz, idle-high/falling-edge sampling (mode 2). A 1 µs CONVST pulse exceeds the specified 25 ns minimum. Eight words require 128 clocks (16 µs); maximum listed conversion time with oversampling off is 4.2 µs. This fits a 125 µs period arithmetically, but does not prove ESP32 task latency under SD/Wi-Fi load.</p>
-<p>The AD7606 has no identification/configuration register readback and no sensor-frame CRC. File/container CRC protects transport/storage bytes only. Wrong range, mode or wiring can produce plausible data: apply two different known voltages and verify both codes, ground and polarity before recording sensors. A late conversion or unread previous result stops the driver instead of assigning a new timestamp to old data.</p>
+<p>The AD7606 has no identification/configuration register readback and no sensor-frame CRC. File/container CRC protects transport/storage bytes only. Wrong range, mode or wiring can produce plausible data: apply two different known voltages and verify both codes, ground and polarity before recording sensors. A late conversion or unread previous result stops the driver instead of assigning a new timestamp to old data. In the current recording build, the conversion timer timestamps and wakes the ADC task directly; the task waits for BUSY to clear with an 80 µs deadline. This avoids the delayed falling-BUSY interrupt wake-up exposed by integrated execution. BUSY remains connected and monitored; ADC diagnostic windows use their own interrupt path.</p>
 <p>The received HW-AD7606-F4/RBD-3184 module's labelled header is documented, but a photograph cannot prove its serial strap, VIO routing, reference choice or component substitutions. Verify the module electrically. The single-chip PCB does not reproduce undocumented breakout-board internals. See <a href="bench-pcb-differences.md">bench/PCB differences</a> and <a href="module-qualification.md">module qualification</a>.</p>
 <h2>Power, reference and controls</h2>
 <ul>
@@ -135,14 +167,18 @@
 </ul>
 <h2>IMU path and timing</h2>
 <p>Use the selected MIKROE-4237 carrier with JP2–JP4 in SPI position (pads 1–2), 3.3 V power and the specified mikroBUS header orientation. SPI3 is shared on GPIO4/5/6 (MOSI/MISO/SCLK); separate CS GPIO7/15 and INT1 GPIO16/17 identify foot/shank. Verify carrier solder bridges, supply and connector orientation on the received parts.</p>
-<p>The firmware checks WHO_AM_I=0x47 and configuration readback, selects 200 Hz accel/gyro, ±16 g/±2000 dps, standard 16-byte FIFO records and 1 µs sensor timestamps. Byte order is big-endian. It detects full FIFO, invalid packet headers and missing/stale interrupt anchors. Sensor clocks are independent; FIFO timestamps wrap. ESP32 interrupt times and FIFO read windows are preserved, and reconstructed sample times remain explicitly uncertain. No claim of calibrated EMG-to-IMU alignment is made.</p>
+<p>The firmware checks WHO_AM_I=0x47 and configuration readback, selects 200 Hz accel/gyro, ±16 g/±2000 dps, standard 16-byte FIFO records and 1 µs sensor timestamps. Byte order is big-endian. It detects full FIFO, invalid packet headers and missing/stale interrupt anchors. Sensor clocks are independent; FIFO timestamps wrap. ESP32 interrupt times and FIFO read windows are preserved. The first FIFO burst anchors an estimate; later samples advance by the sensor timestamp counter delta instead of re-anchoring every burst. Ambiguous counter/read intervals are rejected. Reconstructed sample times remain explicitly uncertain. No claim of calibrated EMG-to-IMU alignment is made.</p>
 <h2>Sources and release gate</h2>
 <p>Primary references: <a href="https://www.analog.com/media/en/technical-documentation/data-sheets/AD7606_7606-6_7606-4.pdf">ADI AD7606 Rev G, Tables 2–3 and serial-interface sections</a>, <a href="https://www.invensense.tdk.com/en-us/products/6-axis/icm-42688-p">TDK ICM-42688-P</a>, <a href="https://www.mikroe.com/6dof-imu-14-click">MikroE carrier</a>, <a href="https://www.ti.com/product/TPS60150">TI TPS60150</a>, <a href="https://www.ti.com/product/TPS63070">TI TPS63070</a>, <a href="https://www.microchip.com/en-us/product/mcp6004">Microchip MCP6004</a>, <a href="https://assets.nexperia.com/documents/data-sheet/BAV199-Q.pdf">Nexperia BAV199</a>, <a href="https://docs.wokwi.com/guides/esp32">Wokwi ESP32 support</a>, <a href="https://docs.wokwi.com/chips-api/getting-started">Wokwi Chips API</a>.</p>
-<p>The specified virtual checks <strong>pass under documented model assumptions and capture limits</strong>. Physical gates include received-module qualification, power/startup/ripple, analog noise/clipping/crosstalk, cable integrity, actual 8 kHz timing, sustained SD/Wi-Fi recording, battery runtime and final PCB layout review. No board order or human-use approval follows from this report.</p>
+<p>Completed checks pass within their stated scope. <strong>The current whole-system virtual matrix remains incomplete</strong> because of partial capture and cloud quota; see the <a href="integrated-verification.html">case ledger</a>. Physical gates include received-module qualification, power/startup/ripple, analog noise/clipping/crosstalk, cable integrity, actual 8 kHz timing, sustained SD/Wi-Fi recording, battery runtime and final PCB layout review. No board order or human-use approval follows from this report.</p>
 <h2>Follow-up: verification safeguards and driver logic</h2>
-<p>Fifteen synthetic runner regression tests now reject stale files, partial windows, wrong sample rates/channel values and empty traces. Ten native C test groups also execute the production AD7606 driver against mocked timer, BUSY and SPI APIs, including late-read and unread-conversion faults. These are separate from the 40 host/converter tests. They do not emulate ESP32 concurrency or measure physical timing. See <code>simulations/driver-tests/</code> and <code>simulations/wokwi/tests/</code>. The <a href="virtual-verification.md">Wokwi execution report</a> records the seven passing scenarios and capture limits.</p>
+<p>Fifteen synthetic runner regression tests now reject stale files, partial windows, wrong sample rates/channel values and empty traces. Sixteen native C test groups also execute the production AD7606 driver against mocked timer, BUSY and SPI APIs, including late-read and unread-conversion faults, direct timer wake-up, missing BUSY assertion, ignored CONVST and the bounded BUSY wait. Eight additional groups check the production IMU timestamp helper. These are separate from the 40 host/converter tests. They do not emulate ESP32 concurrency or measure physical timing. See <code>simulations/driver-tests/</code> and <code>simulations/wokwi/tests/</code>. The <a href="virtual-verification.html">historical Wokwi report</a> records the seven earlier diagnostic scenarios and capture limits. The <a href="integrated-verification.html">current integrated report</a> records actual recorder/FatFS/UDP execution and its unfinished cases.</p>
 <h2>Execution-driven corrections</h2>
-<p>SPI mode is now initialized with a discarded read during RESET before the first measured conversion. A shared diagnostic fault latch stops all tasks after a worker error, preventing a subsequent plausible-looking window. Both changes are in the seven rebuilt profiles. The first measured frame and FIFO-overflow stop behavior pass Wokwi checks. Detailed results and the first-conversion waveform are in the <a href="virtual-verification.md">virtual verification report</a>.</p>
+<p>SPI mode is now initialized with a discarded read during RESET before the first measured conversion. A shared diagnostic fault latch stops all tasks after a worker error, preventing a subsequent plausible-looking window. Both changes remain in the seven current recompiled profiles. The first measured frame and FIFO-overflow stop behavior passed the earlier diagnostic image, and current integrated known-code/overflow checks also pass. Detailed results and the first-conversion waveform are in the <a href="virtual-verification.html">virtual verification report</a>.</p>
 <h2>Recording firmware follow-up</h2>
-<p>Recording firmware ad7606-2ch-1.4 corrects worker handle lifetime, stops acquisition after a latched fault, attempts both IMU shutdowns and publishes the wireless END verdict after final filesystem checks. Thirty-eight native cases pass across the breadboard and PCB profiles. Read the <a href="recording-verification.html">recording and recovery report</a> for the RTOS evidence and limits, stop reasons and the persistence caveat. Legacy binary decoding is unchanged. Board geometry, electrical connections and the five other setups are unchanged.</p>
-</main></html>
+<p>The v1.4 recording correction, retained in ad7606-2ch-1.6, fixes worker handle lifetime, stops acquisition after a latched fault, attempts both IMU shutdowns and publishes the wireless END verdict after final filesystem checks. Thirty-eight native cases pass across the breadboard and PCB profiles. Read the <a href="recording-verification.html">recording and recovery report</a> for the RTOS evidence and limits, stop reasons and the persistence caveat. Legacy binary decoding is unchanged. Board geometry, electrical connections and the five other setups are unchanged.</p>
+<h2>Integrated acquisition follow-up</h2>
+<p>Preserved v1.5 execution corrected a delayed ADC task wake-up and FIFO-burst timestamp regressions. Sixteen current native ADC groups, eight timing-helper groups, 38 native recorder cases and 40 host tests pass. Preserved v1.5 Wokwi nominal SD-file and UDP data have zero timestamp regressions and no detected saved-sample loss; deliberate faults remain explicit. The <a href="integrated-verification.html">integrated verification report</a> preserves unsuccessful attempts, the partial battery export, quota refusals and exact source/image hashes.</p>
+<h2>Missing conversion acknowledgement — current v1.6</h2>
+<p>The driver now requires BUSY high at the end of the 1 µs CONVST pulse, before making the frame pending. A missing assertion indicates a disconnected/stuck-low BUSY line or ignored conversion and latches a timing fault instead of reading stale words. This follows the AD7606 Rev G 45 ns maximum BUSY assertion and 3.45 µs minimum conversion timing. Sixteen native driver groups and the local C pipeline pass with the new safeguard. The current v1.6 whole-system cloud run has not executed; its <a href="../simulations/integrated-recorder/tested-source-1.5/manifest.json">v1.5 baseline snapshot</a> is retained separately.</p>
+</main></body></html>
