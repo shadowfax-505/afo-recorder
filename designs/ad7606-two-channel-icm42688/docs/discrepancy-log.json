@@ -53,5 +53,20 @@
     "id": "missing-interrupt-trace-target",
     "status": "corrected",
     "detail": "Verifier checks the foot sensor selected by scenario configuration; regression test protects role mapping."
+  },
+  {
+    "id": "recording-worker-handle-lifetime",
+    "status": "corrected-and-tested",
+    "detail": "Workers suspend after completion; owner joins, waits for suspended states, deletes and clears handles. Fault latch stops acquisition. Native early-completion case passes."
+  },
+  {
+    "id": "both-imu-stop-calls",
+    "status": "corrected-and-tested",
+    "detail": "Both IMU stops are attempted even if foot stop fails; sensor fault remains visible."
+  },
+  {
+    "id": "premature-wireless-end",
+    "status": "corrected-and-tested",
+    "detail": "Wireless END follows final write/sync/close checks. Failure emits storage reason 1. SD END alone cannot certify persistence after a late filesystem error."
   }
 ]

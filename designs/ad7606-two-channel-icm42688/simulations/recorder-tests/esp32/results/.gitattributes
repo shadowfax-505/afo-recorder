@@ -1,0 +1,2 @@
+# Preserve captured emulator logs, including firmware spaces at line ends.
+*.txt -whitespace

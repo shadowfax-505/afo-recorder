@@ -2,7 +2,7 @@
 
 ## Focused refinement — 30 September 2026
 
-The [fixed two-channel AD7606 / ICM build](../designs/ad7606-two-channel-icm42688/docs/circuit-audit.html) passes seven actual ESP-IDF diagnostic scenarios in Wokwi, with serial logs and decoded VCD evidence. SPI startup and diagnostic fault-latch issues were corrected, and all seven firmware profiles rebuilt. Read the [execution report](../designs/ad7606-two-channel-icm42688/docs/virtual-verification.html) for model and capture limits. Physical power/noise/timing/storage/radio/runtime tests remain pending. Other five packages are unchanged. The sections below describe the earlier six-package release.
+The [fixed two-channel AD7606 / ICM build](../designs/ad7606-two-channel-icm42688/docs/circuit-audit.html) retains seven passing actual ESP-IDF sensor/protocol scenarios in Wokwi. The recording follow-up corrects worker shutdown, both IMU stop calls and premature wireless END reporting. Thirty-eight native recording cases pass for the PCB/breadboard profiles; 300 real-FreeRTOS lifecycle cycles pass in Wokwi. Three recording profiles were rebuilt; four diagnostic images are unchanged. Read the [recording report](../designs/ad7606-two-channel-icm42688/docs/recording-verification.html) and [sensor execution report](../designs/ad7606-two-channel-icm42688/docs/virtual-verification.html). Physical power/noise/timing/storage/radio/runtime tests remain pending. Other five packages are unchanged. The sections below describe the earlier six-package release.
 
 ## Completed
 

@@ -1,0 +1,4 @@
+[wokwi]
+version = 1
+firmware = "firmware/merged.bin"
+elf = "firmware/recorder_lifecycle.elf"
