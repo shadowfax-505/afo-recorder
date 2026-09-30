@@ -28,7 +28,12 @@ static bool tick(gptimer_handle_t t,const gptimer_alarm_event_data_t *event,void
 uint64_t adc_sample_timestamp(void){portENTER_CRITICAL_ISR(&stamp_lock);uint64_t x=trigger_stamp;portEXIT_CRITICAL_ISR(&stamp_lock);return x;}
 esp_err_t adc_configure(void){
     gpio_config_t o={.pin_bit_mask=(1ULL<<ADC_RESET)|(1ULL<<ADC_CONVST),.mode=GPIO_MODE_OUTPUT};TRY(gpio_config(&o));
-    gpio_set_level(ADC_CONVST,0);gpio_set_level(ADC_RESET,1);esp_rom_delay_us(2);gpio_set_level(ADC_RESET,0);vTaskDelay(pdMS_TO_TICKS(10));
+    gpio_set_level(ADC_CONVST,0);gpio_set_level(ADC_RESET,1);esp_rom_delay_us(2);
+    // Establish the controller's mode-2 clock before the first conversion.
+    // This read occurs during RESET and is never a measurement or counted frame.
+    uint8_t discard[16]={0};spi_transaction_t prime={.length=128,.rx_buffer=discard};
+    TRY(spi_device_polling_transmit(adc,&prime));
+    gpio_set_level(ADC_RESET,0);vTaskDelay(pdMS_TO_TICKS(10));
     atomic_store(&pending,false);atomic_store(&stream_fault,false);return ESP_OK;
 }
 esp_err_t adc_bus_init(void){

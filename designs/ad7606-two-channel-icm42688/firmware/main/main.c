@@ -208,7 +208,7 @@ static void record_session(void) {
     char meta[2048];
     snprintf(meta,sizeof(meta),
       "{" AFO_ADC_METADATA AFO_SD_METADATA
-      "\"firmware\":\"ad7606-2ch-1.2\",\"hardware_variant\":\"" HARDWARE_VARIANT "\","
+      "\"firmware\":\"ad7606-2ch-1.3\",\"hardware_variant\":\"" HARDWARE_VARIANT "\","
       "\"synthetic\":false,\"trial_id\":\"%s\",\"clock\":\"esp_timer_boot_us\","
       "\"emg_hz\":8000,\"imu_hz\":200,\"imu_enabled\":true,"
       "\"active_channel_count\":%d,\"emg_channels\":%s,"

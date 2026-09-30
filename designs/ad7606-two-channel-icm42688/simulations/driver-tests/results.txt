@@ -1,3 +1,4 @@
+PASS SPI mode primed during RESET before any measured conversion
 PASS no read before conversion
 PASS 128-clock read, signed order, disabled channels and trigger timestamp
 PASS preexisting BUSY inhibits trigger and latches fault

@@ -2,13 +2,13 @@
 
 This project uses the **actual stage-6 ESP-IDF diagnostic firmware**, not an Arduino replacement. `firmware/merged.bin` combines the bootloader, partition table and application; `firmware/afo_recorder.elf` is the corresponding ELF. The two EMG codes are 6554 and 13107 (approximately 1 V and 2 V at ±5 V full scale). Both IMU instances use the same source and separate state, FIFOs and timers.
 
-**Status: not yet a passing Wokwi system test.** A browser attempt stalled with SPI2 MISO contention warnings. The CLI attempt could not run without a locally configured token. These are unresolved simulation issues; they do not establish physical failure or success. See `results/browser-attempt.txt`. No successful virtual logic trace is supplied. Native custom-chip unit tests and WASM compilation are separate checks, not ESP32 execution.
+**Status: seven actual ESP32-S3 firmware scenarios pass in Wokwi CLI.** See the [verification report](../../docs/virtual-verification.md), [scenario results](results/scenarios.json), serial logs, compressed VCDs and protocol summaries in `results/`. Startup SPI initialization and a shared diagnostic fault latch correct two issues exposed by execution. Historical failed attempts remain labeled as historical. Physical testing is outstanding.
 
 ## Run
 
 1. Install [Wokwi CLI](https://github.com/wokwi/wokwi-cli). Configure `WOKWI_CLI_TOKEN` locally using the [Wokwi CI dashboard](https://wokwi.com/dashboard/ci). Never put the token in the repository.
 2. From this directory run `wokwi-cli chip compile chips/ad7606.chip.c -o chips/ad7606.chip.wasm` and the corresponding command for `icm42688.chip.c`.
-3. Run `python3 run_scenarios.py`. It creates serial logs, VCD traces and expected-versus-observed results in a fresh `results/run-*` directory for each invocation. Missing output is a failure. A full successful run is required before changing this status.
+3. Run `python3 run_scenarios.py`. It creates serial logs, VCD traces and expected-versus-observed results in a fresh `results/run-*` directory for each invocation. Missing output is a failure. A nonzero exit or failed scenario must never be treated as a pass.
 4. For manual browser use, create an ESP32-S3 project; upload both `.chip.c`/`.chip.json` pairs, replace `diagram.json`, then use F1 → **Upload Firmware and Start Simulation** with `firmware/merged.bin`. USB serial/JTAG must be selected in the diagram. Do not press the Arduino build button and mistake that output for the diagnostic binary.
 
 ## Limits
@@ -29,6 +29,6 @@ The API header was downloaded from [Wokwi's official Chips API](https://wokwi.co
 
 The runner rejects stale files, partial windows, missing conversions, incorrect channel extrema, incorrect IMU identity or rate, empty/header-only VCD files, nonzero process exits and timeouts. Nominal gates are 8 kHz ±1% over a roughly one-second window and 195–205 IMU samples/interrupts per window. The serial-disabled case requires the model's exact all-ones signature; arbitrary incorrect data is not sufficient.
 
-VCD validation currently proves **signal activity only**, not correct clock edges, 128-clock frame length or BUSY timing. Those still need protocol-level trace inspection after Wokwi completes a run. Simulator failure remains unresolved and no passing ESP32 system test is claimed.
+`verify_trace.py` checks 128-clock frame lengths, all eight signed words, modeled BUSY timing, conversion periods and specific fault signatures. The analyzer has a one-million-event buffer, so the normal VCD ends before the 2.5-second serial run. A partial last SPI frame is reported and excluded; complete captured frames are checked. Capture coverage is stated in each result. Do not extend this into a claim of long-term or physical timing validation.
 
-Run `python3 -m unittest discover -s tests -p 'test_*.py' -v` here to reproduce the 14 runner regression tests. These use synthetic logs and traces to test the evidence gate; they are separate from the 40 converter/host tests and do not validate physical electronics or simulator execution.
+Run `python3 -m unittest discover -s tests -p 'test_*.py' -v` here to reproduce the 15 runner regression tests. These use synthetic logs and traces to test the evidence gate; they are separate from the 40 converter/host tests and do not validate physical electronics or simulator execution.

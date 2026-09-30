@@ -32,3 +32,7 @@
 The selected two-channel AD7606/ICM runner now uses fresh output directories and rejects stale or partial results, incorrect sample/channel checks and empty traces. Fourteen synthetic evidence-gate regression tests pass. These are not additional hardware or ESP32 simulation passes; the Wokwi SPI contention remains unresolved. Firmware and PCB files are unchanged from v0.1.1.
 
 Nine native test groups execute the unchanged production ADC driver with mocked timer/BUSY/SPI events; all pass. Real-time concurrency and electrical behavior remain outside this test.
+
+### Actual ESP32-S3 simulation — 30 September 2026
+
+Seven AD7606 two-channel/ICM diagnostic scenarios pass Wokwi CLI, with serial and VCD protocol evidence. Initialize mode-2 SPI during reset to prevent a shifted first sample; latch diagnostic worker errors across tasks. Rebuild all seven firmware profiles; 40 host tests, 15 runner tests, ten driver test groups and fresh circuit checks pass. Analyzer coverage and remaining physical/SDMMC/Wi-Fi limits are explicit in the new execution report.

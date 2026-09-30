@@ -10,10 +10,10 @@ Start with [the guided build](viewer/build.html). The [source and licence notice
 
 This focused revision corrects diagnostics and metadata for the fixed two-input ICM build. Other variants are unchanged.
 
-Start with the [circuit audit and verification limits](docs/circuit-audit.md), [short lab sequence](docs/lab-quickstart.md), and [Wokwi package](simulations/wokwi/README.md). Wokwi system execution remains pending; no physical validation is claimed.
+Start with the [circuit audit and verification limits](docs/circuit-audit.md), [short lab sequence](docs/lab-quickstart.md), and [Wokwi package](simulations/wokwi/README.md). Seven actual-firmware Wokwi scenarios pass; [execution results](docs/virtual-verification.md) state the capture/model limits. Physical validation remains outstanding.
 
 Serve this folder over HTTP; opening the viewer directly as a local HTML file will block asset fetches in most browsers. Standard filenames such as CMakeLists.txt, main.c, index.html and KiCad project members are retained for tool compatibility.
 
 All hardware remains an engineering prototype pending physical validation. Module pin positions and outstanding wiring gates are documented; no board order is implied.
 
-Additional checks: [production ADC driver host tests](simulations/driver-tests/README.md) and [simulation evidence safeguards](simulations/wokwi/README.md#evidence-safeguards). Neither is a completed ESP32 simulator run.
+Additional checks: [production ADC driver host tests](simulations/driver-tests/README.md) and [simulation evidence safeguards](simulations/wokwi/README.md#evidence-safeguards). The [Wokwi report](docs/virtual-verification.md) separately records actual ESP32 simulator execution.

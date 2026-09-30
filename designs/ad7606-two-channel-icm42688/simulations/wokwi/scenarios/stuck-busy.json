@@ -50,7 +50,9 @@
       "id": "logic",
       "top": 0,
       "left": 650,
-      "attrs": {}
+      "attrs": {
+        "bufferSize": "1000000"
+      }
     }
   ],
   "connections": [
