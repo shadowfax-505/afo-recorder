@@ -17,3 +17,5 @@ Serve this folder over HTTP; opening the viewer directly as a local HTML file wi
 All hardware remains an engineering prototype pending physical validation. Module pin positions and outstanding wiring gates are documented; no board order is implied.
 
 Additional checks: [production ADC driver host tests](simulations/driver-tests/README.md) and [simulation evidence safeguards](simulations/wokwi/README.md#evidence-safeguards). The [Wokwi report](docs/virtual-verification.md) separately records actual ESP32 simulator execution.
+
+Recording firmware **ad7606-2ch-1.4** adds safe task ownership through shutdown and a final storage verdict before wireless END. [Recording verification](docs/recording-verification.html) documents 38 native control cases, RTOS lifecycle evidence, recovery limits and stop indications. Three recording images were rebuilt; four diagnostic images retain their prior tested binaries. No physical measurements or PCB order are implied.

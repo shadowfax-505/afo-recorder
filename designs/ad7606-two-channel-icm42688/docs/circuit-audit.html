@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><link rel="icon" href="data:,"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Circuit review: AD7606, two EMG inputs, ICM-42688-P</title><style>body{margin:0;background:#f4f3ee;color:#172523;font:17px/1.65 system-ui}main{max-width:1060px;margin:auto;padding:48px 28px}h1{font-size:2.4rem;line-height:1.15}h2{margin-top:2.5em}a{color:#176454}table{border-collapse:collapse;font-size:14px;display:block;overflow:auto}td,th{padding:12px;border:1px solid #ccd4ce;text-align:left;vertical-align:top}th{background:#e2eae4}code{font-size:.9em}p{max-width:85ch}nav{font-size:14px;border-bottom:1px solid #ccd4ce;padding-bottom:16px}@media print{body{background:white}main{padding:0}table{display:table;font-size:10px}}</style><main><nav><a href="../viewer/build.html">Assembly workspace</a> / <a href="circuit-audit.html">Circuit audit</a> / <a href="lab-quickstart.html">Lab sequence</a></nav><h1>Circuit review: AD7606, two EMG inputs, ICM-42688-P</h1>
+<!doctype html><html lang="en"><meta charset="utf-8"><link rel="icon" href="data:,"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Circuit review: AD7606, two EMG inputs, ICM-42688-P — AD7606 two-channel</title><style>body{margin:0;background:#f4f3ee;color:#172523;font:17px/1.65 system-ui}main{max-width:1060px;margin:auto;padding:48px 28px}h1{font-size:2.4rem;line-height:1.15}h2{margin-top:2.5em}a{color:#176454}table{border-collapse:collapse;font-size:14px;display:block;overflow:auto}td,th{padding:12px;border:1px solid #ccd4ce;text-align:left;vertical-align:top}th{background:#e2eae4}code{font-size:.9em}p{max-width:85ch}nav{font-size:14px;border-bottom:1px solid #ccd4ce;padding-bottom:16px}@media print{body{background:white}main{padding:0}table{display:table;font-size:10px}}</style><main><nav><a href="../viewer/build.html">Assembly workspace</a> / <a href="circuit-audit.html">Circuit audit</a> / <a href="lab-quickstart.html">Lab sequence</a> / <a href="recording-verification.html">Recording/recovery</a></nav><h1>Circuit review: AD7606, two EMG inputs, ICM-42688-P</h1>
 <p>Project lead: Muttakin Rahman · Review: 30 September 2026</p>
 <p><strong>The intended signal path is logically consistent, and fresh connectivity and software checks pass. This is not a fully verified recorder.</strong> Seven actual-firmware Wokwi scenarios pass under the documented behavioral models; no physical recorder has been measured. Do not interpret the manufacturing exports as an order recommendation.</p>
 <h2>What changed</h2>
@@ -14,7 +14,7 @@
 <tr>
 <td>Recording metadata described a RAW/VMID mixing circuit absent from the schematic</td>
 <td>Describe the two buffered 3.3 kΩ/47 nF sections and single-ended output; add separate unplugged-bias metadata</td>
-<td>No binary format change; firmware label is ad7606-2ch-1.3; converter/legacy tests pass</td>
+<td>No binary format change; firmware label is ad7606-2ch-1.4; converter/legacy tests pass</td>
 </tr>
 <tr>
 <td>ADC diagnostic could wait indefinitely for BUSY</td>
@@ -84,7 +84,7 @@
 </tr>
 <tr>
 <td>Firmware</td>
-<td>Seven profiles cross-compiled with ESP-IDF v5.4.2; manifests contain new binary hashes</td>
+<td>Seven laboratory profiles available; three recording profiles rebuilt with ESP-IDF v5.4.2, four diagnostic images retained unchanged</td>
 </tr>
 <tr>
 <td>ngspice</td>
@@ -97,6 +97,14 @@
 <tr>
 <td>Wokwi ESP32 execution</td>
 <td><strong>PASS, scoped to modeled digital behavior.</strong> Seven actual ESP-IDF scenarios pass serial and VCD checks; see the <a href="virtual-verification.md">execution report</a></td>
+</tr>
+<tr>
+<td>Recorder control logic</td>
+<td>38 native production-code cases pass; see the <a href="recording-verification.html">recording report</a></td>
+</tr>
+<tr>
+<td>FreeRTOS task lifecycle</td>
+<td>300 actual ESP32-S3 Wokwi cycles pass; peripheral functions stubbed</td>
 </tr>
 <tr>
 <td>Physical tests</td>
@@ -135,4 +143,6 @@
 <p>Fifteen synthetic runner regression tests now reject stale files, partial windows, wrong sample rates/channel values and empty traces. Ten native C test groups also execute the production AD7606 driver against mocked timer, BUSY and SPI APIs, including late-read and unread-conversion faults. These are separate from the 40 host/converter tests. They do not emulate ESP32 concurrency or measure physical timing. See <code>simulations/driver-tests/</code> and <code>simulations/wokwi/tests/</code>. The <a href="virtual-verification.md">Wokwi execution report</a> records the seven passing scenarios and capture limits.</p>
 <h2>Execution-driven corrections</h2>
 <p>SPI mode is now initialized with a discarded read during RESET before the first measured conversion. A shared diagnostic fault latch stops all tasks after a worker error, preventing a subsequent plausible-looking window. Both changes are in the seven rebuilt profiles. The first measured frame and FIFO-overflow stop behavior pass Wokwi checks. Detailed results and the first-conversion waveform are in the <a href="virtual-verification.md">virtual verification report</a>.</p>
+<h2>Recording firmware follow-up</h2>
+<p>Recording firmware ad7606-2ch-1.4 corrects worker handle lifetime, stops acquisition after a latched fault, attempts both IMU shutdowns and publishes the wireless END verdict after final filesystem checks. Thirty-eight native cases pass across the breadboard and PCB profiles. Read the <a href="recording-verification.html">recording and recovery report</a> for the RTOS evidence and limits, stop reasons and the persistence caveat. Legacy binary decoding is unchanged. Board geometry, electrical connections and the five other setups are unchanged.</p>
 </main></html>

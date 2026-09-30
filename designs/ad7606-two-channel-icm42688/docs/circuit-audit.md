@@ -8,7 +8,7 @@ Project lead: Muttakin Rahman · Review: 30 September 2026
 
 | Finding | Correction | Evidence / remaining limit |
 |---|---|---|
-| Recording metadata described a RAW/VMID mixing circuit absent from the schematic | Describe the two buffered 3.3 kΩ/47 nF sections and single-ended output; add separate unplugged-bias metadata | No binary format change; firmware label is ad7606-2ch-1.3; converter/legacy tests pass |
+| Recording metadata described a RAW/VMID mixing circuit absent from the schematic | Describe the two buffered 3.3 kΩ/47 nF sections and single-ended output; add separate unplugged-bias metadata | No binary format change; firmware label is ad7606-2ch-1.4; converter/legacy tests pass |
 | ADC diagnostic could wait indefinitely for BUSY | Fail explicitly after 100 ms without a falling edge | Cross-compiled; stuck/delayed BUSY faults verified in Wokwi |
 | ADC timer could issue later triggers after a latched timing fault | Suppress triggers until stream restart | Source review; real interrupt latency still unmeasured |
 | Diagnostics printed while acquisition remained active and polled IMUs in the ADC reader | Use bounded measurement windows; stop ADC for reporting; separate lower-priority FIFO service | Diagnostic output is discontinuous by design, not an endurance recording |
@@ -28,10 +28,12 @@ The authoritative source remains `design/circuit-spec.json`. `design/audit_conne
 | Breadboard topology | 184 wires, 402 occupied holes, 24 GPIO endpoint checks; 0 named-net splits, shorts, duplicate holes or connector contacts |
 | Host conversion / legacy / live reception | 40 tests pass |
 | Software acquisition faults | 7 scenarios pass, including overflow, missing samples and interrupted file recovery |
-| Firmware | Seven profiles cross-compiled with ESP-IDF v5.4.2; manifests contain new binary hashes |
+| Firmware | Seven laboratory profiles available; three recording profiles rebuilt with ESP-IDF v5.4.2, four diagnostic images retained unchanged |
 | ngspice | Both channels; 16 tolerance corners; 54 DC/loading cases; unplugged-bias case; transient/ideal quantization checks |
 | Wokwi models | Both compile to WASM; native model unit tests pass |
 | Wokwi ESP32 execution | **PASS, scoped to modeled digital behavior.** Seven actual ESP-IDF scenarios pass serial and VCD checks; see the [execution report](virtual-verification.md) |
+| Recorder control logic | 38 native production-code cases pass; see the [recording report](recording-verification.html) |
+| FreeRTOS task lifecycle | 300 actual ESP32-S3 Wokwi cycles pass; peripheral functions stubbed |
 | Physical tests | None performed |
 
 Evidence: [fresh checks](refinement-checks/connectivity.json), [breadboard](refinement-checks/breadboard-wiring.json), [host log](refinement-checks/host-tests.log), [builds](refinement-checks/firmware-builds.json), [analog results](../simulations/results/validation.json), [operating points](../simulations/results/operating-points.json), [Wokwi status](../simulations/wokwi/README.md). The broad historical reports remain available but do not supersede these limitations.
@@ -85,3 +87,7 @@ Fifteen synthetic runner regression tests now reject stale files, partial window
 ## Execution-driven corrections
 
 SPI mode is now initialized with a discarded read during RESET before the first measured conversion. A shared diagnostic fault latch stops all tasks after a worker error, preventing a subsequent plausible-looking window. Both changes are in the seven rebuilt profiles. The first measured frame and FIFO-overflow stop behavior pass Wokwi checks. Detailed results and the first-conversion waveform are in the [virtual verification report](virtual-verification.md).
+
+## Recording firmware follow-up
+
+Recording firmware ad7606-2ch-1.4 corrects worker handle lifetime, stops acquisition after a latched fault, attempts both IMU shutdowns and publishes the wireless END verdict after final filesystem checks. Thirty-eight native cases pass across the breadboard and PCB profiles. Read the [recording and recovery report](recording-verification.html) for the RTOS evidence and limits, stop reasons and the persistence caveat. Legacy binary decoding is unchanged. Board geometry, electrical connections and the five other setups are unchanged.

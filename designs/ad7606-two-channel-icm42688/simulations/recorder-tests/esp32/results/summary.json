@@ -1,0 +1,25 @@
+{
+  "engine": "Wokwi CLI; actual ESP-IDF v5.4.2 ESP32-S3 FreeRTOS execution",
+  "pass": true,
+  "families": {
+    "0": "normal join",
+    "1": "faulted workers suspended before join",
+    "2": "join with EMG worker only; absent IMU task completion bit"
+  },
+  "cycles_per_family": 100,
+  "cases_passed": 300,
+  "exit_code": 0,
+  "esp32_executed": true,
+  "hardware_measured": false,
+  "production_main_sha256": "69c47e82e2d51c3cb7672639211bec4680391f3cafc763d0cc1aa7ecea975697",
+  "harness_sha256": "74f5594774cebbabe0983c328e3858ca3b66ec0b4523453982f9f740acaf7e7e",
+  "firmware_sha256": {
+    "merged.bin": "7d68440d9c2becdd82b8c0f28a2f11580621c62f46dbc3ac5f07dab6ced16a1b",
+    "recorder_lifecycle.elf": "b23ce4393599d9c5450d904975a9db7397d2176b2b742533f8fbb51f1cce0b23"
+  },
+  "limits": [
+    "Peripheral entry points are stubs; no ADC/IMU input or SD/radio execution",
+    "Real FreeRTOS tasks and production join/retire/fault functions are exercised",
+    "No physical core, timing, rail, flash persistence or endurance measurements"
+  ]
+}

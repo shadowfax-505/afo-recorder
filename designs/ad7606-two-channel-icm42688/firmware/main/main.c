@@ -27,7 +27,7 @@ enum { STOP_NORMAL=0, STOP_STORAGE=1, STOP_QUEUE=2, STOP_SENSOR=3,
        STOP_BATTERY=4, STOP_LIMIT=5, STOP_TIMING=6, STOP_USB=7 };
 static QueueHandle_t queue;
 static EventGroupHandle_t done;
-static TaskHandle_t emg_task_handle;
+static TaskHandle_t emg_task_handle,imu_task_handle;
 static uint64_t adc_irq_time;
 static uint32_t adc_irq_count;
 static atomic_bool running;
@@ -43,8 +43,33 @@ static uint8_t block[8192];
 static size_t block_used;
 
 static void set_fault(int why) {
-    if(why==STOP_STORAGE) {atomic_store(&fault,why);return;}
-    int expected=0; atomic_compare_exchange_strong(&fault,&expected,why);
+    if(why==STOP_STORAGE) atomic_store(&fault,why);
+    else {int expected=0;atomic_compare_exchange_strong(&fault,&expected,why);}
+    atomic_store(&running,false);
+}
+static void worker_finished(EventBits_t bit) {
+    // The recorder owns both handles. Keep the task allocated until it joins
+    // and deletes us; a fault may finish a worker before the recorder wakes.
+    xEventGroupSetBits(done,bit);
+    for(;;)vTaskSuspend(NULL);
+}
+static void join_workers(void) {
+    atomic_store(&running,false);
+    if(emg_task_handle)xTaskNotifyGive(emg_task_handle);
+    xEventGroupWaitBits(done,3,pdFALSE,pdTRUE,portMAX_DELAY);
+    TaskHandle_t handles[2]={emg_task_handle,imu_task_handle};
+    for(unsigned i=0;i<2;i++)if(handles[i]) {
+        // The completion bit precedes suspension. Wait for the known state on
+        // the other core before reclaiming its stack and task control block.
+        while(eTaskGetState(handles[i])!=eSuspended)vTaskDelay(pdMS_TO_TICKS(1));
+        vTaskDelete(handles[i]);
+    }
+    emg_task_handle=NULL;imu_task_handle=NULL;
+}
+static bool stop_imus(void) {
+    if(!ENABLE_IMUS)return true;
+    esp_err_t foot=imu_stop(0),shank=imu_stop(1);
+    return foot==ESP_OK&&shank==ESP_OK;
 }
 static void enqueue(const afo_record_t *r) {
     if(xQueueSend(queue,r,0)!=pdTRUE) { queue_dropped++; set_fault(STOP_QUEUE); }
@@ -96,13 +121,13 @@ static void emg_task(void *arg) {
         afo_record_t r;afo_record_init(&r,AFO_EMG_RECORD_KIND,flags,seq,stamp,&p,sizeof(p));
         emg_records++;enqueue(&r);
     }
-    xEventGroupSetBits(done,1);vTaskDelete(NULL);
+    worker_finished(1);
 }
 static void imu_task(void *arg) {
     (void)arg; uint8_t data[2048];uint32_t seq[2]={0};
     const uint64_t started=esp_timer_get_time();
     while(atomic_load(&running)) {
-        for(unsigned id=0;id<2;id++) {
+        for(unsigned id=0;id<2&&atomic_load(&running);id++) {
             uint64_t anchor,after_time;uint32_t before,after;
             irq_snapshot(id,&anchor,&before);
             // The second IMU may have entered stream mode less than one 5ms
@@ -126,7 +151,7 @@ static void imu_task(void *arg) {
                 uint16_t b=(data[(k+1)*16+14]<<8)|data[(k+1)*16+15];
                 lag[k]=lag[k+1]+(uint16_t)(b-a);
             }
-            for(size_t k=0;k<packets;k++) {
+            for(size_t k=0;k<packets&&atomic_load(&running);k++) {
                 const uint8_t *p=data+16*k;
                 // Standard packet: accel+gyro, 16-bit format, ODR timestamp.
                 if((p[0]&0xfc)!=0x68) { imu_errors++;set_fault(STOP_SENSOR);continue; }
@@ -145,7 +170,7 @@ static void imu_task(void *arg) {
         }
         vTaskDelay(pdMS_TO_TICKS(1));
     }
-    xEventGroupSetBits(done,2);vTaskDelete(NULL);
+    worker_finished(2);
 }
 static status_payload_t snapshot(void) {
     status_payload_t s={timer_missed,queue_dropped,imu_errors,fifo_overflows,
@@ -169,7 +194,10 @@ static bool flush_block(int fd) {
 }
 static bool append_record(int fd,const afo_record_t *r) {
     if(block_used+sizeof(*r)>sizeof(block)&&!flush_block(fd))return false;
-    memcpy(block+block_used,r,sizeof(*r));block_used+=sizeof(*r);wifi_live_offer(r);return true;
+    memcpy(block+block_used,r,sizeof(*r));block_used+=sizeof(*r);
+    // Publish the END verdict only after final write/sync/close checks.
+    if(r->type!=REC_END)wifi_live_offer(r);
+    return true;
 }
 static bool free_space_ok(void) {
     uint64_t total,free;
@@ -208,7 +236,7 @@ static void record_session(void) {
     char meta[2048];
     snprintf(meta,sizeof(meta),
       "{" AFO_ADC_METADATA AFO_SD_METADATA
-      "\"firmware\":\"ad7606-2ch-1.3\",\"hardware_variant\":\"" HARDWARE_VARIANT "\","
+      "\"firmware\":\"ad7606-2ch-1.4\",\"hardware_variant\":\"" HARDWARE_VARIANT "\","
       "\"synthetic\":false,\"trial_id\":\"%s\",\"clock\":\"esp_timer_boot_us\","
       "\"emg_hz\":8000,\"imu_hz\":200,\"imu_enabled\":true,"
       "\"active_channel_count\":%d,\"emg_channels\":%s,"
@@ -228,7 +256,7 @@ static void record_session(void) {
     portENTER_CRITICAL(&irq_lock);memset(irq_time,0,sizeof(irq_time));memset(irq_count,0,sizeof(irq_count));portEXIT_CRITICAL(&irq_lock);
     if(ENABLE_IMUS) {gpio_intr_enable(FOOT_INT);gpio_intr_enable(SHANK_INT);}
     if(ENABLE_IMUS&&(imu_start(0)!=ESP_OK||imu_start(1)!=ESP_OK)) {
-        imu_stop(0);imu_stop(1);gpio_intr_disable(FOOT_INT);gpio_intr_disable(SHANK_INT);
+        stop_imus();gpio_intr_disable(FOOT_INT);gpio_intr_disable(SHANK_INT);
         close(fd);gpio_set_level(LED_ERROR,1);return;
     }
     portENTER_CRITICAL(&irq_lock);adc_irq_time=0;adc_irq_count=0;portEXIT_CRITICAL(&irq_lock);
@@ -236,14 +264,13 @@ static void record_session(void) {
     running=true;
     BaseType_t a=xTaskCreatePinnedToCore(emg_task,"emg",4096,NULL,22,&emg_task_handle,1);
     BaseType_t b=pdPASS;
-    if(ENABLE_IMUS)b=xTaskCreatePinnedToCore(imu_task,"imu",12288,NULL,18,NULL,0);
+    if(ENABLE_IMUS)b=xTaskCreatePinnedToCore(imu_task,"imu",12288,NULL,18,&imu_task_handle,0);
     else xEventGroupSetBits(done,2);
     if(a!=pdPASS||b!=pdPASS) {
-        running=false;if(a==pdPASS)xTaskNotifyGive(emg_task_handle);
         if(a!=pdPASS)xEventGroupSetBits(done,1);
         if(b!=pdPASS)xEventGroupSetBits(done,2);
-        xEventGroupWaitBits(done,3,pdFALSE,pdTRUE,portMAX_DELAY);
-        if(ENABLE_IMUS) {imu_stop(0);imu_stop(1);}
+        join_workers();
+        stop_imus();gpio_intr_disable(FOOT_INT);gpio_intr_disable(SHANK_INT);
         close(fd);gpio_set_level(LED_ERROR,1);return;
     }
     gpio_intr_enable(ADC_DRDY);
@@ -267,19 +294,26 @@ static void record_session(void) {
             if((uint64_t)(now-start)>=MAX_SESSION_US)set_fault(STOP_LIMIT);
         }
     }
-    adc_stream_stop();gpio_intr_disable(ADC_DRDY);running=false;xTaskNotifyGive(emg_task_handle);
+    adc_stream_stop();gpio_intr_disable(ADC_DRDY);
     gpio_intr_disable(FOOT_INT);gpio_intr_disable(SHANK_INT);
-    xEventGroupWaitBits(done,3,pdFALSE,pdTRUE,portMAX_DELAY);
-    if(ENABLE_IMUS&&(imu_stop(0)!=ESP_OK||imu_stop(1)!=ESP_OK))set_fault(STOP_SENSOR);
-    emg_task_handle=NULL;
+    join_workers();
+    if(!stop_imus())set_fault(STOP_SENSOR);
     afo_record_t r;
     while(xQueueReceive(queue,&r,0)==pdTRUE) {
         if(atomic_load(&fault)!=STOP_STORAGE&&!append_record(fd,&r))set_fault(STOP_STORAGE);
     }
     status_payload_t final=snapshot();int reason=atomic_load(&fault);
     afo_record_init(&r,REC_END,(uint8_t)reason,++status_seq,esp_timer_get_time(),&final,sizeof(final));
-    bool saved=reason!=STOP_STORAGE&&append_record(fd,&r)&&flush_block(fd)&&fsync(fd)==0;
+    // Persist queued data before writing the stop marker. A failed write has
+    // no trustworthy continuation offset, so never retry that block or END.
+    bool saved=reason!=STOP_STORAGE&&flush_block(fd)&&fsync(fd)==0&&
+        append_record(fd,&r)&&flush_block(fd)&&fsync(fd)==0;
     if(close(fd)!=0)saved=false;
+    if(!saved) {
+        set_fault(STOP_STORAGE);reason=STOP_STORAGE;
+        afo_record_init(&r,REC_END,(uint8_t)reason,status_seq,esp_timer_get_time(),&final,sizeof(final));
+    }
+    wifi_live_offer(&r);
     gpio_set_level(LED_RECORD,0);gpio_set_level(LED_ERROR,!saved||reason!=STOP_NORMAL);
     ESP_LOGI(TAG,"Stopped, reason=%d, finalized=%d, missed=%lu, dropped=%lu",reason,saved,
        (unsigned long)final.timer_missed,(unsigned long)final.queue_dropped);

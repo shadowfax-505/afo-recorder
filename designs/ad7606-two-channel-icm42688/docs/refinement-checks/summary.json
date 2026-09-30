@@ -25,5 +25,9 @@
   "native_production_adc_driver_test_groups_passed": 10,
   "acceptance_scope": "specified circuit, software and behavioral simulation checks only",
   "physical_acceptance_pass": false,
-  "wokwi_scenarios_passed": 7
+  "wokwi_scenarios_passed": 7,
+  "recording_firmware": "ad7606-2ch-1.4",
+  "native_production_recorder_control_cases_passed": 38,
+  "recording_profiles_recompiled": 3,
+  "wokwi_task_lifecycle_cases_passed": 300
 }

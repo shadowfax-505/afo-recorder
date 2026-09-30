@@ -40,6 +40,6 @@ test_modes_and_disabled_channels (test_revb.RevisionBTests.test_modes_and_disabl
 test_record_crc_fault (test_revb.RevisionBTests.test_record_crc_fault) ... ok
 
 ----------------------------------------------------------------------
-Ran 40 tests in 1.268s
+Ran 40 tests in 1.190s
 
 OK

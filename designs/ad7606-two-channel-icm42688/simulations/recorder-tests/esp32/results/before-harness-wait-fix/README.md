@@ -1,0 +1,1 @@
+Historical failing lifecycle test: family 0 completed 100 cycles; family 1 asserted suspension after only 10 ms, shorter than the EMG notification wait of 20 ms. The test now waits for completion/state with a 100 ms deadline. Production recorder source is unchanged by this harness correction. This failed attempt is not a passing result.

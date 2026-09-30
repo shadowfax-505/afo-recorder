@@ -1,5 +1,13 @@
 # Changelog
 
+## Recording shutdown and finalization — v0.1.4 — 30 September 2026
+
+- Keep acquisition task handles valid until the owner joins and deletes suspended workers; latch faults to stop acquisition.
+- Attempt both IMU stop calls even if the foot device reports an error.
+- Sync queued data before END; publish the wireless stop verdict after final write/sync/close checks, including storage failures.
+- Pass 38 native production-recorder cases across PCB and breadboard profiles; 300 lifecycle cycles pass actual ESP-IDF FreeRTOS in Wokwi. Rebuild the three recording profiles; four diagnostic binaries and prior sensor traces are unchanged.
+- Add a recording/recovery report, synthetic fixtures, stop-code guide and reproducible tests. Physical validation remains pending; the five other designs are unchanged.
+
 ## Two-channel AD7606 / ICM refinement — 30 September 2026
 
 - Corrected analog metadata, ADC fault handling, diagnostic acquisition windows and the initial IMU interrupt grace period.

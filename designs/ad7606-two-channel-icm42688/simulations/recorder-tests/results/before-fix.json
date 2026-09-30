@@ -1,0 +1,23 @@
+{
+  "pre_fix_source_sha256": "97ea8ff2d6ad7395228fcb93e05bd337467c709342ac2231e6f66c4a8c59a740",
+  "pre_fix_git_commit": "978307c",
+  "expected_failures_reproduced": 3,
+  "results": [
+    {
+      "case": "worker-fault-before-join",
+      "pre_fix_exit_code": -6,
+      "failure": "Assertion failed: (task&&task->state!=eDeleted), function xTaskNotifyGive, file test_recorder.c, line 121."
+    },
+    {
+      "case": "normal",
+      "pre_fix_exit_code": -6,
+      "failure": "Assertion failed: (closed), function wifi_live_offer, file test_recorder.c, line 192."
+    },
+    {
+      "case": "imu-stop-failure",
+      "pre_fix_exit_code": -6,
+      "failure": "Assertion failed: (closed), function wifi_live_offer, file test_recorder.c, line 192."
+    }
+  ],
+  "hardware_measured": false
+}

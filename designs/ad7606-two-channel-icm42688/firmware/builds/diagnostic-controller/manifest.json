@@ -19,20 +19,20 @@
     "bootloader.bin": "648dbf56de96df55baf4013c87b31eedcdb4d06fcfccee144c93ad71b88d12c4"
   },
   "source_sha256": {
+    "diagnostic.c": "5a46b93676fcec804c5d20d999d7c345bb13d95984d35628debad88b844c21cf",
     "CMakeLists.txt": "9bc5cb5a34a0f9114223bc776954e6078cdd8f1588b48e7864b0ca091daaee96",
+    "ads_crc.c": "31cbb5fd61f5e06c394a426e0fa48d14f3561be4d46fffe6a18e1837edad83cc",
+    "format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
+    "sensors.h": "ef7cdd16559c82d9f7552aeeb14e46400645ce694ec352da3cc8344fbc333dea",
+    "wifi_live.c": "e59426dd0bc9ff26c5e0053a4eaf6e10db1890fe61848a578259f6a5ae91342e",
     "adc_ad7606.c": "b620a4e99f5e495702f1b745623499c1ae2802b687d55713e6140e150d7dd817",
     "adc_ads131m04.c": "914ffa6db82ed58aed9d4f0beb1ae05645ac6fb47097ace88e2be8b6a3c6b6aa",
-    "ads_crc.c": "31cbb5fd61f5e06c394a426e0fa48d14f3561be4d46fffe6a18e1837edad83cc",
-    "ads_crc.h": "d08cf15ad6e5d8d837e5c532b9665bc9c07a045475ba06c6443eed6b4367aeac",
-    "board.h": "11f3f4d30c3b70410810426ffe6371088ed250903c7e569ba36858d6248439cc",
-    "diagnostic.c": "5a46b93676fcec804c5d20d999d7c345bb13d95984d35628debad88b844c21cf",
-    "format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
-    "format.h": "58b01a597eaa2c70a918ad5ee3b71c9e26fe64aedefc91ffba7d96430510c47b",
-    "main.c": "97ea8ff2d6ad7395228fcb93e05bd337467c709342ac2231e6f66c4a8c59a740",
     "sensors.c": "f5c6034a43b260de6282d902a1d76d3e4db60bcbca64d364ebd34fc733df84c9",
-    "sensors.h": "ef7cdd16559c82d9f7552aeeb14e46400645ce694ec352da3cc8344fbc333dea",
-    "variant.h": "55c2cdaef8b2d56e2ced2aa23984a289038adc6caaf9d164c92830c24b8cffb9",
-    "wifi_live.c": "e59426dd0bc9ff26c5e0053a4eaf6e10db1890fe61848a578259f6a5ae91342e",
-    "wifi_live.h": "eba7b829d91892b740965935de32aebcb8a990c1b10df34ffc4ed14320c32acd"
-  }
+    "wifi_live.h": "eba7b829d91892b740965935de32aebcb8a990c1b10df34ffc4ed14320c32acd",
+    "board.h": "11f3f4d30c3b70410810426ffe6371088ed250903c7e569ba36858d6248439cc",
+    "format.h": "58b01a597eaa2c70a918ad5ee3b71c9e26fe64aedefc91ffba7d96430510c47b",
+    "ads_crc.h": "d08cf15ad6e5d8d837e5c532b9665bc9c07a045475ba06c6443eed6b4367aeac",
+    "variant.h": "55c2cdaef8b2d56e2ced2aa23984a289038adc6caaf9d164c92830c24b8cffb9"
+  },
+  "entrypoint": "diagnostic.c"
 }

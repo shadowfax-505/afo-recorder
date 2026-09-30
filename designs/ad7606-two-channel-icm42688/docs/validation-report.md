@@ -1,3 +1,7 @@
+# Current recording-control follow-up — 30 September 2026
+
+Thirty-eight native cases execute the production recorder with task/filesystem API shims for both hardware profiles. Three recording images rebuilt as ad7606-2ch-1.4. Three hundred task lifecycle cycles also pass actual ESP-IDF FreeRTOS on Wokwi. Read the [recording verification report](recording-verification.html) for exact scope and persistence limits. The four diagnostics and seven prior ADC/IMU Wokwi scenarios are unchanged. Physical tests remain pending; the earlier evidence below is retained for traceability.
+
 # Current validation status — 30 September 2026
 
 Read the [focused circuit audit](circuit-audit.md) and [short staged guide](lab-quickstart.md). Fresh ERC/DRC and 390 direct pin comparisons pass, as do 40 host tests and seven software acquisition scenarios. Seven firmware profiles were rebuilt. Analog response, tolerance and DC/loading simulations pass under the documented surrogate models. **Seven actual-firmware Wokwi scenarios now pass serial and VCD protocol checks. The specified virtual gate passes within model/capture limits; physical testing has not been performed.** See the [execution report](virtual-verification.md).

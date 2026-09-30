@@ -33,3 +33,7 @@ Copy one row per test; include failures and retests. Do not prefill these with s
 After all laboratory stages, the final PCB still needs power startup, switching ripple, antenna/USB, thermal, noise, crosstalk and sustained recording checks. Breadboards validate the logical signal path, not the final board layout.
 
 At ADC initialization the firmware clocks a discarded read during RESET to establish SPI mode. No acquisition trigger or counted sample occurs during that read. Identify it separately on the scope; the first counted conversion must have the expected DC codes. A diagnostic failure latches and requires reset/restart after correcting the cause.
+
+## Stopping and checking a recording
+
+For stages 7–9, wait for the recording LED to turn off before removing power or the SD card. An error LED, a nonzero wireless stop reason or a missing END packet requires investigation; do not label the trial successful from a visible filename. Convert the original SD file and keep its quality report with the measured results. A decoded END cannot certify persistence after a final sync/close error. See the [stop reasons and recovery checks](recording-verification.html). The recording images carry firmware identity `ad7606-2ch-1.4`; the four diagnostic images are unchanged.
