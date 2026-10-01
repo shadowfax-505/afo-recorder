@@ -2,11 +2,9 @@
 
 ## Integrated AD7606 / two-channel / ICM verification — 1 October 2026
 
-The [integrated report](../designs/ad7606-two-channel-icm42688/docs/integrated-verification.html) supersedes earlier current-firmware summaries for this configuration. Version `ad7606-2ch-1.5` fixes delayed ADC servicing and IMU timestamp regressions found during actual ESP-IDF execution. All seven laboratory profiles recompile; the fresh connection audit reports zero ERC/DRC violations and zero mismatches across 390 functional pins.
+The [current integrated report](../designs/ad7606-two-channel-icm42688/docs/integrated-verification.html) records **18/18 v1.6 web-simulator cases passing** actual ESP-IDF recorder, ADC/IMU, FreeRTOS, FatFS and UDP execution with documented substitutes. Complete exports pass the real converter and live decoder. Current real-socket/API/browser/archive replays retain preview drops and packet gaps accurately. The nominal saved recording has no detected sample loss.
 
-Ten integrated Wokwi cases completed with passing checks. The nominal run produced 10,041 EMG records with a complete file and no detected sample loss; its optional trace download failed after the firmware completed. Four cases were refused by the monthly cloud quota, and the low-battery run stopped correctly but did not finish exporting its UDP evidence. The full 16-case matrix has not passed. Storage uses a PSRAM block medium with real FatFS; controls and battery are fixture values; UDP uses loopback. These substitutions do not validate physical SDMMC, radio, power or battery performance.
-
-Current v1.6 rejects ADC conversions whose BUSY signal never asserts. Local coverage includes 16 ADC driver groups, eight IMU clock groups, 38 recording-control cases, 40 converter/live/legacy tests, and a 60-second production-driver pipeline with 480,000 EMG records from repeated ngspice-derived signals. Sixteen integrated-runner tests, nine capture-timing tests and twelve independent ADC model groups pass. Two laptop replays pass real UDP, HTTP, browser and archive checks. All eighteen current v1.6 cloud cases remain unexecuted after one quota-refused attempt; earlier v1.5 captures do not establish v1.6 execution. Historical seven-case diagnostic and 300-cycle lifecycle results retain their original tested binaries and sources; they are not executions of the newly rebuilt images. Other five packages are unchanged by this focused refinement.
+All seven laboratory profiles compile. Clean ERC/DRC and independent comparison cover 390 functional pins and 22 GPIOs per profile. Separate coverage includes 16 ADC groups, eight IMU clock groups, 38 recorder-control cases, 40 host/legacy tests, 16 integrated-runner tests, nine timing tests, twelve model groups and the 60-second 480,000-frame C pipeline. QEMU’s nominal timing qualification fails and remains labeled unqualified. Earlier seven-case diagnostic and 300-cycle lifecycle evidence retains its exact tested images; it is not execution of every newly rebuilt profile. No current downloaded VCD or physical performance is claimed. The other five designs are unchanged.
 
 ## Completed for the three MPU derivatives
 
@@ -25,7 +23,7 @@ See each package's validation report and raw test reports. Older baseline eviden
 
 No hardware has been flashed or measured in this work. Supply/regulator and I²C pull-up behavior, physical carrier headers, timing jitter/drift, ADC accuracy/noise/crosstalk, cable reliability, full-card and interrupted-power behavior, sustained SD/Wi-Fi load, thermal performance and two-hour battery runtime remain unmeasured.
 
-AD7606 header/serial-strap mapping remains a blocker to its physical wiring. The DevKit SD command assignment is now GPIO47 in breadboard firmware, with physical verification still pending. GY-521 body/header geometry remains illustrative. ADS131M04 carrier availability is unresolved. Research-ready, clinical-performance and safety claims are not established.
+AD7606 header order is documented from photographs; the received board’s serial strap and electrical levels still require physical qualification. The DevKit SD command assignment is now GPIO47 in breadboard firmware, with physical verification still pending. GY-521 body/header geometry remains illustrative. ADS131M04 carrier availability is unresolved. Research-ready, clinical-performance and safety claims are not established.
 
 ## SD correction checks — 2026-09-27
 

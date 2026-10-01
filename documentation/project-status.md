@@ -2,7 +2,7 @@
 
 ## Integrated refinement — 1 October 2026
 
-The [fixed two-channel AD7606 / ICM build](../designs/ad7606-two-channel-icm42688/docs/integrated-verification.html) now exercises acquisition, real FreeRTOS/FatFS and UDP together. Simulation exposed and helped correct ADC servicing delays and IMU timestamp regressions. Ten complete cloud cases pass; nominal file/data checks also pass, with a failed optional trace download. Four cases remain quota-blocked and the battery evidence export is partial. The full matrix remains open. All seven lab profiles recompiled as the v1.6 source set, adding required BUSY assertion before an ADC reading is accepted. Sixteen ADC groups and a 60-second native driver pipeline pass, while all eighteen current-image cloud cases remain pending. Earlier diagnostic and lifecycle evidence is archived with its tested source/image identity. Physical power/noise/timing/storage/radio/runtime tests remain pending. Other five packages are unchanged. The sections below describe the earlier six-package release.
+The [fixed two-channel AD7606 / ICM build](../designs/ad7606-two-channel-icm42688/docs/integrated-verification.html) passes all 18 current v1.6 integrated cases in Wokwi’s web editor. Current file and laptop socket/API/browser/archive checks pass with documented substitutes; wireless losses stay visible and saved nominal acquisition remains complete. All seven laboratory profiles compile. QEMU adds refusal evidence but fails nominal timing qualification. Historical diagnostic/lifecycle images and incomplete CLI outcomes remain preserved. No physical recorder has been measured. Other five packages are unchanged. The sections below describe the earlier six-package release.
 
 ## Completed
 

@@ -44,3 +44,7 @@ Nine native test groups execute the unchanged production ADC driver with mocked 
 ### Actual ESP32-S3 simulation — 30 September 2026
 
 Seven AD7606 two-channel/ICM diagnostic scenarios pass Wokwi CLI, with serial and VCD protocol evidence. Initialize mode-2 SPI during reset to prevent a shifted first sample; latch diagnostic worker errors across tasks. Rebuild all seven firmware profiles; 40 host tests, 15 runner tests, ten driver test groups and fresh circuit checks pass. Analyzer coverage and remaining physical/SDMMC/Wi-Fi limits are explicit in the new execution report.
+
+### Current integrated web verification — 1 October 2026
+
+All 18 current v1.6 AD7606/two-channel/ICM integrated cases pass with complete exports and actual converter/live-decoder checks. Separate session buffers from startup stack allocation; rebuild all seven profiles and rerun native control checks. Add reproducible web files, current socket/API/browser/archive tests that retain explicit wireless loss, and an honestly unqualified QEMU experiment. Preserve earlier source/image identities, incomplete CLI outcomes and the other five designs. No physical measurements or board orders.

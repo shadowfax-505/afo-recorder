@@ -88,7 +88,7 @@ def no_payloads(value):
             no_payloads(child)
 
 
-def browser_check(cli, url, out, case, heartbeat):
+def browser_check(cli, url, out, case, heartbeat, expected):
     session = 'afo-laptop-' + case
     logs = []
 
@@ -114,12 +114,9 @@ def browser_check(cli, url, out, case, heartbeat):
         assert parsed['labels'] == ['EMG1 · ADC input voltage', 'EMG2 · ADC input voltage']
         assert len(parsed['canvas']) == 2 and all(n > 100 for n in parsed['canvas'])
         assert 'Acceleration [g]' in parsed['foot'] and 'Acceleration [g]' in parsed['shank']
-        if case == 'normal':
-            assert parsed['state'] == 'Recording ended'
-            assert parsed['gaps'] == '0'
-        else:
-            assert parsed['state'] != 'Recording ended'
-            assert int(parsed['gaps']) == 158
+        assert (parsed['state'] == 'Recording ended') == expected['ended']
+        assert int(parsed['gaps']) == expected['stats']['packet_gaps']
+        if expected['stats']['packet_gaps'] or expected['stats']['device_queue_drops']:
             assert 'Loss or irregular delivery detected' in parsed['notice']
         screenshot = out / 'output' / 'playwright' / (case + '.png')
         screenshot.parent.mkdir(parents=True, exist_ok=True)
@@ -139,8 +136,29 @@ def browser_check(cli, url, out, case, heartbeat):
         (out / (case + '-browser-cli.json')).write_text(json.dumps(logs, indent=2) + '\n')
 
 
-def run_case(case, out, cli):
-    source_dir = TARGET / 'simulations' / 'integrated-recorder' / 'results' / 'current' / case
+def cua_check(handshake, url, case, heartbeat, expected_gaps):
+    """Keep the real receiver alive while its rendered page is checked in CUA."""
+    ready = handshake.with_name(handshake.name + '-' + case + '-ready.json')
+    done = handshake.with_name(handshake.name + '-' + case + '-done.json')
+    pause = handshake.with_name(handshake.name + '-' + case + '-pause')
+    if ready.exists() or done.exists():
+        raise ValueError('browser handshake must use a fresh name')
+    ready.write_text(json.dumps(dict(case=case, url=url, expected_gaps=expected_gaps), indent=2) + '\n')
+    deadline = time.monotonic() + 600
+    while not done.is_file():
+        if time.monotonic() >= deadline:
+            raise TimeoutError('browser verification was not completed')
+        if not pause.exists():
+            heartbeat()
+        time.sleep(.2)
+    result = json.loads(done.read_text())
+    assert result.get('pass') is True and result.get('case') == case
+    assert result.get('expected_gaps') == expected_gaps
+    return result
+
+
+def run_case(case, out, cli, source_root, handshake=None):
+    source_dir = source_root / case
     source = source_dir / 'udp-output.raw'
     stream = packets(source)
     expected = json.loads((source_dir / 'live-results.json').read_text())
@@ -193,8 +211,13 @@ def run_case(case, out, cli):
                     if case == 'normal':
                         assert snapshot['ended'] is True and snapshot['stop_reason'] == 0
                     else:
-                        assert snapshot['ended'] is False and snapshot['stop_reason'] is None
-                        assert snapshot['stats']['packet_gaps'] == 158
+                        assert snapshot['stats']['packet_gaps'] > 0
+                        # A deliberately lossy link can deliver or lose END.
+                        # Preserve its actual verdict instead of inventing one.
+                        if snapshot['ended']:
+                            assert snapshot['stop_reason'] == 0
+                        else:
+                            assert snapshot['stop_reason'] is None
                     # Metadata heartbeat updates connection age but does not invent new samples.
                     last = decode_packet(stream[-1])
                     last_seq = last['sequence']
@@ -207,7 +230,11 @@ def run_case(case, out, cli):
                         payload = json.dumps(meta, separators=(',', ':')).encode()
                         device.sendto(encode_packet(1, last['boot'], last['session'], last_seq,
                                                     payload, dropped=last['dropped']), peer)
-                    browser = browser_check(cli, url, out, case, heartbeat) if cli else {'executed': False}
+                    browser = browser_check(cli, url, out, case, heartbeat,
+                                            expected) if cli else {'executed': False}
+                    if handshake:
+                        browser = cua_check(handshake, url, case, heartbeat,
+                                            expected['stats']['packet_gaps'])
                     # CRC failure and duplicate reject after the baseline browser/API check.
                     duplicate = encode_packet(1, last['boot'], last['session'], last_seq,
                                               json.dumps(meta, separators=(',', ':')).encode(),
@@ -224,6 +251,7 @@ def run_case(case, out, cli):
                     no_payloads(after)
                     # Store a compact decoded result, not raw UDP or 800-point API dumps.
                     evidence = {'case': case, 'pass': True, 'hardware_measured': False,
+                                'recording_firmware': snapshot['metadata']['firmware'],
                                 'source_udp_sha256': digest(source), 'source_packet_count': len(stream),
                                 'record_count': snapshot['records'], 'stats': snapshot['stats'],
                                 'sequence_gaps': snapshot['sequence_gaps'], 'ended': snapshot['ended'],
@@ -257,15 +285,18 @@ def run_case(case, out, cli):
                                         text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
                                         timeout=30)
             report = json.loads((converted / 'quality.json').read_text())
-            if case == 'normal':
-                assert conversion.returncode == 0 and report['no_detected_sample_loss']
-                assert report['session_finalized'] and report['signal_checks_pass']
-            else:
-                assert conversion.returncode == 2 and not report['no_detected_sample_loss']
-                assert not report['session_finalized']
+            expected_gaps = {identity: expected['sequence_gaps'].get(str(kind), 0)
+                             for identity, kind in (('emg', 7), ('foot', 2), ('shank', 3))}
+            assert report['sequence_gaps'] == expected_gaps
+            assert report['session_finalized'] == expected['ended']
+            if not expected['ended']:
                 assert any(issue['kind'] == 'missing_end' for issue in report['issues'])
-                assert report['sequence_gaps']['emg'] == 1449
-                assert report['sequence_gaps']['foot'] == 38 and report['sequence_gaps']['shank'] == 38
+            if any(expected_gaps.values()) or not expected['ended']:
+                assert conversion.returncode == 2 and not report['no_detected_sample_loss']
+            else:
+                assert conversion.returncode == 0 and report['no_detected_sample_loss']
+            if case == 'normal':
+                assert report['signal_checks_pass']
             assert report['synthetic'] is True and report['research_ready'] is False
             (out / (case + '-converted-quality.json')).write_text(json.dumps(report, indent=2) + '\n')
             evidence['converter'] = {'returncode': conversion.returncode,
@@ -282,11 +313,16 @@ def run_case(case, out, cli):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--out', type=Path, default=HERE / 'results')
+    parser.add_argument('--source', type=Path,
+                        default=TARGET / 'simulations/integrated-recorder/results/current',
+                        help='Evidence folder containing normal and wireless-packet-loss captures')
     parser.add_argument('--browser-cli', type=Path,
                         help='Optional Playwright CLI or the installed skill wrapper')
+    parser.add_argument('--ui-handshake', type=Path,
+                        help='Fresh filename prefix for independent CUA browser verification')
     args = parser.parse_args()
     args.out.mkdir(parents=True, exist_ok=True)
-    results = [run_case(case, args.out, args.browser_cli)
+    results = [run_case(case, args.out, args.browser_cli, args.source.resolve(), args.ui_handshake)
                for case in ('normal', 'wireless-packet-loss')]
     summary = {'pass': all(r['pass'] for r in results), 'hardware_measured': False,
                'scope': 'Actual receiver subprocess; loopback UDP; HTTP API; original AFR records; optional live-page browser',

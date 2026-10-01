@@ -16,14 +16,14 @@
   "wokwi_models_wasm_compiled": true,
   "native_model_tests_pass": true,
   "remaining": [
-    "Complete unexecuted cloud cases, nominal trace capture and low-battery evidence export",
-    "Execute newly rebuilt diagnostics and lifecycle image when cloud simulation is available",
-    "Received-module strap and voltage qualification",
-    "Physical analog, timing, power, storage, radio and runtime tests"
+    "Received-module strap/voltage/reference qualification",
+    "Physical power/noise/crosstalk/timing/SDMMC/radio/runtime tests",
+    "Current downloaded VCD and fresh individual laboratory diagnostic execution where required",
+    "Final PCB design review after measured bench stages"
   ],
   "simulation_runner_regression_tests_passed": 15,
   "native_production_adc_driver_test_groups_passed": 16,
-  "acceptance_scope": "Integrated virtual matrix remains incomplete; physical acceptance remains unperformed",
+  "acceptance_scope": "Current 18-case integrated matrix passes under models; physical acceptance and current waveform capture remain unqualified",
   "physical_acceptance_pass": false,
   "recording_firmware": "ad7606-2ch-1.6",
   "native_production_recorder_control_cases_passed": 38,
@@ -32,13 +32,6 @@
   "native_imu_clock_test_groups_passed": 8,
   "diagnostic_profiles_recompiled": 4,
   "integrated_runner_regression_tests_passed": 16,
-  "integrated_cases_planned": 16,
-  "integrated_complete_cli_and_firmware_passes": 10,
-  "integrated_complete_firmware_checks_passes": 11,
-  "integrated_cases_not_executed_quota": 4,
-  "integrated_partial_cases": 1,
-  "integrated_trace_download_failures": 1,
-  "integrated_full_matrix_pass": false,
   "offline_pipeline_emg_samples": 16000,
   "historical_diagnostic_wokwi_cases_passed": 7,
   "historical_rtos_lifecycle_cases_passed": 300,
@@ -49,5 +42,20 @@
   "custom_adc_model_native_groups_passed": 12,
   "laptop_socket_browser_replays_passed": 2,
   "current_integrated_matrix_cases_planned": 18,
-  "current_integrated_image_wokwi_executed": false
+  "current_integrated_image_wokwi_executed": true,
+  "current_integrated_matrix_cases_passed": 18,
+  "current_integrated_full_matrix_pass": true,
+  "current_integrated_engine": "Wokwi web editor",
+  "current_laptop_socket_browser_replays_passed": 2,
+  "qemu_nominal_qualification_pass": false,
+  "current_vcd_retrieved": false,
+  "historical_v15_execution": {
+    "cases_planned": 16,
+    "complete_cli_and_firmware_passes": 10,
+    "complete_firmware_checks_passes": 11,
+    "cases_not_executed_quota": 4,
+    "partial_cases": 1,
+    "trace_download_failures": 1,
+    "full_matrix_pass": false
+  }
 }

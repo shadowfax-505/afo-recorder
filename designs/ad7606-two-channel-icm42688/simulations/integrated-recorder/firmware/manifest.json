@@ -10,7 +10,7 @@
   "trace_instrumentation": true,
   "task_watchdog_enabled": true,
   "sha256": {
-    "firmware/main/main.c": "f565497b79e98c9f953293627b5fdc4f5dcadc372da2388422cebcf881fff867",
+    "firmware/main/main.c": "81beee3f1b272230f810ab2d5e76dd51d8593249966a9db501ee327b4e11ad8f",
     "firmware/main/adc_ad7606.c": "77164ec74b6c574a64885a44e9117409f2edaaaf90a82cb737c3834f4672b5e8",
     "firmware/main/sensors.c": "f5c6034a43b260de6282d902a1d76d3e4db60bcbca64d364ebd34fc733df84c9",
     "firmware/main/sensors.h": "880b651acda742396e7da66f113f6ad27022abc4db84a93f9fff6a162e32ff43",
@@ -38,8 +38,8 @@
     "simulations/integrated-recorder/chips/icm42688.chip.wasm": "85e5bd6c213111fc966aabcff04a0a4af6d2c48811e9470cc27aa90f896f167b",
     "simulations/integrated-recorder/chips/stimulus.h": "61ddf5ba66c9c3f234279bf82dec12f848fa73b2b09d66980c193959b7234717",
     "simulations/integrated-recorder/chips/wokwi-api.h": "f72cbb878f7b54017b3eae0450a410905759934e00fbb508cad198951a016c57",
-    "simulations/integrated-recorder/firmware/merged.bin": "61a6def2a791a67590e94ff8d7ff3c545fac8ad8fa333972ed5a429aea435bec",
-    "simulations/integrated-recorder/firmware/integrated_recorder.elf": "8183d7947aae16f7aae29d63a0cede3ad2b260d9513e08176cb23e5701aca22a",
+    "simulations/integrated-recorder/firmware/merged.bin": "68eb6996195abbbb6eb2f8e2a327ccff640f0fc4c25c9ac2e20cdeb01183808c",
+    "simulations/integrated-recorder/firmware/integrated_recorder.elf": "aabb340315a2c238908cd181e64bbcf485d1c742dbad49ea27bdaed33ed0c8c3",
     "simulations/integrated-recorder/firmware/effective-sdkconfig.txt": "c79ea9477db3935ac85868b56fdfbc8c01390820e7bc213441e356653a8b4810"
   }
 }

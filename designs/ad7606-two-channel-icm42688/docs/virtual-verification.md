@@ -2,7 +2,7 @@
 
 Project lead: Muttakin Rahman · 30 September 2026 · AD7606 / two EMG inputs / ICM-42688-P
 
-**Seven scenarios passed using the earlier actual ESP-IDF v5.4.2 stage-6 diagnostic binary in Wokwi CLI 0.27.1.** Its [tested source/image snapshot](../simulations/wokwi/tested-diagnostic-20260930/manifest.json) is preserved. The current diagnostic binaries were recompiled after current acquisition changes and have not been rerun because cloud CI quota was exhausted. This report establishes only the historical image’s modeled digital behavior; physical hardware has not been measured. For current recorder/FatFS/UDP execution, use the [integrated verification report](integrated-verification.html). [Machine-readable results](../simulations/wokwi/results/scenarios.json).
+**Seven scenarios passed using the earlier actual ESP-IDF v5.4.2 stage-6 diagnostic binary in Wokwi CLI 0.27.1.** Its [tested source/image snapshot](../simulations/wokwi/tested-diagnostic-20260930/manifest.json) is preserved. The current diagnostic binaries were recompiled after acquisition changes; this historical seven-case matrix has not been rerun on them. Current recorder/FatFS/UDP execution separately passes 18 cases through the web editor; see the [integrated report](integrated-verification.html). This report establishes only its historical image’s modeled digital behavior. Physical hardware has not been measured. [Machine-readable results](../simulations/wokwi/results/scenarios.json).
 
 ## Corrections found by execution
 

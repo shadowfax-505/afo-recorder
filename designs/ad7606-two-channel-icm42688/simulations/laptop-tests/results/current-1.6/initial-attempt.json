@@ -1,0 +1,6 @@
+{
+  "pass": false,
+  "hardware_measured": false,
+  "reason": "The earlier laptop replay assertion assumed nominal wireless archives are loss-free and that the packet-loss fixture always removes END. Current v1.6 output can drop a best-effort preview frame, and its lossy capture delivered END. The strict byte, gap and ending checks were made input-specific rather than labeling missing measurements loss-free. See ../current-1.6-recheck/summary.json for the successful rerun.",
+  "runner_sha256": "7a76986e34d838f39e97c6bfe2b7ee5af5443be3053fa21b2a1c91722dceb455"
+}

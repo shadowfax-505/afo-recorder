@@ -2,13 +2,13 @@
 
 Project lead: Muttakin Rahman · 1 October 2026
 
-Current recording firmware **ad7606-2ch-1.6** retains the ADC task wake-up and FIFO-burst timestamp corrections found during v1.5 integrated execution, and now rejects missing BUSY assertion/ignored CONVST before accepting stale ADC words. The [integrated verification report](integrated-verification.html) is the current evidence entrypoint. **The whole-system virtual matrix and physical acceptance have not passed.**
+Current recording firmware **ad7606-2ch-1.6** retains the ADC task wake-up and FIFO-burst timestamp corrections found during v1.5 integrated execution, and now rejects missing BUSY assertion/ignored CONVST before accepting stale ADC words. The [integrated verification report](integrated-verification.html) is the current evidence entrypoint. **All 18 current integrated cases pass within the documented models. Physical acceptance remains unperformed.**
 
 | Evidence | Current result |
 |---|---|
 | Preserved v1.5 production firmware, FreeRTOS, FatFS and lwIP on Wokwi | Ten complete CLI/firmware passes; nominal firmware/file/UDP checks also pass with optional trace-download failure |
-| Current v1.6 whole-system Wokwi execution | All 18 candidate cases unexecuted; one attempt refused by exhausted CI quota. [v1.5 exact tested source/image snapshot](../simulations/integrated-recorder/tested-source-1.5/manifest.json) is retained |
-| Remaining integrated cases | Battery export partial; four cases unexecuted because monthly CI quota was exhausted |
+| Current v1.6 whole-system Wokwi execution | All 18 current cases pass in the web editor; complete file/live decode and explicit fault reporting. [v1.5 exact tested source/image snapshot](../simulations/integrated-recorder/tested-source-1.5/manifest.json) is retained |
+| Current low-battery export | Both file and UDP dumps complete; earlier v1.5 partial capture remains historical |
 | KiCad / independent pin comparison | Clean ERC/DRC; 390 pins and 22 GPIOs per profile compared without mismatches |
 | Current v1.6 laboratory firmware | All seven profiles cross-compiled; current diagnostic images not rerun in Wokwi |
 | Native actual ADC driver / IMU timing helper | 16 / eight groups pass |
@@ -16,11 +16,13 @@ Current recording firmware **ad7606-2ch-1.6** retains the ADC task wake-up and F
 | Host converter / live / legacy | 40 tests pass |
 | Integrated evidence runner | 16 tests pass |
 | Current behavioral ADC model | 12 native groups pass under address/undefined sanitizers; no Wokwi/WASM execution |
-| Captured timing audit | Nine post-processing tests pass on v1.5 evidence; no new firmware execution |
-| Laptop receiver / HTTP / live browser / archive | Two actual local-socket cases pass using preserved v1.5 datagrams; no RF link |
+| Captured timing audit | Nine auditor regression tests pass; current capture post-processing passes; no physical clock calibration |
+| Laptop receiver / HTTP / live browser / archive | Two current v1.6 socket/API/browser/archive cases pass; preview/packet loss remains visible; no RF link |
 | Actual C analog-to-file pipeline | 60 seconds, 480,000 EMG / 12,009 foot / 12,001 shank; 916/915 counter rollovers; correct codes; zero regressions or unexplained loss; pending foot packet counted |
 | Analog surrogate | Two channels; 16 tolerance corners; 54 DC/loading cases; analytical response comparison passes |
 | Queue capacity model | Four assumed one-hour writer cases pass; stall/throughput faults overflow explicitly. No firmware endurance or card measurement |
+| QEMU timing experiment | Refusals exercised; nominal acquisition fails; not a qualified continuous-recording result |
+| Current waveform download | No new VCD retrieved; preserved historical traces remain available |
 | Physical tests | None performed |
 
 Read the [circuit audit](circuit-audit.html), [recording/recovery guide](recording-verification.html), [module qualification](module-qualification.md) and [short staged guide](lab-quickstart.html). Current manufacturing files remain engineering-prototype outputs; bench results and final review precede any order recommendation.

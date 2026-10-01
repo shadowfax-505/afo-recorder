@@ -1,0 +1,12 @@
+{
+  "name": "icm42688 behavioral model",
+  "author": "AFO Recorder project",
+  "pins": [
+    "CS",
+    "SCLK",
+    "SDI",
+    "SDO",
+    "INT1"
+  ],
+  "controls": []
+}

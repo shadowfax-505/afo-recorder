@@ -1,0 +1,1 @@
+sequence,conversion_trigger_host_us,ch0_raw,ch1_raw,ch0_adc_input_v,ch1_adc_input_v,ch0_myoware_raw_v_estimate,ch1_myoware_raw_v_estimate,adc_status,adc_crc,read_start_us,read_duration_us,elapsed_slots,active_mask,flags

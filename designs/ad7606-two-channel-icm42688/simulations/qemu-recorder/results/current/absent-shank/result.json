@@ -1,0 +1,12 @@
+{
+  "case": "absent-shank",
+  "engine": "Espressif QEMU ESP32-S3",
+  "configured": true,
+  "completed": true,
+  "pass": true,
+  "hardware_measured": false,
+  "physical_acceptance_pass": false,
+  "clock_mode": "wall_paced",
+  "refused": true,
+  "reason": "Initialization failed; recording disabled."
+}

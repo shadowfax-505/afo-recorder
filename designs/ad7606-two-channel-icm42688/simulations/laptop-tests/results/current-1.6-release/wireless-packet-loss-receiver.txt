@@ -1,0 +1,3 @@
+Live viewer: http://127.0.0.1:64412/
+Connect laptop Wi-Fi to AFO-Recorder-B. Captures: /var/folders/w5/b_txk1fj1gs03jrsn0275fth0000gn/T/afo-laptop-synthetic-ngpflgz3/capture
+Ctrl+C stops reception and finalizes the laptop files.

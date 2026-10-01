@@ -1,0 +1,14 @@
+{
+  "foot": "Acceleration [g]: 0.000 / 0.000 / 1.000 · Angular velocity [°/s]: 0.00 / 0.00 / 0.00 · Sample 263 · Timing flags 2",
+  "gaps": "0",
+  "labels": [
+    "EMG1 · ADC input voltage",
+    "EMG2 · ADC input voltage"
+  ],
+  "notice": "Loss or irregular delivery detected. Inspect the quality report and compare with the SD file.",
+  "records": "10,557",
+  "shank": "Acceleration [g]: 0.001 / 0.000 / 1.000 · Angular velocity [°/s]: 0.00 / 0.00 / 0.00 · Sample 252 · Timing flags 2",
+  "state": "Recording ended",
+  "synthetic": true,
+  "title": "AFO · Live acquisition"
+}

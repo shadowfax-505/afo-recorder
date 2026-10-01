@@ -251,7 +251,9 @@ static void reset_stats(void) {
     emg_records=0;foot_records=0;shank_records=0;queue_high_water=0;status_seq=0;
     fault=0;block_used=0;xQueueReset(queue);xEventGroupClearBits(done,3);
 }
-static void record_session(void) {
+// Keep session buffers out of the startup stack frame. Startup also calls the
+// NVS/network initialization paths, which need their own stack headroom.
+static void __attribute__((noinline)) record_session(void) {
     current_battery=battery_mv();
     if(!gpio_get_level(USB_PRESENT_PIN)||current_battery<BATTERY_WARN_MV||!free_space_ok()) {
         gpio_set_level(LED_ERROR,1);ESP_LOGE(TAG,"Start refused: USB attached, battery, or free space");return;

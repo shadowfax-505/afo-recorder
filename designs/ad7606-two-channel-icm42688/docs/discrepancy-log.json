@@ -103,5 +103,25 @@
     "id": "missing-busy-assertion",
     "status": "corrected-locally-cloud-rerun-pending",
     "detail": "v1.6 requires BUSY high after the 1 us CONVST pulse. Previously missing/disconnected BUSY or ignored CONVST could accept plausible stale ADC words. Sixteen native ADC groups and six native pipeline groups pass; full v1.6 integrated 18-case cloud execution remains pending."
+  },
+  {
+    "id": "startup-session-stack-allocation",
+    "status": "corrected-and-simulated",
+    "detail": "Keep record_session out of the startup compiler frame; all profiles rebuilt, 38 native control cases rerun, current 18-case Wokwi web matrix passes. No peak hardware stack measurement."
+  },
+  {
+    "id": "current-web-execution",
+    "status": "complete-under-models",
+    "detail": "18 current v1.6 cases complete through supported web firmware upload; quota-refused CLI outcomes remain historical. No new downloaded VCD."
+  },
+  {
+    "id": "laptop-fixed-loss-outcome-assumption",
+    "status": "test-gate-corrected-and-rerun",
+    "detail": "Current nominal preview drops one EMG frame; lossy current run delivered END. Replay checks actual source gaps and ending, rejects corruption/duplicates and preserves record bytes. Warning code 2 remains expected for missing measurements."
+  },
+  {
+    "id": "qemu-deadline-qualification",
+    "status": "unqualified",
+    "detail": "Seven-case experiment retains initialization refusals and generic fail-closed behavior but nominal sampling fails. Do not count it as 8 kHz qualification or relax timing to force success."
   }
 ]

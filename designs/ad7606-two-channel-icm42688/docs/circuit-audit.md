@@ -2,7 +2,7 @@
 
 Project lead: Muttakin Rahman · Review: 1 October 2026
 
-**The intended signal path is logically consistent, and fresh connectivity and software checks pass. This is not a fully verified recorder.** The [current integrated report](integrated-verification.html) records ten complete CLI/firmware passes, an additional nominal firmware/file/UDP pass with trace-download failure, one partial case and four quota-blocked cases. The full matrix has not passed; no physical recorder has been measured. Do not interpret the manufacturing exports as an order recommendation.
+**The intended signal path is logically consistent, and current circuit/software checks pass. All 18 current v1.6 integrated cases pass in Wokwi with documented substitutes.** The [integrated report](integrated-verification.html) includes complete exports, explicit wireless gaps, preserved historical failures and the unqualified QEMU timing experiment. No physical recorder has been measured; manufacturing files remain engineering prototypes.
 
 ## What changed
 
@@ -32,7 +32,7 @@ The authoritative source remains `design/circuit-spec.json`. `design/audit_conne
 | ngspice | Both channels; 16 tolerance corners; 54 DC/loading cases; unplugged-bias case; transient/ideal quantization checks |
 | Wokwi models | Both compile to WASM; native model unit tests pass |
 | Preserved v1.5 integrated Wokwi execution | Ten complete CLI/firmware passes; nominal firmware/file/UDP passes with optional trace failure; battery partial; four cases unexecuted due to quota. [Tested source/image snapshot](../simulations/integrated-recorder/tested-source-1.5/manifest.json) |
-| Current v1.6 integrated cloud execution | All 18 candidate cases unexecuted; one missing-BUSY attempt refused by quota. Preserved v1.5 results are not a current-image rerun |
+| Current v1.6 integrated cloud execution | All 18 current cases pass in the web editor; complete converter/decoder checks. Preserved v1.5 outcomes are separate |
 | Historical diagnostic Wokwi execution | Seven cases passed on the preserved earlier image; [source/image snapshot](../simulations/wokwi/tested-diagnostic-20260930/manifest.json) |
 | Native driver/timing logic | 16 current ADC groups and eight IMU timestamp-helper groups pass |
 | Integrated evidence runner | 16 tests pass; partial/quota evidence is not counted as passed execution |
@@ -86,11 +86,11 @@ The firmware checks WHO_AM_I=0x47 and configuration readback, selects 200 Hz acc
 
 Primary references: [ADI AD7606 Rev G, Tables 2–3 and serial-interface sections](https://www.analog.com/media/en/technical-documentation/data-sheets/AD7606_7606-6_7606-4.pdf), [TDK ICM-42688-P](https://www.invensense.tdk.com/en-us/products/6-axis/icm-42688-p), [MikroE carrier](https://www.mikroe.com/6dof-imu-14-click), [TI TPS60150](https://www.ti.com/product/TPS60150), [TI TPS63070](https://www.ti.com/product/TPS63070), [Microchip MCP6004](https://www.microchip.com/en-us/product/mcp6004), [Nexperia BAV199](https://assets.nexperia.com/documents/data-sheet/BAV199-Q.pdf), [Wokwi ESP32 support](https://docs.wokwi.com/guides/esp32), [Wokwi Chips API](https://docs.wokwi.com/chips-api/getting-started).
 
-Completed checks pass within their stated scope. **The current whole-system virtual matrix remains incomplete** because of partial capture and cloud quota; see the [case ledger](integrated-verification.html). Physical gates include received-module qualification, power/startup/ripple, analog noise/clipping/crosstalk, cable integrity, actual 8 kHz timing, sustained SD/Wi-Fi recording, battery runtime and final PCB layout review. No board order or human-use approval follows from this report.
+Completed checks pass within their stated scope. **The current whole-system case matrix passes within its documented model/substitution limits**; see the [case ledger](integrated-verification.html). Physical gates include received-module qualification, power/startup/ripple, analog noise/clipping/crosstalk, cable integrity, actual 8 kHz timing, sustained SD/Wi-Fi recording, battery runtime and final PCB layout review. No board order or human-use approval follows from this report.
 
 ## Follow-up: verification safeguards and driver logic
 
-Fifteen synthetic runner regression tests now reject stale files, partial windows, wrong sample rates/channel values and empty traces. Sixteen native C test groups also execute the production AD7606 driver against mocked timer, BUSY and SPI APIs, including late-read and unread-conversion faults, direct timer wake-up, missing BUSY assertion, ignored CONVST and the bounded BUSY wait. Eight additional groups check the production IMU timestamp helper. These are separate from the 40 host/converter tests. They do not emulate ESP32 concurrency or measure physical timing. See `simulations/driver-tests/` and `simulations/wokwi/tests/`. The [historical Wokwi report](virtual-verification.md) records the seven earlier diagnostic scenarios and capture limits. The [current integrated report](integrated-verification.html) records actual recorder/FatFS/UDP execution and its unfinished cases.
+Fifteen synthetic runner regression tests now reject stale files, partial windows, wrong sample rates/channel values and empty traces. Sixteen native C test groups also execute the production AD7606 driver against mocked timer, BUSY and SPI APIs, including late-read and unread-conversion faults, direct timer wake-up, missing BUSY assertion, ignored CONVST and the bounded BUSY wait. Eight additional groups check the production IMU timestamp helper. These are separate from the 40 host/converter tests. They do not emulate ESP32 concurrency or measure physical timing. See `simulations/driver-tests/` and `simulations/wokwi/tests/`. The [historical Wokwi report](virtual-verification.md) records the seven earlier diagnostic scenarios and capture limits. The [current integrated report](integrated-verification.html) records actual recorder/FatFS/UDP execution and its scope.
 
 ## Execution-driven corrections
 
@@ -106,4 +106,8 @@ Preserved v1.5 execution corrected a delayed ADC task wake-up and FIFO-burst tim
 
 ## Missing conversion acknowledgement — current v1.6
 
-The driver now requires BUSY high at the end of the 1 µs CONVST pulse, before making the frame pending. A missing assertion indicates a disconnected/stuck-low BUSY line or ignored conversion and latches a timing fault instead of reading stale words. This follows the AD7606 Rev G 45 ns maximum BUSY assertion and 3.45 µs minimum conversion timing. Sixteen native driver groups and the local C pipeline pass with the new safeguard. The current v1.6 whole-system cloud run has not executed; its [v1.5 baseline snapshot](../simulations/integrated-recorder/tested-source-1.5/manifest.json) is retained separately.
+The driver now requires BUSY high at the end of the 1 µs CONVST pulse, before making the frame pending. A missing assertion indicates a disconnected/stuck-low BUSY line or ignored conversion and latches a timing fault instead of reading stale words. This follows the AD7606 Rev G 45 ns maximum BUSY assertion and 3.45 µs minimum conversion timing. Sixteen native driver groups and the local C pipeline pass with the new safeguard. The current v1.6 web matrix executes all three ADC handshake fault cases and rejects them with an ADC error and zero EMG; its [v1.5 baseline snapshot](../simulations/integrated-recorder/tested-source-1.5/manifest.json) is retained separately.
+
+## Current full-system execution
+
+All 18 v1.6 web cases pass. A startup stack-allocation correction is included in the rebuilt images. Current laptop replays retain one nominal preview drop and 158 deliberately missing packets visibly, with exact archived measurement bytes. QEMU establishes additional refusal behavior but fails nominal timing qualification; it is not counted as continuous-acquisition evidence. Current web byte/capture timing checks are distinct from the preserved diagnostic VCDs. See the [integrated report](integrated-verification.html).
