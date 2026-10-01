@@ -1,0 +1,19 @@
+[
+  "/Users/muttakinrahman/Documents/Codex/2026-09-12/i-want-to-do-a-research-2/work/qemu-9.2.2/qemu/bin/qemu-system-xtensa",
+  "-machine",
+  "esp32s3",
+  "-nographic",
+  "-monitor",
+  "none",
+  "-serial",
+  "stdio",
+  "-m",
+  "8M",
+  "-global",
+  "driver=ssi_psram,property=is_octal,value=true",
+  "-drive",
+  "file=/tmp/afo-qemu-55koqi4o/flash.bin,if=mtd,format=raw",
+  "-no-reboot",
+  "-qmp",
+  "unix:/tmp/afo-qemu-55koqi4o/monitor.sock,server=on,wait=off"
+]

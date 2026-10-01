@@ -1,0 +1,3 @@
+sequence,host_time_estimate_us,sensor_time_unwrapped_us,sensor_timestamp_raw,ax_raw,ay_raw,az_raw,gx_raw,gy_raw,gz_raw,ax_g,ay_g,az_g,gx_dps,gy_dps,gz_dps,temperature_raw,fifo_header,read_start_us,read_end_us,irq_anchor_us,flags,valid
+1,1062703,5000,5000,2,0,2048,0,0,0,0.0009765625,0.0,1.0,0.0,0.0,0.0,0,104,1067579,1068776,1062703,2,1
+2,1067703,10000,10000,2,0,2048,0,0,0,0.0009765625,0.0,1.0,0.0,0.0,0.0,0,104,1072217,1073425,1068683,2,1

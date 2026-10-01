@@ -4,6 +4,12 @@ This test replays the actual AFW datagrams exported by the integrated ESP-IDF si
 
 The input is simulated data. The replay changes only `synthetic=true` in each metadata packet and recomputes that packet's CRC. It preserves every measurement record, sequence number, timing flag and missing packet from the source capture. Neither the test nor its screenshots represent physical sensor or radio measurements.
 
+## Current v1.6 evidence
+
+The [current results](results/current-1.6-final/summary.json) pass actual socket/API, CUA browser, CRC/duplicate rejection and byte-exact archive checks. Nominal reception contains 10,557 records: one best-effort preview EMG drop is visible. The lossy capture contains 9,034 records, 158 missing UDP packets and gaps of 1,457 EMG / 34 foot / 33 shank records. Both runs received END 0, but their laptop converter returns warning code 2 for missing measurements. Their source SD streams are complete.
+
+Use `--source ../integrated-recorder/results/web-current --out /path/to/new-results` to replay the current captures. `--ui-handshake /path/to/fresh-prefix` permits independent CUA inspection while metadata heartbeats keep the receiver alive; pause its named heartbeat file to check stale-link display, then provide its browser-result JSON. Without a browser option, the same socket/API/archive checks run. `tested-runner-1.5.py` preserves the earlier runner. The initial current-run assumption failure is recorded under `results/current-1.6/`; the source-specific ending/gap assertions retain losses rather than declaring them clean.
+
 ## Run it
 
 From this recorder package:
@@ -20,7 +26,9 @@ python3 simulations/laptop-tests/run.py --browser-cli /path/to/playwright-cli
 
 Use a Python environment with the dependencies in `host/requirements.txt` installed. The script uses kernel-assigned UDP and HTTP ports on localhost; it does not join a network or use a token. Results are written beneath `simulations/laptop-tests/results/`. Browser screenshots are saved in that result directory's `output/playwright/` folder.
 
-## What is checked
+The released live page also links directly to this configuration’s current assembly workspace rather than the earlier local prototype route. The earlier current-data replay and its exact HTML are retained in `results/current-1.6-recheck/`.
+
+## Preserved v1.5 evidence
 
 | Check | Nominal capture | Capture with dropped packets |
 |---|---|---|

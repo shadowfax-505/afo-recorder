@@ -1,0 +1,13 @@
+{
+  "transport": "wifi_udp",
+  "not_a_replacement_for_sd": true,
+  "statistics": {
+    "packets": 0,
+    "packet_gaps": 0,
+    "reordered_or_duplicate": 0,
+    "invalid_packets": 0,
+    "unknown_session_packets": 0,
+    "device_queue_drops": 0
+  },
+  "sessions": {}
+}

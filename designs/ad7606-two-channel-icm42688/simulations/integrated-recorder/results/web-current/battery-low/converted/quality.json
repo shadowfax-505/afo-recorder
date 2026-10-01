@@ -1,0 +1,53 @@
+{
+  "source_sha256": "0aff9901a827a413c207c83f0b542f9e80250aed7d36bd01613ceb10e9625cb9",
+  "synthetic": true,
+  "counts": {
+    "emg": 24005,
+    "foot": 612,
+    "shank": 601,
+    "status": 3,
+    "end": 1
+  },
+  "session_finalized": true,
+  "structurally_complete": false,
+  "no_detected_sample_loss": false,
+  "signal_checks_pass": true,
+  "research_ready": false,
+  "sequence_gaps": {
+    "emg": 0,
+    "foot": 0,
+    "shank": 0
+  },
+  "anomalies": {
+    "sequence_regressions": 0,
+    "timestamp_regressions": 0,
+    "emg_clipped_samples": 0,
+    "emg_out_of_range": 0,
+    "imu_invalid_samples": 0,
+    "imu_timestamp_anomalies": 0,
+    "timing_uncertain_records": 1213,
+    "flagged_gap_records": 0
+  },
+  "emg_observed_skipped_slots": 0,
+  "emg_rate_from_host_timestamps_hz": 7983.787629386485,
+  "last_status": {
+    "timer_missed": 0,
+    "queue_dropped": 0,
+    "imu_errors": 0,
+    "fifo_overflows": 0,
+    "adc_errors": 0,
+    "emg_records": 24005,
+    "foot_records": 612,
+    "shank_records": 601,
+    "battery_mv": 3200,
+    "queue_high_water": 62
+  },
+  "issues": [
+    {
+      "kind": "abnormal_stop",
+      "reason": 4
+    }
+  ],
+  "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
+  "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
+}

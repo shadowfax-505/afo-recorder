@@ -161,7 +161,8 @@ def main():
     parser.add_argument("--results", type=Path, default=P / "results/current")
     parser.add_argument("--out", type=Path, default=P / "results/current/timing-audit.json")
     args = parser.parse_args()
-    summary = {"hardware_measured": False, "new_firmware_execution": False, "full_integrated_matrix_pass": False,
+    summary = {"hardware_measured": False, "new_firmware_execution": False, "full_integrated_matrix_pass": None,
+               "matrix_note": "This timing-only audit does not determine execution acceptance; use the case ledger.",
                "limits": ["Results apply only to captured, fixed-clock behavioral-model data.",
                           "Sensor-counter rate is not physical clock accuracy or calibrated synchronization.",
                           "Read-window causality checks do not calibrate the initial IRQ/FIFO origin."],

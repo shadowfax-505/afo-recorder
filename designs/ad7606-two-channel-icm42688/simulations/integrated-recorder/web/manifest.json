@@ -1,0 +1,27 @@
+{
+  "simulation_only": true,
+  "hardware_measured": false,
+  "transformations": [
+    "Inline stimulus.h in ad7606.chip.c",
+    "Remove header-only pragma once; preserve its blank line"
+  ],
+  "changed_model_callbacks": false,
+  "source_sha256": {
+    "chips/ad7606.chip.c": "4f51a81decf39f12a1a78911bf40c12b8628a9e31fb80afeee7db95613714cf7",
+    "chips/stimulus.h": "61ddf5ba66c9c3f234279bf82dec12f848fa73b2b09d66980c193959b7234717",
+    "chips/ad7606.chip.json": "5d6fd2e91e0593d54abe2216b2dedabfbf993aad161674f8f69bc8fa03e6981e",
+    "chips/icm42688.chip.c": "47906b3285935c1d1729ad1b505df8ab46325a0a5cd3c512b192f7c1ddfa67eb",
+    "chips/icm42688.chip.json": "e1b62a52007ea7a6b79978267a0fdec242fb2b4f6d42eee0879a84e4335c388b",
+    "chips/fixture.chip.c": "998ed1747a9cd226ffafcb2134f3ad33626c1c98aa104fc9b3f57474ccbe5bf7",
+    "chips/fixture.chip.json": "f7fbac81c71d685714728662ed592f39a0368be505224bf4d8d27a026bc69438"
+  },
+  "web_sha256": {
+    "diagram.json": "e5cacd9b8d2255061d05efdf67ba030ac0603ace997cbea0dfe0747f2a6fb364",
+    "ad7606.chip.c": "d0f3d7ad8fe708cfb0904e2cf9e6802d03b3298f5ec5e368a4a8b92aacb3fddf",
+    "ad7606.chip.json": "5d6fd2e91e0593d54abe2216b2dedabfbf993aad161674f8f69bc8fa03e6981e",
+    "icm42688.chip.c": "47906b3285935c1d1729ad1b505df8ab46325a0a5cd3c512b192f7c1ddfa67eb",
+    "icm42688.chip.json": "e1b62a52007ea7a6b79978267a0fdec242fb2b4f6d42eee0879a84e4335c388b",
+    "fixture.chip.c": "998ed1747a9cd226ffafcb2134f3ad33626c1c98aa104fc9b3f57474ccbe5bf7",
+    "fixture.chip.json": "f7fbac81c71d685714728662ed592f39a0368be505224bf4d8d27a026bc69438"
+  }
+}

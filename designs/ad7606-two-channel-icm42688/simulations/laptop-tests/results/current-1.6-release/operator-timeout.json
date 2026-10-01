@@ -1,0 +1,5 @@
+{
+  "pass": false,
+  "scope": "Operator handshake only; no production timeout",
+  "reason": "Browser inspection finished after the 240-second operator budget; second case was not fully assessed. Retained as incomplete evidence. Final rerun uses a 600-second operator window, unchanged product timing, and a fresh evidence folder."
+}

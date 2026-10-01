@@ -9,7 +9,7 @@
   "hardware_measured": false,
   "esp32_executed": false,
   "production_sources_sha256": {
-    "main.c": "f565497b79e98c9f953293627b5fdc4f5dcadc372da2388422cebcf881fff867",
+    "main.c": "81beee3f1b272230f810ab2d5e76dd51d8593249966a9db501ee327b4e11ad8f",
     "format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
     "board.h": "11f3f4d30c3b70410810426ffe6371088ed250903c7e569ba36858d6248439cc",
     "variant.h": "55c2cdaef8b2d56e2ced2aa23984a289038adc6caaf9d164c92830c24b8cffb9"

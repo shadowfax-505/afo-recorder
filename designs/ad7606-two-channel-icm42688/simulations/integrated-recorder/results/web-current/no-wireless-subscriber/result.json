@@ -1,0 +1,96 @@
+{
+  "pass": true,
+  "failures": [],
+  "production": {
+    "case": 9,
+    "fault": 0,
+    "emg": 10043,
+    "foot": 263,
+    "shank": 252,
+    "missed": 0,
+    "dropped": 0,
+    "imu_errors": 0,
+    "fifo_overflows": 0,
+    "adc_errors": 0,
+    "queue_peak": 58,
+    "udp": 0,
+    "discarded": 0,
+    "writes": 85,
+    "syncs": 4,
+    "closes": 1,
+    "pages": 192
+  },
+  "saved_record_count": 10560,
+  "saved_bytes": 679936,
+  "quality": {
+    "source_sha256": "021f6fa566d1884cfbd271022df73582ff8343acb6292280a69602a93fc754fe",
+    "synthetic": true,
+    "counts": {
+      "emg": 10043,
+      "foot": 263,
+      "shank": 252,
+      "status": 1,
+      "end": 1
+    },
+    "session_finalized": true,
+    "structurally_complete": true,
+    "no_detected_sample_loss": true,
+    "signal_checks_pass": true,
+    "research_ready": false,
+    "sequence_gaps": {
+      "emg": 0,
+      "foot": 0,
+      "shank": 0
+    },
+    "anomalies": {
+      "sequence_regressions": 0,
+      "timestamp_regressions": 0,
+      "emg_clipped_samples": 0,
+      "emg_out_of_range": 0,
+      "imu_invalid_samples": 0,
+      "imu_timestamp_anomalies": 0,
+      "timing_uncertain_records": 515,
+      "flagged_gap_records": 0
+    },
+    "emg_observed_skipped_slots": 0,
+    "emg_rate_from_host_timestamps_hz": 7983.920850897376,
+    "last_status": {
+      "timer_missed": 0,
+      "queue_dropped": 0,
+      "imu_errors": 0,
+      "fifo_overflows": 0,
+      "adc_errors": 0,
+      "emg_records": 10043,
+      "foot_records": 263,
+      "shank_records": 252,
+      "battery_mv": 3800,
+      "queue_high_water": 58
+    },
+    "issues": [],
+    "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
+    "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
+  },
+  "live": {
+    "stats": {
+      "packets": 0,
+      "packet_gaps": 0,
+      "reordered_or_duplicate": 0,
+      "invalid_packets": 0,
+      "unknown_session_packets": 0,
+      "device_queue_drops": 0
+    },
+    "error": null,
+    "session": null,
+    "imu": {},
+    "health": {}
+  },
+  "udp_packets": 0,
+  "source_sha256": "51fdc775308c29b89ba4ea389857122f7890fc5c98a2b74ad061ff7ecbe4c14c",
+  "case": "no-wireless-subscriber",
+  "engine": "Wokwi web editor",
+  "firmware": "ad7606-2ch-1.6",
+  "hardware_measured": false,
+  "serial_sha256": "1e7260fcdbb74706a235e0b8cc882cd34717fd0eb03c81814868677e1c0c8e7f",
+  "assessor_sha256": "bfb185c259584a6dc6aa2d8b853f9c650225e1813916466bc8a821d0d739c639",
+  "merged_image_sha256": "68eb6996195abbbb6eb2f8e2a327ccff640f0fc4c25c9ac2e20cdeb01183808c"
+}

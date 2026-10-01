@@ -1,0 +1,202 @@
+{
+  "pass": true,
+  "failures": [],
+  "production": {
+    "case": 0,
+    "fault": 0,
+    "emg": 10041,
+    "foot": 263,
+    "shank": 252,
+    "missed": 0,
+    "dropped": 0,
+    "imu_errors": 0,
+    "fifo_overflows": 0,
+    "adc_errors": 0,
+    "queue_peak": 61,
+    "udp": 1123,
+    "discarded": 0,
+    "writes": 85,
+    "syncs": 4,
+    "closes": 1,
+    "pages": 192
+  },
+  "saved_record_count": 10558,
+  "saved_bytes": 679808,
+  "quality": {
+    "source_sha256": "7595ded38e93e04740bba797800a985357dff1a7a96ef9226fe6ca536a020d47",
+    "synthetic": true,
+    "counts": {
+      "emg": 10041,
+      "foot": 263,
+      "shank": 252,
+      "status": 1,
+      "end": 1
+    },
+    "session_finalized": true,
+    "structurally_complete": true,
+    "no_detected_sample_loss": true,
+    "signal_checks_pass": true,
+    "research_ready": false,
+    "sequence_gaps": {
+      "emg": 0,
+      "foot": 0,
+      "shank": 0
+    },
+    "anomalies": {
+      "sequence_regressions": 0,
+      "timestamp_regressions": 0,
+      "emg_clipped_samples": 0,
+      "emg_out_of_range": 0,
+      "imu_invalid_samples": 0,
+      "imu_timestamp_anomalies": 0,
+      "timing_uncertain_records": 515,
+      "flagged_gap_records": 0
+    },
+    "emg_observed_skipped_slots": 0,
+    "emg_rate_from_host_timestamps_hz": 7983.860514640921,
+    "last_status": {
+      "timer_missed": 0,
+      "queue_dropped": 0,
+      "imu_errors": 0,
+      "fifo_overflows": 0,
+      "adc_errors": 0,
+      "emg_records": 10041,
+      "foot_records": 263,
+      "shank_records": 252,
+      "battery_mv": 3800,
+      "queue_high_water": 61
+    },
+    "issues": [],
+    "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
+    "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
+  },
+  "live": {
+    "stats": {
+      "packets": 1123,
+      "packet_gaps": 0,
+      "reordered_or_duplicate": 0,
+      "invalid_packets": 0,
+      "unknown_session_packets": 0,
+      "device_queue_drops": 1
+    },
+    "error": null,
+    "session": "848f9845-af346559",
+    "imu": {
+      "foot": {
+        "accel_g": [
+          0.00048828125,
+          0.0,
+          1.0
+        ],
+        "gyro_dps": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "sequence": 263,
+        "timestamp_us": 2185001,
+        "flags": 2
+      },
+      "shank": {
+        "accel_g": [
+          0.0009765625,
+          0.0,
+          1.0
+        ],
+        "gyro_dps": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "sequence": 252,
+        "timestamp_us": 2185002,
+        "flags": 2
+      }
+    },
+    "health": {
+      "timer_missed": 0,
+      "queue_dropped": 0,
+      "imu_errors": 0,
+      "fifo_overflows": 0,
+      "adc_errors": 0,
+      "emg_records": 10041,
+      "foot_records": 263,
+      "shank_records": 252,
+      "battery_mv": 3800,
+      "queue_high_water": 61
+    },
+    "metadata": {
+      "hardware_design": "AD7606_TWO_FIXED",
+      "schema": "afo-recorder/3",
+      "adc_model": "AD7606",
+      "adc_bits": 16,
+      "adc_reference_mv": 5000,
+      "adc_reference_measured": false,
+      "input_scale": 1,
+      "input_midpoint_mv": 0,
+      "adc_pga": 1,
+      "adc_osr": 1,
+      "adc_sensor_crc_supported": false,
+      "adc_filter": "oversampling disabled; internal analog filter",
+      "sample_timestamp_event": "CONVST GPIO write software timestamp",
+      "adc_clock_hz": 0,
+      "sd_cmd_gpio": 47,
+      "sd_clk_gpio": 39,
+      "sd_d0_gpio": 40,
+      "firmware": "ad7606-2ch-1.6",
+      "hardware_variant": "breadboard",
+      "synthetic": true,
+      "trial_id": "trial_db240349.afolog",
+      "clock": "esp_timer_boot_us",
+      "emg_hz": 8000,
+      "imu_hz": 200,
+      "imu_enabled": true,
+      "active_channel_count": 2,
+      "emg_channels": [
+        "EMG1",
+        "EMG2"
+      ],
+      "calibration_state": "uncalibrated",
+      "simultaneous": true,
+      "accel_range_g": 16,
+      "gyro_range_dps": 2000,
+      "imu_timestamp_tick_us": 1,
+      "imu_timing_calibrated": false,
+      "imu_locations": [
+        "foot",
+        "shank"
+      ],
+      "imu_time": "fifo_delta_first_irq",
+      "placement_verified": false,
+      "record_bytes": 64,
+      "usb_recording_inhibit": true,
+      "analog_filter": "two cascaded 3.3k/47nF low-pass sections, each unity buffered; 100R series output, 1nF to ground; single-ended ADC",
+      "unplugged_input_bias_mv": 1500,
+      "unplugged_input_bias_ohm": 1000000,
+      "clock_or_filter_delay_correction": "none",
+      "notes": "Engineering prototype; physical validation pending",
+      "transport": "wifi_udp",
+      "live_capture": true
+    },
+    "records": 10557,
+    "ended": true,
+    "first_sequence": {
+      "2": 1,
+      "7": 1,
+      "3": 1
+    },
+    "sequence_gaps": {
+      "7": 1
+    },
+    "stop_reason": 0
+  },
+  "udp_packets": 1123,
+  "source_sha256": "e02b62a04e16270a11d6cd84723bbc410af0314d22e6bb389b3fb99eb9b2fc3a",
+  "case": "normal",
+  "engine": "Wokwi web editor",
+  "firmware": "ad7606-2ch-1.6",
+  "hardware_measured": false,
+  "serial_sha256": "0373e61464793f511b677504c931a176d8efff8e6cf4babee8454cfe9db77947",
+  "assessor_sha256": "bfb185c259584a6dc6aa2d8b853f9c650225e1813916466bc8a821d0d739c639",
+  "merged_image_sha256": "68eb6996195abbbb6eb2f8e2a327ccff640f0fc4c25c9ac2e20cdeb01183808c"
+}

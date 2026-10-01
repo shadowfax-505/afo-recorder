@@ -16,6 +16,6 @@ The public site now includes a dedicated project manual with configuration selec
 
 ## Integrated verification preview — 1 October 2026
 
-The [v0.1.5 engineering preview](https://github.com/shadowfax-505/afo-recorder/releases/tag/v0.1.5) updates only the fixed two-channel AD7606 / ICM package, with current v1.6 firmware, local integrated-driver and laptop tests, and preserved v1.5 cloud execution evidence. All eighteen current-image cloud cases remain pending. The other five packages retain their earlier release assets. The [integrated report](../designs/ad7606-two-channel-icm42688/docs/integrated-verification.html) explains the distinction and remaining physical gates.
+The [v0.1.5 engineering preview](https://github.com/shadowfax-505/afo-recorder/releases/tag/v0.1.5) updates only the fixed two-channel AD7606 / ICM package. All eighteen current v1.6 integrated cases pass Wokwi web execution with complete exports and actual converter/live-decoder checks. Current laptop socket/API/browser/archive tests retain wireless losses explicitly. The unqualified QEMU timing experiment and earlier v1.5 partial/failed CLI outcomes remain visible. The other five packages retain their earlier assets. The [integrated report](../designs/ad7606-two-channel-icm42688/docs/integrated-verification.html) separates this evidence from unperformed physical validation.
 
-Package SHA-256: `0271d279f4d816ee582e7bab94372d961f0be0138d54e0a0d011b85a3f027ab7`.
+Package SHA-256: `1cbb9ee3dba3b0ebd01f78c82b4ddc191e69ca6655c73b040032beb58d1b3c6e`.

@@ -1,0 +1,1438 @@
+{
+  "hardware_measured": false,
+  "new_firmware_execution": false,
+  "full_integrated_matrix_pass": null,
+  "matrix_note": "This timing-only audit does not determine execution acceptance; use the case ledger.",
+  "limits": [
+    "Results apply only to captured, fixed-clock behavioral-model data.",
+    "Sensor-counter rate is not physical clock accuracy or calibrated synchronization.",
+    "Read-window causality checks do not calibrate the initial IRQ/FIFO origin."
+  ],
+  "captures": [
+    {
+      "case": "adc-busy-stays-low",
+      "scope": "post-processing of existing saved capture",
+      "streams": {
+        "emg": {
+          "samples": 0,
+          "first_trigger_us": null,
+          "last_trigger_us": null,
+          "observed_trigger_rate_hz": null,
+          "trigger_interval_us": null,
+          "trigger_to_read_start_us": null,
+          "read_duration_us": null,
+          "read_end_to_next_trigger_us": null,
+          "pass": true,
+          "errors": []
+        },
+        "foot": {
+          "samples": 11,
+          "first_estimate_us": 875001,
+          "last_estimate_us": 925001,
+          "sensor_counter_rate_hz": 200.0,
+          "raw_counter_delta_us": {
+            "min": 5000,
+            "median": 5000.0,
+            "max": 5000
+          },
+          "estimate_to_read_end_us": {
+            "min": 2793,
+            "median": 27793,
+            "max": 52793
+          },
+          "irq_anchor_age_at_read_us": {
+            "min": 1254,
+            "median": 1254,
+            "max": 1254
+          },
+          "first_estimate_minus_first_anchor_us": -50000,
+          "timing_uncertain_samples": 11,
+          "counter_rollovers": 0,
+          "pass": true,
+          "errors": []
+        },
+        "shank": {
+          "samples": 0,
+          "first_estimate_us": null,
+          "last_estimate_us": null,
+          "sensor_counter_rate_hz": null,
+          "raw_counter_delta_us": null,
+          "estimate_to_read_end_us": null,
+          "irq_anchor_age_at_read_us": null,
+          "first_estimate_minus_first_anchor_us": null,
+          "timing_uncertain_samples": 0,
+          "counter_rollovers": 0,
+          "pass": true,
+          "errors": []
+        }
+      },
+      "sha256": {
+        "converted/emg.csv": "b0547a1a9705cf743bd7135ce00cf85a8f3d5cc0b8586e0311c80fc2b681ee01",
+        "converted/foot.csv": "d698d146d8fb9312c7025edbacc1509b30755a3f116124cfb3098678b6130cb6",
+        "converted/shank.csv": "17623e12d0fad07eb07aafd457e49105437a986464bb169d21f2107c4b9068c0",
+        "recorder-output.raw": "b0612ce9f1b06f3db44be97f6b81105b2ff1e7b06fa3c7f23492260ce1c4fd6e"
+      },
+      "production_metadata_bytes": 1279,
+      "wifi_metadata_capacity_bytes": 1280,
+      "wifi_metadata_remaining_bytes": 1,
+      "available_stream_timing_checks_pass": true,
+      "full_case_execution_pass": null,
+      "qualification_note": "Timing checks neither upgrade incomplete/quota-blocked executions nor establish physical timing. Empty or absent streams have no rate evidence."
+    },
+    {
+      "case": "adc-stuck-busy",
+      "scope": "post-processing of existing saved capture",
+      "streams": {
+        "emg": {
+          "samples": 0,
+          "first_trigger_us": null,
+          "last_trigger_us": null,
+          "observed_trigger_rate_hz": null,
+          "trigger_interval_us": null,
+          "trigger_to_read_start_us": null,
+          "read_duration_us": null,
+          "read_end_to_next_trigger_us": null,
+          "pass": true,
+          "errors": []
+        },
+        "foot": {
+          "samples": 11,
+          "first_estimate_us": 875001,
+          "last_estimate_us": 925001,
+          "sensor_counter_rate_hz": 200.0,
+          "raw_counter_delta_us": {
+            "min": 5000,
+            "median": 5000.0,
+            "max": 5000
+          },
+          "estimate_to_read_end_us": {
+            "min": 2793,
+            "median": 27793,
+            "max": 52793
+          },
+          "irq_anchor_age_at_read_us": {
+            "min": 1254,
+            "median": 1254,
+            "max": 1254
+          },
+          "first_estimate_minus_first_anchor_us": -50000,
+          "timing_uncertain_samples": 11,
+          "counter_rollovers": 0,
+          "pass": true,
+          "errors": []
+        },
+        "shank": {
+          "samples": 0,
+          "first_estimate_us": null,
+          "last_estimate_us": null,
+          "sensor_counter_rate_hz": null,
+          "raw_counter_delta_us": null,
+          "estimate_to_read_end_us": null,
+          "irq_anchor_age_at_read_us": null,
+          "first_estimate_minus_first_anchor_us": null,
+          "timing_uncertain_samples": 0,
+          "counter_rollovers": 0,
+          "pass": true,
+          "errors": []
+        }
+      },
+      "sha256": {
+        "converted/emg.csv": "b0547a1a9705cf743bd7135ce00cf85a8f3d5cc0b8586e0311c80fc2b681ee01",
+        "converted/foot.csv": "d698d146d8fb9312c7025edbacc1509b30755a3f116124cfb3098678b6130cb6",
+        "converted/shank.csv": "17623e12d0fad07eb07aafd457e49105437a986464bb169d21f2107c4b9068c0",
+        "recorder-output.raw": "e7003cf5d47c7808b905e047d842f3dcb518f6b416fe1b31a888ae00057207ad"
+      },
+      "production_metadata_bytes": 1279,
+      "wifi_metadata_capacity_bytes": 1280,
+      "wifi_metadata_remaining_bytes": 1,
+      "available_stream_timing_checks_pass": true,
+      "full_case_execution_pass": null,
+      "qualification_note": "Timing checks neither upgrade incomplete/quota-blocked executions nor establish physical timing. Empty or absent streams have no rate evidence."
+    },
+    {
+      "case": "adc-trigger-ignored",
+      "scope": "post-processing of existing saved capture",
+      "streams": {
+        "emg": {
+          "samples": 0,
+          "first_trigger_us": null,
+          "last_trigger_us": null,
+          "observed_trigger_rate_hz": null,
+          "trigger_interval_us": null,
+          "trigger_to_read_start_us": null,
+          "read_duration_us": null,
+          "read_end_to_next_trigger_us": null,
+          "pass": true,
+          "errors": []
+        },
+        "foot": {
+          "samples": 11,
+          "first_estimate_us": 875001,
+          "last_estimate_us": 925001,
+          "sensor_counter_rate_hz": 200.0,
+          "raw_counter_delta_us": {
+            "min": 5000,
+            "median": 5000.0,
+            "max": 5000
+          },
+          "estimate_to_read_end_us": {
+            "min": 2793,
+            "median": 27793,
+            "max": 52793
+          },
+          "irq_anchor_age_at_read_us": {
+            "min": 1254,
+            "median": 1254,
+            "max": 1254
+          },
+          "first_estimate_minus_first_anchor_us": -50000,
+          "timing_uncertain_samples": 11,
+          "counter_rollovers": 0,
+          "pass": true,
+          "errors": []
+        },
+        "shank": {
+          "samples": 0,
+          "first_estimate_us": null,
+          "last_estimate_us": null,
+          "sensor_counter_rate_hz": null,
+          "raw_counter_delta_us": null,
+          "estimate_to_read_end_us": null,
+          "irq_anchor_age_at_read_us": null,
+          "first_estimate_minus_first_anchor_us": null,
+          "timing_uncertain_samples": 0,
+          "counter_rollovers": 0,
+          "pass": true,
+          "errors": []
+        }
+      },
+      "sha256": {
+        "converted/emg.csv": "b0547a1a9705cf743bd7135ce00cf85a8f3d5cc0b8586e0311c80fc2b681ee01",
+        "converted/foot.csv": "d698d146d8fb9312c7025edbacc1509b30755a3f116124cfb3098678b6130cb6",
+        "converted/shank.csv": "17623e12d0fad07eb07aafd457e49105437a986464bb169d21f2107c4b9068c0",
+        "recorder-output.raw": "c6417e7c23ac7713fe4ba29cca2ba7f777ed569b022b4508d745864c8ae99a17"
+      },
+      "production_metadata_bytes": 1279,
+      "wifi_metadata_capacity_bytes": 1280,
+      "wifi_metadata_remaining_bytes": 1,
+      "available_stream_timing_checks_pass": true,
+      "full_case_execution_pass": null,
+      "qualification_note": "Timing checks neither upgrade incomplete/quota-blocked executions nor establish physical timing. Empty or absent streams have no rate evidence."
+    },
+    {
+      "case": "battery-low",
+      "scope": "post-processing of existing saved capture",
+      "streams": {
+        "emg": {
+          "samples": 24005,
+          "first_trigger_us": 928222,
+          "last_trigger_us": 3934815,
+          "observed_trigger_rate_hz": 7983.787629386485,
+          "trigger_interval_us": {
+            "min": 122,
+            "median": 125.0,
+            "max": 128
+          },
+          "trigger_to_read_start_us": {
+            "min": 7,
+            "median": 7,
+            "max": 12
+          },
+          "read_duration_us": {
+            "min": 23,
+            "median": 24,
+            "max": 29
+          },
+          "read_end_to_next_trigger_us": {
+            "min": 89,
+            "median": 94.0,
+            "max": 97
+          },
+          "pass": true,
+          "errors": []
+        },
+        "foot": {
+          "samples": 612,
+          "first_estimate_us": 875001,
+          "last_estimate_us": 3930001,
+          "sensor_counter_rate_hz": 200.0,
+          "raw_counter_delta_us": {
+            "min": 5000,
+            "median": 5000,
+            "max": 5000
+          },
+          "estimate_to_read_end_us": {
+            "min": 390,
+            "median": 398.0,
+            "max": 52793
+          },
+          "irq_anchor_age_at_read_us": {
+            "min": 137,
+            "median": 140.0,
+            "max": 4857
+          },
+          "first_estimate_minus_first_anchor_us": -50000,
+          "timing_uncertain_samples": 612,
+          "counter_rollovers": 46,
+          "pass": true,
+          "errors": []
+        },
+        "shank": {
+          "samples": 601,
+          "first_estimate_us": 930002,
+          "last_estimate_us": 3930002,
+          "sensor_counter_rate_hz": 200.0,
+          "raw_counter_delta_us": {
+            "min": 5000,
+            "median": 5000.0,
+            "max": 5000
+          },
+          "estimate_to_read_end_us": {
+            "min": 413,
+            "median": 663,
+            "max": 6790
+          },
+          "irq_anchor_age_at_read_us": {
+            "min": 23,
+            "median": 405,
+            "max": 4807
+          },
+          "first_estimate_minus_first_anchor_us": 0,
+          "timing_uncertain_samples": 601,
+          "counter_rollovers": 45,
+          "pass": true,
+          "errors": []
+        }
+      },
+      "sha256": {
+        "converted/emg.csv": "01280f896e0c4f3c8a30ef95a8d62271114063741e19e17a5636651418994d6a",
+        "converted/foot.csv": "5fae0a321aff715bf0e4f8b95504814e1d3629117df1ada7a0c0e5f7b42b5c37",
+        "converted/shank.csv": "7ed049ae60c8b281c89737e6a7138cc2e00077c21c2947d42fa3c3fbb0f1429d",
+        "recorder-output.raw": "f9a8491a1f5d6c3d34a9cd6f7c8e761fa5a40fa2eb24b751845c91f3acca5e55"
+      },
+      "production_metadata_bytes": 1279,
+      "wifi_metadata_capacity_bytes": 1280,
+      "wifi_metadata_remaining_bytes": 1,
+      "startup": {
+        "first_shank_minus_first_foot_estimate_us": 55001,
+        "foot_minus_shank_sample_count": 11,
+        "explanation": "Production imu_start calls run sequentially and each waits 50 ms before enabling FIFO; unequal startup counts are not automatically sample loss.",
+        "synchronization_measured": false,
+        "offset_limit": "Each time origin depends on its own first IRQ/FIFO observation. This is an estimated startup offset, not measured foot-shank synchronization; independent clock drift and initial anchor error remain uncalibrated.",
+        "foot_first_estimate_minus_first_emg_trigger_us": -53221,
+        "shank_first_estimate_minus_first_emg_trigger_us": 1780
+      },
+      "available_stream_timing_checks_pass": true,
+      "full_case_execution_pass": null,
+      "qualification_note": "Timing checks neither upgrade incomplete/quota-blocked executions nor establish physical timing. Empty or absent streams have no rate evidence."
+    },
+    {
+      "case": "filtered-synthetic-emg",
+      "scope": "post-processing of existing saved capture",
+      "streams": {
+        "emg": {
+          "samples": 10041,
+          "first_trigger_us": 928222,
+          "last_trigger_us": 2185759,
+          "observed_trigger_rate_hz": 7983.860514640921,
+          "trigger_interval_us": {
+            "min": 122,
+            "median": 125.0,
+            "max": 128
+          },
+          "trigger_to_read_start_us": {
+            "min": 7,
+            "median": 7,
+            "max": 11
+          },
+          "read_duration_us": {
+            "min": 23,
+            "median": 24,
+            "max": 29
+          },
+          "read_end_to_next_trigger_us": {
+            "min": 89,
+            "median": 94.0,
+            "max": 97
+          },
+          "pass": true,
+          "errors": []
+        },
+        "foot": {
+          "samples": 263,
+          "first_estimate_us": 875001,
+          "last_estimate_us": 2185001,
+          "sensor_counter_rate_hz": 200.0,
+          "raw_counter_delta_us": {
+            "min": 5000,
+            "median": 5000.0,
+            "max": 5000
+          },
+          "estimate_to_read_end_us": {
+            "min": 390,
+            "median": 398,
+            "max": 52793
+          },
+          "irq_anchor_age_at_read_us": {
+            "min": 137,
+            "median": 140,
+            "max": 4857
+          },
+          "first_estimate_minus_first_anchor_us": -50000,
+          "timing_uncertain_samples": 263,
+          "counter_rollovers": 20,
+          "pass": true,
+          "errors": []
+        },
+        "shank": {
+          "samples": 252,
+          "first_estimate_us": 930002,
+          "last_estimate_us": 2185002,
+          "sensor_counter_rate_hz": 200.0,
+          "raw_counter_delta_us": {
+            "min": 5000,
+            "median": 5000,
+            "max": 5000
+          },
+          "estimate_to_read_end_us": {
+            "min": 413,
+            "median": 663.0,
+            "max": 6642
+          },
+          "irq_anchor_age_at_read_us": {
+            "min": 23,
+            "median": 405.0,
+            "max": 4754
+          },
+          "first_estimate_minus_first_anchor_us": 0,
+          "timing_uncertain_samples": 252,
+          "counter_rollovers": 19,
+          "pass": true,
+          "errors": []
+        }
+      },
+      "sha256": {
+        "converted/emg.csv": "db259919af4839cd701a20c81d4c95dc5834f9ca385f4d09180188638d21fb57",
+        "converted/foot.csv": "d1930ed3caea406affb5584d2e318f9d848fd5f193a7b56d6e0dc7bf38c241c7",
+        "converted/shank.csv": "98e811393aae92f4502e8102ce7752ebab03c0281fe0045b23d060cc57f6bb16",
+        "recorder-output.raw": "1d55cf9827acacb6cf5f796489fc55bd6de1900b692f19fd67bdc957ac7247b0"
+      },
+      "production_metadata_bytes": 1279,
+      "wifi_metadata_capacity_bytes": 1280,
+      "wifi_metadata_remaining_bytes": 1,
+      "startup": {
+        "first_shank_minus_first_foot_estimate_us": 55001,
+        "foot_minus_shank_sample_count": 11,
+        "explanation": "Production imu_start calls run sequentially and each waits 50 ms before enabling FIFO; unequal startup counts are not automatically sample loss.",
+        "synchronization_measured": false,
+        "offset_limit": "Each time origin depends on its own first IRQ/FIFO observation. This is an estimated startup offset, not measured foot-shank synchronization; independent clock drift and initial anchor error remain uncalibrated.",
+        "foot_first_estimate_minus_first_emg_trigger_us": -53221,
+        "shank_first_estimate_minus_first_emg_trigger_us": 1780
+      },
+      "available_stream_timing_checks_pass": true,
+      "full_case_execution_pass": null,
+      "qualification_note": "Timing checks neither upgrade incomplete/quota-blocked executions nor establish physical timing. Empty or absent streams have no rate evidence."
+    },
+    {
+      "case": "imu-fifo-overflow",
+      "scope": "post-processing of existing saved capture",
+      "streams": {
+        "emg": {
+          "samples": 0,
+          "first_trigger_us": null,
+          "last_trigger_us": null,
+          "observed_trigger_rate_hz": null,
+          "trigger_interval_us": null,
+          "trigger_to_read_start_us": null,
+          "read_duration_us": null,
+          "read_end_to_next_trigger_us": null,
+          "pass": true,
+          "errors": []
+        },
+        "foot": {
+          "samples": 0,
+          "first_estimate_us": null,
+          "last_estimate_us": null,
+          "sensor_counter_rate_hz": null,
+          "raw_counter_delta_us": null,
+          "estimate_to_read_end_us": null,
+          "irq_anchor_age_at_read_us": null,
+          "first_estimate_minus_first_anchor_us": null,
+          "timing_uncertain_samples": 0,
+          "counter_rollovers": 0,
+          "pass": true,
+          "errors": []
+        },
+        "shank": {
+          "samples": 0,
+          "first_estimate_us": null,
+          "last_estimate_us": null,
+          "sensor_counter_rate_hz": null,
+          "raw_counter_delta_us": null,
+          "estimate_to_read_end_us": null,
+          "irq_anchor_age_at_read_us": null,
+          "first_estimate_minus_first_anchor_us": null,
+          "timing_uncertain_samples": 0,
+          "counter_rollovers": 0,
+          "pass": true,
+          "errors": []
+        }
+      },
+      "sha256": {
+        "converted/emg.csv": "b0547a1a9705cf743bd7135ce00cf85a8f3d5cc0b8586e0311c80fc2b681ee01",
+        "converted/foot.csv": "17623e12d0fad07eb07aafd457e49105437a986464bb169d21f2107c4b9068c0",
+        "converted/shank.csv": "17623e12d0fad07eb07aafd457e49105437a986464bb169d21f2107c4b9068c0",
+        "recorder-output.raw": "220280392051b599344906ae01640786a519be14e46448788301add07776ec2e"
+      },
+      "production_metadata_bytes": 1279,
+      "wifi_metadata_capacity_bytes": 1280,
+      "wifi_metadata_remaining_bytes": 1,
+      "available_stream_timing_checks_pass": null,
+      "full_case_execution_pass": null,
+      "qualification_note": "Timing checks neither upgrade incomplete/quota-blocked executions nor establish physical timing. Empty or absent streams have no rate evidence."
+    },
+    {
+      "case": "imu-missing-interrupt",
+      "scope": "post-processing of existing saved capture",
+      "streams": {
+        "emg": {
+          "samples": 803,
+          "first_trigger_us": 926602,
+          "last_trigger_us": 1027055,
+          "observed_trigger_rate_hz": 7983.8332354434415,
+          "trigger_interval_us": {
+            "min": 123,
+            "median": 125.0,
+            "max": 128
+          },
+          "trigger_to_read_start_us": {
+            "min": 7,
+            "median": 7,
+            "max": 10
+          },
+          "read_duration_us": {
+            "min": 23,
+            "median": 24,
+            "max": 27
+          },
+          "read_end_to_next_trigger_us": {
+            "min": 91,
+            "median": 94.0,
+            "max": 97
+          },
+          "pass": true,
+          "errors": []
+        },
+        "foot": {
+          "samples": 0,
+          "first_estimate_us": null,
+          "last_estimate_us": null,
+          "sensor_counter_rate_hz": null,
+          "raw_counter_delta_us": null,
+          "estimate_to_read_end_us": null,
+          "irq_anchor_age_at_read_us": null,
+          "first_estimate_minus_first_anchor_us": null,
+          "timing_uncertain_samples": 0,
+          "counter_rollovers": 0,
+          "pass": true,
+          "errors": []
+        },
+        "shank": {
+          "samples": 20,
+          "first_estimate_us": 930001,
+          "last_estimate_us": 1025001,
+          "sensor_counter_rate_hz": 200.0,
+          "raw_counter_delta_us": {
+            "min": 5000,
+            "median": 5000,
+            "max": 5000
+          },
+          "estimate_to_read_end_us": {
+            "min": 397,
+            "median": 397.0,
+            "max": 4214
+          },
+          "irq_anchor_age_at_read_us": {
+            "min": 140,
+            "median": 140.0,
+            "max": 3956
+          },
+          "first_estimate_minus_first_anchor_us": 0,
+          "timing_uncertain_samples": 20,
+          "counter_rollovers": 1,
+          "pass": true,
+          "errors": []
+        }
+      },
+      "sha256": {
+        "converted/emg.csv": "9c4eac82ec203ec8497d9c7a3e1da1060657a460c00b4976a20408a667c92d6e",
+        "converted/foot.csv": "17623e12d0fad07eb07aafd457e49105437a986464bb169d21f2107c4b9068c0",
+        "converted/shank.csv": "ac73a653d191a1ad9cd44aad8c5f56464f14ed8a548c4891b7829a95145dcbcc",
+        "recorder-output.raw": "57596ecbe959d769c03937380128c17f25a51df2b1e9a554f25444d301517aae"
+      },
+      "production_metadata_bytes": 1279,
+      "wifi_metadata_capacity_bytes": 1280,
+      "wifi_metadata_remaining_bytes": 1,
+      "available_stream_timing_checks_pass": true,
+      "full_case_execution_pass": null,
+      "qualification_note": "Timing checks neither upgrade incomplete/quota-blocked executions nor establish physical timing. Empty or absent streams have no rate evidence."
+    },
+    {
+      "case": "interrupted-recording",
+      "scope": "post-processing of existing saved capture",
+      "streams": {
+        "emg": {
+          "samples": 7984,
+          "first_trigger_us": 928221,
+          "last_trigger_us": 1928111,
+          "observed_trigger_rate_hz": 7983.878226604927,
+          "trigger_interval_us": {
+            "min": 123,
+            "median": 125,
+            "max": 128
+          },
+          "trigger_to_read_start_us": {
+            "min": 7,
+            "median": 7.0,
+            "max": 11
+          },
+          "read_duration_us": {
+            "min": 23,
+            "median": 24.0,
+            "max": 29
+          },
+          "read_end_to_next_trigger_us": {
+            "min": 89,
+            "median": 94,
+            "max": 97
+          },
+          "pass": true,
+          "errors": []
+        },
+        "foot": {
+          "samples": 211,
+          "first_estimate_us": 875001,
+          "last_estimate_us": 1925001,
+          "sensor_counter_rate_hz": 200.0,
+          "raw_counter_delta_us": {
+            "min": 5000,
+            "median": 5000.0,
+            "max": 5000
+          },
+          "estimate_to_read_end_us": {
+            "min": 389,
+            "median": 398,
+            "max": 52793
+          },
+          "irq_anchor_age_at_read_us": {
+            "min": 137,
+            "median": 140,
+            "max": 4801
+          },
+          "first_estimate_minus_first_anchor_us": -50000,
+          "timing_uncertain_samples": 211,
+          "counter_rollovers": 16,
+          "pass": true,
+          "errors": []
+        },
+        "shank": {
+          "samples": 200,
+          "first_estimate_us": 930002,
+          "last_estimate_us": 1925002,
+          "sensor_counter_rate_hz": 200.0,
+          "raw_counter_delta_us": {
+            "min": 5000,
+            "median": 5000,
+            "max": 5000
+          },
+          "estimate_to_read_end_us": {
+            "min": 410,
+            "median": 663.0,
+            "max": 6646
+          },
+          "irq_anchor_age_at_read_us": {
+            "min": 21,
+            "median": 405.0,
+            "max": 4753
+          },
+          "first_estimate_minus_first_anchor_us": 0,
+          "timing_uncertain_samples": 200,
+          "counter_rollovers": 15,
+          "pass": true,
+          "errors": []
+        }
+      },
+      "sha256": {
+        "converted/emg.csv": "4352ab67711ab0558f8ab0ee216ef756488d3887eb8570d6d68bc24711c297d0",
+        "converted/foot.csv": "8bdc4cc6b6b44148bd8130043ab15caea4417ac8bf0432825b487c1a57d311e4",
+        "converted/shank.csv": "47d8851cd8cddac84969309cb9c7ced4d0625a82a5d892831db48180db82a078",
+        "recorder-output.raw": "dbeb3b1672879a1bb925b6ad62c2350d8db9453921298b1adf21a3349909009e"
+      },
+      "production_metadata_bytes": 1279,
+      "wifi_metadata_capacity_bytes": 1280,
+      "wifi_metadata_remaining_bytes": 1,
+      "startup": {
+        "first_shank_minus_first_foot_estimate_us": 55001,
+        "foot_minus_shank_sample_count": 11,
+        "explanation": "Production imu_start calls run sequentially and each waits 50 ms before enabling FIFO; unequal startup counts are not automatically sample loss.",
+        "synchronization_measured": false,
+        "offset_limit": "Each time origin depends on its own first IRQ/FIFO observation. This is an estimated startup offset, not measured foot-shank synchronization; independent clock drift and initial anchor error remain uncalibrated.",
+        "foot_first_estimate_minus_first_emg_trigger_us": -53220,
+        "shank_first_estimate_minus_first_emg_trigger_us": 1781
+      },
+      "available_stream_timing_checks_pass": true,
+      "full_case_execution_pass": null,
+      "qualification_note": "Timing checks neither upgrade incomplete/quota-blocked executions nor establish physical timing. Empty or absent streams have no rate evidence."
+    },
+    {
+      "case": "no-wireless-subscriber",
+      "scope": "post-processing of existing saved capture",
+      "streams": {
+        "emg": {
+          "samples": 10043,
+          "first_trigger_us": 928014,
+          "last_trigger_us": 2185792,
+          "observed_trigger_rate_hz": 7983.920850897376,
+          "trigger_interval_us": {
+            "min": 122,
+            "median": 125.0,
+            "max": 128
+          },
+          "trigger_to_read_start_us": {
+            "min": 7,
+            "median": 7,
+            "max": 11
+          },
+          "read_duration_us": {
+            "min": 23,
+            "median": 24,
+            "max": 29
+          },
+          "read_end_to_next_trigger_us": {
+            "min": 89,
+            "median": 94.0,
+            "max": 97
+          },
+          "pass": true,
+          "errors": []
+        },
+        "foot": {
+          "samples": 263,
+          "first_estimate_us": 875001,
+          "last_estimate_us": 2185001,
+          "sensor_counter_rate_hz": 200.0,
+          "raw_counter_delta_us": {
+            "min": 5000,
+            "median": 5000.0,
+            "max": 5000
+          },
+          "estimate_to_read_end_us": {
+            "min": 389,
+            "median": 397,
+            "max": 52791
+          },
+          "irq_anchor_age_at_read_us": {
+            "min": 135,
+            "median": 139,
+            "max": 4843
+          },
+          "first_estimate_minus_first_anchor_us": -50000,
+          "timing_uncertain_samples": 263,
+          "counter_rollovers": 20,
+          "pass": true,
+          "errors": []
+        },
+        "shank": {
+          "samples": 252,
+          "first_estimate_us": 930002,
+          "last_estimate_us": 2185002,
+          "sensor_counter_rate_hz": 200.0,
+          "raw_counter_delta_us": {
+            "min": 5000,
+            "median": 5000,
+            "max": 5000
+          },
+          "estimate_to_read_end_us": {
+            "min": 403,
+            "median": 663.0,
+            "max": 6636
+          },
+          "irq_anchor_age_at_read_us": {
+            "min": 13,
+            "median": 405.0,
+            "max": 4752
+          },
+          "first_estimate_minus_first_anchor_us": 0,
+          "timing_uncertain_samples": 252,
+          "counter_rollovers": 19,
+          "pass": true,
+          "errors": []
+        }
+      },
+      "sha256": {
+        "converted/emg.csv": "0d8caf0f7fdcc704de69c19fe2de670fcb082029e1f583ed0e3cd2539eac7a11",
+        "converted/foot.csv": "0700967bab54f16b542b6540486e973b053537d2b60aed2d4208c367996315a9",
+        "converted/shank.csv": "c9b8a4a253fe388bda4b8bab90b008b511988c74a31694acaa38fa4daaa6549e",
+        "recorder-output.raw": "51fdc775308c29b89ba4ea389857122f7890fc5c98a2b74ad061ff7ecbe4c14c"
+      },
+      "production_metadata_bytes": 1279,
+      "wifi_metadata_capacity_bytes": 1280,
+      "wifi_metadata_remaining_bytes": 1,
+      "startup": {
+        "first_shank_minus_first_foot_estimate_us": 55001,
+        "foot_minus_shank_sample_count": 11,
+        "explanation": "Production imu_start calls run sequentially and each waits 50 ms before enabling FIFO; unequal startup counts are not automatically sample loss.",
+        "synchronization_measured": false,
+        "offset_limit": "Each time origin depends on its own first IRQ/FIFO observation. This is an estimated startup offset, not measured foot-shank synchronization; independent clock drift and initial anchor error remain uncalibrated.",
+        "foot_first_estimate_minus_first_emg_trigger_us": -53013,
+        "shank_first_estimate_minus_first_emg_trigger_us": 1988
+      },
+      "available_stream_timing_checks_pass": true,
+      "full_case_execution_pass": null,
+      "qualification_note": "Timing checks neither upgrade incomplete/quota-blocked executions nor establish physical timing. Empty or absent streams have no rate evidence."
+    },
+    {
+      "case": "normal",
+      "scope": "post-processing of existing saved capture",
+      "streams": {
+        "emg": {
+          "samples": 10041,
+          "first_trigger_us": 928222,
+          "last_trigger_us": 2185759,
+          "observed_trigger_rate_hz": 7983.860514640921,
+          "trigger_interval_us": {
+            "min": 122,
+            "median": 125.0,
+            "max": 128
+          },
+          "trigger_to_read_start_us": {
+            "min": 7,
+            "median": 7,
+            "max": 11
+          },
+          "read_duration_us": {
+            "min": 23,
+            "median": 24,
+            "max": 29
+          },
+          "read_end_to_next_trigger_us": {
+            "min": 89,
+            "median": 94.0,
+            "max": 97
+          },
+          "pass": true,
+          "errors": []
+        },
+        "foot": {
+          "samples": 263,
+          "first_estimate_us": 875001,
+          "last_estimate_us": 2185001,
+          "sensor_counter_rate_hz": 200.0,
+          "raw_counter_delta_us": {
+            "min": 5000,
+            "median": 5000.0,
+            "max": 5000
+          },
+          "estimate_to_read_end_us": {
+            "min": 390,
+            "median": 398,
+            "max": 52793
+          },
+          "irq_anchor_age_at_read_us": {
+            "min": 137,
+            "median": 140,
+            "max": 4857
+          },
+          "first_estimate_minus_first_anchor_us": -50000,
+          "timing_uncertain_samples": 263,
+          "counter_rollovers": 20,
+          "pass": true,
+          "errors": []
+        },
+        "shank": {
+          "samples": 252,
+          "first_estimate_us": 930002,
+          "last_estimate_us": 2185002,
+          "sensor_counter_rate_hz": 200.0,
+          "raw_counter_delta_us": {
+            "min": 5000,
+            "median": 5000,
+            "max": 5000
+          },
+          "estimate_to_read_end_us": {
+            "min": 413,
+            "median": 663.0,
+            "max": 6642
+          },
+          "irq_anchor_age_at_read_us": {
+            "min": 23,
+            "median": 405.0,
+            "max": 4754
+          },
+          "first_estimate_minus_first_anchor_us": 0,
+          "timing_uncertain_samples": 252,
+          "counter_rollovers": 19,
+          "pass": true,
+          "errors": []
+        }
+      },
+      "sha256": {
+        "converted/emg.csv": "96705148888b149c485fdece5ad8ce95466361e4efbe93ab4c70a0a7d985a687",
+        "converted/foot.csv": "d1930ed3caea406affb5584d2e318f9d848fd5f193a7b56d6e0dc7bf38c241c7",
+        "converted/shank.csv": "98e811393aae92f4502e8102ce7752ebab03c0281fe0045b23d060cc57f6bb16",
+        "recorder-output.raw": "e02b62a04e16270a11d6cd84723bbc410af0314d22e6bb389b3fb99eb9b2fc3a"
+      },
+      "production_metadata_bytes": 1279,
+      "wifi_metadata_capacity_bytes": 1280,
+      "wifi_metadata_remaining_bytes": 1,
+      "startup": {
+        "first_shank_minus_first_foot_estimate_us": 55001,
+        "foot_minus_shank_sample_count": 11,
+        "explanation": "Production imu_start calls run sequentially and each waits 50 ms before enabling FIFO; unequal startup counts are not automatically sample loss.",
+        "synchronization_measured": false,
+        "offset_limit": "Each time origin depends on its own first IRQ/FIFO observation. This is an estimated startup offset, not measured foot-shank synchronization; independent clock drift and initial anchor error remain uncalibrated.",
+        "foot_first_estimate_minus_first_emg_trigger_us": -53221,
+        "shank_first_estimate_minus_first_emg_trigger_us": 1780
+      },
+      "available_stream_timing_checks_pass": true,
+      "full_case_execution_pass": null,
+      "qualification_note": "Timing checks neither upgrade incomplete/quota-blocked executions nor establish physical timing. Empty or absent streams have no rate evidence."
+    },
+    {
+      "case": "queue-stall-350ms",
+      "scope": "post-processing of existing saved capture",
+      "streams": {
+        "emg": {
+          "samples": 2062,
+          "first_trigger_us": 928222,
+          "last_trigger_us": 1186366,
+          "observed_trigger_rate_hz": 7983.915953886203,
+          "trigger_interval_us": {
+            "min": 124,
+            "median": 125,
+            "max": 127
+          },
+          "trigger_to_read_start_us": {
+            "min": 7,
+            "median": 7.0,
+            "max": 11
+          },
+          "read_duration_us": {
+            "min": 23,
+            "median": 24.0,
+            "max": 29
+          },
+          "read_end_to_next_trigger_us": {
+            "min": 89,
+            "median": 94,
+            "max": 96
+          },
+          "pass": true,
+          "errors": []
+        },
+        "foot": {
+          "samples": 63,
+          "first_estimate_us": 875001,
+          "last_estimate_us": 1185001,
+          "sensor_counter_rate_hz": 200.0,
+          "raw_counter_delta_us": {
+            "min": 5000,
+            "median": 5000.0,
+            "max": 5000
+          },
+          "estimate_to_read_end_us": {
+            "min": 397,
+            "median": 397,
+            "max": 52793
+          },
+          "irq_anchor_age_at_read_us": {
+            "min": 139,
+            "median": 139,
+            "max": 4801
+          },
+          "first_estimate_minus_first_anchor_us": -50000,
+          "timing_uncertain_samples": 63,
+          "counter_rollovers": 4,
+          "pass": true,
+          "errors": []
+        },
+        "shank": {
+          "samples": 52,
+          "first_estimate_us": 930002,
+          "last_estimate_us": 1185002,
+          "sensor_counter_rate_hz": 200.0,
+          "raw_counter_delta_us": {
+            "min": 5000,
+            "median": 5000,
+            "max": 5000
+          },
+          "estimate_to_read_end_us": {
+            "min": 457,
+            "median": 663.0,
+            "max": 5457
+          },
+          "irq_anchor_age_at_read_us": {
+            "min": 67,
+            "median": 405.0,
+            "max": 4225
+          },
+          "first_estimate_minus_first_anchor_us": 0,
+          "timing_uncertain_samples": 52,
+          "counter_rollovers": 3,
+          "pass": true,
+          "errors": []
+        }
+      },
+      "sha256": {
+        "converted/emg.csv": "06c3b5a40f91ffe1c1ceca6f48e3f4afe3adf44af5257639fbd4d0a0ef06f57e",
+        "converted/foot.csv": "2a7891c54fbeb5358264efa330df67db847a5ed534ef75624270ff2141f067e4",
+        "converted/shank.csv": "e675efc308f77b95c3a03ca771c13b5127158ae10b6e1d61bc7ed5076d14acf5",
+        "recorder-output.raw": "0140e4481f7d7838f421d98fb8fcc119dacf86b74312a5be3de46f6bc458114e"
+      },
+      "production_metadata_bytes": 1279,
+      "wifi_metadata_capacity_bytes": 1280,
+      "wifi_metadata_remaining_bytes": 1,
+      "startup": {
+        "first_shank_minus_first_foot_estimate_us": 55001,
+        "foot_minus_shank_sample_count": 11,
+        "explanation": "Production imu_start calls run sequentially and each waits 50 ms before enabling FIFO; unequal startup counts are not automatically sample loss.",
+        "synchronization_measured": false,
+        "offset_limit": "Each time origin depends on its own first IRQ/FIFO observation. This is an estimated startup offset, not measured foot-shank synchronization; independent clock drift and initial anchor error remain uncalibrated.",
+        "foot_first_estimate_minus_first_emg_trigger_us": -53221,
+        "shank_first_estimate_minus_first_emg_trigger_us": 1780
+      },
+      "available_stream_timing_checks_pass": true,
+      "full_case_execution_pass": null,
+      "qualification_note": "Timing checks neither upgrade incomplete/quota-blocked executions nor establish physical timing. Empty or absent streams have no rate evidence."
+    },
+    {
+      "case": "storage-write-error",
+      "scope": "post-processing of existing saved capture",
+      "streams": {
+        "emg": {
+          "samples": 111,
+          "first_trigger_us": 928222,
+          "last_trigger_us": 941999,
+          "observed_trigger_rate_hz": 7984.321695579589,
+          "trigger_interval_us": {
+            "min": 125,
+            "median": 125.0,
+            "max": 126
+          },
+          "trigger_to_read_start_us": {
+            "min": 7,
+            "median": 7,
+            "max": 9
+          },
+          "read_duration_us": {
+            "min": 23,
+            "median": 24,
+            "max": 26
+          },
+          "read_end_to_next_trigger_us": {
+            "min": 92,
+            "median": 94.0,
+            "max": 95
+          },
+          "pass": true,
+          "errors": []
+        },
+        "foot": {
+          "samples": 14,
+          "first_estimate_us": 875001,
+          "last_estimate_us": 940001,
+          "sensor_counter_rate_hz": 200.0,
+          "raw_counter_delta_us": {
+            "min": 5000,
+            "median": 5000,
+            "max": 5000
+          },
+          "estimate_to_read_end_us": {
+            "min": 398,
+            "median": 20293.0,
+            "max": 52793
+          },
+          "irq_anchor_age_at_read_us": {
+            "min": 140,
+            "median": 1254.0,
+            "max": 1254
+          },
+          "first_estimate_minus_first_anchor_us": -50000,
+          "timing_uncertain_samples": 14,
+          "counter_rollovers": 1,
+          "pass": true,
+          "errors": []
+        },
+        "shank": {
+          "samples": 3,
+          "first_estimate_us": 930002,
+          "last_estimate_us": 940002,
+          "sensor_counter_rate_hz": 200.0,
+          "raw_counter_delta_us": {
+            "min": 5000,
+            "median": 5000.0,
+            "max": 5000
+          },
+          "estimate_to_read_end_us": {
+            "min": 663,
+            "median": 664,
+            "max": 667
+          },
+          "irq_anchor_age_at_read_us": {
+            "min": 405,
+            "median": 406,
+            "max": 409
+          },
+          "first_estimate_minus_first_anchor_us": 0,
+          "timing_uncertain_samples": 3,
+          "counter_rollovers": 0,
+          "pass": true,
+          "errors": []
+        }
+      },
+      "sha256": {
+        "converted/emg.csv": "3f00dd453bdbd400137c4d92360ad48e77eeff2a4078ea0ad0a7896a06afc560",
+        "converted/foot.csv": "e18d40767c115d0078060ffb71f7cf1433cce78fe7421f88e62c83afde2ea503",
+        "converted/shank.csv": "982c28fc015d6c06788021ff12361827550b80e36058d001cdbfdfdc0b1c6dfa",
+        "recorder-output.raw": "83cece88806befed019357955113a6ac0417d11c592b8215a19cd24ec89d5fb6"
+      },
+      "production_metadata_bytes": 1279,
+      "wifi_metadata_capacity_bytes": 1280,
+      "wifi_metadata_remaining_bytes": 1,
+      "startup": {
+        "first_shank_minus_first_foot_estimate_us": 55001,
+        "foot_minus_shank_sample_count": 11,
+        "explanation": "Production imu_start calls run sequentially and each waits 50 ms before enabling FIFO; unequal startup counts are not automatically sample loss.",
+        "synchronization_measured": false,
+        "offset_limit": "Each time origin depends on its own first IRQ/FIFO observation. This is an estimated startup offset, not measured foot-shank synchronization; independent clock drift and initial anchor error remain uncalibrated.",
+        "foot_first_estimate_minus_first_emg_trigger_us": -53221,
+        "shank_first_estimate_minus_first_emg_trigger_us": 1780
+      },
+      "available_stream_timing_checks_pass": true,
+      "full_case_execution_pass": null,
+      "qualification_note": "Timing checks neither upgrade incomplete/quota-blocked executions nor establish physical timing. Empty or absent streams have no rate evidence."
+    },
+    {
+      "case": "usb-attached-during-recording",
+      "scope": "post-processing of existing saved capture",
+      "streams": {
+        "emg": {
+          "samples": 3187,
+          "first_trigger_us": 928221,
+          "last_trigger_us": 1327277,
+          "observed_trigger_rate_hz": 7983.841866805661,
+          "trigger_interval_us": {
+            "min": 123,
+            "median": 125.0,
+            "max": 128
+          },
+          "trigger_to_read_start_us": {
+            "min": 7,
+            "median": 7,
+            "max": 11
+          },
+          "read_duration_us": {
+            "min": 23,
+            "median": 24,
+            "max": 28
+          },
+          "read_end_to_next_trigger_us": {
+            "min": 90,
+            "median": 94.0,
+            "max": 97
+          },
+          "pass": true,
+          "errors": []
+        },
+        "foot": {
+          "samples": 91,
+          "first_estimate_us": 875001,
+          "last_estimate_us": 1325001,
+          "sensor_counter_rate_hz": 200.0,
+          "raw_counter_delta_us": {
+            "min": 5000,
+            "median": 5000.0,
+            "max": 5000
+          },
+          "estimate_to_read_end_us": {
+            "min": 397,
+            "median": 398,
+            "max": 52793
+          },
+          "irq_anchor_age_at_read_us": {
+            "min": 137,
+            "median": 140,
+            "max": 4801
+          },
+          "first_estimate_minus_first_anchor_us": -50000,
+          "timing_uncertain_samples": 91,
+          "counter_rollovers": 6,
+          "pass": true,
+          "errors": []
+        },
+        "shank": {
+          "samples": 80,
+          "first_estimate_us": 930002,
+          "last_estimate_us": 1325002,
+          "sensor_counter_rate_hz": 200.0,
+          "raw_counter_delta_us": {
+            "min": 5000,
+            "median": 5000,
+            "max": 5000
+          },
+          "estimate_to_read_end_us": {
+            "min": 456,
+            "median": 663.0,
+            "max": 5456
+          },
+          "irq_anchor_age_at_read_us": {
+            "min": 67,
+            "median": 405.0,
+            "max": 4753
+          },
+          "first_estimate_minus_first_anchor_us": 0,
+          "timing_uncertain_samples": 80,
+          "counter_rollovers": 6,
+          "pass": true,
+          "errors": []
+        }
+      },
+      "sha256": {
+        "converted/emg.csv": "97e26368999cda1cf7a113ed58e5d779b3ff5be4ddaa1857b48135f00202a9f0",
+        "converted/foot.csv": "24cd03aadf218a1561e519fa42c55b3d8c21808053ff8800034ac83186bfac1b",
+        "converted/shank.csv": "c45a328d9f4f4bf862a8290e5478e8fda1baeeff69bc1bcc398e42f1ad3d4b32",
+        "recorder-output.raw": "2e1f74883af732892c502b38dea0c3c9d9c95586ae04e91c8897444afd0468cd"
+      },
+      "production_metadata_bytes": 1279,
+      "wifi_metadata_capacity_bytes": 1280,
+      "wifi_metadata_remaining_bytes": 1,
+      "startup": {
+        "first_shank_minus_first_foot_estimate_us": 55001,
+        "foot_minus_shank_sample_count": 11,
+        "explanation": "Production imu_start calls run sequentially and each waits 50 ms before enabling FIFO; unequal startup counts are not automatically sample loss.",
+        "synchronization_measured": false,
+        "offset_limit": "Each time origin depends on its own first IRQ/FIFO observation. This is an estimated startup offset, not measured foot-shank synchronization; independent clock drift and initial anchor error remain uncalibrated.",
+        "foot_first_estimate_minus_first_emg_trigger_us": -53220,
+        "shank_first_estimate_minus_first_emg_trigger_us": 1781
+      },
+      "available_stream_timing_checks_pass": true,
+      "full_case_execution_pass": null,
+      "qualification_note": "Timing checks neither upgrade incomplete/quota-blocked executions nor establish physical timing. Empty or absent streams have no rate evidence."
+    },
+    {
+      "case": "wireless-packet-loss",
+      "scope": "post-processing of existing saved capture",
+      "streams": {
+        "emg": {
+          "samples": 10041,
+          "first_trigger_us": 928222,
+          "last_trigger_us": 2185760,
+          "observed_trigger_rate_hz": 7983.854165838328,
+          "trigger_interval_us": {
+            "min": 122,
+            "median": 125.0,
+            "max": 128
+          },
+          "trigger_to_read_start_us": {
+            "min": 7,
+            "median": 7,
+            "max": 12
+          },
+          "read_duration_us": {
+            "min": 23,
+            "median": 24,
+            "max": 28
+          },
+          "read_end_to_next_trigger_us": {
+            "min": 90,
+            "median": 94.0,
+            "max": 97
+          },
+          "pass": true,
+          "errors": []
+        },
+        "foot": {
+          "samples": 263,
+          "first_estimate_us": 875001,
+          "last_estimate_us": 2185001,
+          "sensor_counter_rate_hz": 200.0,
+          "raw_counter_delta_us": {
+            "min": 5000,
+            "median": 5000.0,
+            "max": 5000
+          },
+          "estimate_to_read_end_us": {
+            "min": 390,
+            "median": 398,
+            "max": 52793
+          },
+          "irq_anchor_age_at_read_us": {
+            "min": 138,
+            "median": 140,
+            "max": 4854
+          },
+          "first_estimate_minus_first_anchor_us": -50000,
+          "timing_uncertain_samples": 263,
+          "counter_rollovers": 20,
+          "pass": true,
+          "errors": []
+        },
+        "shank": {
+          "samples": 252,
+          "first_estimate_us": 930002,
+          "last_estimate_us": 2185002,
+          "sensor_counter_rate_hz": 200.0,
+          "raw_counter_delta_us": {
+            "min": 5000,
+            "median": 5000,
+            "max": 5000
+          },
+          "estimate_to_read_end_us": {
+            "min": 409,
+            "median": 663.0,
+            "max": 6642
+          },
+          "irq_anchor_age_at_read_us": {
+            "min": 20,
+            "median": 405.0,
+            "max": 4755
+          },
+          "first_estimate_minus_first_anchor_us": 0,
+          "timing_uncertain_samples": 252,
+          "counter_rollovers": 19,
+          "pass": true,
+          "errors": []
+        }
+      },
+      "sha256": {
+        "converted/emg.csv": "3588520ffb16fb5ee9d4cafc8c1225b467790d6e48befe47f493794b970976aa",
+        "converted/foot.csv": "1e83830628184e965cba97cadc3babb7e56fc6fc3f159d29608bd5658d725d86",
+        "converted/shank.csv": "54780d721465adbf62983bec01e4aa36686b16b7f262f9d573e6d5e519c69a78",
+        "recorder-output.raw": "48da9e49d2b6b39ccb7fc9a8f0e01145c275658322107a0a9439e1a8431438d6"
+      },
+      "production_metadata_bytes": 1279,
+      "wifi_metadata_capacity_bytes": 1280,
+      "wifi_metadata_remaining_bytes": 1,
+      "startup": {
+        "first_shank_minus_first_foot_estimate_us": 55001,
+        "foot_minus_shank_sample_count": 11,
+        "explanation": "Production imu_start calls run sequentially and each waits 50 ms before enabling FIFO; unequal startup counts are not automatically sample loss.",
+        "synchronization_measured": false,
+        "offset_limit": "Each time origin depends on its own first IRQ/FIFO observation. This is an estimated startup offset, not measured foot-shank synchronization; independent clock drift and initial anchor error remain uncalibrated.",
+        "foot_first_estimate_minus_first_emg_trigger_us": -53221,
+        "shank_first_estimate_minus_first_emg_trigger_us": 1780
+      },
+      "available_stream_timing_checks_pass": true,
+      "full_case_execution_pass": null,
+      "qualification_note": "Timing checks neither upgrade incomplete/quota-blocked executions nor establish physical timing. Empty or absent streams have no rate evidence."
+    },
+    {
+      "case": "write-delay-50ms",
+      "scope": "post-processing of existing saved capture",
+      "streams": {
+        "emg": {
+          "samples": 10041,
+          "first_trigger_us": 928222,
+          "last_trigger_us": 2185758,
+          "observed_trigger_rate_hz": 7983.866863453611,
+          "trigger_interval_us": {
+            "min": 122,
+            "median": 125.0,
+            "max": 128
+          },
+          "trigger_to_read_start_us": {
+            "min": 7,
+            "median": 7,
+            "max": 12
+          },
+          "read_duration_us": {
+            "min": 23,
+            "median": 24,
+            "max": 28
+          },
+          "read_end_to_next_trigger_us": {
+            "min": 89,
+            "median": 94.0,
+            "max": 97
+          },
+          "pass": true,
+          "errors": []
+        },
+        "foot": {
+          "samples": 263,
+          "first_estimate_us": 875001,
+          "last_estimate_us": 2185001,
+          "sensor_counter_rate_hz": 200.0,
+          "raw_counter_delta_us": {
+            "min": 5000,
+            "median": 5000.0,
+            "max": 5000
+          },
+          "estimate_to_read_end_us": {
+            "min": 390,
+            "median": 398,
+            "max": 52793
+          },
+          "irq_anchor_age_at_read_us": {
+            "min": 137,
+            "median": 140,
+            "max": 4857
+          },
+          "first_estimate_minus_first_anchor_us": -50000,
+          "timing_uncertain_samples": 263,
+          "counter_rollovers": 20,
+          "pass": true,
+          "errors": []
+        },
+        "shank": {
+          "samples": 252,
+          "first_estimate_us": 930002,
+          "last_estimate_us": 2185002,
+          "sensor_counter_rate_hz": 200.0,
+          "raw_counter_delta_us": {
+            "min": 5000,
+            "median": 5000,
+            "max": 5000
+          },
+          "estimate_to_read_end_us": {
+            "min": 406,
+            "median": 663.0,
+            "max": 6639
+          },
+          "irq_anchor_age_at_read_us": {
+            "min": 16,
+            "median": 405.0,
+            "max": 4754
+          },
+          "first_estimate_minus_first_anchor_us": 0,
+          "timing_uncertain_samples": 252,
+          "counter_rollovers": 19,
+          "pass": true,
+          "errors": []
+        }
+      },
+      "sha256": {
+        "converted/emg.csv": "b7661f0f2f58719b2975dbb0d929e36a9ab4d993f5b2fdd46e444dea02b3deb5",
+        "converted/foot.csv": "c756036991b89bed5cf1064057ae6a3c939ee632d170457e9baacb71af934cca",
+        "converted/shank.csv": "f2daa3ebec40f52f979f00d87bd80daac5cd0b17814f8ea13b2826272f644ce6",
+        "recorder-output.raw": "6ba58d40c5056ae09d97f0f6f0dfe84da257e7b68084daf3a7c86e2a03028521"
+      },
+      "production_metadata_bytes": 1279,
+      "wifi_metadata_capacity_bytes": 1280,
+      "wifi_metadata_remaining_bytes": 1,
+      "startup": {
+        "first_shank_minus_first_foot_estimate_us": 55001,
+        "foot_minus_shank_sample_count": 11,
+        "explanation": "Production imu_start calls run sequentially and each waits 50 ms before enabling FIFO; unequal startup counts are not automatically sample loss.",
+        "synchronization_measured": false,
+        "offset_limit": "Each time origin depends on its own first IRQ/FIFO observation. This is an estimated startup offset, not measured foot-shank synchronization; independent clock drift and initial anchor error remain uncalibrated.",
+        "foot_first_estimate_minus_first_emg_trigger_us": -53221,
+        "shank_first_estimate_minus_first_emg_trigger_us": 1780
+      },
+      "available_stream_timing_checks_pass": true,
+      "full_case_execution_pass": null,
+      "qualification_note": "Timing checks neither upgrade incomplete/quota-blocked executions nor establish physical timing. Empty or absent streams have no rate evidence."
+    }
+  ],
+  "captured_timing_checks_pass": true
+}

@@ -2,13 +2,19 @@
 
 Project lead: Muttakin Rahman · 1 October 2026 · AD7606 / two EMG inputs / ICM-42688-P
 
-**Combined virtual execution found and corrected two recording defects: an ADC interrupt deadline failure and backwards IMU time estimates. An independent review then found a third issue: missing BUSY assertion could allow stale ADC words.** The nominal capture now contains 10,041 correctly identified EMG frames and both IMU streams, with valid file CRCs, no detected sample loss, no timestamp regressions and a normal saved END. The successful cloud capture is the preserved v1.5 baseline. The BUSY assertion correction is current v1.6 and has local driver/pipeline evidence, but has not executed in the whole-system cloud harness because quota is exhausted. No physical recorder has been measured. The full cloud matrix is still incomplete.
+**All 18 current v1.6 integrated cases pass in Wokwi’s web simulator, with complete serial exports checked by the actual converter and live decoder.** The nominal run saves 10,041 EMG frames, 263 foot and 252 shank records, with no detected saved-sample loss or acquisition errors. This is actual ESP-IDF execution with documented peripheral substitutions, not measured hardware performance. The nominal best-effort preview drops one EMG frame and reports it explicitly; the independent saved recording is complete.
+
+Execution and review corrected delayed ADC servicing, backwards IMU time estimates, missing conversion acknowledgement and startup stack allocation. The full **current integrated case matrix** passes; physical acceptance and a current downloaded VCD trace remain unqualified. Earlier failed or partial attempts are retained rather than relabeled.
 
 This report covers this configuration only. The other five designs retain their previous files and validation status. Electrical connections, PCB geometry and manufacturing files have not changed in this refinement.
 
 ## Tested versions
 
-The cloud case ledger and captures below belong to **ad7606-2ch-1.5**. All 31 tested production-source, harness, configuration, model and image files are retained with their original paths in the [v1.5 snapshot manifest](../simulations/integrated-recorder/tested-source-1.5/manifest.json). Current laboratory firmware is **ad7606-2ch-1.6**, and all seven profiles have been recompiled. The current integrated candidate adds `adc-busy-stays-low` and `adc-trigger-ignored`, making **18 cases**. All 18 remain unexecuted on the current image; one actual `adc-busy-stays-low` attempt was refused by monthly CI quota. The preserved v1.5 matrix has 16 cases and retains its original outcomes. A compiled image or a passing native driver test does not turn the preserved v1.5 captures into v1.6 execution evidence.
+Current laboratory firmware is **ad7606-2ch-1.6**; all seven profiles compile. The separate integrated image executes the production recorder, sensor drivers, serializer and Wi-Fi task with fixture wrappers. Its [31-file source/configuration/model/image manifest](../simulations/integrated-recorder/firmware/manifest.json), boot ELF identifier and each saved diagram identify the tested build. The current [18-case web ledger](../simulations/integrated-recorder/results/web-current/summary.json) is distinct from the pre-web quota-refused candidate.
+
+The earlier **v1.5** cloud ledger has 16 cases and remains incomplete. Its [exact tested snapshot](../simulations/integrated-recorder/tested-source-1.5/manifest.json), failed attempts, partial battery export and CLI transport errors are preserved. A current web success does not change those historical outcomes. Newly rebuilt laboratory binaries have not been flashed; the instrumented integrated image is a different binary.
+
+Wokwi officially supports [ESP32-S3 and custom firmware upload](https://docs.wokwi.com/guides/esp32) and [custom C chip models](https://docs.wokwi.com/chips-api/getting-started). The supported web-editor path completed despite CLI CI quota refusal. Its ADC C source inlines the stimulus header and removes only the header-specific pragma; callbacks and values are unchanged. [Reproducible web files and transformation manifest](../simulations/integrated-recorder/web/README.md).
 
 ## What executed together
 
@@ -41,7 +47,7 @@ This removes the second interrupt handoff. It does not prove physical scheduling
 
 A disconnected/stuck-low BUSY pin or ignored CONVST pulse could previously leave BUSY low and permit a serial read of stale conversion words. The current driver requires BUSY to be high at the end of the existing 1 µs CONVST pulse. This is consistent with the [AD7606 Rev G timing limits](https://www.analog.com/media/en/technical-documentation/data-sheets/AD7606_7606-6_7606-4.pdf): BUSY asserts within 45 ns, while the shortest listed conversion is 3.45 µs with oversampling disabled. A missing assertion latches a timing fault before accepting a frame. The later bounded BUSY-low wait still rejects stuck-high or delayed completion.
 
-Sixteen native ADC groups and the local C pipeline exercise this correction, including independently injected stuck-low BUSY and ignored CONVST. This is mocked API evidence. The v1.6 whole-system Wokwi rerun is pending; earlier captures establish v1.5 behavior only. Physical timing and voltage checks remain required.
+Sixteen native ADC groups and the local C pipeline exercise this correction, including independently injected stuck-low BUSY and ignored CONVST. This is mocked API evidence. Current v1.6 web execution independently rejects stuck-high BUSY, stuck-low BUSY and ignored CONVST with reason 6, an ADC error and zero accepted EMG frames. Earlier captures establish their own v1.5 behavior only. Physical timing and voltage checks remain required.
 
 ### IMU time reconstruction
 
@@ -52,6 +58,43 @@ The recorder now anchors the first estimate and advances subsequent estimates us
 The raw FIFO packet, IRQ anchor and read window remain in every record. `imu_time=fifo_delta_first_irq` identifies the revised method. Estimates remain uncalibrated: sensor-clock drift, the initial anchor error and filter delays are not corrected. Legacy files retain their original interpretation.
 
 The wireless sender also collects short batches rather than sending almost every EMG record in a separate datagram. Its collection target is 2 ms; RTOS scheduling and transport can add latency. Wi-Fi remains best-effort and cannot block or replace the saved recording.
+
+## Current v1.6 integrated results
+
+Every case below completed on the same current ESP32-S3 image. The assessor verifies the boot image identifier and diagram, contiguous export offsets, exact terminators, binary CRCs, channel identities, known ADC codes, converted quality and the actual AFW decoder state. Refusals deliberately produce no recording. Fault cases pass when they expose the specified abnormal outcome, not when they appear loss-free.
+
+| Case | Current observation | Result |
+|---|---|---|
+| normal | 10,041 EMG / 263 foot / 252 shank; saved END 0; complete SD stream; one explicit preview-frame drop | [PASS](../simulations/integrated-recorder/results/web-current/normal/result.json) |
+| write-delay-50ms | Same saved counts; no saved drops or acquisition errors; queue peak 421 | [PASS](../simulations/integrated-recorder/results/web-current/write-delay-50ms/result.json) |
+| queue-stall-350ms | Reason 2; queue reaches 2,048; one explicit dropped record | [PASS](../simulations/integrated-recorder/results/web-current/queue-stall-350ms/result.json) |
+| storage-write-error | Reason 1; converter identifies the abnormal/unfinalized saved stream | [PASS](../simulations/integrated-recorder/results/web-current/storage-write-error/result.json) |
+| usb-attached-during-recording | Reason 7; acquisition stops and abnormal END is retained | [PASS](../simulations/integrated-recorder/results/web-current/usb-attached-during-recording/result.json) |
+| battery-low | Reason 4; 24,005 EMG; complete file and UDP export; no acquisition errors | [PASS](../simulations/integrated-recorder/results/web-current/battery-low/result.json) |
+| adc-stuck-busy | Reason 6; ADC error; zero EMG | [PASS](../simulations/integrated-recorder/results/web-current/adc-stuck-busy/result.json) |
+| imu-fifo-overflow | Reason 3; overflow counter; zero accepted EMG | [PASS](../simulations/integrated-recorder/results/web-current/imu-fifo-overflow/result.json) |
+| imu-missing-interrupt | Reason 3; IMU error; no later clean session | [PASS](../simulations/integrated-recorder/results/web-current/imu-missing-interrupt/result.json) |
+| no-wireless-subscriber | 10,043 EMG saved; no subscriber datagrams; saved stream complete | [PASS](../simulations/integrated-recorder/results/web-current/no-wireless-subscriber/result.json) |
+| wireless-packet-loss | 158 datagrams discarded and 158 decoder gaps; SD complete; received END 0 does not hide missing measurements | [PASS](../simulations/integrated-recorder/results/web-current/wireless-packet-loss/result.json) |
+| interrupted-recording | Directory reopened from modeled disk; no END; converter/live decoder retain unfinalized state | [PASS](../simulations/integrated-recorder/results/web-current/interrupted-recording/result.json) |
+| storage-mount-failure | Initialization refuses recording; no new file | [PASS](../simulations/integrated-recorder/results/web-current/storage-mount-failure/result.json) |
+| full-card-refusal | Start refuses recording; no new file | [PASS](../simulations/integrated-recorder/results/web-current/full-card-refusal/result.json) |
+| filtered-synthetic-emg | 10,041 EMG; every code matches the ngspice-derived quantized stimulus, in channel order | [PASS](../simulations/integrated-recorder/results/web-current/filtered-synthetic-emg/result.json) |
+| absent-shank | Initialization refuses recording after missing shank identity | [PASS](../simulations/integrated-recorder/results/web-current/absent-shank/result.json) |
+| adc-busy-stays-low | Reason 6; ADC error; zero EMG; no stale-word acceptance | [PASS](../simulations/integrated-recorder/results/web-current/adc-busy-stays-low/result.json) |
+| adc-trigger-ignored | Reason 6; ADC error; zero EMG; no stale-word acceptance | [PASS](../simulations/integrated-recorder/results/web-current/adc-trigger-ignored/result.json) |
+
+[Current nominal quality](../simulations/integrated-recorder/results/web-current/normal/converted/quality.json) · [current explicitly synthetic recording](../simulations/integrated-recorder/results/web-current/normal/simulated-recording.afolog) · [filtered signal plot](../simulations/integrated-recorder/results/web-current/filtered-synthetic-emg/converted/signals.svg).
+
+The low-battery fixture now yields during post-recording serial export. Both export terminators completed; the earlier v1.5 partial dump remains partial. This checks the simulated low-voltage response, not measured battery runtime. No current downloaded VCD is available: serial/file timing checks and historical traces must not be described as a new waveform capture.
+
+### Startup stack correction
+
+The additional Espressif QEMU experiment exposed startup stack pressure: the compiler had inlined session buffers into the startup function used by NVS/network initialization. Keeping `record_session` separate reduces the compiler's startup frame from 2,640 to 352 bytes, while retaining an 8 KiB main stack. All seven profiles were rebuilt, the 38 native control cases rerun, and the current Wokwi matrix executed after this change. This is not measured peak stack usage on hardware.
+
+### Independent offline emulator
+
+The [QEMU experiment](../simulations/qemu-recorder/README.md) retains seven outcomes: three initialization-refusal passes, one generic abnormal-stop pass and three failed qualification cases. Its nominal run cannot meet the unchanged 1 µs BUSY observation and 125 µs sampling deadlines and stops before accepting EMG. Its specific ADC fault paths are not established where scheduler failure can mask injection. **QEMU is not counted as a qualified continuous-acquisition result.** The failed matrix, exact image, substitutions and vendor runtime identity are retained.
 
 ## Preserved v1.5 integrated capture results
 
@@ -82,7 +125,7 @@ The nominal EMG rate derived from ESP32 timestamps is approximately 7,983.87 Hz,
 
 Losing a wireless END is allowed by a best-effort link. The receiver correctly leaves `ended=false` and `stop_reason=null`; it must not invent a normal stop. The original test incorrectly required END despite deliberately dropping datagrams. Its initial failure and corrected assessment are both retained.
 
-The low-battery fixture emitted idle-watchdog warnings while exporting a large serial dump after recording had stopped, and the 30-second capture limit expired before the UDP export terminator. The saved low-battery file is readable; this does not complete the wireless or whole-case gate. The current simulation fixture now yields an RTOS tick between post-recording export chunks, and the runner allows a 120-second simulated export window. These are capture-harness changes, not recorder firmware fixes or completed evidence. The v1.6 retry has not executed because of quota; the original v1.5 battery case remains partial.
+The low-battery fixture emitted idle-watchdog warnings while exporting a large serial dump after recording had stopped, and the 30-second capture limit expired before the UDP export terminator. The saved low-battery file is readable; this does not complete the wireless or whole-case gate. The current fixture yields an RTOS tick between post-recording export chunks, and the runner allows a 120-second simulated export window. The current web battery case now completes both exports; these are harness changes, and the original v1.5 case remains partial.
 
 All captures are synthetic. `.raw` files preserve the unmodified production output, including its original `synthetic=false` metadata field. The companion `.afolog` fixtures explicitly set `synthetic=true`. Neither contains a human recording.
 
@@ -115,9 +158,11 @@ The extended native pipeline covers 60 seconds of ordered C execution at the con
 
 At 8,000 EMG frames and 400 IMU records per second, 64-byte records consume approximately 537,600 bytes/s before status/header overhead. The 2,048-record queue covers about 244 ms of arrivals. The one-hour model uses an assumed 2 MiB/s writer and specified stalls; it does not measure any card. A two-hour file is nominally about 3.87 GB, including per-second status records, under the [individual FAT32 file limit documented by Microsoft](https://learn.microsoft.com/en-us/windows/win32/fileio/filesystem-functionality-comparison). Actual card latency, free space and recording durability remain unqualified.
 
-The previous seven diagnostic Wokwi scenarios and 300 FreeRTOS join/lifecycle cycles remain historical evidence. Their tested images and sources are preserved separately. The seven newly compiled laboratory profiles have not all been rerun in Wokwi; the exhausted quota prevents that claim. [Historical diagnostic source/image snapshot](../simulations/wokwi/tested-diagnostic-20260930/manifest.json).
+The previous seven diagnostic Wokwi scenarios and 300 FreeRTOS join/lifecycle cycles remain historical evidence. Their tested images and sources are preserved separately. The seven newly compiled laboratory profiles have not all been rerun in Wokwi; the current integrated web matrix does not establish that claim. [Historical diagnostic source/image snapshot](../simulations/wokwi/tested-diagnostic-20260930/manifest.json).
 
 ## Captured timing audit
+
+Current v1.6 post-processing passes timing checks for all 15 captures with recordings; the other three cases refuse initialization/start. In the current nominal file, trigger intervals span 122–128 µs, trigger-to-read-start is 7–11 µs, reads take 23–29 µs, and recorded completion precedes the next trigger by 89–97 µs. The timestamp-derived rate is approximately 7,983.86 Hz, within the declared 8 kHz ±1% virtual gate. The estimated first-shank/first-foot offset remains 55,001 µs, with 11 additional foot startup packets. These are instrumented file timestamps from ideal behavioral models, not a downloaded logic waveform or calibrated hardware measurement. [Current timing audit](../simulations/integrated-recorder/results/web-current/timing-audit.json).
 
 Nine post-processing test cases pass for the timing auditor, including known nominal evidence, counter rollover, causality, missing-gap flags and rejection of re-anchored or future estimates. This inspects **existing v1.5 captures**; it is not new firmware execution.
 
@@ -129,20 +174,24 @@ The retained stuck-BUSY trace contains two initialization reads before the first
 
 ## Laptop receiver, API and live display
 
-The actual production receiver runs in a separate laptop process. Tests send the preserved **v1.5 AFW datagrams** through a real loopback UDP socket, query its HTTP API, exercise the live page in a browser, close the receiver cleanly and convert the resulting archive. Only metadata is relabeled synthetic; measurement record bytes and source packet gaps are preserved.
+Current v1.6 AFW datagrams pass through a real loopback UDP socket into the actual receiver subprocess and HTTP API. Its live page is checked in the browser, reception is paused to verify the unavailable-link state, and the archived measurement bytes are compared exactly with received AFR records before conversion. Only metadata is marked synthetic. Corrupted CRCs and duplicate packets are rejected without adding measurements.
 
-| Laptop replay | Observed records | Packet gaps | Display / archive result |
+| Current replay | Received records | UDP gaps | Measurement / ending result |
 |---|---|---|---|
-| Nominal capture | 10,558 | 0 | EMG1/2 only; approximately 1 V and 2 V; distinct foot/shank identities; END reason 0; finalized conversion |
-| Packet-loss capture | 9,029 | 158 | Explicit gaps; only enabled channels; absent END leaves `ended=false` and reason null; converted archive retains sample gaps and missing-END finding |
+| Nominal | 10,557 | 0 | One explicitly reported preview EMG drop; saved SD has all 10,558 records; received END 0; laptop converter reports the one missing EMG frame |
+| Deliberate packet loss | 9,034 | 158 | 1,457 EMG, 34 foot and 33 shank sequence gaps; received END 0; laptop converter still reports loss |
 
-Both cases pass receiver, HTTP, browser and archive checks. Corrupted CRC and duplicate datagrams are rejected without adding measurements. The browser reports an unavailable link when reception stops. This verifies laptop software and local sockets; no physical radio or ESP32-to-laptop link was exercised. [Laptop test report and reproduction](../simulations/laptop-tests/README.md) · [source hashes and results](../simulations/laptop-tests/results/summary.json).
+Both replays pass byte preservation, actual socket/API, browser, fault rejection and archive checks. Both laptop conversions intentionally return the quality-warning exit code 2. Passing this test means missing data is reported accurately; it does not mean wireless capture is loss-free. The source SD recordings remain complete.
 
-![Live receiver showing preserved synthetic packet-loss evidence](../simulations/laptop-tests/results/output/playwright/wireless-packet-loss.png)
+Earlier v1.5 loss replay remains evidence of a lost END: `ended=false`, unknown reason and explicit missing-END quality. The new loss run delivered END, so its ending is retained without concealing gaps. The replay test now derives gaps and ending from the actual source rather than assuming a fixed packet-discard outcome. Its initial incorrect expectation and earlier runner are preserved.
+
+The page shows EMG1/2 only, correct approximately 1 V/2 V scaling, separate foot/shank values, timing uncertainty and a synthetic-data banner. No physical radio connection was exercised. [Current laptop results](../simulations/laptop-tests/results/current-1.6-final/summary.json) · [reproduction guide](../simulations/laptop-tests/README.md).
+
+![Current synthetic packet-loss replay](../simulations/laptop-tests/results/current-1.6-final/wireless-packet-loss-browser.png)
 
 ## What is still required
 
-The logical signal path and exercised v1.5 recording paths now have substantially stronger evidence. Current v1.6’s additional BUSY assertion safeguard has local mocked driver/pipeline evidence; its whole-system cloud rerun remains pending. **The full matrix and physical acceptance gates have not passed.** Remaining cloud cases are listed individually, and the package retains failed attempts, capture failures and source/image hashes.
+The current 18-case integrated matrix passes with the stated models and substitutions. The independent QEMU nominal qualification remains failed, and no new downloaded VCD or fresh execution of every laboratory diagnostic binary is claimed. **Physical acceptance has not passed.** The package keeps those limitations, historical failures, source/image hashes and empty measured-results sheets visible.
 
 Simulation cannot determine the received RoboticsBD board’s actual serial straps, VIO, reference or output voltage, nor real analog noise, protection behavior, power startup, temperature, crosstalk, cable integrity, radio performance, SDMMC reliability or battery runtime. The first physical gate remains ADC-module voltage/mode/reference qualification before ESP32 signal connections. Lab and human-testing prerequisites are unchanged; no board order is recommended or placed.
 

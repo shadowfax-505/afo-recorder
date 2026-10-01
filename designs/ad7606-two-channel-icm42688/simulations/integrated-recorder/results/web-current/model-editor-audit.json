@@ -1,0 +1,43 @@
+{
+  "all_match": true,
+  "json_comparison": "Parsed JSON equivalence",
+  "c_comparison": "Exact text after CRLF normalization",
+  "files": [
+    {
+      "file": "ad7606.chip.c",
+      "match": true,
+      "editor_sha256": "d0f3d7ad8fe708cfb0904e2cf9e6802d03b3298f5ec5e368a4a8b92aacb3fddf",
+      "generated_sha256": "d0f3d7ad8fe708cfb0904e2cf9e6802d03b3298f5ec5e368a4a8b92aacb3fddf"
+    },
+    {
+      "file": "ad7606.chip.json",
+      "match": true,
+      "editor_sha256": "8ec6bed0212fd05c46ced8b25504e80cd1ac086697cb89a1712578c703f09dff",
+      "generated_sha256": "5d6fd2e91e0593d54abe2216b2dedabfbf993aad161674f8f69bc8fa03e6981e"
+    },
+    {
+      "file": "icm42688.chip.c",
+      "match": true,
+      "editor_sha256": "47906b3285935c1d1729ad1b505df8ab46325a0a5cd3c512b192f7c1ddfa67eb",
+      "generated_sha256": "47906b3285935c1d1729ad1b505df8ab46325a0a5cd3c512b192f7c1ddfa67eb"
+    },
+    {
+      "file": "icm42688.chip.json",
+      "match": true,
+      "editor_sha256": "e1b62a52007ea7a6b79978267a0fdec242fb2b4f6d42eee0879a84e4335c388b",
+      "generated_sha256": "e1b62a52007ea7a6b79978267a0fdec242fb2b4f6d42eee0879a84e4335c388b"
+    },
+    {
+      "file": "fixture.chip.c",
+      "match": true,
+      "editor_sha256": "998ed1747a9cd226ffafcb2134f3ad33626c1c98aa104fc9b3f57474ccbe5bf7",
+      "generated_sha256": "998ed1747a9cd226ffafcb2134f3ad33626c1c98aa104fc9b3f57474ccbe5bf7"
+    },
+    {
+      "file": "fixture.chip.json",
+      "match": true,
+      "editor_sha256": "f7fbac81c71d685714728662ed592f39a0368be505224bf4d8d27a026bc69438",
+      "generated_sha256": "f7fbac81c71d685714728662ed592f39a0368be505224bf4d8d27a026bc69438"
+    }
+  ]
+}
