@@ -1,0 +1,89 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><link rel="icon" href="data:,"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Complete system — AD7606 two-channel recorder</title><style>body{margin:0;background:#f4f3ee;color:#172523;font:17px/1.65 system-ui}main{max-width:1060px;margin:auto;padding:48px 28px}h1{font-size:2.4rem;line-height:1.15}h2{margin-top:2.5em}a{color:#176454}table{border-collapse:collapse;font-size:14px;display:block;overflow:auto}td,th{padding:12px;border:1px solid #ccd4ce;text-align:left;vertical-align:top}th{background:#e2eae4}code{font-size:.9em}pre{overflow:auto;padding:16px;background:#e2eae4;border-radius:6px}p{max-width:85ch}img{max-width:100%;height:auto}nav{font-size:14px;border-bottom:1px solid #ccd4ce;padding-bottom:16px}blockquote{border-left:3px solid #809c8a;margin-left:0;padding-left:20px}@media(max-width:640px){main{padding:28px 18px}h1{font-size:1.9rem}}@media print{body{background:white}main{padding:0}table{display:table;font-size:10px}}</style></head><body><main><nav><a href="whole-system.html">Complete system</a> / <a href="../viewer/build.html">Assembly workspace</a> / <a href="integrated-verification.html">Integrated verification</a> / <a href="circuit-audit.html">Circuit audit</a> / <a href="lab-quickstart.html">Lab sequence</a></nav><h1>See the complete recorder</h1>
+<p>Muttakin Rahman · AD7606 · two MyoWare RAW inputs · two ICM-42688-P sensors</p>
+<p>The complete setup has two views: a physical assembly plan for building, and a Wokwi scene for running the recorder software. Both include the controller, power, EMG paths, motion sensors, storage and controls. The earlier Wokwi template link showed a smaller protocol fixture; use the saved project below.</p>
+<h2>Open the view you need</h2>
+<table>
+<thead>
+<tr>
+<th>View</th>
+<th>Open it</th>
+<th>Use it for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Whole physical assembly</td>
+<td><a href="../viewer/index.html?stage=10&amp;v=1.6">Open the complete 3D setup</a></td>
+<td>Breadboards, commercial modules, component placement and individual terminal-to-hole connections</td>
+</tr>
+<tr>
+<td>Complete Wokwi scene</td>
+<td><a href="https://wokwi.com/projects/476662256690643969">Open the saved recorder project</a></td>
+<td>ESP-IDF execution, modeled ADC/IMU interfaces and visible system context</td>
+</tr>
+<tr>
+<td>Simulation download</td>
+<td><a href="../simulations/integrated-recorder/full-system/full-system-wokwi.zip">Download the Wokwi bundle</a></td>
+<td>The exact scene, all custom-chip files, merged firmware and manifests</td>
+</tr>
+</tbody>
+</table>
+<h3>Physical assembly</h3>
+<p>Select <strong>Stage 10 → Complete stage</strong> to see everything. Use <strong>Focus canvas</strong> to hide the side panels, then <strong>Fit</strong>. Exit focus to inspect connections. Select a wire in the inspector for its exact endpoints; double-click a board to inspect its insertion holes. Module drawings and wire bends remain illustrative.</p>
+<p><img src="../simulations/integrated-recorder/full-system/assembly-proof.png" alt="Complete breadboard/module assembly with all connections" /></p>
+<h3>Run the Wokwi recorder</h3>
+<ol>
+<li>Open the saved project and extract the Wokwi bundle. The project already includes <strong>36 parts, 79 connections and 24 custom-chip files</strong>.</li>
+<li>Focus a code editor, press <strong>F1</strong>, and select <strong>Upload Firmware and Start Simulation…</strong>.</li>
+<li>Select <code>integrated-recorder/firmware/merged.bin</code> from the extracted bundle. This is the simulation-only image. The placeholder sketch and default Play button alone do not run the tested recorder.</li>
+<li>Check the boot output for <strong>ESP-IDF v5.4.2</strong> and <strong>ELF prefix <code>aabb34031</code></strong>. In the simulation menu choose <strong>Full screen</strong>, then <strong>Fit</strong>, so all components are visible.</li>
+<li>Wait for <code>INTEGRATED_COMPLETE,case=0</code>, <code>EXPORT_END,AFO</code> and <code>EXPORT_END,UDP</code>. The automatic short run uses known 1 V / 2 V ADC codes and both IMU identities.</li>
+</ol>
+<p>Re-upload the custom image after reopening the project. Saving the drawing does not guarantee that the uploaded firmware persists. <strong>Never flash this instrumented simulation image onto hardware</strong>; use the separate laboratory firmware profiles for the recorder.</p>
+<p><img src="../simulations/integrated-recorder/full-system/browser-proof.png" alt="Complete Wokwi canvas after the nominal recorder run" /></p>
+<h2>What the expanded scene passed</h2>
+<p>The complete scene finished a nominal run with <strong>10,041 EMG frames, 263 foot and 252 shank records</strong>. The saved recording has zero detected sequence gaps, ADC errors, IMU errors or queue drops. The actual converter and live decoder assessed the exported bytes. One preview-frame drop is reported explicitly; the saved file remains complete. IMU host times remain estimates and are marked uncertain.</p>
+<p><a href="../simulations/integrated-recorder/full-system/results/normal/result.json">Expanded-scene result</a> · <a href="../simulations/integrated-recorder/full-system/scene-checks.json">Connection/source checks</a> · <a href="../simulations/integrated-recorder/firmware/manifest.json">Firmware manifest</a></p>
+<p>A fresh opening of the saved public project retained every custom model and an exactly matching diagram. Its <a href="../simulations/integrated-recorder/full-system/results/saved-project-normal/result.json">repeat nominal run</a> also passes with the same saved counts. <a href="../simulations/integrated-recorder/full-system/browser-checks.json">Browser persistence checks</a>.</p>
+<p>The <a href="integrated-verification.html">18-case integrated verification report</a> uses the retained smaller protocol fixture. This additional full-scene run covers the nominal case; it does not relabel the earlier fault-test diagrams as full-scene runs. Recorder firmware and original sensor-model C sources are unchanged.</p>
+<h2>Drawn connections and executed interfaces</h2>
+<table>
+<thead>
+<tr>
+<th>Component or path</th>
+<th>Execution in Wokwi</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ESP32-S3, ADC SPI, IMU SPI and interrupts</td>
+<td>Actual recorder image with behavioral AD7606 and ICM models</td>
+</tr>
+<tr>
+<td>MyoWare and buffered two-stage filters</td>
+<td>Passive illustrations; known ADC codes originate inside the ADC model. <a href="circuit-audit.html">Analog simulation evidence</a> is separate.</td>
+</tr>
+<tr>
+<td>Protected battery, rails, sensing and USB</td>
+<td>Passive illustrations; the fixture injects voltage and USB states. No power, charging, USB transport or runtime simulation.</td>
+</tr>
+<tr>
+<td>microSD and CLK/CMD/D0 wiring</td>
+<td>Pin context for the real SDMMC interface. Actual FatFS runs on a PSRAM block medium; the card and SDMMC peripheral are substituted.</td>
+</tr>
+<tr>
+<td>Wi-Fi and laptop</td>
+<td>Actual production UDP reaches an internal subscriber. Radio and external laptop transport are substituted; separate laptop replay tests cover the receiver.</td>
+</tr>
+<tr>
+<td>LEDs and button</td>
+<td>LEDs use the production GPIOs. The automatic fixture starts/stops the short run.</td>
+</tr>
+</tbody>
+</table>
+<p>Green/orange lines show executed sensor interfaces; purple shows the illustrated analog paths. Red/black indicate ideal power context, gray indicates substituted interfaces, and blue marks the logical preview link. Extra model supply/analog ports are drawing terminals, <strong>not RoboticsBD header numbers</strong>.</p>
+<p>No virtual run establishes actual module straps, VIO, noise, power startup, card reliability, radio performance or battery runtime. Physical measurements remain pending. Follow the <a href="lab-quickstart.html">short laboratory sequence</a> when instruments are available; no PCB order is part of these checks.</p>
+<h2>Reproduce or inspect</h2>
+<p>The bundle preserves <code>integrated-recorder/full-system/</code> and <code>integrated-recorder/firmware/</code>. The scene manifest identifies all diagram/model bytes. <a href="../simulations/integrated-recorder/full-system/README.md">Scene source and reproduction instructions</a> · <a href="../simulations/integrated-recorder/full-system/download.json">Bundle contents and SHA-256</a>.</p>
+<p>The project uses Wokwi's documented <a href="https://docs.wokwi.com/guides/esp32">custom firmware upload</a>, <a href="https://docs.wokwi.com/chips-api/getting-started">custom-chip API</a> and <a href="https://docs.wokwi.com/diagram-format">diagram format</a>. An official simulator platform does not independently validate project-authored behavioral models.</p>
+</main></body></html>

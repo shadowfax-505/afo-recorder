@@ -1,0 +1,11 @@
+{
+  "name": "USB inlet / illustrated",
+  "author": "Muttakin Rahman",
+  "pins": [
+    "VBUS",
+    "D_MINUS",
+    "D_PLUS",
+    "GND"
+  ],
+  "controls": []
+}

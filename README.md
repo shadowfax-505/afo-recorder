@@ -91,3 +91,5 @@ Disconnect charging cables, USB, and mains-connected instruments while electrode
 - [Third-party notices](THIRD_PARTY_NOTICES.md)
 
 Project lead: **Muttakin Rahman**. Manufacturer credits, source references, and third-party licence notices are retained. Publication does not change the ownership of external boards, CAD, datasheets, libraries, or photographs.
+
+Open the [complete-system guide](designs/ad7606-two-channel-icm42688/docs/whole-system.md) for the physical assembly, saved Wokwi scene and downloadable simulation bundle.

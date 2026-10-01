@@ -1,0 +1,13 @@
+{
+  "name": "Regulated rails / illustrated",
+  "author": "Muttakin Rahman",
+  "pins": [
+    "PACK_PLUS",
+    "GND",
+    "3V3D",
+    "3V0A",
+    "5V",
+    "VMID"
+  ],
+  "controls": []
+}

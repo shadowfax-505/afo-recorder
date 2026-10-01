@@ -1,0 +1,182 @@
+{
+  "scene": "complete-system-context",
+  "default_case": "normal",
+  "production_firmware_changed": false,
+  "historical_18_case_scene_changed": false,
+  "original_executable_edges": [
+    [
+      "esp:10",
+      "adc:CS"
+    ],
+    [
+      "esp:11",
+      "adc:CONVST"
+    ],
+    [
+      "esp:9",
+      "adc:RESET"
+    ],
+    [
+      "esp:8",
+      "adc:BUSY"
+    ],
+    [
+      "esp:12",
+      "adc:SCLK"
+    ],
+    [
+      "esp:13",
+      "adc:DOUTA"
+    ],
+    [
+      "esp:7",
+      "foot:CS"
+    ],
+    [
+      "esp:6",
+      "foot:SCLK"
+    ],
+    [
+      "esp:4",
+      "foot:SDI"
+    ],
+    [
+      "esp:5",
+      "foot:SDO"
+    ],
+    [
+      "esp:16",
+      "foot:INT1"
+    ],
+    [
+      "esp:15",
+      "shank:CS"
+    ],
+    [
+      "esp:6",
+      "shank:SCLK"
+    ],
+    [
+      "esp:4",
+      "shank:SDI"
+    ],
+    [
+      "esp:5",
+      "shank:SDO"
+    ],
+    [
+      "esp:17",
+      "shank:INT1"
+    ],
+    [
+      "esp:3",
+      "fixture:CASE0"
+    ],
+    [
+      "esp:14",
+      "fixture:CASE1"
+    ],
+    [
+      "esp:46",
+      "fixture:CASE2"
+    ],
+    [
+      "esp:48",
+      "fixture:CASE3"
+    ],
+    [
+      "adc:CONVST",
+      "logic:D0"
+    ],
+    [
+      "adc:BUSY",
+      "logic:D1"
+    ],
+    [
+      "adc:CS",
+      "logic:D2"
+    ],
+    [
+      "adc:SCLK",
+      "logic:D3"
+    ],
+    [
+      "adc:DOUTA",
+      "logic:D4"
+    ],
+    [
+      "foot:INT1",
+      "logic:D5"
+    ],
+    [
+      "shank:INT1",
+      "logic:D6"
+    ],
+    [
+      "foot:CS",
+      "logic:D7"
+    ],
+    [
+      "esp:GND.1",
+      "logic:GND"
+    ]
+  ],
+  "passive_context_types": [
+    "battery",
+    "power",
+    "myoware",
+    "frontend",
+    "storage",
+    "laptop",
+    "radio",
+    "usb",
+    "monitor"
+  ],
+  "extra_passive_pins": {
+    "ad7606": [
+      "AIN1",
+      "AIN2",
+      "AVCC_5V",
+      "VIO_3V3",
+      "GND"
+    ],
+    "icm42688": [
+      "VDD_3V3",
+      "GND"
+    ],
+    "fixture": []
+  },
+  "scope": "Original protocol callbacks plus passive system illustrations; not an electrical solver",
+  "sha256": {
+    "ad7606.chip.c": "d0f3d7ad8fe708cfb0904e2cf9e6802d03b3298f5ec5e368a4a8b92aacb3fddf",
+    "ad7606.chip.json": "920c3e1ba2d957f76683a0e463fdb5acc01c6114e2ea78409335d2938f001bc7",
+    "battery.chip.c": "4774b35581f0f922b5a5f85a9c2c24151ddd944f79fbc7e25de6ba96896c2f29",
+    "battery.chip.json": "2edf8f3fd685f791b42462af1d3610b2b8eb751478f3abb06991764abb669e00",
+    "diagram.json": "963449c35089f074aead4318b1e2a7fd6392911308f42d065fc94643aa929404",
+    "fixture.chip.c": "998ed1747a9cd226ffafcb2134f3ad33626c1c98aa104fc9b3f57474ccbe5bf7",
+    "fixture.chip.json": "3159eb42bfd9c800d2e028387cdbf6a4182ad1aa4a5655332cb2a04d28bdc600",
+    "frontend.chip.c": "4774b35581f0f922b5a5f85a9c2c24151ddd944f79fbc7e25de6ba96896c2f29",
+    "frontend.chip.json": "77b72e840a2310dd004009640ac2532066f5269c96870b7c7716eba0fabb306a",
+    "icm42688.chip.c": "47906b3285935c1d1729ad1b505df8ab46325a0a5cd3c512b192f7c1ddfa67eb",
+    "icm42688.chip.json": "3f7aea45883970fc592f97a8141a91f4c25ed0c643e9809bbeb8f228940e7014",
+    "laptop.chip.c": "4774b35581f0f922b5a5f85a9c2c24151ddd944f79fbc7e25de6ba96896c2f29",
+    "laptop.chip.json": "e5409d3d92709f00929ecbebea0a9056bcc6239aa4e7b2867779083934ef6cd4",
+    "monitor.chip.c": "4774b35581f0f922b5a5f85a9c2c24151ddd944f79fbc7e25de6ba96896c2f29",
+    "monitor.chip.json": "f0e06841a63c79c73c7ee29d6a6d1501143f8c75aaa270a6168bacd299df9c8c",
+    "myoware.chip.c": "4774b35581f0f922b5a5f85a9c2c24151ddd944f79fbc7e25de6ba96896c2f29",
+    "myoware.chip.json": "b284b063eb0507a0f6b15dffa014cbe57807158dfadaee660e28f69eefbe2689",
+    "power.chip.c": "4774b35581f0f922b5a5f85a9c2c24151ddd944f79fbc7e25de6ba96896c2f29",
+    "power.chip.json": "d6ce78015f6e116b5940bfbbdc3a7fa8a25fe2d36c7525a7178c865b81bd708a",
+    "radio.chip.c": "4774b35581f0f922b5a5f85a9c2c24151ddd944f79fbc7e25de6ba96896c2f29",
+    "radio.chip.json": "ac81aa887b3e49780c67fe8be86e86aa0e1f9355ec695f50e185b311455e8819",
+    "storage.chip.c": "4774b35581f0f922b5a5f85a9c2c24151ddd944f79fbc7e25de6ba96896c2f29",
+    "storage.chip.json": "a573e7fa99aeca0081f7efe04969354aab4500910f5a656cd16779c18831df00",
+    "usb.chip.c": "4774b35581f0f922b5a5f85a9c2c24151ddd944f79fbc7e25de6ba96896c2f29",
+    "usb.chip.json": "b2dcc394021868b13140a81b1dfc184571e894f6e36e1df21b832b0a129be55b"
+  },
+  "frozen_model_c_sha256": {
+    "ad7606.chip.c": "d0f3d7ad8fe708cfb0904e2cf9e6802d03b3298f5ec5e368a4a8b92aacb3fddf",
+    "icm42688.chip.c": "47906b3285935c1d1729ad1b505df8ab46325a0a5cd3c512b192f7c1ddfa67eb",
+    "fixture.chip.c": "998ed1747a9cd226ffafcb2134f3ad33626c1c98aa104fc9b3f57474ccbe5bf7"
+  }
+}

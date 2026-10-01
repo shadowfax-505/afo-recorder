@@ -2,6 +2,8 @@
 
 These files run the AD7606 / fixed two-channel / ICM-42688-P recorder on Wokwi's ESP32-S3. They are a **simulation fixture**, not hardware flashing files. The actual recorder code runs with modeled sensors, a PSRAM disk replacing SDMMC, and a loopback UDP subscriber replacing the laptop radio link.
 
+For the complete visible setup, open the [saved whole-system project](https://wokwi.com/projects/476662256690643969) and follow the [whole-system guide](../../../docs/whole-system.html). This folder retains the smaller protocol fixture used for the eighteen-case matrix. It is not a physical assembly drawing.
+
 1. Open the [official custom-firmware template](https://wokwi.com/projects/305457271083631168).
 2. Replace `diagram.json` with this folder's copy. Import the six `.chip.c` / `.chip.json` files through the editor's **Upload File(s)** command. Retain the template's placeholder sketch; it is not used for this firmware run.
 3. Focus an editor, press **F1**, and choose **Upload Firmware and Start Simulation…**. Select `../firmware/merged.bin` from the project package. This merged image includes the bootloader, partition table and application.

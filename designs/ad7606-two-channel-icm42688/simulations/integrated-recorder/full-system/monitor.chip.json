@@ -1,0 +1,12 @@
+{
+  "name": "Battery + USB sensing / injected",
+  "author": "Muttakin Rahman",
+  "pins": [
+    "BAT",
+    "VBUS",
+    "GND",
+    "BAT_ADC",
+    "USB_N"
+  ],
+  "controls": []
+}
