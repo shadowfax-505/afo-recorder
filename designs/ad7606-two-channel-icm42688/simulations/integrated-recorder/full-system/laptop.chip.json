@@ -1,0 +1,8 @@
+{
+  "name": "Laptop / internal UDP substitute",
+  "author": "Muttakin Rahman",
+  "pins": [
+    "AFW1_PREVIEW"
+  ],
+  "controls": []
+}

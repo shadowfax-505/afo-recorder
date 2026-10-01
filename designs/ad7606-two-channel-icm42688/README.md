@@ -2,7 +2,7 @@
 
 Project lead: Muttakin Rahman
 
-[Open the assembly workspace](viewer/build.html) · [Short lab sequence](docs/lab-quickstart.html) · [Complete connection tables](docs/build-guide.html) · [Integrated verification](docs/integrated-verification.html)
+[Open the assembly workspace](viewer/build.html) · [See the complete system](docs/whole-system.html) · [Short lab sequence](docs/lab-quickstart.html) · [Complete connection tables](docs/build-guide.html) · [Integrated verification](docs/integrated-verification.html)
 
 This package is the fixed two-input recorder: two bare MyoWare 2.0 RAW sensors, an AD7606 and two ICM-42688-P carriers. Current recording firmware **ad7606-2ch-1.6** retains the ADC task wake-up and IMU timestamp corrections exposed by integrated execution, and additionally rejects a missing BUSY assertion after CONVST instead of accepting stale data. The electrical design and the five other configurations are unchanged.
 

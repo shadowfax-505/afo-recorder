@@ -1,0 +1,9 @@
+{
+  "name": "Protected 1S battery / illustrated",
+  "author": "Muttakin Rahman",
+  "pins": [
+    "PACK_PLUS",
+    "GND"
+  ],
+  "controls": []
+}

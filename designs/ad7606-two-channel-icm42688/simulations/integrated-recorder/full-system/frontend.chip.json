@@ -1,0 +1,12 @@
+{
+  "name": "Two RC stages + buffers / ngspice",
+  "author": "Muttakin Rahman",
+  "pins": [
+    "RAW",
+    "3V0A",
+    "GND",
+    "VMID",
+    "TO_ADC"
+  ],
+  "controls": []
+}

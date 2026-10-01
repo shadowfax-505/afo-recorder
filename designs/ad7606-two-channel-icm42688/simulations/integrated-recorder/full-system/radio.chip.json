@@ -1,0 +1,8 @@
+{
+  "name": "ESP32 Wi-Fi / logical link",
+  "author": "Muttakin Rahman",
+  "pins": [
+    "AFW1_PREVIEW"
+  ],
+  "controls": []
+}

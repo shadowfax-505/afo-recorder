@@ -1,0 +1,12 @@
+{
+  "name": "microSD / RAM disk substitute",
+  "author": "Muttakin Rahman",
+  "pins": [
+    "3V3",
+    "GND",
+    "CLK",
+    "CMD",
+    "D0"
+  ],
+  "controls": []
+}

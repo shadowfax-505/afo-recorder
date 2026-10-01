@@ -8,6 +8,8 @@ Execution and review corrected delayed ADC servicing, backwards IMU time estimat
 
 This report covers this configuration only. The other five designs retain their previous files and validation status. Electrical connections, PCB geometry and manufacturing files have not changed in this refinement.
 
+[See the complete system](whole-system.html): the physical assembly and a separate saved Wokwi scene include power, both EMG paths, both IMUs, storage, controls and laptop context. The expanded scene passed an additional nominal run. The eighteen-case results below retain their original protocol-fixture diagrams.
+
 ## Tested versions
 
 Current laboratory firmware is **ad7606-2ch-1.6**; all seven profiles compile. The separate integrated image executes the production recorder, sensor drivers, serializer and Wi-Fi task with fixture wrappers. Its [31-file source/configuration/model/image manifest](../simulations/integrated-recorder/firmware/manifest.json), boot ELF identifier and each saved diagram identify the tested build. The current [18-case web ledger](../simulations/integrated-recorder/results/web-current/summary.json) is distinct from the pre-web quota-refused candidate.

@@ -1,0 +1,10 @@
+{
+  "name": "MyoWare RAW / synthetic input",
+  "author": "Muttakin Rahman",
+  "pins": [
+    "VIN_3V0",
+    "GND",
+    "RAW"
+  ],
+  "controls": []
+}

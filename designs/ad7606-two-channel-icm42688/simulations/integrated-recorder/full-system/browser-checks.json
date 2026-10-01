@@ -1,0 +1,16 @@
+{
+  "project_url": "https://wokwi.com/projects/476662256690643969",
+  "fresh_reopen": true,
+  "custom_chip_file_count": 24,
+  "missing_chip_blocks": false,
+  "persisted_diagram_matches_local": true,
+  "parts": 36,
+  "connections": 79,
+  "boot_elf_prefix": "aabb34031",
+  "complete_marker": true,
+  "file_export_complete": true,
+  "udp_export_complete": true,
+  "scope": "Complete context drawing plus executed recorder/sensor fixture; analog, power, SDMMC and radio substitutions documented",
+  "hardware_measured": false,
+  "placeholder_instruction_edit_saved": false
+}
