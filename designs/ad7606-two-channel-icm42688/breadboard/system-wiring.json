@@ -726,7 +726,7 @@
       "net": "GND",
       "a": {
         "module": "battery",
-        "terminal": "JST-PH black \u2212 lead",
+        "terminal": "JST-PH black − lead",
         "physical": true,
         "board_pin": {
           "x": 14,
@@ -770,7 +770,7 @@
       "net": "GND",
       "a": {
         "module": "ldo",
-        "terminal": "GND pin2 \u2192 JP2.2",
+        "terminal": "GND pin2 → JP2.2",
         "physical": true,
         "adapter_pin": {
           "header": "JP2",
@@ -1283,7 +1283,7 @@
       "net": "GND",
       "a": {
         "module": "clamp1",
-        "terminal": "CHIP_PAD_1 \u2192 JP1.2",
+        "terminal": "CHIP_PAD_1 → JP1.2",
         "physical": true,
         "adapter_pin": {
           "header": "JP1",
@@ -1376,7 +1376,7 @@
       "net": "GND",
       "a": {
         "module": "clamp2",
-        "terminal": "CHIP_PAD_1 \u2192 JP1.2",
+        "terminal": "CHIP_PAD_1 → JP1.2",
         "physical": true,
         "adapter_pin": {
           "header": "JP1",
@@ -1510,7 +1510,7 @@
       "net": "GND",
       "a": {
         "module": "usb-q",
-        "terminal": "SOURCE pin2 \u2192 JP1.3",
+        "terminal": "SOURCE pin2 → JP1.3",
         "physical": true,
         "adapter_pin": {
           "header": "JP1",
@@ -2475,7 +2475,7 @@
       "net": "3V3D",
       "a": {
         "module": "ldo",
-        "terminal": "IN pin1 \u2192 JP2.1",
+        "terminal": "IN pin1 → JP2.1",
         "physical": true,
         "adapter_pin": {
           "header": "JP2",
@@ -2511,7 +2511,7 @@
       "net": "3V3D",
       "a": {
         "module": "ldo",
-        "terminal": "EN pin3 \u2192 JP2.3",
+        "terminal": "EN pin3 → JP2.3",
         "physical": true,
         "adapter_pin": {
           "header": "JP2",
@@ -2729,7 +2729,7 @@
       "net": "3V0A",
       "a": {
         "module": "ldo",
-        "terminal": "OUT pin5 / 3.0V \u2192 JP1.1",
+        "terminal": "OUT pin5 / 3.0V → JP1.1",
         "physical": true,
         "adapter_pin": {
           "header": "JP1",
@@ -2789,7 +2789,7 @@
       "net": "3V0A",
       "a": {
         "module": "clamp1",
-        "terminal": "CHIP_PAD_2 \u2192 JP1.3",
+        "terminal": "CHIP_PAD_2 → JP1.3",
         "physical": true,
         "adapter_pin": {
           "header": "JP1",
@@ -2849,7 +2849,7 @@
       "net": "3V0A",
       "a": {
         "module": "clamp2",
-        "terminal": "CHIP_PAD_2 \u2192 JP1.3",
+        "terminal": "CHIP_PAD_2 → JP1.3",
         "physical": true,
         "adapter_pin": {
           "header": "JP1",
@@ -2897,7 +2897,7 @@
       },
       "stage": 3,
       "status": "Terminal identities specified; received-hardware checks required",
-      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+      "note": "After module qualification, verify active-low CS on GPIO10. A measured frame contains all 128 clocks; RESET-time discarded reads are separate. Keep SPI leads short with nearby ground return."
     },
     {
       "id": "wire-108",
@@ -2917,7 +2917,7 @@
       },
       "stage": 3,
       "status": "Terminal identities specified; received-hardware checks required",
-      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+      "note": "After module qualification, verify active-low CS on GPIO10. A measured frame contains all 128 clocks; RESET-time discarded reads are separate. Keep SPI leads short with nearby ground return."
     },
     {
       "id": "wire-109",
@@ -2954,7 +2954,7 @@
       },
       "stage": 3,
       "status": "Terminal identities specified; received-hardware checks required",
-      "note": "Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+      "note": "After module qualification, verify active-low CS on GPIO10. A measured frame contains all 128 clocks; RESET-time discarded reads are separate. Keep SPI leads short with nearby ground return."
     },
     {
       "id": "wire-110",
@@ -2992,7 +2992,7 @@
       },
       "stage": 3,
       "status": "Terminal identities specified; received-hardware checks required",
-      "note": "Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+      "note": "RD is serial SCLK: GPIO12, 8 MHz, SPI mode 2 (idle HIGH; sample falling edge). Measure physical idle/setup/hold; the Wokwi idle-level limitation does not authorize a polarity change."
     },
     {
       "id": "wire-111",
@@ -3030,7 +3030,7 @@
       },
       "stage": 3,
       "status": "Terminal identities specified; received-hardware checks required",
-      "note": "Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+      "note": "DB7 is DOUTA in verified serial mode: GPIO13 receives all eight 16-bit words in V1–V8 order. Export only EMG1/2. DB8/DOUTB is unused, not a second MISO lead."
     },
     {
       "id": "wire-112",
@@ -3068,7 +3068,7 @@
       },
       "stage": 3,
       "status": "Terminal identities specified; received-hardware checks required",
-      "note": "Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+      "note": "RST is active HIGH on GPIO9. Firmware discards one RESET-time read per ADC configuration; normally one at diagnostic boot, two before the first recording session. Do not count these as EMG conversions."
     },
     {
       "id": "wire-113",
@@ -3106,7 +3106,7 @@
       },
       "stage": 3,
       "status": "Terminal identities specified; received-hardware checks required",
-      "note": "Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+      "note": "This shared net name means AD7606 BUSY on GPIO8. Verify BUSY asserts after CONVST and falls before SCLK; a missing/stuck/late BUSY must produce a fault, not stale plausible data."
     },
     {
       "id": "wire-114",
@@ -3126,7 +3126,7 @@
       },
       "stage": 3,
       "status": "Terminal identities specified; received-hardware checks required",
-      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+      "note": "GPIO11 must reach BOTH CVA and CVB through the same DIST1 a29/b29/c29 five-hole strip. Verify unpowered continuity and simultaneous rising edges. Never leave one conversion group floating."
     },
     {
       "id": "wire-115",
@@ -3163,7 +3163,7 @@
       },
       "stage": 3,
       "status": "Terminal identities specified; received-hardware checks required",
-      "note": "Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+      "note": "GPIO11 must reach BOTH CVA and CVB through the same DIST1 a29/b29/c29 five-hole strip. Verify unpowered continuity and simultaneous rising edges. Never leave one conversion group floating."
     },
     {
       "id": "wire-116",
@@ -3200,7 +3200,7 @@
       },
       "stage": 3,
       "status": "Terminal identities specified; received-hardware checks required",
-      "note": "Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+      "note": "GPIO11 must reach BOTH CVA and CVB through the same DIST1 a29/b29/c29 five-hole strip. Verify unpowered continuity and simultaneous rising edges. Never leave one conversion group floating."
     },
     {
       "id": "wire-117",
@@ -3321,7 +3321,7 @@
       "net": "RC0A",
       "a": {
         "module": "clamp1",
-        "terminal": "CHIP_PAD_3 \u2192 JP2.3",
+        "terminal": "CHIP_PAD_3 → JP2.3",
         "physical": true,
         "adapter_pin": {
           "header": "JP2",
@@ -3471,7 +3471,7 @@
       "net": "RC1A",
       "a": {
         "module": "clamp2",
-        "terminal": "CHIP_PAD_3 \u2192 JP2.3",
+        "terminal": "CHIP_PAD_3 → JP2.3",
         "physical": true,
         "adapter_pin": {
           "header": "JP2",
@@ -3520,7 +3520,7 @@
       },
       "stage": 6,
       "status": "Terminal identities specified; received-hardware checks required",
-      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+      "note": "Shared ICM SPI MOSI is GPIO4 to both mikroBUS pin 6 contacts. Use SPI JP2–JP4 positions 1–2; qualify 3.3 V and carrier orientation before wiring."
     },
     {
       "id": "wire-130",
@@ -3545,7 +3545,7 @@
       },
       "stage": 6,
       "status": "Terminal identities specified; received-hardware checks required",
-      "note": "Complete IMU supply, interface and configuration checks before connecting."
+      "note": "Shared ICM SPI MOSI is GPIO4 to both mikroBUS pin 6 contacts. Use SPI JP2–JP4 positions 1–2; qualify 3.3 V and carrier orientation before wiring."
     },
     {
       "id": "wire-131",
@@ -3570,7 +3570,7 @@
       },
       "stage": 6,
       "status": "Terminal identities specified; received-hardware checks required",
-      "note": "Complete IMU supply, interface and configuration checks before connecting."
+      "note": "Shared ICM SPI MOSI is GPIO4 to both mikroBUS pin 6 contacts. Use SPI JP2–JP4 positions 1–2; qualify 3.3 V and carrier orientation before wiring."
     },
     {
       "id": "wire-132",
@@ -3590,7 +3590,7 @@
       },
       "stage": 6,
       "status": "Terminal identities specified; received-hardware checks required",
-      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+      "note": "Shared ICM SPI MISO is GPIO5 from both mikroBUS pin 5 contacts. Separate CS lines select each carrier; verify the inactive carrier releases the bus."
     },
     {
       "id": "wire-133",
@@ -3615,7 +3615,7 @@
       },
       "stage": 6,
       "status": "Terminal identities specified; received-hardware checks required",
-      "note": "Complete IMU supply, interface and configuration checks before connecting."
+      "note": "Shared ICM SPI MISO is GPIO5 from both mikroBUS pin 5 contacts. Separate CS lines select each carrier; verify the inactive carrier releases the bus."
     },
     {
       "id": "wire-134",
@@ -3640,7 +3640,7 @@
       },
       "stage": 6,
       "status": "Terminal identities specified; received-hardware checks required",
-      "note": "Complete IMU supply, interface and configuration checks before connecting."
+      "note": "Shared ICM SPI MISO is GPIO5 from both mikroBUS pin 5 contacts. Separate CS lines select each carrier; verify the inactive carrier releases the bus."
     },
     {
       "id": "wire-135",
@@ -3660,7 +3660,7 @@
       },
       "stage": 6,
       "status": "Terminal identities specified; received-hardware checks required",
-      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+      "note": "Shared ICM SPI SCLK is GPIO6 to both mikroBUS pin 4 contacts; 1 MHz mode 0 in this firmware. Keep leads short with a nearby ground return."
     },
     {
       "id": "wire-136",
@@ -3685,7 +3685,7 @@
       },
       "stage": 6,
       "status": "Terminal identities specified; received-hardware checks required",
-      "note": "Complete IMU supply, interface and configuration checks before connecting."
+      "note": "Shared ICM SPI SCLK is GPIO6 to both mikroBUS pin 4 contacts; 1 MHz mode 0 in this firmware. Keep leads short with a nearby ground return."
     },
     {
       "id": "wire-137",
@@ -3710,7 +3710,7 @@
       },
       "stage": 6,
       "status": "Terminal identities specified; received-hardware checks required",
-      "note": "Complete IMU supply, interface and configuration checks before connecting."
+      "note": "Shared ICM SPI SCLK is GPIO6 to both mikroBUS pin 4 contacts; 1 MHz mode 0 in this firmware. Keep leads short with a nearby ground return."
     },
     {
       "id": "wire-138",
@@ -3729,7 +3729,7 @@
       },
       "stage": 6,
       "status": "Terminal identities specified; received-hardware checks required",
-      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+      "note": "Foot ICM chip select is GPIO7 to mikroBUS pin 3 / CS. Rotate only the foot carrier and confirm the foot stream identity before adding the shank."
     },
     {
       "id": "wire-139",
@@ -3749,7 +3749,7 @@
       },
       "stage": 6,
       "status": "Terminal identities specified; received-hardware checks required",
-      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+      "note": "Foot ICM chip select is GPIO7 to mikroBUS pin 3 / CS. Rotate only the foot carrier and confirm the foot stream identity before adding the shank."
     },
     {
       "id": "wire-140",
@@ -3774,7 +3774,7 @@
       },
       "stage": 6,
       "status": "Terminal identities specified; received-hardware checks required",
-      "note": "Complete IMU supply, interface and configuration checks before connecting."
+      "note": "Foot ICM chip select is GPIO7 to mikroBUS pin 3 / CS. Rotate only the foot carrier and confirm the foot stream identity before adding the shank."
     },
     {
       "id": "wire-141",
@@ -3800,7 +3800,7 @@
       },
       "stage": 6,
       "status": "Terminal identities specified; received-hardware checks required",
-      "note": "Complete IMU supply, interface and configuration checks before connecting."
+      "note": "Foot INT1 uses mikroBUS pin 15 / INT to GPIO16. Verify active-high pulses at 200 Hz independently of shank; missing IRQ or FIFO overflow must remain visible."
     },
     {
       "id": "wire-142",
@@ -3819,7 +3819,7 @@
       },
       "stage": 6,
       "status": "Terminal identities specified; received-hardware checks required",
-      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+      "note": "Shank ICM chip select is GPIO15 to mikroBUS pin 3 / CS. Rotate only the shank carrier and confirm the shank stream identity."
     },
     {
       "id": "wire-143",
@@ -3839,7 +3839,7 @@
       },
       "stage": 6,
       "status": "Terminal identities specified; received-hardware checks required",
-      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+      "note": "Shank ICM chip select is GPIO15 to mikroBUS pin 3 / CS. Rotate only the shank carrier and confirm the shank stream identity."
     },
     {
       "id": "wire-144",
@@ -3864,7 +3864,7 @@
       },
       "stage": 6,
       "status": "Terminal identities specified; received-hardware checks required",
-      "note": "Complete IMU supply, interface and configuration checks before connecting."
+      "note": "Shank ICM chip select is GPIO15 to mikroBUS pin 3 / CS. Rotate only the shank carrier and confirm the shank stream identity."
     },
     {
       "id": "wire-145",
@@ -3890,7 +3890,7 @@
       },
       "stage": 6,
       "status": "Terminal identities specified; received-hardware checks required",
-      "note": "Complete IMU supply, interface and configuration checks before connecting."
+      "note": "Shank INT1 uses mikroBUS pin 15 / INT to GPIO17. Verify active-high pulses at 200 Hz independently of foot; preserve independent startup times and counters."
     },
     {
       "id": "wire-146",
@@ -4349,7 +4349,7 @@
       "net": "USB_GATE",
       "a": {
         "module": "usb-q",
-        "terminal": "GATE pin1 \u2192 JP1.2",
+        "terminal": "GATE pin1 → JP1.2",
         "physical": true,
         "adapter_pin": {
           "header": "JP1",
@@ -4397,14 +4397,14 @@
       },
       "stage": 2,
       "status": "Terminal identities specified; received-hardware checks required",
-      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+      "note": "GPIO21 is LOW when external USB is attached and HIGH when absent; the diagnostic attachment indicator prints the inverse. USB VBUS is sense-only; leave both DevKit USB sockets empty."
     },
     {
       "id": "wire-171",
       "net": "USB_PRESENT_N",
       "a": {
         "module": "usb-q",
-        "terminal": "DRAIN pin3 \u2192 JP2.3",
+        "terminal": "DRAIN pin3 → JP2.3",
         "physical": true,
         "adapter_pin": {
           "header": "JP2",
@@ -4433,7 +4433,7 @@
       },
       "stage": 2,
       "status": "Terminal identities specified; received-hardware checks required",
-      "note": "Use the specified adapter pad-to-header mapping; check solder orientation and unpowered continuity."
+      "note": "GPIO21 is LOW when external USB is attached and HIGH when absent; the diagnostic attachment indicator prints the inverse. USB VBUS is sense-only; leave both DevKit USB sockets empty."
     },
     {
       "id": "wire-172",
@@ -4453,7 +4453,7 @@
       },
       "stage": 2,
       "status": "Terminal identities specified; received-hardware checks required",
-      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+      "note": "GPIO21 is LOW when external USB is attached and HIGH when absent; the diagnostic attachment indicator prints the inverse. USB VBUS is sense-only; leave both DevKit USB sockets empty."
     },
     {
       "id": "wire-173",
@@ -4581,7 +4581,7 @@
       },
       "stage": 7,
       "status": "Terminal identities specified; received-hardware checks required",
-      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+      "note": "SDMMC CMD is GPIO47 on the breadboard and Adafruit 4682 JP1.5. Select breadboard-sd-only-2ch or breadboard-record-2ch; the PCB image uses GPIO38."
     },
     {
       "id": "wire-178",
@@ -4601,7 +4601,7 @@
       },
       "stage": 7,
       "status": "Terminal identities specified; received-hardware checks required",
-      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+      "note": "SDMMC CLK is GPIO39 to Adafruit 4682 JP1.3. This is not SPI SD wiring. Keep the card supply stable and audit the original saved file."
     },
     {
       "id": "wire-179",
@@ -4621,7 +4621,7 @@
       },
       "stage": 7,
       "status": "Terminal identities specified; received-hardware checks required",
-      "note": "One lead per listed hole/contact. Verify unpowered continuity before applying power."
+      "note": "SDMMC D0 is GPIO40 to Adafruit 4682 JP1.4. Use all five listed SD contacts, including GND. A wireless preview cannot establish SD persistence."
     },
     {
       "id": "wire-180",
@@ -4764,9 +4764,10 @@
     }
   ],
   "notes": [
-    "Named terminal panels are electrical connections, NOT inferred module header coordinates.",
-    "Bench power converters differ from compact PCB converters. This harness does not establish power-stage equivalence.",
-    "USB and external DevKit power are mutually exclusive; USB sense must monitor actual cable-side VBUS, not the powered 5V header."
+    "Use named connector labels and the revision-12 hole tables; wire bends and module body dimensions are illustrative.",
+    "Bench converters and the DevKit programming interface differ from the compact PCB; this harness does not establish power/layout equivalence.",
+    "Both DevKit USB sockets stay empty. The external USB inlet carries data and VBUS sensing only; VBUS must not feed the regulated recorder 5 V rail.",
+    "Current v1.6 firmware and the stage cards incorporate simulation findings. All physical qualification, scope and recording measurements remain NOT TESTED."
   ],
   "coverage": {
     "external_breadboard_leads_unmapped": [],

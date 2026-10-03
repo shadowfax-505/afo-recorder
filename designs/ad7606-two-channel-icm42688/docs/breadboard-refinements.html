@@ -1,0 +1,134 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><link rel="icon" href="data:,"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Breadboard updates from simulation — AD7606 two-channel</title><style>body{margin:0;background:#f4f3ee;color:#172523;font:17px/1.65 system-ui}main{max-width:1060px;margin:auto;padding:48px 28px}h1{font-size:2.4rem;line-height:1.15}h2{margin-top:2.5em}a{color:#176454}table{border-collapse:collapse;font-size:14px;display:block;overflow:auto}td,th{padding:12px;border:1px solid #ccd4ce;text-align:left;vertical-align:top}th{background:#e2eae4}code{font-size:.9em}pre{overflow:auto;padding:16px;background:#e2eae4;border-radius:6px}p{max-width:85ch}img{max-width:100%;height:auto}nav{font-size:14px;border-bottom:1px solid #ccd4ce;padding-bottom:16px}blockquote{border-left:3px solid #809c8a;margin-left:0;padding-left:20px}@media(max-width:640px){main{padding:28px 18px}h1{font-size:1.9rem}}@media print{body{background:white}main{padding:0}table{display:table;font-size:10px}}</style></head><body><main><nav><a href="../viewer/build.html">Assembly workspace</a> / <a href="breadboard-refinements.html">Applied findings</a> / <a href="lab-quickstart.html">Lab sequence</a> / <a href="build-guide.html">Wire tables</a> / <a href="data-interpretation.html">Saved data</a> / <a href="integrated-verification.html">Verification</a></nav><h1>Breadboard updates from simulation</h1>
+<p><strong>AD7606 · two EMG inputs · two ICM-42688-P carriers.</strong> The simulation findings now inform the <a href="../viewer/build.html">guided assembly</a>, <a href="build-guide.html">wire tables</a> and <a href="lab-quickstart.html">short lab sequence</a>. Use the <a href="bench-checklist.csv">bench checklist</a> to collect physical results and the <a href="../breadboard/probe-connections.csv">probe table</a> to connect instruments. Every measurement row starts as <strong>NOT TESTED</strong>.</p>
+<p>The existing connections already match the corrected firmware. This update adds specific checks and explanations at those connections. The current breadboard firmware is <code>ad7606-2ch-1.6</code>; its seven compiled profiles and source hashes were checked again. None of those laboratory images has been flashed to an assembled recorder. Wokwi executed a separate instrumented image, with storage and wireless substitutions described in the <a href="integrated-verification.html">verification report</a>.</p>
+<h2>What to do differently at the bench</h2>
+<table>
+<thead>
+<tr>
+<th>Finding</th>
+<th>Action in the breadboard build</th>
+<th>Stage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A late read could otherwise reuse or relabel a previous conversion.</td>
+<td>Use the current firmware. It checks BUSY assertion, rejects unread/overlapping conversions, and stops on an ADC timing fault. Scope CONVST, BUSY, CS and SCLK together; a repeated plausible DC code alone is insufficient evidence.</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Both conversion groups must start together.</td>
+<td>Verify continuity from GPIO11 through DIST1 a29/b29/c29 to <strong>both CVA and CVB</strong>. Capture the same rising edge at both module terminals.</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Two-channel export still requires the full serial frame.</td>
+<td>Read all eight 16-bit words through <strong>DB7/DOUTA</strong>, with 128 SCLK cycles. Only V1/V2 are the two enabled EMG channels. Swap known V1/V2 voltages to verify identity; V3–V8 remain at the defined unused levels.</td>
+<td>3, 5</td>
+</tr>
+<tr>
+<td>Startup contains discarded SPI transactions.</td>
+<td>Separate RESET-time reads from measured conversions: one per ADC configuration, normally one after diagnostic initialization and two before the first recording session after boot. They have no measurement CONVST and contribute no saved EMG sample.</td>
+<td>3, 7</td>
+</tr>
+<tr>
+<td>The virtual GPIO trace did not qualify physical idle-clock behavior.</td>
+<td>Retain SPI mode 2: idle high and sample on falling edges. Measure SCLK at CS assertion on the real module, including after startup. Do not change clock polarity to imitate the simulator's idle-level limitation.</td>
+<td>3</td>
+</tr>
+<tr>
+<td>The analog path is unity gain; the midpoint is an unplugged-input bias.</td>
+<td>Expect <code>RAW volts = signed code × 5 / 32768</code>, <code>input_scale=1</code> and <code>input_midpoint_mv=0</code>. Check the unplugged port near 1.5 V separately. Do not subtract 1.5 V twice or label ADC volts as input-referred muscle microvolts.</td>
+<td>4, 7</td>
+</tr>
+<tr>
+<td>Foot and shank begin acquisition at different times.</td>
+<td>Check both CS identities and both INT1 wires. Keep their original timestamps and independent counters; unequal startup counts are possible. Do not align rows by their row number.</td>
+<td>6, 7</td>
+</tr>
+<tr>
+<td>A FIFO read can contain samples that arrived during that read.</td>
+<td>Use the updated converter. Retain <code>read_start_us</code>, <code>read_end_us</code>, the IRQ anchor and the raw sensor counter. A sample after read start but before read end is not automatically a fault. Reconstructed host times remain estimates.</td>
+<td>6, 7</td>
+</tr>
+<tr>
+<td>A Wi-Fi preview lost one EMG record while the corresponding saved file retained it.</td>
+<td>Audit the original SD file and laptop archive separately. A visible wireless gap must remain visible, but it does not establish SD loss. Conversely, a plausible preview cannot certify the saved file.</td>
+<td>7, 8</td>
+</tr>
+<tr>
+<td>A filename or decoded END can exist despite a final storage error.</td>
+<td>Wait for recording to stop, retain the status/error indication, and convert the original file. Check CRC32, counters, timestamp quality, END and the stop reason together. Investigate sync/close errors even when END decodes.</td>
+<td>7–9</td>
+</tr>
+</tbody>
+</table>
+<h2>Stage 3: connect the analyzer precisely</h2>
+<p>Use short high-impedance probes with a nearby common ground. The analyzer must accept 3.3 V logic. Connect only after the module's 5 V supply, 3.3 V VIO, serial-mode strap, internal reference and output levels pass <a href="module-qualification.md">module qualification</a>. Bare-chip pins and photographed carrier headers are different references.</p>
+<table>
+<thead>
+<tr>
+<th>Signal</th>
+<th>ESP32-S3 contact</th>
+<th>Module / breadboard endpoint</th>
+<th>Expected behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CONVST</td>
+<td>J1.17 / GPIO11</td>
+<td>DIST1 a29 → b29/CVA and c29/CVB</td>
+<td>One common rising trigger; 125 µs nominal period. The firmware delays 1 µs high; actual GPIO pulse width requires measurement and must meet the chip's ≥25 ns minimum.</td>
+</tr>
+<tr>
+<td>BUSY</td>
+<td>J1.12 / GPIO8</td>
+<td>ADC CN1 <strong>BUSY</strong></td>
+<td>Asserts after an accepted trigger; with oversampling off the AD7606 conversion is specified at 3.45–4.2 µs. Read only after it falls. The firmware's 80 µs wait is an error deadline, not acceptable normal conversion time.</td>
+</tr>
+<tr>
+<td>CS</td>
+<td>J1.16 / GPIO10</td>
+<td>DIST1 b28 → c28 / ADC CN1 <strong>CS</strong></td>
+<td>Active-low window containing 128 clocks for each measured frame.</td>
+</tr>
+<tr>
+<td>SCLK</td>
+<td>J1.18 / GPIO12</td>
+<td>ADC CN1 <strong>RD</strong></td>
+<td>8 MHz, SPI mode 2. Verify physical idle high, sample edge and setup/hold. The clocked part of a 128-bit read is 16 µs.</td>
+</tr>
+<tr>
+<td>DOUTA</td>
+<td>J1.19 / GPIO13</td>
+<td>ADC CN1 <strong>DB7</strong></td>
+<td>Eight signed words in V1→V8 order, MSB first. DB8/DOUTB is not a second MISO lead in this build.</td>
+</tr>
+<tr>
+<td>RESET</td>
+<td>J1.15 / GPIO9</td>
+<td>ADC CN1 <strong>RST</strong></td>
+<td>Active high. Discard RESET-time reads before counting measurement frames.</td>
+</tr>
+</tbody>
+</table>
+<p><code>ADC_DRDY</code> remains a shared firmware/net name for GPIO8; <strong>on this AD7606 build the terminal is BUSY</strong>, not a separate DRDY output. There is no external ADC clock module to add.</p>
+<p>Use calibrated positive DC sources at V1/V2 before adding the analog boards. At ±5 V range, 1.000 V and 2.000 V give ideal codes 6554 and 13107. Use the actual meter reading in the calculation. The project integration screen is ±65 codes plus the measured source/meter uncertainty; it is not a precision calibration or datasheet accuracy claim. Swap the sources, then restore the documented ground/bias arrangement. Once BB1/BB2 are connected, use only the safe analog-stage stimulus range in the <a href="synthetic-input-tests.md">synthetic-input procedure</a>.</p>
+<p>Retain the physical rate gate: <strong>8 kHz ±0.1% averaged over 60 seconds</strong>, and individual trigger intervals within the existing ±1% project screen. The virtual timing assessor uses its own simulator tolerance; it does not relax these lab gates. Diagnostics acquire in approximately one-second windows and stop triggers while printing. Exclude those intentional gaps from within-window rate measurements; use the recording image for continuous tests.</p>
+<h2>Stage 6: keep the two motion streams identifiable</h2>
+<p>For the selected MIKROE-4237 carriers, set JP2–JP4 to SPI positions 1–2 and use the documented 3.3 V supply. Shared MOSI is <strong>GPIO4</strong>, MISO <strong>GPIO5</strong>, and SCLK <strong>GPIO6</strong>. Foot CS/INT1 use <strong>GPIO7/16</strong>; shank CS/INT1 use <strong>GPIO15/17</strong>. These assignments come from this ICM build, not an MPU-6050 address-selection diagram.</p>
+<p>The firmware configures WHO_AM_I <code>0x47</code>, 200 Hz, ±16 g, ±2000 °/s, active-high INT1 pulses, and a standard 16-byte FIFO packet with a 1 µs timestamp counter. Check each carrier separately, then both together. In a recording, retained 16-bit sensor counters wrap every 65.536 ms. Normal wrap handling is different from an ambiguous long gap. Confirm FIFO order, sample counters and axis signs as well as interrupt activity.</p>
+<p>The <code>FLAG_TIMING_UNCERTAIN</code> bit (<code>2</code>) marks reconstructed host times as estimates; it is expected on these ICM records. A gap bit, invalid sample, FIFO overflow, missing interrupt or rejected timestamp requires investigation. Foot/shank start offsets and filter delays need physical characterization before a study depends on accurate inter-sensor alignment.</p>
+<h2>Stages 7 and 8: check the data you will actually analyze</h2>
+<p>Use <code>breadboard-sd-only-2ch</code> first, then <code>breadboard-record-2ch</code> for Wi-Fi. Both use SDMMC <strong>CMD GPIO47, CLK GPIO39, D0 GPIO40</strong> on Adafruit 4682. The PCB image uses CMD GPIO38 and is not interchangeable. Do not replace these connections with a generic SPI microSD diagram.</p>
+<p>Copy the original SD file to the laptop, keep an untouched copy, and run from this variant's folder:</p>
+<pre><code class="language-sh">python3 host/convert.py trial.afolog --out trial-converted
+</code></pre>
+<p>Check <code>metadata.json</code>, <code>quality.json</code>, <code>emg.csv</code>, <code>foot.csv</code>, <code>shank.csv</code> and <code>status.csv</code>. Metadata must identify AD7606, two enabled inputs, ICM-42688-P, the breadboard hardware and the current firmware. Only EMG1/2 are measurements. AD7606 has no sensor-frame CRC/status word; blank ADC-specific columns are intentional. <strong>Container CRC32 must still pass.</strong> Preserve timestamp-estimate flags and both IMU read times.</p>
+<p>For a normal manual stop, investigate any counter gap, invalid row, storage/queue error, missing END or unexpected stop reason. For an intentional interrupted-power test, the recovery report must identify the truncated tail/missing END; it must not present recovered partial data as a complete successful trial. Use <code>--recover</code> only for that explicitly labeled recovery exercise.</p>
+<p>Then receive Wi-Fi while SD continues, disconnect/reconnect wireless and compare the two archives. Use the <a href="data-interpretation.html">saved-data guide</a> for units, flags and <a href="../simulations/recording-interpretation/recording-examples.zip">real simulated example files</a>. Simulated examples illustrate interpretation; they do not fill any laboratory result cell.</p>
+<h2>Remaining physical checks</h2>
+<p>Supply startup/ripple, received-module straps and logic levels, physical SPI edges, analog noise/crosstalk, actual SDMMC behavior, RF reception and battery runtime remain unmeasured. No compact PCB order is recommended until the relevant lab gates and final design review pass. The bench setup validates circuit blocks; the final board still needs its own layout-dependent checks.</p>
+<p>Manufacturer references: <a href="https://www.analog.com/media/en/technical-documentation/data-sheets/AD7606_7606-6_7606-4.pdf">AD7606 Rev. G</a>, especially Tables 2–3 and Serial Interface; <a href="https://www.invensense.tdk.com/en-us/products/6-axis/icm-42688-p">ICM-42688-P manufacturer page</a>. Read the selected carrier's included schematic/header evidence before wiring.</p>
+</main></body></html>

@@ -15,7 +15,7 @@
         "Record minimum/maximum voltages, current, startup, ripple and temperature."
       ],
       "troubleshoot": "Disconnect power; check polarity, resistor values, short circuits and supply current limit.",
-      "acceptance": "3.3 V digital 3.23\u20133.43 V; 3.0 V analog 2.94\u20133.06 V; midpoint 1.47\u20131.53 V. Test 0/100/300 mA digital and 0/20/50 mA analog. Ripple targets \u226450/10 mVpp (20 MHz bandwidth); step deviation \u22645%, recovery \u00b13% within10 ms. Temperature <60\u00b0C after10 min at20\u201330\u00b0C ambient. 5 V ADC:4.8\u20135.2 V at10\u201350 mA; verify never above5.25 V including startup."
+      "acceptance": "3.3 V digital 3.23–3.43 V; 3.0 V analog 2.94–3.06 V; midpoint 1.47–1.53 V. Test 0/100/300 mA digital and 0/20/50 mA analog. Ripple targets ≤50/10 mVpp (20 MHz bandwidth); step deviation ≤5%, recovery ±3% within10 ms. Temperature <60°C after10 min at20–30°C ambient. 5 V ADC:4.8–5.2 V at10–50 mA; verify never above5.25 V including startup."
     },
     {
       "title": "Controller and controls",
@@ -27,27 +27,30 @@
       ],
       "tests": [
         "Flash the controller diagnostic profile only. Verify reset, buttons and LEDs.",
-        "Verify USB detection and the documented power arrangement. Both onboard USB sockets remain empty.",
+        "Verify GPIO21 LOW with external USB attached and HIGH when absent. The diagnostic prints USB attached=1/0, the inverse of that pin level. Both DevKit onboard USB sockets remain empty.",
         "Record repeated programming/reset results and measured current."
       ],
       "troubleshoot": "Check 5 V/3.3 V rails, boot/reset state and USB wiring; do not bypass the attachment interlock.",
       "acceptance": "20 program/reset cycles without failure. Buttons/LEDs respond. GPIO21 low when USB attached, high when absent. Recorder must refuse to start while USB attached; that interlock needs a repeat at stage7. Record measured current; no assumed universal current limit."
     },
     {
-      "title": "ADC and known voltages",
-      "purpose": "Confirm correct conversion and channel order using a known signal.",
+      "title": "AD7606 timing and known voltages",
+      "purpose": "Prove accepted conversions, complete serial frames and the two input identities before adding analog boards.",
       "add": [
-        "Selected ADC module and its qualification instructions",
-        "ADC diagnostic firmware",
-        "Known DC source, multimeter and logic analyzer or oscilloscope"
+        "RoboticsBD RBD-3184 AD7606 module; qualify supplies, serial strap and reference before signal leads",
+        "diagnostic-adc from firmware/builds; calibrated positive DC source and multimeter",
+        "3.3 V-compatible logic analyzer or oscilloscope; use breadboard/probe-connections.csv"
       ],
       "tests": [
-        "Complete the module supply, logic-level and mode-selection checks first.",
-        "Use known DC inputs and compare measured codes against the detailed acceptance limits.",
-        "Check 8 kHz timing and error counters. Preserve raw traces and diagnostic logs."
+        "Before connecting ESP32 signals, verify 5 V AVCC, 3.3 V VIO, serial mode, internal reference, RANGE low and OS0–OS2 low.",
+        "Continuity: GPIO11 reaches both CVA/CVB through DIST1 a29/b29/c29. GPIO8 connects to BUSY; GPIO13 reads DB7/DOUTA.",
+        "Apply 1.000 V to V1 and 2.000 V to V2; expect ideal codes 6554/13107. Swap sources and confirm channel identity. Compute expected codes from measured source voltage.",
+        "Capture CONVST, BUSY, CS, SCLK and DOUTA: 128 clocks for all eight words, 8 MHz mode 2, idle high and falling-edge sampling. Export only V1/V2.",
+        "Discard RESET-time startup reads: one per configuration, normally one at diagnostic boot and two before the first recording session after boot. They are not measured EMG frames.",
+        "Use current v1.6 firmware; any missing BUSY assertion, timeout or unread/overlapping conversion is a failed test. Diagnostic windows intentionally pause for printing."
       ],
-      "troubleshoot": "Check mode straps, logic supply, reset, chip select and input reference; distinguish chip pins from carrier headers.",
-      "acceptance": "Conversion triggers125 \u00b5s\u00b11%;8 kHz\u00b10.1% averaged60 s. BUSY completes before next trigger; read all128 bits; no timeout/overrun in60 s. At input 0.5 / 1.5 / 2.5 V, ideal codes 3277 / 9830 / 16384; allow \u00b165 codes plus source uncertainty (10 mV project screen)."
+      "troubleshoot": "Power off and check module straps, DB7/DOUTA, CVA/CVB common strip, BUSY and grounds. AD7606 has no ID register or sensor-frame CRC. Do not change physical SPI polarity to imitate a Wokwi idle-clock limitation.",
+      "acceptance": "Physical gate: 125 µs trigger interval ±1%; 8 kHz ±0.1% averaged over 60 s of acquisition. CONVST high ≥25 ns. With oversampling off, conversion 3.45–4.2 µs; the firmware 80 µs wait is a fault deadline. Each measurement read has 128 clocks and completes before the next trigger. DC error ≤65 codes plus measured source/meter uncertainty. Zero unexplained timeout/overrun/errors. See docs/breadboard-refinements.html for probe contacts and startup-read interpretation."
     },
     {
       "title": "First analog channel",
@@ -60,41 +63,45 @@
       "tests": [
         "Use synthetic-input-tests.md for the exact signal and return connections.",
         "Start at 1.5 V offset and 100 mVpp; verify voltage before connection.",
-        "Measure offset, frequency response, noise and unplugged bias using the detailed limits."
+        "Measure offset, frequency response, noise and unplugged bias using the detailed limits.",
+        "Keep unity RAW reconstruction: signed code × 5 / 32768 volts. The 1.5 V unplugged bias is separate from input_midpoint_mv=0 metadata."
       ],
       "troubleshoot": "Inspect IC notch, component values, protection adapter orientation and signal-generator load setting.",
-      "acceptance": "DC gain1; two3.3k/47nF low-pass stages. Compare gain against simulations/results/response.csv tolerance envelope; allow additional\u00b10.5 dB measurement/model margin. Unplugged RAW\u21921.50 V\u00b130 mV after settling. Record RMS noise over20\u2013500 Hz; provisional target<2 mVrms input-referred, to be reviewed for research suitability. Check clipping using safe0.1\u20132.9 V sources, never\u00b15 V into3 V buffers."
+      "acceptance": "DC gain1; two3.3k/47nF low-pass stages. Compare gain against simulations/results/response.csv tolerance envelope; allow additional±0.5 dB measurement/model margin. Unplugged RAW→1.50 V±30 mV after settling. Record RMS noise over20–500 Hz; provisional target<2 mVrms input-referred, to be reviewed for research suitability. Check clipping using safe0.1–2.9 V sources, never±5 V into3 V buffers."
     },
     {
-      "title": "Remaining analog inputs",
-      "purpose": "Verify each port independently before combining recordings.",
+      "title": "Second EMG channel",
+      "purpose": "Verify EMG1 and EMG2 independently, then together in this fixed two-input build.",
       "add": [
-        "Remaining populated analog boards for this variant",
-        "Synthetic signal source and ADC diagnostic firmware"
+        "BB2 complete second analog path and its protection adapter",
+        "Synthetic signal source; fixed-two diagnostic-adc profile"
       ],
       "tests": [
-        "Inject a distinct signal into one channel at a time and verify port identity.",
-        "Use each supported channel-count profile; disabled channels must not appear as valid muscle signals.",
-        "Measure crosstalk and run the continuity/timing checks in the detailed guide."
+        "Repeat the first-channel offset and frequency tests on BB2. Populate exactly BB1 and BB2; this board has no EMG3/EMG4 ports.",
+        "Inject a distinct signal into one input at a time, then swap the signals. Verify EMG1/2 identity and common frame timestamp.",
+        "Hold the undriven RAW port at midpoint, measure crosstalk and preserve the baseline and generator-feedthrough trace.",
+        "Only the two enabled inputs may appear as muscle measurements in CSV/live display; unused ADC words are still clocked but are not exported as EMG."
       ],
-      "troubleshoot": "Check channel order, midpoint impedance and ground returns; verify you selected the correct firmware variant.",
-      "acceptance": "Enabled channels match physical ports; disabled channels absent from CSV/live display. Simultaneous channel samples share trigger/frame timestamp. Project crosstalk screen <\u221240 dB versus driven signal, with generator feedthrough measured separately. Zero unexplained errors in10 min."
+      "troubleshoot": "Check channel order, midpoint impedance, ground returns and wire coupling. Use the fixed-two firmware; ADC V3–V8 are not additional EMG ports.",
+      "acceptance": "Enabled channels match physical ports; disabled channels absent from CSV/live display. Simultaneous channel samples share trigger/frame timestamp. Project crosstalk screen <−40 dB versus driven signal, with generator feedthrough measured separately. Zero unexplained errors in10 min."
     },
     {
-      "title": "Foot and shank motion sensors",
-      "purpose": "Bring up one sensor before connecting the second.",
+      "title": "Foot and shank ICM sensors",
+      "purpose": "Bring up the foot carrier first, then the shank, while keeping independent identities and timing evidence.",
       "add": [
-        "First IMU, then second IMU",
-        "Matching one-IMU and two-IMU diagnostic builds",
-        "Logic analyzer; verified short signal cables"
+        "MIKROE-4237 ICM-42688-P carriers, first foot then shank; JP2–JP4 SPI positions 1–2 and 3.3 V supply",
+        "diagnostic-imu-one then diagnostic-imu-two from this variant",
+        "Logic analyzer on SPI and each INT1; use the probe table"
       ],
       "tests": [
-        "Complete module-specific supply, interface and header checks.",
-        "Verify identity, axes, stationary readings and 200 Hz output.",
-        "Test the intended cable length, FIFO errors and timestamp behavior."
+        "Verify carrier supply, SPI jumpers and header orientation before signal leads. Shared MOSI GPIO4, MISO GPIO5, SCLK GPIO6.",
+        "Foot CS/INT1 are GPIO7/16; shank CS/INT1 are GPIO15/17. Rotate one carrier at a time to prove identity and axis signs.",
+        "Check WHO_AM_I 0x47, configuration readback, both 200 Hz interrupt streams and FIFO packet counts. Missing first IRQ beyond 100 ms, FIFO overflow or invalid packet is a failure.",
+        "During recording, retain raw 16-bit sensor timestamps, read_start_us/read_end_us and IRQ anchors. Normal counter rollover is every 65.536 ms; host times remain estimates.",
+        "Foot/shank startup counts may differ. Do not pair rows by index or reject a sample merely because it arrived during a FIFO read. The converter checks the read-end bound."
       ],
-      "troubleshoot": "Check interface selection, addresses or chip selects, interrupt pins, supply and pull-ups.",
-      "acceptance": "WHO_AM_I0x47;200 Hz\u00b11% over60 s, no FIFO overflow/errors. Stationary gravity-axis within\u00b10.1g of\u00b11g; cross axes within\u00b10.1g, gyro per axis<5\u00b0/s before calibration. Verify axis signs and intended cable length."
+      "troubleshoot": "Check SPI selection, shared GPIO4/5/6, distinct CS and INT1 wires, cable integrity and 3.3 V. Flag 2 means uncertain host-time reconstruction; gap/invalid flags and sensor/timing stop reasons require investigation.",
+      "acceptance": "WHO_AM_I 0x47 and readback pass. 200 Hz ±1% per sensor over 60 s; no overflow, missing-IRQ or invalid-packet errors. ±16 g / ±2000 °/s configured; stationary gravity-axis within ±0.1 g of ±1 g, other axes within ±0.1 g and gyro per axis <5 °/s before calibration. Confirm identities, axis signs and cable length; characterize synchronization separately."
     },
     {
       "title": "SD recording",
@@ -104,11 +111,13 @@
         "Breadboard SD-only recording firmware; GPIO47 is CMD"
       ],
       "tests": [
-        "Record synthetic signals for 60 minutes and convert the file.",
-        "Test missing/full card and interrupted recordings using expendable media.",
-        "Check sample counters, queue errors and USB-attachment recording inhibition."
+        "Use breadboard-sd-only-2ch with SDMMC CMD GPIO47, CLK GPIO39, D0 GPIO40; check all five Adafruit 4682 contacts.",
+        "Record synthetic inputs for 60 minutes, stop and wait for recording LED off, then convert the untouched SD file. A filename or END alone cannot prove persistence.",
+        "Check AD7606 / two enabled inputs / ICM identities / breadboard metadata, unity RAW-voltage scaling, CRC32, counters, timing flags, END and stop reason. ADC-specific CRC/status columns are intentionally blank.",
+        "Test missing/full card and interrupted recording on expendable media. Recovery must report a truncated tail/missing END; keep partial runs labeled.",
+        "Repeat USB-attachment inhibition and sync/close error checks. GPIO21 is active low; preserve explicit stop/error evidence."
       ],
-      "troubleshoot": "Check the breadboard firmware profile, card wiring, rail droop and storage latency.",
+      "troubleshoot": "Check the breadboard profile and GPIO47/39/40, local card supply and queues. Keep original files and quality.json; never replace saved SD evidence with the wireless preview.",
       "acceptance": "60 min, no unexplained SD sample loss, CRC errors or queue overflow. Refuse start without SD; report full-card stop. Recovery preserves complete valid records and reports truncated tail/missing END. Attach USB during synthetic recording: explicit stop."
     },
     {
@@ -119,9 +128,10 @@
         "Laptop receiver and converter; existing SD setup"
       ],
       "tests": [
-        "Record to SD while receiving on the laptop for 60 minutes.",
-        "Disconnect and reconnect Wi-Fi and confirm visible wireless gaps.",
-        "Compare SD and received data; require no unexplained SD loss."
+        "Use breadboard-record-2ch while SD recording continues for 60 minutes; only EMG1/2 may appear.",
+        "Disconnect/reconnect Wi-Fi and confirm visible wireless gaps. Preserve the laptop archive and its quality report.",
+        "Audit the original SD file separately: a Wi-Fi gap is not automatically SD loss, and a plausible preview cannot certify saved data.",
+        "Compare channel identities, timestamps, scaling and stop/error indications across both archives. Keep all unexplained SD gaps, CRC or queue failures visible."
       ],
       "troubleshoot": "Check network selection, firewall, receiver port, supply stability and queue counters.",
       "acceptance": "60 min with two channels: stage7 SD quality maintained; only enabled channels displayed; induced packet loss visible in counters/gaps. Compare SD versus laptop capture."
@@ -139,7 +149,7 @@
         "Document battery identity, charge state, configuration, ambient temperature and shutdown behavior."
       ],
       "troubleshoot": "Check converter droop, battery protection and temperature. Do not infer runtime from nominal capacity alone.",
-      "acceptance": "Measured\u22652 h intended-use runtime;20 startup/shutdown cycles; successful60 min trial; no unexpected reset. Record pack capacity, age, voltage, configuration and ambient temperature."
+      "acceptance": "Measured≥2 h intended-use runtime;20 startup/shutdown cycles; successful60 min trial; no unexpected reset. Record pack capacity, age, voltage, configuration and ambient temperature."
     },
     {
       "title": "MyoWare integration",

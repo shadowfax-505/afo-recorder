@@ -1,6 +1,6 @@
 # Rebuilding the recorder firmware
 
-The released builds use ESP-IDF v5.4.2 and the ESP32-S3 target. Activate that ESP-IDF environment first. Open a terminal in the chosen design's `firmware` folder. The ADC and IMU identities come from that package's sources; changing the EMG count does not change the sensor driver.
+Current profiles use source set **ad7606-2ch-1.6**, ESP-IDF v5.4.2 and the ESP32-S3 target. Use the [current breadboard lab kit](../breadboard/breadboard-lab-kit.zip) for the six breadboard images, or the [profile table](../firmware/builds/README.md) and individual manifests in the repository. The physical binaries were compiled but have not been flashed or executed on an assembled recorder. Activate that ESP-IDF environment first. Open a terminal in the chosen design's `firmware` folder. The ADC and IMU identities come from that package's sources; changing the EMG count does not change the sensor driver.
 
 For a two-channel breadboard recorder with Wi-Fi:
 
@@ -14,7 +14,7 @@ For a two-channel custom-PCB recorder:
 idf.py -B build-pcb-2 -DEMG_CHANNEL_COUNT=2 -DAFO_HARDWARE=pcb -DAFO_WIFI=1 -DAFO_DIAGNOSTIC_STAGE=0 -DAFO_IMU_COUNT=2 build
 ```
 
-Only the expandable packages accept `EMG_CHANNEL_COUNT=4`. Use a separate build directory for each hardware/count combination. Set `AFO_WIFI=0` to isolate storage testing. Breadboard builds define `AFO_BREADBOARD=1` internally and use GPIO47 for SD CMD; PCB builds use GPIO38. Do not override this macro manually.
+This fixed-two build requires `EMG_CHANNEL_COUNT=2`; it has no four-channel profile. Use a separate build directory for each hardware/count combination. Set `AFO_WIFI=0` to isolate storage testing. Breadboard builds define `AFO_BREADBOARD=1` internally and use GPIO47 for SD CMD; PCB builds use GPIO38. Do not override this macro manually.
 
 For a one-IMU bench diagnostic:
 

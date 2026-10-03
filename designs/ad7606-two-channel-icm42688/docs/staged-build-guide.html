@@ -1,0 +1,96 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><link rel="icon" href="data:,"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Staged breadboard build — AD7606 two-channel</title><style>body{margin:0;background:#f4f3ee;color:#172523;font:17px/1.65 system-ui}main{max-width:1060px;margin:auto;padding:48px 28px}h1{font-size:2.4rem;line-height:1.15}h2{margin-top:2.5em}a{color:#176454}table{border-collapse:collapse;font-size:14px;display:block;overflow:auto}td,th{padding:12px;border:1px solid #ccd4ce;text-align:left;vertical-align:top}th{background:#e2eae4}code{font-size:.9em}pre{overflow:auto;padding:16px;background:#e2eae4;border-radius:6px}p{max-width:85ch}img{max-width:100%;height:auto}nav{font-size:14px;border-bottom:1px solid #ccd4ce;padding-bottom:16px}blockquote{border-left:3px solid #809c8a;margin-left:0;padding-left:20px}@media(max-width:640px){main{padding:28px 18px}h1{font-size:1.9rem}}@media print{body{background:white}main{padding:0}table{display:table;font-size:10px}}</style></head><body><main><nav><a href="../viewer/build.html">Assembly workspace</a> / <a href="breadboard-refinements.html">Applied findings</a> / <a href="lab-quickstart.html">Lab sequence</a> / <a href="build-guide.html">Wire tables</a> / <a href="data-interpretation.html">Saved data</a> / <a href="integrated-verification.html">Verification</a></nav><h1>AD7606 fixed two-EMG: staged breadboard-to-PCB build</h1>
+<p><strong>Use <a href="physical-assembly.md">physical assembly</a>, <a href="build-guide.html">complete hole/wire tables</a> and <a href="module-qualification.md">module qualification</a>.</strong> Old stage SVGs are block overviews, not current insertion instructions. The viewer and revision-12 tables govern breadboard routing. The <a href="breadboard-refinements.html">simulation-to-bench guide</a>, <a href="../breadboard/probe-connections.csv">probe table</a> and <a href="bench-checklist.csv">blank bench checklist</a> apply the current verification findings without changing those endpoints.</p>
+<p>All instrument-connected tests use synthetic signals with no person attached. Remove all power before moving jumpers. Keep module links short (initial target≤50 mm), pair fast signals with ground, keep converter reference/decoupling on the ADC module, and do not construct switching loops on solderless breadboard. Never place an ammeter across a supply; insert it in series with the positive supply lead after powering down. Do not power modules through signal pins.</p>
+<h2>Circuit correspondence</h2>
+<p>The final PCB specification is design/main.json. BB1–BB2 implement its two analog paths; BB0 implements midpoint buffering. DIP pin1 starts at e10, notch toward row9; a–e and f–j form separate5-hole strips per row. There are no implicit power-rail connections. Use breadboard/placements.csv and wiring.csv together. Every jumper lead has its own hole; strip-short and unique-hole checks are in breadboard/checks.json. External wiring is specified in system-wiring.csv; module pin names and connector orientation define the connection, not the rendered body position.</p>
+<p>Populate exactly two input channels. This PCB has no EMG3/EMG4 connectors or expansion input circuits. Each signal board has two unity followers and two RC stages; BAV199 requires a verified soldered carrier. Capacitor/filter tolerances match simulation. Components of different packages require their own footprint/pin review. Test-only substitutions and power/USB differences are documented in module-verification.md; the breadboard is electrical validation of these blocks, not a full replica of layout-dependent performance.</p>
+<h2>Acceptance policy</h2>
+<p>Limits below are <strong>provisional engineering screens</strong>, not measured results or blanket manufacturer guarantees. Filter envelopes and ideal DC codes are calculated; rail limits follow the selected nominal rails and IC operating range. Noise/crosstalk/ripple/temperature thresholds are project targets requiring final review. Measure instrument bandwidth, calibration and uncertainty; record failures without widening limits to pass.</p>
+<table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>Assembly and instrument connections</th>
+<th>Gate before proceeding</th>
+<th>Troubleshooting</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../breadboard/stages/stage-01.svg">1. Power and midpoint</a></td>
+<td>BB0 midpoint; regulated lab rails, no controller. Connect DMM across each rail/GND; scope ground spring at load. Initially 50 mA current limit, increase deliberately for dummy loads.</td>
+<td>3.3 V digital 3.23–3.43 V; 3.0 V analog 2.94–3.06 V; midpoint 1.47–1.53 V. Test 0/100/300 mA digital and 0/20/50 mA analog. Ripple targets ≤50/10 mVpp (20 MHz bandwidth); step deviation ≤5%, recovery ±3% within10 ms. Temperature &lt;60°C after10 min at20–30°C ambient. 5 V ADC:4.8–5.2 V at10–50 mA; verify never above5.25 V including startup.</td>
+<td>Check polarity, ground continuity, supply limits, load resistor rating and midpoint follower wiring.</td>
+</tr>
+<tr>
+<td><a href="../breadboard/stages/stage-02.svg">2. ESP32 controller</a></td>
+<td>Add N8R8 controller; diagnostic-controller build. Attach USB with no person connected. Fit controls, LEDs, battery sense and USB detection circuit from schematic. Scope GPIO21 USB_PRESENT_N.</td>
+<td>20 program/reset cycles without failure. Buttons/LEDs respond. GPIO21 low when USB attached, high when absent. Recorder must refuse to start while USB attached; that interlock needs a repeat at stage7. Record measured current; no assumed universal current limit.</td>
+<td>Check boot/reset levels, native USB pins and 3.3 V rail droop.</td>
+</tr>
+<tr>
+<td><a href="../breadboard/stages/stage-03.svg">3. ADC timing and DC</a></td>
+<td>Complete module verification first. Add AD7606 with its local internal-reference circuitry and decoupling; no external ADC clock is used. Connect known DC sources with common ground. Use diagnostic-adc. Scope CONVST, BUSY, CS, SCLK and DB7/DOUTA using the probe table. GPIO11 reaches both CVA/CVB through DIST1 a29/b29/c29; shared ADC_DRDY net means BUSY on GPIO8.</td>
+<td>Conversion triggers125 µs±1%;8 kHz±0.1% averaged60 s. With oversampling off, conversion 3.45–4.2 µs; CONVST high ≥25 ns. Read all 128 bits through DB7/DOUTA at 8 MHz mode 2, idle high / falling-edge sample; complete before the next trigger; no timeout/overrun in60 s. At input 0.5 / 1.5 / 2.5 V, ideal codes 3277 / 9830 / 16384; allow ±65 codes plus source uncertainty (10 mV project screen).</td>
+<td>Check serial mode, reset polarity, reference, logic levels and CS timing. Separate RESET-time discarded reads (normally one per diagnostic boot, two before the first recording session). An 80 µs firmware deadline is not acceptable normal BUSY duration. AD7606 has no ID register/readback equivalent; test known DC codes and channel identity.</td>
+</tr>
+<tr>
+<td><a href="../breadboard/stages/stage-04.svg">4. First EMG channel</a></td>
+<td>Add BB1 complete analog path. Signal generator RAW0:1.5 V DC +100 mVpp sine. DMM at RAW,BUF0A,BUF0B,AIN0P; scope both filter stages. Sweep20,100,500,1000,4000 Hz. Never attach electrodes.</td>
+<td>DC gain1; two3.3k/47nF low-pass stages. Compare gain against simulations/results/response.csv tolerance envelope; allow additional±0.5 dB measurement/model margin. Unplugged RAW→1.50 V±30 mV after settling. Record RMS noise over20–500 Hz; provisional target&lt;2 mVrms input-referred, to be reviewed for research suitability. Check clipping using safe0.1–2.9 V sources, never±5 V into3 V buffers.</td>
+<td>Check DIP notch/pins, capacitor values, carrier orientation and offset. ADC mathematical clipping plots are not safe test-voltage instructions.</td>
+</tr>
+<tr>
+<td><a href="../breadboard/stages/stage-05.svg">5. Second EMG channel</a></td>
+<td>Add BB2; use the fixed-two firmware. Inject 100 Hz into one input at a time; hold the second at midpoint. There are exactly two EMG ports. Unused ADC V3–V8 remain at their defined levels and are not exported as EMG.</td>
+<td>Enabled channels match physical ports; disabled channels absent from CSV/live display. Simultaneous channel samples share trigger/frame timestamp. Project crosstalk screen &lt;−40 dB versus driven signal, with generator feedthrough measured separately. Zero unexplained errors in10 min.</td>
+<td>Check channel order, ground return, midpoint impedance and wire coupling; do not infer crosstalk from ideal simulation.</td>
+</tr>
+<tr>
+<td><a href="../breadboard/stages/stage-06.svg">6. Foot and shank IMUs</a></td>
+<td>Add one ready-made IMU, then second. diagnostic-imu-one then diagnostic-imu-two. Logic analyzer on shared SPI and individual CS/INT; rotate each known axis.</td>
+<td>WHO_AM_I0x47;200 Hz±1% over60 s, no FIFO overflow/errors. Stationary gravity-axis within±0.1g of±1g; cross axes within±0.1g, gyro per axis&lt;5°/s before calibration. Verify axis signs and intended cable length.</td>
+<td>Check SPI jumpers, GPIO4 MOSI/5 MISO/6 SCLK, foot CS/INT1 GPIO7/16 and shank GPIO15/17, 3.3 V and cable integrity. Preserve raw 16-bit counter wraps and independent start offsets; host times are estimates. Flag 2 alone is expected uncertainty, while gap/invalid flags require investigation.</td>
+</tr>
+<tr>
+<td><a href="../breadboard/stages/stage-07.svg">7. SD recording</a></td>
+<td>Add SD interface. Record synthetic inputs without USB; use the two-channel SD-only build. Repeat with missing/full card and five controlled power interruptions on expendable media.</td>
+<td>60 min, no unexplained SD sample loss, CRC errors or queue overflow. Refuse start without SD; report full-card stop. Recovery preserves complete valid records and reports truncated tail/missing END. Check metadata, original counters, CRC32, timing flags, END and stop reason together; a filename or END alone does not certify a successful sync/close. Attach USB during synthetic recording: explicit stop.</td>
+<td>Inspect card latency/rail droop, queues and reports. Never erase original fault evidence; filesystem recovery is not guaranteed.</td>
+</tr>
+<tr>
+<td><a href="../breadboard/stages/stage-08.svg">8. Wi-Fi and SD together</a></td>
+<td>Join AFO-Recorder-B Wi-Fi on laptop; run python3 host/live_receiver.py. Maintain SD recording; congest/disconnect/reconnect wireless.</td>
+<td>60 min with two channels: stage7 SD quality maintained; only enabled channels displayed; induced packet loss visible in counters/gaps. Compare SD versus laptop capture.</td>
+<td>Check laptop firewall/UDP3333, network selection and queue counters. Wi-Fi copy is best effort. Audit the original SD file and laptop archive separately; a preview gap is not automatically saved-data loss.</td>
+</tr>
+<tr>
+<td><a href="../breadboard/stages/stage-09.svg">9. Battery runtime</a></td>
+<td>Remove lab supply and all instrument/USB connections. Connect protected1S battery with verified polarity, external charging only.</td>
+<td>Measured≥2 h intended-use runtime;20 startup/shutdown cycles; successful60 min trial; no unexpected reset. Record pack capacity, age, voltage, configuration and ambient temperature.</td>
+<td>Check droop, protection trip and converter temperature. Battery time is not predicted by these simulations.</td>
+</tr>
+<tr>
+<td><a href="../breadboard/stages/stage-10.svg">10. MyoWare and wearable integration</a></td>
+<td>Replace synthetic inputs with MyoWare RAW, first without person/electrodes. Verify polarity, sensor rail, cabling and clearance around AFO.</td>
+<td>Secure strain relief/mounting; no cable pull on electrodes. Institutional approval, consent and electrical-safety review completed before supervised human testing. No charging or mains/USB/instrument cables attached to a person.</td>
+<td>Resolve sensor saturation, movement artifacts and safety/mounting issues before wearable recordings.</td>
+</tr>
+</tbody>
+</table>
+<h2>Firmware and laptop use</h2>
+<p>ESP-IDF5.4.2. Prebuilt firmware/builds profiles have individual manifests and flash offsets. Recording builds include separate <code>pcb-record</code>, <code>breadboard-record</code> and <code>breadboard-sd-only</code> images. Diagnostics identify the breadboard fixture. Do not alter interlocks for recording. Diagnostic profiles intentionally permit USB, never mount SD or start Wi-Fi, and do not require later modules.</p>
+<pre><code class="language-sh">idf.py -B build-controller -DAFO_DIAGNOSTIC_STAGE=2 -DAFO_HARDWARE=breadboard build
+idf.py -B build-adc -DAFO_DIAGNOSTIC_STAGE=3 -DEMG_CHANNEL_COUNT=2 -DAFO_HARDWARE=breadboard build
+idf.py -B build-imu -DAFO_DIAGNOSTIC_STAGE=6 -DAFO_IMU_COUNT=1 -DAFO_HARDWARE=breadboard build
+idf.py -B build-record -DAFO_DIAGNOSTIC_STAGE=0 -DEMG_CHANNEL_COUNT=2 -DAFO_WIFI=1 -DAFO_HARDWARE=breadboard build
+</code></pre>
+<p>Stages 4/5 use ADC diagnostics with new stimuli. Diagnostics pause triggers while printing outside their approximately one-second acquisition windows; do not count those intentional pauses as within-window loss. IMU_COUNT=2 adds the second IMU. For stage7 compile AFO_WIFI=0. ADC diagnostics report means, range, RMS and fault counts; USB printing can affect timing, so recording/logic-analyzer tests are still mandatory.</p>
+<pre><code class="language-sh">python3 host/convert.py trial.afolog --help
+python3 host/live_receiver.py --help
+python3 host/live_receiver.py
+</code></pre>
+<p>Join the device network using the configured firmware credentials (see firmware/main/wifi_live.c). Receiver serves a local dashboard, stores received original records and tracks loss. Use the SD file as primary evidence. Host tools support legacy schema1, ADS schema2 and AD7606 schema3; only enabled channels are exported.</p>
+<h2>Order gate</h2>
+<p>Fill docs/stage-results.csv and attach raw scope traces, logs and source recordings. Before recommending an order: confirm received hardware matches the selected parts and terminal maps; complete schematic/footprint/power-loop/USB/antenna/assembly reviews; rerun ERC/DRC/parity; sign off lab gates. After fabrication repeat power, analog noise/crosstalk, sustained recording, timing, wireless and thermal tests on the compact board. Neither DRC nor breadboard success establishes medical safety or patient fit.</p>
+</main></body></html>

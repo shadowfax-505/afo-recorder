@@ -10,3 +10,7 @@ This package uses the AD7606 path, exactly two MyoWare inputs, and two ICM-42688
 6. Read [validation report](validation-report.md) before interpreting any automated pass.
 
 The whole-project manual is available at <https://shadowfax-505.github.io/afo-recorder/documentation/>. Hardware measurements remain pending.
+
+## Breadboard handoff
+
+[Applied simulation findings](breadboard-refinements.html) · [Probe contacts](../breadboard/probe-connections.csv) · [Blank bench checklist](bench-checklist.csv) · [Current breadboard lab kit](../breadboard/breadboard-lab-kit.zip). The ten interactive stages and wire instructions now describe the fixed-two AD7606/ICM build, current v1.6 firmware and separate SD/Wi-Fi quality checks. Physical results remain unmeasured.
