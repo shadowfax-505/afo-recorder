@@ -1,0 +1,6 @@
+Wire,Stage,Net,From,To,Instructions
+wire-097,7,3V3D,sd:JP1.1 / 3V3,DIST1:c25,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-177,7,SD_CMD,esp:J3.17 / GPIO47,sd:JP1.5,SDMMC CMD is GPIO47 on the breadboard and Adafruit 4682 JP1.5. Select breadboard-sd-only-2ch or breadboard-record-2ch; the PCB image uses GPIO38.
+wire-178,7,SD_CLK,esp:J3.9 / GPIO39,sd:JP1.3,SDMMC CLK is GPIO39 to Adafruit 4682 JP1.3. This is not SPI SD wiring. Keep the card supply stable and audit the original saved file.
+wire-179,7,SD_D0,esp:J3.8 / GPIO40,sd:JP1.4,"SDMMC D0 is GPIO40 to Adafruit 4682 JP1.4. Use all five listed SD contacts, including GND. A wireless preview cannot establish SD persistence."
+wire-184,7,GND,sd:JP1.2 / GND,DIST1:e19,microSD return lead; verified JP1 pad 2 belongs to GND in Adafruit SDIO microSD board CAD. Install with power off.

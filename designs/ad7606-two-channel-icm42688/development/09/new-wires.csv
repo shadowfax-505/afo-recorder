@@ -1,0 +1,3 @@
+Wire,Stage,Net,From,To,Instructions
+wire-001,9,SOURCE_POS,battery:JST-PH red + lead,DIST1:a1,"Connect lab source OR battery, never both; remove both lab leads before battery attachment."
+wire-033,9,GND,battery:JST-PH black − lead,DIST1:e5,"Connect lab source OR battery, never both; remove both lab leads before battery attachment."

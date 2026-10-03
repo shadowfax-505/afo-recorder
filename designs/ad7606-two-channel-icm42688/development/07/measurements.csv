@@ -1,0 +1,6 @@
+check_id,acceptance,measured_value,unit,uncertainty,instrument_settings,evidence_file,outcome,operator,date,review_notes
+7-format,AD7606 / two inputs / ICM / breadboard metadata; RAW code ×5/32768 V; scale 1 midpoint offset 0; retain raw IMU counters IRQ anchors read start/end and timing flags,,,,,,NOT TESTED,,,
+7-endurance,CMD GPIO47 CLK GPIO39 D0 GPIO40; container CRC32 and counters pass; no unexplained saved gaps/queue errors; END and expected stop reason; no sync/close failure,,,,,,NOT TESTED,,,
+7-usb,Refuse start with USB attached; attach during synthetic recording gives explicit stop/error; no person attached,,,,,,NOT TESTED,,,
+7-storage-faults,No-card refuses start; full-card explicit stop; five controlled interruptions preserve only CRC-valid records and report truncated tail/missing END,,,,,,NOT TESTED,,,
+7-timestamps,Normal 65.536 ms counter wraps handled; host estimate flag 2 retained; startup count differences not row-aligned; no unexplained gap/invalid/timing rejection,,,,,,NOT TESTED,,,

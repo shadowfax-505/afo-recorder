@@ -1,0 +1,37 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>01 - Qualify power one rail at a time</title><style>body{margin:0;background:#edf0ed;color:#172c29;font:17px/1.65 system-ui,sans-serif}main{max-width:940px;margin:32px auto;padding:42px;background:#fff;border-top:6px solid #0b7766;border-radius:6px}nav{display:flex;gap:20px;flex-wrap:wrap;font-size:14px;border-bottom:1px solid #d5dfdb;padding-bottom:18px}a{color:#096b60;text-underline-offset:3px}h1{font-size:38px;line-height:1.15;letter-spacing:-1px}h2{font-size:25px;margin-top:38px}h3{font-size:20px}table{border-collapse:collapse;width:100%;font-size:14px;display:block;overflow-x:auto}th,td{padding:10px;text-align:left;border:1px solid #dce5df;vertical-align:top}th{background:#e8f2ee}li{margin:8px 0}code{background:#f0f3f0;padding:2px 5px}footer{font-size:13px;margin-top:40px;border-top:1px solid #ddd;padding-top:15px}@media(max-width:650px){main{margin:0;padding:22px}h1{font-size:30px}}</style></head><body><main><nav><a href="../../development/index.html">Build sequence</a><a href="../../docs/understanding-the-recorder.html">How it works</a><a href="../../viewer/build.html">Assembly workspace</a><a href="../../docs/understanding-the-recorder.pdf">Briefing PDF</a></nav><h1>01 - Qualify power one rail at a time</h1>
+<p><strong>Prerequisite:</strong> Stage 0 reviewed. <strong>Firmware:</strong> None. <strong>Status: NOT TESTED.</strong></p>
+<p><a href="../index.html">Sequence overview</a> | <a href="../../docs/build-guide.html">Exact contacts</a> | <a href="../../viewer/build.html">3D assembly</a></p>
+<h2>Add and test</h2>
+<p>1A: digital regulator alone. 1B: 5 V regulator alone. 1C: 3 V analog regulator fed from the accepted digital rail. 1D: midpoint buffer. Test idle first, then dummy loads. Keep ESP32, ADC, IMUs and MyoWare disconnected. Use the selected regulator modules; do not breadboard switching IC loops.</p>
+<h2>Acceptance checks</h2>
+<ul>
+<li><strong>1-polarity:</strong> No rail short; correct source polarity; lab supply only, battery disconnected</li>
+<li><strong>1-digital:</strong> 3.23–3.43 V at 0/100/300 mA; ripple ≤50 mVpp (20 MHz bandwidth); provisional project screen</li>
+<li><strong>1-analog:</strong> 2.94–3.06 V at 0/20/50 mA; midpoint 0.49–0.51 × measured analog rail; ripple ≤10 mVpp; provisional project screen</li>
+<li><strong>1-adc-supply:</strong> 4.8–5.2 V at 10–50 mA; never exceed 5.25 V during startup</li>
+</ul>
+<h2>Send for review</h2>
+<ul>
+<li>Rail DMM readings</li>
+<li>startup and load-step scope traces</li>
+<li>supply current/limit</li>
+<li>dummy-load resistance and rating</li>
+<li>temperature versus time</li>
+</ul>
+<p>Measure polarity before enabling. Begin with unloaded module current limit appropriate to its documented startup requirement; log the chosen setting. If limiting occurs, disable and diagnose rather than repeatedly increasing it. No universal safe current limit is assumed.</p>
+<h2>Continuous regression</h2>
+<p>Before power: inspect the changed wiring against the contact table and photograph it. After power: remeasure every connected rail at the load, verify no unexpected heat/current, and rerun the last accepted diagnostic. Repeat earlier affected tests whenever a supply, cable, firmware or grounding connection changes. Record failures and repairs; retain the previous accepted evidence.</p>
+<h2>If the gate fails</h2>
+<p>Stop acquisition and remove power before changing wiring. Disconnect only the last-added module and restore the last accepted configuration. Repeat its test. If it now fails, check the shared supply/ground and changed connections before replacing components. Never change multiple modules at once to chase a fault.</p>
+<h2>Results</h2>
+<p>Fill measurements.csv; retain raw instrument files alongside screenshots. Outcome starts NOT TESTED. Include units, uncertainty, instrument model/settings, source voltage/load, firmware hash and filenames. Mark unmet criteria FAIL; missing evidence PENDING. Submit the whole stage folder, including failures. A completeness check is not engineering approval.</p>
+<h2>Stage files</h2>
+<ul>
+<li><a href="new-wires.csv">New wires</a>: exact endpoints copied from the existing wiring table; keep earlier accepted wires. Power-isolation and qualification instructions above override connection order within a stage.</li>
+<li><a href="probe-contacts.csv">Probe contacts</a>: available exact probe locations. An empty table means use the instrument instructions above.</li>
+<li><a href="fixture-parts.csv">Fixture parts</a>: staged discrete fixture components from the existing BOM; this is not a complete procurement list for modules, tools or consumables.</li>
+<li><a href="measurements.csv">Measurements</a> and <a href="submission.json">submission metadata</a>.</li>
+</ul>
+<h2>Dummy-load examples</h2>
+<p>Use R = V / I and P = V x I. Approximate examples: 3.3 V at 300 mA needs 11 ohms and dissipates 0.99 W (use at least a 2 W resistor); 5 V at 50 mA needs 100 ohms and dissipates 0.25 W (at least 0.5 W); 3 V at 50 mA needs 60 ohms and dissipates 0.15 W (at least 0.5 W). Measure actual resistance/current, keep hot loads away from plastic, and remain within regulator ratings. Switch between load points with power off unless using a qualified electronic load. Current limit and startup capture are recorded evidence, not fixed universal settings.</p>
+<footer>Muttakin Rahman · AD7606 / two-channel / ICM-42688-P · Physical validation pending</footer></main></body></html>

@@ -1,0 +1,47 @@
+Wire,Stage,Net,From,To,Instructions
+wire-024,2,GND,AUX1:g23,DIST1:e2,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-025,2,GND,AUX1:g31,DIST1:c3,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-026,2,GND,AUX1:g39,DIST1:d3,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-027,2,GND,AUX1:g47,DIST1:e3,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-028,2,GND,AUX1:g51,DIST1:c4,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-029,2,GND,AUX2:g3,DIST1:d4,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-034,2,GND,esp:J1.22 / GND,DIST1:c6,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-056,2,GND,button:NO contact 2,DIST1:d13,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-057,2,GND,usb:JP2.1 / GND,DIST1:e13,"External USB inlet only; both DevKit USB sockets empty. VBUS is sense-only, never connected to recorder 5 V."
+wire-058,2,GND,usb-q:SOURCE pin2 → JP1.3,DIST1:c14,Use the specified adapter pad-to-header mapping; check solder orientation and unpowered continuity.
+wire-076,2,VBAT,AUX1:a43,DIST1:a20,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-080,2,5V,reg5:VOUT / 5-pin row 5,DIST1:a21,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-081,2,5V,esp:J1.21 / 5V,DIST1:b21,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-089,2,3V3D,AUX1:a15,DIST1:e22,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-090,2,3V3D,AUX2:a7,DIST1:c23,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-146,2,BUTTON,AUX1:g15,DIST1:a41,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-147,2,BUTTON,esp:J1.11 / GPIO18,DIST1:b41,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-148,2,BUTTON,button:NO contact 1,DIST1:c41,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-149,2,LED_REC,AUX1:a19,DIST1:a42,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-150,2,LED_REC,esp:J3.7 / GPIO41,DIST1:b42,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-151,2,LED_REC_A,AUX1:g19,DIST1:a43,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-152,2,LED_REC_A,AUX1:a23,DIST1:b43,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-153,2,LED_ERR,AUX1:a27,DIST1:a44,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-154,2,LED_ERR,esp:J3.6 / GPIO42,DIST1:b44,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-155,2,LED_ERR_A,AUX1:g27,DIST1:a45,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-156,2,LED_ERR_A,AUX1:a31,DIST1:b45,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-157,2,LED_LOW,AUX1:a35,DIST1:a46,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-158,2,LED_LOW,esp:J3.5 / GPIO2,DIST1:b46,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-159,2,LED_LOW_A,AUX1:g35,DIST1:a47,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-160,2,LED_LOW_A,AUX1:a39,DIST1:b47,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-161,2,BAT_SENSE,AUX1:g43,DIST1:a48,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-162,2,BAT_SENSE,AUX1:a47,DIST1:b48,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-163,2,BAT_SENSE,AUX1:a51,DIST1:c48,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-164,2,BAT_SENSE,esp:J3.4 / GPIO1,DIST1:d48,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-165,2,USB_VBUS,AUX1:a55,DIST1:a49,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-166,2,USB_VBUS,usb:JP2.5 / VBUS,DIST1:b49,"External USB inlet only; both DevKit USB sockets empty. VBUS is sense-only, never connected to recorder 5 V."
+wire-167,2,USB_GATE,AUX1:g55,DIST1:a50,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-168,2,USB_GATE,AUX2:a3,DIST1:b50,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-169,2,USB_GATE,usb-q:GATE pin1 → JP1.2,DIST1:c50,Use the specified adapter pad-to-header mapping; check solder orientation and unpowered continuity.
+wire-170,2,USB_PRESENT_N,AUX2:g7,DIST1:a51,GPIO21 is LOW when external USB is attached and HIGH when absent; the diagnostic attachment indicator prints the inverse. USB VBUS is sense-only; leave both DevKit USB sockets empty.
+wire-171,2,USB_PRESENT_N,usb-q:DRAIN pin3 → JP2.3,DIST1:b51,GPIO21 is LOW when external USB is attached and HIGH when absent; the diagnostic attachment indicator prints the inverse. USB VBUS is sense-only; leave both DevKit USB sockets empty.
+wire-172,2,USB_PRESENT_N,esp:J3.18 / GPIO21,DIST1:c51,GPIO21 is LOW when external USB is attached and HIGH when absent; the diagnostic attachment indicator prints the inverse. USB VBUS is sense-only; leave both DevKit USB sockets empty.
+wire-173,2,USB_DM,usb:JP2.4 / D-,usb-dm-r:lead 1,"External USB inlet only; both DevKit USB sockets empty. VBUS is sense-only, never connected to recorder 5 V."
+wire-174,2,USB_DM_MCU,usb-dm-r:lead 2,esp:J3.20 / GPIO19,"External USB inlet only; both DevKit USB sockets empty. VBUS is sense-only, never connected to recorder 5 V."
+wire-175,2,USB_DP,usb:JP2.3 / D+,usb-dp-r:lead 1,"External USB inlet only; both DevKit USB sockets empty. VBUS is sense-only, never connected to recorder 5 V."
+wire-176,2,USB_DP_MCU,usb-dp-r:lead 2,esp:J3.19 / GPIO20,"External USB inlet only; both DevKit USB sockets empty. VBUS is sense-only, never connected to recorder 5 V."

@@ -1,0 +1,11 @@
+Stage,Reference,Value,Board,Note
+4,R100,3.3k,BB1,DIP/passive fixture; check package pinout
+4,R101,1M,BB1,DIP/passive fixture; check package pinout
+4,C100,47nF,BB1,DIP/passive fixture; check package pinout
+4,R102,3.3k,BB1,DIP/passive fixture; check package pinout
+4,C101,47nF,BB1,DIP/passive fixture; check package pinout
+4,R104,100,BB1,DIP/passive fixture; check package pinout
+4,C102,1nF,BB1,DIP/passive fixture; check package pinout
+4,UB1,MCP6002-I/P DIP8; same amplifier family as PCB MCP6004,BB1,DIP/passive fixture; check package pinout
+4,CB1,100nF local bypass,BB1,DIP/passive fixture; check package pinout
+4,,BAV199 carrier,,One per analog path; verify chip pads

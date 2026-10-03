@@ -1,0 +1,12 @@
+{
+  "stage": 1,
+  "build": "ad7606-two-channel-icm42688",
+  "hardware_revision": "",
+  "firmware_sha256": "",
+  "operator": "",
+  "date": "",
+  "instrument_list": [],
+  "changes_since_last_stage": "",
+  "evidence_files": [],
+  "review_status": "NOT REVIEWED"
+}

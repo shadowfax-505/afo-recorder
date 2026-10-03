@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "participant_code": "",
+  "session_id": "",
+  "date_time_timezone": "",
+  "protocol_approval_reference": "",
+  "operator_code": "",
+  "build": "ad7606-two-channel-icm42688",
+  "hardware_revision": "",
+  "firmware_sha256": "",
+  "original_file_sha256": "",
+  "synthetic": false,
+  "leg_side": "",
+  "condition": {
+    "afo_model": "",
+    "afo_setting": "",
+    "footwear": "",
+    "walking_speed_method": "",
+    "task": "",
+    "trial_order": "",
+    "rest_duration_s": null
+  },
+  "emg_channels": [
+    {
+      "port": "EMG1",
+      "muscle": "tibialis anterior",
+      "placement_landmarks": "",
+      "electrode_spacing_mm": null,
+      "sensor_serial": "",
+      "normalization_method": "",
+      "calibration_file": ""
+    },
+    {
+      "port": "EMG2",
+      "muscle": "medial gastrocnemius",
+      "placement_landmarks": "",
+      "electrode_spacing_mm": null,
+      "sensor_serial": "",
+      "normalization_method": "",
+      "calibration_file": ""
+    }
+  ],
+  "imus": [
+    {
+      "id": "foot",
+      "mounting_axes": "",
+      "calibration_file": ""
+    },
+    {
+      "id": "shank",
+      "mounting_axes": "",
+      "calibration_file": ""
+    }
+  ],
+  "synchronization": {
+    "reference_device": "",
+    "event_method": "",
+    "offset_us": null,
+    "uncertainty_us": null,
+    "drift_test_file": ""
+  },
+  "event_labels_file": "",
+  "quality_report_file": "",
+  "exclusion_rules_set_before_collection": "",
+  "adverse_events_or_artifacts": "",
+  "review_status": "NOT REVIEWED"
+}

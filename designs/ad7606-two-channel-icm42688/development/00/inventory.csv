@@ -1,0 +1,6 @@
+item,manufacturer,part_number,revision,quantity,photo_front,photo_back,verified_pinout_source,notes
+ESP32,Espressif,ESP32-S3-DevKitC-1 N8R8,,1,,,,
+ADC,RoboticsBD,RBD-3184 AD7606,,1,,,,
+Foot IMU,MikroElektronika,MIKROE-4237,,1,,,,
+Shank IMU,MikroElektronika,MIKROE-4237,,1,,,,
+MyoWare,Advancer Technologies,MyoWare 2.0 bare,,2,,,,

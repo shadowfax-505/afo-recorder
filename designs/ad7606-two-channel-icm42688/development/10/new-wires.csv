@@ -1,0 +1,9 @@
+Wire,Stage,Net,From,To,Instructions
+wire-049,10,GND,myo1:GND solder pad,DIST1:c11,"Use bare-sensor RAW, VIN and GND pads; no person attached during instrument tests."
+wire-052,10,GND,myo2:GND solder pad,DIST1:c12,"Use bare-sensor RAW, VIN and GND pads; no person attached during instrument tests."
+wire-103,10,3V0A,myo1:VIN solder pad,DIST1:b27,"Use bare-sensor RAW, VIN and GND pads; no person attached during instrument tests."
+wire-105,10,3V0A,myo2:VIN solder pad,DIST1:d27,"Use bare-sensor RAW, VIN and GND pads; no person attached during instrument tests."
+wire-119,10,RAW0,BB1:b2,DIST1:a31,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-120,10,RAW0,myo1:RAW solder pad,DIST1:b31,"Use bare-sensor RAW, VIN and GND pads; no person attached during instrument tests."
+wire-125,10,RAW1,BB2:b2,DIST1:a34,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-126,10,RAW1,myo2:RAW solder pad,DIST1:b34,"Use bare-sensor RAW, VIN and GND pads; no person attached during instrument tests."

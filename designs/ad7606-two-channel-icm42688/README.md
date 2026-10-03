@@ -2,6 +2,8 @@
 
 Project lead: Muttakin Rahman
 
+**Begin sequential development:** [stage-by-stage build and evidence](development/index.html) · [understand the system](docs/understanding-the-recorder.html) · [supervisor briefing PDF](docs/understanding-the-recorder.pdf).
+
 [Open the assembly workspace](viewer/build.html) · [See the complete system](docs/whole-system.html) · [Short lab sequence](docs/lab-quickstart.html) · [Applied breadboard findings](docs/breadboard-refinements.html) · [Current breadboard lab kit](breadboard/breadboard-lab-kit.zip) · [Laptop setup](docs/laptop-setup.html) · [Download checks](docs/download-checks.html) · [Complete connection tables](docs/build-guide.html) · [Integrated verification](docs/integrated-verification.html)
 
 This package is the fixed two-input recorder: two bare MyoWare 2.0 RAW sensors, an AD7606 and two ICM-42688-P carriers. Current recording firmware **ad7606-2ch-1.6** retains the ADC task wake-up and IMU timestamp corrections exposed by integrated execution, and additionally rejects a missing BUSY assertion after CONVST instead of accepting stale data. The electrical design and the five other configurations are unchanged.

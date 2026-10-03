@@ -1,0 +1,8 @@
+check_id,acceptance,measured_value,unit,uncertainty,instrument_settings,evidence_file,outcome,operator,date,review_notes
+3-module,AVCC 4.75–5.25 V; VIO 3.23–3.43 V (project target); internal reference and serial strap verified; ESP32-safe output levels; RANGE/OS low,,,,,,NOT TESTED,,,
+3-common-trigger,GPIO11 through DIST1 a29/b29/c29 reaches both CVA/CVB; common rising edge,,,,,,NOT TESTED,,,
+3-dc,1 V / 2 V ideal 6554 / 13107; compute from measured source; ±65 codes plus measured uncertainty; swapping sources swaps EMG identities,,,,,,NOT TESTED,,,
+3-prime,Normally one discarded read per diagnostic boot; no measurement CONVST or saved sample; first measured DC codes correct,,,,,,NOT TESTED,,,
+3-serial,"128 clocks; 8 MHz; mode 2 idle HIGH / falling-edge sample; eight signed words V1–V8, only V1/V2 exported",,,,,,NOT TESTED,,,
+3-busy,CONVST high ≥25 ns; conversion 3.45–4.2 µs with oversampling off; SCLK after BUSY fall; 80 µs is fault deadline only,,,,,,NOT TESTED,,,
+3-rate,125 µs intervals ±1%; 8 kHz ±0.1% over 60 s of acquisition; exclude diagnostic print pauses; no unexplained timeout/overrun,,,,,,NOT TESTED,,,

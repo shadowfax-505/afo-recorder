@@ -1,0 +1,10 @@
+Stage,Reference,Value,Board,Note
+5,R110,3.3k,BB2,DIP/passive fixture; check package pinout
+5,R111,1M,BB2,DIP/passive fixture; check package pinout
+5,C110,47nF,BB2,DIP/passive fixture; check package pinout
+5,R112,3.3k,BB2,DIP/passive fixture; check package pinout
+5,C111,47nF,BB2,DIP/passive fixture; check package pinout
+5,R114,100,BB2,DIP/passive fixture; check package pinout
+5,C112,1nF,BB2,DIP/passive fixture; check package pinout
+5,UB2,MCP6002-I/P DIP8; same amplifier family as PCB MCP6004,BB2,DIP/passive fixture; check package pinout
+5,CB2,100nF local bypass,BB2,DIP/passive fixture; check package pinout

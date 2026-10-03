@@ -1,0 +1,320 @@
+{
+  "schema_version": 1,
+  "build": "ad7606-two-channel-icm42688",
+  "firmware": "ad7606-2ch-1.6",
+  "physical_status": "NOT TESTED",
+  "stages": [
+    {
+      "stage": 0,
+      "title": "Identify the exact build",
+      "prerequisite": "None",
+      "firmware": "None",
+      "actions": "Inventory only; no power. Photograph both sides of every module, connector and jumper with readable markings. Identify the protected battery and charger separately. List instruments, calibration dates and available dummy loads.",
+      "evidence": [
+        "inventory.csv",
+        "photos of all module markings and both PCB faces",
+        "instrument list"
+      ],
+      "caution": "No component substitutions or unidentified module pin positions. Missing equipment becomes a specific pending test, not an assumed pass.",
+      "checks": []
+    },
+    {
+      "stage": 1,
+      "title": "Qualify power one rail at a time",
+      "prerequisite": "Stage 0 reviewed",
+      "firmware": "None",
+      "actions": "1A: digital regulator alone. 1B: 5 V regulator alone. 1C: 3 V analog regulator fed from the accepted digital rail. 1D: midpoint buffer. Test idle first, then dummy loads. Keep ESP32, ADC, IMUs and MyoWare disconnected. Use the selected regulator modules; do not breadboard switching IC loops.",
+      "evidence": [
+        "Rail DMM readings",
+        "startup and load-step scope traces",
+        "supply current/limit",
+        "dummy-load resistance and rating",
+        "temperature versus time"
+      ],
+      "caution": "Measure polarity before enabling. Begin with unloaded module current limit appropriate to its documented startup requirement; log the chosen setting. If limiting occurs, disable and diagnose rather than repeatedly increasing it. No universal safe current limit is assumed.",
+      "checks": [
+        {
+          "id": "1-polarity",
+          "acceptance": "No rail short; correct source polarity; lab supply only, battery disconnected"
+        },
+        {
+          "id": "1-digital",
+          "acceptance": "3.23\u20133.43 V at 0/100/300 mA; ripple \u226450 mVpp (20 MHz bandwidth); provisional project screen"
+        },
+        {
+          "id": "1-analog",
+          "acceptance": "2.94\u20133.06 V at 0/20/50 mA; midpoint 0.49\u20130.51 \u00d7 measured analog rail; ripple \u226410 mVpp; provisional project screen"
+        },
+        {
+          "id": "1-adc-supply",
+          "acceptance": "4.8\u20135.2 V at 10\u201350 mA; never exceed 5.25 V during startup"
+        }
+      ]
+    },
+    {
+      "stage": 2,
+      "title": "Controller and controls",
+      "prerequisite": "Stage 1 accepted",
+      "firmware": "diagnostic-controller",
+      "actions": "Add controller, button, LEDs and USB sense. Connect only according to the existing exact contact table. Check 20 boots/programming cycles, then USB sense attached/absent. Do not connect both external regulation and an unqualified DevKit USB power feed.",
+      "evidence": [
+        "Complete serial log",
+        "binary SHA-256",
+        "photos",
+        "20-cycle table",
+        "GPIO21 voltage both states",
+        "rail measurements under controller load"
+      ],
+      "caution": "The diagnostic intentionally allows instrumented USB operation. It does not itself prove the recording interlock; repeat the actual recording inhibition test at stage 7.",
+      "checks": [
+        {
+          "id": "2-controller",
+          "acceptance": "20 programming/reset cycles without failure; buttons and LEDs match controls"
+        },
+        {
+          "id": "2-usb",
+          "acceptance": "GPIO21 LOW attached / HIGH absent; attachment indicator 1/0; no USB VBUS feed into regulated 5 V; DevKit USB sockets empty"
+        }
+      ]
+    },
+    {
+      "stage": 3,
+      "title": "ADC module and two DC inputs",
+      "prerequisite": "Stage 2 accepted",
+      "firmware": "diagnostic-adc",
+      "actions": "3A: qualify module power/straps with ESP32 signal leads disconnected. 3B: add shared CVA/CVB trigger, BUSY, reset and SPI. Keep unused analog inputs at their documented levels. Apply measured 1 V/2 V DC and swap them. Do not connect analog buffers yet.",
+      "evidence": [
+        "Module continuity table and strap close-ups",
+        "VIO/AVCC/reference voltages",
+        "raw logic trace with RESET, CONVST, BUSY, CS, SCLK and DOUTA",
+        "serial windows",
+        "both measured DC voltages before/after swap"
+      ],
+      "caution": "AD7606 has no register identity or frame CRC. Prove identity, range and channel order using known voltages. DB7 is DOUTA in serial mode; do not infer header orientation from the chip pin numbers.",
+      "checks": [
+        {
+          "id": "3-module",
+          "acceptance": "AVCC 4.75\u20135.25 V; VIO 3.23\u20133.43 V (project target); internal reference and serial strap verified; ESP32-safe output levels; RANGE/OS low"
+        },
+        {
+          "id": "3-common-trigger",
+          "acceptance": "GPIO11 through DIST1 a29/b29/c29 reaches both CVA/CVB; common rising edge"
+        },
+        {
+          "id": "3-dc",
+          "acceptance": "1 V / 2 V ideal 6554 / 13107; compute from measured source; \u00b165 codes plus measured uncertainty; swapping sources swaps EMG identities"
+        },
+        {
+          "id": "3-prime",
+          "acceptance": "Normally one discarded read per diagnostic boot; no measurement CONVST or saved sample; first measured DC codes correct"
+        },
+        {
+          "id": "3-serial",
+          "acceptance": "128 clocks; 8 MHz; mode 2 idle HIGH / falling-edge sample; eight signed words V1\u2013V8, only V1/V2 exported"
+        },
+        {
+          "id": "3-busy",
+          "acceptance": "CONVST high \u226525 ns; conversion 3.45\u20134.2 \u00b5s with oversampling off; SCLK after BUSY fall; 80 \u00b5s is fault deadline only"
+        },
+        {
+          "id": "3-rate",
+          "acceptance": "125 \u00b5s intervals \u00b11%; 8 kHz \u00b10.1% over 60 s of acquisition; exclude diagnostic print pauses; no unexplained timeout/overrun"
+        }
+      ]
+    },
+    {
+      "stage": 4,
+      "title": "First analog input",
+      "prerequisite": "Stage 3 accepted",
+      "firmware": "diagnostic-adc",
+      "actions": "Build only BB1 using MCP6002 and the exact placement/contact drawing. Keep ADC V2 at a known DC level. Check local decoupling, midpoint, then 1.5 V-biased 100 mVpp at 20, 100, 500 and 1000 Hz. Keep generator output within 0.1-2.9 V including turn-on transients.",
+      "evidence": [
+        "RAW1 and V1 simultaneous scope traces",
+        "amplitude/phase at each frequency",
+        "DC offset",
+        "unplugged settling",
+        "generator output settings and termination",
+        "serial mean/RMS"
+      ],
+      "caution": "Measure the voltage at the breadboard, not just the generator display: a 50-ohm setting into a high-impedance load can change delivered amplitude. Do not attach electrodes.",
+      "checks": [
+        {
+          "id": "4-response",
+          "acceptance": "1.5 V + 100 mVpp synthetic input; unity DC; measured response within simulated tolerance envelope plus \u00b10.5 dB margin; no person attached"
+        },
+        {
+          "id": "4-bias",
+          "acceptance": "Unplugged RAW settles 1.50 V \u00b130 mV; use safe 0.1\u20132.9 V sources for connected 3 V analog stage"
+        }
+      ]
+    },
+    {
+      "stage": 5,
+      "title": "Second analog input and interaction",
+      "prerequisite": "Stage 4 accepted",
+      "firmware": "diagnostic-adc",
+      "actions": "Build BB2 and repeat every BB1 test. Swap test sources to prove identities. Drive one channel while the other is held at midpoint, then reverse. Measure idle, controller-active and later Wi-Fi-active noise separately.",
+      "evidence": [
+        "Both response tables",
+        "10-minute diagnostic error log",
+        "baseline RMS/PSD with bandwidth",
+        "driven and quiet channel amplitudes",
+        "cable-layout photos"
+      ],
+      "caution": "Provisional crosstalk screen is below -40 dB relative to the driven channel. A noise floor can only establish an upper bound: report that bound rather than claiming an exact crosstalk value. Research noise targets depend on the smallest effect to detect.",
+      "checks": [
+        {
+          "id": "5-identity",
+          "acceptance": "Repeat BB1 tests on BB2; exactly EMG1/2; common frame timestamp; no extra exported muscle channels"
+        },
+        {
+          "id": "5-crosstalk",
+          "acceptance": "Provisional <\u221240 dB crosstalk screen; generator feedthrough measured separately; preserve RMS noise and 10 min error log"
+        }
+      ]
+    },
+    {
+      "stage": 6,
+      "title": "Foot IMU, then shank IMU",
+      "prerequisite": "Stage 5 accepted; ADC remains attached",
+      "firmware": "diagnostic-imu-one, then diagnostic-imu-two",
+      "actions": "6A: foot MIKROE-4237 carrier at 3.3 V, SPI jumpers verified. 6B: add shank. Test each in six static orientations and rotate one at a time. Capture separate INT1 lines. These diagnostics also run the ADC; they are not standalone IMU-only images.",
+      "evidence": [
+        "WHO/readback serial results",
+        "FIFO and interrupt counts over 60 s",
+        "six-face accelerometer means",
+        "stationary gyro means",
+        "axis photographs",
+        "raw IRQ/SPI timing capture"
+      ],
+      "caution": "No shared sensor clock is assumed. Counter wraps and different startup counts are normal; equal row numbers do not identify simultaneous foot/shank samples.",
+      "checks": [
+        {
+          "id": "6-foot",
+          "acceptance": "SPI JP2\u2013JP4 1\u20132; 3.3 V; WHO_AM_I 0x47/readback; foot CS GPIO7 / INT1 GPIO16; correct axis signs"
+        },
+        {
+          "id": "6-shank",
+          "acceptance": "Shank CS GPIO15 / INT1 GPIO17; 200 Hz \u00b11% per sensor over 60 s; no FIFO/missing-IRQ/invalid-packet errors"
+        },
+        {
+          "id": "6-stationary",
+          "acceptance": "\u00b116 g / \u00b12000 \u00b0/s configured; gravity axis \u00b11 g within \u00b10.1 g, cross axes within \u00b10.1 g; gyro per axis <5 \u00b0/s before calibration"
+        }
+      ]
+    },
+    {
+      "stage": 7,
+      "title": "Original SD recording",
+      "prerequisite": "Stage 6 accepted",
+      "firmware": "breadboard-sd-only-2ch",
+      "actions": "7A: short known-signal recording and conversion. 7B: 60-minute continuous run. 7C: absent/full-card and five interrupted-write trials on expendable media. Test recording USB inhibition with synthetic signals only. Stop and wait for recording LED off before removing media.",
+      "evidence": [
+        "Unmodified .afolog files",
+        "converter command/version",
+        "metadata, quality report and CSV excerpts",
+        "stop reason",
+        "serial log",
+        "card make/capacity/filesystem",
+        "scope trace of continuous conversion cadence"
+      ],
+      "caution": "Keep damaged originals; do not overwrite them with recovered files. END is not proof of successful final filesystem sync. Check close/sync faults and counters independently. Diagnostic printing pauses cannot be used as continuous-acquisition evidence.",
+      "checks": [
+        {
+          "id": "7-format",
+          "acceptance": "AD7606 / two inputs / ICM / breadboard metadata; RAW code \u00d75/32768 V; scale 1 midpoint offset 0; retain raw IMU counters IRQ anchors read start/end and timing flags"
+        },
+        {
+          "id": "7-endurance",
+          "acceptance": "CMD GPIO47 CLK GPIO39 D0 GPIO40; container CRC32 and counters pass; no unexplained saved gaps/queue errors; END and expected stop reason; no sync/close failure"
+        },
+        {
+          "id": "7-usb",
+          "acceptance": "Refuse start with USB attached; attach during synthetic recording gives explicit stop/error; no person attached"
+        },
+        {
+          "id": "7-storage-faults",
+          "acceptance": "No-card refuses start; full-card explicit stop; five controlled interruptions preserve only CRC-valid records and report truncated tail/missing END"
+        },
+        {
+          "id": "7-timestamps",
+          "acceptance": "Normal 65.536 ms counter wraps handled; host estimate flag 2 retained; startup count differences not row-aligned; no unexplained gap/invalid/timing rejection"
+        }
+      ]
+    },
+    {
+      "stage": 8,
+      "title": "Wi-Fi while SD records",
+      "prerequisite": "Stage 7 accepted",
+      "firmware": "breadboard-record-2ch",
+      "actions": "First repeat a short baseline without a receiver, then a 60-minute SD+Wi-Fi trial. Interrupt and reconnect laptop reception. Compare common record identities, codes and timestamps; never fill missing preview data silently.",
+      "evidence": [
+        "Original SD file AND laptop raw archive",
+        "receiver log/quality",
+        "disconnect times",
+        "laptop OS/software version",
+        "both converted outputs",
+        "new rail/noise captures under wireless load"
+      ],
+      "caution": "A smooth dashboard is not an acceptance test. Wireless loss must be visible, while independently checking that SD did not lose records.",
+      "checks": [
+        {
+          "id": "8-live",
+          "acceptance": "60 min; only EMG1/2; explicit preview losses; independently audit original SD counters/CRC/END/stop and confirm no unexplained saved loss"
+        },
+        {
+          "id": "8-disconnect",
+          "acceptance": "Disconnect/reconnect produces visible preview gaps; compare identities codes timestamps and stop/error indications without filling missing data"
+        }
+      ]
+    },
+    {
+      "stage": 9,
+      "title": "Battery and full-load regression",
+      "prerequisite": "Stage 8 accepted",
+      "firmware": "breadboard-record-2ch",
+      "actions": "Remove both lab supply leads. Check protected pack polarity before connection. Log actual runtime for at least two hours, voltage/current/temperature and low-battery events; repeat 20 starts/stops. Firmware session limit is two hours: document restart if runtime testing continues.",
+      "evidence": [
+        "Timestamped battery log",
+        "pack rating/age/protection details",
+        "start/stop table",
+        "resulting original files",
+        "peak-current and voltage-dip captures using the approved no-person bench arrangement"
+      ],
+      "caution": "Battery protection does not provide patient isolation. Battery warning/stop thresholds are firmware decisions, not proof that the pack protection trips correctly. Do not bypass protection or intentionally overdischarge.",
+      "checks": [
+        {
+          "id": "9-battery",
+          "acceptance": "Both lab-supply leads removed; \u22652 h measured runtime; 20 repeatable startups/shutdowns; complete 60 min trial; record pack voltage age temperature and events"
+        }
+      ]
+    },
+    {
+      "stage": 10,
+      "title": "MyoWare integration and research readiness",
+      "prerequisite": "Stage 9 accepted; research protocol review separate",
+      "firmware": "breadboard-record-2ch",
+      "actions": "10A: verify VIN/GND/RAW routing and sensor integration with no person attached. 10B: approved supervised mounting protocol with all USB, chargers and instruments removed before electrodes attach. 10C: repeated placement, synchronized reference and labeled pilot tasks.",
+      "evidence": [
+        "Pseudonymous trial manifest",
+        "placement/axis diagrams",
+        "calibration files",
+        "AFO/footwear/condition labels",
+        "event/reference timestamps",
+        "original recordings and quality",
+        "protocol approval reference, not identifiable consent documents"
+      ],
+      "caution": "Engineering stage completion does not authorize participants. Match sensor electrode spacing to the study and document deviations from SENIAM. AFO pressure, cable traction and movement artifact can alter EMG. Keep participant identity outside the project repository.",
+      "checks": [
+        {
+          "id": "10-sensor",
+          "acceptance": "Correct VIN/GND/RAW pads and supply; no saturation or cabling fault; distinguish RAW volts from electrode-referred EMG"
+        },
+        {
+          "id": "10-wearable",
+          "acceptance": "Consent and safety review complete; mounting strain relief/AFO clearance checked; no lab instruments mains USB or charging while electrodes are attached"
+        }
+      ]
+    }
+  ]
+}

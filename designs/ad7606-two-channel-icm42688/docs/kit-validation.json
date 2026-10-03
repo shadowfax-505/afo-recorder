@@ -2,14 +2,14 @@
   "scope": "Extracted AD7606 fixed-two ICM breadboard kit",
   "hardware_measured": false,
   "physical_measurements_completed": 0,
-  "archive_sha256": "8420e24af6af651801d0b1cf58cf92245b25971e6b0bdbdc29f0185eb754e1bb",
+  "archive_sha256": "202445b995ffeacfef849c126445e9eff7b739de2c6629f9cb09b91fe777e499",
   "csv_test_environment": {
     "python": "3.14.7",
     "matplotlib_installed": false
   },
   "integrity_and_example": {
     "status": "PASS",
-    "package_files_verified": 234,
+    "package_files_verified": 328,
     "recording_sha256": "af8ac32aee08bd2fadbcc7370bded2c4383a52524bea9a1e56408e7d721f95b6",
     "converted_counts": {
       "emg": 10041,
@@ -105,30 +105,18 @@
     },
     "signals.svg": {
       "bytes": 82472,
-      "sha256": "bfab37a8e9bac0648a06f832f66c37bf9afceb0f377082dcca1ef78eb1fc94b3"
+      "sha256": "d3e9f72d77c864d90347e6fc447ba404d50cafbddc2acc42d53fd146169da21d"
     }
   },
   "tampered_recording_rejected": true,
   "status": "PASS",
-  "browser": {
-    "status": "PASS",
-    "external_assets_blocked": true,
-    "csp_connect_src": "self",
-    "requests": 22,
-    "failed_requests": [],
-    "console_errors": 0,
-    "views_checked": [
-      "complete assembly, stage 10",
-      "stage-three instructions",
-      "DB7/DOUTA wire inspector",
-      "laptop guide",
-      "download-check report"
-    ],
-    "proof_image_sha256": "6adc87eacaa59e2df1a3d348ad930aff158b90281ff24708fdcea87aabd6f4e3",
-    "note": "Browser checked independently; wire curves and module placement remain illustrative.",
-    "tested_archive_sha256": "8420e24af6af651801d0b1cf58cf92245b25971e6b0bdbdc29f0185eb754e1bb"
-  },
-  "verification_runner_sha256": "e3a8b31eeec637599462f7b818d95bed78df9a88cdfa4e9ee7778990d7db8623",
-  "date": "2026-10-03",
-  "scope_limit": "Laptop/asset checks on captured synthetic data; zero physical measurements."
+  "date": "2026-10-04",
+  "documentation_checks": {
+    "stage_folders": 11,
+    "wire_rows": 184,
+    "other_design_files_unchanged": 2256,
+    "intake_tests_passed": 5,
+    "pdf_pages_visually_reviewed": 7,
+    "physical_measurements_completed": 0
+  }
 }

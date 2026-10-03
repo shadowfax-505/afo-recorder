@@ -1,0 +1,2 @@
+Wire,Stage,Net,From,To,Probe_at,Ground_return,Expected_or_purpose,Connection_rule
+wire-172,2,USB_PRESENT_N,esp:J3.18 / GPIO21,DIST1:c51,esp:J3.18 / GPIO21,Nearby listed GND lead/contact; common instrument ground,GPIO21 is LOW when external USB is attached and HIGH when absent; the diagnostic attachment indicator prints the inverse. USB VBUS is sense-only; leave both DevKit USB sockets empty.,"High-impedance 3.3 V-compatible probe; clip existing contact, no second jumper in an occupied hole; connect only after module qualification; no person attached"

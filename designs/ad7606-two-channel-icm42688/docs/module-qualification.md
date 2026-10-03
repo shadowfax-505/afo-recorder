@@ -29,3 +29,8 @@ The selected carrier is MIKROE-4237 6DOF IMU 14 Click; use its included manufact
 ## Supplies and bare MyoWare
 
 Verify regulator VIN/GND/VOUT silkscreen and lead polarity before attachment. For bare MyoWare 2.0 use VIN, GND and RAW solder pads; ENV and RECT are different signals. Front and back views are mirrored. Follow the [MyoWare advanced guide](https://cdn.sparkfun.com/assets/learn_tutorials/1/9/5/6/MyoWare_v2_AdvancedGuide-Updated.pdf). USB, laboratory equipment and chargers remain disconnected during electrode-attached use.
+
+
+### Acceptance hierarchy for this active build
+
+The sequential build uses 3.23–3.43 V at VIO as the project target, measured at the module. Wider qualification windows elsewhere describe a gross check, not permission to skip this target or the ESP32 input-level check. AD7606 AVCC operating limits are 4.75–5.25 V; the project rail target is 4.80–5.20 V. Record meter uncertainty, startup peaks and loaded voltages. Midpoint acceptance is 0.49–0.51 times the actual analog rail, rather than an independent fixed nominal window.

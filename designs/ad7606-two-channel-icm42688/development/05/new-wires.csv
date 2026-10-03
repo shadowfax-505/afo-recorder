@@ -1,0 +1,9 @@
+Wire,Stage,Net,From,To,Instructions
+wire-023,5,GND,BB2:d6,DIST1:d2,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-053,5,GND,clamp2:CHIP_PAD_1 → JP1.2,DIST1:d12,Use the specified adapter pad-to-header mapping; check solder orientation and unpowered continuity.
+wire-101,5,3V0A,BB2:h10,DIST1:d26,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-106,5,3V0A,clamp2:CHIP_PAD_2 → JP1.3,DIST1:e27,Use the specified adapter pad-to-header mapping; check solder orientation and unpowered continuity.
+wire-123,5,AIN1P,BB2:c28,DIST1:a33,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-124,5,AIN1P,adc:V2 / CN2 photo label,DIST1:b33,"Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+wire-127,5,RC1A,BB2:d4,DIST1:a35,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-128,5,RC1A,clamp2:CHIP_PAD_3 → JP2.3,DIST1:b35,Use the specified adapter pad-to-header mapping; check solder orientation and unpowered continuity.
