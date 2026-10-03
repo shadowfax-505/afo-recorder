@@ -1,0 +1,78 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><link rel="icon" href="data:,"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Checks on the downloaded breadboard kit — AD7606 two-channel</title><style>body{margin:0;background:#f4f3ee;color:#172523;font:17px/1.65 system-ui}main{max-width:1060px;margin:auto;padding:48px 28px}h1{font-size:2.4rem;line-height:1.15}h2{margin-top:2.5em}a{color:#176454}table{border-collapse:collapse;font-size:14px;display:block;overflow:auto}td,th{padding:12px;border:1px solid #ccd4ce;text-align:left;vertical-align:top}th{background:#e2eae4}code{font-size:.9em}pre{overflow:auto;padding:16px;background:#e2eae4;border-radius:6px}p{max-width:85ch}img{max-width:100%;height:auto}nav{font-size:14px;border-bottom:1px solid #ccd4ce;padding-bottom:16px}blockquote{border-left:3px solid #809c8a;margin-left:0;padding-left:20px}@media(max-width:640px){main{padding:28px 18px}h1{font-size:1.9rem}}@media print{body{background:white}main{padding:0}table{display:table;font-size:10px}}</style></head><body><main><nav><a href="../viewer/build.html">Assembly workspace</a> / <a href="breadboard-refinements.html">Applied findings</a> / <a href="lab-quickstart.html">Lab sequence</a> / <a href="build-guide.html">Wire tables</a> / <a href="laptop-setup.html">Laptop setup</a> / <a href="data-interpretation.html">Saved data</a> / <a href="integrated-verification.html">Verification</a></nav><h1>Checks on the downloaded breadboard kit</h1>
+<p><strong>AD7606 · two EMG inputs · ICM-42688-P.</strong> The current <a href="../breadboard/breadboard-lab-kit.zip">lab kit</a> was extracted into a temporary folder outside the project. These checks run its actual laptop files, rather than relying on imports or assets available only in the repository. See the <a href="kit-validation.json">machine-readable receipt</a> for the tested archive hash and results. No physical recorder was connected.</p>
+<h2>Two handoff gaps corrected</h2>
+<p>The earlier kit omitted <code>simulations/run_acquisition.py</code>, which its reader regression tests import. That source-only synthetic fixture is now included, with a <a href="../host/run_tests.py">test runner</a> that sets the local import paths. Legacy four-channel reader tests remain; this fixed-two hardware still rejects four-channel firmware.</p>
+<p>The earlier start command requested plots without explaining their Matplotlib dependency. The <a href="laptop-setup.html">laptop setup guide</a> now gives a Python-only <code>--no-plots</code> route, an optional plotting environment, Windows command equivalents, new-output-folder rules and the meaning of converter exit codes. Converter behavior and the recording format are unchanged.</p>
+<p>The kit also includes a frozen <a href="../breadboard/recording-example.afolog">synthetic recording</a>, its <a href="../breadboard/recording-example.json">provenance receipt</a> and an <a href="../host/check_package.py">integrity/data check</a>. Its bytes match the previously preserved Wokwi capture. It is not a new hardware measurement.</p>
+<h2>Results and what they establish</h2>
+<table>
+<thead>
+<tr>
+<th>Check</th>
+<th>Observed result</th>
+<th>Scope</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Packaged host suite in a Python environment without Matplotlib</td>
+<td>All 40 tests passed, including corruption/recovery, enabled channels, legacy decoding and wireless gaps</td>
+<td>Reader/telemetry code and the fixed-two circuit/firmware contract; the C guard test uses a host compiler</td>
+</tr>
+<tr>
+<td>Frozen saved-file conversion</td>
+<td>10,041 EMG frames, 263 foot samples, 252 shank samples, one status and one END; no detected saved-file gap</td>
+<td>Correct decoding of this captured synthetic session</td>
+</tr>
+<tr>
+<td>Units and timing flags</td>
+<td>Exactly two EMG columns; signed code × 5 / 32768 voltage scaling; all 515 IMU timing-estimate flags preserved</td>
+<td>Interpretation; no measured calibration or timing alignment</td>
+</tr>
+<tr>
+<td>Optional plot environment</td>
+<td>The documented dependency installation completed; default conversion produced PNG and SVG plots</td>
+<td>Python plotting workflow on this macOS/Python environment</td>
+</tr>
+<tr>
+<td>Packaged receiver with captured UDP input</td>
+<td>1,123 packets replayed over loopback; 10,557 archived records preserved byte for byte</td>
+<td>Laptop socket, API and archive path; no radio or ESP32 Wi-Fi execution</td>
+</tr>
+<tr>
+<td>Saved file versus wireless archive</td>
+<td>Wireless EMG sequence 5330 remained missing; saved file retained it. Wireless conversion returned code 2 and reported the gap</td>
+<td>Separate quality reporting; missing wireless data was not filled or presented as saved-file loss</td>
+</tr>
+<tr>
+<td>Corrupt and duplicate UDP packets</td>
+<td>Both rejected without adding measurements</td>
+<td>Receiver fault handling</td>
+</tr>
+<tr>
+<td>Modified example file</td>
+<td>Package check rejected the changed file</td>
+<td>Manifest integrity checking</td>
+</tr>
+<tr>
+<td>Extracted viewer with external assets blocked</td>
+<td>Complete assembly, stage-three instructions, DB7/DOUTA wire inspection and laptop guide loaded with no failed asset requests or console errors</td>
+<td>Local asset closure and UI behavior; geometry and wire bends remain illustrative</td>
+</tr>
+</tbody>
+</table>
+<p>The example's host-derived EMG rate is about 7,983.86 Hz in Wokwi. Its saved-file integrity result does not certify the physical <strong>8 kHz ±0.1%</strong> gate. The simulator's schedule, substitute storage and injected battery reading do not establish real sample-rate accuracy, SDMMC behavior or battery runtime.</p>
+<h2>Repeat the checks</h2>
+<p>For the extracted kit:</p>
+<pre><code class="language-sh">python3 host/check_package.py --out package-check.json
+python3 host/run_tests.py
+python3 host/convert.py breadboard/recording-example.afolog --out example-csv --no-plots
+</code></pre>
+<p>The test suite needs a C compiler named <code>cc</code> for one firmware contract test. CSV conversion and the package check need only Python. Preserve the kit manifest and your receipts; use new result paths rather than overwriting earlier evidence.</p>
+<p>For the repository-level extraction and captured-UDP replay, run <a href="../design/verify_breadboard_download.py">the download verifier</a> from this variant's folder:</p>
+<pre><code class="language-sh">python3 design/verify_breadboard_download.py --python /path/to/test-python --out /path/to/new-results
+</code></pre>
+<p>Add <code>--plot-python /path/to/plot-environment/bin/python</code> to check plots as well. This verifier uses the preserved UDP capture in the full repository; that historical capture is not duplicated into the small lab kit. The <a href="kit-validation.json">receipt</a> records whether plotting ran and whether Matplotlib was present in the CSV-test environment. Browser checks were performed separately against a loopback server restricted to local resources.</p>
+<h2>What still needs a lab</h2>
+<p>Received-module straps, output logic levels, reference voltage, power startup/ripple, analog noise/crosstalk, physical SPI edges, actual SDMMC endurance, radio reception, temperature and battery runtime remain unmeasured. The six laboratory firmware profiles are unchanged and have not been flashed to an assembled recorder. All 30 rows of the <a href="bench-checklist.csv">bench checklist</a> remain <strong>NOT TESTED</strong>. Continue with the <a href="lab-quickstart.html">lab sequence</a> when hardware and instruments are available; these software checks do not recommend a PCB order.</p>
+</main></body></html>

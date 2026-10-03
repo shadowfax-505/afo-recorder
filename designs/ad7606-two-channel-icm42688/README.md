@@ -2,9 +2,11 @@
 
 Project lead: Muttakin Rahman
 
-[Open the assembly workspace](viewer/build.html) · [See the complete system](docs/whole-system.html) · [Short lab sequence](docs/lab-quickstart.html) · [Applied breadboard findings](docs/breadboard-refinements.html) · [Current breadboard lab kit](breadboard/breadboard-lab-kit.zip) · [Complete connection tables](docs/build-guide.html) · [Integrated verification](docs/integrated-verification.html)
+[Open the assembly workspace](viewer/build.html) · [See the complete system](docs/whole-system.html) · [Short lab sequence](docs/lab-quickstart.html) · [Applied breadboard findings](docs/breadboard-refinements.html) · [Current breadboard lab kit](breadboard/breadboard-lab-kit.zip) · [Laptop setup](docs/laptop-setup.html) · [Download checks](docs/download-checks.html) · [Complete connection tables](docs/build-guide.html) · [Integrated verification](docs/integrated-verification.html)
 
 This package is the fixed two-input recorder: two bare MyoWare 2.0 RAW sensors, an AD7606 and two ICM-42688-P carriers. Current recording firmware **ad7606-2ch-1.6** retains the ADC task wake-up and IMU timestamp corrections exposed by integrated execution, and additionally rejects a missing BUSY assertion after CONVST instead of accepting stale data. The electrical design and the five other configurations are unchanged.
+
+The breadboard lab kit now includes its regression fixture, a frozen synthetic recording and simple laptop check commands. All 40 packaged host tests pass outside the repository; CSV conversion works without plotting dependencies, and an optional Matplotlib environment produces plots. A captured-UDP loopback replay preserves the wireless gap separately from the intact saved file. See the [download-check report](docs/download-checks.html) for the tested ZIP hash and limits. These checks do not execute an assembled recorder.
 
 The current **v1.6 18-case integrated matrix passes** in Wokwi’s web editor. Saved nominal acquisition has no detected sample loss; wireless preview losses remain visible and do not alter the SD stream. Both current laptop socket/API/browser/archive replays pass. The historical v1.5 incomplete CLI ledger and source snapshot remain unchanged. The [current report](docs/integrated-verification.html) documents peripheral substitutions, the unqualified QEMU experiment and physical gates. No assembled recorder has been measured.
 

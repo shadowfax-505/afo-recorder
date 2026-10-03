@@ -1,0 +1,30 @@
+{
+  "kind": "frozen synthetic recording",
+  "hardware_measured": false,
+  "sha256": "af8ac32aee08bd2fadbcc7370bded2c4383a52524bea9a1e56408e7d721f95b6",
+  "bytes": 679808,
+  "original_project_file": "simulations/integrated-recorder/full-system/trace-validation/probe-run/simulated-recording.afolog",
+  "original_public_url": "https://shadowfax-505.github.io/afo-recorder/designs/ad7606-two-channel-icm42688/simulations/integrated-recorder/full-system/trace-validation/probe-run/simulated-recording.afolog",
+  "capture_origin": {
+    "hardware_measured": false,
+    "engine": "Wokwi web editor",
+    "project_url": "https://wokwi.com/projects/476662256690643969",
+    "saved_project_modified": false,
+    "temporary_scene": "Complete system plus input-only observer, verified in the editor before execution",
+    "serial_capture": "Actual visible Serial Monitor accessibility text",
+    "pin_capture": "Actual rendered Chips Console DOM innerText, including chip badges and split stdout chunks",
+    "capture_data_synthetic": true,
+    "native_instrument_test_data_used_as_recorder_evidence": false,
+    "image_elf_prefix": "aabb34031",
+    "full_session_vcd_retrieved": false
+  },
+  "counts": {
+    "emg": 10041,
+    "foot": 263,
+    "shank": 252,
+    "status": 1,
+    "end": 1
+  },
+  "timing_estimate_records": 515,
+  "note": "Unchanged bytes from the provenance-tagged Wokwi capture. Original untagged evidence is retained in the main project. This sample establishes reader behavior, not measured sensor performance."
+}

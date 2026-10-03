@@ -109,7 +109,8 @@ def validate():
 
     link_count = 0
     for filename in ['breadboard-refinements.html', 'lab-quickstart.html',
-                     'staged-build-guide.html', 'physical-assembly.html', 'firmware-build-guide.html']:
+                     'staged-build-guide.html', 'physical-assembly.html', 'firmware-build-guide.html',
+                     'laptop-setup.html', 'download-checks.html']:
         page = VARIANT / 'docs' / filename
         links = LinkReader()
         links.feed(page.read_text())
@@ -126,7 +127,9 @@ def validate():
               'firmware/main/board.h', 'firmware/builds/validation.json',
               'docs/breadboard-refinements.html', 'docs/lab-quickstart.html',
               'docs/staged-build-guide.html', 'docs/physical-assembly.html',
-              'docs/firmware-build-guide.html', 'design/validate_breadboard_guidance.py']
+              'docs/firmware-build-guide.html', 'docs/laptop-setup.html', 'docs/download-checks.html',
+              'host/check_package.py', 'host/run_tests.py', 'breadboard/recording-example.json',
+              'breadboard/recording-example.afolog', 'design/validate_breadboard_guidance.py']
     result = {'scope': 'AD7606 fixed-two ICM breadboard handoff', 'status': 'PASS',
               'wire_table_rows': len(wires), 'firmware_pin_comparisons': len(pins),
               'probe_contacts_verified': len(probes), 'compiled_profiles_hash_verified': len(profiles),

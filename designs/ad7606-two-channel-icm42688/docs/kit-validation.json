@@ -1,0 +1,134 @@
+{
+  "scope": "Extracted AD7606 fixed-two ICM breadboard kit",
+  "hardware_measured": false,
+  "physical_measurements_completed": 0,
+  "archive_sha256": "8420e24af6af651801d0b1cf58cf92245b25971e6b0bdbdc29f0185eb754e1bb",
+  "csv_test_environment": {
+    "python": "3.14.7",
+    "matplotlib_installed": false
+  },
+  "integrity_and_example": {
+    "status": "PASS",
+    "package_files_verified": 234,
+    "recording_sha256": "af8ac32aee08bd2fadbcc7370bded2c4383a52524bea9a1e56408e7d721f95b6",
+    "converted_counts": {
+      "emg": 10041,
+      "foot": 263,
+      "shank": 252,
+      "status": 1,
+      "end": 1
+    },
+    "imu_timing_estimate_records": 515,
+    "exported_emg_channels": 2,
+    "synthetic": true,
+    "research_ready": false,
+    "physical_measurements_completed": 0,
+    "note": "Integrity and saved-data checks only. Run host/run_tests.py separately; this command does not execute ESP32 hardware or test physical wiring."
+  },
+  "host_regression_tests": {
+    "status": "PASS",
+    "tests": 40,
+    "failures": 0
+  },
+  "saved_quality": {
+    "source_sha256": "af8ac32aee08bd2fadbcc7370bded2c4383a52524bea9a1e56408e7d721f95b6",
+    "synthetic": true,
+    "counts": {
+      "emg": 10041,
+      "foot": 263,
+      "shank": 252,
+      "status": 1,
+      "end": 1
+    },
+    "session_finalized": true,
+    "structurally_complete": true,
+    "no_detected_sample_loss": true,
+    "signal_checks_pass": true,
+    "research_ready": false,
+    "sequence_gaps": {
+      "emg": 0,
+      "foot": 0,
+      "shank": 0
+    },
+    "anomalies": {
+      "sequence_regressions": 0,
+      "timestamp_regressions": 0,
+      "emg_clipped_samples": 0,
+      "emg_out_of_range": 0,
+      "imu_invalid_samples": 0,
+      "imu_timestamp_anomalies": 0,
+      "timing_uncertain_records": 515,
+      "flagged_gap_records": 0
+    },
+    "emg_observed_skipped_slots": 0,
+    "emg_rate_from_host_timestamps_hz": 7983.860514640921,
+    "last_status": {
+      "timer_missed": 0,
+      "queue_dropped": 0,
+      "imu_errors": 0,
+      "fifo_overflows": 0,
+      "adc_errors": 0,
+      "emg_records": 10041,
+      "foot_records": 263,
+      "shank_records": 252,
+      "battery_mv": 3800,
+      "queue_high_water": 61
+    },
+    "issues": [],
+    "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
+    "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
+  },
+  "receiver_replay": {
+    "status": "PASS",
+    "input_udp_sha256": "55fb4849f6fce4f7f3d5196ad8e278054dc0f2f493ab6f5257a07098f80abe17",
+    "packets": 1123,
+    "archived_records": 10557,
+    "archived_records_byte_exact": true,
+    "missing_from_wireless": [
+      [
+        7,
+        5330
+      ]
+    ],
+    "wireless_conversion_exit": 2,
+    "wireless_loss_reported": true,
+    "original_saved_file_loss_reported": false,
+    "crc_corruption_rejected": true,
+    "duplicate_rejected": true,
+    "loopback_only": true,
+    "radio_tested": false
+  },
+  "plots": {
+    "signals.png": {
+      "bytes": 104581,
+      "sha256": "0ea9ad79c9c105b3851fadf6e9345f8372f20d67680cde98a291e65252609e43"
+    },
+    "signals.svg": {
+      "bytes": 82472,
+      "sha256": "bfab37a8e9bac0648a06f832f66c37bf9afceb0f377082dcca1ef78eb1fc94b3"
+    }
+  },
+  "tampered_recording_rejected": true,
+  "status": "PASS",
+  "browser": {
+    "status": "PASS",
+    "external_assets_blocked": true,
+    "csp_connect_src": "self",
+    "requests": 22,
+    "failed_requests": [],
+    "console_errors": 0,
+    "views_checked": [
+      "complete assembly, stage 10",
+      "stage-three instructions",
+      "DB7/DOUTA wire inspector",
+      "laptop guide",
+      "download-check report"
+    ],
+    "proof_image_sha256": "6adc87eacaa59e2df1a3d348ad930aff158b90281ff24708fdcea87aabd6f4e3",
+    "note": "Browser checked independently; wire curves and module placement remain illustrative.",
+    "tested_archive_sha256": "8420e24af6af651801d0b1cf58cf92245b25971e6b0bdbdc29f0185eb754e1bb"
+  },
+  "verification_runner_sha256": "e3a8b31eeec637599462f7b818d95bed78df9a88cdfa4e9ee7778990d7db8623",
+  "date": "2026-10-03",
+  "scope_limit": "Laptop/asset checks on captured synthetic data; zero physical measurements."
+}

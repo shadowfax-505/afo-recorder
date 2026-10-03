@@ -24,7 +24,8 @@ def collect_files():
     for folder in ['breadboard', 'viewer', 'docs', 'host']:
         for path in (VARIANT / folder).rglob('*'):
             if (not path.is_file() or '__pycache__' in path.parts or path.suffix in ['.pyc', '.zip']
-                    or path.name in ['breadboard-lab-kit.json', 'guidance-validation.json']):
+                    or path.name in ['breadboard-lab-kit.json', 'guidance-validation.json',
+                                     'kit-validation.json']):
                 continue
             files[path.relative_to(VARIANT).as_posix()] = path
     for name in ['CMakeLists.txt', 'sdkconfig.defaults']:
@@ -40,6 +41,8 @@ def collect_files():
         files['firmware/builds/' + name] = VARIANT / 'firmware/builds' / name
     for name in ['main.json', 'breadboard-gpio-map.json']:
         files['design/' + name] = VARIANT / 'design' / name
+    # Reader regression tests import this source-only synthetic queue fixture.
+    files['simulations/run_acquisition.py'] = VARIANT / 'simulations/run_acquisition.py'
     for name in ['README.md', 'THIRD_PARTY_NOTICES.md']:
         files[name] = VARIANT / name
     for name in ['LICENSE', 'THIRD_PARTY_NOTICES.md']:
@@ -100,8 +103,17 @@ No physical measurement has been completed or certified.
    and the offsets from its manifest. Keep the actual application hash with the trial.
    Breadboard SDMMC is CMD GPIO47 / CLK GPIO39 / D0 GPIO40.
 5. Convert an untouched SD copy with:
-   python3 host/convert.py trial.afolog --out trial-converted
+   python3 host/convert.py trial.afolog --out trial-converted --no-plots
    Audit the original SD file and laptop archive separately.
+
+Before building hardware, try the included synthetic recording:
+   python3 host/convert.py breadboard/recording-example.afolog --out example-csv --no-plots
+   python3 host/check_package.py
+   python3 host/run_tests.py
+The test suite needs a C compiler named cc for one firmware contract check.
+CSV conversion, file-integrity checks and Wi-Fi reception need only Python.
+For optional plots, install host/requirements.txt in a Python virtual environment.
+Read docs/laptop-setup.html for the commands, units and troubleshooting.
 
 Included firmware uses source set ad7606-2ch-1.6 and ESP-IDF v5.4.2. It has been
 cross-compiled, not flashed to an assembled recorder. The canonical validation
@@ -113,6 +125,8 @@ The viewer uses local assets and an HTTP server. Offline guides and wire tables
 are included. Evidence/manufacturing links outside this kit open the published
 project; those links were rewritten in packaged HTML only. Complete KiCad and
 historical simulation evidence remain in the main project repository.
+The included run_acquisition.py is a source-only synthetic regression fixture.
+The example is a frozen synthetic recording, not an assembled-recorder measurement.
 
 Check the received AD7606 board's supplies, logic levels, internal reference and
 serial straps BEFORE adding ESP32 signal leads. Follow module qualification.
@@ -124,6 +138,8 @@ Read the included source notices and keep them with any redistributed models.
                 'firmware_source_set': build_validation['source_set'], 'enabled_emg_channels': 2,
                 'imu': 'ICM-42688-P', 'included_profiles': PROFILES,
                 'simulation_only_firmware_included': False, 'pcb_recording_binary_included': False,
+                'synthetic_regression_fixture_included': True,
+                'frozen_synthetic_recording_included': True,
                 'physical_measurements_completed': 0, 'html_link_rewrites': rewritten_pages,
                 'files': {name: {'sha256': checksum(data),
                                  'original_source_sha256': checksum(files[name].read_bytes()) if name in files else None}
