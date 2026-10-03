@@ -6,7 +6,7 @@
   "probe_contacts_verified": 18,
   "compiled_profiles_hash_verified": 7,
   "unmeasured_checklist_rows": 30,
-  "rendered_local_links_verified": 73,
+  "rendered_local_links_verified": 113,
   "physical_measurements_completed": 0,
   "lab_binaries_executed": false,
   "source_sha256": {
@@ -19,12 +19,18 @@
     "viewer/guide.json": "a7ef7107a52817082cda9e2a83887449f0beb8d5414b63c75cbbbc0031a21fa1",
     "firmware/main/board.h": "11f3f4d30c3b70410810426ffe6371088ed250903c7e569ba36858d6248439cc",
     "firmware/builds/validation.json": "8c08a320a27b265aa5c9774cc5646617b4ddf5b5063a8fa0374eb2855d7f4c41",
-    "docs/breadboard-refinements.html": "bed6b5e0f43ddd156dd9db66a4747a220d24b92d5692d8bfb0916d6af8bc5056",
-    "docs/lab-quickstart.html": "012adea5558c93ed8fbdbc262ebd393fb5f04dc1dce847b050bd864bfc9e57d7",
-    "docs/staged-build-guide.html": "cf4b242190256b6e61b99ff805ac16c8a24c68dc5953a70eb40e5eeee8ae59a8",
-    "docs/physical-assembly.html": "8233acf3270e5cbd5e1bdf9a213bf01820d715a81db93fe3146384f455707d04",
-    "docs/firmware-build-guide.html": "ed900e79cd4b251921792101ac09710b3a8da96826a787ff02e6a0fca0aa85a5",
-    "design/validate_breadboard_guidance.py": "5d370e53576cdbc03eaa2369470cdb8cb7cb19cd4ab4f4d911edb127fda58cc6"
+    "docs/breadboard-refinements.html": "642c392b6340b8d2a0709e344ced0d09ec3800c133d920892aaa38fada383476",
+    "docs/lab-quickstart.html": "2e9edcf3bfe24eb4cff0c536a5e487d11d5f07435c1f14e7081000a1ebb2c943",
+    "docs/staged-build-guide.html": "c8a38d32e393597bba570bef532ab68496f1e2c82023c714e361e863ed312d5e",
+    "docs/physical-assembly.html": "486f75ed1d295b98efeec852255a060839874ed24b3eadece8f6de04d347f612",
+    "docs/firmware-build-guide.html": "24ebb187e115ca2e83363b16531e9ba47bfcba9645bee1fe52bf6e732529f557",
+    "docs/laptop-setup.html": "43783c4a59770fb5e4a54224ffd4ff2e5516d16110fbde63ea6e6d3bbd084b9f",
+    "docs/download-checks.html": "64f3e59c373e140aa3947d7237d122ed88dbd7fab2c008edc20245d1513487f4",
+    "host/check_package.py": "d178a7eb1f39f222b2951f5844778d76ce3f8a203536665a5d6e76eb5acda909",
+    "host/run_tests.py": "21acca12ac4e1f76ced41ee42879a586f0ee1c6586ee938e7748d0c1717b2964",
+    "breadboard/recording-example.json": "e2cb9154e95e08896561ba9dd7cd578b72e2d816d605f5806b27cb8170877701",
+    "breadboard/recording-example.afolog": "af8ac32aee08bd2fadbcc7370bded2c4383a52524bea9a1e56408e7d721f95b6",
+    "design/validate_breadboard_guidance.py": "927f9ce2f8f99d4073854ea86ea5e2ad9c19cfe7f229cd3cef5495f3f6caf9b3"
   },
   "note": "Static instruction/pin/hash checks; not electrical measurements or fresh firmware execution."
 }

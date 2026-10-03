@@ -53,8 +53,10 @@ Use `breadboard-sd-only-2ch` first, then `breadboard-record-2ch` for Wi-Fi. Both
 Copy the original SD file to the laptop, keep an untouched copy, and run from this variant's folder:
 
 ```sh
-python3 host/convert.py trial.afolog --out trial-converted
+python3 host/convert.py trial.afolog --out trial-converted --no-plots
 ```
+
+This CSV/JSON command needs only Python. For optional plots, install `host/requirements.txt` in a virtual environment and omit `--no-plots`. The [laptop setup guide](laptop-setup.html) includes a frozen synthetic recording, dependency instructions and a one-command package check.
 
 Check `metadata.json`, `quality.json`, `emg.csv`, `foot.csv`, `shank.csv` and `status.csv`. Metadata must identify AD7606, two enabled inputs, ICM-42688-P, the breadboard hardware and the current firmware. Only EMG1/2 are measurements. AD7606 has no sensor-frame CRC/status word; blank ADC-specific columns are intentional. **Container CRC32 must still pass.** Preserve timestamp-estimate flags and both IMU read times.
 

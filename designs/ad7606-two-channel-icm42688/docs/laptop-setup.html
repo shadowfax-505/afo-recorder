@@ -1,0 +1,37 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><link rel="icon" href="data:,"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Start the downloaded lab kit — AD7606 two-channel</title><style>body{margin:0;background:#f4f3ee;color:#172523;font:17px/1.65 system-ui}main{max-width:1060px;margin:auto;padding:48px 28px}h1{font-size:2.4rem;line-height:1.15}h2{margin-top:2.5em}a{color:#176454}table{border-collapse:collapse;font-size:14px;display:block;overflow:auto}td,th{padding:12px;border:1px solid #ccd4ce;text-align:left;vertical-align:top}th{background:#e2eae4}code{font-size:.9em}pre{overflow:auto;padding:16px;background:#e2eae4;border-radius:6px}p{max-width:85ch}img{max-width:100%;height:auto}nav{font-size:14px;border-bottom:1px solid #ccd4ce;padding-bottom:16px}blockquote{border-left:3px solid #809c8a;margin-left:0;padding-left:20px}@media(max-width:640px){main{padding:28px 18px}h1{font-size:1.9rem}}@media print{body{background:white}main{padding:0}table{display:table;font-size:10px}}</style></head><body><main><nav><a href="../viewer/build.html">Assembly workspace</a> / <a href="breadboard-refinements.html">Applied findings</a> / <a href="lab-quickstart.html">Lab sequence</a> / <a href="build-guide.html">Wire tables</a> / <a href="laptop-setup.html">Laptop setup</a> / <a href="data-interpretation.html">Saved data</a> / <a href="integrated-verification.html">Verification</a></nav><h1>Start the downloaded lab kit</h1>
+<p><strong>AD7606 · two EMG inputs · ICM-42688-P.</strong> Extract the <a href="../breadboard/breadboard-lab-kit.zip">breadboard lab kit</a> and open a terminal in its folder, beside <code>START-HERE.md</code>. The viewer, CSV converter and Wi-Fi receiver work with local files. Plotting is an optional Python dependency. The <a href="download-checks.html">download-check report</a> records the standalone tests and their limits.</p>
+<h2>Open the build instructions</h2>
+<pre><code class="language-sh">python3 -m http.server 8769 --bind 127.0.0.1
+</code></pre>
+<p>Open <a href="http://127.0.0.1:8769/viewer/build.html?stage=1">the local build view</a>. If another server already uses 8769, choose an unused port such as 8770 and use that port in the address. Keep the terminal open while viewing; Ctrl+C stops the server. Serve only the extracted kit, not your home folder. Assembly assets and the stage instructions are local. Links to historical evidence, manufacturing files and the main project use the published website and need an internet connection.</p>
+<h2>Try CSV conversion before building</h2>
+<p>The kit includes <code>breadboard/recording-example.afolog</code>, copied byte for byte from the previously captured synthetic Wokwi recording. Its <a href="../breadboard/recording-example.json">provenance receipt</a> identifies the source and hash. It contains 10,041 EMG frames, 263 foot samples, 252 shank samples, one status record and one END. The foot and shank started at different times. This is a software example, not a measurement from a person or an assembled recorder.</p>
+<p>No extra Python packages are needed for CSV and JSON output:</p>
+<pre><code class="language-sh">python3 host/convert.py breadboard/recording-example.afolog --out example-csv --no-plots
+python3 host/check_package.py
+</code></pre>
+<p>Use a new output directory each time. The converter refuses to overwrite an existing result. Open <code>example-csv/emg.csv</code>, <code>foot.csv</code> and <code>shank.csv</code> in your analysis software, and keep <code>metadata.json</code> and <code>quality.json</code> with them. Only EMG1/2 appear. ADC voltage and estimated MyoWare RAW voltage are in volts; they are not input-referred muscle microvolts. The 515 motion samples retain timing-estimate flags. See <a href="data-interpretation.html">saved-data interpretation</a> for units, counters and timestamp alignment.</p>
+<p>For your future SD file, keep an untouched copy and replace the example path:</p>
+<pre><code class="language-sh">python3 host/convert.py trial.afolog --out trial-csv --no-plots
+</code></pre>
+<p>Exit code 0 means the converter's loss/signal checks passed; code 2 means output contains reported quality problems. Code 1 means conversion or a dependency failed. A clean conversion is not a calibration or electrical-safety certificate.</p>
+<h2>Add plots when needed</h2>
+<p>Create a Python environment and install the plotting dependency listed in the kit:</p>
+<pre><code class="language-sh">python3 -m venv .venv
+.venv/bin/python -m pip install -r host/requirements.txt
+.venv/bin/python host/convert.py breadboard/recording-example.afolog --out example-plots
+</code></pre>
+<p>On Windows, use <code>py</code> for environment creation and <code>.venv\Scripts\python.exe</code> for the last two commands. The default conversion command creates <code>signals.png</code> and <code>signals.svg</code> in addition to CSV/JSON. Without Matplotlib, use <code>--no-plots</code>. If a previous default command reported missing Matplotlib after creating CSV files, retain those files and their quality report, install the dependency, and rerun into a <strong>new</strong> output folder.</p>
+<h2>Run the supplied checks</h2>
+<pre><code class="language-sh">python3 host/check_package.py --out package-check.json
+python3 host/run_tests.py
+</code></pre>
+<p>The first command verifies the manifest hashes and frozen example's two-channel scaling, row counts and motion timing flags. The second runs the packaged regression tests, including legacy-file support and synthetic fault cases. It needs a C compiler named <code>cc</code> for the firmware channel-count guard; CSV conversion and live reception do not. No ESP-IDF or Wokwi installation is needed for these laptop checks. They do not execute a physical ESP32 or establish analog, storage, radio or runtime performance.</p>
+<h2>Receive Wi-Fi after the storage stage passes</h2>
+<p>Keep the original SD recording as the primary archive. Connect the laptop to the recorder's access point, then run:</p>
+<pre><code class="language-sh">python3 host/live_receiver.py --device 192.168.4.1 --out trial-wifi
+</code></pre>
+<p>The local live page opens at port 8766. Ctrl+C stops reception and closes the laptop archive. Use a new capture folder for each run. Convert the captured <code>.afolog</code> file with <code>--no-plots</code> or your plotting environment, and compare its quality report with the original SD file. A wireless gap is not automatically an SD gap. The downloaded example verifies interpretation only; it cannot test your laptop's radio or the received modules.</p>
+<h2>Continue to physical stages</h2>
+<p>Use the <a href="lab-quickstart.html">short lab sequence</a>, <a href="build-guide.html">exact wire tables</a>, <a href="../breadboard/probe-connections.csv">probe contacts</a> and <a href="bench-checklist.csv">blank checklist</a>. All physical outcomes remain <strong>NOT TESTED</strong>. The six included firmware profiles are laboratory builds, cross-compiled and not flashed to an assembled recorder. The kit excludes simulation-only images and the compact-PCB recording image. Flash all three files at the offsets in the chosen profile's manifest.</p>
+</main></body></html>

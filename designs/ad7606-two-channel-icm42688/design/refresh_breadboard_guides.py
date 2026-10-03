@@ -59,6 +59,7 @@ def render_lab_guides():
            '<a href="breadboard-refinements.html">Applied findings</a> / '
            '<a href="lab-quickstart.html">Lab sequence</a> / '
            '<a href="build-guide.html">Wire tables</a> / '
+           '<a href="laptop-setup.html">Laptop setup</a> / '
            '<a href="data-interpretation.html">Saved data</a> / '
            '<a href="integrated-verification.html">Verification</a></nav>')
     template = template[:template.index('<nav>')] + nav
@@ -67,7 +68,9 @@ def render_lab_guides():
               'breadboard-refinements': 'Breadboard updates from simulation',
               'staged-build-guide': 'Staged breadboard build',
               'physical-assembly': 'Physical assembly',
-              'firmware-build-guide': 'Firmware profiles and rebuilding'}
+              'firmware-build-guide': 'Firmware profiles and rebuilding',
+              'laptop-setup': 'Start the downloaded lab kit',
+              'download-checks': 'Checks on the downloaded breadboard kit'}
     for name, title in titles.items():
         prefix = re.sub(r'<title>.*?</title>', f'<title>{title} — AD7606 two-channel</title>', template)
         (docs / f'{name}.html').write_text(prefix + renderer.render((docs / f'{name}.md').read_text()) +
@@ -75,5 +78,5 @@ def render_lab_guides():
 
 
 if __name__ == '__main__':
-    print(f'Refreshed {refresh_wire_tables()} wire instructions and five focused lab guides')
+    print(f'Refreshed {refresh_wire_tables()} wire instructions and focused lab guides')
     render_lab_guides()
