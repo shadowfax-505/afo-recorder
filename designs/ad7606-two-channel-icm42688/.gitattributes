@@ -1,0 +1,3 @@
+# PDFs are binary documents; CSV worksheets retain spreadsheet-compatible CRLF.
+docs/*.pdf binary
+development/**/*.csv -text whitespace=cr-at-eol
