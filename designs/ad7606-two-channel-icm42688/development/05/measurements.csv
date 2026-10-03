@@ -1,0 +1,3 @@
+check_id,acceptance,measured_value,unit,uncertainty,instrument_settings,evidence_file,outcome,operator,date,review_notes
+5-identity,Repeat BB1 tests on BB2; exactly EMG1/2; common frame timestamp; no extra exported muscle channels,,,,,,NOT TESTED,,,
+5-crosstalk,Provisional <−40 dB crosstalk screen; generator feedthrough measured separately; preserve RMS noise and 10 min error log,,,,,,NOT TESTED,,,

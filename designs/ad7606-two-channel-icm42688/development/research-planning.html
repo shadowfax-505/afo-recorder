@@ -1,0 +1,81 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Define the research claim before collecting the study</title><style>body{margin:0;background:#edf0ed;color:#172c29;font:17px/1.65 system-ui,sans-serif}main{max-width:940px;margin:32px auto;padding:42px;background:#fff;border-top:6px solid #0b7766;border-radius:6px}nav{display:flex;gap:20px;flex-wrap:wrap;font-size:14px;border-bottom:1px solid #d5dfdb;padding-bottom:18px}a{color:#096b60;text-underline-offset:3px}h1{font-size:38px;line-height:1.15;letter-spacing:-1px}h2{font-size:25px;margin-top:38px}h3{font-size:20px}table{border-collapse:collapse;width:100%;font-size:14px;display:block;overflow-x:auto}th,td{padding:10px;text-align:left;border:1px solid #dce5df;vertical-align:top}th{background:#e8f2ee}li{margin:8px 0}code{background:#f0f3f0;padding:2px 5px}footer{font-size:13px;margin-top:40px;border-top:1px solid #ddd;padding-top:15px}@media(max-width:650px){main{margin:0;padding:22px}h1{font-size:30px}}</style></head><body><main><nav><a href="../development/index.html">Build sequence</a><a href="../docs/understanding-the-recorder.html">How it works</a><a href="../viewer/build.html">Assembly workspace</a><a href="../docs/understanding-the-recorder.pdf">Briefing PDF</a></nav><h1>Define the research claim before collecting the study</h1>
+<p>Complete with the supervisor and, where applicable, clinical collaborators. This is not a prescribed clinical protocol.</p>
+<table>
+<thead>
+<tr>
+<th>Decision</th>
+<th>Write before collection</th>
+<th>Why it matters</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Primary question</td>
+<td>One testable AFO or neuromuscular hypothesis</td>
+<td>Avoid choosing an attractive result after analysis.</td>
+</tr>
+<tr>
+<td>Primary outcome</td>
+<td>Exact feature, units, time window and normalization</td>
+<td>“Muscle activity” is not a complete outcome definition.</td>
+</tr>
+<tr>
+<td>Meaningful difference</td>
+<td>Smallest effect worth detecting</td>
+<td>Determines required noise, repeatability and timing performance.</td>
+</tr>
+<tr>
+<td>Reference</td>
+<td>Independent gait-event, angle or task reference and its uncertainty</td>
+<td>IMU-estimated events cannot validate themselves.</td>
+</tr>
+<tr>
+<td>Participants and unit</td>
+<td>Participant/session/trial structure; eligibility under protocol</td>
+<td>Thousands of samples from one person are not thousands of independent participants.</td>
+</tr>
+<tr>
+<td>Conditions</td>
+<td>AFO configuration, footwear, walking speed, order and rest</td>
+<td>These can change signals independently of the intervention.</td>
+</tr>
+<tr>
+<td>Placement</td>
+<td>Anatomical landmarks, spacing, side, mounting axes, repeatability</td>
+<td>Sensor changes can masquerade as physiology.</td>
+</tr>
+<tr>
+<td>Calibration</td>
+<td>Electrical calibration, IMU bias/alignment, EMG normalization</td>
+<td>Physical units alone do not establish comparability.</td>
+</tr>
+<tr>
+<td>Timing budget</td>
+<td>Allowed alignment uncertainty for the intended outcome</td>
+<td>200 Hz motion does not provide arbitrarily precise event timing.</td>
+</tr>
+<tr>
+<td>Quality rules</td>
+<td>Saturation, dropout, artifact and missing-label exclusion rules</td>
+<td>Make decisions before examining condition effects.</td>
+</tr>
+<tr>
+<td>Analysis</td>
+<td>Filtering, windowing, model, repeated-measures treatment</td>
+<td>Preserve participant independence and avoid data leakage.</td>
+</tr>
+<tr>
+<td>Data protection</td>
+<td>Pseudonyms, access, retention and institutional approval</td>
+<td>Research recordings and clinical information may be sensitive.</td>
+</tr>
+</tbody>
+</table>
+<p>Examples to discuss, not approved studies:</p>
+<ul>
+<li><strong>AFO comparison:</strong> normalized TA activation during independently labeled swing, with controlled speed and within-participant conditions. Requires validated event labels and reliable normalization.</li>
+<li><strong>Neuromuscular coordination:</strong> TA/medial-gastrocnemius coactivation under defined tasks. Requires an explicit coactivation formula and consideration of electrode placement and physiological crosstalk.</li>
+<li><strong>Movement monitoring:</strong> foot/shank motion features during a prescribed task. Requires mounting calibration and appropriate reference validation; do not call inferred ankle angle a direct measurement.</li>
+</ul>
+<p>For machine learning, split by participant when claiming generalization to new people. Keep overlapping windows from the same trial together; otherwise train/test leakage can inflate results. Determine sample size from the chosen outcome and study design, not the 8 kHz sample count. A pilot estimates feasibility and variance; it does not establish diagnostic accuracy.</p>
+<footer>Muttakin Rahman · AD7606 / two-channel / ICM-42688-P · Physical validation pending</footer></main></body></html>

@@ -1,0 +1,2 @@
+check_id,acceptance,measured_value,unit,uncertainty,instrument_settings,evidence_file,outcome,operator,date,review_notes
+9-battery,Both lab-supply leads removed; ≥2 h measured runtime; 20 repeatable startups/shutdowns; complete 60 min trial; record pack voltage age temperature and events,,,,,,NOT TESTED,,,

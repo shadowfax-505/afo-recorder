@@ -1,0 +1,9 @@
+Stage,Reference,Value,Board,Note
+1,R40,10k,BB0,DIP/passive fixture; check package pinout
+1,R41,10k,BB0,DIP/passive fixture; check package pinout
+1,C30,1uF,BB0,DIP/passive fixture; check package pinout
+1,R42,100,BB0,DIP/passive fixture; check package pinout
+1,C31,1uF,BB0,DIP/passive fixture; check package pinout
+1,UB0,MCP6002-I/P midpoint; half B grounded follower,BB0,DIP/passive fixture; check package pinout
+1,CB0,100nF,BB0,DIP/passive fixture; check package pinout
+1,,Regulated supply + dummy loads,,Lab instrument substitution; final power converter unvalidated

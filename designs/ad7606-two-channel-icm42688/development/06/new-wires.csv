@@ -1,0 +1,28 @@
+Wire,Stage,Net,From,To,Instructions
+wire-054,6,GND,foot:mikroBUS 8 / GND,DIST1:e12,"Complete IMU supply, interface and configuration checks before connecting."
+wire-055,6,GND,shank:mikroBUS 8 / GND,DIST1:c13,"Complete IMU supply, interface and configuration checks before connecting."
+wire-072,6,GND,foot:mikroBUS 16 / SNC,DIST1:e18,"Complete IMU supply, interface and configuration checks before connecting."
+wire-073,6,GND,foot:mikroBUS 9 / GND,DIST1:b19,"Complete IMU supply, interface and configuration checks before connecting."
+wire-074,6,GND,shank:mikroBUS 16 / SNC,DIST1:c19,"Complete IMU supply, interface and configuration checks before connecting."
+wire-075,6,GND,shank:mikroBUS 9 / GND,DIST1:d19,"Complete IMU supply, interface and configuration checks before connecting."
+wire-087,6,3V3D,AUX1:a7,DIST1:c22,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-088,6,3V3D,AUX1:a11,DIST1:d22,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-095,6,3V3D,foot:mikroBUS 7 / 3.3V,DIST1:e24,"Complete IMU supply, interface and configuration checks before connecting."
+wire-096,6,3V3D,shank:mikroBUS 7 / 3.3V,DIST1:b25,"Complete IMU supply, interface and configuration checks before connecting."
+wire-129,6,IMU_MOSI,esp:J1.4 / GPIO4,DIST1:a36,Shared ICM SPI MOSI is GPIO4 to both mikroBUS pin 6 contacts. Use SPI JP2–JP4 positions 1–2; qualify 3.3 V and carrier orientation before wiring.
+wire-130,6,IMU_MOSI,foot:mikroBUS 6 / MOSI,DIST1:b36,Shared ICM SPI MOSI is GPIO4 to both mikroBUS pin 6 contacts. Use SPI JP2–JP4 positions 1–2; qualify 3.3 V and carrier orientation before wiring.
+wire-131,6,IMU_MOSI,shank:mikroBUS 6 / MOSI,DIST1:c36,Shared ICM SPI MOSI is GPIO4 to both mikroBUS pin 6 contacts. Use SPI JP2–JP4 positions 1–2; qualify 3.3 V and carrier orientation before wiring.
+wire-132,6,IMU_MISO,esp:J1.5 / GPIO5,DIST1:a37,Shared ICM SPI MISO is GPIO5 from both mikroBUS pin 5 contacts. Separate CS lines select each carrier; verify the inactive carrier releases the bus.
+wire-133,6,IMU_MISO,foot:mikroBUS 5 / MISO,DIST1:b37,Shared ICM SPI MISO is GPIO5 from both mikroBUS pin 5 contacts. Separate CS lines select each carrier; verify the inactive carrier releases the bus.
+wire-134,6,IMU_MISO,shank:mikroBUS 5 / MISO,DIST1:c37,Shared ICM SPI MISO is GPIO5 from both mikroBUS pin 5 contacts. Separate CS lines select each carrier; verify the inactive carrier releases the bus.
+wire-135,6,IMU_SCK,esp:J1.6 / GPIO6,DIST1:a38,Shared ICM SPI SCLK is GPIO6 to both mikroBUS pin 4 contacts; 1 MHz mode 0 in this firmware. Keep leads short with a nearby ground return.
+wire-136,6,IMU_SCK,foot:mikroBUS 4 / SCK,DIST1:b38,Shared ICM SPI SCLK is GPIO6 to both mikroBUS pin 4 contacts; 1 MHz mode 0 in this firmware. Keep leads short with a nearby ground return.
+wire-137,6,IMU_SCK,shank:mikroBUS 4 / SCK,DIST1:c38,Shared ICM SPI SCLK is GPIO6 to both mikroBUS pin 4 contacts; 1 MHz mode 0 in this firmware. Keep leads short with a nearby ground return.
+wire-138,6,FOOT_CS,AUX1:g7,DIST1:a39,Foot ICM chip select is GPIO7 to mikroBUS pin 3 / CS. Rotate only the foot carrier and confirm the foot stream identity before adding the shank.
+wire-139,6,FOOT_CS,esp:J1.7 / GPIO7,DIST1:b39,Foot ICM chip select is GPIO7 to mikroBUS pin 3 / CS. Rotate only the foot carrier and confirm the foot stream identity before adding the shank.
+wire-140,6,FOOT_CS,foot:mikroBUS 3 / CS,DIST1:c39,Foot ICM chip select is GPIO7 to mikroBUS pin 3 / CS. Rotate only the foot carrier and confirm the foot stream identity before adding the shank.
+wire-141,6,FOOT_INT,esp:J1.9 / GPIO16,foot:mikroBUS 15 / INT,Foot INT1 uses mikroBUS pin 15 / INT to GPIO16. Verify active-high pulses at 200 Hz independently of shank; missing IRQ or FIFO overflow must remain visible.
+wire-142,6,SHANK_CS,AUX1:g11,DIST1:a40,Shank ICM chip select is GPIO15 to mikroBUS pin 3 / CS. Rotate only the shank carrier and confirm the shank stream identity.
+wire-143,6,SHANK_CS,esp:J1.8 / GPIO15,DIST1:b40,Shank ICM chip select is GPIO15 to mikroBUS pin 3 / CS. Rotate only the shank carrier and confirm the shank stream identity.
+wire-144,6,SHANK_CS,shank:mikroBUS 3 / CS,DIST1:c40,Shank ICM chip select is GPIO15 to mikroBUS pin 3 / CS. Rotate only the shank carrier and confirm the shank stream identity.
+wire-145,6,SHANK_INT,esp:J1.10 / GPIO17,shank:mikroBUS 15 / INT,Shank INT1 uses mikroBUS pin 15 / INT to GPIO17. Verify active-high pulses at 200 Hz independently of foot; preserve independent startup times and counters.

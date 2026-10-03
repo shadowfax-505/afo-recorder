@@ -21,7 +21,7 @@ def checksum(data):
 
 def collect_files():
     files = {}
-    for folder in ['breadboard', 'viewer', 'docs', 'host']:
+    for folder in ['breadboard', 'viewer', 'docs', 'host', 'development']:
         for path in (VARIANT / folder).rglob('*'):
             if (not path.is_file() or '__pycache__' in path.parts or path.suffix in ['.pyc', '.zip']
                     or path.name in ['breadboard-lab-kit.json', 'guidance-validation.json',
@@ -85,6 +85,9 @@ def package():
         content[name] = data
 
     content['START-HERE.md'] = b'''# AD7606 two-channel breadboard lab kit
+
+Start with development/index.html for sequential assembly and evidence forms.
+Read docs/understanding-the-recorder.pdf for the supervisor briefing.
 
 Project lead: Muttakin Rahman
 

@@ -1,0 +1,41 @@
+Wire,Stage,Net,From,To,Instructions
+wire-002,1,SOURCE_POS,power-switch:SPST solder lug 1,DIST1:b1,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-003,1,SOURCE_POS,lab-supply:Red + binding post,DIST1:c1,"Connect lab source OR battery, never both; remove both lab leads before battery attachment."
+wire-004,1,GND,DIST1:a2,DIST1:a3,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-005,1,GND,DIST1:b3,DIST1:a4,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-006,1,GND,DIST1:b4,DIST1:a5,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-007,1,GND,DIST1:b5,DIST1:a6,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-008,1,GND,DIST1:b6,DIST1:a7,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-009,1,GND,DIST1:b7,DIST1:a8,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-010,1,GND,DIST1:b8,DIST1:a9,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-011,1,GND,DIST1:b9,DIST1:a10,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-012,1,GND,DIST1:b10,DIST1:a11,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-013,1,GND,DIST1:b11,DIST1:a12,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-014,1,GND,DIST1:b12,DIST1:a13,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-015,1,GND,DIST1:b13,DIST1:a14,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-016,1,GND,DIST1:b14,DIST1:a15,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-017,1,GND,DIST1:b15,DIST1:a16,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-018,1,GND,DIST1:b16,DIST1:a17,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-019,1,GND,DIST1:b17,DIST1:a18,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-020,1,GND,DIST1:b18,DIST1:a19,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-021,1,GND,BB0:e6,DIST1:b2,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-030,1,GND,lab-supply:Black COM binding post,DIST1:e4,"Connect lab source OR battery, never both; remove both lab leads before battery attachment."
+wire-031,1,GND,reg3:GND / 5-pin row 3,DIST1:c5,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-032,1,GND,reg5:GND / 5-pin row 3,DIST1:d5,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-035,1,GND,ldo:GND pin2 → JP2.2,DIST1:d6,Use the specified adapter pad-to-header mapping; check solder orientation and unpowered continuity.
+wire-077,1,VBAT,power-switch:SPST solder lug 2,DIST1:b20,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-078,1,VBAT,reg5:VIN / 5-pin row 2,DIST1:c20,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-079,1,VBAT,reg3:VIN / 5-pin row 2,DIST1:d20,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-083,1,3V3D,DIST1:a22,DIST1:a23,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-084,1,3V3D,DIST1:b23,DIST1:a24,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-085,1,3V3D,DIST1:b24,DIST1:a25,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-091,1,3V3D,reg3:VOUT / 5-pin row 5,DIST1:d23,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-092,1,3V3D,ldo:IN pin1 → JP2.1,DIST1:e23,Use the specified adapter pad-to-header mapping; check solder orientation and unpowered continuity.
+wire-093,1,3V3D,ldo:EN pin3 → JP2.3,DIST1:c24,Use the specified adapter pad-to-header mapping; check solder orientation and unpowered continuity.
+wire-098,1,3V0A,DIST1:a26,DIST1:a27,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-099,1,3V0A,BB0:d2,DIST1:b26,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-102,1,3V0A,ldo:OUT pin5 / 3.0V → JP1.1,DIST1:e26,Use the specified adapter pad-to-header mapping; check solder orientation and unpowered continuity.
+wire-180,1,3V3D,cap-2:lead 1,ldo:U$1.1 solder pad,"Local soldered LDO bypass, short insulated leads; not a remote breadboard capacitor."
+wire-181,1,GND,cap-2:lead 2,ldo:U$1.2 solder pad,"Local soldered LDO bypass, short insulated leads; not a remote breadboard capacitor."
+wire-182,1,3V0A,cap-3:lead 1,ldo:U$1.6 solder pad,"Local soldered LDO bypass, short insulated leads; not a remote breadboard capacitor."
+wire-183,1,GND,cap-3:lead 2,ldo:U$1.2 solder pad,"Local soldered LDO bypass, short insulated leads; not a remote breadboard capacitor."

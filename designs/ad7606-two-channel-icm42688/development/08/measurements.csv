@@ -1,0 +1,3 @@
+check_id,acceptance,measured_value,unit,uncertainty,instrument_settings,evidence_file,outcome,operator,date,review_notes
+8-live,60 min; only EMG1/2; explicit preview losses; independently audit original SD counters/CRC/END/stop and confirm no unexplained saved loss,,,,,,NOT TESTED,,,
+8-disconnect,Disconnect/reconnect produces visible preview gaps; compare identities codes timestamps and stop/error indications without filling missing data,,,,,,NOT TESTED,,,

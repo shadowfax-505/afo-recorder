@@ -1,0 +1,3 @@
+check_id,acceptance,measured_value,unit,uncertainty,instrument_settings,evidence_file,outcome,operator,date,review_notes
+2-controller,20 programming/reset cycles without failure; buttons and LEDs match controls,,,,,,NOT TESTED,,,
+2-usb,GPIO21 LOW attached / HIGH absent; attachment indicator 1/0; no USB VBUS feed into regulated 5 V; DevKit USB sockets empty,,,,,,NOT TESTED,,,

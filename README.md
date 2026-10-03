@@ -95,3 +95,8 @@ Project lead: **Muttakin Rahman**. Manufacturer credits, source references, and 
 Open the [complete-system guide](designs/ad7606-two-channel-icm42688/docs/whole-system.md) for the physical assembly, saved Wokwi scene and downloadable simulation bundle.
 
 The latest focused checks include a [complete-scene digital timing capture](designs/ad7606-two-channel-icm42688/docs/digital-timing.md) and a [saved-data interpretation guide](designs/ad7606-two-channel-icm42688/docs/data-interpretation.md). The independent audit checks 21,116 original record CRCs and CSV rows across two synthetic captures. Downloadable examples include binary recordings, metadata, quality reports and readable analysis tables; original measurement bytes are preserved. Physical storage, signal accuracy and timing calibration remain pending.
+
+
+## Active build: sequential development
+
+The [AD7606 two-channel / ICM-42688-P workbook](designs/ad7606-two-channel-icm42688/development/README.md) organizes assembly, exact new wires, measurements and evidence review one module at a time. Read the [personal system explanation](designs/ad7606-two-channel-icm42688/docs/understanding-the-recorder.md) for the AFO and neuromuscular research rationale. The other five configurations remain unchanged.

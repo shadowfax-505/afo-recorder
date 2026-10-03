@@ -1,0 +1,48 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Build, measure, review, then add one module</title><style>body{margin:0;background:#edf0ed;color:#172c29;font:17px/1.65 system-ui,sans-serif}main{max-width:940px;margin:32px auto;padding:42px;background:#fff;border-top:6px solid #0b7766;border-radius:6px}nav{display:flex;gap:20px;flex-wrap:wrap;font-size:14px;border-bottom:1px solid #d5dfdb;padding-bottom:18px}a{color:#096b60;text-underline-offset:3px}h1{font-size:38px;line-height:1.15;letter-spacing:-1px}h2{font-size:25px;margin-top:38px}h3{font-size:20px}table{border-collapse:collapse;width:100%;font-size:14px;display:block;overflow-x:auto}th,td{padding:10px;text-align:left;border:1px solid #dce5df;vertical-align:top}th{background:#e8f2ee}li{margin:8px 0}code{background:#f0f3f0;padding:2px 5px}footer{font-size:13px;margin-top:40px;border-top:1px solid #ddd;padding-top:15px}@media(max-width:650px){main{margin:0;padding:22px}h1{font-size:30px}}</style></head><body><main><nav><a href="../development/index.html">Build sequence</a><a href="../docs/understanding-the-recorder.html">How it works</a><a href="../viewer/build.html">Assembly workspace</a><a href="../docs/understanding-the-recorder.pdf">Briefing PDF</a></nav><h1>Build, measure, review, then add one module</h1>
+<p><strong>Active build: AD7606 / two RAW EMG inputs / two ICM-42688-P carriers.</strong> Project lead: Muttakin Rahman. The other five designs remain separate; do not borrow their pin maps or firmware.</p>
+<p>Start with <strong>00</strong>, even if every component has already been purchased. No assembled recorder has passed these gates yet. Simulation and software evidence remain in the existing verification reports. This sequence adds reviewable physical evidence; it does not replace the exact wiring drawings.</p>
+<h2>Your working loop</h2>
+<ol>
+<li>Read one stage card and collect only its parts. Use the exact contact table and stage-filtered viewer, not a generic illustration.</li>
+<li>Disconnect battery, lab supply and USB, and disable signal-generator outputs before changing wiring. Add the stated circuit and inspect every changed connection. Photograph the result before energizing.</li>
+<li>Test that module, then rerun the prior accepted checks affected by the addition. Keep the configuration fixed while collecting evidence.</li>
+<li>Fill the results sheet and send the complete stage folder. Include raw traces/logs, not only a photograph of a successful display.</li>
+<li>Resolve FAIL/PENDING items. Record the accepted hardware/firmware hashes and review date before moving forward.</li>
+</ol>
+<p>Do not rename existing firmware or manufacturing files. Keep a private working copy of these stage folders; use one subfolder per attempt, for example <code>03/attempt-001/</code>. Preserve failed attempts and record the repair. Never commit identifiable participant information or credentials to the public repository.</p>
+<h2>Sequence and evidence</h2>
+<ul>
+<li><a href="00/README.html">00: Identify the exact build</a> - inventory.csv; photos of all module markings and both PCB faces; instrument list.</li>
+<li><a href="01/README.html">01: Qualify power one rail at a time</a> - Rail DMM readings; startup and load-step scope traces; supply current/limit; dummy-load resistance and rating; temperature versus time.</li>
+<li><a href="02/README.html">02: Controller and controls</a> - Complete serial log; binary SHA-256; photos; 20-cycle table; GPIO21 voltage both states; rail measurements under controller load.</li>
+<li><a href="03/README.html">03: ADC module and two DC inputs</a> - Module continuity table and strap close-ups; VIO/AVCC/reference voltages; raw logic trace with RESET, CONVST, BUSY, CS, SCLK and DOUTA; serial windows; both measured DC voltages before/after swap.</li>
+<li><a href="04/README.html">04: First analog input</a> - RAW1 and V1 simultaneous scope traces; amplitude/phase at each frequency; DC offset; unplugged settling; generator output settings and termination; serial mean/RMS.</li>
+<li><a href="05/README.html">05: Second analog input and interaction</a> - Both response tables; 10-minute diagnostic error log; baseline RMS/PSD with bandwidth; driven and quiet channel amplitudes; cable-layout photos.</li>
+<li><a href="06/README.html">06: Foot IMU, then shank IMU</a> - WHO/readback serial results; FIFO and interrupt counts over 60 s; six-face accelerometer means; stationary gyro means; axis photographs; raw IRQ/SPI timing capture.</li>
+<li><a href="07/README.html">07: Original SD recording</a> - Unmodified .afolog files; converter command/version; metadata, quality report and CSV excerpts; stop reason; serial log; card make/capacity/filesystem; scope trace of continuous conversion cadence.</li>
+<li><a href="08/README.html">08: Wi-Fi while SD records</a> - Original SD file AND laptop raw archive; receiver log/quality; disconnect times; laptop OS/software version; both converted outputs; new rail/noise captures under wireless load.</li>
+<li><a href="09/README.html">09: Battery and full-load regression</a> - Timestamped battery log; pack rating/age/protection details; start/stop table; resulting original files; peak-current and voltage-dip captures using the approved no-person bench arrangement.</li>
+<li><a href="10/README.html">10: MyoWare integration and research readiness</a> - Pseudonymous trial manifest; placement/axis diagrams; calibration files; AFO/footwear/condition labels; event/reference timestamps; original recordings and quality; protocol approval reference, not identifiable consent documents.</li>
+</ul>
+<h2>Three kinds of acceptance</h2>
+<p><strong>Engineering screen:</strong> the listed electrical, timing and integrity limits. Some are provisional project targets, not manufacturer guarantees.</p>
+<p><strong>Research acceptance:</strong> study-specific minimum effect, EMG noise/artifact tolerance, synchronization uncertainty, placement repeatability and reference validity. Set these before collecting the study, not after inspecting favorable results.</p>
+<p><strong>Human-use authorization:</strong> institutional protocol and electrical-safety review. Bench completion alone does not provide this.</p>
+<h2>The minimum useful message to send me</h2>
+<p>“Stage 03, attempt 002; this is the fixed-two AD7606/ICM breadboard. Firmware SHA: … . Changed: … . Applied stimulus: … . Expected: … . Measured: … with uncertainty … . Attached: full serial log, original logic capture, module photos and measurements.csv. Earlier stage regression: … .”</p>
+<p>For an unexpected result, keep the exact failed configuration photographed. State whether it occurs cold/warm, USB attached/absent, Wi-Fi on/off, and with the last module removed. Do not send participant identifiers.</p>
+<h2>Start here today</h2>
+<p>Send the completed stage-00 inventory and clear front/back module photographs, plus the instruments available. If nothing has been bought, enter “not acquired” and the proposed supplier/part number. That is useful evidence; it is not a failed test.</p>
+<h2>Companion documents</h2>
+<ul>
+<li><a href="logic-review.html">Logic review and open gates</a></li>
+<li><a href="research-planning.html">Research planning worksheet</a></li>
+<li><a href="research-session-template.json">Research session manifest</a></li>
+<li><a href="../docs/understanding-the-recorder.html">Personal system explanation</a></li>
+<li><a href="../docs/build-guide.html">Exact physical contact tables</a></li>
+<li><a href="../docs/laptop-setup.html">Existing laptop setup</a></li>
+</ul>
+<p>The breadboard verifies module integration. Its regulator modules, DevKit and DIP buffers differ physically from the custom PCB; repeat bring-up on the PCB and qualify layout-dependent noise, heat and radio behavior separately.</p>
+<h2>Optional evidence check</h2>
+<p>Run <code>python3 development/check_submission.py PATH_TO_YOUR_STAGE_FOLDER</code> from the variant root. It checks missing fields, listed files and hashes. A ready result means ready for human review, never hardware approval. Use Python 3.9 or newer. Record dimensionless units as <code>1</code> and explain uncertainty for categorical observations rather than leaving cells empty.</p>
+<footer>Muttakin Rahman · AD7606 / two-channel / ICM-42688-P · Physical validation pending</footer></main></body></html>

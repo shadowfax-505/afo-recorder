@@ -1,0 +1,3 @@
+check_id,acceptance,measured_value,unit,uncertainty,instrument_settings,evidence_file,outcome,operator,date,review_notes
+10-sensor,Correct VIN/GND/RAW pads and supply; no saturation or cabling fault; distinguish RAW volts from electrode-referred EMG,,,,,,NOT TESTED,,,
+10-wearable,Consent and safety review complete; mounting strain relief/AFO clearance checked; no lab instruments mains USB or charging while electrodes are attached,,,,,,NOT TESTED,,,
