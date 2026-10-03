@@ -1,0 +1,36 @@
+{
+  "hardware_measured": false,
+  "instrument": "Project-authored passive digital pin observer",
+  "original_scene_unchanged": true,
+  "original_connections": 79,
+  "added_input_taps": {
+    "CONVST": "adc:CONVST",
+    "BUSY": "adc:BUSY",
+    "CS": "adc:CS",
+    "SCLK": "adc:SCLK",
+    "DOUTA": "adc:DOUTA",
+    "FOOT_IRQ": "foot:INT1",
+    "SHANK_IRQ": "shank:INT1",
+    "FOOT_CS": "foot:CS",
+    "RESET": "adc:RESET",
+    "GND": "esp:GND.1"
+  },
+  "parts": 38,
+  "connections": 89,
+  "sensor_model_c_sources_unchanged": true,
+  "sha256": {
+    "diagram.json": "38da950c6e76d98de419177d009b03e8ffdc2676096d55a91ad54754eac45662",
+    "probe.chip.c": "2c18d04e4a6f0cfced75f7823b7a000ba39acc4ef765c3d72f9ce0c0a6d10625",
+    "probe.chip.json": "a63f6f0c3b7c4878f5cc08b0163fb3c867f0330b39b54ad977411f0a998840bc"
+  },
+  "web_execution": "Browser compiles the uploaded C source; its generated WASM hash is not exposed here.",
+  "local_wasm": "Separate artifact compiled by Wokwi CLI v0.27.1 with WASI-SDK v25.0",
+  "local_compile_check": {
+    "pass": true,
+    "compiler": "Wokwi CLI v0.27.1 / WASI-SDK v25.0",
+    "wasm_sha256": "a987b3d98d19b056db7567788e94026013d0ef5352f4622619dc34eeefd95a4e",
+    "api_header_sha256": "f72cbb878f7b54017b3eae0450a410905759934e00fbb508cad198951a016c57",
+    "wasm_distributed": false,
+    "wasm_executed_in_browser_hash_known": false
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "hardware_measured": false,
+  "engine": "Wokwi web editor",
+  "project_url": "https://wokwi.com/projects/476662256690643969",
+  "saved_project_modified": false,
+  "temporary_scene": "Complete system plus input-only observer, verified in the editor before execution",
+  "serial_capture": "Actual visible Serial Monitor accessibility text",
+  "pin_capture": "Actual rendered Chips Console DOM innerText, including chip badges and split stdout chunks",
+  "capture_data_synthetic": true,
+  "native_instrument_test_data_used_as_recorder_evidence": false,
+  "image_elf_prefix": "aabb34031",
+  "full_session_vcd_retrieved": false
+}

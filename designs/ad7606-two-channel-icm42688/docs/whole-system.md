@@ -36,6 +36,10 @@ The complete scene finished a nominal run with **10,041 EMG frames, 263 foot and
 
 [Expanded-scene result](../simulations/integrated-recorder/full-system/results/normal/result.json) · [Connection/source checks](../simulations/integrated-recorder/full-system/scene-checks.json) · [Firmware manifest](../simulations/integrated-recorder/firmware/manifest.json)
 
+An additional [input-only pin capture](digital-timing.html) matches all 10,041 conversions and reads to the saved EMG frames, verifies 128 clocks per ADC read, and observes both 200 Hz interrupt streams. Its partial derived waveform and complete-session aggregate counters are supplied separately from the unavailable native full-session VCD download.
+
+The [saved-data guide](data-interpretation.html) now explains the binary format, channel identities, units and estimated timestamps. Its downloadable examples include actual synthetic recordings, CSVs, named analysis tables, quality reports and an independent byte comparison. Both the known-voltage and filtered-waveform captures pass; their measurement records are preserved exactly.
+
 A fresh opening of the saved public project retained every custom model and an exactly matching diagram. Its [repeat nominal run](../simulations/integrated-recorder/full-system/results/saved-project-normal/result.json) also passes with the same saved counts. [Browser persistence checks](../simulations/integrated-recorder/full-system/browser-checks.json).
 
 The [18-case integrated verification report](integrated-verification.html) uses the retained smaller protocol fixture. This additional full-scene run covers the nominal case; it does not relabel the earlier fault-test diagrams as full-scene runs. Recorder firmware and original sensor-model C sources are unchanged.

@@ -1,0 +1,30 @@
+{
+  "hardware_measured": false,
+  "observations": [
+    {
+      "id": "T-01",
+      "type": "Corrected instrument expectation",
+      "expected_before_review": "One RESET-time priming read",
+      "observed": 2,
+      "resolution": "Startup adc_bus_init invokes adc_configure; start_recording invokes it again. Both reads are discarded before the first CONVST. The integrated-scene assessor expects two; the separate one-shot diagnostic retains its own gate."
+    },
+    {
+      "id": "T-02",
+      "type": "Simulator limitation",
+      "observed": "SCLK is read as low at all 10043 CS assertions in the Wokwi pin model. All 10041 acquisition reads decode correctly on falling SCLK edges, with 128 rises and 128 falls each.",
+      "resolution": "Keep this raw observation. Physical clock idle polarity and setup/hold margins remain unqualified; do not change the physical circuit or firmware based solely on the inactive virtual GPIO level."
+    },
+    {
+      "id": "T-03",
+      "type": "Capture transport limitation",
+      "observed": "Two stopped full-scene runs did not deliver a browser VCD download event or a new local trace.",
+      "resolution": "Use independently decoded first-two-frame pin logs and all-frame instrument counters. A complete-session native logic-analyzer VCD remains unqualified."
+    },
+    {
+      "id": "T-04",
+      "type": "Console presentation",
+      "observed": "Long printf JSON is split into multiple visible Chips Console rows, each with a repeated chip-probe badge.",
+      "resolution": "Preserve the original rendered console. Remove only the exact badge/layout delimiters when parsing; require complete JSON and a single final summary. Native tests include split and truncated captures."
+    }
+  ]
+}

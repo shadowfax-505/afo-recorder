@@ -1,0 +1,85 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><link rel="icon" href="data:,"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Digital timing verification — AD7606 two-channel</title><style>body{margin:0;background:#f4f3ee;color:#172523;font:17px/1.65 system-ui}main{max-width:1060px;margin:auto;padding:48px 28px}h1{font-size:2.4rem;line-height:1.15}h2{margin-top:2.5em}a{color:#176454}table{border-collapse:collapse;font-size:14px;display:block;overflow:auto}td,th{padding:12px;border:1px solid #ccd4ce;text-align:left;vertical-align:top}th{background:#e2eae4}code{font-size:.9em}pre{overflow:auto;padding:16px;background:#e2eae4;border-radius:6px}p{max-width:85ch}img{max-width:100%;height:auto}nav{font-size:14px;border-bottom:1px solid #ccd4ce;padding-bottom:16px}blockquote{border-left:3px solid #809c8a;margin-left:0;padding-left:20px}@media(max-width:640px){main{padding:28px 18px}h1{font-size:1.9rem}}@media print{body{background:white}main{padding:0}table{display:table;font-size:10px}}</style></head><body><main><nav><a href="whole-system.html">Complete system</a> / <a href="data-interpretation.html">Saved data</a> / <a href="digital-timing.html">Digital timing</a> / <a href="integrated-verification.html">Integrated verification</a> / <a href="circuit-audit.html">Circuit audit</a> / <a href="lab-quickstart.html">Lab sequence</a></nav><h1>Digital timing, observed in Wokwi</h1>
+<p>Muttakin Rahman · AD7606 / two EMG / ICM-42688-P · 3 October 2026</p>
+<p>The complete recorder now has a separate <strong>passing digital pin capture</strong>. An input-only virtual probe watched the running ESP-IDF firmware and the modeled ADC/IMU signals. Its <strong>10,041 conversion triggers and 10,041 reads</strong> match the saved EMG frames exactly. The saved file, actual converter and live decoder also pass.</p>
+<p>This check observes simulated digital behavior. Sensor physics, analog noise, real SDMMC/card operation, RF transport, power and battery runtime remain outside it.</p>
+<p><a href="whole-system.html">Open the complete system</a> · <a href="../simulations/integrated-recorder/full-system/trace-validation/digital-timing-wokwi.zip">Download the timing scene</a> · <a href="../simulations/integrated-recorder/full-system/trace-validation/probe-run/result.json">Inspect the result</a></p>
+<h2>What passed</h2>
+<table>
+<thead>
+<tr>
+<th>Check</th>
+<th>Observed in the simulator</th>
+<th>What it establishes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ADC conversion/read count</td>
+<td>10,041 / 10,041; no pending or partial read</td>
+<td>Every observed nominal conversion has a completed read and saved EMG frame</td>
+</tr>
+<tr>
+<td>ADC readout</td>
+<td>128 rising and 128 falling clocks per read; zero wrong-word frames</td>
+<td>Correct simultaneous-frame serialization through DOUTA, including signed eight-word order</td>
+</tr>
+<tr>
+<td>ADC clock</td>
+<td>125 ns between falling edges; 1,275,207 intervals checked</td>
+<td>8 MHz read clock within this virtual run</td>
+</tr>
+<tr>
+<td>Trigger schedule</td>
+<td>Mean 7,983.860 Hz; individual intervals 122.250–128.262 µs</td>
+<td>Passes the modeled 8 kHz ±1% mean and 125 µs ±5 µs interval gates</td>
+</tr>
+<tr>
+<td>CONVST / BUSY</td>
+<td>CONVST high 1.483–1.484 µs; BUSY high 4.000 µs</td>
+<td>Trigger pulse is long enough; all reads begin after the modeled conversion completes</td>
+</tr>
+<tr>
+<td>IMU interrupts</td>
+<td>Both every 5.000 ms, with 10.000 µs pulses; 252 / 252 in the ADC window</td>
+<td>Two independent modeled 200 Hz interrupt streams</td>
+</tr>
+<tr>
+<td>Saved output</td>
+<td>10,041 EMG, 263 foot and 252 shank records</td>
+<td>Correct enabled channels, both sensor identities and no detected saved sequence gaps</td>
+</tr>
+<tr>
+<td>Live output</td>
+<td>Actual UDP decoder passes; one preview drop reported</td>
+<td>Preview loss stays explicit while the saved stream remains complete</td>
+</tr>
+</tbody>
+</table>
+<p>The ADC model sends distinct test values on all eight words: <code>6554, 13107, -1234, 2345, -32768, 32767, 0, 1111</code>. Only the first two are exported as EMG. The other six are synthetic channel-order checks, not valid muscle measurements.</p>
+<h2>Read the waveform</h2>
+<p><img src="../simulations/integrated-recorder/full-system/trace-validation/probe-run/adc-timing.png" alt="First ADC conversion and read-clock detail, plotted from actual simulated pin changes" /></p>
+<p>The plot uses <strong>actual observed pin transitions</strong> from the first ADC read. The full partial capture includes the first two complete reads and a leading BUSY edge before the next CONVST callback. The independent decoder reconstructs both signed eight-word frames from <strong>611 recorded pin changes</strong>. A second set of snapshots identifies the last two reads; aggregate counters and decoding checks cover all 10,041 reads.</p>
+<p><a href="../simulations/integrated-recorder/full-system/trace-validation/probe-run/sampled-edges.csv">Edge CSV</a> · <a href="../simulations/integrated-recorder/full-system/trace-validation/probe-run/sampled-edges.vcd">Partial derived VCD</a> · <a href="../simulations/integrated-recorder/full-system/trace-validation/probe-run/chips-console.txt">Original Chips Console</a> · <a href="../simulations/integrated-recorder/full-system/trace-validation/probe-run/edge-exports.json">Export provenance</a></p>
+<p><strong>The partial VCD is derived from the pin observer; it is not a downloaded full-session Wokwi logic-analyzer file.</strong> Two attempts to obtain that browser download did not return a file. Their inputs and status remain in the evidence folder. Full-session native VCD qualification remains open.</p>
+<h2>Two details the capture clarified</h2>
+<p><strong>Startup reads.</strong> There are two discarded SPI reads during RESET: one when <code>adc_bus_init</code> configures the converter and another when <code>start_recording</code> configures it for the session. Both precede the first conversion, and neither is counted as muscle data. The integrated checker now accounts for both. The separate one-shot diagnostic keeps its own startup expectation.</p>
+<p><strong>Clock idle state.</strong> The observer reports SCLK low at the CS assertion for all 10,043 transactions, including the two startup reads. This raw finding remains in the result as <code>wrong_idle_clock</code>; it has not been edited out. Active read clocks and falling-edge decoding pass. The Wokwi GPIO abstraction does not establish the physical controller's clock-idle polarity or setup/hold margins. Those checks remain pending on real hardware; this observation alone does not justify changing the physical design.</p>
+<p>The recorder image, original sensor-model C files, PCB and other five configurations were preserved. The probe adds only input taps and a visible diagnostic label to a temporary copy of the complete scene.</p>
+<h2>Run the same check</h2>
+<ol>
+<li>Open the <a href="https://wokwi.com/projects/476662256690643969">saved complete recorder project</a> and extract the timing download. The saved project contains the original full scene; the optional probe is supplied in the download.</li>
+<li>Use the editor file menu → <strong>Upload file(s)…</strong> for <code>probe.chip.c</code> and <code>probe.chip.json</code> in <code>integrated-recorder/full-system/trace-validation/</code>.</li>
+<li>Replace the editor's <code>diagram.json</code> with the copy from that same folder. The instrumented scene has <strong>38 parts and 89 connections</strong>. The probe is labeled <strong>INPUT-ONLY VIRTUAL PROBE</strong>.</li>
+<li>Focus an editor, press <strong>F1 → Upload Firmware and Start Simulation…</strong>, and select the download's <code>integrated-recorder/firmware/merged.bin</code>. Check <strong>ELF prefix aabb34031</strong>. This firmware is for simulation only.</li>
+<li>Let Serial Monitor reach <code>INTEGRATED_COMPLETE,case=0</code> and both <code>EXPORT_END</code> markers. In <strong>Chips Console</strong>, scroll to <code>PROBE_SUMMARY</code>. Retain both original console texts.</li>
+</ol>
+<p>Re-upload the custom image after reopening the page. A drawing saved in Wokwi does not guarantee persistence of an uploaded firmware image. The default placeholder sketch is not the recorder firmware.</p>
+<h2>How the result was checked</h2>
+<p>The strict assessor verifies the frozen <strong>31-file recorder manifest</strong>, pre-run diagram copied from the visible editor, input-only probe source, uploaded image identity, complete file/UDP exports, saved counts and host decoding. It compares the probe's counts with the saved EMG count and independently decodes the first two reads from the captured data/clock edges.</p>
+<p>The instrument itself passes <strong>10 native test groups, including 12 injected fault variations</strong>. Short clocks, swapped words, missing BUSY, reading during BUSY, bad clock sequencing, priming/reset errors, slow timing, missing interrupts, partial captures and resumed conversions are rejected. Bad raw data cannot pass merely because a summary says it is good. Native fixture edges are synthetic instrument tests; they are kept separate from the actual browser capture.</p>
+<p><a href="../simulations/integrated-recorder/full-system/trace-validation/instrument-tests.json">Instrument test results</a> · <a href="../simulations/integrated-recorder/full-system/trace-validation/probe-run/probe-manifest.json">Probe manifest</a> · <a href="../simulations/integrated-recorder/full-system/trace-validation/observations.json">Observation log</a> · <a href="../simulations/integrated-recorder/full-system/trace-validation/download.json">Bundle SHA-256</a> · <a href="../simulations/integrated-recorder/full-system/trace-validation/README.md">Source and reproduction commands</a></p>
+<p>Wokwi documents <a href="https://docs.wokwi.com/chips-api/gpio">pin-change observation</a>, <a href="https://docs.wokwi.com/chips-api/time">virtual time in nanoseconds</a> and <a href="https://docs.wokwi.com/chips-api/getting-started#debugging-your-custom-chip">custom-chip console output</a>. The project-authored probe is tested independently, but an official simulator does not validate its models as physical devices.</p>
+<p>The existing <a href="integrated-verification.html">18-case integrated fault matrix</a> remains separate. Those cases used the smaller protocol fixture. This additional complete-scene pin capture covers the nominal case and does not turn the earlier fault diagrams into full-scene runs.</p>
+<h2>Remaining implementation gates</h2>
+<p>Inspect and measure the received ADC board's serial-mode strap, 5 V rail, 3.3 V VIO, reference and output levels before ESP32 connection. Physical clock polarity, setup/hold, noise, crosstalk, sustained recording, card behavior, radio performance and runtime remain untested. The <a href="lab-quickstart.html">short lab sequence</a> remains the handoff for those measurements. Manufacturing files are engineering prototypes; no board is ordered by this work.</p>
+</main></body></html>

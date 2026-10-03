@@ -1,0 +1,139 @@
+{
+  "passed": true,
+  "method": "Independent stdlib byte/CRC/CSV/input comparison",
+  "hardware_measured": false,
+  "cases": {
+    "known-dc": {
+      "passed": true,
+      "hardware_measured": false,
+      "synthetic": true,
+      "original_sha256": "a1b3e3fdd83e69af32061e01d36fde0f570d00c34a194a1bb59ed5baee1c11c8",
+      "tagged_sha256": "af8ac32aee08bd2fadbcc7370bded2c4383a52524bea9a1e56408e7d721f95b6",
+      "bytes": 679808,
+      "record_bytes": 64,
+      "header_bytes": 4096,
+      "validated_record_crc32": 10558,
+      "counts": {
+        "foot": 263,
+        "emg": 10041,
+        "shank": 252,
+        "status": 1,
+        "end": 1
+      },
+      "header_changes": [
+        "simulation",
+        "synthetic"
+      ],
+      "record_body_unchanged": true,
+      "csv_rows_compared": 10558,
+      "emg_values_compared": 20082,
+      "channel_mapping": {
+        "ch0": "EMG1",
+        "ch1": "EMG2"
+      },
+      "unused_channels_exported": false,
+      "expected_emg_input": "Known nominal 1 V / 2 V codes",
+      "nominal_lsb_v": 0.000152587890625,
+      "max_quantization_error_v": null,
+      "first_emg_host_us": 928222,
+      "last_emg_host_us": 2185759,
+      "host_span_s": 1.257537,
+      "host_rate_hz": 7983.860514640921,
+      "imu": {
+        "foot": {
+          "rows": 263,
+          "counter_rollovers": 20,
+          "first_host_estimate_us": 875001,
+          "last_host_estimate_us": 2185001,
+          "nominal_sensor_interval_us": 5000,
+          "timing_uncertain_records": 263,
+          "stationary_z_g": 1.0,
+          "samples_after_burst_read_start": 4,
+          "samples_after_burst_irq_anchor": 6
+        },
+        "shank": {
+          "rows": 252,
+          "counter_rollovers": 19,
+          "first_host_estimate_us": 930002,
+          "last_host_estimate_us": 2185002,
+          "nominal_sensor_interval_us": 5000,
+          "timing_uncertain_records": 252,
+          "stationary_z_g": 1.0,
+          "samples_after_burst_read_start": 0,
+          "samples_after_burst_irq_anchor": 13
+        }
+      },
+      "saved_sequence_gaps": 0,
+      "live_missing_emg_sequence": 5330,
+      "live_records_identical_to_saved": true,
+      "timing_calibrated": false,
+      "research_ready": false
+    },
+    "synthetic-waveform": {
+      "passed": true,
+      "hardware_measured": false,
+      "synthetic": true,
+      "original_sha256": "1d55cf9827acacb6cf5f796489fc55bd6de1900b692f19fd67bdc957ac7247b0",
+      "tagged_sha256": "d2578d3424defbb3869d6e5441b3c890f62bb4474f9ea61b684ad1fadadcdbdd",
+      "bytes": 679808,
+      "record_bytes": 64,
+      "header_bytes": 4096,
+      "validated_record_crc32": 10558,
+      "counts": {
+        "foot": 263,
+        "emg": 10041,
+        "shank": 252,
+        "status": 1,
+        "end": 1
+      },
+      "header_changes": [
+        "simulation",
+        "synthetic"
+      ],
+      "record_body_unchanged": true,
+      "csv_rows_compared": 10558,
+      "emg_values_compared": 20082,
+      "channel_mapping": {
+        "ch0": "EMG1",
+        "ch1": "EMG2"
+      },
+      "unused_channels_exported": false,
+      "expected_emg_input": "Precomputed ngspice synthetic stimulus",
+      "nominal_lsb_v": 0.000152587890625,
+      "max_quantization_error_v": 7.629263988229162e-05,
+      "first_emg_host_us": 928222,
+      "last_emg_host_us": 2185759,
+      "host_span_s": 1.257537,
+      "host_rate_hz": 7983.860514640921,
+      "imu": {
+        "foot": {
+          "rows": 263,
+          "counter_rollovers": 20,
+          "first_host_estimate_us": 875001,
+          "last_host_estimate_us": 2185001,
+          "nominal_sensor_interval_us": 5000,
+          "timing_uncertain_records": 263,
+          "stationary_z_g": 1.0,
+          "samples_after_burst_read_start": 4,
+          "samples_after_burst_irq_anchor": 6
+        },
+        "shank": {
+          "rows": 252,
+          "counter_rollovers": 19,
+          "first_host_estimate_us": 930002,
+          "last_host_estimate_us": 2185002,
+          "nominal_sensor_interval_us": 5000,
+          "timing_uncertain_records": 252,
+          "stationary_z_g": 1.0,
+          "samples_after_burst_read_start": 0,
+          "samples_after_burst_irq_anchor": 13
+        }
+      },
+      "saved_sequence_gaps": 0,
+      "live_missing_emg_sequence": 5330,
+      "live_records_identical_to_saved": true,
+      "timing_calibrated": false,
+      "research_ready": false
+    }
+  }
+}

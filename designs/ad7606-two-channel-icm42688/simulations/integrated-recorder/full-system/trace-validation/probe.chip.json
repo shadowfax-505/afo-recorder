@@ -1,0 +1,6 @@
+{
+  "name": "Passive digital timing probe / simulation only",
+  "author": "Muttakin Rahman",
+  "pins": ["CONVST", "BUSY", "CS", "SCLK", "DOUTA", "FOOT_IRQ", "SHANK_IRQ", "FOOT_CS", "RESET", "GND"],
+  "controls": []
+}

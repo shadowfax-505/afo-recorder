@@ -1,0 +1,18 @@
+{
+  "source_sha256": "d2578d3424defbb3869d6e5441b3c890f62bb4474f9ea61b684ad1fadadcdbdd",
+  "synthetic": true,
+  "time_origin_host_us": 928222,
+  "time_origin": "first saved EMG CONVST software timestamp",
+  "channel_identities": [
+    "EMG1",
+    "EMG2"
+  ],
+  "calibration_state": "uncalibrated",
+  "no_resampling": true,
+  "no_filtering": true,
+  "no_missing_samples_inferred": true,
+  "imu_times_estimated": true,
+  "imu_timing_calibrated": false,
+  "research_ready": false,
+  "note": "Voltage is ADC input, not muscle input microvolts. Negative initial foot time is retained."
+}
