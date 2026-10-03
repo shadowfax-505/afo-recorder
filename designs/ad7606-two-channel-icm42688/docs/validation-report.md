@@ -1,13 +1,16 @@
 # Current validation — AD7606 / two EMG / ICM-42688-P
 
-Project lead: Muttakin Rahman · 1 October 2026
+Project lead: Muttakin Rahman · updated 3 October 2026
 
 Current recording firmware **ad7606-2ch-1.6** retains the ADC task wake-up and FIFO-burst timestamp corrections found during v1.5 integrated execution, and now rejects missing BUSY assertion/ignored CONVST before accepting stale ADC words. The [integrated verification report](integrated-verification.html) is the current evidence entrypoint. **All 18 current integrated cases pass within the documented models. Physical acceptance remains unperformed.**
 
 | Evidence | Current result |
 |---|---|
 | Preserved v1.5 production firmware, FreeRTOS, FatFS and lwIP on Wokwi | Ten complete CLI/firmware passes; nominal firmware/file/UDP checks also pass with optional trace-download failure |
-| Current v1.6 whole-system Wokwi execution | All 18 current cases pass in the web editor; complete file/live decode and explicit fault reporting. [v1.5 exact tested source/image snapshot](../simulations/integrated-recorder/tested-source-1.5/manifest.json) is retained |
+| Current v1.6 integrated firmware / protocol-fixture execution | All 18 current cases pass in the web editor; complete file/live decode and explicit fault reporting. [v1.5 exact tested source/image snapshot](../simulations/integrated-recorder/tested-source-1.5/manifest.json) is retained |
+| Complete visible system | Two original nominal runs and an additional input-only pin-probe run pass; original recorder image and sensor-model C files preserved |
+| Complete-scene digital pin capture | 10,041 conversions/reads; 128 clocks per read; 8 MHz clock; both 200 Hz interrupts. First two reads independently decoded from raw edges. [Partial derived waveform and limitations](digital-timing.html) |
+| Independent saved-data comparison | 21,116 original record CRCs and CSV rows checked across known-DC and synthetic-waveform captures; enabled-channel identity, scaling, timing flags, final counters and saved/live byte parity pass. Eleven damaged-data cases rejected. [Interpretation and download](data-interpretation.html) |
 | Current low-battery export | Both file and UDP dumps complete; earlier v1.5 partial capture remains historical |
 | KiCad / independent pin comparison | Clean ERC/DRC; 390 pins and 22 GPIOs per profile compared without mismatches |
 | Current v1.6 laboratory firmware | All seven profiles cross-compiled; current diagnostic images not rerun in Wokwi |
@@ -15,14 +18,15 @@ Current recording firmware **ad7606-2ch-1.6** retains the ADC task wake-up and F
 | Native production recorder control | 38 cases pass across PCB and breadboard profiles |
 | Host converter / live / legacy | 40 tests pass |
 | Integrated evidence runner | 16 tests pass |
-| Current behavioral ADC model | 12 native groups pass under address/undefined sanitizers; no Wokwi/WASM execution |
+| Current behavioral ADC model | 12 native groups pass under address/undefined sanitizers; also executed by the current 18-case Wokwi web matrix and nominal complete-scene runs; electrical behavior remains modeled |
+| Input-only virtual timing instrument | Ten native groups, including twelve injected fault variations, pass; actual browser capture uses the supplied C source; local WASI build separately passes |
 | Captured timing audit | Nine auditor regression tests pass; current capture post-processing passes; no physical clock calibration |
 | Laptop receiver / HTTP / live browser / archive | Two current v1.6 socket/API/browser/archive cases pass; preview/packet loss remains visible; no RF link |
 | Actual C analog-to-file pipeline | 60 seconds, 480,000 EMG / 12,009 foot / 12,001 shank; 916/915 counter rollovers; correct codes; zero regressions or unexplained loss; pending foot packet counted |
 | Analog surrogate | Two channels; 16 tolerance corners; 54 DC/loading cases; analytical response comparison passes |
 | Queue capacity model | Four assumed one-hour writer cases pass; stall/throughput faults overflow explicitly. No firmware endurance or card measurement |
 | QEMU timing experiment | Refusals exercised; nominal acquisition fails; not a qualified continuous-recording result |
-| Current waveform download | No new VCD retrieved; preserved historical traces remain available |
+| Native full-session waveform download | No new VCD retrieved; partial observer-derived edge CSV/VCD supplied with explicit coverage; clock idle polarity and physical setup/hold remain unqualified |
 | Physical tests | None performed |
 
 Read the [circuit audit](circuit-audit.html), [recording/recovery guide](recording-verification.html), [module qualification](module-qualification.md) and [short staged guide](lab-quickstart.html). Current manufacturing files remain engineering-prototype outputs; bench results and final review precede any order recommendation.

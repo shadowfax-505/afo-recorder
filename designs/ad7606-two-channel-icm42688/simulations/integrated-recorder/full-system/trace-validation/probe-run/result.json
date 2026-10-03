@@ -1,0 +1,458 @@
+{
+  "pass": true,
+  "hardware_measured": false,
+  "research_ready": false,
+  "base_scene_checks": {
+    "pass": true,
+    "parts": 36,
+    "connections": 79,
+    "original_executable_connections_preserved": 29,
+    "protocol_c_sources_byte_identical": true,
+    "lab_context_gpio_matches": true,
+    "passive_blocks_have_no_callbacks_or_pin_drives": true,
+    "electrical_or_physical_validation": false
+  },
+  "recording": {
+    "pass": true,
+    "failures": [],
+    "production": {
+      "case": 0,
+      "fault": 0,
+      "emg": 10041,
+      "foot": 263,
+      "shank": 252,
+      "missed": 0,
+      "dropped": 0,
+      "imu_errors": 0,
+      "fifo_overflows": 0,
+      "adc_errors": 0,
+      "queue_peak": 61,
+      "udp": 1123,
+      "discarded": 0,
+      "writes": 85,
+      "syncs": 4,
+      "closes": 1,
+      "pages": 192
+    },
+    "saved_record_count": 10558,
+    "saved_bytes": 679808,
+    "quality": {
+      "source_sha256": "af8ac32aee08bd2fadbcc7370bded2c4383a52524bea9a1e56408e7d721f95b6",
+      "synthetic": true,
+      "counts": {
+        "emg": 10041,
+        "foot": 263,
+        "shank": 252,
+        "status": 1,
+        "end": 1
+      },
+      "session_finalized": true,
+      "structurally_complete": true,
+      "no_detected_sample_loss": true,
+      "signal_checks_pass": true,
+      "research_ready": false,
+      "sequence_gaps": {
+        "emg": 0,
+        "foot": 0,
+        "shank": 0
+      },
+      "anomalies": {
+        "sequence_regressions": 0,
+        "timestamp_regressions": 0,
+        "emg_clipped_samples": 0,
+        "emg_out_of_range": 0,
+        "imu_invalid_samples": 0,
+        "imu_timestamp_anomalies": 0,
+        "timing_uncertain_records": 515,
+        "flagged_gap_records": 0
+      },
+      "emg_observed_skipped_slots": 0,
+      "emg_rate_from_host_timestamps_hz": 7983.860514640921,
+      "last_status": {
+        "timer_missed": 0,
+        "queue_dropped": 0,
+        "imu_errors": 0,
+        "fifo_overflows": 0,
+        "adc_errors": 0,
+        "emg_records": 10041,
+        "foot_records": 263,
+        "shank_records": 252,
+        "battery_mv": 3800,
+        "queue_high_water": 61
+      },
+      "issues": [],
+      "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
+      "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
+    },
+    "live": {
+      "stats": {
+        "packets": 1123,
+        "packet_gaps": 0,
+        "reordered_or_duplicate": 0,
+        "invalid_packets": 0,
+        "unknown_session_packets": 0,
+        "device_queue_drops": 1
+      },
+      "error": null,
+      "session": "7067824a-a2e91c25",
+      "imu": {
+        "foot": {
+          "accel_g": [
+            0.00048828125,
+            0.0,
+            1.0
+          ],
+          "gyro_dps": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "sequence": 263,
+          "timestamp_us": 2185001,
+          "flags": 2
+        },
+        "shank": {
+          "accel_g": [
+            0.0009765625,
+            0.0,
+            1.0
+          ],
+          "gyro_dps": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "sequence": 252,
+          "timestamp_us": 2185002,
+          "flags": 2
+        }
+      },
+      "health": {
+        "timer_missed": 0,
+        "queue_dropped": 0,
+        "imu_errors": 0,
+        "fifo_overflows": 0,
+        "adc_errors": 0,
+        "emg_records": 10041,
+        "foot_records": 263,
+        "shank_records": 252,
+        "battery_mv": 3800,
+        "queue_high_water": 61
+      },
+      "metadata": {
+        "hardware_design": "AD7606_TWO_FIXED",
+        "schema": "afo-recorder/3",
+        "adc_model": "AD7606",
+        "adc_bits": 16,
+        "adc_reference_mv": 5000,
+        "adc_reference_measured": false,
+        "input_scale": 1,
+        "input_midpoint_mv": 0,
+        "adc_pga": 1,
+        "adc_osr": 1,
+        "adc_sensor_crc_supported": false,
+        "adc_filter": "oversampling disabled; internal analog filter",
+        "sample_timestamp_event": "CONVST GPIO write software timestamp",
+        "adc_clock_hz": 0,
+        "sd_cmd_gpio": 47,
+        "sd_clk_gpio": 39,
+        "sd_d0_gpio": 40,
+        "firmware": "ad7606-2ch-1.6",
+        "hardware_variant": "breadboard",
+        "synthetic": true,
+        "trial_id": "trial_cb7f4bb0.afolog",
+        "clock": "esp_timer_boot_us",
+        "emg_hz": 8000,
+        "imu_hz": 200,
+        "imu_enabled": true,
+        "active_channel_count": 2,
+        "emg_channels": [
+          "EMG1",
+          "EMG2"
+        ],
+        "calibration_state": "uncalibrated",
+        "simultaneous": true,
+        "accel_range_g": 16,
+        "gyro_range_dps": 2000,
+        "imu_timestamp_tick_us": 1,
+        "imu_timing_calibrated": false,
+        "imu_locations": [
+          "foot",
+          "shank"
+        ],
+        "imu_time": "fifo_delta_first_irq",
+        "placement_verified": false,
+        "record_bytes": 64,
+        "usb_recording_inhibit": true,
+        "analog_filter": "two cascaded 3.3k/47nF low-pass sections, each unity buffered; 100R series output, 1nF to ground; single-ended ADC",
+        "unplugged_input_bias_mv": 1500,
+        "unplugged_input_bias_ohm": 1000000,
+        "clock_or_filter_delay_correction": "none",
+        "notes": "Engineering prototype; physical validation pending",
+        "transport": "wifi_udp",
+        "live_capture": true
+      },
+      "records": 10557,
+      "ended": true,
+      "first_sequence": {
+        "2": 1,
+        "7": 1,
+        "3": 1
+      },
+      "sequence_gaps": {
+        "7": 1
+      },
+      "stop_reason": 0
+    },
+    "udp_packets": 1123,
+    "source_sha256": "a1b3e3fdd83e69af32061e01d36fde0f570d00c34a194a1bb59ed5baee1c11c8"
+  },
+  "pin_checks": {
+    "pass": true,
+    "errors": [],
+    "hardware_measured": false,
+    "research_ready": false,
+    "engine": "Actual Wokwi pin-watch callbacks, checked by an independent edge decoder",
+    "expected_saved_emg_frames": 10041,
+    "virtual_mean_trigger_rate_hz": 7983.8602543398165,
+    "observer": {
+      "version": 1,
+      "hardware_measured": false,
+      "drives_outputs": false,
+      "idle_report_us": 2000,
+      "report_ns": 2187759449,
+      "first_trigger_ns": 928222408,
+      "last_trigger_ns": 2185759449,
+      "triggers": 10041,
+      "reads": 10041,
+      "priming_reads": 2,
+      "pending": 0,
+      "partial_frame": false,
+      "bad_clocks": 0,
+      "bad_words": 0,
+      "read_while_busy": 0,
+      "missing_busy": 0,
+      "overlapping_conversions": 0,
+      "wrong_idle_clock": 10043,
+      "prime_outside_reset": 0,
+      "watch_failures": 0,
+      "foot_irq_total": 263,
+      "shank_irq_total": 252,
+      "foot_irq_window": 252,
+      "shank_irq_window": 252,
+      "trigger_period_ns": {
+        "count": 10040,
+        "min": 122250,
+        "max": 128262,
+        "sum": 1257537041
+      },
+      "convst_width_ns": {
+        "count": 10041,
+        "min": 1483,
+        "max": 1484,
+        "sum": 14893976
+      },
+      "busy_width_ns": {
+        "count": 10041,
+        "min": 4000,
+        "max": 4000,
+        "sum": 40164000
+      },
+      "falling_clock_period_ns": {
+        "count": 1275207,
+        "min": 125,
+        "max": 125,
+        "sum": 159400875
+      },
+      "foot_irq_period_ns": {
+        "count": 262,
+        "min": 5000000,
+        "max": 5000000,
+        "sum": 1310000000
+      },
+      "shank_irq_period_ns": {
+        "count": 251,
+        "min": 5000000,
+        "max": 5000000,
+        "sum": 1255000000
+      },
+      "foot_irq_width_ns": {
+        "count": 263,
+        "min": 10000,
+        "max": 10000,
+        "sum": 2630000
+      },
+      "shank_irq_width_ns": {
+        "count": 252,
+        "min": 10000,
+        "max": 10000,
+        "sum": 2520000
+      }
+    },
+    "sampled_frames": [
+      {
+        "number": 1,
+        "trigger_ns": 928222408,
+        "busy_end_ns": 928226408,
+        "cs_start_ns": 928234591,
+        "cs_end_ns": 928250591,
+        "falls": 128,
+        "rises": 128,
+        "words": [
+          6554,
+          13107,
+          -1234,
+          2345,
+          -32768,
+          32767,
+          0,
+          1111
+        ]
+      },
+      {
+        "number": 2,
+        "trigger_ns": 928347662,
+        "busy_end_ns": 928351662,
+        "cs_start_ns": 928359845,
+        "cs_end_ns": 928375845,
+        "falls": 128,
+        "rises": 128,
+        "words": [
+          6554,
+          13107,
+          -1234,
+          2345,
+          -32768,
+          32767,
+          0,
+          1111
+        ]
+      },
+      {
+        "number": 10040,
+        "trigger_ns": 2185634195,
+        "busy_end_ns": 2185638195,
+        "cs_start_ns": 2185647807,
+        "cs_end_ns": 2185663807,
+        "falls": 128,
+        "rises": 128,
+        "words": [
+          6554,
+          13107,
+          -1234,
+          2345,
+          -32768,
+          32767,
+          0,
+          1111
+        ]
+      },
+      {
+        "number": 10041,
+        "trigger_ns": 2185759449,
+        "busy_end_ns": 2185763449,
+        "cs_start_ns": 2185771632,
+        "cs_end_ns": 2185787632,
+        "falls": 128,
+        "rises": 128,
+        "words": [
+          6554,
+          13107,
+          -1234,
+          2345,
+          -32768,
+          32767,
+          0,
+          1111
+        ]
+      }
+    ],
+    "raw_edge_check": {
+      "complete_frames": 2,
+      "events": 611,
+      "frames": [
+        {
+          "start_ns": 928234591,
+          "rises": 128,
+          "end_ns": 928250591,
+          "words": [
+            6554,
+            13107,
+            -1234,
+            2345,
+            -32768,
+            32767,
+            0,
+            1111
+          ],
+          "falls": 128
+        },
+        {
+          "start_ns": 928359845,
+          "rises": 128,
+          "end_ns": 928375845,
+          "words": [
+            6554,
+            13107,
+            -1234,
+            2345,
+            -32768,
+            32767,
+            0,
+            1111
+          ],
+          "falls": 128
+        }
+      ],
+      "coverage": "Actual first two ADC frames only; not a full-session VCD"
+    },
+    "coverage": "All ADC frames counted/decoded by the observer; detailed raw edges for first two only",
+    "clock_idle_polarity_qualified": false,
+    "clock_idle_note": "The observer reports SCLK low at CS assertion in this Wokwi run. The raw capture decodes falling-edge data and all 128 clocks correctly. The simulator does not establish the physical controller idle polarity or setup/hold margins.",
+    "sclk_low_at_cs_assertions": 10043,
+    "priming_note": "adc_bus_init calls adc_configure once; start_recording calls it again. Both RESET-time reads are discarded, before the first conversion.",
+    "full_session_vcd_qualified": false
+  },
+  "probe_input_manifest": {
+    "hardware_measured": false,
+    "instrument": "Project-authored passive digital pin observer",
+    "original_scene_unchanged": true,
+    "original_connections": 79,
+    "added_input_taps": {
+      "CONVST": "adc:CONVST",
+      "BUSY": "adc:BUSY",
+      "CS": "adc:CS",
+      "SCLK": "adc:SCLK",
+      "DOUTA": "adc:DOUTA",
+      "FOOT_IRQ": "foot:INT1",
+      "SHANK_IRQ": "shank:INT1",
+      "FOOT_CS": "foot:CS",
+      "RESET": "adc:RESET",
+      "GND": "esp:GND.1"
+    },
+    "parts": 38,
+    "connections": 89,
+    "sensor_model_c_sources_unchanged": true,
+    "sha256": {
+      "diagram.json": "38da950c6e76d98de419177d009b03e8ffdc2676096d55a91ad54754eac45662",
+      "probe.chip.c": "2c18d04e4a6f0cfced75f7823b7a000ba39acc4ef765c3d72f9ce0c0a6d10625",
+      "probe.chip.json": "a63f6f0c3b7c4878f5cc08b0163fb3c867f0330b39b54ad977411f0a998840bc"
+    },
+    "web_execution": "Browser compiles the uploaded C source; its generated WASM hash is not exposed here.",
+    "local_wasm": "Separate artifact compiled by Wokwi CLI v0.27.1 with WASI-SDK v25.0",
+    "local_compile_check": {
+      "pass": true,
+      "compiler": "Wokwi CLI v0.27.1 / WASI-SDK v25.0",
+      "wasm_sha256": "a987b3d98d19b056db7567788e94026013d0ef5352f4622619dc34eeefd95a4e",
+      "api_header_sha256": "f72cbb878f7b54017b3eae0450a410905759934e00fbb508cad198951a016c57",
+      "wasm_distributed": false,
+      "wasm_executed_in_browser_hash_known": false
+    }
+  },
+  "sha256": {
+    "serial.txt": "c87580233872b154cfddcfb2e7ee77afcba363fada4fc32a5d542df2030bdf17",
+    "chips-console.txt": "44f03f8cdf97fefe2a456d93cedbd17f95d536c684a731be8addd8dbd64a63ea",
+    "diagram.json": "38da950c6e76d98de419177d009b03e8ffdc2676096d55a91ad54754eac45662",
+    "tested-build.json": "f5c06d8ac598d4fada82aea17c890007275b4dee1e7d7efa458d99ac1fad9f20"
+  }
+}

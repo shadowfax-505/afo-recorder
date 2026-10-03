@@ -1,0 +1,10 @@
+{
+  "hardware_measured": false,
+  "waveform_qualified": false,
+  "vcd_download": "No download event or new local VCD file obtained after stopping",
+  "intended_diagram": "diagram.json",
+  "observed_diagram": "observed-diagram-after-inspection.json",
+  "observation_phase": "after recorder completed and capture controls were inspected",
+  "observed_differences": "Several positions and one wire color changed during UI inspection; endpoint pairs, component types and model attributes unchanged",
+  "serial_assessed": false
+}

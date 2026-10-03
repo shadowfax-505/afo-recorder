@@ -1,0 +1,63 @@
+{
+  "passed": true,
+  "damaged_cases_rejected": 11,
+  "tests": [
+    {
+      "name": "truncated-header",
+      "rejected": true,
+      "reason": "Truncated 4096-byte header"
+    },
+    {
+      "name": "truncated-record",
+      "rejected": true,
+      "reason": "Truncated 64-byte record"
+    },
+    {
+      "name": "header-crc-corruption",
+      "rejected": true,
+      "reason": "Header CRC32"
+    },
+    {
+      "name": "record-crc-corruption",
+      "rejected": true,
+      "reason": "Record CRC32 at 4160"
+    },
+    {
+      "name": "wrong-voltage-units",
+      "rejected": true,
+      "reason": "CSV scaling/value differs: ch0_adc_input_v"
+    },
+    {
+      "name": "swapped-emg-channels",
+      "rejected": true,
+      "reason": "CSV value differs: ch0_raw"
+    },
+    {
+      "name": "hidden-disabled-channel",
+      "rejected": true,
+      "reason": "EMG CSV columns/count"
+    },
+    {
+      "name": "csv-row-missing",
+      "rejected": true,
+      "reason": "EMG CSV columns/count"
+    },
+    {
+      "name": "wrong-imu-axis-scaling",
+      "rejected": true,
+      "reason": "CSV scaling/value differs: az_g"
+    },
+    {
+      "name": "unflagged-imu-time",
+      "rejected": true,
+      "reason": "CSV value differs: flags"
+    },
+    {
+      "name": "wrong-final-counter",
+      "rejected": true,
+      "reason": "CSV value differs: emg_records"
+    }
+  ],
+  "source_evidence_unchanged": true,
+  "hardware_measured": false
+}

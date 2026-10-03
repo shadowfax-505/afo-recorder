@@ -1,0 +1,870 @@
+{
+  "version": 1,
+  "author": "Muttakin Rahman",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "board-esp32-s3-devkitc-1",
+      "id": "esp",
+      "top": 60,
+      "left": 400,
+      "attrs": {
+        "flashSize": "8",
+        "psramSize": "8",
+        "psramType": "octal",
+        "cpuFrequency": "max",
+        "serialInterface": "USB_SERIAL_JTAG"
+      }
+    },
+    {
+      "type": "chip-ad7606",
+      "id": "adc",
+      "top": 80,
+      "left": 50,
+      "attrs": {
+        "fault": "0",
+        "waveform": "0"
+      }
+    },
+    {
+      "type": "chip-icm42688",
+      "id": "foot",
+      "top": 80,
+      "left": 735,
+      "attrs": {
+        "identity": "1",
+        "fault": "0"
+      }
+    },
+    {
+      "type": "chip-icm42688",
+      "id": "shank",
+      "top": 250,
+      "left": 735,
+      "attrs": {
+        "identity": "2",
+        "fault": "0"
+      }
+    },
+    {
+      "type": "chip-fixture",
+      "id": "fixture",
+      "top": 640,
+      "left": 0,
+      "attrs": {
+        "case": "0"
+      },
+      "hide": true
+    },
+    {
+      "type": "wokwi-logic-analyzer",
+      "id": "logic",
+      "top": 440,
+      "left": 735,
+      "attrs": {
+        "bufferSize": "1000000"
+      }
+    },
+    {
+      "type": "chip-battery",
+      "id": "battery",
+      "left": 45,
+      "top": -260,
+      "attrs": {}
+    },
+    {
+      "type": "chip-power",
+      "id": "power",
+      "left": 360,
+      "top": -260,
+      "attrs": {}
+    },
+    {
+      "type": "chip-myoware",
+      "id": "myo1",
+      "left": -290,
+      "top": 80,
+      "attrs": {}
+    },
+    {
+      "type": "chip-myoware",
+      "id": "myo2",
+      "left": -290,
+      "top": 260,
+      "attrs": {}
+    },
+    {
+      "type": "chip-frontend",
+      "id": "filter1",
+      "left": -120,
+      "top": 80,
+      "attrs": {}
+    },
+    {
+      "type": "chip-frontend",
+      "id": "filter2",
+      "left": -120,
+      "top": 260,
+      "attrs": {}
+    },
+    {
+      "type": "chip-storage",
+      "id": "sd",
+      "left": 380,
+      "top": 435,
+      "attrs": {}
+    },
+    {
+      "type": "chip-radio",
+      "id": "radio",
+      "left": 760,
+      "top": -230,
+      "attrs": {}
+    },
+    {
+      "type": "chip-laptop",
+      "id": "laptop",
+      "left": 985,
+      "top": -230,
+      "attrs": {}
+    },
+    {
+      "type": "chip-usb",
+      "id": "usb",
+      "left": 45,
+      "top": -135,
+      "attrs": {}
+    },
+    {
+      "type": "chip-monitor",
+      "id": "monitor",
+      "left": 190,
+      "top": -135,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "button",
+      "left": 250,
+      "top": 460,
+      "attrs": {
+        "color": "blue"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "rec",
+      "left": 335,
+      "top": 355,
+      "attrs": {
+        "color": "green"
+      }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "rec_r",
+      "left": 335,
+      "top": 400,
+      "attrs": {
+        "value": "1000"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "err",
+      "left": 400,
+      "top": 355,
+      "attrs": {
+        "color": "red"
+      }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "err_r",
+      "left": 400,
+      "top": 400,
+      "attrs": {
+        "value": "1000"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "low",
+      "left": 465,
+      "top": 355,
+      "attrs": {
+        "color": "yellow"
+      }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "low_r",
+      "left": 465,
+      "top": 400,
+      "attrs": {
+        "value": "1000"
+      }
+    },
+    {
+      "type": "wokwi-text",
+      "id": "title",
+      "left": -290,
+      "top": -370,
+      "attrs": {
+        "text": "AD7606 / TWO EMG / TWO ICM-42688-P \u2014 COMPLETE SYSTEM CONTEXT"
+      }
+    },
+    {
+      "type": "wokwi-text",
+      "id": "legend",
+      "left": -290,
+      "top": -325,
+      "attrs": {
+        "text": "Green/orange: executed digital interfaces   Purple: analog chain illustration\nRed/black: ideal power context   Gray: SDMMC replaced by RAM disk   Blue: logical UDP link"
+      }
+    },
+    {
+      "type": "wokwi-text",
+      "id": "power_note",
+      "left": 360,
+      "top": -165,
+      "attrs": {
+        "text": "3.3 V digital \u00b7 3.0 V analog \u00b7 5 V ADC \u00b7 1.5 V midpoint\nBattery and USB states are injected by the fixture.\nPower, charging, USB transport and runtime are NOT simulated."
+      }
+    },
+    {
+      "type": "wokwi-text",
+      "id": "myo_note",
+      "left": -320,
+      "top": 440,
+      "attrs": {
+        "text": "EMG1 / EMG2\nNo electrodes or person.\n1 V / 2 V known inputs are\ngenerated inside ADC model.\nAnalog response: separate ngspice."
+      }
+    },
+    {
+      "type": "wokwi-text",
+      "id": "adc_note",
+      "left": 15,
+      "top": 350,
+      "attrs": {
+        "text": "AD7606 \u00b7 \u00b15 V \u00b7 OS=0\nCVA/CVB together \u00b7 all 8 words read\nOnly EMG1/2 exported. Mode straps\nand unused inputs: see lab guide."
+      }
+    },
+    {
+      "type": "wokwi-text",
+      "id": "foot_note",
+      "left": 735,
+      "top": 40,
+      "attrs": {
+        "text": "FOOT / ICM-42688-P / 200 Hz"
+      }
+    },
+    {
+      "type": "wokwi-text",
+      "id": "shank_note",
+      "left": 735,
+      "top": 215,
+      "attrs": {
+        "text": "SHANK / ICM-42688-P / 200 Hz"
+      }
+    },
+    {
+      "type": "wokwi-text",
+      "id": "controls_note",
+      "left": 320,
+      "top": 300,
+      "attrs": {
+        "text": "REC     ERROR     LOW\nStart/stop shown; automated\nfixture controls this short run."
+      }
+    },
+    {
+      "type": "wokwi-text",
+      "id": "storage_note",
+      "left": 360,
+      "top": 535,
+      "attrs": {
+        "text": "Real FatFS write / sync / reopen\nPSRAM medium substitutes SD card.\nSDMMC wires are context only."
+      }
+    },
+    {
+      "type": "wokwi-text",
+      "id": "wifi_note",
+      "left": 760,
+      "top": -160,
+      "attrs": {
+        "text": "No physical radio/laptop simulation.\nProduction UDP + internal subscriber;\nreal laptop replay tested separately."
+      }
+    },
+    {
+      "type": "wokwi-text",
+      "id": "esp_note",
+      "left": 380,
+      "top": -20,
+      "attrs": {
+        "text": "ESP32-S3 N8R8\nProduction ESP-IDF image + fixture\nUpload merged.bin with F1.\nOutputs: serial file + UDP exports."
+      }
+    },
+    {
+      "type": "wokwi-text",
+      "id": "analyzer_note",
+      "left": 735,
+      "top": 555,
+      "attrs": {
+        "text": "Logic analyzer taps are hidden\nfor clarity; all eight remain connected."
+      }
+    },
+    {
+      "type": "chip-probe",
+      "id": "probe",
+      "left": 730,
+      "top": 525,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-text",
+      "id": "probe_note",
+      "left": 720,
+      "top": 645,
+      "attrs": {
+        "text": "INPUT-ONLY VIRTUAL PROBE\nTiming + decoded words: Chips Console\nFirst two frames: recorded edge trace\nNo electrical or manufacturer validation.",
+        "fontSize": "12"
+      }
+    }
+  ],
+  "connections": [
+    [
+      "esp:10",
+      "adc:CS",
+      "green",
+      []
+    ],
+    [
+      "esp:11",
+      "adc:CONVST",
+      "green",
+      []
+    ],
+    [
+      "esp:9",
+      "adc:RESET",
+      "green",
+      []
+    ],
+    [
+      "esp:8",
+      "adc:BUSY",
+      "orange",
+      []
+    ],
+    [
+      "esp:12",
+      "adc:SCLK",
+      "green",
+      []
+    ],
+    [
+      "esp:13",
+      "adc:DOUTA",
+      "green",
+      []
+    ],
+    [
+      "esp:7",
+      "foot:CS",
+      "green",
+      []
+    ],
+    [
+      "esp:6",
+      "foot:SCLK",
+      "green",
+      []
+    ],
+    [
+      "esp:4",
+      "foot:SDI",
+      "green",
+      []
+    ],
+    [
+      "esp:5",
+      "foot:SDO",
+      "green",
+      []
+    ],
+    [
+      "esp:16",
+      "foot:INT1",
+      "orange",
+      []
+    ],
+    [
+      "esp:15",
+      "shank:CS",
+      "green",
+      []
+    ],
+    [
+      "esp:6",
+      "shank:SCLK",
+      "green",
+      []
+    ],
+    [
+      "esp:4",
+      "shank:SDI",
+      "green",
+      []
+    ],
+    [
+      "esp:5",
+      "shank:SDO",
+      "green",
+      []
+    ],
+    [
+      "esp:17",
+      "shank:INT1",
+      "orange",
+      []
+    ],
+    [
+      "esp:3",
+      "fixture:CASE0",
+      "",
+      []
+    ],
+    [
+      "esp:14",
+      "fixture:CASE1",
+      "",
+      []
+    ],
+    [
+      "esp:46",
+      "fixture:CASE2",
+      "",
+      []
+    ],
+    [
+      "esp:48",
+      "fixture:CASE3",
+      "",
+      []
+    ],
+    [
+      "adc:CONVST",
+      "logic:D0",
+      "",
+      []
+    ],
+    [
+      "adc:BUSY",
+      "logic:D1",
+      "",
+      []
+    ],
+    [
+      "adc:CS",
+      "logic:D2",
+      "",
+      []
+    ],
+    [
+      "adc:SCLK",
+      "logic:D3",
+      "",
+      []
+    ],
+    [
+      "adc:DOUTA",
+      "logic:D4",
+      "",
+      []
+    ],
+    [
+      "foot:INT1",
+      "logic:D5",
+      "",
+      []
+    ],
+    [
+      "shank:INT1",
+      "logic:D6",
+      "",
+      []
+    ],
+    [
+      "foot:CS",
+      "logic:D7",
+      "",
+      []
+    ],
+    [
+      "esp:GND.1",
+      "logic:GND",
+      "",
+      []
+    ],
+    [
+      "esp:41",
+      "rec_r:1",
+      "green",
+      []
+    ],
+    [
+      "rec_r:2",
+      "rec:A",
+      "green",
+      []
+    ],
+    [
+      "rec:C",
+      "esp:GND.1",
+      "black",
+      []
+    ],
+    [
+      "esp:42",
+      "err_r:1",
+      "green",
+      []
+    ],
+    [
+      "err_r:2",
+      "err:A",
+      "green",
+      []
+    ],
+    [
+      "err:C",
+      "esp:GND.1",
+      "black",
+      []
+    ],
+    [
+      "esp:2",
+      "low_r:1",
+      "green",
+      []
+    ],
+    [
+      "low_r:2",
+      "low:A",
+      "green",
+      []
+    ],
+    [
+      "low:C",
+      "esp:GND.1",
+      "black",
+      []
+    ],
+    [
+      "button:1.l",
+      "esp:18",
+      "green",
+      []
+    ],
+    [
+      "button:2.l",
+      "esp:GND.1",
+      "black",
+      []
+    ],
+    [
+      "battery:PACK_PLUS",
+      "power:PACK_PLUS",
+      "red",
+      []
+    ],
+    [
+      "battery:GND",
+      "power:GND",
+      "black",
+      []
+    ],
+    [
+      "power:5V",
+      "esp:5V",
+      "red",
+      []
+    ],
+    [
+      "power:5V",
+      "adc:AVCC_5V",
+      "red",
+      []
+    ],
+    [
+      "power:3V3D",
+      "adc:VIO_3V3",
+      "red",
+      []
+    ],
+    [
+      "power:GND",
+      "esp:GND.1",
+      "black",
+      []
+    ],
+    [
+      "adc:GND",
+      "esp:GND.1",
+      "black",
+      []
+    ],
+    [
+      "battery:PACK_PLUS",
+      "monitor:BAT",
+      "red",
+      []
+    ],
+    [
+      "usb:VBUS",
+      "monitor:VBUS",
+      "gray",
+      []
+    ],
+    [
+      "usb:GND",
+      "esp:GND.1",
+      "black",
+      []
+    ],
+    [
+      "monitor:GND",
+      "esp:GND.1",
+      "black",
+      []
+    ],
+    [
+      "monitor:BAT_ADC",
+      "esp:1",
+      "gray",
+      []
+    ],
+    [
+      "monitor:USB_N",
+      "esp:21",
+      "gray",
+      []
+    ],
+    [
+      "usb:D_MINUS",
+      "esp:19",
+      "gray",
+      []
+    ],
+    [
+      "usb:D_PLUS",
+      "esp:20",
+      "gray",
+      []
+    ],
+    [
+      "power:3V3D",
+      "foot:VDD_3V3",
+      "red",
+      []
+    ],
+    [
+      "foot:GND",
+      "esp:GND.1",
+      "black",
+      []
+    ],
+    [
+      "power:3V3D",
+      "shank:VDD_3V3",
+      "red",
+      []
+    ],
+    [
+      "shank:GND",
+      "esp:GND.1",
+      "black",
+      []
+    ],
+    [
+      "power:3V0A",
+      "myo1:VIN_3V0",
+      "red",
+      []
+    ],
+    [
+      "myo1:GND",
+      "esp:GND.1",
+      "black",
+      []
+    ],
+    [
+      "myo1:RAW",
+      "filter1:RAW",
+      "purple",
+      []
+    ],
+    [
+      "power:3V0A",
+      "filter1:3V0A",
+      "red",
+      []
+    ],
+    [
+      "power:VMID",
+      "filter1:VMID",
+      "purple",
+      []
+    ],
+    [
+      "filter1:GND",
+      "esp:GND.1",
+      "black",
+      []
+    ],
+    [
+      "filter1:TO_ADC",
+      "adc:AIN1",
+      "purple",
+      []
+    ],
+    [
+      "power:3V0A",
+      "myo2:VIN_3V0",
+      "red",
+      []
+    ],
+    [
+      "myo2:GND",
+      "esp:GND.1",
+      "black",
+      []
+    ],
+    [
+      "myo2:RAW",
+      "filter2:RAW",
+      "purple",
+      []
+    ],
+    [
+      "power:3V0A",
+      "filter2:3V0A",
+      "red",
+      []
+    ],
+    [
+      "power:VMID",
+      "filter2:VMID",
+      "purple",
+      []
+    ],
+    [
+      "filter2:GND",
+      "esp:GND.1",
+      "black",
+      []
+    ],
+    [
+      "filter2:TO_ADC",
+      "adc:AIN2",
+      "purple",
+      []
+    ],
+    [
+      "power:3V3D",
+      "sd:3V3",
+      "red",
+      []
+    ],
+    [
+      "sd:GND",
+      "esp:GND.1",
+      "black",
+      []
+    ],
+    [
+      "esp:39",
+      "sd:CLK",
+      "gray",
+      []
+    ],
+    [
+      "esp:47",
+      "sd:CMD",
+      "gray",
+      []
+    ],
+    [
+      "esp:40",
+      "sd:D0",
+      "gray",
+      []
+    ],
+    [
+      "radio:AFW1_PREVIEW",
+      "laptop:AFW1_PREVIEW",
+      "blue",
+      []
+    ],
+    [
+      "adc:CONVST",
+      "probe:CONVST",
+      "",
+      []
+    ],
+    [
+      "adc:BUSY",
+      "probe:BUSY",
+      "",
+      []
+    ],
+    [
+      "adc:CS",
+      "probe:CS",
+      "",
+      []
+    ],
+    [
+      "adc:SCLK",
+      "probe:SCLK",
+      "",
+      []
+    ],
+    [
+      "adc:DOUTA",
+      "probe:DOUTA",
+      "",
+      []
+    ],
+    [
+      "foot:INT1",
+      "probe:FOOT_IRQ",
+      "",
+      []
+    ],
+    [
+      "shank:INT1",
+      "probe:SHANK_IRQ",
+      "",
+      []
+    ],
+    [
+      "foot:CS",
+      "probe:FOOT_CS",
+      "",
+      []
+    ],
+    [
+      "adc:RESET",
+      "probe:RESET",
+      "",
+      []
+    ],
+    [
+      "esp:GND.1",
+      "probe:GND",
+      "",
+      []
+    ]
+  ]
+}

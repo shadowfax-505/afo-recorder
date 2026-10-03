@@ -1,0 +1,13 @@
+{
+  "hardware_measured": false,
+  "waveform_qualified": false,
+  "vcd_download": "No download event or new local VCD file obtained after stopping",
+  "intended_diagram": "diagram.json",
+  "observed_diagram": "observed-diagram-before-run.json",
+  "observation_phase": "Visible diagram editor copied before firmware start",
+  "observed_diagram_exact": true,
+  "serial_export_terminators_observed": true,
+  "serial_assessed": false,
+  "native_full_session_trace_available": false,
+  "note": "Transport/capture limitation retained separately from the later passing input-only probe run"
+}

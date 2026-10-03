@@ -1,0 +1,8 @@
+{
+  "pass": true,
+  "tests": 10,
+  "fault_variations": 12,
+  "hardware_measured": false,
+  "fixture_edges": "synthetic native instrument tests",
+  "failed": []
+}

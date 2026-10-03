@@ -10,6 +10,8 @@ This report covers this configuration only. The other five designs retain their 
 
 [See the complete system](whole-system.html): the physical assembly and a separate saved Wokwi scene include power, both EMG paths, both IMUs, storage, controls and laptop context. The expanded scene passed an additional nominal run. The eighteen-case results below retain their original protocol-fixture diagrams.
 
+**3 October follow-up:** a complete-scene [digital pin observer](digital-timing.html) passes 10,041 ADC trigger/read checks and both 200 Hz IMU interrupt streams. The [saved-data audit and interpretation guide](data-interpretation.html) independently compares 21,116 original records across two captures with every exported CSV row, verifies channel identity and nominal units, and confirms byte parity between received preview records and the saved file. Native full-session VCD download and hardware timing remain unqualified.
+
 ## Tested versions
 
 Current laboratory firmware is **ad7606-2ch-1.6**; all seven profiles compile. The separate integrated image executes the production recorder, sensor drivers, serializer and Wi-Fi task with fixture wrappers. Its [31-file source/configuration/model/image manifest](../simulations/integrated-recorder/firmware/manifest.json), boot ELF identifier and each saved diagram identify the tested build. The current [18-case web ledger](../simulations/integrated-recorder/results/web-current/summary.json) is distinct from the pre-web quota-refused candidate.
@@ -88,7 +90,7 @@ Every case below completed on the same current ESP32-S3 image. The assessor veri
 
 [Current nominal quality](../simulations/integrated-recorder/results/web-current/normal/converted/quality.json) · [current explicitly synthetic recording](../simulations/integrated-recorder/results/web-current/normal/simulated-recording.afolog) · [filtered signal plot](../simulations/integrated-recorder/results/web-current/filtered-synthetic-emg/converted/signals.svg).
 
-The low-battery fixture now yields during post-recording serial export. Both export terminators completed; the earlier v1.5 partial dump remains partial. This checks the simulated low-voltage response, not measured battery runtime. No current downloaded VCD is available: serial/file timing checks and historical traces must not be described as a new waveform capture.
+The low-battery fixture now yields during post-recording serial export. Both export terminators completed; the earlier v1.5 partial dump remains partial. This checks the simulated low-voltage response, not measured battery runtime. No current native downloaded VCD is available. The later [pin-observer waveform](digital-timing.html) is a partial capture derived from observed simulated transitions, with separately checked complete-session counters; it does not qualify a native full-session VCD.
 
 ### Startup stack correction
 

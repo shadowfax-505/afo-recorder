@@ -1,0 +1,15 @@
+{
+  "hardware_measured": false,
+  "source": "chips-console.txt",
+  "source_sha256": "44f03f8cdf97fefe2a456d93cedbd17f95d536c684a731be8addd8dbd64a63ea",
+  "coverage": "First two complete ADC reads; final edge is BUSY rising before the third CONVST callback",
+  "observed_edge_count": 611,
+  "initial_snapshot_values": 9,
+  "full_session_vcd_qualified": false,
+  "sha256": {
+    "sampled-edges.csv": "db82d95a03fd771fbae999b29aff4725325630987c5e0549824e102be8a7f527",
+    "sampled-edges.vcd": "c4fab21fe78ca635760de91546e498d2be806277869f4b660d6893bddc5b25d7",
+    "adc-timing.png": "5698abefb981516609f84e45d64ea6728d54390a2c940c505437dba6629d9f1a",
+    "adc-timing.svg": "125747cf380c7e00cddbf0958bc1c9bb59791968340a0627371ea75c3d41ae1b"
+  }
+}

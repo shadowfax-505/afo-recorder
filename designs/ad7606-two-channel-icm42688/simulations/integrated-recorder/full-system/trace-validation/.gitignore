@@ -1,0 +1,3 @@
+# These local compiler artifacts are not the web engine's executed WASM image.
+probe.chip.wasm
+wokwi-api.h
