@@ -24,9 +24,9 @@ Unpowered: verify no direct VBUS-to-recorder-5V connection. Powered with host ab
 
 1. Rails and dummy loads: target 5.00 V ±5%, 3.30 V ±5%, 3.00 V ±3%; verify polarity before adding modules. Record startup and ripple waveforms; these screening limits do not replace component-specific limits or final noise validation.
 2. Controller: programming/reset, buttons, LEDs, USB enumeration and recording inhibition.
-3. Qualified ADC: known DC levels, identity/configuration where supported, 8 kHz conversion cadence (125 µs nominal), counter continuity; ADS frame CRC or AD BUSY/readout checks as applicable.
+3. Qualified AD7606: known DC levels and swapped V1/V2 identity test; both CVA/CVB share GPIO11. Check 8 kHz conversion cadence, BUSY assertion/deassertion and full 128-clock read through DB7/DOUTA. Separate discarded RESET-time reads from counted conversions; AD7606 has no sensor-frame CRC.
 4. First analog channel: synthetic offset/amplitude sweep, clipping and filter response against simulation.
-5. Remaining channels: identity, two/four-channel selection where supported, crosstalk and disabled-channel handling.
+5. Second EMG channel: populate BB2 and verify exactly EMG1/2, common frame timestamps, crosstalk and the defined unused ADC levels. No EMG3/EMG4 ports exist in this fixed-two build.
 6. First then second IMU: identity, orientation, 200 Hz nominal acquisition, FIFO and timing diagnostics.
 7. SD: uninterrupted 60-minute synthetic recording, conversion, full-card and interrupted-file tests.
 8. Wi-Fi with SD: visible wireless gaps and no unexplained SD sample loss.
@@ -35,4 +35,4 @@ Unpowered: verify no direct VBUS-to-recorder-5V connection. Powered with host ab
 
 For every stage record: date, hardware/module revision, firmware profile, instrument, stimulus/load, measured minimum/maximum, trace/file location, pass/fail, fault and corrective action. Earlier diagnostic stages remain available. Do not mark any measured row passed from a simulation.
 
-See module-qualification.md before stage 3 or 6, the existing detailed staged-test guide for signal limits, and the per-wire and component tables below. If an older drawing disagrees, revision-12 tables supersede its breadboard routing; stop and reconcile any electrical discrepancy before power-up. PCB files are unchanged by this breadboard update; final layout-dependent validation remains required.
+Use [applied simulation findings](breadboard-refinements.html), [probe contacts](../breadboard/probe-connections.csv) and [blank bench checklist](bench-checklist.csv). See module-qualification.md before stage 3 or 6, the existing detailed staged-test guide for signal limits, and the per-wire and component tables below. If an older drawing disagrees, revision-12 tables supersede its breadboard routing; stop and reconcile any electrical discrepancy before power-up. PCB files are unchanged by this breadboard update; final layout-dependent validation remains required.

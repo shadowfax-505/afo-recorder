@@ -105,16 +105,16 @@ wire-103,10,3V0A,myo1:VIN solder pad,DIST1:b27,"Use bare-sensor RAW, VIN and GND
 wire-104,4,3V0A,clamp1:CHIP_PAD_2 → JP1.3,DIST1:c27,Use the specified adapter pad-to-header mapping; check solder orientation and unpowered continuity.
 wire-105,10,3V0A,myo2:VIN solder pad,DIST1:d27,"Use bare-sensor RAW, VIN and GND pads; no person attached during instrument tests."
 wire-106,5,3V0A,clamp2:CHIP_PAD_2 → JP1.3,DIST1:e27,Use the specified adapter pad-to-header mapping; check solder orientation and unpowered continuity.
-wire-107,3,ADC_CS,AUX1:g3,DIST1:a28,One lead per listed hole/contact. Verify unpowered continuity before applying power.
-wire-108,3,ADC_CS,esp:J1.16 / GPIO10,DIST1:b28,One lead per listed hole/contact. Verify unpowered continuity before applying power.
-wire-109,3,ADC_CS,adc:CS / CN1 photo label,DIST1:c28,"Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
-wire-110,3,ADC_SCK,esp:J1.18 / GPIO12,adc:RD / CN1 photo label,"Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
-wire-111,3,ADC_MISO,esp:J1.19 / GPIO13,adc:DB7 / CN1 photo label,"Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
-wire-112,3,ADC_RESET,esp:J1.15 / GPIO9,adc:RST / CN1 photo label,"Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
-wire-113,3,ADC_DRDY,esp:J1.12 / GPIO8,adc:BUSY / CN1 photo label,"Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
-wire-114,3,ADC_CONVST,esp:J1.17 / GPIO11,DIST1:a29,One lead per listed hole/contact. Verify unpowered continuity before applying power.
-wire-115,3,ADC_CONVST,adc:CVA / CN1 photo label,DIST1:b29,"Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
-wire-116,3,ADC_CONVST,adc:CVB / CN1 photo label,DIST1:c29,"Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
+wire-107,3,ADC_CS,AUX1:g3,DIST1:a28,"After module qualification, verify active-low CS on GPIO10. A measured frame contains all 128 clocks; RESET-time discarded reads are separate. Keep SPI leads short with nearby ground return."
+wire-108,3,ADC_CS,esp:J1.16 / GPIO10,DIST1:b28,"After module qualification, verify active-low CS on GPIO10. A measured frame contains all 128 clocks; RESET-time discarded reads are separate. Keep SPI leads short with nearby ground return."
+wire-109,3,ADC_CS,adc:CS / CN1 photo label,DIST1:c28,"After module qualification, verify active-low CS on GPIO10. A measured frame contains all 128 clocks; RESET-time discarded reads are separate. Keep SPI leads short with nearby ground return."
+wire-110,3,ADC_SCK,esp:J1.18 / GPIO12,adc:RD / CN1 photo label,"RD is serial SCLK: GPIO12, 8 MHz, SPI mode 2 (idle HIGH; sample falling edge). Measure physical idle/setup/hold; the Wokwi idle-level limitation does not authorize a polarity change."
+wire-111,3,ADC_MISO,esp:J1.19 / GPIO13,adc:DB7 / CN1 photo label,"DB7 is DOUTA in verified serial mode: GPIO13 receives all eight 16-bit words in V1–V8 order. Export only EMG1/2. DB8/DOUTB is unused, not a second MISO lead."
+wire-112,3,ADC_RESET,esp:J1.15 / GPIO9,adc:RST / CN1 photo label,"RST is active HIGH on GPIO9. Firmware discards one RESET-time read per ADC configuration; normally one at diagnostic boot, two before the first recording session. Do not count these as EMG conversions."
+wire-113,3,ADC_DRDY,esp:J1.12 / GPIO8,adc:BUSY / CN1 photo label,"This shared net name means AD7606 BUSY on GPIO8. Verify BUSY asserts after CONVST and falls before SCLK; a missing/stuck/late BUSY must produce a fault, not stale plausible data."
+wire-114,3,ADC_CONVST,esp:J1.17 / GPIO11,DIST1:a29,GPIO11 must reach BOTH CVA and CVB through the same DIST1 a29/b29/c29 five-hole strip. Verify unpowered continuity and simultaneous rising edges. Never leave one conversion group floating.
+wire-115,3,ADC_CONVST,adc:CVA / CN1 photo label,DIST1:b29,GPIO11 must reach BOTH CVA and CVB through the same DIST1 a29/b29/c29 five-hole strip. Verify unpowered continuity and simultaneous rising edges. Never leave one conversion group floating.
+wire-116,3,ADC_CONVST,adc:CVB / CN1 photo label,DIST1:c29,GPIO11 must reach BOTH CVA and CVB through the same DIST1 a29/b29/c29 five-hole strip. Verify unpowered continuity and simultaneous rising edges. Never leave one conversion group floating.
 wire-117,4,AIN0P,BB1:c28,DIST1:a30,One lead per listed hole/contact. Verify unpowered continuity before applying power.
 wire-118,4,AIN0P,adc:V1 / CN2 photo label,DIST1:b30,"Complete ADC module qualification before connecting. Use connector labels and orientation, not the model dimensions."
 wire-119,10,RAW0,BB1:b2,DIST1:a31,One lead per listed hole/contact. Verify unpowered continuity before applying power.
@@ -127,23 +127,23 @@ wire-125,10,RAW1,BB2:b2,DIST1:a34,One lead per listed hole/contact. Verify unpow
 wire-126,10,RAW1,myo2:RAW solder pad,DIST1:b34,"Use bare-sensor RAW, VIN and GND pads; no person attached during instrument tests."
 wire-127,5,RC1A,BB2:d4,DIST1:a35,One lead per listed hole/contact. Verify unpowered continuity before applying power.
 wire-128,5,RC1A,clamp2:CHIP_PAD_3 → JP2.3,DIST1:b35,Use the specified adapter pad-to-header mapping; check solder orientation and unpowered continuity.
-wire-129,6,IMU_MOSI,esp:J1.4 / GPIO4,DIST1:a36,One lead per listed hole/contact. Verify unpowered continuity before applying power.
-wire-130,6,IMU_MOSI,foot:mikroBUS 6 / MOSI,DIST1:b36,"Complete IMU supply, interface and configuration checks before connecting."
-wire-131,6,IMU_MOSI,shank:mikroBUS 6 / MOSI,DIST1:c36,"Complete IMU supply, interface and configuration checks before connecting."
-wire-132,6,IMU_MISO,esp:J1.5 / GPIO5,DIST1:a37,One lead per listed hole/contact. Verify unpowered continuity before applying power.
-wire-133,6,IMU_MISO,foot:mikroBUS 5 / MISO,DIST1:b37,"Complete IMU supply, interface and configuration checks before connecting."
-wire-134,6,IMU_MISO,shank:mikroBUS 5 / MISO,DIST1:c37,"Complete IMU supply, interface and configuration checks before connecting."
-wire-135,6,IMU_SCK,esp:J1.6 / GPIO6,DIST1:a38,One lead per listed hole/contact. Verify unpowered continuity before applying power.
-wire-136,6,IMU_SCK,foot:mikroBUS 4 / SCK,DIST1:b38,"Complete IMU supply, interface and configuration checks before connecting."
-wire-137,6,IMU_SCK,shank:mikroBUS 4 / SCK,DIST1:c38,"Complete IMU supply, interface and configuration checks before connecting."
-wire-138,6,FOOT_CS,AUX1:g7,DIST1:a39,One lead per listed hole/contact. Verify unpowered continuity before applying power.
-wire-139,6,FOOT_CS,esp:J1.7 / GPIO7,DIST1:b39,One lead per listed hole/contact. Verify unpowered continuity before applying power.
-wire-140,6,FOOT_CS,foot:mikroBUS 3 / CS,DIST1:c39,"Complete IMU supply, interface and configuration checks before connecting."
-wire-141,6,FOOT_INT,esp:J1.9 / GPIO16,foot:mikroBUS 15 / INT,"Complete IMU supply, interface and configuration checks before connecting."
-wire-142,6,SHANK_CS,AUX1:g11,DIST1:a40,One lead per listed hole/contact. Verify unpowered continuity before applying power.
-wire-143,6,SHANK_CS,esp:J1.8 / GPIO15,DIST1:b40,One lead per listed hole/contact. Verify unpowered continuity before applying power.
-wire-144,6,SHANK_CS,shank:mikroBUS 3 / CS,DIST1:c40,"Complete IMU supply, interface and configuration checks before connecting."
-wire-145,6,SHANK_INT,esp:J1.10 / GPIO17,shank:mikroBUS 15 / INT,"Complete IMU supply, interface and configuration checks before connecting."
+wire-129,6,IMU_MOSI,esp:J1.4 / GPIO4,DIST1:a36,Shared ICM SPI MOSI is GPIO4 to both mikroBUS pin 6 contacts. Use SPI JP2–JP4 positions 1–2; qualify 3.3 V and carrier orientation before wiring.
+wire-130,6,IMU_MOSI,foot:mikroBUS 6 / MOSI,DIST1:b36,Shared ICM SPI MOSI is GPIO4 to both mikroBUS pin 6 contacts. Use SPI JP2–JP4 positions 1–2; qualify 3.3 V and carrier orientation before wiring.
+wire-131,6,IMU_MOSI,shank:mikroBUS 6 / MOSI,DIST1:c36,Shared ICM SPI MOSI is GPIO4 to both mikroBUS pin 6 contacts. Use SPI JP2–JP4 positions 1–2; qualify 3.3 V and carrier orientation before wiring.
+wire-132,6,IMU_MISO,esp:J1.5 / GPIO5,DIST1:a37,Shared ICM SPI MISO is GPIO5 from both mikroBUS pin 5 contacts. Separate CS lines select each carrier; verify the inactive carrier releases the bus.
+wire-133,6,IMU_MISO,foot:mikroBUS 5 / MISO,DIST1:b37,Shared ICM SPI MISO is GPIO5 from both mikroBUS pin 5 contacts. Separate CS lines select each carrier; verify the inactive carrier releases the bus.
+wire-134,6,IMU_MISO,shank:mikroBUS 5 / MISO,DIST1:c37,Shared ICM SPI MISO is GPIO5 from both mikroBUS pin 5 contacts. Separate CS lines select each carrier; verify the inactive carrier releases the bus.
+wire-135,6,IMU_SCK,esp:J1.6 / GPIO6,DIST1:a38,Shared ICM SPI SCLK is GPIO6 to both mikroBUS pin 4 contacts; 1 MHz mode 0 in this firmware. Keep leads short with a nearby ground return.
+wire-136,6,IMU_SCK,foot:mikroBUS 4 / SCK,DIST1:b38,Shared ICM SPI SCLK is GPIO6 to both mikroBUS pin 4 contacts; 1 MHz mode 0 in this firmware. Keep leads short with a nearby ground return.
+wire-137,6,IMU_SCK,shank:mikroBUS 4 / SCK,DIST1:c38,Shared ICM SPI SCLK is GPIO6 to both mikroBUS pin 4 contacts; 1 MHz mode 0 in this firmware. Keep leads short with a nearby ground return.
+wire-138,6,FOOT_CS,AUX1:g7,DIST1:a39,Foot ICM chip select is GPIO7 to mikroBUS pin 3 / CS. Rotate only the foot carrier and confirm the foot stream identity before adding the shank.
+wire-139,6,FOOT_CS,esp:J1.7 / GPIO7,DIST1:b39,Foot ICM chip select is GPIO7 to mikroBUS pin 3 / CS. Rotate only the foot carrier and confirm the foot stream identity before adding the shank.
+wire-140,6,FOOT_CS,foot:mikroBUS 3 / CS,DIST1:c39,Foot ICM chip select is GPIO7 to mikroBUS pin 3 / CS. Rotate only the foot carrier and confirm the foot stream identity before adding the shank.
+wire-141,6,FOOT_INT,esp:J1.9 / GPIO16,foot:mikroBUS 15 / INT,Foot INT1 uses mikroBUS pin 15 / INT to GPIO16. Verify active-high pulses at 200 Hz independently of shank; missing IRQ or FIFO overflow must remain visible.
+wire-142,6,SHANK_CS,AUX1:g11,DIST1:a40,Shank ICM chip select is GPIO15 to mikroBUS pin 3 / CS. Rotate only the shank carrier and confirm the shank stream identity.
+wire-143,6,SHANK_CS,esp:J1.8 / GPIO15,DIST1:b40,Shank ICM chip select is GPIO15 to mikroBUS pin 3 / CS. Rotate only the shank carrier and confirm the shank stream identity.
+wire-144,6,SHANK_CS,shank:mikroBUS 3 / CS,DIST1:c40,Shank ICM chip select is GPIO15 to mikroBUS pin 3 / CS. Rotate only the shank carrier and confirm the shank stream identity.
+wire-145,6,SHANK_INT,esp:J1.10 / GPIO17,shank:mikroBUS 15 / INT,Shank INT1 uses mikroBUS pin 15 / INT to GPIO17. Verify active-high pulses at 200 Hz independently of foot; preserve independent startup times and counters.
 wire-146,2,BUTTON,AUX1:g15,DIST1:a41,One lead per listed hole/contact. Verify unpowered continuity before applying power.
 wire-147,2,BUTTON,esp:J1.11 / GPIO18,DIST1:b41,One lead per listed hole/contact. Verify unpowered continuity before applying power.
 wire-148,2,BUTTON,button:NO contact 1,DIST1:c41,One lead per listed hole/contact. Verify unpowered continuity before applying power.
@@ -168,16 +168,16 @@ wire-166,2,USB_VBUS,usb:JP2.5 / VBUS,DIST1:b49,"External USB inlet only; both De
 wire-167,2,USB_GATE,AUX1:g55,DIST1:a50,One lead per listed hole/contact. Verify unpowered continuity before applying power.
 wire-168,2,USB_GATE,AUX2:a3,DIST1:b50,One lead per listed hole/contact. Verify unpowered continuity before applying power.
 wire-169,2,USB_GATE,usb-q:GATE pin1 → JP1.2,DIST1:c50,Use the specified adapter pad-to-header mapping; check solder orientation and unpowered continuity.
-wire-170,2,USB_PRESENT_N,AUX2:g7,DIST1:a51,One lead per listed hole/contact. Verify unpowered continuity before applying power.
-wire-171,2,USB_PRESENT_N,usb-q:DRAIN pin3 → JP2.3,DIST1:b51,Use the specified adapter pad-to-header mapping; check solder orientation and unpowered continuity.
-wire-172,2,USB_PRESENT_N,esp:J3.18 / GPIO21,DIST1:c51,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-170,2,USB_PRESENT_N,AUX2:g7,DIST1:a51,GPIO21 is LOW when external USB is attached and HIGH when absent; the diagnostic attachment indicator prints the inverse. USB VBUS is sense-only; leave both DevKit USB sockets empty.
+wire-171,2,USB_PRESENT_N,usb-q:DRAIN pin3 → JP2.3,DIST1:b51,GPIO21 is LOW when external USB is attached and HIGH when absent; the diagnostic attachment indicator prints the inverse. USB VBUS is sense-only; leave both DevKit USB sockets empty.
+wire-172,2,USB_PRESENT_N,esp:J3.18 / GPIO21,DIST1:c51,GPIO21 is LOW when external USB is attached and HIGH when absent; the diagnostic attachment indicator prints the inverse. USB VBUS is sense-only; leave both DevKit USB sockets empty.
 wire-173,2,USB_DM,usb:JP2.4 / D-,usb-dm-r:lead 1,"External USB inlet only; both DevKit USB sockets empty. VBUS is sense-only, never connected to recorder 5 V."
 wire-174,2,USB_DM_MCU,usb-dm-r:lead 2,esp:J3.20 / GPIO19,"External USB inlet only; both DevKit USB sockets empty. VBUS is sense-only, never connected to recorder 5 V."
 wire-175,2,USB_DP,usb:JP2.3 / D+,usb-dp-r:lead 1,"External USB inlet only; both DevKit USB sockets empty. VBUS is sense-only, never connected to recorder 5 V."
 wire-176,2,USB_DP_MCU,usb-dp-r:lead 2,esp:J3.19 / GPIO20,"External USB inlet only; both DevKit USB sockets empty. VBUS is sense-only, never connected to recorder 5 V."
-wire-177,7,SD_CMD,esp:J3.17 / GPIO47,sd:JP1.5,One lead per listed hole/contact. Verify unpowered continuity before applying power.
-wire-178,7,SD_CLK,esp:J3.9 / GPIO39,sd:JP1.3,One lead per listed hole/contact. Verify unpowered continuity before applying power.
-wire-179,7,SD_D0,esp:J3.8 / GPIO40,sd:JP1.4,One lead per listed hole/contact. Verify unpowered continuity before applying power.
+wire-177,7,SD_CMD,esp:J3.17 / GPIO47,sd:JP1.5,SDMMC CMD is GPIO47 on the breadboard and Adafruit 4682 JP1.5. Select breadboard-sd-only-2ch or breadboard-record-2ch; the PCB image uses GPIO38.
+wire-178,7,SD_CLK,esp:J3.9 / GPIO39,sd:JP1.3,SDMMC CLK is GPIO39 to Adafruit 4682 JP1.3. This is not SPI SD wiring. Keep the card supply stable and audit the original saved file.
+wire-179,7,SD_D0,esp:J3.8 / GPIO40,sd:JP1.4,"SDMMC D0 is GPIO40 to Adafruit 4682 JP1.4. Use all five listed SD contacts, including GND. A wireless preview cannot establish SD persistence."
 wire-180,1,3V3D,cap-2:lead 1,ldo:U$1.1 solder pad,"Local soldered LDO bypass, short insulated leads; not a remote breadboard capacitor."
 wire-181,1,GND,cap-2:lead 2,ldo:U$1.2 solder pad,"Local soldered LDO bypass, short insulated leads; not a remote breadboard capacitor."
 wire-182,1,3V0A,cap-3:lead 1,ldo:U$1.6 solder pad,"Local soldered LDO bypass, short insulated leads; not a remote breadboard capacitor."

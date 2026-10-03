@@ -1,0 +1,30 @@
+{
+  "scope": "AD7606 fixed-two ICM breadboard handoff",
+  "status": "PASS",
+  "wire_table_rows": 184,
+  "firmware_pin_comparisons": 17,
+  "probe_contacts_verified": 18,
+  "compiled_profiles_hash_verified": 7,
+  "unmeasured_checklist_rows": 30,
+  "rendered_local_links_verified": 73,
+  "physical_measurements_completed": 0,
+  "lab_binaries_executed": false,
+  "source_sha256": {
+    "breadboard/system-wiring.json": "0c71197392b09d8691ae1a5017510f3081f3ef3f4829581a04ec0c3349cecc91",
+    "breadboard/system-wiring.csv": "5c64676a764cb63c5f3e1e170b8977099f57368dc9ece42c6d0d6d5bdae5e8e4",
+    "breadboard/exact-wire-endpoints.csv": "5c64676a764cb63c5f3e1e170b8977099f57368dc9ece42c6d0d6d5bdae5e8e4",
+    "breadboard/probe-connections.csv": "bd044ca3c579bdba39e11098904c7ee4b95c582706f28109bb1192eaff5154ab",
+    "docs/bench-checklist.csv": "f65140b4aa5698d3507b8a14171a9aa03abba983c273211c1185e0f514fb1408",
+    "docs/build-guide.html": "820e54f5155b10f96fe0272904cdae7a12df86387854feff415c95e642182b2f",
+    "viewer/guide.json": "a7ef7107a52817082cda9e2a83887449f0beb8d5414b63c75cbbbc0031a21fa1",
+    "firmware/main/board.h": "11f3f4d30c3b70410810426ffe6371088ed250903c7e569ba36858d6248439cc",
+    "firmware/builds/validation.json": "8c08a320a27b265aa5c9774cc5646617b4ddf5b5063a8fa0374eb2855d7f4c41",
+    "docs/breadboard-refinements.html": "bed6b5e0f43ddd156dd9db66a4747a220d24b92d5692d8bfb0916d6af8bc5056",
+    "docs/lab-quickstart.html": "012adea5558c93ed8fbdbc262ebd393fb5f04dc1dce847b050bd864bfc9e57d7",
+    "docs/staged-build-guide.html": "cf4b242190256b6e61b99ff805ac16c8a24c68dc5953a70eb40e5eeee8ae59a8",
+    "docs/physical-assembly.html": "8233acf3270e5cbd5e1bdf9a213bf01820d715a81db93fe3146384f455707d04",
+    "docs/firmware-build-guide.html": "ed900e79cd4b251921792101ac09710b3a8da96826a787ff02e6a0fca0aa85a5",
+    "design/validate_breadboard_guidance.py": "5d370e53576cdbc03eaa2369470cdb8cb7cb19cd4ab4f4d911edb127fda58cc6"
+  },
+  "note": "Static instruction/pin/hash checks; not electrical measurements or fresh firmware execution."
+}
