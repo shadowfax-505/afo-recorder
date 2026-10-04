@@ -46,4 +46,9 @@ class SubmissionTests(unittest.TestCase):
    with (p/'measurements.csv').open('w',newline='') as f:
     w=csv.DictWriter(f,fieldnames=list(rows[0]));w.writeheader();w.writerows(rows)
    r=review(p);self.assertEqual(r['status'],'READY FOR HUMAN REVIEW');self.assertFalse(r['engineering_approval'])
+ def test_truncated_csv_row_rejected_without_crash(self):
+  with tempfile.TemporaryDirectory() as d:
+   p=Path(d);(p/'submission.json').write_text(json.dumps({'stage':3}))
+   (p/'measurements.csv').write_text('other,check_id\nx,3-dc\nx\n')
+   self.assertEqual(review(p)['status'],'INCOMPLETE')
 if __name__=='__main__':unittest.main()

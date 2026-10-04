@@ -33,11 +33,11 @@ def review(folder):
             # Use the packaged plan, not the submitted worksheet, as the checklist.
             plan=json.loads(Path(__file__).with_name('stage-plan.json').read_text())
             expected={check['id'] for item in plan['stages'] if item['stage']==stage for check in item['checks']}
-            observed={row.get('check_id','') for row in rows}
+            observed={str(row.get('check_id') or '') for row in rows}
             for check in sorted(expected-observed):missing.append('Missing required check: '+check)
             for check in sorted(observed-expected):missing.append('Unknown check: '+str(check))
             for row in rows:
-                tag=row.get('check_id','unknown')
+                tag=str(row.get('check_id') or 'unknown')
                 if row.get('outcome') not in ('PASS','FAIL','PENDING'):missing.append(tag+': outcome not recorded')
                 for key in ('measured_value','unit','uncertainty','instrument_settings','evidence_file','operator','date'):
                     if not row.get(key):missing.append(tag+': missing '+key)
