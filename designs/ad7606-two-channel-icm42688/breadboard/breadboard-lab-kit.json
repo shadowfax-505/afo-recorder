@@ -1,8 +1,8 @@
 {
   "filename": "breadboard-lab-kit.zip",
-  "bytes": 8333689,
-  "sha256": "5a96fc3a217e0abac8d64c2be27cb812058fb991e4b7dbcce4dd622adea20928",
-  "files": 329,
+  "bytes": 8506503,
+  "sha256": "a6cc76b90d2c100973d6ec4de2532998c6aa265bbb1f9644e6a35261c7f839cf",
+  "files": 334,
   "included_profiles": [
     "diagnostic-controller",
     "diagnostic-adc",

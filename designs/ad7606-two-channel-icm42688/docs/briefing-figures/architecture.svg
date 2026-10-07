@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg
+  PUBLIC '-//W3C//DTD SVG 1.0//EN'
+  'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'>
+<svg width="499" height="220" preserveAspectRatio="xMinYMin meet" viewBox="0 0 499 220" xmlns="http://www.w3.org/2000/svg" version="1.0" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title>...</title>
+	<desc>...</desc>
+	<clipPath id="clip">
+		<rect x="0" y="0" width="499" height="220"/>
+	</clipPath>
+	<g id="group" transform="scale(1,-1) translate(0,-220)" style="clip-path: url(#clip)">
+		<g transform="">
+			<rect x="0" y="140" width="110" height="55" rx="4" ry="4" style="stroke: rgb(3%,41%,37%); stroke-linecap: butt; stroke-width: 1; fill: rgb(90%,94%,93%); fill-rule: evenodd;"/>
+			<text x="28.495" y="173.5" style="font-family: Helvetica; font-size: 9px;fill: rgb(9%,17%,16%); stroke:none;" transform="translate(0,347) scale(1,-1)">2 x MyoWare</text>
+			<text x="28.4905" y="160.5" style="font-family: Helvetica; font-size: 9px;fill: rgb(9%,17%,16%); stroke:none;" transform="translate(0,321) scale(1,-1)">RAW outputs</text>
+			<rect x="128" y="140" width="110" height="55" rx="4" ry="4" style="stroke: rgb(3%,41%,37%); stroke-linecap: butt; stroke-width: 1; fill: rgb(90%,94%,93%); fill-rule: evenodd;"/>
+			<text x="164.865" y="173.5" style="font-family: Helvetica; font-size: 9px;fill: rgb(9%,17%,16%); stroke:none;" transform="translate(0,347) scale(1,-1)">Buffers +</text>
+			<text x="156.243" y="160.5" style="font-family: Helvetica; font-size: 9px;fill: rgb(9%,17%,16%); stroke:none;" transform="translate(0,321) scale(1,-1)">two RC poles</text>
+			<rect x="256" y="140" width="110" height="55" rx="4" ry="4" style="stroke: rgb(3%,41%,37%); stroke-linecap: butt; stroke-width: 1; fill: rgb(90%,94%,93%); fill-rule: evenodd;"/>
+			<text x="294.7415" y="173.5" style="font-family: Helvetica; font-size: 9px;fill: rgb(9%,17%,16%); stroke:none;" transform="translate(0,347) scale(1,-1)">AD7606</text>
+			<text x="285.494" y="160.5" style="font-family: Helvetica; font-size: 9px;fill: rgb(9%,17%,16%); stroke:none;" transform="translate(0,321) scale(1,-1)">8 kHz trigger</text>
+			<rect x="384" y="140" width="110" height="55" rx="4" ry="4" style="stroke: rgb(3%,41%,37%); stroke-linecap: butt; stroke-width: 1; fill: rgb(90%,94%,93%); fill-rule: evenodd;"/>
+			<text x="417.9895" y="173.5" style="font-family: Helvetica; font-size: 9px;fill: rgb(9%,17%,16%); stroke:none;" transform="translate(0,347) scale(1,-1)">ESP32-S3</text>
+			<text x="415.996" y="160.5" style="font-family: Helvetica; font-size: 9px;fill: rgb(9%,17%,16%); stroke:none;" transform="translate(0,321) scale(1,-1)">timestamps</text>
+			<path d="M 110,167 L 128,167 Z" style="stroke: rgb(3%,41%,37%); stroke-linecap: butt; stroke-width: 1.4;"/>
+			<polygon points="128 167, 122.7345 169.8766, 122.7345 164.1234" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,41%,37%); fill-rule: evenodd;"/>
+			<path d="M 238,167 L 256,167 Z" style="stroke: rgb(3%,41%,37%); stroke-linecap: butt; stroke-width: 1.4;"/>
+			<polygon points="256 167, 250.7345 169.8766, 250.7345 164.1234" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,41%,37%); fill-rule: evenodd;"/>
+			<path d="M 366,167 L 384,167 Z" style="stroke: rgb(3%,41%,37%); stroke-linecap: butt; stroke-width: 1.4;"/>
+			<polygon points="384 167, 378.7345 169.8766, 378.7345 164.1234" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,41%,37%); fill-rule: evenodd;"/>
+			<rect x="245" y="35" width="120" height="55" rx="4" ry="4" style="stroke: rgb(3%,41%,37%); stroke-linecap: butt; stroke-width: 1; fill: rgb(90%,94%,93%); fill-rule: evenodd;"/>
+			<text x="278.8595" y="68.5" style="font-family: Helvetica; font-size: 9px;fill: rgb(9%,17%,16%); stroke:none;" transform="translate(0,137) scale(1,-1)">Foot + shank</text>
+			<text x="278.243" y="55.5" style="font-family: Helvetica; font-size: 9px;fill: rgb(9%,17%,16%); stroke:none;" transform="translate(0,111) scale(1,-1)">ICM-42688-P</text>
+			<path d="M 365,63 L 439,140 Z" style="stroke: rgb(3%,41%,37%); stroke-linecap: butt; stroke-width: 1.4;"/>
+			<polygon points="439 140, 433.2774 138.1967, 437.4255 134.2103" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,41%,37%); fill-rule: evenodd;"/>
+			<rect x="384" y="35" width="110" height="55" rx="4" ry="4" style="stroke: rgb(3%,41%,37%); stroke-linecap: butt; stroke-width: 1; fill: rgb(90%,94%,93%); fill-rule: evenodd;"/>
+			<text x="405.502" y="68.5" style="font-family: Helvetica; font-size: 9px;fill: rgb(9%,17%,16%); stroke:none;" transform="translate(0,137) scale(1,-1)">microSD primary</text>
+			<text x="411.7525" y="55.5" style="font-family: Helvetica; font-size: 9px;fill: rgb(9%,17%,16%); stroke:none;" transform="translate(0,111) scale(1,-1)">Wi-Fi preview</text>
+			<path d="M 439,140 L 439,90 Z" style="stroke: rgb(3%,41%,37%); stroke-linecap: butt; stroke-width: 1.4;"/>
+			<polygon points="439 90, 441.8766 95.2655, 436.1234 95.2655" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,41%,37%); fill-rule: evenodd;"/>
+			<text x="0" y="10" style="font-family: Times-Roman; font-size: 9px;fill: rgb(3%,41%,37%); stroke:none;" transform="translate(0,20) scale(1,-1)">Functional paths only; not physical header positions.</text>
+		</g>
+	</g>
+</svg>
