@@ -19,42 +19,6 @@ for source in files:
  title=source.read_text().splitlines()[0].lstrip('# ')
  body=md.render(text)
  output.write_text('<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+html.escape(title)+'</title><style>'+css+'</style></head><body><main><nav><a href="'+home+'development/index.html">Build sequence</a><a href="'+home+'docs/understanding-the-recorder.html">How it works</a><a href="'+home+'viewer/build.html">Assembly workspace</a><a href="'+home+'docs/understanding-the-recorder.pdf">Briefing PDF</a></nav>'+body+'<footer>Muttakin Rahman · AD7606 / two-channel / ICM-42688-P · Physical validation pending</footer></main></body></html>')
-# PDF uses the same source, with deliberate chapter grouping and vector flow diagram.
-from reportlab.platypus import SimpleDocTemplate,Paragraph,Spacer,PageBreak,KeepTogether
-from reportlab.lib.styles import getSampleStyleSheet,ParagraphStyle
-from reportlab.lib import colors
-from reportlab.lib.enums import TA_LEFT
-from reportlab.graphics.shapes import Drawing,Rect,String,Line,Polygon
-styles=getSampleStyleSheet()
-styles.add(ParagraphStyle(name='TitleCustom',fontName='Helvetica-Bold',fontSize=29,leading=34,textColor=colors.HexColor('#123d35'),spaceAfter=22))
-styles.add(ParagraphStyle(name='Chapter',fontName='Helvetica-Bold',fontSize=20,leading=25,textColor=colors.HexColor('#096b60'),spaceAfter=15))
-styles.add(ParagraphStyle(name='TextCustom',fontName='Helvetica',fontSize=11,leading=16,spaceAfter=12))
-styles.add(ParagraphStyle(name='SmallCustom',fontName='Helvetica',fontSize=8,leading=12,spaceAfter=8))
-source=(P/'docs/understanding-the-recorder.md').read_text()
-sections=re.split(r'^## ',source,flags=re.M)
-story=[Paragraph('Understanding my<br/>muscle and motion recorder',styles['TitleCustom']),Paragraph('Muttakin Rahman',styles['Chapter']),Paragraph('A personal briefing for AFO and neuromuscular research',styles['TextCustom']),Spacer(1,18)]
-d=Drawing(490,165)
-labels=['MyoWare RAW','Analog filters','AD7606','ESP32','SD / laptop']
-for i,label in enumerate(labels):
- x=i*98;y=100
- d.add(Rect(x,y,88,48,rx=6,ry=6,fillColor=colors.HexColor('#e6f1ed'),strokeColor=colors.HexColor('#0b7766')))
- d.add(String(x+44,y+20,label,textAnchor='middle',fontName='Helvetica',fontSize=9))
- if i<4:
-  d.add(Line(x+88,y+24,x+97,y+24,strokeColor=colors.HexColor('#0b7766')))
-  d.add(Polygon([x+97,y+24,x+93,y+27,x+93,y+21],fillColor=colors.HexColor('#0b7766'),strokeColor=None))
-d.add(Rect(275,15,126,42,rx=6,ry=6,fillColor=colors.HexColor('#e6f1ed'),strokeColor=colors.HexColor('#0b7766')))
-d.add(String(338,32,'Foot + shank IMUs',textAnchor='middle',fontName='Helvetica',fontSize=10))
-d.add(Line(338,57,338,99,strokeColor=colors.HexColor('#0b7766')))
-d.add(Polygon([338,99,334,93,342,93],fillColor=colors.HexColor('#0b7766'),strokeColor=None))
-story.extend([d,Paragraph('Design and simulation evidence exist. An assembled recorder has not yet been measured.',styles['TextCustom']),Paragraph('4 October 2026 · Fixed two-channel AD7606 / ICM-42688-P build',styles['SmallCustom']),PageBreak()])
-for idx,section in enumerate(sections[1:]):
- title,body=section.split('\n',1)
- if idx and idx%2==0:story.append(PageBreak())
- story.append(Paragraph(html.escape(title),styles['Chapter']))
- for para in body.strip().split('\n\n'):
-  para=para.replace('“','"').replace('”','"').replace('’',"'").replace('–','-').replace('—','-')
-  story.append(Paragraph(html.escape(para).replace('\n','<br/>'),styles['SmallCustom' if title=='Reading and evidence' else 'TextCustom']))
-def footer(canvas,doc):
- canvas.setStrokeColor(colors.HexColor('#cbd8d1'));canvas.line(48,40,547,40)
- canvas.setFont('Helvetica',8);canvas.setFillColor(colors.HexColor('#45645c'));canvas.drawString(48,27,'Muttakin Rahman | Research recorder | Physical validation pending');canvas.drawRightString(547,27,str(doc.page))
-SimpleDocTemplate(str(P/'docs/understanding-the-recorder.pdf'),pagesize=(595,842),rightMargin=48,leftMargin=48,topMargin=48,bottomMargin=55,title='Understanding my muscle and motion recorder',author='Muttakin Rahman').build(story,onFirstPage=footer,onLaterPages=footer)
+# Keep the detailed handbook and circuit pack reproducible.
+from build_supervisor_documents import build
+build()

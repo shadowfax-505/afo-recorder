@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg
+  PUBLIC '-//W3C//DTD SVG 1.0//EN'
+  'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'>
+<svg width="499" height="220" preserveAspectRatio="xMinYMin meet" viewBox="0 0 499 220" xmlns="http://www.w3.org/2000/svg" version="1.0" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title>...</title>
+	<desc>...</desc>
+	<clipPath id="clip">
+		<rect x="0" y="0" width="499" height="220"/>
+	</clipPath>
+	<g id="group" transform="scale(1,-1) translate(0,-220)" style="clip-path: url(#clip)">
+		<g transform="">
+			<text x="0" y="169" style="font-family: Times-Roman; font-size: 9px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,338) scale(1,-1)">CONVST</text>
+			<path d="M 85,165 L 480,165 Z" style="stroke: rgb(50%,50%,50%); stroke-linecap: butt; stroke-width: 1;"/>
+			<text x="0" y="119" style="font-family: Times-Roman; font-size: 9px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,238) scale(1,-1)">BUSY</text>
+			<path d="M 85,115 L 480,115 Z" style="stroke: rgb(50%,50%,50%); stroke-linecap: butt; stroke-width: 1;"/>
+			<text x="0" y="69" style="font-family: Times-Roman; font-size: 9px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,138) scale(1,-1)">Serial read</text>
+			<path d="M 85,65 L 480,65 Z" style="stroke: rgb(50%,50%,50%); stroke-linecap: butt; stroke-width: 1;"/>
+			<path d="M 100,165 L 100,190 Z" style="stroke: rgb(3%,41%,37%); stroke-linecap: butt; stroke-width: 1;"/>
+			<path d="M 100,190 L 108,190 Z" style="stroke: rgb(3%,41%,37%); stroke-linecap: butt; stroke-width: 1;"/>
+			<path d="M 108,190 L 108,165 Z" style="stroke: rgb(3%,41%,37%); stroke-linecap: butt; stroke-width: 1;"/>
+			<path d="M 280,165 L 280,190 Z" style="stroke: rgb(3%,41%,37%); stroke-linecap: butt; stroke-width: 1;"/>
+			<path d="M 280,190 L 288,190 Z" style="stroke: rgb(3%,41%,37%); stroke-linecap: butt; stroke-width: 1;"/>
+			<path d="M 288,190 L 288,165 Z" style="stroke: rgb(3%,41%,37%); stroke-linecap: butt; stroke-width: 1;"/>
+			<path d="M 460,165 L 460,190 Z" style="stroke: rgb(3%,41%,37%); stroke-linecap: butt; stroke-width: 1;"/>
+			<path d="M 460,190 L 468,190 Z" style="stroke: rgb(3%,41%,37%); stroke-linecap: butt; stroke-width: 1;"/>
+			<path d="M 468,190 L 468,165 Z" style="stroke: rgb(3%,41%,37%); stroke-linecap: butt; stroke-width: 1;"/>
+			<rect x="108" y="115" width="45" height="22" rx="4" ry="4" style="stroke: rgb(3%,41%,37%); stroke-linecap: butt; stroke-width: 1; fill: rgb(90%,94%,93%); fill-rule: evenodd;"/>
+			<text x="130.5" y="132.0" style="font-family: Helvetica; font-size: 9px;fill: rgb(9%,17%,16%); stroke:none;" transform="translate(0,264) scale(1,-1)"></text>
+			<rect x="165" y="65" width="95" height="22" rx="4" ry="4" style="stroke: rgb(3%,41%,37%); stroke-linecap: butt; stroke-width: 1; fill: rgb(90%,94%,93%); fill-rule: evenodd;"/>
+			<text x="191.242" y="82.0" style="font-family: Helvetica; font-size: 9px;fill: rgb(9%,17%,16%); stroke:none;" transform="translate(0,164) scale(1,-1)">128 clocks</text>
+			<rect x="288" y="115" width="45" height="22" rx="4" ry="4" style="stroke: rgb(3%,41%,37%); stroke-linecap: butt; stroke-width: 1; fill: rgb(90%,94%,93%); fill-rule: evenodd;"/>
+			<text x="310.5" y="132.0" style="font-family: Helvetica; font-size: 9px;fill: rgb(9%,17%,16%); stroke:none;" transform="translate(0,264) scale(1,-1)"></text>
+			<rect x="345" y="65" width="95" height="22" rx="4" ry="4" style="stroke: rgb(3%,41%,37%); stroke-linecap: butt; stroke-width: 1; fill: rgb(90%,94%,93%); fill-rule: evenodd;"/>
+			<text x="371.242" y="82.0" style="font-family: Helvetica; font-size: 9px;fill: rgb(9%,17%,16%); stroke:none;" transform="translate(0,164) scale(1,-1)">128 clocks</text>
+			<text x="175" y="202" style="font-family: Times-Roman; font-size: 10px;fill: rgb(3%,41%,37%); stroke:none;" transform="translate(0,404) scale(1,-1)">125 us between triggers (8 kHz)</text>
+			<text x="0" y="15" style="font-family: Times-Roman; font-size: 9px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,30) scale(1,-1)">Illustration only: widths are not measured or to scale.</text>
+		</g>
+	</g>
+</svg>

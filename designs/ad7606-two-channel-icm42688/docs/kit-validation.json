@@ -2,14 +2,14 @@
   "scope": "Extracted AD7606 fixed-two ICM breadboard kit",
   "hardware_measured": false,
   "physical_measurements_completed": 0,
-  "archive_sha256": "5a96fc3a217e0abac8d64c2be27cb812058fb991e4b7dbcce4dd622adea20928",
+  "archive_sha256": "a6cc76b90d2c100973d6ec4de2532998c6aa265bbb1f9644e6a35261c7f839cf",
   "csv_test_environment": {
     "python": "3.14.7",
     "matplotlib_installed": false
   },
   "integrity_and_example": {
     "status": "PASS",
-    "package_files_verified": 328,
+    "package_files_verified": 333,
     "recording_sha256": "af8ac32aee08bd2fadbcc7370bded2c4383a52524bea9a1e56408e7d721f95b6",
     "converted_counts": {
       "emg": 10041,
@@ -105,13 +105,13 @@
     },
     "signals.svg": {
       "bytes": 82472,
-      "sha256": "ce9fe33b2f58dfb6ec0ae510e93c51608513d3ae9615d7d3ffe494c5b24b34cd"
+      "sha256": "1b13f28ef570796dd03e724206af20bf016e73d8f1015755f2f85ee2aefa9c72"
     }
   },
   "tampered_recording_rejected": true,
   "status": "PASS",
-  "date": "2026-10-04",
-  "documentation_checks": {
+  "date": "2026-10-07",
+  "preserved_documentation_checks_2026_10_04": {
     "stage_folders": 11,
     "wire_rows": 184,
     "other_design_files_unchanged": 2256,
@@ -120,5 +120,12 @@
     "physical_measurements_completed": 0,
     "packaged_intake_suite_executed": true,
     "required_measurement_ids_enforced": true
+  },
+  "documentation_checks": {
+    "handbook_pages_visually_reviewed": 25,
+    "circuit_pack_pages_visually_reviewed": 5,
+    "handbook_sections": 23,
+    "physical_measurements_completed": 0,
+    "scope": "Expanded documentation and fresh extracted-package host checks; circuit and firmware sources unchanged."
   }
 }

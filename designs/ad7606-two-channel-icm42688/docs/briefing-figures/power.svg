@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg
+  PUBLIC '-//W3C//DTD SVG 1.0//EN'
+  'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'>
+<svg width="499" height="220" preserveAspectRatio="xMinYMin meet" viewBox="0 0 499 220" xmlns="http://www.w3.org/2000/svg" version="1.0" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title>...</title>
+	<desc>...</desc>
+	<clipPath id="clip">
+		<rect x="0" y="0" width="499" height="220"/>
+	</clipPath>
+	<g id="group" transform="scale(1,-1) translate(0,-220)" style="clip-path: url(#clip)">
+		<g transform="">
+			<rect x="0" y="150" width="125" height="48" rx="4" ry="4" style="stroke: rgb(3%,41%,37%); stroke-linecap: butt; stroke-width: 1; fill: rgb(90%,94%,93%); fill-rule: evenodd;"/>
+			<text x="28.2325" y="180.0" style="font-family: Helvetica; font-size: 9px;fill: rgb(9%,17%,16%); stroke:none;" transform="translate(0,360) scale(1,-1)">Protected battery</text>
+			<text x="27.985" y="167.0" style="font-family: Helvetica; font-size: 9px;fill: rgb(9%,17%,16%); stroke:none;" transform="translate(0,334) scale(1,-1)">external charging</text>
+			<rect x="185" y="150" width="140" height="48" rx="4" ry="4" style="stroke: rgb(3%,41%,37%); stroke-linecap: butt; stroke-width: 1; fill: rgb(90%,94%,93%); fill-rule: evenodd;"/>
+			<text x="224.733" y="180.0" style="font-family: Helvetica; font-size: 9px;fill: rgb(9%,17%,16%); stroke:none;" transform="translate(0,360) scale(1,-1)">Regulation and</text>
+			<text x="219.738" y="167.0" style="font-family: Helvetica; font-size: 9px;fill: rgb(9%,17%,16%); stroke:none;" transform="translate(0,334) scale(1,-1)">power distribution</text>
+			<path d="M 125,174 L 185,174 Z" style="stroke: rgb(3%,41%,37%); stroke-linecap: butt; stroke-width: 1.4;"/>
+			<polygon points="185 174, 179.7345 176.8766, 179.7345 171.1234" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,41%,37%); fill-rule: evenodd;"/>
+			<rect x="0" y="40" width="150" height="55" rx="4" ry="4" style="stroke: rgb(3%,41%,37%); stroke-linecap: butt; stroke-width: 1; fill: rgb(90%,94%,93%); fill-rule: evenodd;"/>
+			<text x="57.495000000000005" y="73.5" style="font-family: Helvetica; font-size: 9px;fill: rgb(9%,17%,16%); stroke:none;" transform="translate(0,147) scale(1,-1)">5 V ADC</text>
+			<text x="43.9905" y="60.5" style="font-family: Helvetica; font-size: 9px;fill: rgb(9%,17%,16%); stroke:none;" transform="translate(0,121) scale(1,-1)">module / AVCC</text>
+			<path d="M 255,150 L 75,95 Z" style="stroke: rgb(3%,41%,37%); stroke-linecap: butt; stroke-width: 1.4;"/>
+			<polygon points="75 95, 80.87625 93.78768, 79.19508 99.28967" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,41%,37%); fill-rule: evenodd;"/>
+			<rect x="173" y="40" width="150" height="55" rx="4" ry="4" style="stroke: rgb(3%,41%,37%); stroke-linecap: butt; stroke-width: 1; fill: rgb(90%,94%,93%); fill-rule: evenodd;"/>
+			<text x="224.4875" y="73.5" style="font-family: Helvetica; font-size: 9px;fill: rgb(9%,17%,16%); stroke:none;" transform="translate(0,147) scale(1,-1)">3.3 V digital</text>
+			<text x="212.2385" y="60.5" style="font-family: Helvetica; font-size: 9px;fill: rgb(9%,17%,16%); stroke:none;" transform="translate(0,121) scale(1,-1)">ESP32, IMUs, SD</text>
+			<path d="M 255,150 L 248,95 Z" style="stroke: rgb(3%,41%,37%); stroke-linecap: butt; stroke-width: 1.4;"/>
+			<polygon points="248 95, 251.5183 99.86018, 245.8113 100.5865" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,41%,37%); fill-rule: evenodd;"/>
+			<rect x="346" y="40" width="150" height="55" rx="4" ry="4" style="stroke: rgb(3%,41%,37%); stroke-linecap: butt; stroke-width: 1; fill: rgb(90%,94%,93%); fill-rule: evenodd;"/>
+			<text x="395.7325" y="73.5" style="font-family: Helvetica; font-size: 9px;fill: rgb(9%,17%,16%); stroke:none;" transform="translate(0,147) scale(1,-1)">3.0 V analog</text>
+			<text x="387.736" y="60.5" style="font-family: Helvetica; font-size: 9px;fill: rgb(9%,17%,16%); stroke:none;" transform="translate(0,121) scale(1,-1)">sensors / buffers</text>
+			<path d="M 255,150 L 421,95 Z" style="stroke: rgb(3%,41%,37%); stroke-linecap: butt; stroke-width: 1.4;"/>
+			<polygon points="421 95, 416.9064 99.38664, 415.097 93.92548" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,41%,37%); fill-rule: evenodd;"/>
+			<text x="0" y="12" style="font-family: Times-Roman; font-size: 9px;fill: rgb(3%,41%,37%); stroke:none;" transform="translate(0,24) scale(1,-1)">Common ground. USB attachment inhibits recording.</text>
+		</g>
+	</g>
+</svg>
