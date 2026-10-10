@@ -18,7 +18,7 @@ static bool recording_model;
 static int16_t stimulus[8000][2];
 static gptimer_event_callbacks_t callback;
 typedef struct {uint8_t regs[128],fifo[2048];unsigned used,generated;uint16_t ticks;
-    double next_us,period_us;} imu_model_t;
+    double next_us,period_us,last_irq_us;} imu_model_t;
 static imu_model_t devices[2];
 static void advance_to(int64_t target){
     assert(target>=now_us);
@@ -28,6 +28,7 @@ static void advance_to(int64_t target){
         while(m->next_us<=target){
             if(m->regs[0x16]==0x40&&m->regs[0x4e]==0x0f){
                 uint8_t packet[16]={0x68,0,0,0,0,8,0};m->ticks+=5000;m->generated++;
+                m->last_irq_us=m->next_us; // modeled INT1 data-ready time
                 packet[2]=id+1;packet[14]=m->ticks>>8;packet[15]=m->ticks;
                 if(m->used+16<=2048){memcpy(m->fifo+m->used,packet,16);m->used+=16;}
                 else m->regs[0x2d]|=2;
@@ -142,7 +143,9 @@ int main(int argc,char **argv){
                 assert(p[1]==0&&p[2]==id+1&&p[3]==0&&p[4]==0&&p[5]==8&&p[6]==0);
                 if(counts[id]){assert((uint16_t)(ticks-last_ticks[id])==5000&&estimate>last_estimates[id]);if(ticks<last_ticks[id])rollovers[id]++;}
                 last_ticks[id]=ticks;last_estimates[id]=estimate;
-                imu_payload_t body={.read_start_us=start,.read_end_us=end,.irq_anchor_us=start};memcpy(body.fifo_packet,p,16);
+                // Like the firmware, store the latest data-ready interrupt before the read.
+                uint64_t irq=devices[id].last_irq_us>0?(uint64_t)devices[id].last_irq_us:start;
+                imu_payload_t body={.read_start_us=start,.read_end_us=end,.irq_anchor_us=irq};memcpy(body.fifo_packet,p,16);
                 afo_record_init(&record,id?REC_SHANK:REC_FOOT,FLAG_TIMING_UNCERTAIN,++counts[id],estimate,&body,sizeof(body));save(output,&record);
             }
             // Separate IMU-bus transfer windows are recorded as modeled durations.

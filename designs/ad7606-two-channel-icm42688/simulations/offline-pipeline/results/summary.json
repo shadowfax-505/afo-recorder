@@ -9,13 +9,13 @@
     "imu_timing.h": "787dcb29ba8319d5d9e8f9ef4477268f3f2c4da0dd05da3ccbfcc3b4258b5c01",
     "format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
     "format.h": "58b01a597eaa2c70a918ad5ee3b71c9e26fe64aedefc91ffba7d96430510c47b",
-    "board.h": "11f3f4d30c3b70410810426ffe6371088ed250903c7e569ba36858d6248439cc",
+    "board.h": "b9a11159e5d1fcab21571b279d2e5dc8070e15d570360a86220696eadaffd23d",
     "variant.h": "55c2cdaef8b2d56e2ced2aa23984a289038adc6caaf9d164c92830c24b8cffb9"
   },
   "stimulus_sha256": "c2d23fb153e84391c9d15172b9170dca5ed42f85f21512dfd61f593e45669e72",
   "co_simulation_sha256": {
-    "pipeline.c": "b326a61507fdfcb092326758b958a99de659832274d72efd139a6e129f459df9",
-    "run.py": "a63529cbe81fb6f0f3123eb0357601df653ac9265d07c39637b3c64da4dc8ac0",
+    "pipeline.c": "0d7a8fe6a8a8f56fe97ea5be55ae2f8f7fc268aba714a1225912da94060c4807",
+    "run.py": "268ab71bc3d64e53ded40d09a633e930d0a7f9588b388c9fe25e6cf818269fc9",
     "mock_idf.h": "68faa0f6289a32b3c76cda1701c0878bf27f32f61b164e54de5112c8cb95616f"
   },
   "modeled_duration_seconds": 2,
@@ -49,7 +49,7 @@
   "boundary_note": "FIFO packets still buffered at the modeled stop are counted explicitly; no unseen packet is called a recorded measurement.",
   "groups_passed": 6,
   "quality": {
-    "source_sha256": "ec3bac7322e863e6de9e313d984df79c07058c3622e0bb851f171af7e54dcdc3",
+    "source_sha256": "431d37fa94e51ff075b685fd820555e847a276a75b132f36c0a579f7f72618cd",
     "synthetic": true,
     "counts": {
       "emg": 16000,
@@ -93,6 +93,33 @@
       "queue_high_water": 0
     },
     "issues": [],
+    "imu_clock": {
+      "foot": {
+        "tick_steps": 409,
+        "median_tick_step": 5000.0,
+        "expected_tick_step": 5000.0,
+        "median_step_error_percent": 0.0,
+        "fit_reads": 400,
+        "fit_span_s": null,
+        "host_us_per_sensor_tick": null,
+        "sensor_tick_error_ppm": null,
+        "fit_note": "needs at least 40 FIFO reads spanning 10 s",
+        "within_1_percent": true
+      },
+      "shank": {
+        "tick_steps": 398,
+        "median_tick_step": 5000.0,
+        "expected_tick_step": 5000.0,
+        "median_step_error_percent": 0.0,
+        "fit_reads": 399,
+        "fit_span_s": null,
+        "host_us_per_sensor_tick": null,
+        "sensor_tick_error_ppm": null,
+        "fit_note": "needs at least 40 FIFO reads spanning 10 s",
+        "within_1_percent": true
+      }
+    },
+    "imu_clock_note": "Screen only: FIFO timestamp increments versus the configured 1 us tick, and sensor ticks versus ESP32 interrupt times. Includes interrupt latency; not a calibration.",
     "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
     "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
   },

@@ -5,6 +5,7 @@ import csv
 import hashlib
 import json
 import os
+import re
 from pathlib import Path
 import subprocess
 import sys
@@ -27,7 +28,8 @@ def run(duration_seconds=2, output=None, compact_directory=None):
     spec=spec_from_file_location('acquisition_model',ROOT/'simulations/run_acquisition.py')
     model=module_from_spec(spec);spec.loader.exec_module(model)
     meta=model.metadata(2)
-    meta.update(firmware='ad7606-2ch-1.6-driver-co-simulation',
+    firmware_id=re.search(r'#define AFO_FIRMWARE_ID "([^"]+)"',(ROOT/'firmware/main/board.h').read_text())[1]
+    meta.update(firmware=firmware_id+'-driver-co-simulation',
         simulation_engine='native C: real drivers/serializer; ideal peripheral API model',
         hardware_variant='offline-co-simulation',imu_time='modeled_fifo_delta',
         notes='No RTOS scheduler, SDMMC or radio execution; modeled SPI/read times',
@@ -47,6 +49,11 @@ def run(duration_seconds=2, output=None, compact_directory=None):
     report=convert(result/'synthetic.afolog',export,make_plots=True)
     assert report['counts']['emg']==sample_count and report['no_detected_sample_loss'] and report['signal_checks_pass']
     assert report['emg_rate_from_host_timestamps_hz']==8000
+    # The model injects +70 ppm (foot) and -110 ppm (shank) IMU clock errors.
+    if duration_seconds>=10:
+        for sensor,ppm in (('foot',70),('shank',-110)):
+            clock=report['imu_clock'][sensor]
+            assert clock['median_tick_step']==5000 and abs(clock['sensor_tick_error_ppm']-ppm)<=5,(sensor,clock)
     original=[(int(r['code1']),int(r['code2'])) for r in csv.DictReader(stimulus.open())]
     with (export/'emg.csv').open() as f:
         for i,row in enumerate(csv.DictReader(f)):
