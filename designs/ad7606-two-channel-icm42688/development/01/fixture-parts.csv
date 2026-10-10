@@ -7,3 +7,10 @@ Stage,Reference,Value,Board,Note
 1,UB0,MCP6002-I/P midpoint; half B grounded follower,BB0,DIP/passive fixture; check package pinout
 1,CB0,100nF,BB0,DIP/passive fixture; check package pinout
 1,,Regulated supply + dummy loads,,Lab instrument substitution; final power converter unvalidated
+1,"BB0-BB2, AUX1, AUX2, DIST1",6 × BusBoard BB830 breadboard,,63 rows; long power rails unused
+1,reg5,Pololu 4082 S13V30F5 5 V regulator,,Lab power module; not PCB converter validation
+1,reg3,Pololu 4980 S13V25F3 3.3 V regulator,,Do not parallel with the DevKit 3.3 V output
+1,ldo,TPS7A2030PDBVR analog LDO on Adafruit 1230 carrier,,Specified pad/header mapping; solder local bypass
+1,cap-2,1uF LDO input capacitor,,Solder at the LDO input
+1,cap-3,1uF LDO output capacitor,,Solder at the LDO output
+1,power-switch,POWER switch (SPST),,Rated for the battery and lab-supply current

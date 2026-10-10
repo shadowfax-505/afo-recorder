@@ -16,7 +16,7 @@
 <tbody>
 <tr>
 <td>Packaged host suite in a Python environment without Matplotlib</td>
-<td>All 40 tests passed, including corruption/recovery, enabled channels, legacy decoding and wireless gaps</td>
+<td>All 46 tests passed, including corruption/recovery, enabled channels, legacy decoding, wireless gaps, the 1,400-byte metadata limit, record-queue duration, absence of a compiled Wi-Fi password and the IMU clock screen</td>
 <td>Reader/telemetry code and the fixed-two circuit/firmware contract; the C guard test uses a host compiler</td>
 </tr>
 <tr>
@@ -31,7 +31,7 @@
 </tr>
 <tr>
 <td>Optional plot environment</td>
-<td>The documented dependency installation completed; default conversion produced PNG and SVG plots</td>
+<td>Checked on the previous (firmware 1.6) archive: the documented dependency installation completed and default conversion produced PNG and SVG plots. Not repeated for the 1.7 archive; see the receipt</td>
 <td>Python plotting workflow on this macOS/Python environment</td>
 </tr>
 <tr>
@@ -56,7 +56,7 @@
 </tr>
 <tr>
 <td>Extracted viewer with external assets blocked</td>
-<td>Complete assembly, stage-three instructions, DB7/DOUTA wire inspection and laptop guide loaded with no failed asset requests or console errors</td>
+<td>Checked on the previous archive with no failed asset requests or console errors. The 1.7 archive changes only guide text in the viewer; the browser check was not repeated</td>
 <td>Local asset closure and UI behavior; geometry and wire bends remain illustrative</td>
 </tr>
 </tbody>
@@ -74,5 +74,5 @@ python3 host/convert.py breadboard/recording-example.afolog --out example-csv --
 </code></pre>
 <p>Add <code>--plot-python /path/to/plot-environment/bin/python</code> to check plots as well. This verifier uses the preserved UDP capture in the full repository; that historical capture is not duplicated into the small lab kit. The <a href="kit-validation.json">receipt</a> records whether plotting ran and whether Matplotlib was present in the CSV-test environment. Browser checks were performed separately against a loopback server restricted to local resources.</p>
 <h2>What still needs a lab</h2>
-<p>Received-module straps, output logic levels, reference voltage, power startup/ripple, analog noise/crosstalk, physical SPI edges, actual SDMMC endurance, radio reception, temperature and battery runtime remain unmeasured. The six laboratory firmware profiles are unchanged and have not been flashed to an assembled recorder. All 30 rows of the <a href="bench-checklist.csv">bench checklist</a> remain <strong>NOT TESTED</strong>. Continue with the <a href="lab-quickstart.html">lab sequence</a> when hardware and instruments are available; these software checks do not recommend a PCB order.</p>
+<p>Received-module straps, output logic levels, reference voltage, power startup/ripple, analog noise/crosstalk, physical SPI edges, actual SDMMC endurance, radio reception, temperature and battery runtime remain unmeasured. The six laboratory firmware profiles (source set 1.7) have not been flashed to an assembled recorder. All 30 rows of the <a href="bench-checklist.csv">bench checklist</a> remain <strong>NOT TESTED</strong>. Continue with the <a href="lab-quickstart.html">lab sequence</a> when hardware and instruments are available; these software checks do not recommend a PCB order.</p>
 </main></body></html>

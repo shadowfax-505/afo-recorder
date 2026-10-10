@@ -2,11 +2,13 @@
   "engine": "native event-count queue model, configured 8kHz/200Hz and 128-record writes",
   "hardware_measured": false,
   "firmware_executed": false,
-  "cases_passed": 6,
-  "queue_time_budget_ms": 243.8095238095238,
+  "cases_passed": 9,
+  "queue_capacity": 20480,
+  "queue_time_budget_ms": 2438.0952380952385,
   "record_bytes_s": 537600,
   "two_hour_nominal_bytes_with_status_and_header": 3871184960,
   "source_sha256": "35c504dba592ac396f5a5744215ad239969026af7e15141d269daf46fa0ddaaa",
+  "board_h_sha256": "b9a11159e5d1fcab21571b279d2e5dc8070e15d570360a86220696eadaffd23d",
   "limits": [
     "Modeled write throughput and latencies are assumptions, not SD-card measurements",
     "Arrival/write counts only; no binary files, firmware, GPIO, scheduler or persistence",
@@ -26,7 +28,7 @@
         720079
       ],
       "queue_high_water": 41,
-      "queue_capacity": 2048,
+      "queue_capacity": 20480,
       "consumed": 30240000,
       "completed_writes": 236249,
       "stop_reason": 0,
@@ -47,7 +49,7 @@
         720079
       ],
       "queue_high_water": 461,
-      "queue_capacity": 2048,
+      "queue_capacity": 20480,
       "consumed": 30240000,
       "completed_writes": 236249,
       "stop_reason": 0,
@@ -68,7 +70,7 @@
         720079
       ],
       "queue_high_water": 1553,
-      "queue_capacity": 2048,
+      "queue_capacity": 20480,
       "consumed": 30240000,
       "completed_writes": 236249,
       "stop_reason": 0,
@@ -89,7 +91,7 @@
         720079
       ],
       "queue_high_water": 1889,
-      "queue_capacity": 2048,
+      "queue_capacity": 20480,
       "consumed": 30240000,
       "completed_writes": 236249,
       "stop_reason": 0,
@@ -100,22 +102,85 @@
     {
       "hardware_measured": false,
       "firmware_executed": false,
-      "duration_s": 10,
+      "duration_s": 3600,
       "modeled_write_bytes_s": 2097152,
       "extra_stall_ms": 350,
+      "stall_period_s": 30,
+      "produced": [
+        28800000,
+        719949,
+        720079
+      ],
+      "queue_high_water": 2981,
+      "queue_capacity": 20480,
+      "consumed": 30240000,
+      "completed_writes": 236249,
+      "stop_reason": 0,
+      "last_event_s": 3600.0,
+      "case": "one-hour-350ms-stalls",
+      "pass": true
+    },
+    {
+      "hardware_measured": false,
+      "firmware_executed": false,
+      "duration_s": 3600,
+      "modeled_write_bytes_s": 2097152,
+      "extra_stall_ms": 500,
+      "stall_period_s": 30,
+      "produced": [
+        28800000,
+        719949,
+        720079
+      ],
+      "queue_high_water": 4241,
+      "queue_capacity": 20480,
+      "consumed": 30240000,
+      "completed_writes": 236249,
+      "stop_reason": 0,
+      "last_event_s": 3600.0,
+      "case": "one-hour-500ms-stalls",
+      "pass": true
+    },
+    {
+      "hardware_measured": false,
+      "firmware_executed": false,
+      "duration_s": 3600,
+      "modeled_write_bytes_s": 2097152,
+      "extra_stall_ms": 1000,
+      "stall_period_s": 30,
+      "produced": [
+        28800000,
+        719949,
+        720079
+      ],
+      "queue_high_water": 8442,
+      "queue_capacity": 20480,
+      "consumed": 30240000,
+      "completed_writes": 236249,
+      "stop_reason": 0,
+      "last_event_s": 3600.0,
+      "case": "one-hour-1000ms-stalls",
+      "pass": true
+    },
+    {
+      "hardware_measured": false,
+      "firmware_executed": false,
+      "duration_s": 10,
+      "modeled_write_bytes_s": 2097152,
+      "extra_stall_ms": 2600,
       "stall_period_s": 1,
       "produced": [
-        9998,
-        249,
-        250
+        27553,
+        688,
+        688
       ],
-      "queue_high_water": 2048,
-      "queue_capacity": 2048,
+      "queue_high_water": 20480,
+      "queue_capacity": 20480,
       "consumed": 8448,
       "completed_writes": 65,
       "stop_reason": 2,
-      "last_event_s": 1.249862,
-      "case": "350ms-overflow",
+      "last_event_s": 3.444125,
+      "case": "2600ms-overflow",
       "pass": true
     },
     {
@@ -126,16 +191,16 @@
       "extra_stall_ms": 0,
       "stall_period_s": 10,
       "produced": [
-        14997,
-        374,
-        374
+        157259,
+        3931,
+        3931
       ],
-      "queue_high_water": 2048,
-      "queue_capacity": 2048,
-      "consumed": 13696,
-      "completed_writes": 106,
+      "queue_high_water": 20480,
+      "queue_capacity": 20480,
+      "consumed": 144640,
+      "completed_writes": 1129,
       "stop_reason": 2,
-      "last_event_s": 1.874625,
+      "last_event_s": 19.657375,
       "case": "insufficient-throughput",
       "pass": true
     }

@@ -1,5 +1,5 @@
 {
-  "engine": "native C compiler; production main.c and format.c; mocked ESP-IDF APIs",
+  "engine": "native C compiler; production main.c, format.c and metadata.c; mocked ESP-IDF APIs",
   "cases_per_profile": 19,
   "profiles": [
     "pcb",
@@ -9,9 +9,10 @@
   "hardware_measured": false,
   "esp32_executed": false,
   "production_sources_sha256": {
-    "main.c": "81beee3f1b272230f810ab2d5e76dd51d8593249966a9db501ee327b4e11ad8f",
+    "main.c": "68bdf08f499c1f1476afbd91ff3d58a7c355f62ad9909c343cd285a62ce0b376",
     "format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
-    "board.h": "11f3f4d30c3b70410810426ffe6371088ed250903c7e569ba36858d6248439cc",
+    "metadata.c": "8bbf04caaa01497fc9758903db85363336fac0fd8d37b190f9536cf236c4937c",
+    "board.h": "b9a11159e5d1fcab21571b279d2e5dc8070e15d570360a86220696eadaffd23d",
     "variant.h": "55c2cdaef8b2d56e2ced2aa23984a289038adc6caaf9d164c92830c24b8cffb9"
   },
   "limits": [
@@ -33,14 +34,14 @@
       "writes": 5,
       "syncs": 3,
       "closes": 1,
-      "metadata_bytes": 1272,
+      "metadata_bytes": 1301,
       "profile": "pcb",
       "metadata_roundtrip_pass": true,
       "live_end_reason_pass": true,
       "laptop_stop_state_pass": true,
       "sd_live_end_identical": true,
       "quality": {
-        "source_sha256": "e11303fe992b2d9485c5270e6166556532e275c46f861e512c55e7222a6be94c",
+        "source_sha256": "b51c4c3d80a22fc7edb31e0a0b5fd4e6db4d420c777c693a920146c0d72632fb",
         "synthetic": true,
         "counts": {
           "emg": 260,
@@ -84,6 +85,33 @@
           "queue_high_water": 272
         },
         "issues": [],
+        "imu_clock": {
+          "foot": {
+            "tick_steps": 5,
+            "median_tick_step": 5000.0,
+            "expected_tick_step": 5000.0,
+            "median_step_error_percent": 0.0,
+            "fit_reads": 6,
+            "fit_span_s": null,
+            "host_us_per_sensor_tick": null,
+            "sensor_tick_error_ppm": null,
+            "fit_note": "needs at least 40 FIFO reads spanning 10 s",
+            "within_1_percent": true
+          },
+          "shank": {
+            "tick_steps": 5,
+            "median_tick_step": 5000.0,
+            "expected_tick_step": 5000.0,
+            "median_step_error_percent": 0.0,
+            "fit_reads": 6,
+            "fit_span_s": null,
+            "host_us_per_sensor_tick": null,
+            "sensor_tick_error_ppm": null,
+            "fit_note": "needs at least 40 FIFO reads spanning 10 s",
+            "within_1_percent": true
+          }
+        },
+        "imu_clock_note": "Screen only: FIFO timestamp increments versus the configured 1 us tick, and sensor ticks versus ESP32 interrupt times. Includes interrupt latency; not a calibration.",
         "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
         "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
       },
@@ -102,14 +130,14 @@
       "writes": 69,
       "syncs": 3,
       "closes": 1,
-      "metadata_bytes": 1272,
+      "metadata_bytes": 1301,
       "profile": "pcb",
       "metadata_roundtrip_pass": true,
       "live_end_reason_pass": true,
       "laptop_stop_state_pass": true,
       "sd_live_end_identical": true,
       "quality": {
-        "source_sha256": "e11303fe992b2d9485c5270e6166556532e275c46f861e512c55e7222a6be94c",
+        "source_sha256": "b51c4c3d80a22fc7edb31e0a0b5fd4e6db4d420c777c693a920146c0d72632fb",
         "synthetic": true,
         "counts": {
           "emg": 260,
@@ -153,6 +181,33 @@
           "queue_high_water": 272
         },
         "issues": [],
+        "imu_clock": {
+          "foot": {
+            "tick_steps": 5,
+            "median_tick_step": 5000.0,
+            "expected_tick_step": 5000.0,
+            "median_step_error_percent": 0.0,
+            "fit_reads": 6,
+            "fit_span_s": null,
+            "host_us_per_sensor_tick": null,
+            "sensor_tick_error_ppm": null,
+            "fit_note": "needs at least 40 FIFO reads spanning 10 s",
+            "within_1_percent": true
+          },
+          "shank": {
+            "tick_steps": 5,
+            "median_tick_step": 5000.0,
+            "expected_tick_step": 5000.0,
+            "median_step_error_percent": 0.0,
+            "fit_reads": 6,
+            "fit_span_s": null,
+            "host_us_per_sensor_tick": null,
+            "sensor_tick_error_ppm": null,
+            "fit_note": "needs at least 40 FIFO reads spanning 10 s",
+            "within_1_percent": true
+          }
+        },
+        "imu_clock_note": "Screen only: FIFO timestamp increments versus the configured 1 us tick, and sensor ticks versus ESP32 interrupt times. Includes interrupt latency; not a calibration.",
         "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
         "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
       },
@@ -171,14 +226,14 @@
       "writes": 5,
       "syncs": 3,
       "closes": 1,
-      "metadata_bytes": 1272,
+      "metadata_bytes": 1301,
       "profile": "pcb",
       "metadata_roundtrip_pass": true,
       "live_end_reason_pass": true,
       "laptop_stop_state_pass": true,
       "sd_live_end_identical": true,
       "quality": {
-        "source_sha256": "1ff94a7168dcc48175fc59a70fd6d1789134c91bda1de59576e4a3aed003f01c",
+        "source_sha256": "37fc2b85c3f67247d75aa3da800eca458a9a96da2da5b496157d466cfce37173",
         "synthetic": true,
         "counts": {
           "emg": 260,
@@ -227,6 +282,33 @@
             "reason": 6
           }
         ],
+        "imu_clock": {
+          "foot": {
+            "tick_steps": 5,
+            "median_tick_step": 5000.0,
+            "expected_tick_step": 5000.0,
+            "median_step_error_percent": 0.0,
+            "fit_reads": 6,
+            "fit_span_s": null,
+            "host_us_per_sensor_tick": null,
+            "sensor_tick_error_ppm": null,
+            "fit_note": "needs at least 40 FIFO reads spanning 10 s",
+            "within_1_percent": true
+          },
+          "shank": {
+            "tick_steps": 5,
+            "median_tick_step": 5000.0,
+            "expected_tick_step": 5000.0,
+            "median_step_error_percent": 0.0,
+            "fit_reads": 6,
+            "fit_span_s": null,
+            "host_us_per_sensor_tick": null,
+            "sensor_tick_error_ppm": null,
+            "fit_note": "needs at least 40 FIFO reads spanning 10 s",
+            "within_1_percent": true
+          }
+        },
+        "imu_clock_note": "Screen only: FIFO timestamp increments versus the configured 1 us tick, and sensor ticks versus ESP32 interrupt times. Includes interrupt latency; not a calibration.",
         "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
         "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
       },
@@ -237,27 +319,27 @@
       "scenario": "queue-overflow",
       "stream_started": true,
       "reason": 2,
-      "disk_bytes": 135232,
-      "live_bytes": 131136,
+      "disk_bytes": 1314880,
+      "live_bytes": 1310784,
       "tasks_created": 2,
       "tasks_deleted": 2,
       "notifications": 1,
-      "writes": 18,
+      "writes": 162,
       "syncs": 3,
       "closes": 1,
-      "metadata_bytes": 1272,
+      "metadata_bytes": 1301,
       "profile": "pcb",
       "metadata_roundtrip_pass": true,
       "live_end_reason_pass": true,
       "laptop_stop_state_pass": true,
       "sd_live_end_identical": true,
       "quality": {
-        "source_sha256": "a235281eae3a24a44ce337e349256378d37b27c83e718afb369fa490646cc7df",
+        "source_sha256": "99795ea53158289a5ed6bac17e3fdd91ef9fc6dc6bea71b0a6d7c4639052798e",
         "synthetic": true,
         "counts": {
-          "emg": 1952,
-          "foot": 48,
-          "shank": 48,
+          "emg": 19506,
+          "foot": 487,
+          "shank": 487,
           "status": 0,
           "end": 1
         },
@@ -278,7 +360,7 @@
           "emg_out_of_range": 0,
           "imu_invalid_samples": 0,
           "imu_timestamp_anomalies": 0,
-          "timing_uncertain_records": 96,
+          "timing_uncertain_records": 974,
           "flagged_gap_records": 0
         },
         "emg_observed_skipped_slots": 0,
@@ -289,24 +371,51 @@
           "imu_errors": 0,
           "fifo_overflows": 0,
           "adc_errors": 0,
-          "emg_records": 1953,
-          "foot_records": 48,
-          "shank_records": 48,
+          "emg_records": 19507,
+          "foot_records": 487,
+          "shank_records": 487,
           "battery_mv": 3800,
-          "queue_high_water": 2048
+          "queue_high_water": 20480
         },
         "issues": [
           {
             "kind": "counter_mismatch",
             "stream": "emg",
-            "reported": 1953,
-            "decoded": 1952
+            "reported": 19507,
+            "decoded": 19506
           },
           {
             "kind": "abnormal_stop",
             "reason": 2
           }
         ],
+        "imu_clock": {
+          "foot": {
+            "tick_steps": 486,
+            "median_tick_step": 5000.0,
+            "expected_tick_step": 5000.0,
+            "median_step_error_percent": 0.0,
+            "fit_reads": 487,
+            "fit_span_s": null,
+            "host_us_per_sensor_tick": null,
+            "sensor_tick_error_ppm": null,
+            "fit_note": "needs at least 40 FIFO reads spanning 10 s",
+            "within_1_percent": true
+          },
+          "shank": {
+            "tick_steps": 486,
+            "median_tick_step": 5000.0,
+            "expected_tick_step": 5000.0,
+            "median_step_error_percent": 0.0,
+            "fit_reads": 487,
+            "fit_span_s": null,
+            "host_us_per_sensor_tick": null,
+            "sensor_tick_error_ppm": null,
+            "fit_note": "needs at least 40 FIFO reads spanning 10 s",
+            "within_1_percent": true
+          }
+        },
+        "imu_clock_note": "Screen only: FIFO timestamp increments versus the configured 1 us tick, and sensor ticks versus ESP32 interrupt times. Includes interrupt latency; not a calibration.",
         "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
         "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
       },
@@ -325,13 +434,13 @@
       "writes": 2,
       "syncs": 1,
       "closes": 1,
-      "metadata_bytes": 1272,
+      "metadata_bytes": 1301,
       "profile": "pcb",
       "metadata_roundtrip_pass": true,
       "live_end_reason_pass": true,
       "laptop_stop_state_pass": true,
       "quality": {
-        "source_sha256": "a500fcf09cafa2129013eb823735f5b7e26065c4d2556ddc3cc0aff89db0e0ce",
+        "source_sha256": "301070bf176cd1b55382521f6fc10ff04bea4eac8dc419c4ba5ce96b70b32446",
         "synthetic": true,
         "counts": {
           "emg": 0,
@@ -381,6 +490,8 @@
             "stream": "shank"
           }
         ],
+        "imu_clock": {},
+        "imu_clock_note": "Screen only: FIFO timestamp increments versus the configured 1 us tick, and sensor ticks versus ESP32 interrupt times. Includes interrupt latency; not a calibration.",
         "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
         "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
       },
@@ -399,13 +510,13 @@
       "writes": 3,
       "syncs": 1,
       "closes": 1,
-      "metadata_bytes": 1272,
+      "metadata_bytes": 1301,
       "profile": "pcb",
       "metadata_roundtrip_pass": true,
       "live_end_reason_pass": true,
       "laptop_stop_state_pass": true,
       "quality": {
-        "source_sha256": "76ea802c0ceb93d53f4223b758908dfd3df9455466d2ba6c1f1fba599c572f63",
+        "source_sha256": "8435924d5a53ca167cfe1d31e285cca9f443fab9fd605072fcfc9e5b881128c8",
         "synthetic": true,
         "counts": {
           "emg": 2,
@@ -456,6 +567,8 @@
             "stream": "shank"
           }
         ],
+        "imu_clock": {},
+        "imu_clock_note": "Screen only: FIFO timestamp increments versus the configured 1 us tick, and sensor ticks versus ESP32 interrupt times. Includes interrupt latency; not a calibration.",
         "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
         "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
       },
@@ -474,13 +587,13 @@
       "writes": 2,
       "syncs": 1,
       "closes": 1,
-      "metadata_bytes": 1272,
+      "metadata_bytes": 1301,
       "profile": "pcb",
       "metadata_roundtrip_pass": true,
       "live_end_reason_pass": true,
       "laptop_stop_state_pass": true,
       "quality": {
-        "source_sha256": "a500fcf09cafa2129013eb823735f5b7e26065c4d2556ddc3cc0aff89db0e0ce",
+        "source_sha256": "301070bf176cd1b55382521f6fc10ff04bea4eac8dc419c4ba5ce96b70b32446",
         "synthetic": true,
         "counts": {
           "emg": 0,
@@ -530,6 +643,8 @@
             "stream": "shank"
           }
         ],
+        "imu_clock": {},
+        "imu_clock_note": "Screen only: FIFO timestamp increments versus the configured 1 us tick, and sensor ticks versus ESP32 interrupt times. Includes interrupt latency; not a calibration.",
         "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
         "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
       },
@@ -568,7 +683,7 @@
       "metadata_bytes": 0,
       "profile": "pcb",
       "quality": {
-        "source_sha256": "a500fcf09cafa2129013eb823735f5b7e26065c4d2556ddc3cc0aff89db0e0ce",
+        "source_sha256": "301070bf176cd1b55382521f6fc10ff04bea4eac8dc419c4ba5ce96b70b32446",
         "synthetic": true,
         "counts": {
           "emg": 0,
@@ -618,6 +733,8 @@
             "stream": "shank"
           }
         ],
+        "imu_clock": {},
+        "imu_clock_note": "Screen only: FIFO timestamp increments versus the configured 1 us tick, and sensor ticks versus ESP32 interrupt times. Includes interrupt latency; not a calibration.",
         "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
         "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
       },
@@ -636,13 +753,13 @@
       "writes": 4,
       "syncs": 2,
       "closes": 1,
-      "metadata_bytes": 1272,
+      "metadata_bytes": 1301,
       "profile": "pcb",
       "metadata_roundtrip_pass": true,
       "live_end_reason_pass": true,
       "laptop_stop_state_pass": true,
       "quality": {
-        "source_sha256": "c065bee7aeae6ea8a5be3a25cfd4126e3519b26f244cf2e887c099d0c393fe16",
+        "source_sha256": "96257f1ffe936bcdb63a9892944a43efbe694d0c8b185d9554f87eb9b1fe9224",
         "synthetic": true,
         "counts": {
           "emg": 260,
@@ -680,6 +797,33 @@
             "message": "Unfinalized session; trailing samples may be lost."
           }
         ],
+        "imu_clock": {
+          "foot": {
+            "tick_steps": 5,
+            "median_tick_step": 5000.0,
+            "expected_tick_step": 5000.0,
+            "median_step_error_percent": 0.0,
+            "fit_reads": 6,
+            "fit_span_s": null,
+            "host_us_per_sensor_tick": null,
+            "sensor_tick_error_ppm": null,
+            "fit_note": "needs at least 40 FIFO reads spanning 10 s",
+            "within_1_percent": true
+          },
+          "shank": {
+            "tick_steps": 5,
+            "median_tick_step": 5000.0,
+            "expected_tick_step": 5000.0,
+            "median_step_error_percent": 0.0,
+            "fit_reads": 6,
+            "fit_span_s": null,
+            "host_us_per_sensor_tick": null,
+            "sensor_tick_error_ppm": null,
+            "fit_note": "needs at least 40 FIFO reads spanning 10 s",
+            "within_1_percent": true
+          }
+        },
+        "imu_clock_note": "Screen only: FIFO timestamp increments versus the configured 1 us tick, and sensor ticks versus ESP32 interrupt times. Includes interrupt latency; not a calibration.",
         "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
         "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
       },
@@ -698,13 +842,13 @@
       "writes": 5,
       "syncs": 3,
       "closes": 1,
-      "metadata_bytes": 1272,
+      "metadata_bytes": 1301,
       "profile": "pcb",
       "metadata_roundtrip_pass": true,
       "live_end_reason_pass": true,
       "laptop_stop_state_pass": true,
       "quality": {
-        "source_sha256": "e11303fe992b2d9485c5270e6166556532e275c46f861e512c55e7222a6be94c",
+        "source_sha256": "b51c4c3d80a22fc7edb31e0a0b5fd4e6db4d420c777c693a920146c0d72632fb",
         "synthetic": true,
         "counts": {
           "emg": 260,
@@ -748,6 +892,33 @@
           "queue_high_water": 272
         },
         "issues": [],
+        "imu_clock": {
+          "foot": {
+            "tick_steps": 5,
+            "median_tick_step": 5000.0,
+            "expected_tick_step": 5000.0,
+            "median_step_error_percent": 0.0,
+            "fit_reads": 6,
+            "fit_span_s": null,
+            "host_us_per_sensor_tick": null,
+            "sensor_tick_error_ppm": null,
+            "fit_note": "needs at least 40 FIFO reads spanning 10 s",
+            "within_1_percent": true
+          },
+          "shank": {
+            "tick_steps": 5,
+            "median_tick_step": 5000.0,
+            "expected_tick_step": 5000.0,
+            "median_step_error_percent": 0.0,
+            "fit_reads": 6,
+            "fit_span_s": null,
+            "host_us_per_sensor_tick": null,
+            "sensor_tick_error_ppm": null,
+            "fit_note": "needs at least 40 FIFO reads spanning 10 s",
+            "within_1_percent": true
+          }
+        },
+        "imu_clock_note": "Screen only: FIFO timestamp increments versus the configured 1 us tick, and sensor ticks versus ESP32 interrupt times. Includes interrupt latency; not a calibration.",
         "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
         "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
       },
@@ -766,13 +937,13 @@
       "writes": 5,
       "syncs": 3,
       "closes": 1,
-      "metadata_bytes": 1272,
+      "metadata_bytes": 1301,
       "profile": "pcb",
       "metadata_roundtrip_pass": true,
       "live_end_reason_pass": true,
       "laptop_stop_state_pass": true,
       "quality": {
-        "source_sha256": "e11303fe992b2d9485c5270e6166556532e275c46f861e512c55e7222a6be94c",
+        "source_sha256": "b51c4c3d80a22fc7edb31e0a0b5fd4e6db4d420c777c693a920146c0d72632fb",
         "synthetic": true,
         "counts": {
           "emg": 260,
@@ -816,6 +987,33 @@
           "queue_high_water": 272
         },
         "issues": [],
+        "imu_clock": {
+          "foot": {
+            "tick_steps": 5,
+            "median_tick_step": 5000.0,
+            "expected_tick_step": 5000.0,
+            "median_step_error_percent": 0.0,
+            "fit_reads": 6,
+            "fit_span_s": null,
+            "host_us_per_sensor_tick": null,
+            "sensor_tick_error_ppm": null,
+            "fit_note": "needs at least 40 FIFO reads spanning 10 s",
+            "within_1_percent": true
+          },
+          "shank": {
+            "tick_steps": 5,
+            "median_tick_step": 5000.0,
+            "expected_tick_step": 5000.0,
+            "median_step_error_percent": 0.0,
+            "fit_reads": 6,
+            "fit_span_s": null,
+            "host_us_per_sensor_tick": null,
+            "sensor_tick_error_ppm": null,
+            "fit_note": "needs at least 40 FIFO reads spanning 10 s",
+            "within_1_percent": true
+          }
+        },
+        "imu_clock_note": "Screen only: FIFO timestamp increments versus the configured 1 us tick, and sensor ticks versus ESP32 interrupt times. Includes interrupt latency; not a calibration.",
         "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
         "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
       },
@@ -834,11 +1032,11 @@
       "writes": 1,
       "syncs": 1,
       "closes": 1,
-      "metadata_bytes": 1272,
+      "metadata_bytes": 1301,
       "profile": "pcb",
       "metadata_roundtrip_pass": true,
       "quality": {
-        "source_sha256": "a500fcf09cafa2129013eb823735f5b7e26065c4d2556ddc3cc0aff89db0e0ce",
+        "source_sha256": "301070bf176cd1b55382521f6fc10ff04bea4eac8dc419c4ba5ce96b70b32446",
         "synthetic": true,
         "counts": {
           "emg": 0,
@@ -888,6 +1086,8 @@
             "stream": "shank"
           }
         ],
+        "imu_clock": {},
+        "imu_clock_note": "Screen only: FIFO timestamp increments versus the configured 1 us tick, and sensor ticks versus ESP32 interrupt times. Includes interrupt latency; not a calibration.",
         "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
         "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
       },
@@ -906,11 +1106,11 @@
       "writes": 1,
       "syncs": 1,
       "closes": 1,
-      "metadata_bytes": 1272,
+      "metadata_bytes": 1301,
       "profile": "pcb",
       "metadata_roundtrip_pass": true,
       "quality": {
-        "source_sha256": "a500fcf09cafa2129013eb823735f5b7e26065c4d2556ddc3cc0aff89db0e0ce",
+        "source_sha256": "301070bf176cd1b55382521f6fc10ff04bea4eac8dc419c4ba5ce96b70b32446",
         "synthetic": true,
         "counts": {
           "emg": 0,
@@ -960,6 +1160,8 @@
             "stream": "shank"
           }
         ],
+        "imu_clock": {},
+        "imu_clock_note": "Screen only: FIFO timestamp increments versus the configured 1 us tick, and sensor ticks versus ESP32 interrupt times. Includes interrupt latency; not a calibration.",
         "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
         "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
       },
@@ -978,14 +1180,14 @@
       "writes": 5,
       "syncs": 3,
       "closes": 1,
-      "metadata_bytes": 1272,
+      "metadata_bytes": 1301,
       "profile": "pcb",
       "metadata_roundtrip_pass": true,
       "live_end_reason_pass": true,
       "laptop_stop_state_pass": true,
       "sd_live_end_identical": true,
       "quality": {
-        "source_sha256": "a123ee5147064e592b5f646a33fa99185d01af6da34251884ce97a4c744977c2",
+        "source_sha256": "b01c8582cd9312df4858c72b01c0f0404134f562942fba3530f056cb3b91036f",
         "synthetic": true,
         "counts": {
           "emg": 260,
@@ -1034,6 +1236,33 @@
             "reason": 3
           }
         ],
+        "imu_clock": {
+          "foot": {
+            "tick_steps": 5,
+            "median_tick_step": 5000.0,
+            "expected_tick_step": 5000.0,
+            "median_step_error_percent": 0.0,
+            "fit_reads": 6,
+            "fit_span_s": null,
+            "host_us_per_sensor_tick": null,
+            "sensor_tick_error_ppm": null,
+            "fit_note": "needs at least 40 FIFO reads spanning 10 s",
+            "within_1_percent": true
+          },
+          "shank": {
+            "tick_steps": 5,
+            "median_tick_step": 5000.0,
+            "expected_tick_step": 5000.0,
+            "median_step_error_percent": 0.0,
+            "fit_reads": 6,
+            "fit_span_s": null,
+            "host_us_per_sensor_tick": null,
+            "sensor_tick_error_ppm": null,
+            "fit_note": "needs at least 40 FIFO reads spanning 10 s",
+            "within_1_percent": true
+          }
+        },
+        "imu_clock_note": "Screen only: FIFO timestamp increments versus the configured 1 us tick, and sensor ticks versus ESP32 interrupt times. Includes interrupt latency; not a calibration.",
         "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
         "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
       },
@@ -1069,14 +1298,14 @@
       "writes": 5,
       "syncs": 3,
       "closes": 1,
-      "metadata_bytes": 1272,
+      "metadata_bytes": 1301,
       "profile": "pcb",
       "metadata_roundtrip_pass": true,
       "live_end_reason_pass": true,
       "laptop_stop_state_pass": true,
       "sd_live_end_identical": true,
       "quality": {
-        "source_sha256": "d3b077c08f2d6c1414bda59f0bbcf965ad19dfb57a9b7842fd8562f2973735e9",
+        "source_sha256": "2c4eff8892d24815c4dd31f1804b1a5482bcbcf72a32d4bc8f12659e0b2fa09b",
         "synthetic": true,
         "counts": {
           "emg": 260,
@@ -1125,6 +1354,33 @@
             "reason": 7
           }
         ],
+        "imu_clock": {
+          "foot": {
+            "tick_steps": 5,
+            "median_tick_step": 5000.0,
+            "expected_tick_step": 5000.0,
+            "median_step_error_percent": 0.0,
+            "fit_reads": 6,
+            "fit_span_s": null,
+            "host_us_per_sensor_tick": null,
+            "sensor_tick_error_ppm": null,
+            "fit_note": "needs at least 40 FIFO reads spanning 10 s",
+            "within_1_percent": true
+          },
+          "shank": {
+            "tick_steps": 5,
+            "median_tick_step": 5000.0,
+            "expected_tick_step": 5000.0,
+            "median_step_error_percent": 0.0,
+            "fit_reads": 6,
+            "fit_span_s": null,
+            "host_us_per_sensor_tick": null,
+            "sensor_tick_error_ppm": null,
+            "fit_note": "needs at least 40 FIFO reads spanning 10 s",
+            "within_1_percent": true
+          }
+        },
+        "imu_clock_note": "Screen only: FIFO timestamp increments versus the configured 1 us tick, and sensor ticks versus ESP32 interrupt times. Includes interrupt latency; not a calibration.",
         "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
         "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
       },
@@ -1143,14 +1399,14 @@
       "writes": 7,
       "syncs": 6,
       "closes": 1,
-      "metadata_bytes": 1272,
+      "metadata_bytes": 1301,
       "profile": "pcb",
       "metadata_roundtrip_pass": true,
       "live_end_reason_pass": true,
       "laptop_stop_state_pass": true,
       "sd_live_end_identical": true,
       "quality": {
-        "source_sha256": "11c9b5598eb0dfe52dc3ff64057873ba22ae9afd8e0a4deddc015c959c49fde1",
+        "source_sha256": "c20e8c76b1fb2b84afd30efa53d031be2bd56afddd1b0f20e43b54a779436530",
         "synthetic": true,
         "counts": {
           "emg": 260,
@@ -1199,6 +1455,33 @@
             "reason": 4
           }
         ],
+        "imu_clock": {
+          "foot": {
+            "tick_steps": 5,
+            "median_tick_step": 5000.0,
+            "expected_tick_step": 5000.0,
+            "median_step_error_percent": 0.0,
+            "fit_reads": 6,
+            "fit_span_s": null,
+            "host_us_per_sensor_tick": null,
+            "sensor_tick_error_ppm": null,
+            "fit_note": "needs at least 40 FIFO reads spanning 10 s",
+            "within_1_percent": true
+          },
+          "shank": {
+            "tick_steps": 5,
+            "median_tick_step": 5000.0,
+            "expected_tick_step": 5000.0,
+            "median_step_error_percent": 0.0,
+            "fit_reads": 6,
+            "fit_span_s": null,
+            "host_us_per_sensor_tick": null,
+            "sensor_tick_error_ppm": null,
+            "fit_note": "needs at least 40 FIFO reads spanning 10 s",
+            "within_1_percent": true
+          }
+        },
+        "imu_clock_note": "Screen only: FIFO timestamp increments versus the configured 1 us tick, and sensor ticks versus ESP32 interrupt times. Includes interrupt latency; not a calibration.",
         "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
         "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
       },
@@ -1217,13 +1500,13 @@
       "writes": 4,
       "syncs": 2,
       "closes": 1,
-      "metadata_bytes": 1272,
+      "metadata_bytes": 1301,
       "profile": "pcb",
       "metadata_roundtrip_pass": true,
       "live_end_reason_pass": true,
       "laptop_stop_state_pass": true,
       "quality": {
-        "source_sha256": "c2538f03bdd061c3513fce495a4f0197d5c1591f2098484681a43a763b631ee1",
+        "source_sha256": "f7ada15ea3b3908aec392cd2f4da4b5760fd23e26b95f8bfd5fa391ea7a2434b",
         "synthetic": true,
         "counts": {
           "emg": 260,
@@ -1272,6 +1555,33 @@
             "message": "Unfinalized session; trailing samples may be lost."
           }
         ],
+        "imu_clock": {
+          "foot": {
+            "tick_steps": 5,
+            "median_tick_step": 5000.0,
+            "expected_tick_step": 5000.0,
+            "median_step_error_percent": 0.0,
+            "fit_reads": 6,
+            "fit_span_s": null,
+            "host_us_per_sensor_tick": null,
+            "sensor_tick_error_ppm": null,
+            "fit_note": "needs at least 40 FIFO reads spanning 10 s",
+            "within_1_percent": true
+          },
+          "shank": {
+            "tick_steps": 5,
+            "median_tick_step": 5000.0,
+            "expected_tick_step": 5000.0,
+            "median_step_error_percent": 0.0,
+            "fit_reads": 6,
+            "fit_span_s": null,
+            "host_us_per_sensor_tick": null,
+            "sensor_tick_error_ppm": null,
+            "fit_note": "needs at least 40 FIFO reads spanning 10 s",
+            "within_1_percent": true
+          }
+        },
+        "imu_clock_note": "Screen only: FIFO timestamp increments versus the configured 1 us tick, and sensor ticks versus ESP32 interrupt times. Includes interrupt latency; not a calibration.",
         "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
         "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
       },
@@ -1290,14 +1600,14 @@
       "writes": 5,
       "syncs": 3,
       "closes": 1,
-      "metadata_bytes": 1279,
+      "metadata_bytes": 1308,
       "profile": "breadboard",
       "metadata_roundtrip_pass": true,
       "live_end_reason_pass": true,
       "laptop_stop_state_pass": true,
       "sd_live_end_identical": true,
       "quality": {
-        "source_sha256": "ad1947acadaaa2adde27a93991d0a5fa9a3f6e412f876717b1dc8509968237a0",
+        "source_sha256": "96c0c8071e61d2f365ef317713f19f5ec05eb7ad3280f3147e4ee8a3bd8f00c5",
         "synthetic": true,
         "counts": {
           "emg": 260,
@@ -1341,6 +1651,33 @@
           "queue_high_water": 272
         },
         "issues": [],
+        "imu_clock": {
+          "foot": {
+            "tick_steps": 5,
+            "median_tick_step": 5000.0,
+            "expected_tick_step": 5000.0,
+            "median_step_error_percent": 0.0,
+            "fit_reads": 6,
+            "fit_span_s": null,
+            "host_us_per_sensor_tick": null,
+            "sensor_tick_error_ppm": null,
+            "fit_note": "needs at least 40 FIFO reads spanning 10 s",
+            "within_1_percent": true
+          },
+          "shank": {
+            "tick_steps": 5,
+            "median_tick_step": 5000.0,
+            "expected_tick_step": 5000.0,
+            "median_step_error_percent": 0.0,
+            "fit_reads": 6,
+            "fit_span_s": null,
+            "host_us_per_sensor_tick": null,
+            "sensor_tick_error_ppm": null,
+            "fit_note": "needs at least 40 FIFO reads spanning 10 s",
+            "within_1_percent": true
+          }
+        },
+        "imu_clock_note": "Screen only: FIFO timestamp increments versus the configured 1 us tick, and sensor ticks versus ESP32 interrupt times. Includes interrupt latency; not a calibration.",
         "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
         "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
       },
@@ -1359,14 +1696,14 @@
       "writes": 69,
       "syncs": 3,
       "closes": 1,
-      "metadata_bytes": 1279,
+      "metadata_bytes": 1308,
       "profile": "breadboard",
       "metadata_roundtrip_pass": true,
       "live_end_reason_pass": true,
       "laptop_stop_state_pass": true,
       "sd_live_end_identical": true,
       "quality": {
-        "source_sha256": "ad1947acadaaa2adde27a93991d0a5fa9a3f6e412f876717b1dc8509968237a0",
+        "source_sha256": "96c0c8071e61d2f365ef317713f19f5ec05eb7ad3280f3147e4ee8a3bd8f00c5",
         "synthetic": true,
         "counts": {
           "emg": 260,
@@ -1410,6 +1747,33 @@
           "queue_high_water": 272
         },
         "issues": [],
+        "imu_clock": {
+          "foot": {
+            "tick_steps": 5,
+            "median_tick_step": 5000.0,
+            "expected_tick_step": 5000.0,
+            "median_step_error_percent": 0.0,
+            "fit_reads": 6,
+            "fit_span_s": null,
+            "host_us_per_sensor_tick": null,
+            "sensor_tick_error_ppm": null,
+            "fit_note": "needs at least 40 FIFO reads spanning 10 s",
+            "within_1_percent": true
+          },
+          "shank": {
+            "tick_steps": 5,
+            "median_tick_step": 5000.0,
+            "expected_tick_step": 5000.0,
+            "median_step_error_percent": 0.0,
+            "fit_reads": 6,
+            "fit_span_s": null,
+            "host_us_per_sensor_tick": null,
+            "sensor_tick_error_ppm": null,
+            "fit_note": "needs at least 40 FIFO reads spanning 10 s",
+            "within_1_percent": true
+          }
+        },
+        "imu_clock_note": "Screen only: FIFO timestamp increments versus the configured 1 us tick, and sensor ticks versus ESP32 interrupt times. Includes interrupt latency; not a calibration.",
         "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
         "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
       },
@@ -1428,14 +1792,14 @@
       "writes": 5,
       "syncs": 3,
       "closes": 1,
-      "metadata_bytes": 1279,
+      "metadata_bytes": 1308,
       "profile": "breadboard",
       "metadata_roundtrip_pass": true,
       "live_end_reason_pass": true,
       "laptop_stop_state_pass": true,
       "sd_live_end_identical": true,
       "quality": {
-        "source_sha256": "f318fc02c8c3f01cf8835e7b25c1388a803b41fd83339fad59295a30250db1a4",
+        "source_sha256": "4ce8f5b5e38820e6328fa61b9614d6000324df962e133cf10331cf364801ad7b",
         "synthetic": true,
         "counts": {
           "emg": 260,
@@ -1484,6 +1848,33 @@
             "reason": 6
           }
         ],
+        "imu_clock": {
+          "foot": {
+            "tick_steps": 5,
+            "median_tick_step": 5000.0,
+            "expected_tick_step": 5000.0,
+            "median_step_error_percent": 0.0,
+            "fit_reads": 6,
+            "fit_span_s": null,
+            "host_us_per_sensor_tick": null,
+            "sensor_tick_error_ppm": null,
+            "fit_note": "needs at least 40 FIFO reads spanning 10 s",
+            "within_1_percent": true
+          },
+          "shank": {
+            "tick_steps": 5,
+            "median_tick_step": 5000.0,
+            "expected_tick_step": 5000.0,
+            "median_step_error_percent": 0.0,
+            "fit_reads": 6,
+            "fit_span_s": null,
+            "host_us_per_sensor_tick": null,
+            "sensor_tick_error_ppm": null,
+            "fit_note": "needs at least 40 FIFO reads spanning 10 s",
+            "within_1_percent": true
+          }
+        },
+        "imu_clock_note": "Screen only: FIFO timestamp increments versus the configured 1 us tick, and sensor ticks versus ESP32 interrupt times. Includes interrupt latency; not a calibration.",
         "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
         "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
       },
@@ -1494,27 +1885,27 @@
       "scenario": "queue-overflow",
       "stream_started": true,
       "reason": 2,
-      "disk_bytes": 135232,
-      "live_bytes": 131136,
+      "disk_bytes": 1314880,
+      "live_bytes": 1310784,
       "tasks_created": 2,
       "tasks_deleted": 2,
       "notifications": 1,
-      "writes": 18,
+      "writes": 162,
       "syncs": 3,
       "closes": 1,
-      "metadata_bytes": 1279,
+      "metadata_bytes": 1308,
       "profile": "breadboard",
       "metadata_roundtrip_pass": true,
       "live_end_reason_pass": true,
       "laptop_stop_state_pass": true,
       "sd_live_end_identical": true,
       "quality": {
-        "source_sha256": "22ae5632269b68c7181bde7ecfb2129985f32d7d24c6af19d2a55b050308ba66",
+        "source_sha256": "76237b1afdda05656e0e150c6f0dd8cd8b3e9af8d0ec5002366fcc9d3697935d",
         "synthetic": true,
         "counts": {
-          "emg": 1952,
-          "foot": 48,
-          "shank": 48,
+          "emg": 19506,
+          "foot": 487,
+          "shank": 487,
           "status": 0,
           "end": 1
         },
@@ -1535,7 +1926,7 @@
           "emg_out_of_range": 0,
           "imu_invalid_samples": 0,
           "imu_timestamp_anomalies": 0,
-          "timing_uncertain_records": 96,
+          "timing_uncertain_records": 974,
           "flagged_gap_records": 0
         },
         "emg_observed_skipped_slots": 0,
@@ -1546,24 +1937,51 @@
           "imu_errors": 0,
           "fifo_overflows": 0,
           "adc_errors": 0,
-          "emg_records": 1953,
-          "foot_records": 48,
-          "shank_records": 48,
+          "emg_records": 19507,
+          "foot_records": 487,
+          "shank_records": 487,
           "battery_mv": 3800,
-          "queue_high_water": 2048
+          "queue_high_water": 20480
         },
         "issues": [
           {
             "kind": "counter_mismatch",
             "stream": "emg",
-            "reported": 1953,
-            "decoded": 1952
+            "reported": 19507,
+            "decoded": 19506
           },
           {
             "kind": "abnormal_stop",
             "reason": 2
           }
         ],
+        "imu_clock": {
+          "foot": {
+            "tick_steps": 486,
+            "median_tick_step": 5000.0,
+            "expected_tick_step": 5000.0,
+            "median_step_error_percent": 0.0,
+            "fit_reads": 487,
+            "fit_span_s": null,
+            "host_us_per_sensor_tick": null,
+            "sensor_tick_error_ppm": null,
+            "fit_note": "needs at least 40 FIFO reads spanning 10 s",
+            "within_1_percent": true
+          },
+          "shank": {
+            "tick_steps": 486,
+            "median_tick_step": 5000.0,
+            "expected_tick_step": 5000.0,
+            "median_step_error_percent": 0.0,
+            "fit_reads": 487,
+            "fit_span_s": null,
+            "host_us_per_sensor_tick": null,
+            "sensor_tick_error_ppm": null,
+            "fit_note": "needs at least 40 FIFO reads spanning 10 s",
+            "within_1_percent": true
+          }
+        },
+        "imu_clock_note": "Screen only: FIFO timestamp increments versus the configured 1 us tick, and sensor ticks versus ESP32 interrupt times. Includes interrupt latency; not a calibration.",
         "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
         "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
       },
@@ -1582,13 +2000,13 @@
       "writes": 2,
       "syncs": 1,
       "closes": 1,
-      "metadata_bytes": 1279,
+      "metadata_bytes": 1308,
       "profile": "breadboard",
       "metadata_roundtrip_pass": true,
       "live_end_reason_pass": true,
       "laptop_stop_state_pass": true,
       "quality": {
-        "source_sha256": "392982216dd8cde4c398ce7afe0f941ca6cb91b435d7677c2a7bb2c98329205f",
+        "source_sha256": "cd70ad686f3d9578fd9f54e6d5ac144f724819084f4a03a99c7c24672fbec94f",
         "synthetic": true,
         "counts": {
           "emg": 0,
@@ -1638,6 +2056,8 @@
             "stream": "shank"
           }
         ],
+        "imu_clock": {},
+        "imu_clock_note": "Screen only: FIFO timestamp increments versus the configured 1 us tick, and sensor ticks versus ESP32 interrupt times. Includes interrupt latency; not a calibration.",
         "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
         "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
       },
@@ -1656,13 +2076,13 @@
       "writes": 3,
       "syncs": 1,
       "closes": 1,
-      "metadata_bytes": 1279,
+      "metadata_bytes": 1308,
       "profile": "breadboard",
       "metadata_roundtrip_pass": true,
       "live_end_reason_pass": true,
       "laptop_stop_state_pass": true,
       "quality": {
-        "source_sha256": "d5bffc49f5330db718adb7f5aacd68a047c5b288b7bf087725bbe3ecd5cdc662",
+        "source_sha256": "08c0bc4a9b58725677a34ab9d6f7e5ed5fc09659db4e2297072ad31ecfad60c5",
         "synthetic": true,
         "counts": {
           "emg": 2,
@@ -1713,6 +2133,8 @@
             "stream": "shank"
           }
         ],
+        "imu_clock": {},
+        "imu_clock_note": "Screen only: FIFO timestamp increments versus the configured 1 us tick, and sensor ticks versus ESP32 interrupt times. Includes interrupt latency; not a calibration.",
         "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
         "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
       },
@@ -1731,13 +2153,13 @@
       "writes": 2,
       "syncs": 1,
       "closes": 1,
-      "metadata_bytes": 1279,
+      "metadata_bytes": 1308,
       "profile": "breadboard",
       "metadata_roundtrip_pass": true,
       "live_end_reason_pass": true,
       "laptop_stop_state_pass": true,
       "quality": {
-        "source_sha256": "392982216dd8cde4c398ce7afe0f941ca6cb91b435d7677c2a7bb2c98329205f",
+        "source_sha256": "cd70ad686f3d9578fd9f54e6d5ac144f724819084f4a03a99c7c24672fbec94f",
         "synthetic": true,
         "counts": {
           "emg": 0,
@@ -1787,6 +2209,8 @@
             "stream": "shank"
           }
         ],
+        "imu_clock": {},
+        "imu_clock_note": "Screen only: FIFO timestamp increments versus the configured 1 us tick, and sensor ticks versus ESP32 interrupt times. Includes interrupt latency; not a calibration.",
         "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
         "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
       },
@@ -1825,7 +2249,7 @@
       "metadata_bytes": 0,
       "profile": "breadboard",
       "quality": {
-        "source_sha256": "392982216dd8cde4c398ce7afe0f941ca6cb91b435d7677c2a7bb2c98329205f",
+        "source_sha256": "cd70ad686f3d9578fd9f54e6d5ac144f724819084f4a03a99c7c24672fbec94f",
         "synthetic": true,
         "counts": {
           "emg": 0,
@@ -1875,6 +2299,8 @@
             "stream": "shank"
           }
         ],
+        "imu_clock": {},
+        "imu_clock_note": "Screen only: FIFO timestamp increments versus the configured 1 us tick, and sensor ticks versus ESP32 interrupt times. Includes interrupt latency; not a calibration.",
         "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
         "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
       },
@@ -1893,13 +2319,13 @@
       "writes": 4,
       "syncs": 2,
       "closes": 1,
-      "metadata_bytes": 1279,
+      "metadata_bytes": 1308,
       "profile": "breadboard",
       "metadata_roundtrip_pass": true,
       "live_end_reason_pass": true,
       "laptop_stop_state_pass": true,
       "quality": {
-        "source_sha256": "524405ee94ce76dbb1c329531620f37d4779782679256a989a71b3c25b8989a3",
+        "source_sha256": "5865abcc9d731a93e4a5097a6de725a279c09e62f9430e4164b896140d183ffd",
         "synthetic": true,
         "counts": {
           "emg": 260,
@@ -1937,6 +2363,33 @@
             "message": "Unfinalized session; trailing samples may be lost."
           }
         ],
+        "imu_clock": {
+          "foot": {
+            "tick_steps": 5,
+            "median_tick_step": 5000.0,
+            "expected_tick_step": 5000.0,
+            "median_step_error_percent": 0.0,
+            "fit_reads": 6,
+            "fit_span_s": null,
+            "host_us_per_sensor_tick": null,
+            "sensor_tick_error_ppm": null,
+            "fit_note": "needs at least 40 FIFO reads spanning 10 s",
+            "within_1_percent": true
+          },
+          "shank": {
+            "tick_steps": 5,
+            "median_tick_step": 5000.0,
+            "expected_tick_step": 5000.0,
+            "median_step_error_percent": 0.0,
+            "fit_reads": 6,
+            "fit_span_s": null,
+            "host_us_per_sensor_tick": null,
+            "sensor_tick_error_ppm": null,
+            "fit_note": "needs at least 40 FIFO reads spanning 10 s",
+            "within_1_percent": true
+          }
+        },
+        "imu_clock_note": "Screen only: FIFO timestamp increments versus the configured 1 us tick, and sensor ticks versus ESP32 interrupt times. Includes interrupt latency; not a calibration.",
         "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
         "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
       },
@@ -1955,13 +2408,13 @@
       "writes": 5,
       "syncs": 3,
       "closes": 1,
-      "metadata_bytes": 1279,
+      "metadata_bytes": 1308,
       "profile": "breadboard",
       "metadata_roundtrip_pass": true,
       "live_end_reason_pass": true,
       "laptop_stop_state_pass": true,
       "quality": {
-        "source_sha256": "ad1947acadaaa2adde27a93991d0a5fa9a3f6e412f876717b1dc8509968237a0",
+        "source_sha256": "96c0c8071e61d2f365ef317713f19f5ec05eb7ad3280f3147e4ee8a3bd8f00c5",
         "synthetic": true,
         "counts": {
           "emg": 260,
@@ -2005,6 +2458,33 @@
           "queue_high_water": 272
         },
         "issues": [],
+        "imu_clock": {
+          "foot": {
+            "tick_steps": 5,
+            "median_tick_step": 5000.0,
+            "expected_tick_step": 5000.0,
+            "median_step_error_percent": 0.0,
+            "fit_reads": 6,
+            "fit_span_s": null,
+            "host_us_per_sensor_tick": null,
+            "sensor_tick_error_ppm": null,
+            "fit_note": "needs at least 40 FIFO reads spanning 10 s",
+            "within_1_percent": true
+          },
+          "shank": {
+            "tick_steps": 5,
+            "median_tick_step": 5000.0,
+            "expected_tick_step": 5000.0,
+            "median_step_error_percent": 0.0,
+            "fit_reads": 6,
+            "fit_span_s": null,
+            "host_us_per_sensor_tick": null,
+            "sensor_tick_error_ppm": null,
+            "fit_note": "needs at least 40 FIFO reads spanning 10 s",
+            "within_1_percent": true
+          }
+        },
+        "imu_clock_note": "Screen only: FIFO timestamp increments versus the configured 1 us tick, and sensor ticks versus ESP32 interrupt times. Includes interrupt latency; not a calibration.",
         "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
         "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
       },
@@ -2023,13 +2503,13 @@
       "writes": 5,
       "syncs": 3,
       "closes": 1,
-      "metadata_bytes": 1279,
+      "metadata_bytes": 1308,
       "profile": "breadboard",
       "metadata_roundtrip_pass": true,
       "live_end_reason_pass": true,
       "laptop_stop_state_pass": true,
       "quality": {
-        "source_sha256": "ad1947acadaaa2adde27a93991d0a5fa9a3f6e412f876717b1dc8509968237a0",
+        "source_sha256": "96c0c8071e61d2f365ef317713f19f5ec05eb7ad3280f3147e4ee8a3bd8f00c5",
         "synthetic": true,
         "counts": {
           "emg": 260,
@@ -2073,6 +2553,33 @@
           "queue_high_water": 272
         },
         "issues": [],
+        "imu_clock": {
+          "foot": {
+            "tick_steps": 5,
+            "median_tick_step": 5000.0,
+            "expected_tick_step": 5000.0,
+            "median_step_error_percent": 0.0,
+            "fit_reads": 6,
+            "fit_span_s": null,
+            "host_us_per_sensor_tick": null,
+            "sensor_tick_error_ppm": null,
+            "fit_note": "needs at least 40 FIFO reads spanning 10 s",
+            "within_1_percent": true
+          },
+          "shank": {
+            "tick_steps": 5,
+            "median_tick_step": 5000.0,
+            "expected_tick_step": 5000.0,
+            "median_step_error_percent": 0.0,
+            "fit_reads": 6,
+            "fit_span_s": null,
+            "host_us_per_sensor_tick": null,
+            "sensor_tick_error_ppm": null,
+            "fit_note": "needs at least 40 FIFO reads spanning 10 s",
+            "within_1_percent": true
+          }
+        },
+        "imu_clock_note": "Screen only: FIFO timestamp increments versus the configured 1 us tick, and sensor ticks versus ESP32 interrupt times. Includes interrupt latency; not a calibration.",
         "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
         "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
       },
@@ -2091,11 +2598,11 @@
       "writes": 1,
       "syncs": 1,
       "closes": 1,
-      "metadata_bytes": 1279,
+      "metadata_bytes": 1308,
       "profile": "breadboard",
       "metadata_roundtrip_pass": true,
       "quality": {
-        "source_sha256": "392982216dd8cde4c398ce7afe0f941ca6cb91b435d7677c2a7bb2c98329205f",
+        "source_sha256": "cd70ad686f3d9578fd9f54e6d5ac144f724819084f4a03a99c7c24672fbec94f",
         "synthetic": true,
         "counts": {
           "emg": 0,
@@ -2145,6 +2652,8 @@
             "stream": "shank"
           }
         ],
+        "imu_clock": {},
+        "imu_clock_note": "Screen only: FIFO timestamp increments versus the configured 1 us tick, and sensor ticks versus ESP32 interrupt times. Includes interrupt latency; not a calibration.",
         "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
         "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
       },
@@ -2163,11 +2672,11 @@
       "writes": 1,
       "syncs": 1,
       "closes": 1,
-      "metadata_bytes": 1279,
+      "metadata_bytes": 1308,
       "profile": "breadboard",
       "metadata_roundtrip_pass": true,
       "quality": {
-        "source_sha256": "392982216dd8cde4c398ce7afe0f941ca6cb91b435d7677c2a7bb2c98329205f",
+        "source_sha256": "cd70ad686f3d9578fd9f54e6d5ac144f724819084f4a03a99c7c24672fbec94f",
         "synthetic": true,
         "counts": {
           "emg": 0,
@@ -2217,6 +2726,8 @@
             "stream": "shank"
           }
         ],
+        "imu_clock": {},
+        "imu_clock_note": "Screen only: FIFO timestamp increments versus the configured 1 us tick, and sensor ticks versus ESP32 interrupt times. Includes interrupt latency; not a calibration.",
         "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
         "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
       },
@@ -2235,14 +2746,14 @@
       "writes": 5,
       "syncs": 3,
       "closes": 1,
-      "metadata_bytes": 1279,
+      "metadata_bytes": 1308,
       "profile": "breadboard",
       "metadata_roundtrip_pass": true,
       "live_end_reason_pass": true,
       "laptop_stop_state_pass": true,
       "sd_live_end_identical": true,
       "quality": {
-        "source_sha256": "20475ad85589047b51faee38c38d8505f2b6a7c9334a984131e092d760933ef0",
+        "source_sha256": "d5d0c709ac821ee1e0eea0bc45eca4ece0d9c9f8d4ab54a23f9f72567efb74d3",
         "synthetic": true,
         "counts": {
           "emg": 260,
@@ -2291,6 +2802,33 @@
             "reason": 3
           }
         ],
+        "imu_clock": {
+          "foot": {
+            "tick_steps": 5,
+            "median_tick_step": 5000.0,
+            "expected_tick_step": 5000.0,
+            "median_step_error_percent": 0.0,
+            "fit_reads": 6,
+            "fit_span_s": null,
+            "host_us_per_sensor_tick": null,
+            "sensor_tick_error_ppm": null,
+            "fit_note": "needs at least 40 FIFO reads spanning 10 s",
+            "within_1_percent": true
+          },
+          "shank": {
+            "tick_steps": 5,
+            "median_tick_step": 5000.0,
+            "expected_tick_step": 5000.0,
+            "median_step_error_percent": 0.0,
+            "fit_reads": 6,
+            "fit_span_s": null,
+            "host_us_per_sensor_tick": null,
+            "sensor_tick_error_ppm": null,
+            "fit_note": "needs at least 40 FIFO reads spanning 10 s",
+            "within_1_percent": true
+          }
+        },
+        "imu_clock_note": "Screen only: FIFO timestamp increments versus the configured 1 us tick, and sensor ticks versus ESP32 interrupt times. Includes interrupt latency; not a calibration.",
         "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
         "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
       },
@@ -2326,14 +2864,14 @@
       "writes": 5,
       "syncs": 3,
       "closes": 1,
-      "metadata_bytes": 1279,
+      "metadata_bytes": 1308,
       "profile": "breadboard",
       "metadata_roundtrip_pass": true,
       "live_end_reason_pass": true,
       "laptop_stop_state_pass": true,
       "sd_live_end_identical": true,
       "quality": {
-        "source_sha256": "1a0a70e3e022c61d03c22c0e3d9f232ca320414a77ced94458eae2023b4256b9",
+        "source_sha256": "fa571e322b33ffc4ea955eeb02defda48a3c0d9c7a3bc031ee157de4b004a4ae",
         "synthetic": true,
         "counts": {
           "emg": 260,
@@ -2382,6 +2920,33 @@
             "reason": 7
           }
         ],
+        "imu_clock": {
+          "foot": {
+            "tick_steps": 5,
+            "median_tick_step": 5000.0,
+            "expected_tick_step": 5000.0,
+            "median_step_error_percent": 0.0,
+            "fit_reads": 6,
+            "fit_span_s": null,
+            "host_us_per_sensor_tick": null,
+            "sensor_tick_error_ppm": null,
+            "fit_note": "needs at least 40 FIFO reads spanning 10 s",
+            "within_1_percent": true
+          },
+          "shank": {
+            "tick_steps": 5,
+            "median_tick_step": 5000.0,
+            "expected_tick_step": 5000.0,
+            "median_step_error_percent": 0.0,
+            "fit_reads": 6,
+            "fit_span_s": null,
+            "host_us_per_sensor_tick": null,
+            "sensor_tick_error_ppm": null,
+            "fit_note": "needs at least 40 FIFO reads spanning 10 s",
+            "within_1_percent": true
+          }
+        },
+        "imu_clock_note": "Screen only: FIFO timestamp increments versus the configured 1 us tick, and sensor ticks versus ESP32 interrupt times. Includes interrupt latency; not a calibration.",
         "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
         "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
       },
@@ -2400,14 +2965,14 @@
       "writes": 7,
       "syncs": 6,
       "closes": 1,
-      "metadata_bytes": 1279,
+      "metadata_bytes": 1308,
       "profile": "breadboard",
       "metadata_roundtrip_pass": true,
       "live_end_reason_pass": true,
       "laptop_stop_state_pass": true,
       "sd_live_end_identical": true,
       "quality": {
-        "source_sha256": "22db3a24764d8c715e6afe3183775d5a10c4347a577d7e3eb1d73331bc42582a",
+        "source_sha256": "1c6db75548102f9d0daa2a4527f842da45ffe8a4e8ec1eba7fc954d73d7831ea",
         "synthetic": true,
         "counts": {
           "emg": 260,
@@ -2456,6 +3021,33 @@
             "reason": 4
           }
         ],
+        "imu_clock": {
+          "foot": {
+            "tick_steps": 5,
+            "median_tick_step": 5000.0,
+            "expected_tick_step": 5000.0,
+            "median_step_error_percent": 0.0,
+            "fit_reads": 6,
+            "fit_span_s": null,
+            "host_us_per_sensor_tick": null,
+            "sensor_tick_error_ppm": null,
+            "fit_note": "needs at least 40 FIFO reads spanning 10 s",
+            "within_1_percent": true
+          },
+          "shank": {
+            "tick_steps": 5,
+            "median_tick_step": 5000.0,
+            "expected_tick_step": 5000.0,
+            "median_step_error_percent": 0.0,
+            "fit_reads": 6,
+            "fit_span_s": null,
+            "host_us_per_sensor_tick": null,
+            "sensor_tick_error_ppm": null,
+            "fit_note": "needs at least 40 FIFO reads spanning 10 s",
+            "within_1_percent": true
+          }
+        },
+        "imu_clock_note": "Screen only: FIFO timestamp increments versus the configured 1 us tick, and sensor ticks versus ESP32 interrupt times. Includes interrupt latency; not a calibration.",
         "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
         "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
       },
@@ -2474,13 +3066,13 @@
       "writes": 4,
       "syncs": 2,
       "closes": 1,
-      "metadata_bytes": 1279,
+      "metadata_bytes": 1308,
       "profile": "breadboard",
       "metadata_roundtrip_pass": true,
       "live_end_reason_pass": true,
       "laptop_stop_state_pass": true,
       "quality": {
-        "source_sha256": "833183de4101ffa55d93a34caa87e40bca4e109d5925112fbb6bf6df49d41ad0",
+        "source_sha256": "54ab5871d959a4bf2f2c26f9489ab61a42beb0785e7e0789a52e248df506f687",
         "synthetic": true,
         "counts": {
           "emg": 260,
@@ -2529,6 +3121,33 @@
             "message": "Unfinalized session; trailing samples may be lost."
           }
         ],
+        "imu_clock": {
+          "foot": {
+            "tick_steps": 5,
+            "median_tick_step": 5000.0,
+            "expected_tick_step": 5000.0,
+            "median_step_error_percent": 0.0,
+            "fit_reads": 6,
+            "fit_span_s": null,
+            "host_us_per_sensor_tick": null,
+            "sensor_tick_error_ppm": null,
+            "fit_note": "needs at least 40 FIFO reads spanning 10 s",
+            "within_1_percent": true
+          },
+          "shank": {
+            "tick_steps": 5,
+            "median_tick_step": 5000.0,
+            "expected_tick_step": 5000.0,
+            "median_step_error_percent": 0.0,
+            "fit_reads": 6,
+            "fit_span_s": null,
+            "host_us_per_sensor_tick": null,
+            "sensor_tick_error_ppm": null,
+            "fit_note": "needs at least 40 FIFO reads spanning 10 s",
+            "within_1_percent": true
+          }
+        },
+        "imu_clock_note": "Screen only: FIFO timestamp increments versus the configured 1 us tick, and sensor ticks versus ESP32 interrupt times. Includes interrupt latency; not a calibration.",
         "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
         "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
       },

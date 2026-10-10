@@ -33,20 +33,21 @@ def refresh_wire_tables():
         if count != 1:
             raise ValueError(f"Expected exactly one assembly-table row for {row['Wire']}; found {count}")
 
-    old_status = r'<p><strong>Current v1\.6 / preserved v1\.5 evidence:</strong>.*?</p>'
+    old_status = (r'<p><strong>(?:Current v1\.6 / preserved v1\.5 evidence|Current breadboard handoff):</strong>'
+                  r'.*?</p>')
     replacement = ('<p><strong>Current breadboard handoff:</strong> '
                    '<a href="breadboard-refinements.html">Applied simulation findings</a> · '
                    '<a href="lab-quickstart.html">Short lab sequence</a> · '
                    '<a href="bench-checklist.csv">Blank bench checklist</a> · '
                    '<a href="../breadboard/probe-connections.csv">Exact probe contacts</a> · '
                    '<a href="../breadboard/breadboard-lab-kit.zip">Current lab kit</a>. '
-                   'Use v1.6 laboratory profiles. See '
+                   'Use v1.7 laboratory profiles. See '
                    '<a href="integrated-verification.html">current integrated results</a>, '
                    '<a href="digital-timing.html">digital timing</a> and '
                    '<a href="data-interpretation.html">saved-data interpretation</a> for evidence and limits. '
                    'Every physical measurement remains unperformed; simulation results do not fill lab result cells.</p>')
     text, count = re.subn(old_status, replacement, text)
-    if count == 0 and '<strong>Current breadboard handoff:</strong>' not in text:
+    if count != 1:
         raise ValueError('Assembly-table evidence banner not found')
     path.write_text(text)
     return len(rows)

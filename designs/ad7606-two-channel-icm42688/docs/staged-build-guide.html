@@ -19,13 +19,13 @@
 <tr>
 <td><a href="../breadboard/stages/stage-01.svg">1. Power and midpoint</a></td>
 <td>BB0 midpoint; regulated lab rails, no controller. Connect DMM across each rail/GND; scope ground spring at load. Initially 50 mA current limit, increase deliberately for dummy loads.</td>
-<td>3.3 V digital 3.23–3.43 V; 3.0 V analog 2.94–3.06 V; midpoint 1.47–1.53 V. Test 0/100/300 mA digital and 0/20/50 mA analog. Ripple targets ≤50/10 mVpp (20 MHz bandwidth); step deviation ≤5%, recovery ±3% within10 ms. Temperature &lt;60°C after10 min at20–30°C ambient. 5 V ADC:4.8–5.2 V at10–50 mA; verify never above5.25 V including startup.</td>
+<td>3.3 V digital 3.23–3.43 V; 3.0 V analog 2.94–3.06 V; midpoint 0.49–0.51 × measured analog rail (1.47–1.53 V at a nominal 3.00 V rail). Test 0/100/300 mA digital and 0/20/50 mA analog. Ripple targets ≤50/10 mVpp (20 MHz bandwidth); step deviation ≤5%, recovery ±3% within10 ms. Temperature &lt;60°C after10 min at20–30°C ambient. 5 V ADC:4.8–5.2 V at10–50 mA; verify never above5.25 V including startup.</td>
 <td>Check polarity, ground continuity, supply limits, load resistor rating and midpoint follower wiring.</td>
 </tr>
 <tr>
 <td><a href="../breadboard/stages/stage-02.svg">2. ESP32 controller</a></td>
 <td>Add N8R8 controller; diagnostic-controller build. Attach USB with no person connected. Fit controls, LEDs, battery sense and USB detection circuit from schematic. Scope GPIO21 USB_PRESENT_N.</td>
-<td>20 program/reset cycles without failure. Buttons/LEDs respond. GPIO21 low when USB attached, high when absent. Recorder must refuse to start while USB attached; that interlock needs a repeat at stage7. Record measured current; no assumed universal current limit.</td>
+<td>20 program/reset cycles without failure. Buttons/LEDs respond. GPIO21 low when USB attached, high when absent. Measure the external 10k usb-pu (GPIO21 to 3V3D) unpowered: the diagnostic enables an internal pull-up, the recording firmware does not. Recorder must refuse to start while USB attached; that interlock needs a repeat at stage7. Record measured current; no assumed universal current limit.</td>
 <td>Check boot/reset levels, native USB pins and 3.3 V rail droop.</td>
 </tr>
 <tr>
@@ -49,18 +49,18 @@
 <tr>
 <td><a href="../breadboard/stages/stage-06.svg">6. Foot and shank IMUs</a></td>
 <td>Add one ready-made IMU, then second. diagnostic-imu-one then diagnostic-imu-two. Logic analyzer on shared SPI and individual CS/INT; rotate each known axis.</td>
-<td>WHO_AM_I0x47;200 Hz±1% over60 s, no FIFO overflow/errors. Stationary gravity-axis within±0.1g of±1g; cross axes within±0.1g, gyro per axis&lt;5°/s before calibration. Verify axis signs and intended cable length.</td>
+<td>WHO_AM_I 0x47; 200 Hz ±1% over 60 s, no FIFO overflow/errors; diagnostic tick_step_mean 5000 ±0.5% and mean host_us_per_tick 1.00 ±1% over ≥60 windows. Stationary gravity-axis within±0.1g of±1g; cross axes within±0.1g, gyro per axis&lt;5°/s before calibration. Verify axis signs and intended cable length.</td>
 <td>Check SPI jumpers, GPIO4 MOSI/5 MISO/6 SCLK, foot CS/INT1 GPIO7/16 and shank GPIO15/17, 3.3 V and cable integrity. Preserve raw 16-bit counter wraps and independent start offsets; host times are estimates. Flag 2 alone is expected uncertainty, while gap/invalid flags require investigation.</td>
 </tr>
 <tr>
 <td><a href="../breadboard/stages/stage-07.svg">7. SD recording</a></td>
 <td>Add SD interface. Record synthetic inputs without USB; use the two-channel SD-only build. Repeat with missing/full card and five controlled power interruptions on expendable media.</td>
-<td>60 min, no unexplained SD sample loss, CRC errors or queue overflow. Refuse start without SD; report full-card stop. Recovery preserves complete valid records and reports truncated tail/missing END. Check metadata, original counters, CRC32, timing flags, END and stop reason together; a filename or END alone does not certify a successful sync/close. Attach USB during synthetic recording: explicit stop.</td>
+<td>60 min and full 2 h (stop reason 5, session limit) runs: no unexplained SD sample loss, CRC errors or queue overflow; final queue_high_water ≤10,240 of 20,480; record card make/model/capacity/speed class; quality.json imu_clock median_tick_step 5000 ±0.5% and host_us_per_sensor_tick within ±1%. Refuse start without SD; report full-card stop. Recovery preserves complete valid records and reports truncated tail/missing END. Check metadata, original counters, CRC32, timing flags, END and stop reason together; a filename or END alone does not certify a successful sync/close. Attach USB during synthetic recording: explicit stop.</td>
 <td>Inspect card latency/rail droop, queues and reports. Never erase original fault evidence; filesystem recovery is not guaranteed.</td>
 </tr>
 <tr>
 <td><a href="../breadboard/stages/stage-08.svg">8. Wi-Fi and SD together</a></td>
-<td>Join AFO-Recorder-B Wi-Fi on laptop; run python3 host/live_receiver.py. Maintain SD recording; congest/disconnect/reconnect wireless.</td>
+<td>Read the recorder's Wi-Fi password once from the USB console at the bench (generated on first boot, printed at every boot); keep it private. Join AFO-Recorder-B on the laptop; run python3 host/live_receiver.py. Maintain SD recording; congest/disconnect/reconnect wireless.</td>
 <td>60 min with two channels: stage7 SD quality maintained; only enabled channels displayed; induced packet loss visible in counters/gaps. Compare SD versus laptop capture.</td>
 <td>Check laptop firewall/UDP3333, network selection and queue counters. Wi-Fi copy is best effort. Audit the original SD file and laptop archive separately; a preview gap is not automatically saved-data loss.</td>
 </tr>

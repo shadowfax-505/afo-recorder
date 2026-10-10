@@ -6,7 +6,7 @@
 
 ## Add and test
 
-First repeat a short baseline without a receiver, then a 60-minute SD+Wi-Fi trial. Interrupt and reconnect laptop reception. Compare common record identities, codes and timestamps; never fill missing preview data silently.
+Read the per-device Wi-Fi password once from the USB console at the bench (no person attached) and keep it private, then remove USB. First repeat a short baseline without a receiver, then a 60-minute SD+Wi-Fi trial. Interrupt and reconnect laptop reception. Compare common record identities, codes and timestamps; never fill missing preview data silently.
 
 ## Acceptance checks
 

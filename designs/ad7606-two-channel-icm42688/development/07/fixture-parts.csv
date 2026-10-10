@@ -1,2 +1,3 @@
 Stage,Reference,Value,Board,Note
-7,,3.3 V microSD interface + card,,Match schematic
+7,sd,Adafruit 4682 microSD breakout (3.3 V),,SDIO wiring; keep the breakout pull-ups
+7,card,microSD card,,"Record make, model, capacity, speed class and filesystem; keep expendable cards for fault tests"

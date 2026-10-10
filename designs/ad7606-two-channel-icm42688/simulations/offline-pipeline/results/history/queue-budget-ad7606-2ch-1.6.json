@@ -1,0 +1,143 @@
+{
+  "engine": "native event-count queue model, configured 8kHz/200Hz and 128-record writes",
+  "hardware_measured": false,
+  "firmware_executed": false,
+  "cases_passed": 6,
+  "queue_time_budget_ms": 243.8095238095238,
+  "record_bytes_s": 537600,
+  "two_hour_nominal_bytes_with_status_and_header": 3871184960,
+  "source_sha256": "35c504dba592ac396f5a5744215ad239969026af7e15141d269daf46fa0ddaaa",
+  "limits": [
+    "Modeled write throughput and latencies are assumptions, not SD-card measurements",
+    "Arrival/write counts only; no binary files, firmware, GPIO, scheduler or persistence",
+    "Cannot qualify one-hour recording or two-hour battery runtime"
+  ],
+  "cases": [
+    {
+      "hardware_measured": false,
+      "firmware_executed": false,
+      "duration_s": 3600,
+      "modeled_write_bytes_s": 2097152,
+      "extra_stall_ms": 0,
+      "stall_period_s": 10,
+      "produced": [
+        28800000,
+        719949,
+        720079
+      ],
+      "queue_high_water": 41,
+      "queue_capacity": 2048,
+      "consumed": 30240000,
+      "completed_writes": 236249,
+      "stop_reason": 0,
+      "last_event_s": 3600.0,
+      "case": "one-hour-normal",
+      "pass": true
+    },
+    {
+      "hardware_measured": false,
+      "firmware_executed": false,
+      "duration_s": 3600,
+      "modeled_write_bytes_s": 2097152,
+      "extra_stall_ms": 50,
+      "stall_period_s": 10,
+      "produced": [
+        28800000,
+        719949,
+        720079
+      ],
+      "queue_high_water": 461,
+      "queue_capacity": 2048,
+      "consumed": 30240000,
+      "completed_writes": 236249,
+      "stop_reason": 0,
+      "last_event_s": 3600.0,
+      "case": "one-hour-50ms-stalls",
+      "pass": true
+    },
+    {
+      "hardware_measured": false,
+      "firmware_executed": false,
+      "duration_s": 3600,
+      "modeled_write_bytes_s": 2097152,
+      "extra_stall_ms": 180,
+      "stall_period_s": 10,
+      "produced": [
+        28800000,
+        719949,
+        720079
+      ],
+      "queue_high_water": 1553,
+      "queue_capacity": 2048,
+      "consumed": 30240000,
+      "completed_writes": 236249,
+      "stop_reason": 0,
+      "last_event_s": 3600.0,
+      "case": "one-hour-180ms-stalls",
+      "pass": true
+    },
+    {
+      "hardware_measured": false,
+      "firmware_executed": false,
+      "duration_s": 3600,
+      "modeled_write_bytes_s": 2097152,
+      "extra_stall_ms": 220,
+      "stall_period_s": 30,
+      "produced": [
+        28800000,
+        719949,
+        720079
+      ],
+      "queue_high_water": 1889,
+      "queue_capacity": 2048,
+      "consumed": 30240000,
+      "completed_writes": 236249,
+      "stop_reason": 0,
+      "last_event_s": 3600.0,
+      "case": "one-hour-220ms-stalls",
+      "pass": true
+    },
+    {
+      "hardware_measured": false,
+      "firmware_executed": false,
+      "duration_s": 10,
+      "modeled_write_bytes_s": 2097152,
+      "extra_stall_ms": 350,
+      "stall_period_s": 1,
+      "produced": [
+        9998,
+        249,
+        250
+      ],
+      "queue_high_water": 2048,
+      "queue_capacity": 2048,
+      "consumed": 8448,
+      "completed_writes": 65,
+      "stop_reason": 2,
+      "last_event_s": 1.249862,
+      "case": "350ms-overflow",
+      "pass": true
+    },
+    {
+      "hardware_measured": false,
+      "firmware_executed": false,
+      "duration_s": 60,
+      "modeled_write_bytes_s": 500000,
+      "extra_stall_ms": 0,
+      "stall_period_s": 10,
+      "produced": [
+        14997,
+        374,
+        374
+      ],
+      "queue_high_water": 2048,
+      "queue_capacity": 2048,
+      "consumed": 13696,
+      "completed_writes": 106,
+      "stop_reason": 2,
+      "last_event_s": 1.874625,
+      "case": "insufficient-throughput",
+      "pass": true
+    }
+  ]
+}

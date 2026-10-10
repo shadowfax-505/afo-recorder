@@ -6,15 +6,15 @@
 
 ## Add and test
 
-7A: short known-signal recording and conversion. 7B: 60-minute continuous run. 7C: absent/full-card and five interrupted-write trials on expendable media. Test recording USB inhibition with synthetic signals only. Stop and wait for recording LED off before removing media.
+7A: short known-signal recording and conversion. 7B: 60-minute continuous run, then one full 2-hour run until the firmware stops with reason 5 (session limit). 7C: absent/full-card and five interrupted-write trials on expendable media. Test recording USB inhibition with synthetic signals only. Stop and wait for recording LED off before removing media.
 
 ## Acceptance checks
 
 - **7-format:** AD7606 / two inputs / ICM / breadboard metadata; RAW code ×5/32768 V; scale 1 midpoint offset 0; retain raw IMU counters IRQ anchors read start/end and timing flags
-- **7-endurance:** CMD GPIO47 CLK GPIO39 D0 GPIO40; container CRC32 and counters pass; no unexplained saved gaps/queue errors; END and expected stop reason; no sync/close failure
+- **7-endurance:** CMD GPIO47 CLK GPIO39 D0 GPIO40; one 60 min run and one full 2 h run ending with stop reason 5 (session limit); container CRC32 and counters pass; no unexplained saved gaps/queue errors; final queue_high_water ≤10,240 (half of 20,480); END and expected stop reason; no sync/close failure; card make/model/capacity/speed class/filesystem recorded
 - **7-usb:** Refuse start with USB attached; attach during synthetic recording gives explicit stop/error; no person attached
 - **7-storage-faults:** No-card refuses start; full-card explicit stop; five controlled interruptions preserve only CRC-valid records and report truncated tail/missing END
-- **7-timestamps:** Normal 65.536 ms counter wraps handled; host estimate flag 2 retained; startup count differences not row-aligned; no unexplained gap/invalid/timing rejection
+- **7-timestamps:** Normal 65.536 ms counter wraps handled; host estimate flag 2 retained; startup count differences not row-aligned; quality.json imu_clock per sensor: median_tick_step 5000 ±0.5% and host_us_per_sensor_tick within ±1% (runs ≥10 min); no unexplained gap/invalid/timing rejection
 
 ## Send for review
 
@@ -22,8 +22,10 @@
 - converter command/version
 - metadata, quality report and CSV excerpts
 - stop reason
+- final status queue_high_water
+- quality.json imu_clock
 - serial log
-- card make/capacity/filesystem
+- card make/model/capacity/speed class/filesystem
 - scope trace of continuous conversion cadence
 
 Keep damaged originals; do not overwrite them with recovered files. END is not proof of successful final filesystem sync. Check close/sync faults and counters independently. Diagnostic printing pauses cannot be used as continuous-acquisition evidence.

@@ -18,6 +18,9 @@ static portMUX_TYPE lock=portMUX_INITIALIZER_UNLOCKED;
 static uint32_t edges,imu_edges[2],imu_packets[2];
 static int16_t imu_last[2][6];
 static uint16_t imu_ticks[2];
+// Sums of consecutive FIFO timestamp increments, to compare sensor ticks with host time.
+static uint64_t imu_tick_sum[2];
+static uint32_t imu_tick_steps[2];
 static atomic_bool diagnostic_fault;
 static void imu_irq(void *arg){
     unsigned id=(unsigned)(uintptr_t)arg;
@@ -36,14 +39,20 @@ static void fail(const char *step,esp_err_t e){
     while(1)vTaskDelay(pdMS_TO_TICKS(1000));
 }
 static void imu_reader(void *arg){
-    (void)arg;uint8_t buf[2048];
+    (void)arg;uint8_t buf[2048];bool have_tick[2]={false,false};uint16_t previous_tick[2]={0};
     while(1){
         for(unsigned i=0;i<AFO_IMU_COUNT;i++){
             size_t packets=0;bool overflow=false;
             esp_err_t e=imu_fifo(i,buf,sizeof(buf),&packets,&overflow);
             if(e!=ESP_OK||overflow)fail("IMU FIFO/read",e!=ESP_OK?e:ESP_ERR_INVALID_SIZE);
             for(size_t k=0;k<packets;k++)if((buf[k*16]&0xfc)!=0x68)fail("IMU FIFO header",ESP_ERR_INVALID_RESPONSE);
-            portENTER_CRITICAL(&lock);imu_packets[i]+=packets;
+            uint64_t step_sum=0;uint32_t steps=0;
+            for(size_t k=0;k<packets;k++){
+                uint16_t tick=(buf[k*16+14]<<8)|buf[k*16+15];
+                if(have_tick[i]){step_sum+=(uint16_t)(tick-previous_tick[i]);steps++;}
+                previous_tick[i]=tick;have_tick[i]=true;
+            }
+            portENTER_CRITICAL(&lock);imu_packets[i]+=packets;imu_tick_sum[i]+=step_sum;imu_tick_steps[i]+=steps;
             if(packets){
                 const uint8_t *last=buf+(packets-1)*16;
                 for(unsigned axis=0;axis<6;axis++)imu_last[i][axis]=(int16_t)((last[1+2*axis]<<8)|last[2+2*axis]);
@@ -59,7 +68,7 @@ void app_main(void){
     ESP_ERROR_CHECK(gpio_config(&out));
     gpio_config_t in={.pin_bit_mask=(1ULL<<BUTTON_PIN)|(1ULL<<USB_PRESENT_PIN),.mode=GPIO_MODE_INPUT,.pull_up_en=GPIO_PULLUP_ENABLE};
     ESP_ERROR_CHECK(gpio_config(&in));
-    printf("BENCH ONLY; NO ELECTRODES. stage=%d hardware=%s channels=%d\n",AFO_DIAGNOSTIC_STAGE,HARDWARE_VARIANT,EMG_CHANNEL_COUNT);
+    printf("BENCH ONLY; NO ELECTRODES. firmware=%s stage=%d hardware=%s channels=%d\n",AFO_FIRMWARE_ID,AFO_DIAGNOSTIC_STAGE,HARDWARE_VARIANT,EMG_CHANNEL_COUNT);
     if(AFO_DIAGNOSTIC_STAGE==2){
         unsigned tick=0;
         while(1){gpio_set_level(LED_RECORD,tick&1);gpio_set_level(LED_ERROR,(tick>>1)&1);gpio_set_level(LED_BATTERY,(tick>>2)&1);
@@ -84,9 +93,12 @@ void app_main(void){
     while(1){
         int32_t low[4]={INT_MAX,INT_MAX,INT_MAX,INT_MAX},high[4]={INT_MIN,INT_MIN,INT_MIN,INT_MIN};
         int64_t sum[4]={0};double sumsq[4]={0};uint32_t good=0;
-        uint32_t prior_irq[2],prior_packets[2];
+        uint32_t prior_irq[2],prior_packets[2],prior_steps[2];uint64_t prior_tick_sum[2];
+        // IMU counts continue during printing, so they use their own host interval.
+        int64_t imu_window_start=esp_timer_get_time();
         portENTER_CRITICAL(&lock);
-        for(unsigned i=0;i<2;i++){prior_irq[i]=imu_edges[i];prior_packets[i]=imu_packets[i];}
+        for(unsigned i=0;i<2;i++){prior_irq[i]=imu_edges[i];prior_packets[i]=imu_packets[i];
+            prior_steps[i]=imu_tick_steps[i];prior_tick_sum[i]=imu_tick_sum[i];}
         portEXIT_CRITICAL(&lock);
         ulTaskNotifyTake(pdTRUE,0);
         portENTER_CRITICAL(&lock);edges=0;portEXIT_CRITICAL(&lock);
@@ -115,9 +127,16 @@ void app_main(void){
         if(AFO_DIAGNOSTIC_STAGE==6)for(unsigned i=0;i<AFO_IMU_COUNT;i++){
             int16_t axes[6];
             portENTER_CRITICAL(&lock);uint32_t irq_n=imu_edges[i]-prior_irq[i],packets=imu_packets[i]-prior_packets[i];
+            uint32_t steps=imu_tick_steps[i]-prior_steps[i];uint64_t tick_sum=imu_tick_sum[i]-prior_tick_sum[i];
             for(unsigned a=0;a<6;a++)axes[a]=imu_last[i][a];
             unsigned ticks=imu_ticks[i];portEXIT_CRITICAL(&lock);
-            printf("IMU,%u,packets=%"PRIu32",interrupts=%"PRIu32",ax_raw=%d,ay_raw=%d,az_raw=%d,gx_raw=%d,gy_raw=%d,gz_raw=%d,timestamp_raw=%u\n",i,packets,irq_n,axes[0],axes[1],axes[2],axes[3],axes[4],axes[5],ticks);
+            int64_t imu_interval=esp_timer_get_time()-imu_window_start;
+            // Expected tick_step_mean is 5000 at 200 Hz with the 1 us timestamp setting.
+            // host_us_per_tick compares the sensor clock with the ESP32 clock.
+            double step_mean=steps?(double)tick_sum/steps:0;
+            double host_per_tick=(packets&&step_mean>0)?(double)imu_interval/(packets*step_mean):0;
+            printf("IMU,%u,interval_us=%"PRId64",packets=%"PRIu32",interrupts=%"PRIu32",ax_raw=%d,ay_raw=%d,az_raw=%d,gx_raw=%d,gy_raw=%d,gz_raw=%d,timestamp_raw=%u,tick_steps=%"PRIu32",tick_step_mean=%.2f,host_us_per_tick=%.5f\n",
+                i,imu_interval,packets,irq_n,axes[0],axes[1],axes[2],axes[3],axes[4],axes[5],ticks,steps,step_mean,host_per_tick);
             if(!irq_n||!packets)fail("IMU missing interrupts/data",ESP_ERR_TIMEOUT);
         }
         printf("WINDOW_COMPLETE; codes require comparison with applied test voltages\n");

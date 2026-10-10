@@ -1,2 +1,20 @@
 Stage,Reference,Value,Board,Note
-2,,ESP32-S3-N8R8 development board,,Exact SKU/header pending
+2,,Espressif ESP32-S3-DevKitC-1 N8R8,,Exact board; both USB sockets stay empty
+2,button,Start/stop pushbutton (normally open),,
+2,button-pullup,10k,AUX1,Button pull-up
+2,rec-r,1k,AUX1,Recording LED resistor
+2,rec-led,Green LED,AUX1,Recording LED; check anode orientation
+2,err-r,1k,AUX1,Error LED resistor
+2,err-led,Red LED,AUX1,Error LED; check anode orientation
+2,low-r,1k,AUX1,Battery LED resistor
+2,low-led,Amber LED,AUX1,Battery LED; check anode orientation
+2,bat-r-top,100k,AUX1,Battery divider top
+2,bat-r-low,100k,AUX1,Battery divider bottom
+2,bat-cap,100nF,AUX1,Battery sense filter
+2,usb,Adafruit 1833 USB inlet,,External inlet; VBUS is sense-only
+2,usb-dm-r,33 ohm inline resistor,,USB D- series resistor
+2,usb-dp-r,33 ohm inline resistor,,USB D+ series resistor
+2,usb-r,100k,AUX1,VBUS sense resistor
+2,usb-pd,1M,AUX2,2N7002 gate pull-down
+2,usb-pu,10k,AUX2,GPIO21 USB-sense pull-up; recording firmware has no internal pull-up
+2,usb-q,2N7002 on SOT-23 adapter,,USB-sense transistor; adapter pad-to-header mapping in build guide

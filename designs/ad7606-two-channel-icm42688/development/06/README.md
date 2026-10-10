@@ -11,13 +11,14 @@
 ## Acceptance checks
 
 - **6-foot:** SPI JP2–JP4 1–2; 3.3 V; WHO_AM_I 0x47/readback; foot CS GPIO7 / INT1 GPIO16; correct axis signs
-- **6-shank:** Shank CS GPIO15 / INT1 GPIO17; 200 Hz ±1% per sensor over 60 s; no FIFO/missing-IRQ/invalid-packet errors
+- **6-shank:** Shank CS GPIO15 / INT1 GPIO17; 200 Hz ±1% per sensor over 60 s (packets ÷ interval_us, or INT1 capture); tick_step_mean 5000 ±0.5% and mean host_us_per_tick 1.00 ±1% per sensor over ≥60 windows; no FIFO/missing-IRQ/invalid-packet errors
 - **6-stationary:** ±16 g / ±2000 °/s configured; gravity axis ±1 g within ±0.1 g, cross axes within ±0.1 g; gyro per axis <5 °/s before calibration
 
 ## Send for review
 
 - WHO/readback serial results
 - FIFO and interrupt counts over 60 s
+- IMU lines with interval_us, tick_step_mean and host_us_per_tick
 - six-face accelerometer means
 - stationary gyro means
 - axis photographs

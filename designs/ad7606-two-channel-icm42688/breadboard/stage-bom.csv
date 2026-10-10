@@ -1,4 +1,40 @@
 Stage,Reference,Value,Board,Note
+1,R40,10k,BB0,DIP/passive fixture; check package pinout
+1,R41,10k,BB0,DIP/passive fixture; check package pinout
+1,C30,1uF,BB0,DIP/passive fixture; check package pinout
+1,R42,100,BB0,DIP/passive fixture; check package pinout
+1,C31,1uF,BB0,DIP/passive fixture; check package pinout
+1,UB0,MCP6002-I/P midpoint; half B grounded follower,BB0,DIP/passive fixture; check package pinout
+1,CB0,100nF,BB0,DIP/passive fixture; check package pinout
+1,,Regulated supply + dummy loads,,Lab instrument substitution; final power converter unvalidated
+1,"BB0-BB2, AUX1, AUX2, DIST1",6 × BusBoard BB830 breadboard,,63 rows; long power rails unused
+1,reg5,Pololu 4082 S13V30F5 5 V regulator,,Lab power module; not PCB converter validation
+1,reg3,Pololu 4980 S13V25F3 3.3 V regulator,,Do not parallel with the DevKit 3.3 V output
+1,ldo,TPS7A2030PDBVR analog LDO on Adafruit 1230 carrier,,Specified pad/header mapping; solder local bypass
+1,cap-2,1uF LDO input capacitor,,Solder at the LDO input
+1,cap-3,1uF LDO output capacitor,,Solder at the LDO output
+1,power-switch,POWER switch (SPST),,Rated for the battery and lab-supply current
+2,,Espressif ESP32-S3-DevKitC-1 N8R8,,Exact board; both USB sockets stay empty
+2,button,Start/stop pushbutton (normally open),,
+2,button-pullup,10k,AUX1,Button pull-up
+2,rec-r,1k,AUX1,Recording LED resistor
+2,rec-led,Green LED,AUX1,Recording LED; check anode orientation
+2,err-r,1k,AUX1,Error LED resistor
+2,err-led,Red LED,AUX1,Error LED; check anode orientation
+2,low-r,1k,AUX1,Battery LED resistor
+2,low-led,Amber LED,AUX1,Battery LED; check anode orientation
+2,bat-r-top,100k,AUX1,Battery divider top
+2,bat-r-low,100k,AUX1,Battery divider bottom
+2,bat-cap,100nF,AUX1,Battery sense filter
+2,usb,Adafruit 1833 USB inlet,,External inlet; VBUS is sense-only
+2,usb-dm-r,33 ohm inline resistor,,USB D- series resistor
+2,usb-dp-r,33 ohm inline resistor,,USB D+ series resistor
+2,usb-r,100k,AUX1,VBUS sense resistor
+2,usb-pd,1M,AUX2,2N7002 gate pull-down
+2,usb-pu,10k,AUX2,GPIO21 USB-sense pull-up; recording firmware has no internal pull-up
+2,usb-q,2N7002 on SOT-23 adapter,,USB-sense transistor; adapter pad-to-header mapping in build guide
+3,adc,RoboticsBD RBD-3184 / HW-AD7606-F4,,"Qualify straps, VIO and AVCC before signal wiring"
+3,adc-cs-pullup,10k,AUX1,ADC CS pull-up
 4,R100,3.3k,BB1,DIP/passive fixture; check package pinout
 4,R101,1M,BB1,DIP/passive fixture; check package pinout
 4,C100,47nF,BB1,DIP/passive fixture; check package pinout
@@ -8,6 +44,7 @@ Stage,Reference,Value,Board,Note
 4,C102,1nF,BB1,DIP/passive fixture; check package pinout
 4,UB1,MCP6002-I/P DIP8; same amplifier family as PCB MCP6004,BB1,DIP/passive fixture; check package pinout
 4,CB1,100nF local bypass,BB1,DIP/passive fixture; check package pinout
+4,clamp1,BAV199 on SOT-23 adapter (EMG1 input protection),,Adapter pad-to-header mapping in build guide
 5,R110,3.3k,BB2,DIP/passive fixture; check package pinout
 5,R111,1M,BB2,DIP/passive fixture; check package pinout
 5,C110,47nF,BB2,DIP/passive fixture; check package pinout
@@ -17,18 +54,11 @@ Stage,Reference,Value,Board,Note
 5,C112,1nF,BB2,DIP/passive fixture; check package pinout
 5,UB2,MCP6002-I/P DIP8; same amplifier family as PCB MCP6004,BB2,DIP/passive fixture; check package pinout
 5,CB2,100nF local bypass,BB2,DIP/passive fixture; check package pinout
-1,R40,10k,BB0,DIP/passive fixture; check package pinout
-1,R41,10k,BB0,DIP/passive fixture; check package pinout
-1,C30,1uF,BB0,DIP/passive fixture; check package pinout
-1,R42,100,BB0,DIP/passive fixture; check package pinout
-1,C31,1uF,BB0,DIP/passive fixture; check package pinout
-1,UB0,MCP6002-I/P midpoint; half B grounded follower,BB0,DIP/passive fixture; check package pinout
-1,CB0,100nF,BB0,DIP/passive fixture; check package pinout
-1,,Regulated supply + dummy loads,,Lab instrument substitution; final power converter unvalidated
-2,,ESP32-S3-N8R8 development board,,Exact SKU/header pending
-3,,RoboticsBD RBD-3184 / HW-AD7606-F4,,Module wiring gate
-4,,BAV199 carrier,,One per analog path; verify chip pads
-6,,2 × ICM-42688-P SPI modules,,SKU and orientation pending
-7,,3.3 V microSD interface + card,,Match schematic
-9,,Protected 1S battery,,Capacity/runtime measured
-10,,2 MyoWare2.0 RAW,,Sensor integration last
+5,clamp2,BAV199 on SOT-23 adapter (EMG2 input protection),,Adapter pad-to-header mapping in build guide
+6,"foot, shank",2 × MIKROE-4237 6DOF IMU 14 Click (ICM-42688-P),,Set SPI jumpers; SKU and orientation photographed at stage 0
+6,foot-pullup,10k,AUX1,Foot IMU CS pull-up
+6,shank-pullup,10k,AUX1,Shank IMU CS pull-up
+7,sd,Adafruit 4682 microSD breakout (3.3 V),,SDIO wiring; keep the breakout pull-ups
+7,card,microSD card,,"Record make, model, capacity, speed class and filesystem; keep expendable cards for fault tests"
+9,battery,"Adafruit 328 protected 1S LiPo, 2500 mAh",,Check connector polarity; charge externally only
+10,"myo1, myo2",2 × MyoWare 2.0 bare sensors (RAW output),,VIN/GND/RAW pads; ENV/RECT unused; sensor integration last

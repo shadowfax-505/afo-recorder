@@ -2,11 +2,13 @@
 """Stream AFO recordings to CSV, audit JSON, and bounded-size diagnostic plots."""
 from __future__ import annotations
 import argparse
+from collections import Counter
 import csv
 from contextlib import ExitStack
 import hashlib
 import json
 from pathlib import Path
+import statistics
 import sys
 from afo_format import (read_header, iter_records, decode_fifo, EMG, IMU,
                         decode_emg_b, KINDS, HEADER_SIZE, RECORD_SIZE, FormatError, status_values)
@@ -46,6 +48,45 @@ def plots(output, channels, synthetic):
     fig.savefig(output/'signals.svg')
     plt.close(fig)
 
+def imu_clock_summary(steps, bursts, nominal):
+    """Screen the IMU FIFO timestamp scale against the ESP32 clock.
+
+    steps: Counter of consecutive 16-bit FIFO timestamp increments.
+    bursts: (unwrapped sensor ticks of the newest packet in a FIFO read,
+    host IRQ anchor in us) per read. The anchor is the latest data-ready
+    interrupt before the read, so a sample arriving during the read pairs
+    one period late; medians over the first and last tenth of the reads
+    suppress those outliers. This is a screen, not a clock calibration.
+    """
+    count=sum(steps.values());median=None
+    if count:
+        lower,upper=(count-1)//2,count//2;seen=0;low=None
+        for value in sorted(steps):
+            seen+=steps[value]
+            if low is None and seen>lower:low=value
+            if seen>upper:median=(low+value)/2;break
+    summary={'tick_steps':count,'median_tick_step':median,'expected_tick_step':nominal,
+             'median_step_error_percent':None if median is None else round((median/nominal-1)*100,4),
+             'fit_reads':len(bursts),'fit_span_s':None,'host_us_per_sensor_tick':None,
+             'sensor_tick_error_ppm':None,'fit_note':None}
+    edge=max(20,len(bursts)//10)
+    span=(bursts[-1][0]-bursts[0][0])/1e6 if len(bursts)>1 else 0
+    if len(bursts)<2*edge or span<10:
+        summary['fit_note']='needs at least 40 FIFO reads spanning 10 s'
+    else:
+        first,last=bursts[:edge],bursts[-edge:]
+        first_offset=statistics.median(anchor-ticks for ticks,anchor in first)
+        last_offset=statistics.median(anchor-ticks for ticks,anchor in last)
+        tick_span=statistics.fmean(t for t,_ in last)-statistics.fmean(t for t,_ in first)
+        error=(last_offset-first_offset)/tick_span
+        summary.update(fit_span_s=round(span,3),host_us_per_sensor_tick=round(1+error,8),
+                       sensor_tick_error_ppm=round(error*1e6,1))
+    known=[x for x in (summary['median_step_error_percent'],
+                       None if summary['sensor_tick_error_ppm'] is None else summary['sensor_tick_error_ppm']/1e4)
+           if x is not None]
+    summary['within_1_percent']=bool(known) and all(abs(x)<=1 for x in known)
+    return summary
+
 def convert(source: Path, output: Path, *, recover=False, make_plots=True, operator_metadata=None):
     source=Path(source);output=Path(output)
     if output.exists() and any(output.iterdir()):
@@ -61,6 +102,7 @@ def convert(source: Path, output: Path, *, recover=False, make_plots=True, opera
         'imu_timestamp_anomalies','timing_uncertain_records','flagged_gap_records')}
     total_slots=0;observed_missed=0;first_emg=None;last_emg=None;last_end=None;end_seen=False
     sensor_last={};sensor_unwrapped={};last_status=None
+    tick_steps={'foot':Counter(),'shank':Counter()};imu_bursts={'foot':[],'shank':[]};burst_key={};burst_last={}
     records_est=max(1,(source.stat().st_size-HEADER_SIZE)//RECORD_SIZE)
     revb=metadata['schema']!='afo-recorder/1'
     ad7606=metadata['schema']=='afo-recorder/3'
@@ -132,9 +174,15 @@ def convert(source: Path, output: Path, *, recover=False, make_plots=True, opera
                         delta=(raw-sensor_last[name])&0xffff
                         nominal=1e6/metadata['imu_hz']
                         if not .8*nominal<=delta<=1.2*nominal:anomalies['imu_timestamp_anomalies']+=1
-                        sensor_unwrapped[name]+=delta
+                        sensor_unwrapped[name]+=delta;tick_steps[name][delta]+=1
                     else:sensor_unwrapped[name]=raw
                     sensor_last[name]=raw
+                    # Records from one FIFO read share read times and IRQ anchor.
+                    key=(read_start,read_end,anchor)
+                    if burst_key.get(name)!=key:
+                        if name in burst_last:imu_bursts[name].append(burst_last[name])
+                        burst_key[name]=key
+                    burst_last[name]=(sensor_unwrapped[name],anchor)
                     axes=[p[k] for k in ('ax','ay','az','gx','gy','gz')]
                     scaled=[v*metadata['accel_range_g']/32768 for v in axes[:3]]+[
                             v*metadata['gyro_range_dps']/32768 for v in axes[3:]]
@@ -151,6 +199,9 @@ def convert(source: Path, output: Path, *, recover=False, make_plots=True, opera
     except (FormatError, OSError) as exc:
         (output/'CONVERSION_FAILED.txt').write_text(str(exc)+'\nPartial CSV files are not a validated export.\n')
         raise
+    for name,last in burst_last.items():imu_bursts[name].append(last)
+    imu_clock={name:imu_clock_summary(tick_steps[name],imu_bursts[name],1e6/metadata['imu_hz'])
+               for name in ('foot','shank') if counts[name]}
     if not end_seen:issues.append({'kind':'missing_end','message':'Unfinalized session; trailing samples may be lost.'})
     for name in (('emg','foot','shank') if metadata.get('imu_enabled',True) else ('emg',)):
         if counts[name]==0:issues.append({'kind':'missing_stream','stream':name})
@@ -174,7 +225,8 @@ def convert(source: Path, output: Path, *, recover=False, make_plots=True, opera
             'no_detected_sample_loss':no_loss,'signal_checks_pass':signal_valid,
             'research_ready':False,'sequence_gaps':sequence_gaps,'anomalies':anomalies,
             'emg_observed_skipped_slots':observed_missed,'emg_rate_from_host_timestamps_hz':rate,
-            'last_status':last_status,'issues':issues,
+            'last_status':last_status,'issues':issues,'imu_clock':imu_clock,
+            'imu_clock_note':'Screen only: FIFO timestamp increments versus the configured 1 us tick, and sensor ticks versus ESP32 interrupt times. Includes interrupt latency; not a calibration.',
             'timing_note':'IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.',
             'recovery_note':'Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption.'}
     (output/'metadata.json').write_text(json.dumps({'recorded':metadata,'operator_metadata':operator_metadata or {}},indent=2)+'\n')

@@ -12,6 +12,6 @@ This hardware is `AD7606_TWO_FIXED`: exactly two enabled slots, mask 0x03, EMG1/
 
 ## Current fixed-two timing metadata
 
-The current v1.6 recorder retains `input_scale=1` and `input_midpoint_mv=0` so conversion reconstructs the RAW connector voltage. `unplugged_input_bias_mv=1500` separately describes the circuit’s bias; it is not an additive voltage-reconstruction offset. `imu_time=fifo_delta_first_irq` identifies first-burst interrupt anchoring followed by sensor-counter increments. FIFO order, sensor counter, interrupt anchor and read timing remain available; estimates are flagged uncertain and are not calibrated timestamps.
+The 1.6 and current 1.7 recorders retain `input_scale=1` and `input_midpoint_mv=0` so conversion reconstructs the RAW connector voltage. `unplugged_input_bias_mv=1500` separately describes the circuit’s bias; it is not an additive voltage-reconstruction offset. `imu_time=fifo_delta_first_irq` identifies first-burst interrupt anchoring followed by sensor-counter increments. FIFO order, sensor counter, interrupt anchor and read timing remain available; estimates are flagged uncertain and are not calibrated timestamps.
 
 Integrated simulator `.raw` captures retain the exact production bytes, whose metadata originally says `synthetic=false`. They are simulation evidence, not human recordings. Their companion `.afolog` files explicitly set `synthetic=true`; see the [integrated evidence report](integrated-verification.html) before using a fixture.

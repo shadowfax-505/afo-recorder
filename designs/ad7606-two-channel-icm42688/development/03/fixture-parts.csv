@@ -1,2 +1,3 @@
 Stage,Reference,Value,Board,Note
-3,,RoboticsBD RBD-3184 / HW-AD7606-F4,,Module wiring gate
+3,adc,RoboticsBD RBD-3184 / HW-AD7606-F4,,"Qualify straps, VIO and AVCC before signal wiring"
+3,adc-cs-pullup,10k,AUX1,ADC CS pull-up

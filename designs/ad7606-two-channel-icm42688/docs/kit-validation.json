@@ -2,14 +2,14 @@
   "scope": "Extracted AD7606 fixed-two ICM breadboard kit",
   "hardware_measured": false,
   "physical_measurements_completed": 0,
-  "archive_sha256": "a6cc76b90d2c100973d6ec4de2532998c6aa265bbb1f9644e6a35261c7f839cf",
+  "archive_sha256": "ebb45de0d8630ee623987b0510b30459d9a3fa934bdea570afc541dcab27a25f",
   "csv_test_environment": {
     "python": "3.14.7",
     "matplotlib_installed": false
   },
   "integrity_and_example": {
     "status": "PASS",
-    "package_files_verified": 333,
+    "package_files_verified": 335,
     "recording_sha256": "af8ac32aee08bd2fadbcc7370bded2c4383a52524bea9a1e56408e7d721f95b6",
     "converted_counts": {
       "emg": 10041,
@@ -27,7 +27,7 @@
   },
   "host_regression_tests": {
     "status": "PASS",
-    "tests": 40,
+    "tests": 46,
     "failures": 0
   },
   "saved_quality": {
@@ -75,6 +75,33 @@
       "queue_high_water": 61
     },
     "issues": [],
+    "imu_clock": {
+      "foot": {
+        "tick_steps": 262,
+        "median_tick_step": 5000.0,
+        "expected_tick_step": 5000.0,
+        "median_step_error_percent": 0.0,
+        "fit_reads": 249,
+        "fit_span_s": null,
+        "host_us_per_sensor_tick": null,
+        "sensor_tick_error_ppm": null,
+        "fit_note": "needs at least 40 FIFO reads spanning 10 s",
+        "within_1_percent": true
+      },
+      "shank": {
+        "tick_steps": 251,
+        "median_tick_step": 5000.0,
+        "expected_tick_step": 5000.0,
+        "median_step_error_percent": 0.0,
+        "fit_reads": 245,
+        "fit_span_s": null,
+        "host_us_per_sensor_tick": null,
+        "sensor_tick_error_ppm": null,
+        "fit_note": "needs at least 40 FIFO reads spanning 10 s",
+        "within_1_percent": true
+      }
+    },
+    "imu_clock_note": "Screen only: FIFO timestamp increments versus the configured 1 us tick, and sensor ticks versus ESP32 interrupt times. Includes interrupt latency; not a calibration.",
     "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
     "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
   },
@@ -99,33 +126,41 @@
     "radio_tested": false
   },
   "plots": {
-    "signals.png": {
-      "bytes": 104581,
-      "sha256": "0ea9ad79c9c105b3851fadf6e9345f8372f20d67680cde98a291e65252609e43"
-    },
-    "signals.svg": {
-      "bytes": 82472,
-      "sha256": "1b13f28ef570796dd03e724206af20bf016e73d8f1015755f2f85ee2aefa9c72"
-    }
+    "executed": false
   },
   "tampered_recording_rejected": true,
   "status": "PASS",
-  "date": "2026-10-07",
-  "preserved_documentation_checks_2026_10_04": {
-    "stage_folders": 11,
-    "wire_rows": 184,
-    "other_design_files_unchanged": 2256,
-    "intake_tests_passed": 9,
-    "pdf_pages_visually_reviewed": 7,
-    "physical_measurements_completed": 0,
-    "packaged_intake_suite_executed": true,
-    "required_measurement_ids_enforced": true
-  },
-  "documentation_checks": {
-    "handbook_pages_visually_reviewed": 25,
-    "circuit_pack_pages_visually_reviewed": 5,
-    "handbook_sections": 23,
-    "physical_measurements_completed": 0,
-    "scope": "Expanded documentation and fresh extracted-package host checks; circuit and firmware sources unchanged."
+  "date": "2026-10-10",
+  "previous_archive_checks": {
+    "note": "Recorded for the previous firmware 1.6 archive; not repeated for this archive.",
+    "archive_sha256": "a6cc76b90d2c100973d6ec4de2532998c6aa265bbb1f9644e6a35261c7f839cf",
+    "date": "2026-10-07",
+    "plots": {
+      "signals.png": {
+        "bytes": 104581,
+        "sha256": "0ea9ad79c9c105b3851fadf6e9345f8372f20d67680cde98a291e65252609e43"
+      },
+      "signals.svg": {
+        "bytes": 82472,
+        "sha256": "1b13f28ef570796dd03e724206af20bf016e73d8f1015755f2f85ee2aefa9c72"
+      }
+    },
+    "documentation_checks": {
+      "handbook_pages_visually_reviewed": 25,
+      "circuit_pack_pages_visually_reviewed": 5,
+      "handbook_sections": 23,
+      "physical_measurements_completed": 0,
+      "scope": "Expanded documentation and fresh extracted-package host checks; circuit and firmware sources unchanged."
+    },
+    "preserved_documentation_checks_2026_10_04": {
+      "stage_folders": 11,
+      "wire_rows": 184,
+      "other_design_files_unchanged": 2256,
+      "intake_tests_passed": 9,
+      "pdf_pages_visually_reviewed": 7,
+      "physical_measurements_completed": 0,
+      "packaged_intake_suite_executed": true,
+      "required_measurement_ids_enforced": true
+    }
   }
 }

@@ -26,13 +26,13 @@ The authoritative source remains `design/circuit-spec.json`. `design/audit_conne
 | Connected schematic and actual PCB pads | 390 compared; 0 mismatches |
 | Firmware GPIOs | 22 per profile; 0 mismatches |
 | Breadboard topology | 184 wires, 402 occupied holes, 24 GPIO endpoint checks; 0 named-net splits, shorts, duplicate holes or connector contacts |
-| Host conversion / legacy / live reception | 40 tests pass |
+| Host conversion / legacy / live reception / firmware limits | 46 tests pass |
 | Software acquisition faults | 7 scenarios pass, including overflow, missing samples and interrupted file recovery |
-| Firmware | All seven v1.6 laboratory profiles recompiled with ESP-IDF v5.4.2; current diagnostic images have not been rerun in Wokwi |
+| Firmware | All seven v1.7 laboratory profiles recompiled with ESP-IDF v5.4.2 (PSRAM record queue, per-device Wi-Fi password, IMU timestamp-scale checks); none rerun in Wokwi |
 | ngspice | Both channels; 16 tolerance corners; 54 DC/loading cases; unplugged-bias case; transient/ideal quantization checks |
 | Wokwi models | Both compile to WASM; native model unit tests pass |
 | Preserved v1.5 integrated Wokwi execution | Ten complete CLI/firmware passes; nominal firmware/file/UDP passes with optional trace failure; battery partial; four cases unexecuted due to quota. [Tested source/image snapshot](../simulations/integrated-recorder/tested-source-1.5/manifest.json) |
-| Current v1.6 integrated cloud execution | All 18 current cases pass in the web editor; complete converter/decoder checks. Preserved v1.5 outcomes are separate |
+| v1.6 integrated cloud execution (not repeated for 1.7) | All 18 current cases pass in the web editor; complete converter/decoder checks. Preserved v1.5 outcomes are separate |
 | Historical diagnostic Wokwi execution | Seven cases passed on the preserved earlier image; [source/image snapshot](../simulations/wokwi/tested-diagnostic-20260930/manifest.json) |
 | Native driver/timing logic | 16 current ADC groups and eight IMU timestamp-helper groups pass |
 | Integrated evidence runner | 16 tests pass; partial/quota evidence is not counted as passed execution |

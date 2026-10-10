@@ -2,7 +2,8 @@
 import json,struct,zlib
 from afo_format import decode_record,FormatError,RECORD_SIZE
 PREFIX=struct.Struct('<4sBBHIIIIHH')
-MAX_PAYLOAD=1280
+# Must equal WIFI_LIVE_METADATA_MAX in firmware/main/board.h. Older firmware sent at most 1280.
+MAX_PAYLOAD=1400
 
 def encode_packet(kind,boot,session,sequence,payload,count=0,dropped=0):
     if len(payload)>MAX_PAYLOAD:raise FormatError('oversize live packet')
