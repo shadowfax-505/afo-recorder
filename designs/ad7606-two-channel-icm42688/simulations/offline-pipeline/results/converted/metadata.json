@@ -5,7 +5,7 @@
     "adc_model": "AD7606",
     "adc_sensor_crc_supported": false,
     "timestamp_event": "conversion_trigger",
-    "firmware": "ad7606-2ch-1.6-driver-co-simulation",
+    "firmware": "ad7606-2ch-1.7-driver-co-simulation",
     "synthetic": true,
     "emg_hz": 8000,
     "imu_hz": 200,
