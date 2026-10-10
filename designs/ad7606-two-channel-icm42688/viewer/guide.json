@@ -15,7 +15,7 @@
         "Record minimum/maximum voltages, current, startup, ripple and temperature."
       ],
       "troubleshoot": "Disconnect power; check polarity, resistor values, short circuits and supply current limit.",
-      "acceptance": "3.3 V digital 3.23–3.43 V; 3.0 V analog 2.94–3.06 V; midpoint 0.49–0.51 × measured analog rail (1.47–1.53 V at a nominal 3.00 V rail). Test 0/100/300 mA digital and 0/20/50 mA analog. Ripple targets ≤50/10 mVpp (20 MHz bandwidth); step deviation ≤5%, recovery ±3% within10 ms. Temperature <60°C after10 min at20–30°C ambient. 5 V ADC:4.8–5.2 V at10–50 mA; verify never above5.25 V including startup."
+      "acceptance": "3.3 V digital 3.23–3.43 V; 3.0 V analog 2.94–3.06 V; midpoint 0.49–0.51 × measured analog rail (1.47–1.53 V at a nominal 3.00 V rail). Test 0/100/300 mA digital and 0/20/50 mA analog. Ripple targets ≤50/10 mVpp (20 MHz bandwidth); step deviation ≤5%, recovery ±3% within 10 ms. Temperature <60°C after 10 min at 20–30°C ambient. 5 V ADC: 4.8–5.2 V at 10–50 mA; verify never above 5.25 V including startup."
     },
     {
       "title": "Controller and controls",
@@ -31,7 +31,7 @@
         "Record repeated programming/reset results and measured current."
       ],
       "troubleshoot": "Check 5 V/3.3 V rails, boot/reset state and USB wiring; do not bypass the attachment interlock.",
-      "acceptance": "20 program/reset cycles without failure. Buttons/LEDs respond. GPIO21 low when USB attached, high when absent. Measure the external 10k usb-pu (GPIO21 to 3V3D) unpowered: the diagnostic enables an internal pull-up, the recording firmware does not. Recorder must refuse to start while USB attached; that interlock needs a repeat at stage7. Record measured current; no assumed universal current limit."
+      "acceptance": "20 program/reset cycles without failure. Buttons/LEDs respond. GPIO21 low when USB attached, high when absent. Measure the external 10k usb-pu (GPIO21 to 3V3D) unpowered: the diagnostic enables an internal pull-up, the recording firmware does not. Recorder must refuse to start while USB attached; that interlock needs a repeat at stage 7. Record measured current; no assumed universal current limit."
     },
     {
       "title": "AD7606 timing and known voltages",
@@ -63,11 +63,11 @@
       "tests": [
         "Use synthetic-input-tests.md for the exact signal and return connections.",
         "Start at 1.5 V offset and 100 mVpp; verify voltage before connection.",
-        "Measure offset, frequency response, noise and unplugged bias using the detailed limits.",
+        "Measure offset and frequency response at 20, 100, 500 and 1000 Hz through the ADC (check 4000 Hz on the scope only; it is the 8 kHz Nyquist frequency), then noise and unplugged bias using the detailed limits.",
         "Keep unity RAW reconstruction: signed code × 5 / 32768 volts. The 1.5 V unplugged bias is separate from input_midpoint_mv=0 metadata."
       ],
       "troubleshoot": "Inspect IC notch, component values, protection adapter orientation and signal-generator load setting.",
-      "acceptance": "DC gain1; two3.3k/47nF low-pass stages. Compare gain against simulations/results/response.csv tolerance envelope; allow additional±0.5 dB measurement/model margin. Unplugged RAW→1.50 V±30 mV after settling. Record RMS noise over20–500 Hz; provisional target<2 mVrms input-referred, to be reviewed for research suitability. Check clipping using safe0.1–2.9 V sources, never±5 V into3 V buffers."
+      "acceptance": "DC gain 1; two 3.3k/47nF low-pass stages. Compare gain against simulations/results/response.csv tolerance envelope; allow additional ±0.5 dB measurement/model margin. Unplugged RAW→1.50 V±30 mV after settling. Record RMS noise over 20–500 Hz; provisional target <2 mVrms input-referred, to be reviewed for research suitability. Check clipping using safe 0.1–2.9 V sources, never ±5 V into 3 V buffers."
     },
     {
       "title": "Second EMG channel",
@@ -83,7 +83,7 @@
         "Only the two enabled inputs may appear as muscle measurements in CSV/live display; unused ADC words are still clocked but are not exported as EMG."
       ],
       "troubleshoot": "Check channel order, midpoint impedance, ground returns and wire coupling. Use the fixed-two firmware; ADC V3–V8 are not additional EMG ports.",
-      "acceptance": "Enabled channels match physical ports; disabled channels absent from CSV/live display. Simultaneous channel samples share trigger/frame timestamp. Project crosstalk screen <−40 dB versus driven signal, with generator feedthrough measured separately. Zero unexplained errors in10 min."
+      "acceptance": "Enabled channels match physical ports; disabled channels absent from CSV/live display. Simultaneous channel samples share trigger/frame timestamp. Project crosstalk screen <−40 dB versus driven signal, with generator feedthrough measured separately. Zero unexplained errors in 10 min."
     },
     {
       "title": "Foot and shank ICM sensors",
@@ -134,7 +134,7 @@
         "Compare channel identities, timestamps, scaling and stop/error indications across both archives. Keep all unexplained SD gaps, CRC or queue failures visible."
       ],
       "troubleshoot": "Check network selection, firewall, receiver port, supply stability and queue counters.",
-      "acceptance": "60 min with two channels: stage7 SD quality maintained; only enabled channels displayed; induced packet loss visible in counters/gaps. Compare SD versus laptop capture."
+      "acceptance": "60 min with two channels: stage 7 SD quality maintained; only enabled channels displayed; induced packet loss visible in counters/gaps. Compare SD versus laptop capture."
     },
     {
       "title": "Battery operation",
@@ -149,7 +149,7 @@
         "Document battery identity, charge state, configuration, ambient temperature and shutdown behavior."
       ],
       "troubleshoot": "Check converter droop, battery protection and temperature. Do not infer runtime from nominal capacity alone.",
-      "acceptance": "Measured≥2 h intended-use runtime;20 startup/shutdown cycles; successful60 min trial; no unexpected reset. Record pack capacity, age, voltage, configuration and ambient temperature."
+      "acceptance": "Measured ≥2 h intended-use runtime; 20 startup/shutdown cycles; successful 60 min trial; no unexpected reset. Record pack capacity, age, voltage, configuration and ambient temperature."
     },
     {
       "title": "MyoWare integration",

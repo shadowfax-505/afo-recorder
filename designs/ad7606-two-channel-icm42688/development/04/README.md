@@ -6,11 +6,11 @@
 
 ## Add and test
 
-Build only BB1 using MCP6002 and the exact placement/contact drawing. Keep ADC V2 at a known DC level. Check local decoupling, midpoint, then 1.5 V-biased 100 mVpp at 20, 100, 500 and 1000 Hz. Keep generator output within 0.1-2.9 V including turn-on transients.
+Build only BB1 using MCP6002 and the exact placement/contact drawing. Keep ADC V2 at a known DC level. Check local decoupling, midpoint, then 1.5 V-biased 100 mVpp at 20, 100, 500 and 1000 Hz through the ADC; check 4000 Hz on the scope only (it is the 8 kHz Nyquist frequency). Keep generator output within 0.1-2.9 V including turn-on transients.
 
 ## Acceptance checks
 
-- **4-response:** 1.5 V + 100 mVpp synthetic input; unity DC; measured response within simulated tolerance envelope plus ±0.5 dB margin; no person attached
+- **4-response:** 1.5 V + 100 mVpp synthetic input at 20/100/500/1000 Hz via ADC (4 kHz on scope only); unity DC; measured response within simulated tolerance envelope plus ±0.5 dB margin; no person attached
 - **4-bias:** Unplugged RAW settles 1.50 V ±30 mV; use safe 0.1–2.9 V sources for connected 3 V analog stage
 
 ## Send for review
