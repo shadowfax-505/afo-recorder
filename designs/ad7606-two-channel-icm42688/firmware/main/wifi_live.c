@@ -13,13 +13,15 @@
 #include "esp_timer.h"
 #include "esp_log.h"
 #include "nvs_flash.h"
+#include "nvs.h"
+#include "bootloader_random.h"
 #include "lwip/sockets.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/queue.h"
 #include "freertos/task.h"
 #include "freertos/semphr.h"
 
-#define META_MAX 1280
+#define META_MAX WIFI_LIVE_METADATA_MAX
 #define BATCH 16
 static const char *TAG="afo_wifi";
 typedef struct { uint32_t session; afo_record_t record; } item_t;
@@ -37,10 +39,11 @@ static atomic_uint session_id,dropped;
 static char metadata[META_MAX+1]="{\"state\":\"idle\"}";
 static uint32_t boot_id,packet_seq;
 static int live_socket=-1;
+static char ap_password[WIFI_LIVE_PASSWORD_CHARS+1];
 
 static void send_packet(int sock,const struct sockaddr_in *peer,uint8_t kind,
         uint32_t session,const void *payload,uint16_t length,uint16_t count) {
-    uint8_t packet[32+META_MAX];
+    static uint8_t packet[32+META_MAX]; // live_task is the only caller
     prefix_t p={.magic={'A','F','W','1'},.version=1,.kind=kind,.count=count,
         .boot=boot_id,.session=session,.sequence=++packet_seq,.dropped=atomic_load(&dropped),.length=length};
     memcpy(packet,&p,28);memcpy(packet+28,payload,length);
@@ -66,7 +69,7 @@ static void live_task(void *arg) {
         if(now-hello_at>3000000)atomic_store(&subscribed,false);
         if(!atomic_load(&subscribed)) {has_pending=false;vTaskDelay(pdMS_TO_TICKS(20));continue;}
         if(now-meta_at>=1000000||meta_at==0||sent_sid!=atomic_load(&session_id)) {
-            char copy[META_MAX+1];uint32_t sid;
+            static char copy[META_MAX+1];uint32_t sid;
             xSemaphoreTake(meta_lock,portMAX_DELAY);strcpy(copy,metadata);sid=atomic_load(&session_id);xSemaphoreGive(meta_lock);
             send_packet(sock,&peer,1,sid,copy,(uint16_t)strlen(copy),0);meta_at=now;sent_sid=sid;
         }
@@ -85,9 +88,35 @@ static void live_task(void *arg) {
         send_packet(sock,&peer,2,sid,records,count*sizeof(afo_record_t),count);
     }
 }
+esp_err_t wifi_live_prepare_credentials(void) {
+    if(!ENABLE_WIFI_LIVE)return ESP_OK;
+    esp_err_t err=nvs_flash_init();
+    // Keep existing NVS contents intact; never erase to recover.
+    if(err!=ESP_OK)return err;
+    nvs_handle_t nvs;
+    if((err=nvs_open("afo_live",NVS_READWRITE,&nvs))!=ESP_OK)return err;
+    size_t length=sizeof(ap_password);
+    err=nvs_get_str(nvs,"ap_password",ap_password,&length);
+    if(err!=ESP_OK||strlen(ap_password)!=WIFI_LIVE_PASSWORD_CHARS) {
+        // First boot: no password is compiled into the public firmware. This
+        // runs before the battery ADC and the radio start, so the SAR-ADC
+        // entropy source may be enabled briefly for true random characters.
+        static const char alphabet[]="abcdefghjkmnpqrstuvwxyz23456789";
+        bootloader_random_enable();
+        for(unsigned i=0;i<WIFI_LIVE_PASSWORD_CHARS;i++)
+            ap_password[i]=alphabet[esp_random()%(sizeof(alphabet)-1)];
+        bootloader_random_disable();
+        ap_password[WIFI_LIVE_PASSWORD_CHARS]=0;
+        err=nvs_set_str(nvs,"ap_password",ap_password);
+        if(err==ESP_OK)err=nvs_commit(nvs);
+    }
+    nvs_close(nvs);
+    if(err!=ESP_OK)memset(ap_password,0,sizeof(ap_password));
+    return err;
+}
 esp_err_t wifi_live_init(void) {
     if(!ENABLE_WIFI_LIVE)return ESP_OK;
-    if(strlen(WIFI_LIVE_PASSWORD)<8||strlen(WIFI_LIVE_PASSWORD)>63||strlen(WIFI_LIVE_SSID)>32)return ESP_ERR_INVALID_ARG;
+    if(strlen(ap_password)!=WIFI_LIVE_PASSWORD_CHARS||strlen(WIFI_LIVE_SSID)>32)return ESP_ERR_INVALID_STATE;
     esp_netif_t *ap=NULL;
     bool driver_ready=false,started=false,own_loop=false;
     esp_err_t err=nvs_flash_init();
@@ -105,7 +134,7 @@ esp_err_t wifi_live_init(void) {
     if((err=esp_wifi_set_storage(WIFI_STORAGE_RAM))!=ESP_OK)goto failed;
     wifi_config_t cfg={0};
     memcpy(cfg.ap.ssid,WIFI_LIVE_SSID,strlen(WIFI_LIVE_SSID));cfg.ap.ssid_len=strlen(WIFI_LIVE_SSID);
-    memcpy(cfg.ap.password,WIFI_LIVE_PASSWORD,strlen(WIFI_LIVE_PASSWORD));
+    memcpy(cfg.ap.password,ap_password,WIFI_LIVE_PASSWORD_CHARS);
     cfg.ap.channel=6;cfg.ap.max_connection=1;cfg.ap.authmode=WIFI_AUTH_WPA2_PSK;
     if((err=esp_wifi_set_mode(WIFI_MODE_AP))!=ESP_OK)goto failed;
     if((err=esp_wifi_set_config(WIFI_IF_AP,&cfg))!=ESP_OK)goto failed;
@@ -120,7 +149,9 @@ esp_err_t wifi_live_init(void) {
     }
     boot_id=esp_random();
     if(xTaskCreatePinnedToCore(live_task,"wifi_live",8192,NULL,1,NULL,0)!=pdPASS){err=ESP_ERR_NO_MEM;goto failed;}
-    ESP_LOGI(TAG,"Laptop AP: %s; UDP subscriber port %d; best-effort preview",WIFI_LIVE_SSID,WIFI_LIVE_PORT);
+    // USB console only; the recorder refuses to record while USB is attached.
+    ESP_LOGI(TAG,"Laptop AP: %s; password: %s; UDP subscriber port %d; best-effort preview",
+        WIFI_LIVE_SSID,ap_password,WIFI_LIVE_PORT);
     return ESP_OK;
 failed:
     // No telemetry task exists on these paths, so its resources can be released safely.

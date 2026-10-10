@@ -1,6 +1,6 @@
 check_id,acceptance,measured_value,unit,uncertainty,instrument_settings,evidence_file,outcome,operator,date,review_notes
 7-format,AD7606 / two inputs / ICM / breadboard metadata; RAW code ×5/32768 V; scale 1 midpoint offset 0; retain raw IMU counters IRQ anchors read start/end and timing flags,,,,,,NOT TESTED,,,
-7-endurance,CMD GPIO47 CLK GPIO39 D0 GPIO40; container CRC32 and counters pass; no unexplained saved gaps/queue errors; END and expected stop reason; no sync/close failure,,,,,,NOT TESTED,,,
+7-endurance,"CMD GPIO47 CLK GPIO39 D0 GPIO40; one 60 min run and one full 2 h run ending with stop reason 5 (session limit); container CRC32 and counters pass; no unexplained saved gaps/queue errors; final queue_high_water ≤10,240 (half of 20,480); END and expected stop reason; no sync/close failure; card make/model/capacity/speed class/filesystem recorded",,,,,,NOT TESTED,,,
 7-usb,Refuse start with USB attached; attach during synthetic recording gives explicit stop/error; no person attached,,,,,,NOT TESTED,,,
 7-storage-faults,No-card refuses start; full-card explicit stop; five controlled interruptions preserve only CRC-valid records and report truncated tail/missing END,,,,,,NOT TESTED,,,
-7-timestamps,Normal 65.536 ms counter wraps handled; host estimate flag 2 retained; startup count differences not row-aligned; no unexplained gap/invalid/timing rejection,,,,,,NOT TESTED,,,
+7-timestamps,Normal 65.536 ms counter wraps handled; host estimate flag 2 retained; startup count differences not row-aligned; quality.json imu_clock per sensor: median_tick_step 5000 ±0.5% and host_us_per_sensor_tick within ±1% (runs ≥10 min); no unexplained gap/invalid/timing rejection,,,,,,NOT TESTED,,,

@@ -8,3 +8,4 @@ Stage,Reference,Value,Board,Note
 5,C112,1nF,BB2,DIP/passive fixture; check package pinout
 5,UB2,MCP6002-I/P DIP8; same amplifier family as PCB MCP6004,BB2,DIP/passive fixture; check package pinout
 5,CB2,100nF local bypass,BB2,DIP/passive fixture; check package pinout
+5,clamp2,BAV199 on SOT-23 adapter (EMG2 input protection),,Adapter pad-to-header mapping in build guide

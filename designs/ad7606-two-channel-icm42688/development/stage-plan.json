@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "build": "ad7606-two-channel-icm42688",
-  "firmware": "ad7606-2ch-1.6",
+  "firmware": "ad7606-2ch-1.7",
   "physical_status": "NOT TESTED",
   "stages": [
     {
@@ -9,7 +9,7 @@
       "title": "Identify the exact build",
       "prerequisite": "None",
       "firmware": "None",
-      "actions": "Inventory only; no power. Photograph both sides of every module, connector and jumper with readable markings. Identify the protected battery and charger separately. List instruments, calibration dates and available dummy loads.",
+      "actions": "Inventory only; no power. Mark every inventory.csv row acquired or not acquired; for missing items keep the proposed part number. Photograph both sides of every module, connector and jumper with readable markings. Identify the protected battery and charger separately. List instruments, calibration dates and available dummy loads.",
       "evidence": [
         "inventory.csv",
         "photos of all module markings and both PCB faces",
@@ -43,7 +43,7 @@
         },
         {
           "id": "1-analog",
-          "acceptance": "2.94\u20133.06 V at 0/20/50 mA; midpoint 0.49\u20130.51 \u00d7 measured analog rail; ripple \u226410 mVpp; provisional project screen"
+          "acceptance": "2.94\u20133.06 V at 0/20/50 mA; midpoint 0.49\u20130.51 \u00d7 measured analog rail (1.47\u20131.53 V at a nominal 3.00 V rail); ripple \u226410 mVpp; provisional project screen"
         },
         {
           "id": "1-adc-supply",
@@ -56,13 +56,14 @@
       "title": "Controller and controls",
       "prerequisite": "Stage 1 accepted",
       "firmware": "diagnostic-controller",
-      "actions": "Add controller, button, LEDs and USB sense. Connect only according to the existing exact contact table. Check 20 boots/programming cycles, then USB sense attached/absent. Do not connect both external regulation and an unqualified DevKit USB power feed.",
+      "actions": "Add controller, button, LEDs and USB sense. Connect only according to the existing exact contact table. Check 20 boots/programming cycles, then USB sense attached/absent. Measure the external 10k usb-pu (GPIO21 to 3V3D) with power off: the diagnostic enables an internal pull-up that can hide a missing resistor, and the recording firmware does not. Do not connect both external regulation and an unqualified DevKit USB power feed.",
       "evidence": [
         "Complete serial log",
         "binary SHA-256",
         "photos",
         "20-cycle table",
         "GPIO21 voltage both states",
+        "usb-pu resistance",
         "rail measurements under controller load"
       ],
       "caution": "The diagnostic intentionally allows instrumented USB operation. It does not itself prove the recording interlock; repeat the actual recording inhibition test at stage 7.",
@@ -73,7 +74,7 @@
         },
         {
           "id": "2-usb",
-          "acceptance": "GPIO21 LOW attached / HIGH absent; attachment indicator 1/0; no USB VBUS feed into regulated 5 V; DevKit USB sockets empty"
+          "acceptance": "GPIO21 LOW attached / HIGH absent; attachment indicator 1/0; external usb-pu 10k GPIO21\u20133V3D measured unpowered (the diagnostic enables an internal pull-up, recording firmware does not); no USB VBUS feed into regulated 5 V; DevKit USB sockets empty"
         }
       ]
     },
@@ -182,6 +183,7 @@
       "evidence": [
         "WHO/readback serial results",
         "FIFO and interrupt counts over 60 s",
+        "IMU lines with interval_us, tick_step_mean and host_us_per_tick",
         "six-face accelerometer means",
         "stationary gyro means",
         "axis photographs",
@@ -195,7 +197,7 @@
         },
         {
           "id": "6-shank",
-          "acceptance": "Shank CS GPIO15 / INT1 GPIO17; 200 Hz \u00b11% per sensor over 60 s; no FIFO/missing-IRQ/invalid-packet errors"
+          "acceptance": "Shank CS GPIO15 / INT1 GPIO17; 200 Hz \u00b11% per sensor over 60 s (packets \u00f7 interval_us, or INT1 capture); tick_step_mean 5000 \u00b10.5% and mean host_us_per_tick 1.00 \u00b11% per sensor over \u226560 windows; no FIFO/missing-IRQ/invalid-packet errors"
         },
         {
           "id": "6-stationary",
@@ -208,14 +210,16 @@
       "title": "Original SD recording",
       "prerequisite": "Stage 6 accepted",
       "firmware": "breadboard-sd-only-2ch",
-      "actions": "7A: short known-signal recording and conversion. 7B: 60-minute continuous run. 7C: absent/full-card and five interrupted-write trials on expendable media. Test recording USB inhibition with synthetic signals only. Stop and wait for recording LED off before removing media.",
+      "actions": "7A: short known-signal recording and conversion. 7B: 60-minute continuous run, then one full 2-hour run until the firmware stops with reason 5 (session limit). 7C: absent/full-card and five interrupted-write trials on expendable media. Test recording USB inhibition with synthetic signals only. Stop and wait for recording LED off before removing media.",
       "evidence": [
         "Unmodified .afolog files",
         "converter command/version",
         "metadata, quality report and CSV excerpts",
         "stop reason",
+        "final status queue_high_water",
+        "quality.json imu_clock",
         "serial log",
-        "card make/capacity/filesystem",
+        "card make/model/capacity/speed class/filesystem",
         "scope trace of continuous conversion cadence"
       ],
       "caution": "Keep damaged originals; do not overwrite them with recovered files. END is not proof of successful final filesystem sync. Check close/sync faults and counters independently. Diagnostic printing pauses cannot be used as continuous-acquisition evidence.",
@@ -226,7 +230,7 @@
         },
         {
           "id": "7-endurance",
-          "acceptance": "CMD GPIO47 CLK GPIO39 D0 GPIO40; container CRC32 and counters pass; no unexplained saved gaps/queue errors; END and expected stop reason; no sync/close failure"
+          "acceptance": "CMD GPIO47 CLK GPIO39 D0 GPIO40; one 60 min run and one full 2 h run ending with stop reason 5 (session limit); container CRC32 and counters pass; no unexplained saved gaps/queue errors; final queue_high_water \u226410,240 (half of 20,480); END and expected stop reason; no sync/close failure; card make/model/capacity/speed class/filesystem recorded"
         },
         {
           "id": "7-usb",
@@ -238,7 +242,7 @@
         },
         {
           "id": "7-timestamps",
-          "acceptance": "Normal 65.536 ms counter wraps handled; host estimate flag 2 retained; startup count differences not row-aligned; no unexplained gap/invalid/timing rejection"
+          "acceptance": "Normal 65.536 ms counter wraps handled; host estimate flag 2 retained; startup count differences not row-aligned; quality.json imu_clock per sensor: median_tick_step 5000 \u00b10.5% and host_us_per_sensor_tick within \u00b11% (runs \u226510 min); no unexplained gap/invalid/timing rejection"
         }
       ]
     },
@@ -247,7 +251,7 @@
       "title": "Wi-Fi while SD records",
       "prerequisite": "Stage 7 accepted",
       "firmware": "breadboard-record-2ch",
-      "actions": "First repeat a short baseline without a receiver, then a 60-minute SD+Wi-Fi trial. Interrupt and reconnect laptop reception. Compare common record identities, codes and timestamps; never fill missing preview data silently.",
+      "actions": "Read the per-device Wi-Fi password once from the USB console at the bench (no person attached) and keep it private, then remove USB. First repeat a short baseline without a receiver, then a 60-minute SD+Wi-Fi trial. Interrupt and reconnect laptop reception. Compare common record identities, codes and timestamps; never fill missing preview data silently.",
       "evidence": [
         "Original SD file AND laptop raw archive",
         "receiver log/quality",

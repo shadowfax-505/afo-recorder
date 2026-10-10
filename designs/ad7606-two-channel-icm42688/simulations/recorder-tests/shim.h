@@ -51,6 +51,8 @@ typedef int portMUX_TYPE;
 #define portMAX_DELAY UINT32_MAX
 #define pdMS_TO_TICKS(ms) (ms)
 QueueHandle_t xQueueCreate(unsigned length,size_t item_size);
+#define MALLOC_CAP_SPIRAM (1<<10)
+QueueHandle_t xQueueCreateWithCaps(unsigned length,size_t item_size,unsigned caps);
 BaseType_t xQueueSend(QueueHandle_t q,const void *item,TickType_t wait);
 BaseType_t xQueueReceive(QueueHandle_t q,void *item,TickType_t wait);
 unsigned uxQueueMessagesWaiting(QueueHandle_t q);

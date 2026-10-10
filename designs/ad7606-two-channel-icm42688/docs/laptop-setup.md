@@ -54,7 +54,7 @@ The first command verifies the manifest hashes and frozen example's two-channel 
 
 ## Receive Wi-Fi after the storage stage passes
 
-Keep the original SD recording as the primary archive. Connect the laptop to the recorder's access point, then run:
+Keep the original SD recording as the primary archive. The recording firmware contains no Wi-Fi password: each recorder creates a random one on first boot, stores it in its own flash and prints it on the USB console at every boot, for example `Laptop AP: AFO-Recorder-B; password: …`. With no person attached, read it once from the serial log at the bench and keep it in your private notes, not in this repository. Then remove USB (the recorder will not record with USB attached), connect the laptop to `AFO-Recorder-B` with that password, and run:
 
 ```sh
 python3 host/live_receiver.py --device 192.168.4.1 --out trial-wifi

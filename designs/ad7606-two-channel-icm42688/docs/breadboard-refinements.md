@@ -2,7 +2,7 @@
 
 **AD7606 · two EMG inputs · two ICM-42688-P carriers.** The simulation findings now inform the [guided assembly](../viewer/build.html), [wire tables](build-guide.html) and [short lab sequence](lab-quickstart.html). Use the [bench checklist](bench-checklist.csv) to collect physical results and the [probe table](../breadboard/probe-connections.csv) to connect instruments. Every measurement row starts as **NOT TESTED**.
 
-The existing connections already match the corrected firmware. This update adds specific checks and explanations at those connections. The current breadboard firmware is `ad7606-2ch-1.6`; its seven compiled profiles and source hashes were checked again. None of those laboratory images has been flashed to an assembled recorder. Wokwi executed a separate instrumented image, with storage and wireless substitutions described in the [verification report](integrated-verification.html).
+The existing connections already match the corrected firmware. This update adds specific checks and explanations at those connections. The current breadboard firmware is `ad7606-2ch-1.7`; its seven compiled profiles and source hashes were checked again. None of those laboratory images has been flashed to an assembled recorder. Wokwi executed a separate instrumented 1.6 image, not yet repeated for 1.7, with storage and wireless substitutions described in the [verification report](integrated-verification.html).
 
 ## What to do differently at the bench
 

@@ -30,6 +30,7 @@ API_HEADERS = (
     'esp_err.h', 'esp_vfs_fat.h', 'esp_timer.h', 'esp_random.h', 'esp_log.h', 'esp_intr_alloc.h',
     'driver/gpio.h', 'driver/sdmmc_host.h', 'freertos/FreeRTOS.h',
     'freertos/task.h', 'freertos/queue.h', 'freertos/event_groups.h',
+    'esp_heap_caps.h', 'freertos/idf_additions.h',
 )
 
 
@@ -132,11 +133,11 @@ def run():
                 results.append(control)
                 print(f'PASS {profile}/{case}', flush=True)
     report = {
-        'engine': 'native C compiler; production main.c and format.c; mocked ESP-IDF APIs',
+        'engine': 'native C compiler; production main.c, format.c and metadata.c; mocked ESP-IDF APIs',
         'cases_per_profile': len(CASES), 'profiles': ['pcb', 'breadboard'],
         'cases_passed': len(results), 'hardware_measured': False, 'esp32_executed': False,
         'production_sources_sha256': {name: hashlib.sha256((MAIN / name).read_bytes()).hexdigest()
-                                      for name in ('main.c', 'format.c', 'board.h', 'variant.h')},
+                                      for name in ('main.c', 'format.c', 'metadata.c', 'board.h', 'variant.h')},
         'limits': [
             'Deterministic control-flow shims; no real FreeRTOS scheduler, concurrent cores or ISR execution',
             'EMG/IMU records are injected through production enqueue; sensor acquisition is tested separately',

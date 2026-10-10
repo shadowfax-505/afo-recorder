@@ -1,5 +1,14 @@
 # Changelog
 
+## Verification fixes, two-channel AD7606 / ICM firmware 1.7 — 10 October 2026
+
+- Moved the SD record queue to PSRAM and enlarged it from 2,048 to 20,480 records (about 0.244 s to 2.44 s); the old queue was shorter than the SD specification's 250-500 ms write-busy allowance.
+- Removed the compiled-in Wi-Fi password. Each recorder generates a random 16-character password on first boot, stores it in NVS and prints it on the USB console.
+- Raised the live-metadata limit from 1,280 to 1,400 bytes (one Wi-Fi MTU); metadata is built by `metadata.c` and a host test enforces a 64-byte margin.
+- Added IMU timestamp-scale checks: diagnostic IMU lines report `tick_step_mean` and `host_us_per_tick`; the converter's quality report adds `imu_clock`.
+- Stage acceptance now covers a full 2-hour SD run, final queue occupancy, card identity, the external GPIO21 pull-up and IMU timestamp scale. Stage-00 inventory and per-stage parts lists now include every staged fixture item.
+- Rebuilt all seven profiles; 46 host tests and 38 native recorder-control cases pass. The Wokwi integrated matrix still refers to firmware 1.6 and was not repeated. Physical validation remains pending; the five other designs are unchanged.
+
 ## Recording shutdown and finalization — v0.1.4 — 30 September 2026
 
 - Keep acquisition task handles valid until the owner joins and deletes suspended workers; latch faults to stop acquisition.

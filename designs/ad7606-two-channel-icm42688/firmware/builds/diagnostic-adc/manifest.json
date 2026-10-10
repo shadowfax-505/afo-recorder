@@ -14,34 +14,36 @@
     "application.bin": "0x10000"
   },
   "sha256": {
-    "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
-    "application.bin": "3f5bce64ecbd030435cebd31e345fdd1f283c335b16670a6d957214bdb91fe63",
-    "bootloader.bin": "ce2104ba405757ccd704b046ddf946b1226e51170c120d73958edd8eb0db6fbe"
+    "application.bin": "ff36a23e6f0f6744a23bb5db039e1d8610b9389ceace821288840baab826ab8b",
+    "bootloader.bin": "dcdbf7a1161283be3cb4ff27f481a777efefdbd6dd79d9d5d40c194d26518595",
+    "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
   },
   "profile": "diagnostic-adc",
-  "source_set": "ad7606-2ch-1.6",
+  "source_set": "ad7606-2ch-1.7",
   "entrypoint": "diagnostic.c",
   "source_sha256": {
-    "main/CMakeLists.txt": "9bc5cb5a34a0f9114223bc776954e6078cdd8f1588b48e7864b0ca091daaee96",
+    "main/CMakeLists.txt": "4ee702ba8953e843a4d2b150406543ea0e6b92766a70fa9ad35733f52f7eb956",
     "main/adc_ad7606.c": "77164ec74b6c574a64885a44e9117409f2edaaaf90a82cb737c3834f4672b5e8",
     "main/adc_ads131m04.c": "914ffa6db82ed58aed9d4f0beb1ae05645ac6fb47097ace88e2be8b6a3c6b6aa",
     "main/ads_crc.c": "31cbb5fd61f5e06c394a426e0fa48d14f3561be4d46fffe6a18e1837edad83cc",
     "main/ads_crc.h": "d08cf15ad6e5d8d837e5c532b9665bc9c07a045475ba06c6443eed6b4367aeac",
-    "main/board.h": "11f3f4d30c3b70410810426ffe6371088ed250903c7e569ba36858d6248439cc",
-    "main/diagnostic.c": "5a46b93676fcec804c5d20d999d7c345bb13d95984d35628debad88b844c21cf",
+    "main/board.h": "b9a11159e5d1fcab21571b279d2e5dc8070e15d570360a86220696eadaffd23d",
+    "main/diagnostic.c": "6bc6156ba7f31e96c67286df738934c08127ac1dfa7952e0208978f3669ae7f3",
     "main/format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
     "main/format.h": "58b01a597eaa2c70a918ad5ee3b71c9e26fe64aedefc91ffba7d96430510c47b",
     "main/imu_timing.h": "787dcb29ba8319d5d9e8f9ef4477268f3f2c4da0dd05da3ccbfcc3b4258b5c01",
-    "main/main.c": "81beee3f1b272230f810ab2d5e76dd51d8593249966a9db501ee327b4e11ad8f",
+    "main/main.c": "68bdf08f499c1f1476afbd91ff3d58a7c355f62ad9909c343cd285a62ce0b376",
+    "main/metadata.c": "8bbf04caaa01497fc9758903db85363336fac0fd8d37b190f9536cf236c4937c",
+    "main/metadata.h": "d4c4fc8ac3d6eb21a482139108424bf4b03aad7920c6e8090eb4c4f4942a29bf",
     "main/sensors.c": "f5c6034a43b260de6282d902a1d76d3e4db60bcbca64d364ebd34fc733df84c9",
     "main/sensors.h": "880b651acda742396e7da66f113f6ad27022abc4db84a93f9fff6a162e32ff43",
     "main/variant.h": "55c2cdaef8b2d56e2ced2aa23984a289038adc6caaf9d164c92830c24b8cffb9",
-    "main/wifi_live.c": "c679f0ca396d17d68315748e8e7087026c356fe41a4f6f72bd092c3c308afd9e",
-    "main/wifi_live.h": "eba7b829d91892b740965935de32aebcb8a990c1b10df34ffc4ed14320c32acd",
+    "main/wifi_live.c": "81a3e010a18b01f0ba20783ec0df5e14970bfa509305fb523beb00975c99e20a",
+    "main/wifi_live.h": "99d2bea23a26f0271f9f5bb8056ff9ec80d1bfaf1edcd33dcf6551bf7926bf6f",
     "CMakeLists.txt": "ccdcd61455a4cd61ba17da36add6811ccd35d3f880115a07c709f883ebc2b0c6",
-    "sdkconfig.defaults": "31ca50c6cc9499aa42719a9c5f8d333f61ce539968da36442cdd885a8951b020"
+    "sdkconfig.defaults": "efa1f6cc8603f5d99512b34847cccd83cac16af42cf8758570f3ed0b1bc01fd2"
   },
   "current_binary_hardware_tested": false,
   "current_binary_wokwi_executed": false,
-  "execution_note": "Newly rebuilt diagnostic image; cloud execution pending. Historical tested image is preserved separately."
+  "execution_note": "Cross-compiled only; not flashed or executed. Earlier tested diagnostic images remain preserved separately."
 }

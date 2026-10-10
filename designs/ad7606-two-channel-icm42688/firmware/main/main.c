@@ -11,6 +11,7 @@
 #include "sensors.h"
 #include "imu_timing.h"
 #include "wifi_live.h"
+#include "metadata.h"
 #include "driver/gpio.h"
 
 #include "driver/sdmmc_host.h"
@@ -18,10 +19,12 @@
 #include "esp_timer.h"
 #include "esp_random.h"
 #include "esp_log.h"
+#include "esp_heap_caps.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "freertos/queue.h"
 #include "freertos/event_groups.h"
+#include "freertos/idf_additions.h"
 
 static const char *TAG="afo";
 enum { STOP_NORMAL=0, STOP_STORAGE=1, STOP_QUEUE=2, STOP_SENSOR=3,
@@ -176,11 +179,10 @@ static void imu_task(void *arg) {
                 if((p[0]&0xfc)!=0x68) { imu_errors++;set_fault(STOP_SENSOR);continue; }
                 imu_payload_t out;memcpy(out.fifo_packet,p,16);
                 out.read_start_us=t0;out.read_end_us=t1;out.irq_anchor_us=anchor;
+                // Every IMU host time is an estimate, so flag 2 is always set.
+                // An IRQ during the FIFO read (after!=before) adds no separate
+                // flag; counter gaps are checked by imu_clock_step below.
                 uint8_t flags=FLAG_TIMING_UNCERTAIN;
-                // An IRQ during a FIFO read makes the host anchor uncertain;
-                // it does not establish missing sensor samples. Counter gaps
-                // are checked separately by imu_clock_step below.
-                if(after!=before)flags|=FLAG_TIMING_UNCERTAIN;
                 if(!clocks[id].initialized&&anchor<lag[k])flags|=FLAG_GAP;
                 for(unsigned j=1;j<13;j+=2)
                     if(p[j]==0x80&&p[j+1]==0) flags|=FLAG_INVALID;
@@ -263,22 +265,10 @@ static void __attribute__((noinline)) record_session(void) {
     if(fd<0) {gpio_set_level(LED_ERROR,1);ESP_LOGE(TAG,"Cannot create recording");return;}
     reset_stats();gpio_set_level(LED_ERROR,0);
     char meta[2048];
-    snprintf(meta,sizeof(meta),
-      "{" AFO_ADC_METADATA AFO_SD_METADATA
-      "\"firmware\":\"ad7606-2ch-1.6\",\"hardware_variant\":\"" HARDWARE_VARIANT "\","
-      "\"synthetic\":false,\"trial_id\":\"%s\",\"clock\":\"esp_timer_boot_us\","
-      "\"emg_hz\":8000,\"imu_hz\":200,\"imu_enabled\":true,"
-      "\"active_channel_count\":%d,\"emg_channels\":%s,"
-      "\"calibration_state\":\"uncalibrated\",\"simultaneous\":true,"
-      "\"accel_range_g\":16,\"gyro_range_dps\":2000,\"imu_timestamp_tick_us\":1,"
-      "\"imu_timing_calibrated\":false,\"imu_locations\":[\"foot\",\"shank\"],"
-      "\"imu_time\":\"fifo_delta_first_irq\","
-      "\"placement_verified\":false,\"record_bytes\":64,\"usb_recording_inhibit\":true,"
-      "\"analog_filter\":\"two cascaded 3.3k/47nF low-pass sections, each unity buffered; 100R series output, 1nF to ground; single-ended ADC\","
-      "\"unplugged_input_bias_mv\":1500,\"unplugged_input_bias_ohm\":1000000,"
-      "\"clock_or_filter_delay_correction\":\"none\",\"notes\":\"Engineering prototype; physical validation pending\"}",
-      strrchr(path,'/')+1,EMG_CHANNEL_COUNT,
-      EMG_CHANNEL_COUNT==2?"[\"EMG1\",\"EMG2\"]":"[\"EMG1\",\"EMG2\",\"EMG3\",\"EMG4\"]");
+    int meta_length=afo_session_metadata(meta,sizeof(meta),strrchr(path,'/')+1);
+    if(meta_length<0||meta_length>=(int)sizeof(meta)) {
+        close(fd);gpio_set_level(LED_ERROR,1);ESP_LOGE(TAG,"Session metadata too long");return;
+    }
     uint8_t *header=malloc(AFO_HEADER_BYTES);
     bool good=header&&afo_header(header,meta)==0&&write_all(fd,header,AFO_HEADER_BYTES)&&fsync(fd)==0;
     free(header);
@@ -372,11 +362,19 @@ void app_main(void) {
     ESP_ERROR_CHECK(gpio_config(&usb));
     gpio_config_t drdy={.pin_bit_mask=1ULL<<ADC_DRDY,.mode=GPIO_MODE_INPUT,.intr_type=GPIO_INTR_NEGEDGE};
     ESP_ERROR_CHECK(gpio_config(&drdy));
-    queue=xQueueCreate(RECORD_QUEUE_LENGTH,sizeof(afo_record_t));done=xEventGroupCreate();
+    // The record queue is written and read only by tasks, never by an ISR, so
+    // it can live in PSRAM. Its size absorbs SD write-busy periods.
+    queue=xQueueCreateWithCaps(RECORD_QUEUE_LENGTH,sizeof(afo_record_t),MALLOC_CAP_SPIRAM);done=xEventGroupCreate();
     if(!queue||!done)goto failed;
+    ESP_LOGI(TAG,"Firmware %s; record queue %d entries in PSRAM (about %.2f s at 8,400 records/s)",
+        AFO_FIRMWARE_ID,RECORD_QUEUE_LENGTH,RECORD_QUEUE_LENGTH/8400.0);
     if(xTaskCreatePinnedToCore(acquisition_init_task,"acquisition_init",8192,
         xTaskGetCurrentTaskHandle(),5,NULL,1)!=pdPASS)goto failed;
     ulTaskNotifyTake(pdTRUE,portMAX_DELAY);
+    // Wi-Fi credentials first: first-boot password generation briefly uses the
+    // SAR-ADC entropy source, which must finish before the battery ADC starts.
+    esp_err_t credential_result=wifi_live_prepare_credentials();
+    if(credential_result!=ESP_OK)ESP_LOGW(TAG,"Wi-Fi credentials unavailable (%s)",esp_err_to_name(credential_result));
     // The IMU DMA bus belongs to the other core; keep its interrupt work away
     // from the converter timer and BUSY notifications.
     if(acquisition_init_result!=ESP_OK||imu_bus_init(IMU_COUNT)!=ESP_OK||battery_init()!=ESP_OK)goto failed;

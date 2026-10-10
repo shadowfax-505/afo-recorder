@@ -2,11 +2,11 @@
 <p><strong>Prerequisite:</strong> Stage 1 accepted. <strong>Firmware:</strong> diagnostic-controller. <strong>Status: NOT TESTED.</strong></p>
 <p><a href="../index.html">Sequence overview</a> | <a href="../../docs/build-guide.html">Exact contacts</a> | <a href="../../viewer/build.html">3D assembly</a></p>
 <h2>Add and test</h2>
-<p>Add controller, button, LEDs and USB sense. Connect only according to the existing exact contact table. Check 20 boots/programming cycles, then USB sense attached/absent. Do not connect both external regulation and an unqualified DevKit USB power feed.</p>
+<p>Add controller, button, LEDs and USB sense. Connect only according to the existing exact contact table. Check 20 boots/programming cycles, then USB sense attached/absent. Measure the external 10k usb-pu (GPIO21 to 3V3D) with power off: the diagnostic enables an internal pull-up that can hide a missing resistor, and the recording firmware does not. Do not connect both external regulation and an unqualified DevKit USB power feed.</p>
 <h2>Acceptance checks</h2>
 <ul>
 <li><strong>2-controller:</strong> 20 programming/reset cycles without failure; buttons and LEDs match controls</li>
-<li><strong>2-usb:</strong> GPIO21 LOW attached / HIGH absent; attachment indicator 1/0; no USB VBUS feed into regulated 5 V; DevKit USB sockets empty</li>
+<li><strong>2-usb:</strong> GPIO21 LOW attached / HIGH absent; attachment indicator 1/0; external usb-pu 10k GPIO21–3V3D measured unpowered (the diagnostic enables an internal pull-up, recording firmware does not); no USB VBUS feed into regulated 5 V; DevKit USB sockets empty</li>
 </ul>
 <h2>Send for review</h2>
 <ul>
@@ -15,6 +15,7 @@
 <li>photos</li>
 <li>20-cycle table</li>
 <li>GPIO21 voltage both states</li>
+<li>usb-pu resistance</li>
 <li>rail measurements under controller load</li>
 </ul>
 <p>The diagnostic intentionally allows instrumented USB operation. It does not itself prove the recording interlock; repeat the actual recording inhibition test at stage 7.</p>

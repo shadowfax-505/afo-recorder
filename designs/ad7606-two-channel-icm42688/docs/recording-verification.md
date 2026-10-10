@@ -1,8 +1,8 @@
 # Recording, shutdown and recovery
 
-Project lead: Muttakin Rahman · 1 October 2026 · AD7606 / two EMG inputs / ICM-42688-P
+Project lead: Muttakin Rahman · 1 October 2026, updated 10 October 2026 · AD7606 / two EMG inputs / ICM-42688-P
 
-**The updated recording firmware passes 38 native control-flow cases: 19 for the breadboard and 19 for the compact PCB.** All seven current v1.6 laboratory profiles, including three recording and four diagnostic builds, compile with ESP-IDF v5.4.2. These native checks exercise the current recorder and serializer with explicit API shims. The [current integrated report](integrated-verification.html) adds actual recorder/FatFS/lwIP execution with modeled peripherals; its full matrix remains incomplete. The [seven earlier diagnostic scenarios](virtual-verification.html) remain historical evidence. None establishes physical SD or radio performance.
+**The updated recording firmware passes 38 native control-flow cases: 19 for the breadboard and 19 for the compact PCB.** The 38 cases were rerun on source set 1.7, whose queue-overflow case now needs 20,481 queued records. All seven current v1.7 laboratory profiles, including three recording and four diagnostic builds, compile with ESP-IDF v5.4.2. These native checks exercise the current recorder and serializer with explicit API shims. The [current integrated report](integrated-verification.html) adds actual recorder/FatFS/lwIP execution with modeled peripherals; its full matrix remains incomplete. The [seven earlier diagnostic scenarios](virtual-verification.html) remain historical evidence. None establishes physical SD or radio performance.
 
 ## What was corrected
 
@@ -38,7 +38,7 @@ The initial test assumed suspension within 10 ms, shorter than the EMG notificat
 | Low battery | Three consecutive low readings | Recording stops with reason 4 |
 | Full card | Free-space gate fails after recording starts | Storage fault; wireless reason 1 |
 
-The current production metadata is 1,272 bytes for the PCB and 1,279 for the breadboard, below the 1,280-byte AFW1 payload limit. The breadboard profile has only one byte of remaining capacity; future metadata additions must pass the payload-length and decoder tests rather than relying on this margin. The test decodes this exact JSON through the laptop protocol and checks the two enabled channels and GPIO38/47 SD distinction.
+Production metadata is now built by `firmware/main/metadata.c`: 1,301 bytes for the PCB and 1,308 for the breadboard, including the new `record_queue_entries` field. Source set 1.7 raises the AFW1 metadata limit from 1,280 to 1,400 bytes, so a metadata datagram (1,432 bytes) still fits one 1,500-byte Wi-Fi MTU. A host test compiles `metadata.c` for both profiles and fails if either comes within 64 bytes of the limit. (Source set 1.6 used 1,279 of 1,280 bytes on the breadboard.) The test decodes this exact JSON through the laptop protocol and checks the two enabled channels and GPIO38/47 SD distinction.
 
 [Machine-readable control results](../simulations/recorder-tests/results/summary.json) · [before-fix assertions](../simulations/recorder-tests/results/before-fix.json) · [test source and reproduction](../simulations/recorder-tests/README.md) · [normal synthetic recording](../simulations/recorder-tests/results/breadboard/normal/simulated.afolog) · [normal quality report](../simulations/recorder-tests/results/breadboard/normal/quality.json)
 

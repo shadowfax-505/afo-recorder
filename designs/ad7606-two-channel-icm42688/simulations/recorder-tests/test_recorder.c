@@ -22,6 +22,7 @@
 #undef fsync
 #undef close
 #include "../../firmware/main/format.c"
+#include "../../firmware/main/metadata.c"
 
 struct mock_queue {afo_record_t records[RECORD_QUEUE_LENGTH];unsigned head,count,capacity;};
 struct mock_event {EventBits_t bits;};
@@ -32,7 +33,7 @@ static struct mock_task tasks[2],*current_task;
 static jmp_buf worker_return;
 static const char *scenario;
 static uint64_t clock_us=1000000;
-static uint8_t disk[1024*1024],live[1024*1024];
+static uint8_t disk[4*1024*1024],live[4*1024*1024];
 static size_t disk_used,live_used;
 static unsigned write_calls,sync_calls,close_calls,created,deleted,notified;
 static unsigned imu_stops[2],free_queries;
@@ -90,6 +91,9 @@ esp_err_t gpio_isr_handler_add(int p,void (*h)(void *),void *a) {(void)p;(void)h
 QueueHandle_t xQueueCreate(unsigned length,size_t item_size) {
     assert(length<=RECORD_QUEUE_LENGTH&&item_size==sizeof(afo_record_t));
     memset(&test_queue,0,sizeof(test_queue));test_queue.capacity=length;return &test_queue;
+}
+QueueHandle_t xQueueCreateWithCaps(unsigned length,size_t item_size,unsigned caps) {
+    assert(caps==MALLOC_CAP_SPIRAM);return xQueueCreate(length,item_size);
 }
 BaseType_t xQueueSend(QueueHandle_t q,const void *r,TickType_t wait) {
     assert(wait==0);if(q->count==q->capacity)return pdFALSE;
@@ -150,7 +154,7 @@ esp_err_t emg_frame(int32_t codes[4],uint16_t *status,uint16_t *crc) {
 }
 uint64_t adc_sample_timestamp(void) {return clock_us;}
 esp_err_t adc_stream_start(void) {
-    stream_started=true;synthetic_records(is("queue-overflow")?2200:260);
+    stream_started=true;synthetic_records(is("queue-overflow")?RECORD_QUEUE_LENGTH+152:260);
     if(is("worker-fault-before-join")) {
         set_fault(STOP_TIMING);atomic_store(&running,false);run_worker(&tasks[0]);
     }
@@ -188,9 +192,10 @@ int mock_fsync(int fd) {
     return 0;
 }
 int mock_close(int fd) {assert(fd==3&&!closed);close_calls++;closed=true;return is("close-failure")?-1:0;}
+esp_err_t wifi_live_prepare_credentials(void) {return ESP_OK;}
 esp_err_t wifi_live_init(void) {return ESP_OK;}
 void wifi_live_begin(const char *json) {
-    assert(strlen(json)<=1280);snprintf(live_metadata,sizeof(live_metadata),"%s",json);
+    assert(strlen(json)<=WIFI_LIVE_METADATA_MAX);snprintf(live_metadata,sizeof(live_metadata),"%s",json);
 }
 void wifi_live_offer(const afo_record_t *r) {
     if(r->type==REC_END)assert(closed); // No premature successful wireless verdict.

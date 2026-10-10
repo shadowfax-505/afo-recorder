@@ -6,7 +6,7 @@
 
 ## Add and test
 
-Inventory only; no power. Photograph both sides of every module, connector and jumper with readable markings. Identify the protected battery and charger separately. List instruments, calibration dates and available dummy loads.
+Inventory only; no power. Mark every inventory.csv row acquired or not acquired; for missing items keep the proposed part number. Photograph both sides of every module, connector and jumper with readable markings. Identify the protected battery and charger separately. List instruments, calibration dates and available dummy loads.
 
 ## Acceptance checks
 

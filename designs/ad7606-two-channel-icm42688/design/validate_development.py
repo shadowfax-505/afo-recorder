@@ -33,5 +33,5 @@ for relative in subprocess.check_output(['git','ls-files','designs'],cwd=repo,te
   observed=subprocess.check_output(['git','hash-object',relative],cwd=repo,text=True).strip()
   assert observed==expected,relative
   protected.append(relative)
-report={'status':'PASS','date':'2026-10-04','stage_folders':11,'wire_rows_partitioned_exactly':len(collected),'blank_measurement_checks':len(results),'local_links':links,'other_design_files_unchanged':len(protected),'physical_measurements_completed':0,'scope':'Stage organization, links, blank forms, unchanged variants; not hardware performance'}
+report={'status':'PASS','date':'2026-10-10','stage_folders':11,'wire_rows_partitioned_exactly':len(collected),'blank_measurement_checks':len(results),'local_links':links,'other_design_files_unchanged':len(protected),'physical_measurements_completed':0,'scope':'Stage organization, links, blank forms, unchanged variants; not hardware performance'}
 (D/'validation.json').write_text(json.dumps(report,indent=2)+'\n');print(json.dumps(report,indent=2))

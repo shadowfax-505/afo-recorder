@@ -92,7 +92,8 @@ Read docs/understanding-the-recorder.pdf for the supervisor briefing.
 Project lead: Muttakin Rahman
 
 Use this kit for exactly two MyoWare RAW inputs and two ICM-42688-P carriers.
-Circuit routing remains revision 12; instructions apply the v1.6 simulation findings.
+Circuit routing remains revision 12; instructions apply the v1.6 simulation findings
+and the 1.7 firmware corrections.
 No physical measurement has been completed or certified.
 
 1. Open a terminal in this extracted folder and run:
@@ -118,8 +119,10 @@ CSV conversion, file-integrity checks and Wi-Fi reception need only Python.
 For optional plots, install host/requirements.txt in a Python virtual environment.
 Read docs/laptop-setup.html for the commands, units and troubleshooting.
 
-Included firmware uses source set ad7606-2ch-1.6 and ESP-IDF v5.4.2. It has been
-cross-compiled, not flashed to an assembled recorder. The canonical validation
+Included firmware uses source set ad7606-2ch-1.7 and ESP-IDF v5.4.2. It has been
+cross-compiled, not flashed to an assembled recorder. No Wi-Fi password is
+compiled in: each recorder creates one on first boot and prints it on the USB
+console at every boot. Keep it private; never commit it. The canonical validation
 file describes seven compiled profiles; this archive intentionally includes only
 the six breadboard profiles. The PCB recording binary and Wokwi simulation-only
 images are excluded. Do not flash an instrumented simulator image to hardware.

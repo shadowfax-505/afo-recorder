@@ -1,2 +1,2 @@
 Stage,Reference,Value,Board,Note
-10,,2 MyoWare2.0 RAW,,Sensor integration last
+10,"myo1, myo2",2 × MyoWare 2.0 bare sensors (RAW output),,VIN/GND/RAW pads; ENV/RECT unused; sensor integration last

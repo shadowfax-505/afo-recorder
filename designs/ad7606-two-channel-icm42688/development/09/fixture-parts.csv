@@ -1,2 +1,2 @@
 Stage,Reference,Value,Board,Note
-9,,Protected 1S battery,,Capacity/runtime measured
+9,battery,"Adafruit 328 protected 1S LiPo, 2500 mAh",,Check connector polarity; charge externally only

@@ -208,7 +208,7 @@ USB detection is active LOW at GPIO21. The recording interlock is a firmware pre
 
 ## 12. Firmware, storage and wireless preview
 
-The acquisition tasks produce records; a queue temporarily holds them; the writer stores blocks on microSD. Keeping acquisition separate from slow storage reduces interference, but finite buffers only absorb finite delays. A 2,048-record queue at 8,400 nominal data records/s holds about 0.244 seconds if initially empty. Occupancy and other records reduce the available margin.
+The acquisition tasks produce records; a queue temporarily holds them; the writer stores blocks on microSD. Keeping acquisition separate from slow storage reduces interference, but finite buffers only absorb finite delays. Firmware 1.7 keeps a 20,480-record queue in PSRAM; at 8,400 nominal data records/s it holds about 2.44 seconds if initially empty (firmware 1.6 held only 0.244 s, less than the 250-500 ms write-busy time an SD card may legally take). Occupancy and other records reduce the available margin, so stage 7 records the peak queue occupancy.
 
 Each EMG record represents two simultaneous channel values, not two separately timestamped records. At 64 bytes per record, 8,000 EMG plus 400 IMU records/s imply 537,600 bytes/s, about 1.935 GB/hour or 3.871 GB/two hours before overhead. Card capacity and sustained write behavior are different requirements. A fast-looking card label does not establish bounded write latency.
 
@@ -315,7 +315,7 @@ The preserved circuit checks compare 390 schematic/PCB pin connections and 22 fi
 
 The reports retain 18 passing current integrated Wokwi cases, but not every case was run on an identical complete visual fixture. Historical images and incomplete attempts remain separate. QEMU nominal timing was unqualified. The current laboratory diagnostic images were compiled but not all rerun in Wokwi. Do not collapse these into “the whole hardware passed.”
 
-The latest preserved package receipt reports 40 host tests and nine evidence-checker tests. This expanded guide reviews those records; it is not a fresh execution of every historical test. No assembled-hardware results have been added.
+The latest preserved package receipt reports 46 host tests and nine evidence-checker tests. This expanded guide reviews those records; it is not a fresh execution of every historical test. No assembled-hardware results have been added.
 
 ## 18. Designing an AFO or neuromuscular study
 
@@ -431,7 +431,7 @@ Source labels distinguish manufacturer/research guidance (S) from this project's
 - **P1. Project circuit audit and source specification.** Values, pins, correction history and simulation limitations. https://shadowfax-505.github.io/afo-recorder/designs/ad7606-two-channel-icm42688/docs/circuit-audit.html
 - **P2. Bench/PCB differences.** Physical implementation exceptions. https://shadowfax-505.github.io/afo-recorder/designs/ad7606-two-channel-icm42688/docs/bench-pcb-differences.md
 - **P3. Integrated verification.** Execution scope, substitutions and preserved failures. https://shadowfax-505.github.io/afo-recorder/designs/ad7606-two-channel-icm42688/docs/integrated-verification.html
-- **P4. Package/data verification receipt.** Preserved synthetic counts, timing flags, nine intake tests and 40 host tests. https://shadowfax-505.github.io/afo-recorder/designs/ad7606-two-channel-icm42688/docs/kit-validation.json
+- **P4. Package/data verification receipt.** Preserved synthetic counts, timing flags, nine intake tests and 46 host tests. https://shadowfax-505.github.io/afo-recorder/designs/ad7606-two-channel-icm42688/docs/kit-validation.json
 - **P5. Sequential development workbook.** Exact stage evidence and unperformed physical gates. https://shadowfax-505.github.io/afo-recorder/designs/ad7606-two-channel-icm42688/development/index.html
 
 All diagrams in this guide are original explanatory drawings of the project. The separate detailed schematic is exported from the existing project KiCad source. Existing third-party notices remain applicable. This guide does not establish medical-device certification, intellectual-property clearance or research novelty.

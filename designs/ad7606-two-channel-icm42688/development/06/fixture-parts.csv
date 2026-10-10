@@ -1,2 +1,4 @@
 Stage,Reference,Value,Board,Note
-6,,2 × ICM-42688-P SPI modules,,SKU and orientation pending
+6,"foot, shank",2 × MIKROE-4237 6DOF IMU 14 Click (ICM-42688-P),,Set SPI jumpers; SKU and orientation photographed at stage 0
+6,foot-pullup,10k,AUX1,Foot IMU CS pull-up
+6,shank-pullup,10k,AUX1,Shank IMU CS pull-up

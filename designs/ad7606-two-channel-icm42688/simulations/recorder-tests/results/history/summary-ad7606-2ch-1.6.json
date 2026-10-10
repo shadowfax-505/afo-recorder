@@ -1,0 +1,2539 @@
+{
+  "engine": "native C compiler; production main.c and format.c; mocked ESP-IDF APIs",
+  "cases_per_profile": 19,
+  "profiles": [
+    "pcb",
+    "breadboard"
+  ],
+  "cases_passed": 38,
+  "hardware_measured": false,
+  "esp32_executed": false,
+  "production_sources_sha256": {
+    "main.c": "81beee3f1b272230f810ab2d5e76dd51d8593249966a9db501ee327b4e11ad8f",
+    "format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
+    "board.h": "11f3f4d30c3b70410810426ffe6371088ed250903c7e569ba36858d6248439cc",
+    "variant.h": "55c2cdaef8b2d56e2ced2aa23984a289038adc6caaf9d164c92830c24b8cffb9"
+  },
+  "limits": [
+    "Deterministic control-flow shims; no real FreeRTOS scheduler, concurrent cores or ISR execution",
+    "EMG/IMU records are injected through production enqueue; sensor acquisition is tested separately",
+    "No physical SDMMC, flash persistence, radio transport, noise, power or runtime measurements",
+    "Late sync/close failures can leave an END marker among visible bytes; END alone cannot certify durability"
+  ],
+  "results": [
+    {
+      "scenario": "normal",
+      "stream_started": true,
+      "reason": 0,
+      "disk_bytes": 21568,
+      "live_bytes": 17472,
+      "tasks_created": 2,
+      "tasks_deleted": 2,
+      "notifications": 1,
+      "writes": 5,
+      "syncs": 3,
+      "closes": 1,
+      "metadata_bytes": 1272,
+      "profile": "pcb",
+      "metadata_roundtrip_pass": true,
+      "live_end_reason_pass": true,
+      "laptop_stop_state_pass": true,
+      "sd_live_end_identical": true,
+      "quality": {
+        "source_sha256": "e11303fe992b2d9485c5270e6166556532e275c46f861e512c55e7222a6be94c",
+        "synthetic": true,
+        "counts": {
+          "emg": 260,
+          "foot": 6,
+          "shank": 6,
+          "status": 0,
+          "end": 1
+        },
+        "session_finalized": true,
+        "structurally_complete": true,
+        "no_detected_sample_loss": true,
+        "signal_checks_pass": true,
+        "research_ready": false,
+        "sequence_gaps": {
+          "emg": 0,
+          "foot": 0,
+          "shank": 0
+        },
+        "anomalies": {
+          "sequence_regressions": 0,
+          "timestamp_regressions": 0,
+          "emg_clipped_samples": 0,
+          "emg_out_of_range": 0,
+          "imu_invalid_samples": 0,
+          "imu_timestamp_anomalies": 0,
+          "timing_uncertain_records": 12,
+          "flagged_gap_records": 0
+        },
+        "emg_observed_skipped_slots": 0,
+        "emg_rate_from_host_timestamps_hz": 8000.0,
+        "last_status": {
+          "timer_missed": 0,
+          "queue_dropped": 0,
+          "imu_errors": 0,
+          "fifo_overflows": 0,
+          "adc_errors": 0,
+          "emg_records": 260,
+          "foot_records": 6,
+          "shank_records": 6,
+          "battery_mv": 3800,
+          "queue_high_water": 272
+        },
+        "issues": [],
+        "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
+        "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
+      },
+      "sd_commit_checks_pass": true,
+      "pass": true
+    },
+    {
+      "scenario": "short-writes-eintr",
+      "stream_started": true,
+      "reason": 0,
+      "disk_bytes": 21568,
+      "live_bytes": 17472,
+      "tasks_created": 2,
+      "tasks_deleted": 2,
+      "notifications": 1,
+      "writes": 69,
+      "syncs": 3,
+      "closes": 1,
+      "metadata_bytes": 1272,
+      "profile": "pcb",
+      "metadata_roundtrip_pass": true,
+      "live_end_reason_pass": true,
+      "laptop_stop_state_pass": true,
+      "sd_live_end_identical": true,
+      "quality": {
+        "source_sha256": "e11303fe992b2d9485c5270e6166556532e275c46f861e512c55e7222a6be94c",
+        "synthetic": true,
+        "counts": {
+          "emg": 260,
+          "foot": 6,
+          "shank": 6,
+          "status": 0,
+          "end": 1
+        },
+        "session_finalized": true,
+        "structurally_complete": true,
+        "no_detected_sample_loss": true,
+        "signal_checks_pass": true,
+        "research_ready": false,
+        "sequence_gaps": {
+          "emg": 0,
+          "foot": 0,
+          "shank": 0
+        },
+        "anomalies": {
+          "sequence_regressions": 0,
+          "timestamp_regressions": 0,
+          "emg_clipped_samples": 0,
+          "emg_out_of_range": 0,
+          "imu_invalid_samples": 0,
+          "imu_timestamp_anomalies": 0,
+          "timing_uncertain_records": 12,
+          "flagged_gap_records": 0
+        },
+        "emg_observed_skipped_slots": 0,
+        "emg_rate_from_host_timestamps_hz": 8000.0,
+        "last_status": {
+          "timer_missed": 0,
+          "queue_dropped": 0,
+          "imu_errors": 0,
+          "fifo_overflows": 0,
+          "adc_errors": 0,
+          "emg_records": 260,
+          "foot_records": 6,
+          "shank_records": 6,
+          "battery_mv": 3800,
+          "queue_high_water": 272
+        },
+        "issues": [],
+        "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
+        "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
+      },
+      "sd_commit_checks_pass": true,
+      "pass": true
+    },
+    {
+      "scenario": "worker-fault-before-join",
+      "stream_started": true,
+      "reason": 6,
+      "disk_bytes": 21568,
+      "live_bytes": 17472,
+      "tasks_created": 2,
+      "tasks_deleted": 2,
+      "notifications": 1,
+      "writes": 5,
+      "syncs": 3,
+      "closes": 1,
+      "metadata_bytes": 1272,
+      "profile": "pcb",
+      "metadata_roundtrip_pass": true,
+      "live_end_reason_pass": true,
+      "laptop_stop_state_pass": true,
+      "sd_live_end_identical": true,
+      "quality": {
+        "source_sha256": "1ff94a7168dcc48175fc59a70fd6d1789134c91bda1de59576e4a3aed003f01c",
+        "synthetic": true,
+        "counts": {
+          "emg": 260,
+          "foot": 6,
+          "shank": 6,
+          "status": 0,
+          "end": 1
+        },
+        "session_finalized": true,
+        "structurally_complete": false,
+        "no_detected_sample_loss": false,
+        "signal_checks_pass": true,
+        "research_ready": false,
+        "sequence_gaps": {
+          "emg": 0,
+          "foot": 0,
+          "shank": 0
+        },
+        "anomalies": {
+          "sequence_regressions": 0,
+          "timestamp_regressions": 0,
+          "emg_clipped_samples": 0,
+          "emg_out_of_range": 0,
+          "imu_invalid_samples": 0,
+          "imu_timestamp_anomalies": 0,
+          "timing_uncertain_records": 12,
+          "flagged_gap_records": 0
+        },
+        "emg_observed_skipped_slots": 0,
+        "emg_rate_from_host_timestamps_hz": 8000.0,
+        "last_status": {
+          "timer_missed": 0,
+          "queue_dropped": 0,
+          "imu_errors": 0,
+          "fifo_overflows": 0,
+          "adc_errors": 0,
+          "emg_records": 260,
+          "foot_records": 6,
+          "shank_records": 6,
+          "battery_mv": 3800,
+          "queue_high_water": 272
+        },
+        "issues": [
+          {
+            "kind": "abnormal_stop",
+            "reason": 6
+          }
+        ],
+        "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
+        "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
+      },
+      "sd_commit_checks_pass": true,
+      "pass": true
+    },
+    {
+      "scenario": "queue-overflow",
+      "stream_started": true,
+      "reason": 2,
+      "disk_bytes": 135232,
+      "live_bytes": 131136,
+      "tasks_created": 2,
+      "tasks_deleted": 2,
+      "notifications": 1,
+      "writes": 18,
+      "syncs": 3,
+      "closes": 1,
+      "metadata_bytes": 1272,
+      "profile": "pcb",
+      "metadata_roundtrip_pass": true,
+      "live_end_reason_pass": true,
+      "laptop_stop_state_pass": true,
+      "sd_live_end_identical": true,
+      "quality": {
+        "source_sha256": "a235281eae3a24a44ce337e349256378d37b27c83e718afb369fa490646cc7df",
+        "synthetic": true,
+        "counts": {
+          "emg": 1952,
+          "foot": 48,
+          "shank": 48,
+          "status": 0,
+          "end": 1
+        },
+        "session_finalized": true,
+        "structurally_complete": false,
+        "no_detected_sample_loss": false,
+        "signal_checks_pass": true,
+        "research_ready": false,
+        "sequence_gaps": {
+          "emg": 0,
+          "foot": 0,
+          "shank": 0
+        },
+        "anomalies": {
+          "sequence_regressions": 0,
+          "timestamp_regressions": 0,
+          "emg_clipped_samples": 0,
+          "emg_out_of_range": 0,
+          "imu_invalid_samples": 0,
+          "imu_timestamp_anomalies": 0,
+          "timing_uncertain_records": 96,
+          "flagged_gap_records": 0
+        },
+        "emg_observed_skipped_slots": 0,
+        "emg_rate_from_host_timestamps_hz": 8000.0,
+        "last_status": {
+          "timer_missed": 0,
+          "queue_dropped": 1,
+          "imu_errors": 0,
+          "fifo_overflows": 0,
+          "adc_errors": 0,
+          "emg_records": 1953,
+          "foot_records": 48,
+          "shank_records": 48,
+          "battery_mv": 3800,
+          "queue_high_water": 2048
+        },
+        "issues": [
+          {
+            "kind": "counter_mismatch",
+            "stream": "emg",
+            "reported": 1953,
+            "decoded": 1952
+          },
+          {
+            "kind": "abnormal_stop",
+            "reason": 2
+          }
+        ],
+        "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
+        "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
+      },
+      "sd_commit_checks_pass": true,
+      "pass": true
+    },
+    {
+      "scenario": "body-write-failure",
+      "stream_started": true,
+      "reason": 1,
+      "disk_bytes": 4096,
+      "live_bytes": 8256,
+      "tasks_created": 2,
+      "tasks_deleted": 2,
+      "notifications": 1,
+      "writes": 2,
+      "syncs": 1,
+      "closes": 1,
+      "metadata_bytes": 1272,
+      "profile": "pcb",
+      "metadata_roundtrip_pass": true,
+      "live_end_reason_pass": true,
+      "laptop_stop_state_pass": true,
+      "quality": {
+        "source_sha256": "a500fcf09cafa2129013eb823735f5b7e26065c4d2556ddc3cc0aff89db0e0ce",
+        "synthetic": true,
+        "counts": {
+          "emg": 0,
+          "foot": 0,
+          "shank": 0,
+          "status": 0,
+          "end": 0
+        },
+        "session_finalized": false,
+        "structurally_complete": false,
+        "no_detected_sample_loss": false,
+        "signal_checks_pass": true,
+        "research_ready": false,
+        "sequence_gaps": {
+          "emg": 0,
+          "foot": 0,
+          "shank": 0
+        },
+        "anomalies": {
+          "sequence_regressions": 0,
+          "timestamp_regressions": 0,
+          "emg_clipped_samples": 0,
+          "emg_out_of_range": 0,
+          "imu_invalid_samples": 0,
+          "imu_timestamp_anomalies": 0,
+          "timing_uncertain_records": 0,
+          "flagged_gap_records": 0
+        },
+        "emg_observed_skipped_slots": 0,
+        "emg_rate_from_host_timestamps_hz": null,
+        "last_status": null,
+        "issues": [
+          {
+            "kind": "missing_end",
+            "message": "Unfinalized session; trailing samples may be lost."
+          },
+          {
+            "kind": "missing_stream",
+            "stream": "emg"
+          },
+          {
+            "kind": "missing_stream",
+            "stream": "foot"
+          },
+          {
+            "kind": "missing_stream",
+            "stream": "shank"
+          }
+        ],
+        "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
+        "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
+      },
+      "sd_commit_checks_pass": false,
+      "pass": true
+    },
+    {
+      "scenario": "partial-write-failure",
+      "stream_started": true,
+      "reason": 1,
+      "disk_bytes": 4241,
+      "live_bytes": 8256,
+      "tasks_created": 2,
+      "tasks_deleted": 2,
+      "notifications": 1,
+      "writes": 3,
+      "syncs": 1,
+      "closes": 1,
+      "metadata_bytes": 1272,
+      "profile": "pcb",
+      "metadata_roundtrip_pass": true,
+      "live_end_reason_pass": true,
+      "laptop_stop_state_pass": true,
+      "quality": {
+        "source_sha256": "76ea802c0ceb93d53f4223b758908dfd3df9455466d2ba6c1f1fba599c572f63",
+        "synthetic": true,
+        "counts": {
+          "emg": 2,
+          "foot": 0,
+          "shank": 0,
+          "status": 0,
+          "end": 0
+        },
+        "session_finalized": false,
+        "structurally_complete": false,
+        "no_detected_sample_loss": false,
+        "signal_checks_pass": true,
+        "research_ready": false,
+        "sequence_gaps": {
+          "emg": 0,
+          "foot": 0,
+          "shank": 0
+        },
+        "anomalies": {
+          "sequence_regressions": 0,
+          "timestamp_regressions": 0,
+          "emg_clipped_samples": 0,
+          "emg_out_of_range": 0,
+          "imu_invalid_samples": 0,
+          "imu_timestamp_anomalies": 0,
+          "timing_uncertain_records": 0,
+          "flagged_gap_records": 0
+        },
+        "emg_observed_skipped_slots": 0,
+        "emg_rate_from_host_timestamps_hz": 8000.0,
+        "last_status": null,
+        "issues": [
+          {
+            "kind": "corrupt_or_truncated_tail",
+            "start": 4224,
+            "end": 4241
+          },
+          {
+            "kind": "missing_end",
+            "message": "Unfinalized session; trailing samples may be lost."
+          },
+          {
+            "kind": "missing_stream",
+            "stream": "foot"
+          },
+          {
+            "kind": "missing_stream",
+            "stream": "shank"
+          }
+        ],
+        "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
+        "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
+      },
+      "sd_commit_checks_pass": false,
+      "pass": true
+    },
+    {
+      "scenario": "zero-byte-write",
+      "stream_started": true,
+      "reason": 1,
+      "disk_bytes": 4096,
+      "live_bytes": 8256,
+      "tasks_created": 2,
+      "tasks_deleted": 2,
+      "notifications": 1,
+      "writes": 2,
+      "syncs": 1,
+      "closes": 1,
+      "metadata_bytes": 1272,
+      "profile": "pcb",
+      "metadata_roundtrip_pass": true,
+      "live_end_reason_pass": true,
+      "laptop_stop_state_pass": true,
+      "quality": {
+        "source_sha256": "a500fcf09cafa2129013eb823735f5b7e26065c4d2556ddc3cc0aff89db0e0ce",
+        "synthetic": true,
+        "counts": {
+          "emg": 0,
+          "foot": 0,
+          "shank": 0,
+          "status": 0,
+          "end": 0
+        },
+        "session_finalized": false,
+        "structurally_complete": false,
+        "no_detected_sample_loss": false,
+        "signal_checks_pass": true,
+        "research_ready": false,
+        "sequence_gaps": {
+          "emg": 0,
+          "foot": 0,
+          "shank": 0
+        },
+        "anomalies": {
+          "sequence_regressions": 0,
+          "timestamp_regressions": 0,
+          "emg_clipped_samples": 0,
+          "emg_out_of_range": 0,
+          "imu_invalid_samples": 0,
+          "imu_timestamp_anomalies": 0,
+          "timing_uncertain_records": 0,
+          "flagged_gap_records": 0
+        },
+        "emg_observed_skipped_slots": 0,
+        "emg_rate_from_host_timestamps_hz": null,
+        "last_status": null,
+        "issues": [
+          {
+            "kind": "missing_end",
+            "message": "Unfinalized session; trailing samples may be lost."
+          },
+          {
+            "kind": "missing_stream",
+            "stream": "emg"
+          },
+          {
+            "kind": "missing_stream",
+            "stream": "foot"
+          },
+          {
+            "kind": "missing_stream",
+            "stream": "shank"
+          }
+        ],
+        "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
+        "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
+      },
+      "sd_commit_checks_pass": false,
+      "pass": true
+    },
+    {
+      "scenario": "header-write-failure",
+      "stream_started": false,
+      "reason": 1,
+      "disk_bytes": 0,
+      "live_bytes": 0,
+      "tasks_created": 0,
+      "tasks_deleted": 0,
+      "notifications": 0,
+      "writes": 1,
+      "syncs": 0,
+      "closes": 1,
+      "metadata_bytes": 0,
+      "profile": "pcb",
+      "sd_commit_checks_pass": false,
+      "pass": true
+    },
+    {
+      "scenario": "header-sync-failure",
+      "stream_started": false,
+      "reason": 1,
+      "disk_bytes": 4096,
+      "live_bytes": 0,
+      "tasks_created": 0,
+      "tasks_deleted": 0,
+      "notifications": 0,
+      "writes": 1,
+      "syncs": 1,
+      "closes": 1,
+      "metadata_bytes": 0,
+      "profile": "pcb",
+      "quality": {
+        "source_sha256": "a500fcf09cafa2129013eb823735f5b7e26065c4d2556ddc3cc0aff89db0e0ce",
+        "synthetic": true,
+        "counts": {
+          "emg": 0,
+          "foot": 0,
+          "shank": 0,
+          "status": 0,
+          "end": 0
+        },
+        "session_finalized": false,
+        "structurally_complete": false,
+        "no_detected_sample_loss": false,
+        "signal_checks_pass": true,
+        "research_ready": false,
+        "sequence_gaps": {
+          "emg": 0,
+          "foot": 0,
+          "shank": 0
+        },
+        "anomalies": {
+          "sequence_regressions": 0,
+          "timestamp_regressions": 0,
+          "emg_clipped_samples": 0,
+          "emg_out_of_range": 0,
+          "imu_invalid_samples": 0,
+          "imu_timestamp_anomalies": 0,
+          "timing_uncertain_records": 0,
+          "flagged_gap_records": 0
+        },
+        "emg_observed_skipped_slots": 0,
+        "emg_rate_from_host_timestamps_hz": null,
+        "last_status": null,
+        "issues": [
+          {
+            "kind": "missing_end",
+            "message": "Unfinalized session; trailing samples may be lost."
+          },
+          {
+            "kind": "missing_stream",
+            "stream": "emg"
+          },
+          {
+            "kind": "missing_stream",
+            "stream": "foot"
+          },
+          {
+            "kind": "missing_stream",
+            "stream": "shank"
+          }
+        ],
+        "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
+        "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
+      },
+      "sd_commit_checks_pass": false,
+      "pass": true
+    },
+    {
+      "scenario": "data-sync-failure",
+      "stream_started": true,
+      "reason": 1,
+      "disk_bytes": 21504,
+      "live_bytes": 17472,
+      "tasks_created": 2,
+      "tasks_deleted": 2,
+      "notifications": 1,
+      "writes": 4,
+      "syncs": 2,
+      "closes": 1,
+      "metadata_bytes": 1272,
+      "profile": "pcb",
+      "metadata_roundtrip_pass": true,
+      "live_end_reason_pass": true,
+      "laptop_stop_state_pass": true,
+      "quality": {
+        "source_sha256": "c065bee7aeae6ea8a5be3a25cfd4126e3519b26f244cf2e887c099d0c393fe16",
+        "synthetic": true,
+        "counts": {
+          "emg": 260,
+          "foot": 6,
+          "shank": 6,
+          "status": 0,
+          "end": 0
+        },
+        "session_finalized": false,
+        "structurally_complete": false,
+        "no_detected_sample_loss": false,
+        "signal_checks_pass": true,
+        "research_ready": false,
+        "sequence_gaps": {
+          "emg": 0,
+          "foot": 0,
+          "shank": 0
+        },
+        "anomalies": {
+          "sequence_regressions": 0,
+          "timestamp_regressions": 0,
+          "emg_clipped_samples": 0,
+          "emg_out_of_range": 0,
+          "imu_invalid_samples": 0,
+          "imu_timestamp_anomalies": 0,
+          "timing_uncertain_records": 12,
+          "flagged_gap_records": 0
+        },
+        "emg_observed_skipped_slots": 0,
+        "emg_rate_from_host_timestamps_hz": 8000.0,
+        "last_status": null,
+        "issues": [
+          {
+            "kind": "missing_end",
+            "message": "Unfinalized session; trailing samples may be lost."
+          }
+        ],
+        "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
+        "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
+      },
+      "sd_commit_checks_pass": false,
+      "pass": true
+    },
+    {
+      "scenario": "end-sync-failure",
+      "stream_started": true,
+      "reason": 1,
+      "disk_bytes": 21568,
+      "live_bytes": 17472,
+      "tasks_created": 2,
+      "tasks_deleted": 2,
+      "notifications": 1,
+      "writes": 5,
+      "syncs": 3,
+      "closes": 1,
+      "metadata_bytes": 1272,
+      "profile": "pcb",
+      "metadata_roundtrip_pass": true,
+      "live_end_reason_pass": true,
+      "laptop_stop_state_pass": true,
+      "quality": {
+        "source_sha256": "e11303fe992b2d9485c5270e6166556532e275c46f861e512c55e7222a6be94c",
+        "synthetic": true,
+        "counts": {
+          "emg": 260,
+          "foot": 6,
+          "shank": 6,
+          "status": 0,
+          "end": 1
+        },
+        "session_finalized": true,
+        "structurally_complete": true,
+        "no_detected_sample_loss": true,
+        "signal_checks_pass": true,
+        "research_ready": false,
+        "sequence_gaps": {
+          "emg": 0,
+          "foot": 0,
+          "shank": 0
+        },
+        "anomalies": {
+          "sequence_regressions": 0,
+          "timestamp_regressions": 0,
+          "emg_clipped_samples": 0,
+          "emg_out_of_range": 0,
+          "imu_invalid_samples": 0,
+          "imu_timestamp_anomalies": 0,
+          "timing_uncertain_records": 12,
+          "flagged_gap_records": 0
+        },
+        "emg_observed_skipped_slots": 0,
+        "emg_rate_from_host_timestamps_hz": 8000.0,
+        "last_status": {
+          "timer_missed": 0,
+          "queue_dropped": 0,
+          "imu_errors": 0,
+          "fifo_overflows": 0,
+          "adc_errors": 0,
+          "emg_records": 260,
+          "foot_records": 6,
+          "shank_records": 6,
+          "battery_mv": 3800,
+          "queue_high_water": 272
+        },
+        "issues": [],
+        "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
+        "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
+      },
+      "sd_commit_checks_pass": false,
+      "pass": true
+    },
+    {
+      "scenario": "close-failure",
+      "stream_started": true,
+      "reason": 1,
+      "disk_bytes": 21568,
+      "live_bytes": 17472,
+      "tasks_created": 2,
+      "tasks_deleted": 2,
+      "notifications": 1,
+      "writes": 5,
+      "syncs": 3,
+      "closes": 1,
+      "metadata_bytes": 1272,
+      "profile": "pcb",
+      "metadata_roundtrip_pass": true,
+      "live_end_reason_pass": true,
+      "laptop_stop_state_pass": true,
+      "quality": {
+        "source_sha256": "e11303fe992b2d9485c5270e6166556532e275c46f861e512c55e7222a6be94c",
+        "synthetic": true,
+        "counts": {
+          "emg": 260,
+          "foot": 6,
+          "shank": 6,
+          "status": 0,
+          "end": 1
+        },
+        "session_finalized": true,
+        "structurally_complete": true,
+        "no_detected_sample_loss": true,
+        "signal_checks_pass": true,
+        "research_ready": false,
+        "sequence_gaps": {
+          "emg": 0,
+          "foot": 0,
+          "shank": 0
+        },
+        "anomalies": {
+          "sequence_regressions": 0,
+          "timestamp_regressions": 0,
+          "emg_clipped_samples": 0,
+          "emg_out_of_range": 0,
+          "imu_invalid_samples": 0,
+          "imu_timestamp_anomalies": 0,
+          "timing_uncertain_records": 12,
+          "flagged_gap_records": 0
+        },
+        "emg_observed_skipped_slots": 0,
+        "emg_rate_from_host_timestamps_hz": 8000.0,
+        "last_status": {
+          "timer_missed": 0,
+          "queue_dropped": 0,
+          "imu_errors": 0,
+          "fifo_overflows": 0,
+          "adc_errors": 0,
+          "emg_records": 260,
+          "foot_records": 6,
+          "shank_records": 6,
+          "battery_mv": 3800,
+          "queue_high_water": 272
+        },
+        "issues": [],
+        "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
+        "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
+      },
+      "sd_commit_checks_pass": false,
+      "pass": true
+    },
+    {
+      "scenario": "emg-task-create-failure",
+      "stream_started": false,
+      "reason": 0,
+      "disk_bytes": 4096,
+      "live_bytes": 0,
+      "tasks_created": 1,
+      "tasks_deleted": 1,
+      "notifications": 0,
+      "writes": 1,
+      "syncs": 1,
+      "closes": 1,
+      "metadata_bytes": 1272,
+      "profile": "pcb",
+      "metadata_roundtrip_pass": true,
+      "quality": {
+        "source_sha256": "a500fcf09cafa2129013eb823735f5b7e26065c4d2556ddc3cc0aff89db0e0ce",
+        "synthetic": true,
+        "counts": {
+          "emg": 0,
+          "foot": 0,
+          "shank": 0,
+          "status": 0,
+          "end": 0
+        },
+        "session_finalized": false,
+        "structurally_complete": false,
+        "no_detected_sample_loss": false,
+        "signal_checks_pass": true,
+        "research_ready": false,
+        "sequence_gaps": {
+          "emg": 0,
+          "foot": 0,
+          "shank": 0
+        },
+        "anomalies": {
+          "sequence_regressions": 0,
+          "timestamp_regressions": 0,
+          "emg_clipped_samples": 0,
+          "emg_out_of_range": 0,
+          "imu_invalid_samples": 0,
+          "imu_timestamp_anomalies": 0,
+          "timing_uncertain_records": 0,
+          "flagged_gap_records": 0
+        },
+        "emg_observed_skipped_slots": 0,
+        "emg_rate_from_host_timestamps_hz": null,
+        "last_status": null,
+        "issues": [
+          {
+            "kind": "missing_end",
+            "message": "Unfinalized session; trailing samples may be lost."
+          },
+          {
+            "kind": "missing_stream",
+            "stream": "emg"
+          },
+          {
+            "kind": "missing_stream",
+            "stream": "foot"
+          },
+          {
+            "kind": "missing_stream",
+            "stream": "shank"
+          }
+        ],
+        "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
+        "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
+      },
+      "sd_commit_checks_pass": false,
+      "pass": true
+    },
+    {
+      "scenario": "imu-task-create-failure",
+      "stream_started": false,
+      "reason": 0,
+      "disk_bytes": 4096,
+      "live_bytes": 0,
+      "tasks_created": 1,
+      "tasks_deleted": 1,
+      "notifications": 1,
+      "writes": 1,
+      "syncs": 1,
+      "closes": 1,
+      "metadata_bytes": 1272,
+      "profile": "pcb",
+      "metadata_roundtrip_pass": true,
+      "quality": {
+        "source_sha256": "a500fcf09cafa2129013eb823735f5b7e26065c4d2556ddc3cc0aff89db0e0ce",
+        "synthetic": true,
+        "counts": {
+          "emg": 0,
+          "foot": 0,
+          "shank": 0,
+          "status": 0,
+          "end": 0
+        },
+        "session_finalized": false,
+        "structurally_complete": false,
+        "no_detected_sample_loss": false,
+        "signal_checks_pass": true,
+        "research_ready": false,
+        "sequence_gaps": {
+          "emg": 0,
+          "foot": 0,
+          "shank": 0
+        },
+        "anomalies": {
+          "sequence_regressions": 0,
+          "timestamp_regressions": 0,
+          "emg_clipped_samples": 0,
+          "emg_out_of_range": 0,
+          "imu_invalid_samples": 0,
+          "imu_timestamp_anomalies": 0,
+          "timing_uncertain_records": 0,
+          "flagged_gap_records": 0
+        },
+        "emg_observed_skipped_slots": 0,
+        "emg_rate_from_host_timestamps_hz": null,
+        "last_status": null,
+        "issues": [
+          {
+            "kind": "missing_end",
+            "message": "Unfinalized session; trailing samples may be lost."
+          },
+          {
+            "kind": "missing_stream",
+            "stream": "emg"
+          },
+          {
+            "kind": "missing_stream",
+            "stream": "foot"
+          },
+          {
+            "kind": "missing_stream",
+            "stream": "shank"
+          }
+        ],
+        "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
+        "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
+      },
+      "sd_commit_checks_pass": false,
+      "pass": true
+    },
+    {
+      "scenario": "imu-stop-failure",
+      "stream_started": true,
+      "reason": 3,
+      "disk_bytes": 21568,
+      "live_bytes": 17472,
+      "tasks_created": 2,
+      "tasks_deleted": 2,
+      "notifications": 1,
+      "writes": 5,
+      "syncs": 3,
+      "closes": 1,
+      "metadata_bytes": 1272,
+      "profile": "pcb",
+      "metadata_roundtrip_pass": true,
+      "live_end_reason_pass": true,
+      "laptop_stop_state_pass": true,
+      "sd_live_end_identical": true,
+      "quality": {
+        "source_sha256": "a123ee5147064e592b5f646a33fa99185d01af6da34251884ce97a4c744977c2",
+        "synthetic": true,
+        "counts": {
+          "emg": 260,
+          "foot": 6,
+          "shank": 6,
+          "status": 0,
+          "end": 1
+        },
+        "session_finalized": true,
+        "structurally_complete": false,
+        "no_detected_sample_loss": false,
+        "signal_checks_pass": true,
+        "research_ready": false,
+        "sequence_gaps": {
+          "emg": 0,
+          "foot": 0,
+          "shank": 0
+        },
+        "anomalies": {
+          "sequence_regressions": 0,
+          "timestamp_regressions": 0,
+          "emg_clipped_samples": 0,
+          "emg_out_of_range": 0,
+          "imu_invalid_samples": 0,
+          "imu_timestamp_anomalies": 0,
+          "timing_uncertain_records": 12,
+          "flagged_gap_records": 0
+        },
+        "emg_observed_skipped_slots": 0,
+        "emg_rate_from_host_timestamps_hz": 8000.0,
+        "last_status": {
+          "timer_missed": 0,
+          "queue_dropped": 0,
+          "imu_errors": 0,
+          "fifo_overflows": 0,
+          "adc_errors": 0,
+          "emg_records": 260,
+          "foot_records": 6,
+          "shank_records": 6,
+          "battery_mv": 3800,
+          "queue_high_water": 272
+        },
+        "issues": [
+          {
+            "kind": "abnormal_stop",
+            "reason": 3
+          }
+        ],
+        "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
+        "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
+      },
+      "sd_commit_checks_pass": true,
+      "pass": true
+    },
+    {
+      "scenario": "usb-attached",
+      "stream_started": false,
+      "reason": 0,
+      "disk_bytes": 0,
+      "live_bytes": 0,
+      "tasks_created": 0,
+      "tasks_deleted": 0,
+      "notifications": 0,
+      "writes": 0,
+      "syncs": 0,
+      "closes": 0,
+      "metadata_bytes": 0,
+      "profile": "pcb",
+      "sd_commit_checks_pass": false,
+      "pass": true
+    },
+    {
+      "scenario": "usb-during-recording",
+      "stream_started": true,
+      "reason": 7,
+      "disk_bytes": 21568,
+      "live_bytes": 17472,
+      "tasks_created": 2,
+      "tasks_deleted": 2,
+      "notifications": 1,
+      "writes": 5,
+      "syncs": 3,
+      "closes": 1,
+      "metadata_bytes": 1272,
+      "profile": "pcb",
+      "metadata_roundtrip_pass": true,
+      "live_end_reason_pass": true,
+      "laptop_stop_state_pass": true,
+      "sd_live_end_identical": true,
+      "quality": {
+        "source_sha256": "d3b077c08f2d6c1414bda59f0bbcf965ad19dfb57a9b7842fd8562f2973735e9",
+        "synthetic": true,
+        "counts": {
+          "emg": 260,
+          "foot": 6,
+          "shank": 6,
+          "status": 0,
+          "end": 1
+        },
+        "session_finalized": true,
+        "structurally_complete": false,
+        "no_detected_sample_loss": false,
+        "signal_checks_pass": true,
+        "research_ready": false,
+        "sequence_gaps": {
+          "emg": 0,
+          "foot": 0,
+          "shank": 0
+        },
+        "anomalies": {
+          "sequence_regressions": 0,
+          "timestamp_regressions": 0,
+          "emg_clipped_samples": 0,
+          "emg_out_of_range": 0,
+          "imu_invalid_samples": 0,
+          "imu_timestamp_anomalies": 0,
+          "timing_uncertain_records": 12,
+          "flagged_gap_records": 0
+        },
+        "emg_observed_skipped_slots": 0,
+        "emg_rate_from_host_timestamps_hz": 8000.0,
+        "last_status": {
+          "timer_missed": 0,
+          "queue_dropped": 0,
+          "imu_errors": 0,
+          "fifo_overflows": 0,
+          "adc_errors": 0,
+          "emg_records": 260,
+          "foot_records": 6,
+          "shank_records": 6,
+          "battery_mv": 3800,
+          "queue_high_water": 272
+        },
+        "issues": [
+          {
+            "kind": "abnormal_stop",
+            "reason": 7
+          }
+        ],
+        "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
+        "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
+      },
+      "sd_commit_checks_pass": true,
+      "pass": true
+    },
+    {
+      "scenario": "battery-low",
+      "stream_started": true,
+      "reason": 4,
+      "disk_bytes": 21760,
+      "live_bytes": 17664,
+      "tasks_created": 2,
+      "tasks_deleted": 2,
+      "notifications": 1,
+      "writes": 7,
+      "syncs": 6,
+      "closes": 1,
+      "metadata_bytes": 1272,
+      "profile": "pcb",
+      "metadata_roundtrip_pass": true,
+      "live_end_reason_pass": true,
+      "laptop_stop_state_pass": true,
+      "sd_live_end_identical": true,
+      "quality": {
+        "source_sha256": "11c9b5598eb0dfe52dc3ff64057873ba22ae9afd8e0a4deddc015c959c49fde1",
+        "synthetic": true,
+        "counts": {
+          "emg": 260,
+          "foot": 6,
+          "shank": 6,
+          "status": 3,
+          "end": 1
+        },
+        "session_finalized": true,
+        "structurally_complete": false,
+        "no_detected_sample_loss": false,
+        "signal_checks_pass": true,
+        "research_ready": false,
+        "sequence_gaps": {
+          "emg": 0,
+          "foot": 0,
+          "shank": 0
+        },
+        "anomalies": {
+          "sequence_regressions": 0,
+          "timestamp_regressions": 0,
+          "emg_clipped_samples": 0,
+          "emg_out_of_range": 0,
+          "imu_invalid_samples": 0,
+          "imu_timestamp_anomalies": 0,
+          "timing_uncertain_records": 12,
+          "flagged_gap_records": 0
+        },
+        "emg_observed_skipped_slots": 0,
+        "emg_rate_from_host_timestamps_hz": 8000.0,
+        "last_status": {
+          "timer_missed": 0,
+          "queue_dropped": 0,
+          "imu_errors": 0,
+          "fifo_overflows": 0,
+          "adc_errors": 0,
+          "emg_records": 260,
+          "foot_records": 6,
+          "shank_records": 6,
+          "battery_mv": 3200,
+          "queue_high_water": 272
+        },
+        "issues": [
+          {
+            "kind": "abnormal_stop",
+            "reason": 4
+          }
+        ],
+        "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
+        "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
+      },
+      "sd_commit_checks_pass": true,
+      "pass": true
+    },
+    {
+      "scenario": "card-full",
+      "stream_started": true,
+      "reason": 1,
+      "disk_bytes": 21568,
+      "live_bytes": 17536,
+      "tasks_created": 2,
+      "tasks_deleted": 2,
+      "notifications": 1,
+      "writes": 4,
+      "syncs": 2,
+      "closes": 1,
+      "metadata_bytes": 1272,
+      "profile": "pcb",
+      "metadata_roundtrip_pass": true,
+      "live_end_reason_pass": true,
+      "laptop_stop_state_pass": true,
+      "quality": {
+        "source_sha256": "c2538f03bdd061c3513fce495a4f0197d5c1591f2098484681a43a763b631ee1",
+        "synthetic": true,
+        "counts": {
+          "emg": 260,
+          "foot": 6,
+          "shank": 6,
+          "status": 1,
+          "end": 0
+        },
+        "session_finalized": false,
+        "structurally_complete": false,
+        "no_detected_sample_loss": false,
+        "signal_checks_pass": true,
+        "research_ready": false,
+        "sequence_gaps": {
+          "emg": 0,
+          "foot": 0,
+          "shank": 0
+        },
+        "anomalies": {
+          "sequence_regressions": 0,
+          "timestamp_regressions": 0,
+          "emg_clipped_samples": 0,
+          "emg_out_of_range": 0,
+          "imu_invalid_samples": 0,
+          "imu_timestamp_anomalies": 0,
+          "timing_uncertain_records": 12,
+          "flagged_gap_records": 0
+        },
+        "emg_observed_skipped_slots": 0,
+        "emg_rate_from_host_timestamps_hz": 8000.0,
+        "last_status": {
+          "timer_missed": 0,
+          "queue_dropped": 0,
+          "imu_errors": 0,
+          "fifo_overflows": 0,
+          "adc_errors": 0,
+          "emg_records": 260,
+          "foot_records": 6,
+          "shank_records": 6,
+          "battery_mv": 3800,
+          "queue_high_water": 272
+        },
+        "issues": [
+          {
+            "kind": "missing_end",
+            "message": "Unfinalized session; trailing samples may be lost."
+          }
+        ],
+        "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
+        "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
+      },
+      "sd_commit_checks_pass": false,
+      "pass": true
+    },
+    {
+      "scenario": "normal",
+      "stream_started": true,
+      "reason": 0,
+      "disk_bytes": 21568,
+      "live_bytes": 17472,
+      "tasks_created": 2,
+      "tasks_deleted": 2,
+      "notifications": 1,
+      "writes": 5,
+      "syncs": 3,
+      "closes": 1,
+      "metadata_bytes": 1279,
+      "profile": "breadboard",
+      "metadata_roundtrip_pass": true,
+      "live_end_reason_pass": true,
+      "laptop_stop_state_pass": true,
+      "sd_live_end_identical": true,
+      "quality": {
+        "source_sha256": "ad1947acadaaa2adde27a93991d0a5fa9a3f6e412f876717b1dc8509968237a0",
+        "synthetic": true,
+        "counts": {
+          "emg": 260,
+          "foot": 6,
+          "shank": 6,
+          "status": 0,
+          "end": 1
+        },
+        "session_finalized": true,
+        "structurally_complete": true,
+        "no_detected_sample_loss": true,
+        "signal_checks_pass": true,
+        "research_ready": false,
+        "sequence_gaps": {
+          "emg": 0,
+          "foot": 0,
+          "shank": 0
+        },
+        "anomalies": {
+          "sequence_regressions": 0,
+          "timestamp_regressions": 0,
+          "emg_clipped_samples": 0,
+          "emg_out_of_range": 0,
+          "imu_invalid_samples": 0,
+          "imu_timestamp_anomalies": 0,
+          "timing_uncertain_records": 12,
+          "flagged_gap_records": 0
+        },
+        "emg_observed_skipped_slots": 0,
+        "emg_rate_from_host_timestamps_hz": 8000.0,
+        "last_status": {
+          "timer_missed": 0,
+          "queue_dropped": 0,
+          "imu_errors": 0,
+          "fifo_overflows": 0,
+          "adc_errors": 0,
+          "emg_records": 260,
+          "foot_records": 6,
+          "shank_records": 6,
+          "battery_mv": 3800,
+          "queue_high_water": 272
+        },
+        "issues": [],
+        "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
+        "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
+      },
+      "sd_commit_checks_pass": true,
+      "pass": true
+    },
+    {
+      "scenario": "short-writes-eintr",
+      "stream_started": true,
+      "reason": 0,
+      "disk_bytes": 21568,
+      "live_bytes": 17472,
+      "tasks_created": 2,
+      "tasks_deleted": 2,
+      "notifications": 1,
+      "writes": 69,
+      "syncs": 3,
+      "closes": 1,
+      "metadata_bytes": 1279,
+      "profile": "breadboard",
+      "metadata_roundtrip_pass": true,
+      "live_end_reason_pass": true,
+      "laptop_stop_state_pass": true,
+      "sd_live_end_identical": true,
+      "quality": {
+        "source_sha256": "ad1947acadaaa2adde27a93991d0a5fa9a3f6e412f876717b1dc8509968237a0",
+        "synthetic": true,
+        "counts": {
+          "emg": 260,
+          "foot": 6,
+          "shank": 6,
+          "status": 0,
+          "end": 1
+        },
+        "session_finalized": true,
+        "structurally_complete": true,
+        "no_detected_sample_loss": true,
+        "signal_checks_pass": true,
+        "research_ready": false,
+        "sequence_gaps": {
+          "emg": 0,
+          "foot": 0,
+          "shank": 0
+        },
+        "anomalies": {
+          "sequence_regressions": 0,
+          "timestamp_regressions": 0,
+          "emg_clipped_samples": 0,
+          "emg_out_of_range": 0,
+          "imu_invalid_samples": 0,
+          "imu_timestamp_anomalies": 0,
+          "timing_uncertain_records": 12,
+          "flagged_gap_records": 0
+        },
+        "emg_observed_skipped_slots": 0,
+        "emg_rate_from_host_timestamps_hz": 8000.0,
+        "last_status": {
+          "timer_missed": 0,
+          "queue_dropped": 0,
+          "imu_errors": 0,
+          "fifo_overflows": 0,
+          "adc_errors": 0,
+          "emg_records": 260,
+          "foot_records": 6,
+          "shank_records": 6,
+          "battery_mv": 3800,
+          "queue_high_water": 272
+        },
+        "issues": [],
+        "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
+        "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
+      },
+      "sd_commit_checks_pass": true,
+      "pass": true
+    },
+    {
+      "scenario": "worker-fault-before-join",
+      "stream_started": true,
+      "reason": 6,
+      "disk_bytes": 21568,
+      "live_bytes": 17472,
+      "tasks_created": 2,
+      "tasks_deleted": 2,
+      "notifications": 1,
+      "writes": 5,
+      "syncs": 3,
+      "closes": 1,
+      "metadata_bytes": 1279,
+      "profile": "breadboard",
+      "metadata_roundtrip_pass": true,
+      "live_end_reason_pass": true,
+      "laptop_stop_state_pass": true,
+      "sd_live_end_identical": true,
+      "quality": {
+        "source_sha256": "f318fc02c8c3f01cf8835e7b25c1388a803b41fd83339fad59295a30250db1a4",
+        "synthetic": true,
+        "counts": {
+          "emg": 260,
+          "foot": 6,
+          "shank": 6,
+          "status": 0,
+          "end": 1
+        },
+        "session_finalized": true,
+        "structurally_complete": false,
+        "no_detected_sample_loss": false,
+        "signal_checks_pass": true,
+        "research_ready": false,
+        "sequence_gaps": {
+          "emg": 0,
+          "foot": 0,
+          "shank": 0
+        },
+        "anomalies": {
+          "sequence_regressions": 0,
+          "timestamp_regressions": 0,
+          "emg_clipped_samples": 0,
+          "emg_out_of_range": 0,
+          "imu_invalid_samples": 0,
+          "imu_timestamp_anomalies": 0,
+          "timing_uncertain_records": 12,
+          "flagged_gap_records": 0
+        },
+        "emg_observed_skipped_slots": 0,
+        "emg_rate_from_host_timestamps_hz": 8000.0,
+        "last_status": {
+          "timer_missed": 0,
+          "queue_dropped": 0,
+          "imu_errors": 0,
+          "fifo_overflows": 0,
+          "adc_errors": 0,
+          "emg_records": 260,
+          "foot_records": 6,
+          "shank_records": 6,
+          "battery_mv": 3800,
+          "queue_high_water": 272
+        },
+        "issues": [
+          {
+            "kind": "abnormal_stop",
+            "reason": 6
+          }
+        ],
+        "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
+        "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
+      },
+      "sd_commit_checks_pass": true,
+      "pass": true
+    },
+    {
+      "scenario": "queue-overflow",
+      "stream_started": true,
+      "reason": 2,
+      "disk_bytes": 135232,
+      "live_bytes": 131136,
+      "tasks_created": 2,
+      "tasks_deleted": 2,
+      "notifications": 1,
+      "writes": 18,
+      "syncs": 3,
+      "closes": 1,
+      "metadata_bytes": 1279,
+      "profile": "breadboard",
+      "metadata_roundtrip_pass": true,
+      "live_end_reason_pass": true,
+      "laptop_stop_state_pass": true,
+      "sd_live_end_identical": true,
+      "quality": {
+        "source_sha256": "22ae5632269b68c7181bde7ecfb2129985f32d7d24c6af19d2a55b050308ba66",
+        "synthetic": true,
+        "counts": {
+          "emg": 1952,
+          "foot": 48,
+          "shank": 48,
+          "status": 0,
+          "end": 1
+        },
+        "session_finalized": true,
+        "structurally_complete": false,
+        "no_detected_sample_loss": false,
+        "signal_checks_pass": true,
+        "research_ready": false,
+        "sequence_gaps": {
+          "emg": 0,
+          "foot": 0,
+          "shank": 0
+        },
+        "anomalies": {
+          "sequence_regressions": 0,
+          "timestamp_regressions": 0,
+          "emg_clipped_samples": 0,
+          "emg_out_of_range": 0,
+          "imu_invalid_samples": 0,
+          "imu_timestamp_anomalies": 0,
+          "timing_uncertain_records": 96,
+          "flagged_gap_records": 0
+        },
+        "emg_observed_skipped_slots": 0,
+        "emg_rate_from_host_timestamps_hz": 8000.0,
+        "last_status": {
+          "timer_missed": 0,
+          "queue_dropped": 1,
+          "imu_errors": 0,
+          "fifo_overflows": 0,
+          "adc_errors": 0,
+          "emg_records": 1953,
+          "foot_records": 48,
+          "shank_records": 48,
+          "battery_mv": 3800,
+          "queue_high_water": 2048
+        },
+        "issues": [
+          {
+            "kind": "counter_mismatch",
+            "stream": "emg",
+            "reported": 1953,
+            "decoded": 1952
+          },
+          {
+            "kind": "abnormal_stop",
+            "reason": 2
+          }
+        ],
+        "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
+        "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
+      },
+      "sd_commit_checks_pass": true,
+      "pass": true
+    },
+    {
+      "scenario": "body-write-failure",
+      "stream_started": true,
+      "reason": 1,
+      "disk_bytes": 4096,
+      "live_bytes": 8256,
+      "tasks_created": 2,
+      "tasks_deleted": 2,
+      "notifications": 1,
+      "writes": 2,
+      "syncs": 1,
+      "closes": 1,
+      "metadata_bytes": 1279,
+      "profile": "breadboard",
+      "metadata_roundtrip_pass": true,
+      "live_end_reason_pass": true,
+      "laptop_stop_state_pass": true,
+      "quality": {
+        "source_sha256": "392982216dd8cde4c398ce7afe0f941ca6cb91b435d7677c2a7bb2c98329205f",
+        "synthetic": true,
+        "counts": {
+          "emg": 0,
+          "foot": 0,
+          "shank": 0,
+          "status": 0,
+          "end": 0
+        },
+        "session_finalized": false,
+        "structurally_complete": false,
+        "no_detected_sample_loss": false,
+        "signal_checks_pass": true,
+        "research_ready": false,
+        "sequence_gaps": {
+          "emg": 0,
+          "foot": 0,
+          "shank": 0
+        },
+        "anomalies": {
+          "sequence_regressions": 0,
+          "timestamp_regressions": 0,
+          "emg_clipped_samples": 0,
+          "emg_out_of_range": 0,
+          "imu_invalid_samples": 0,
+          "imu_timestamp_anomalies": 0,
+          "timing_uncertain_records": 0,
+          "flagged_gap_records": 0
+        },
+        "emg_observed_skipped_slots": 0,
+        "emg_rate_from_host_timestamps_hz": null,
+        "last_status": null,
+        "issues": [
+          {
+            "kind": "missing_end",
+            "message": "Unfinalized session; trailing samples may be lost."
+          },
+          {
+            "kind": "missing_stream",
+            "stream": "emg"
+          },
+          {
+            "kind": "missing_stream",
+            "stream": "foot"
+          },
+          {
+            "kind": "missing_stream",
+            "stream": "shank"
+          }
+        ],
+        "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
+        "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
+      },
+      "sd_commit_checks_pass": false,
+      "pass": true
+    },
+    {
+      "scenario": "partial-write-failure",
+      "stream_started": true,
+      "reason": 1,
+      "disk_bytes": 4241,
+      "live_bytes": 8256,
+      "tasks_created": 2,
+      "tasks_deleted": 2,
+      "notifications": 1,
+      "writes": 3,
+      "syncs": 1,
+      "closes": 1,
+      "metadata_bytes": 1279,
+      "profile": "breadboard",
+      "metadata_roundtrip_pass": true,
+      "live_end_reason_pass": true,
+      "laptop_stop_state_pass": true,
+      "quality": {
+        "source_sha256": "d5bffc49f5330db718adb7f5aacd68a047c5b288b7bf087725bbe3ecd5cdc662",
+        "synthetic": true,
+        "counts": {
+          "emg": 2,
+          "foot": 0,
+          "shank": 0,
+          "status": 0,
+          "end": 0
+        },
+        "session_finalized": false,
+        "structurally_complete": false,
+        "no_detected_sample_loss": false,
+        "signal_checks_pass": true,
+        "research_ready": false,
+        "sequence_gaps": {
+          "emg": 0,
+          "foot": 0,
+          "shank": 0
+        },
+        "anomalies": {
+          "sequence_regressions": 0,
+          "timestamp_regressions": 0,
+          "emg_clipped_samples": 0,
+          "emg_out_of_range": 0,
+          "imu_invalid_samples": 0,
+          "imu_timestamp_anomalies": 0,
+          "timing_uncertain_records": 0,
+          "flagged_gap_records": 0
+        },
+        "emg_observed_skipped_slots": 0,
+        "emg_rate_from_host_timestamps_hz": 8000.0,
+        "last_status": null,
+        "issues": [
+          {
+            "kind": "corrupt_or_truncated_tail",
+            "start": 4224,
+            "end": 4241
+          },
+          {
+            "kind": "missing_end",
+            "message": "Unfinalized session; trailing samples may be lost."
+          },
+          {
+            "kind": "missing_stream",
+            "stream": "foot"
+          },
+          {
+            "kind": "missing_stream",
+            "stream": "shank"
+          }
+        ],
+        "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
+        "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
+      },
+      "sd_commit_checks_pass": false,
+      "pass": true
+    },
+    {
+      "scenario": "zero-byte-write",
+      "stream_started": true,
+      "reason": 1,
+      "disk_bytes": 4096,
+      "live_bytes": 8256,
+      "tasks_created": 2,
+      "tasks_deleted": 2,
+      "notifications": 1,
+      "writes": 2,
+      "syncs": 1,
+      "closes": 1,
+      "metadata_bytes": 1279,
+      "profile": "breadboard",
+      "metadata_roundtrip_pass": true,
+      "live_end_reason_pass": true,
+      "laptop_stop_state_pass": true,
+      "quality": {
+        "source_sha256": "392982216dd8cde4c398ce7afe0f941ca6cb91b435d7677c2a7bb2c98329205f",
+        "synthetic": true,
+        "counts": {
+          "emg": 0,
+          "foot": 0,
+          "shank": 0,
+          "status": 0,
+          "end": 0
+        },
+        "session_finalized": false,
+        "structurally_complete": false,
+        "no_detected_sample_loss": false,
+        "signal_checks_pass": true,
+        "research_ready": false,
+        "sequence_gaps": {
+          "emg": 0,
+          "foot": 0,
+          "shank": 0
+        },
+        "anomalies": {
+          "sequence_regressions": 0,
+          "timestamp_regressions": 0,
+          "emg_clipped_samples": 0,
+          "emg_out_of_range": 0,
+          "imu_invalid_samples": 0,
+          "imu_timestamp_anomalies": 0,
+          "timing_uncertain_records": 0,
+          "flagged_gap_records": 0
+        },
+        "emg_observed_skipped_slots": 0,
+        "emg_rate_from_host_timestamps_hz": null,
+        "last_status": null,
+        "issues": [
+          {
+            "kind": "missing_end",
+            "message": "Unfinalized session; trailing samples may be lost."
+          },
+          {
+            "kind": "missing_stream",
+            "stream": "emg"
+          },
+          {
+            "kind": "missing_stream",
+            "stream": "foot"
+          },
+          {
+            "kind": "missing_stream",
+            "stream": "shank"
+          }
+        ],
+        "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
+        "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
+      },
+      "sd_commit_checks_pass": false,
+      "pass": true
+    },
+    {
+      "scenario": "header-write-failure",
+      "stream_started": false,
+      "reason": 1,
+      "disk_bytes": 0,
+      "live_bytes": 0,
+      "tasks_created": 0,
+      "tasks_deleted": 0,
+      "notifications": 0,
+      "writes": 1,
+      "syncs": 0,
+      "closes": 1,
+      "metadata_bytes": 0,
+      "profile": "breadboard",
+      "sd_commit_checks_pass": false,
+      "pass": true
+    },
+    {
+      "scenario": "header-sync-failure",
+      "stream_started": false,
+      "reason": 1,
+      "disk_bytes": 4096,
+      "live_bytes": 0,
+      "tasks_created": 0,
+      "tasks_deleted": 0,
+      "notifications": 0,
+      "writes": 1,
+      "syncs": 1,
+      "closes": 1,
+      "metadata_bytes": 0,
+      "profile": "breadboard",
+      "quality": {
+        "source_sha256": "392982216dd8cde4c398ce7afe0f941ca6cb91b435d7677c2a7bb2c98329205f",
+        "synthetic": true,
+        "counts": {
+          "emg": 0,
+          "foot": 0,
+          "shank": 0,
+          "status": 0,
+          "end": 0
+        },
+        "session_finalized": false,
+        "structurally_complete": false,
+        "no_detected_sample_loss": false,
+        "signal_checks_pass": true,
+        "research_ready": false,
+        "sequence_gaps": {
+          "emg": 0,
+          "foot": 0,
+          "shank": 0
+        },
+        "anomalies": {
+          "sequence_regressions": 0,
+          "timestamp_regressions": 0,
+          "emg_clipped_samples": 0,
+          "emg_out_of_range": 0,
+          "imu_invalid_samples": 0,
+          "imu_timestamp_anomalies": 0,
+          "timing_uncertain_records": 0,
+          "flagged_gap_records": 0
+        },
+        "emg_observed_skipped_slots": 0,
+        "emg_rate_from_host_timestamps_hz": null,
+        "last_status": null,
+        "issues": [
+          {
+            "kind": "missing_end",
+            "message": "Unfinalized session; trailing samples may be lost."
+          },
+          {
+            "kind": "missing_stream",
+            "stream": "emg"
+          },
+          {
+            "kind": "missing_stream",
+            "stream": "foot"
+          },
+          {
+            "kind": "missing_stream",
+            "stream": "shank"
+          }
+        ],
+        "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
+        "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
+      },
+      "sd_commit_checks_pass": false,
+      "pass": true
+    },
+    {
+      "scenario": "data-sync-failure",
+      "stream_started": true,
+      "reason": 1,
+      "disk_bytes": 21504,
+      "live_bytes": 17472,
+      "tasks_created": 2,
+      "tasks_deleted": 2,
+      "notifications": 1,
+      "writes": 4,
+      "syncs": 2,
+      "closes": 1,
+      "metadata_bytes": 1279,
+      "profile": "breadboard",
+      "metadata_roundtrip_pass": true,
+      "live_end_reason_pass": true,
+      "laptop_stop_state_pass": true,
+      "quality": {
+        "source_sha256": "524405ee94ce76dbb1c329531620f37d4779782679256a989a71b3c25b8989a3",
+        "synthetic": true,
+        "counts": {
+          "emg": 260,
+          "foot": 6,
+          "shank": 6,
+          "status": 0,
+          "end": 0
+        },
+        "session_finalized": false,
+        "structurally_complete": false,
+        "no_detected_sample_loss": false,
+        "signal_checks_pass": true,
+        "research_ready": false,
+        "sequence_gaps": {
+          "emg": 0,
+          "foot": 0,
+          "shank": 0
+        },
+        "anomalies": {
+          "sequence_regressions": 0,
+          "timestamp_regressions": 0,
+          "emg_clipped_samples": 0,
+          "emg_out_of_range": 0,
+          "imu_invalid_samples": 0,
+          "imu_timestamp_anomalies": 0,
+          "timing_uncertain_records": 12,
+          "flagged_gap_records": 0
+        },
+        "emg_observed_skipped_slots": 0,
+        "emg_rate_from_host_timestamps_hz": 8000.0,
+        "last_status": null,
+        "issues": [
+          {
+            "kind": "missing_end",
+            "message": "Unfinalized session; trailing samples may be lost."
+          }
+        ],
+        "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
+        "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
+      },
+      "sd_commit_checks_pass": false,
+      "pass": true
+    },
+    {
+      "scenario": "end-sync-failure",
+      "stream_started": true,
+      "reason": 1,
+      "disk_bytes": 21568,
+      "live_bytes": 17472,
+      "tasks_created": 2,
+      "tasks_deleted": 2,
+      "notifications": 1,
+      "writes": 5,
+      "syncs": 3,
+      "closes": 1,
+      "metadata_bytes": 1279,
+      "profile": "breadboard",
+      "metadata_roundtrip_pass": true,
+      "live_end_reason_pass": true,
+      "laptop_stop_state_pass": true,
+      "quality": {
+        "source_sha256": "ad1947acadaaa2adde27a93991d0a5fa9a3f6e412f876717b1dc8509968237a0",
+        "synthetic": true,
+        "counts": {
+          "emg": 260,
+          "foot": 6,
+          "shank": 6,
+          "status": 0,
+          "end": 1
+        },
+        "session_finalized": true,
+        "structurally_complete": true,
+        "no_detected_sample_loss": true,
+        "signal_checks_pass": true,
+        "research_ready": false,
+        "sequence_gaps": {
+          "emg": 0,
+          "foot": 0,
+          "shank": 0
+        },
+        "anomalies": {
+          "sequence_regressions": 0,
+          "timestamp_regressions": 0,
+          "emg_clipped_samples": 0,
+          "emg_out_of_range": 0,
+          "imu_invalid_samples": 0,
+          "imu_timestamp_anomalies": 0,
+          "timing_uncertain_records": 12,
+          "flagged_gap_records": 0
+        },
+        "emg_observed_skipped_slots": 0,
+        "emg_rate_from_host_timestamps_hz": 8000.0,
+        "last_status": {
+          "timer_missed": 0,
+          "queue_dropped": 0,
+          "imu_errors": 0,
+          "fifo_overflows": 0,
+          "adc_errors": 0,
+          "emg_records": 260,
+          "foot_records": 6,
+          "shank_records": 6,
+          "battery_mv": 3800,
+          "queue_high_water": 272
+        },
+        "issues": [],
+        "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
+        "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
+      },
+      "sd_commit_checks_pass": false,
+      "pass": true
+    },
+    {
+      "scenario": "close-failure",
+      "stream_started": true,
+      "reason": 1,
+      "disk_bytes": 21568,
+      "live_bytes": 17472,
+      "tasks_created": 2,
+      "tasks_deleted": 2,
+      "notifications": 1,
+      "writes": 5,
+      "syncs": 3,
+      "closes": 1,
+      "metadata_bytes": 1279,
+      "profile": "breadboard",
+      "metadata_roundtrip_pass": true,
+      "live_end_reason_pass": true,
+      "laptop_stop_state_pass": true,
+      "quality": {
+        "source_sha256": "ad1947acadaaa2adde27a93991d0a5fa9a3f6e412f876717b1dc8509968237a0",
+        "synthetic": true,
+        "counts": {
+          "emg": 260,
+          "foot": 6,
+          "shank": 6,
+          "status": 0,
+          "end": 1
+        },
+        "session_finalized": true,
+        "structurally_complete": true,
+        "no_detected_sample_loss": true,
+        "signal_checks_pass": true,
+        "research_ready": false,
+        "sequence_gaps": {
+          "emg": 0,
+          "foot": 0,
+          "shank": 0
+        },
+        "anomalies": {
+          "sequence_regressions": 0,
+          "timestamp_regressions": 0,
+          "emg_clipped_samples": 0,
+          "emg_out_of_range": 0,
+          "imu_invalid_samples": 0,
+          "imu_timestamp_anomalies": 0,
+          "timing_uncertain_records": 12,
+          "flagged_gap_records": 0
+        },
+        "emg_observed_skipped_slots": 0,
+        "emg_rate_from_host_timestamps_hz": 8000.0,
+        "last_status": {
+          "timer_missed": 0,
+          "queue_dropped": 0,
+          "imu_errors": 0,
+          "fifo_overflows": 0,
+          "adc_errors": 0,
+          "emg_records": 260,
+          "foot_records": 6,
+          "shank_records": 6,
+          "battery_mv": 3800,
+          "queue_high_water": 272
+        },
+        "issues": [],
+        "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
+        "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
+      },
+      "sd_commit_checks_pass": false,
+      "pass": true
+    },
+    {
+      "scenario": "emg-task-create-failure",
+      "stream_started": false,
+      "reason": 0,
+      "disk_bytes": 4096,
+      "live_bytes": 0,
+      "tasks_created": 1,
+      "tasks_deleted": 1,
+      "notifications": 0,
+      "writes": 1,
+      "syncs": 1,
+      "closes": 1,
+      "metadata_bytes": 1279,
+      "profile": "breadboard",
+      "metadata_roundtrip_pass": true,
+      "quality": {
+        "source_sha256": "392982216dd8cde4c398ce7afe0f941ca6cb91b435d7677c2a7bb2c98329205f",
+        "synthetic": true,
+        "counts": {
+          "emg": 0,
+          "foot": 0,
+          "shank": 0,
+          "status": 0,
+          "end": 0
+        },
+        "session_finalized": false,
+        "structurally_complete": false,
+        "no_detected_sample_loss": false,
+        "signal_checks_pass": true,
+        "research_ready": false,
+        "sequence_gaps": {
+          "emg": 0,
+          "foot": 0,
+          "shank": 0
+        },
+        "anomalies": {
+          "sequence_regressions": 0,
+          "timestamp_regressions": 0,
+          "emg_clipped_samples": 0,
+          "emg_out_of_range": 0,
+          "imu_invalid_samples": 0,
+          "imu_timestamp_anomalies": 0,
+          "timing_uncertain_records": 0,
+          "flagged_gap_records": 0
+        },
+        "emg_observed_skipped_slots": 0,
+        "emg_rate_from_host_timestamps_hz": null,
+        "last_status": null,
+        "issues": [
+          {
+            "kind": "missing_end",
+            "message": "Unfinalized session; trailing samples may be lost."
+          },
+          {
+            "kind": "missing_stream",
+            "stream": "emg"
+          },
+          {
+            "kind": "missing_stream",
+            "stream": "foot"
+          },
+          {
+            "kind": "missing_stream",
+            "stream": "shank"
+          }
+        ],
+        "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
+        "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
+      },
+      "sd_commit_checks_pass": false,
+      "pass": true
+    },
+    {
+      "scenario": "imu-task-create-failure",
+      "stream_started": false,
+      "reason": 0,
+      "disk_bytes": 4096,
+      "live_bytes": 0,
+      "tasks_created": 1,
+      "tasks_deleted": 1,
+      "notifications": 1,
+      "writes": 1,
+      "syncs": 1,
+      "closes": 1,
+      "metadata_bytes": 1279,
+      "profile": "breadboard",
+      "metadata_roundtrip_pass": true,
+      "quality": {
+        "source_sha256": "392982216dd8cde4c398ce7afe0f941ca6cb91b435d7677c2a7bb2c98329205f",
+        "synthetic": true,
+        "counts": {
+          "emg": 0,
+          "foot": 0,
+          "shank": 0,
+          "status": 0,
+          "end": 0
+        },
+        "session_finalized": false,
+        "structurally_complete": false,
+        "no_detected_sample_loss": false,
+        "signal_checks_pass": true,
+        "research_ready": false,
+        "sequence_gaps": {
+          "emg": 0,
+          "foot": 0,
+          "shank": 0
+        },
+        "anomalies": {
+          "sequence_regressions": 0,
+          "timestamp_regressions": 0,
+          "emg_clipped_samples": 0,
+          "emg_out_of_range": 0,
+          "imu_invalid_samples": 0,
+          "imu_timestamp_anomalies": 0,
+          "timing_uncertain_records": 0,
+          "flagged_gap_records": 0
+        },
+        "emg_observed_skipped_slots": 0,
+        "emg_rate_from_host_timestamps_hz": null,
+        "last_status": null,
+        "issues": [
+          {
+            "kind": "missing_end",
+            "message": "Unfinalized session; trailing samples may be lost."
+          },
+          {
+            "kind": "missing_stream",
+            "stream": "emg"
+          },
+          {
+            "kind": "missing_stream",
+            "stream": "foot"
+          },
+          {
+            "kind": "missing_stream",
+            "stream": "shank"
+          }
+        ],
+        "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
+        "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
+      },
+      "sd_commit_checks_pass": false,
+      "pass": true
+    },
+    {
+      "scenario": "imu-stop-failure",
+      "stream_started": true,
+      "reason": 3,
+      "disk_bytes": 21568,
+      "live_bytes": 17472,
+      "tasks_created": 2,
+      "tasks_deleted": 2,
+      "notifications": 1,
+      "writes": 5,
+      "syncs": 3,
+      "closes": 1,
+      "metadata_bytes": 1279,
+      "profile": "breadboard",
+      "metadata_roundtrip_pass": true,
+      "live_end_reason_pass": true,
+      "laptop_stop_state_pass": true,
+      "sd_live_end_identical": true,
+      "quality": {
+        "source_sha256": "20475ad85589047b51faee38c38d8505f2b6a7c9334a984131e092d760933ef0",
+        "synthetic": true,
+        "counts": {
+          "emg": 260,
+          "foot": 6,
+          "shank": 6,
+          "status": 0,
+          "end": 1
+        },
+        "session_finalized": true,
+        "structurally_complete": false,
+        "no_detected_sample_loss": false,
+        "signal_checks_pass": true,
+        "research_ready": false,
+        "sequence_gaps": {
+          "emg": 0,
+          "foot": 0,
+          "shank": 0
+        },
+        "anomalies": {
+          "sequence_regressions": 0,
+          "timestamp_regressions": 0,
+          "emg_clipped_samples": 0,
+          "emg_out_of_range": 0,
+          "imu_invalid_samples": 0,
+          "imu_timestamp_anomalies": 0,
+          "timing_uncertain_records": 12,
+          "flagged_gap_records": 0
+        },
+        "emg_observed_skipped_slots": 0,
+        "emg_rate_from_host_timestamps_hz": 8000.0,
+        "last_status": {
+          "timer_missed": 0,
+          "queue_dropped": 0,
+          "imu_errors": 0,
+          "fifo_overflows": 0,
+          "adc_errors": 0,
+          "emg_records": 260,
+          "foot_records": 6,
+          "shank_records": 6,
+          "battery_mv": 3800,
+          "queue_high_water": 272
+        },
+        "issues": [
+          {
+            "kind": "abnormal_stop",
+            "reason": 3
+          }
+        ],
+        "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
+        "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
+      },
+      "sd_commit_checks_pass": true,
+      "pass": true
+    },
+    {
+      "scenario": "usb-attached",
+      "stream_started": false,
+      "reason": 0,
+      "disk_bytes": 0,
+      "live_bytes": 0,
+      "tasks_created": 0,
+      "tasks_deleted": 0,
+      "notifications": 0,
+      "writes": 0,
+      "syncs": 0,
+      "closes": 0,
+      "metadata_bytes": 0,
+      "profile": "breadboard",
+      "sd_commit_checks_pass": false,
+      "pass": true
+    },
+    {
+      "scenario": "usb-during-recording",
+      "stream_started": true,
+      "reason": 7,
+      "disk_bytes": 21568,
+      "live_bytes": 17472,
+      "tasks_created": 2,
+      "tasks_deleted": 2,
+      "notifications": 1,
+      "writes": 5,
+      "syncs": 3,
+      "closes": 1,
+      "metadata_bytes": 1279,
+      "profile": "breadboard",
+      "metadata_roundtrip_pass": true,
+      "live_end_reason_pass": true,
+      "laptop_stop_state_pass": true,
+      "sd_live_end_identical": true,
+      "quality": {
+        "source_sha256": "1a0a70e3e022c61d03c22c0e3d9f232ca320414a77ced94458eae2023b4256b9",
+        "synthetic": true,
+        "counts": {
+          "emg": 260,
+          "foot": 6,
+          "shank": 6,
+          "status": 0,
+          "end": 1
+        },
+        "session_finalized": true,
+        "structurally_complete": false,
+        "no_detected_sample_loss": false,
+        "signal_checks_pass": true,
+        "research_ready": false,
+        "sequence_gaps": {
+          "emg": 0,
+          "foot": 0,
+          "shank": 0
+        },
+        "anomalies": {
+          "sequence_regressions": 0,
+          "timestamp_regressions": 0,
+          "emg_clipped_samples": 0,
+          "emg_out_of_range": 0,
+          "imu_invalid_samples": 0,
+          "imu_timestamp_anomalies": 0,
+          "timing_uncertain_records": 12,
+          "flagged_gap_records": 0
+        },
+        "emg_observed_skipped_slots": 0,
+        "emg_rate_from_host_timestamps_hz": 8000.0,
+        "last_status": {
+          "timer_missed": 0,
+          "queue_dropped": 0,
+          "imu_errors": 0,
+          "fifo_overflows": 0,
+          "adc_errors": 0,
+          "emg_records": 260,
+          "foot_records": 6,
+          "shank_records": 6,
+          "battery_mv": 3800,
+          "queue_high_water": 272
+        },
+        "issues": [
+          {
+            "kind": "abnormal_stop",
+            "reason": 7
+          }
+        ],
+        "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
+        "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
+      },
+      "sd_commit_checks_pass": true,
+      "pass": true
+    },
+    {
+      "scenario": "battery-low",
+      "stream_started": true,
+      "reason": 4,
+      "disk_bytes": 21760,
+      "live_bytes": 17664,
+      "tasks_created": 2,
+      "tasks_deleted": 2,
+      "notifications": 1,
+      "writes": 7,
+      "syncs": 6,
+      "closes": 1,
+      "metadata_bytes": 1279,
+      "profile": "breadboard",
+      "metadata_roundtrip_pass": true,
+      "live_end_reason_pass": true,
+      "laptop_stop_state_pass": true,
+      "sd_live_end_identical": true,
+      "quality": {
+        "source_sha256": "22db3a24764d8c715e6afe3183775d5a10c4347a577d7e3eb1d73331bc42582a",
+        "synthetic": true,
+        "counts": {
+          "emg": 260,
+          "foot": 6,
+          "shank": 6,
+          "status": 3,
+          "end": 1
+        },
+        "session_finalized": true,
+        "structurally_complete": false,
+        "no_detected_sample_loss": false,
+        "signal_checks_pass": true,
+        "research_ready": false,
+        "sequence_gaps": {
+          "emg": 0,
+          "foot": 0,
+          "shank": 0
+        },
+        "anomalies": {
+          "sequence_regressions": 0,
+          "timestamp_regressions": 0,
+          "emg_clipped_samples": 0,
+          "emg_out_of_range": 0,
+          "imu_invalid_samples": 0,
+          "imu_timestamp_anomalies": 0,
+          "timing_uncertain_records": 12,
+          "flagged_gap_records": 0
+        },
+        "emg_observed_skipped_slots": 0,
+        "emg_rate_from_host_timestamps_hz": 8000.0,
+        "last_status": {
+          "timer_missed": 0,
+          "queue_dropped": 0,
+          "imu_errors": 0,
+          "fifo_overflows": 0,
+          "adc_errors": 0,
+          "emg_records": 260,
+          "foot_records": 6,
+          "shank_records": 6,
+          "battery_mv": 3200,
+          "queue_high_water": 272
+        },
+        "issues": [
+          {
+            "kind": "abnormal_stop",
+            "reason": 4
+          }
+        ],
+        "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
+        "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
+      },
+      "sd_commit_checks_pass": true,
+      "pass": true
+    },
+    {
+      "scenario": "card-full",
+      "stream_started": true,
+      "reason": 1,
+      "disk_bytes": 21568,
+      "live_bytes": 17536,
+      "tasks_created": 2,
+      "tasks_deleted": 2,
+      "notifications": 1,
+      "writes": 4,
+      "syncs": 2,
+      "closes": 1,
+      "metadata_bytes": 1279,
+      "profile": "breadboard",
+      "metadata_roundtrip_pass": true,
+      "live_end_reason_pass": true,
+      "laptop_stop_state_pass": true,
+      "quality": {
+        "source_sha256": "833183de4101ffa55d93a34caa87e40bca4e109d5925112fbb6bf6df49d41ad0",
+        "synthetic": true,
+        "counts": {
+          "emg": 260,
+          "foot": 6,
+          "shank": 6,
+          "status": 1,
+          "end": 0
+        },
+        "session_finalized": false,
+        "structurally_complete": false,
+        "no_detected_sample_loss": false,
+        "signal_checks_pass": true,
+        "research_ready": false,
+        "sequence_gaps": {
+          "emg": 0,
+          "foot": 0,
+          "shank": 0
+        },
+        "anomalies": {
+          "sequence_regressions": 0,
+          "timestamp_regressions": 0,
+          "emg_clipped_samples": 0,
+          "emg_out_of_range": 0,
+          "imu_invalid_samples": 0,
+          "imu_timestamp_anomalies": 0,
+          "timing_uncertain_records": 12,
+          "flagged_gap_records": 0
+        },
+        "emg_observed_skipped_slots": 0,
+        "emg_rate_from_host_timestamps_hz": 8000.0,
+        "last_status": {
+          "timer_missed": 0,
+          "queue_dropped": 0,
+          "imu_errors": 0,
+          "fifo_overflows": 0,
+          "adc_errors": 0,
+          "emg_records": 260,
+          "foot_records": 6,
+          "shank_records": 6,
+          "battery_mv": 3800,
+          "queue_high_water": 272
+        },
+        "issues": [
+          {
+            "kind": "missing_end",
+            "message": "Unfinalized session; trailing samples may be lost."
+          }
+        ],
+        "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
+        "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
+      },
+      "sd_commit_checks_pass": false,
+      "pass": true
+    }
+  ]
+}

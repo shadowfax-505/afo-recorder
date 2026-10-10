@@ -5,7 +5,8 @@ import math
 from pathlib import Path
 from afo_format import make_header, make_record, EMG, IMU, FIFO, STATUS
 
-def generate(path: Path, seconds: float=2.0, *, skip_slot: int=0, imu_enabled: bool=True):
+def generate(path: Path, seconds: float=2.0, *, skip_slot: int=0, imu_enabled: bool=True,
+             imu_tick_step: int=5000):
     metadata={'schema':'afo-recorder/1','firmware':'synthetic-generator/1','synthetic':True,
         'trial_id':'SYNTHETIC_DEMO','clock':'esp_timer_boot_us','emg_hz':8000,'imu_hz':200,
         'imu_enabled':imu_enabled,'adc_bits':12,'adc_reference_mv':3300,'adc_reference_measured':False,
@@ -32,7 +33,7 @@ def generate(path: Path, seconds: float=2.0, *, skip_slot: int=0, imu_enabled: b
                 for kind in (2,3):
                     raw=[round(300*math.sin(2*math.pi*t)),round(120*math.cos(2*math.pi*t)),2048,
                          round(500*math.sin(2*math.pi*t)),0,round(80*math.cos(2*math.pi*t))]
-                    packet=FIFO.pack(0x68,*raw,0,(imu_n*5000)&0xffff)
+                    packet=FIFO.pack(0x68,*raw,0,(imu_n*imu_tick_step)&0xffff)
                     f.write(make_record(kind,imu_n,host,IMU.pack(packet,host+20,host+160,host),2))
         f.write(make_record(5,1,1000000+int(seconds*1e6)+200,
                            STATUS.pack(missed,0,0,0,0,emg_n,imu_n,imu_n,3850,16)))

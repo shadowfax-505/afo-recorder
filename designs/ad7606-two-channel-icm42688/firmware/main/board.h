@@ -16,7 +16,9 @@
 #define ADS_MODE_REG 0x0111
 #define ADC_SCK 12
 #define ADC_MISO 13
-#define ADC_MOSI 11
+#if !AFO_AD7606
+#define ADC_MOSI 11 // ADS131M04 builds only. AD7606 leaves MOSI unconnected; GPIO11 is CONVST.
+#endif
 #define ADC_CS 10
 #define IMU_SCK 6
 #define IMU_MISO 5
@@ -58,13 +60,23 @@
 #define BATTERY_STOP_MV 3300
 #define MIN_FREE_BYTES (64ULL * 1024 * 1024)
 #define MAX_SESSION_US (2ULL * 60 * 60 * 1000000)
-#define RECORD_QUEUE_LENGTH 2048
+// 20,480 x 64-byte records in PSRAM: about 2.44 s at 8,000 EMG + 400 IMU records/s.
+// The SD specification permits write-busy periods up to 250 ms (SDHC) or
+// 500 ms (SDXC); the older 2,048-entry internal queue held only 0.244 s.
+#define RECORD_QUEUE_LENGTH 20480
 #define SD_MOUNT "/sdcard"
 
-// Laptop preview uses a private access point. Change this bench password before deployment.
+#define AFO_FIRMWARE_ID "ad7606-2ch-1.7"
+
+// Laptop preview uses a private WPA2 access point. No password is compiled in:
+// each recorder generates a random one on first boot, keeps it in NVS and
+// prints it on the USB console at every boot. Erasing flash creates a new one.
 #ifndef ENABLE_WIFI_LIVE
 #define ENABLE_WIFI_LIVE 1
 #endif
 #define WIFI_LIVE_SSID "AFO-Recorder-B"
-#define WIFI_LIVE_PASSWORD "AFO-Bench-2026"
+#define WIFI_LIVE_PASSWORD_CHARS 16
 #define WIFI_LIVE_PORT 3333
+// Largest metadata JSON sent to the laptop; host/live_protocol.py MAX_PAYLOAD
+// must match. 1,400 + 32 framing bytes stays inside one 1,500-byte Wi-Fi MTU.
+#define WIFI_LIVE_METADATA_MAX 1400

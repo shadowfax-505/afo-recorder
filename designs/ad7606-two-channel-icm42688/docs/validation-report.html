@@ -1,6 +1,7 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><link rel="icon" href="data:,"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Current validation — AD7606 two-channel</title><style>body{margin:0;background:#f4f3ee;color:#172523;font:17px/1.65 system-ui}main{max-width:1060px;margin:auto;padding:48px 28px}h1{font-size:2.4rem;line-height:1.15}h2{margin-top:2.5em}a{color:#176454}table{border-collapse:collapse;font-size:14px;display:block;overflow:auto}td,th{padding:12px;border:1px solid #ccd4ce;text-align:left;vertical-align:top}th{background:#e2eae4}code{font-size:.9em}pre{overflow:auto;padding:16px;background:#e2eae4;border-radius:6px}p{max-width:85ch}img{max-width:100%;height:auto}nav{font-size:14px;border-bottom:1px solid #ccd4ce;padding-bottom:16px}blockquote{border-left:3px solid #809c8a;margin-left:0;padding-left:20px}@media(max-width:640px){main{padding:28px 18px}h1{font-size:1.9rem}}@media print{body{background:white}main{padding:0}table{display:table;font-size:10px}}</style></head><body><main><nav><a href="whole-system.html">Complete system</a> / <a href="data-interpretation.html">Saved data</a> / <a href="digital-timing.html">Digital timing</a> / <a href="integrated-verification.html">Integrated verification</a> / <a href="circuit-audit.html">Circuit audit</a> / <a href="lab-quickstart.html">Lab sequence</a></nav><h1>Current validation — AD7606 / two EMG / ICM-42688-P</h1>
-<p>Project lead: Muttakin Rahman · updated 3 October 2026</p>
-<p>Current recording firmware <strong>ad7606-2ch-1.6</strong> retains the ADC task wake-up and FIFO-burst timestamp corrections found during v1.5 integrated execution, and now rejects missing BUSY assertion/ignored CONVST before accepting stale ADC words. The <a href="integrated-verification.html">integrated verification report</a> is the current evidence entrypoint. <strong>All 18 current integrated cases pass within the documented models. Physical acceptance remains unperformed.</strong></p>
+<p>Project lead: Muttakin Rahman · updated 10 October 2026</p>
+<p>Current recording firmware is <strong>ad7606-2ch-1.7</strong>: Source set <strong>ad7606-2ch-1.7</strong> (10 October 2026) moves the SD record queue to PSRAM and enlarges it from 2,048 to 20,480 records (about 0.244 s to 2.44 s), generates a random Wi-Fi password on each recorder instead of compiling one in, raises the live-metadata limit to 1,400 bytes, and adds IMU timestamp-scale checks. All seven 1.7 profiles compile and the native recorder-control cases pass again; <strong>the Wokwi integrated runs below used the 1.6 image and have not been repeated for 1.7.</strong></p>
+<p>The 1.6 firmware retained the ADC task wake-up and FIFO-burst timestamp corrections found during v1.5 integrated execution, and now rejects missing BUSY assertion/ignored CONVST before accepting stale ADC words. The <a href="integrated-verification.html">integrated verification report</a> is the current evidence entrypoint. <strong>All 18 current integrated cases pass within the documented models. Physical acceptance remains unperformed.</strong></p>
 <table>
 <thead>
 <tr>
@@ -14,7 +15,7 @@
 <td>Ten complete CLI/firmware passes; nominal firmware/file/UDP checks also pass with optional trace-download failure</td>
 </tr>
 <tr>
-<td>Current v1.6 integrated firmware / protocol-fixture execution</td>
+<td>v1.6 integrated firmware / protocol-fixture execution</td>
 <td>All 18 current cases pass in the web editor; complete file/live decode and explicit fault reporting. <a href="../simulations/integrated-recorder/tested-source-1.5/manifest.json">v1.5 exact tested source/image snapshot</a> is retained</td>
 </tr>
 <tr>
@@ -38,8 +39,8 @@
 <td>Clean ERC/DRC; 390 pins and 22 GPIOs per profile compared without mismatches</td>
 </tr>
 <tr>
-<td>Current v1.6 laboratory firmware</td>
-<td>All seven profiles cross-compiled; current diagnostic images not rerun in Wokwi</td>
+<td>Current v1.7 laboratory firmware</td>
+<td>All seven profiles cross-compiled without warnings; not flashed and not rerun in Wokwi</td>
 </tr>
 <tr>
 <td>Native actual ADC driver / IMU timing helper</td>
@@ -50,8 +51,8 @@
 <td>38 cases pass across PCB and breadboard profiles</td>
 </tr>
 <tr>
-<td>Host converter / live / legacy</td>
-<td>40 tests pass</td>
+<td>Host converter / live / legacy / firmware limits</td>
+<td>46 tests pass</td>
 </tr>
 <tr>
 <td>Integrated evidence runner</td>

@@ -82,7 +82,7 @@ def validate():
             'FOOT_INT', 'SHANK_INT', 'SD_CMD', 'SD_CLK', 'SD_D0', 'USB_PRESENT_N'} <= {p['Net'] for p in probes}
 
     validation = json.loads((VARIANT / 'firmware/builds/validation.json').read_text())
-    assert validation['source_set'] == 'ad7606-2ch-1.6'
+    assert validation['source_set'] == 'ad7606-2ch-1.7'
     for path, expected in validation['source_sha256'].items():
         assert sha256(VARIANT / 'firmware' / path) == expected, path
     assert len(validation['profiles']) == 7

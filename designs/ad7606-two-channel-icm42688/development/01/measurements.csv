@@ -1,5 +1,5 @@
 check_id,acceptance,measured_value,unit,uncertainty,instrument_settings,evidence_file,outcome,operator,date,review_notes
 1-polarity,"No rail short; correct source polarity; lab supply only, battery disconnected",,,,,,NOT TESTED,,,
 1-digital,3.23–3.43 V at 0/100/300 mA; ripple ≤50 mVpp (20 MHz bandwidth); provisional project screen,,,,,,NOT TESTED,,,
-1-analog,2.94–3.06 V at 0/20/50 mA; midpoint 0.49–0.51 × measured analog rail; ripple ≤10 mVpp; provisional project screen,,,,,,NOT TESTED,,,
+1-analog,2.94–3.06 V at 0/20/50 mA; midpoint 0.49–0.51 × measured analog rail (1.47–1.53 V at a nominal 3.00 V rail); ripple ≤10 mVpp; provisional project screen,,,,,,NOT TESTED,,,
 1-adc-supply,4.8–5.2 V at 10–50 mA; never exceed 5.25 V during startup,,,,,,NOT TESTED,,,
