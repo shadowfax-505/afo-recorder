@@ -2,7 +2,7 @@
   "scope": "Extracted AD7606 fixed-two ICM breadboard kit",
   "hardware_measured": false,
   "physical_measurements_completed": 0,
-  "archive_sha256": "47cf1e6fff5d9386950bf435bf21715cfc4181f9c5bf532764d77bb65b7958cd",
+  "archive_sha256": "599371b93bb862a58ee03a58f0a47bcfacb173929bdca131223eef936160310f",
   "csv_test_environment": {
     "python": "3.14.7",
     "matplotlib_installed": false
@@ -126,11 +126,37 @@
     "radio_tested": false
   },
   "plots": {
-    "executed": false
+    "signals.png": {
+      "bytes": 104581,
+      "sha256": "0ea9ad79c9c105b3851fadf6e9345f8372f20d67680cde98a291e65252609e43"
+    },
+    "signals.svg": {
+      "bytes": 82472,
+      "sha256": "ee8607bba9dca6136878e439ae98531b4ac1c5d04ae5181f2b2466cfe6e20f8a"
+    }
   },
   "tampered_recording_rejected": true,
   "status": "PASS",
   "date": "2026-10-11",
+  "documentation_checks": {
+    "browser": "Claude desktop built-in browser",
+    "server": "python3 -m http.server on 127.0.0.1, extracted archive",
+    "pages": [
+      "viewer/build.html?stage=4",
+      "viewer/index.html?stage=10",
+      "development/index.html",
+      "development/00/README.html",
+      "docs/laptop-setup.html",
+      "docs/download-checks.html"
+    ],
+    "local_links_checked": 61,
+    "failed_links": 0,
+    "console_errors": 0,
+    "failed_asset_requests": 0,
+    "external_requests": 0,
+    "stage4_text_current": true,
+    "scope": "Local asset closure and page loading; geometry and wire bends remain illustrative; no physical hardware."
+  },
   "previous_archive_checks": {
     "note": "Recorded for the firmware 1.6 archive (a6cc76b9...); not repeated for later archives.",
     "archive_sha256": "a6cc76b90d2c100973d6ec4de2532998c6aa265bbb1f9644e6a35261c7f839cf",
