@@ -25,7 +25,7 @@
     "docs/physical-assembly.html": "486f75ed1d295b98efeec852255a060839874ed24b3eadece8f6de04d347f612",
     "docs/firmware-build-guide.html": "8175f27e8dfac3c225df012ed94dfd4d6dd36fb463f773dcf5802e7bde0bd7ee",
     "docs/laptop-setup.html": "d88719fe9a7163cc50da50fdcd7bcdd710d9e89b67a33c13070124bafded65cc",
-    "docs/download-checks.html": "217bac45f1d2681209768d388795de566ec1f85e93e7f87e2fb602c64b447fef",
+    "docs/download-checks.html": "f404666a5999f51f34603d374d7047bfeba261f081ab6ca0dfe00afbd28c65b8",
     "host/check_package.py": "d178a7eb1f39f222b2951f5844778d76ce3f8a203536665a5d6e76eb5acda909",
     "host/run_tests.py": "21acca12ac4e1f76ced41ee42879a586f0ee1c6586ee938e7748d0c1717b2964",
     "breadboard/recording-example.json": "e2cb9154e95e08896561ba9dd7cd578b72e2d816d605f5806b27cb8170877701",
