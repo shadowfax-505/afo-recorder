@@ -58,7 +58,10 @@
 #define BATTERY_STOP_MV 3300
 #define MIN_FREE_BYTES (64ULL * 1024 * 1024)
 #define MAX_SESSION_US (2ULL * 60 * 60 * 1000000)
-#define RECORD_QUEUE_LENGTH 2048
+// 20,480 x 64-byte records in PSRAM: about 2.44 s at 8,000 EMG + 400 IMU records/s.
+// The SD specification permits write-busy periods up to 250 ms (SDHC) or
+// 500 ms (SDXC); the older 2,048-entry internal queue held only 0.244 s.
+#define RECORD_QUEUE_LENGTH 20480
 #define SD_MOUNT "/sdcard"
 
 // Laptop preview uses a private access point. Change this bench password before deployment.
@@ -66,5 +69,10 @@
 #define ENABLE_WIFI_LIVE 1
 #endif
 #define WIFI_LIVE_SSID "AFO-Recorder-B"
-#define WIFI_LIVE_PASSWORD "AFO-Bench-2026"
+// No password is compiled in: each recorder generates a random one on first boot,
+// keeps it in NVS and prints it on the USB console at every boot.
+#define WIFI_LIVE_PASSWORD_CHARS 16
+// Largest metadata JSON sent to the laptop; host/live_protocol.py MAX_PAYLOAD
+// must match. 1,400 + 32 framing bytes stays inside one 1,500-byte Wi-Fi MTU.
+#define WIFI_LIVE_METADATA_MAX 1400
 #define WIFI_LIVE_PORT 3333

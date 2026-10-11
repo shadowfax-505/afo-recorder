@@ -16,8 +16,32 @@
     "application.bin": "0x10000"
   },
   "sha256": {
-    "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
-    "application.bin": "9c18784db53b8676c2b12b84762ed2760dec2e461530dfbde1d477a85d04cf9f",
-    "bootloader.bin": "f37bab4be692dc85080e6bc10f9f6a87313267dae8a8a26aabe7580d70c07043"
-  }
+    "application.bin": "b68cb72e9a0c3afc23f7291201b60a6ded41f0bd98077b6b696399c67c0d5c2c",
+    "bootloader.bin": "3f1f9078b3c56b86272e418b5219bb71ac1c9de91422ddb40c8b00419e442271",
+    "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
+  },
+  "profile": "breadboard-sd-only-2ch",
+  "firmware": "dual-1.2",
+  "source_sha256": {
+    "main/CMakeLists.txt": "72b70f6fd563d90c7791b795382ffc23161ea7fb489ba330c42f1cd36881540f",
+    "main/adc_ad7606.c": "a17495f9e6b02f8956291498fdf866a13232cd8be2cbcc802ae7b19db0cadb5d",
+    "main/adc_ads131m04.c": "914ffa6db82ed58aed9d4f0beb1ae05645ac6fb47097ace88e2be8b6a3c6b6aa",
+    "main/ads_crc.c": "31cbb5fd61f5e06c394a426e0fa48d14f3561be4d46fffe6a18e1837edad83cc",
+    "main/ads_crc.h": "d08cf15ad6e5d8d837e5c532b9665bc9c07a045475ba06c6443eed6b4367aeac",
+    "main/board.h": "3df79ce92ea90364992485213fd83f1c443941f399d753fcb21a83cd8f701b51",
+    "main/diagnostic.c": "7a19841347a47d5ade14da1648510fcb0735d8abf96d372a40fa95c28d97abc3",
+    "main/format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
+    "main/format.h": "58b01a597eaa2c70a918ad5ee3b71c9e26fe64aedefc91ffba7d96430510c47b",
+    "main/imu_tick.h": "f2ebfd51178dedf10df193f04a0ca26dbb2548d1c33047e78216be10c123a294",
+    "main/main.c": "2853f0e893e7ba98cc8f51cba6e0f77652067b75f74410a3d207d22a6aaf2f0b",
+    "main/sensors.c": "f5c6034a43b260de6282d902a1d76d3e4db60bcbca64d364ebd34fc733df84c9",
+    "main/sensors.h": "ef7cdd16559c82d9f7552aeeb14e46400645ce694ec352da3cc8344fbc333dea",
+    "main/variant.h": "b4759dd8c2a32f50343eaa2b4ce7f93d18c2fa8488afdad4c14b5d1707d595ff",
+    "main/wifi_live.c": "e84da31b9f0c796215bbf855726897c2e7d760d46e566b4f957eb0b3b36c8d45",
+    "main/wifi_live.h": "99d2bea23a26f0271f9f5bb8056ff9ec80d1bfaf1edcd33dcf6551bf7926bf6f",
+    "CMakeLists.txt": "ccdcd61455a4cd61ba17da36add6811ccd35d3f880115a07c709f883ebc2b0c6",
+    "sdkconfig.defaults": "333b5513fd45d3959596dd93da6a9eb721a9182f82c1c6f75aa245ac170f0aad"
+  },
+  "idf_version": "v5.4.2",
+  "build_note": "Rebuilt 2026-10-11 after the shared PSRAM-queue, per-device Wi-Fi password and metadata-limit fixes; ICM-42688 timestamp ticks converted as 32/30 us. Cross-compiled only; not flashed or simulated."
 }
