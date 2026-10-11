@@ -89,6 +89,46 @@ def imu_clock_summary(steps, bursts, nominal, tick_us=1.0):
     summary['within_1_percent']=bool(known) and all(abs(x)<=1 for x in known)
     return summary
 
+def fit_host_time(bursts, tick_us=1.0):
+    """Least-squares host time = intercept + slope * unwrapped sensor ticks.
+
+    Uses every FIFO read's newest packet and its interrupt anchor. Reads whose
+    residual exceeds 2 ms (typically a sample that arrived during the read and
+    paired one period late) are rejected and the fit repeated. The result maps
+    each IMU sample onto the ESP32 clock that also times the EMG, removing the
+    sensor clock error that the firmware estimate carries. Returns None when
+    fewer than 40 reads or under 10 s of data are available.
+    """
+    points=[(float(t),float(a)) for t,a in bursts]
+    if len(points)<40 or (points[-1][0]-points[0][0])*tick_us<10e6:return None
+    used=points
+    for _ in range(3):
+        n=len(used);mt=sum(t for t,_ in used)/n;ma=sum(a for _,a in used)/n
+        stt=sum((t-mt)**2 for t,_ in used)
+        if stt<=0:return None
+        slope=sum((t-mt)*(a-ma) for t,a in used)/stt;intercept=ma-slope*mt
+        kept=[(t,a) for t,a in points if abs(a-(intercept+slope*t))<=2000]
+        if len(kept)==len(used):break
+        used=kept
+    residuals=[a-(intercept+slope*t) for t,a in used]
+    rms=(sum(r*r for r in residuals)/len(residuals))**0.5
+    return {'intercept_us':intercept,'host_us_per_sensor_tick':slope,'residual_rms_us':round(rms,2),
+            'reads_used':len(used),'reads_rejected':len(points)-len(used)}
+
+def add_fitted_column(path, fit, tick_us):
+    """Append host_time_fitted_us to an IMU CSV without loading it into memory."""
+    temporary=path.with_suffix('.fitting')
+    with path.open(newline='') as source, temporary.open('w',newline='') as target:
+        reader=csv.reader(source);writer=csv.writer(target)
+        header=next(reader);column=header.index('sensor_time_unwrapped_us');writer.writerow(header+['host_time_fitted_us'])
+        for row in reader:
+            fitted=''
+            if fit:
+                ticks=int(row[column])/tick_us
+                fitted=round(fit['intercept_us']+fit['host_us_per_sensor_tick']*ticks)
+            writer.writerow(row+[fitted])
+    temporary.replace(path)
+
 def convert(source: Path, output: Path, *, recover=False, make_plots=True, operator_metadata=None):
     source=Path(source);output=Path(output)
     if output.exists() and any(output.iterdir()):
@@ -206,6 +246,10 @@ def convert(source: Path, output: Path, *, recover=False, make_plots=True, opera
     for name,last in burst_last.items():imu_bursts[name].append(last)
     imu_clock={name:imu_clock_summary(tick_steps[name],imu_bursts[name],1e6/metadata['imu_hz']/tick_us,tick_us)
                for name in ('foot','shank') if counts[name]}
+    for name in imu_clock:
+        fit=fit_host_time(imu_bursts[name],tick_us)
+        imu_clock[name]['host_time_fit']=fit
+        add_fitted_column(output/f'{name}.csv',fit,tick_us)
     if not end_seen:issues.append({'kind':'missing_end','message':'Unfinalized session; trailing samples may be lost.'})
     for name in (('emg','foot','shank') if metadata.get('imu_enabled',True) else ('emg',)):
         if counts[name]==0:issues.append({'kind':'missing_stream','stream':name})
@@ -230,7 +274,7 @@ def convert(source: Path, output: Path, *, recover=False, make_plots=True, opera
             'research_ready':False,'sequence_gaps':sequence_gaps,'anomalies':anomalies,
             'emg_observed_skipped_slots':observed_missed,'emg_rate_from_host_timestamps_hz':rate,
             'last_status':last_status,'issues':issues,'imu_clock':imu_clock,
-            'imu_clock_note':'Screen only: FIFO timestamp increments versus the recorded nominal tick (imu_timestamp_tick_us), and sensor ticks versus ESP32 interrupt times. Includes interrupt latency; not a calibration.',
+            'imu_clock_note':'Screen only: FIFO timestamp increments versus the recorded nominal tick (imu_timestamp_tick_us), and sensor ticks versus ESP32 interrupt times. Includes interrupt latency; not a calibration. host_time_fitted_us in foot.csv/shank.csv maps each sample onto the ESP32 clock using a least-squares fit of all interrupt anchors; use it, not host_time_estimate_us, to align IMU with EMG in recordings longer than a few seconds.',
             'timing_note':'IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.',
             'recovery_note':'Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption.'}
     (output/'metadata.json').write_text(json.dumps({'recorded':metadata,'operator_metadata':operator_metadata or {}},indent=2)+'\n')

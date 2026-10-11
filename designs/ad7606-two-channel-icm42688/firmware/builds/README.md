@@ -1,6 +1,6 @@
 # Firmware builds
 
-These profiles use source set **ad7606-2ch-1.8** (previous: 1.7, 1.6). All seven were cross-compiled with ESP-IDF v5.4.2; their source and binary SHA-256 hashes are in `validation.json` and each profile's manifest. The laboratory binaries have not been flashed or executed on an assembled recorder. Wokwi used a separate instrumented image.
+These profiles use source set **ad7606-2ch-1.9** (previous: 1.8, 1.7, 1.6). All nine were cross-compiled with ESP-IDF v5.4.2; their source and binary SHA-256 hashes are in `validation.json` and each profile's manifest. The laboratory binaries have not been flashed or executed on an assembled recorder. Wokwi used a separate instrumented image.
 
 | Build stage | Profile | Hardware / dependencies |
 |---|---|---|
@@ -10,6 +10,7 @@ These profiles use source set **ad7606-2ch-1.8** (previous: 1.7, 1.6). All seven
 | 6, both carriers | `diagnostic-imu-two` | Existing ADC stage plus both ICM carriers; no SD or Wi-Fi required |
 | 7 | `breadboard-sd-only-2ch` | Both EMG paths, two IMUs and SDMMC; Wi-Fi off |
 | 8–10 | `breadboard-record-2ch` | Complete breadboard with SD and best-effort Wi-Fi |
+| Any time after the carriers arrive (optional early check) | `diagnostic-imu-bench-one`, `diagnostic-imu-bench-two` | DevKit plus one or both ICM carriers only: 3.3 V, GND, SCK, MISO, MOSI, CS and INT per the stage-6 wire table, SNC to GND. No ADC, SD or Wi-Fi. Prints `BENCH` lines every second and, after 60 s, `VERDICT` lines (PASS/FAIL) and `SUMMARY_COMPLETE` |
 | Compact PCB only | `record-2ch` | PCB SD CMD GPIO38; do not flash this image to the GPIO47 breadboard |
 
 Breadboard SDMMC uses **CMD GPIO47, CLK GPIO39, D0 GPIO40**. See [SD wiring](../../docs/sd-card-wiring.md), [short lab sequence](../../docs/lab-quickstart.html) and [applied simulation findings](../../docs/breadboard-refinements.html). Each build has exactly two EMG channels; there is no four-channel setting for this PCB.

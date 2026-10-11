@@ -9,13 +9,13 @@
     "imu_timing.h": "57314a11652b10ef22639ead2a7afc940426680ed6a65e199ab09f254a07c2cd",
     "format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
     "format.h": "58b01a597eaa2c70a918ad5ee3b71c9e26fe64aedefc91ffba7d96430510c47b",
-    "board.h": "050ba4c588de1ac944d0cb558e41ad03c9ab0fcea599588cd4dfa7fc00074d32",
+    "board.h": "c86d918838b37426a31ab2434a2a7c2ee4bdf88c45e38a46495e37c2bcc16aba",
     "variant.h": "55c2cdaef8b2d56e2ced2aa23984a289038adc6caaf9d164c92830c24b8cffb9"
   },
   "stimulus_sha256": "c2d23fb153e84391c9d15172b9170dca5ed42f85f21512dfd61f593e45669e72",
   "co_simulation_sha256": {
     "pipeline.c": "6db9343dfafe1ef40d5217ff74c8f69ea8d0c82aa5161681434edc1f83da8c47",
-    "run.py": "f9535fc68f5065165968b06229cc20db2ebe8548ef9bfd2d2c3b295a4f809d62",
+    "run.py": "7fa2eb9e22ab85a160c7e3dc10587a04520275f39cc3da55339125994c66c1aa",
     "mock_idf.h": "68faa0f6289a32b3c76cda1701c0878bf27f32f61b164e54de5112c8cb95616f"
   },
   "modeled_duration_seconds": 2,
@@ -49,7 +49,7 @@
   "boundary_note": "FIFO packets still buffered at the modeled stop are counted explicitly; no unseen packet is called a recorded measurement.",
   "groups_passed": 6,
   "quality": {
-    "source_sha256": "7e62d526a2678bea5b2ba38a4efba38241e226e984047e896700bcba401f50e7",
+    "source_sha256": "4f3fa1f95095a524cecc31fa53dcc8fe1609698fbf3832d6fe7f244eef074218",
     "synthetic": true,
     "counts": {
       "emg": 16000,
@@ -105,7 +105,8 @@
         "host_us_per_sensor_tick": null,
         "sensor_tick_error_ppm": null,
         "fit_note": "needs at least 40 FIFO reads spanning 10 s",
-        "within_1_percent": true
+        "within_1_percent": true,
+        "host_time_fit": null
       },
       "shank": {
         "tick_steps": 398,
@@ -118,10 +119,11 @@
         "host_us_per_sensor_tick": null,
         "sensor_tick_error_ppm": null,
         "fit_note": "needs at least 40 FIFO reads spanning 10 s",
-        "within_1_percent": true
+        "within_1_percent": true,
+        "host_time_fit": null
       }
     },
-    "imu_clock_note": "Screen only: FIFO timestamp increments versus the recorded nominal tick (imu_timestamp_tick_us), and sensor ticks versus ESP32 interrupt times. Includes interrupt latency; not a calibration.",
+    "imu_clock_note": "Screen only: FIFO timestamp increments versus the recorded nominal tick (imu_timestamp_tick_us), and sensor ticks versus ESP32 interrupt times. Includes interrupt latency; not a calibration. host_time_fitted_us in foot.csv/shank.csv maps each sample onto the ESP32 clock using a least-squares fit of all interrupt anchors; use it, not host_time_estimate_us, to align IMU with EMG in recordings longer than a few seconds.",
     "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
     "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
   },

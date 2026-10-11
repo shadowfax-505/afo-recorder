@@ -1,5 +1,13 @@
 # Changelog
 
+## ICM-42688 verification and IMU-only bench check, firmware 1.9 — 11 October 2026
+
+- Checked the ICM setup against the MIKROE 6DOF IMU 14 Click v100 schematic, the ICM-42688-P datasheet register descriptions, TDK's ICM-426xx driver definitions and ArduPilot's ICM-42688 driver: supply, jumpers, pin 9 grounding, every register address and value, reserved bits, packet header check, SPI timing and reset/power-on delays.
+- Added `simulations/icm-register-model`: a register-level ICM-42688-P model enforcing datasheet rules. The production driver passes with no rule violation, 60 s of streaming per sensor, and the fault cases (I2C jumper position, stuck register, FIFO overflow).
+- The datasheet allows ±1 % sensor clock error, which the firmware IMU estimate carries (about 600 ms per minute at worst). The converter now adds `host_time_fitted_us`, a least-squares fit of every interrupt anchor, to align IMU with EMG; also applied to the two other ICM designs' converters.
+- New stage-7 builds `diagnostic-imu-bench-one` / `-two`: test the carriers with only the DevKit, with automatic PASS/FAIL verdicts for identity, 200 Hz rate, interrupts, 32/30 µs tick scale, stationary gravity and gyro bias. Stage-6/7 rate and tick-scale gates widened to ±1.5 % to match the datasheet tolerance.
+- All nine profiles rebuilt (cross-compiled only); 48 host tests, native suites, KiCad checks and the extracted-kit verifier pass. Nothing has been measured on hardware.
+
 ## Fixed-two recorder corrections ported to the other five designs — 11 October 2026
 
 - Worker lifecycle (suspend, then join and delete by the recorder), fault latching that stops acquisition, both IMU stops attempted, data synced before END and the wireless stop verdict sent after final sync/close, 2 ms Wi-Fi batching, first-interrupt grace for IMUs, acquisition interrupts allocated on core 1, and windowed diagnostics.

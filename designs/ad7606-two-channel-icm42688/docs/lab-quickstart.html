@@ -95,7 +95,7 @@
 <p>For steps 3–6, diagnostic acquisition runs in approximately one-second windows and stops ADC triggering before printing. <strong>The spaces between diagnostic windows are intentional.</strong> Use the recording builds for continuous capture and endurance tests. The firmware’s 80 µs BUSY wait is a fault deadline, not acceptable normal conversion time. AD7606 has no external clock or separate DRDY output; shared net name ADC_DRDY means BUSY here.</p>
 <p>Use <code>record-2ch</code> only on the custom PCB (SD CMD GPIO38). It is not interchangeable with the breadboard image. Flash all three files at the addresses in the chosen manifest.</p>
 <h2>Reading the diagnostic serial lines</h2>
-<p>The first line names the firmware, for example <code>firmware=ad7606-2ch-1.8 stage=3 hardware=breadboard channels=2</code>; record it with the binary hash. Each acquisition window then prints one <code>ADC</code> line, and stage-6 images add one <code>IMU</code> line per sensor.</p>
+<p>The first line names the firmware, for example <code>firmware=ad7606-2ch-1.9 stage=3 hardware=breadboard channels=2</code>; record it with the binary hash. Each acquisition window then prints one <code>ADC</code> line, and stage-6 images add one <code>IMU</code> line per sensor.</p>
 <table>
 <thead>
 <tr>
@@ -142,6 +142,7 @@
 </tr>
 </tbody>
 </table>
+<p>The IMU-only bench builds (<code>diagnostic-imu-bench-one</code> / <code>-two</code>, DevKit and carriers only) print <code>BENCH</code> lines with the same IMU quantities every second. After 60 s they print <code>VERDICT,&lt;sensor&gt;,&lt;check&gt;,PASS|FAIL,&lt;value&gt;</code> for: identity and readback, 200 Hz ±1.5 %, interrupts matching packets, tick step 4,687.5 ±0.5 %, 1.0667 µs per tick ±1.5 %, stationary |a| 1.00 ±0.10 g and gyro bias under 5 °/s. Keep the carrier still during those 60 s, then rotate it to check axis signs. A tick step near 5,000 means the 32/30 µs scale does not apply to your parts; send the lines before changing firmware.</p>
 <p>Nominal stage-4 values for a 100 mVpp sine at unity DC gain, from the two ideal 1,026 Hz poles only (the simulated tolerance envelope remains the acceptance reference):</p>
 <table>
 <thead>
