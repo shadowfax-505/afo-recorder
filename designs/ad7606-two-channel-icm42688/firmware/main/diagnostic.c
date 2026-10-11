@@ -131,8 +131,8 @@ void app_main(void){
             for(unsigned a=0;a<6;a++)axes[a]=imu_last[i][a];
             unsigned ticks=imu_ticks[i];portEXIT_CRITICAL(&lock);
             int64_t imu_interval=esp_timer_get_time()-imu_window_start;
-            // Expected tick_step_mean is 5000 at 200 Hz with the 1 us timestamp setting.
-            // host_us_per_tick compares the sensor clock with the ESP32 clock.
+            // Expected tick_step_mean is about 4687.5 at 200 Hz: ICM-42688 "1 us" ticks
+            // last 32/30 us (see imu_timing.h). host_us_per_tick should be about 1.0667.
             double step_mean=steps?(double)tick_sum/steps:0;
             double host_per_tick=(packets&&step_mean>0)?(double)imu_interval/(packets*step_mean):0;
             printf("IMU,%u,interval_us=%"PRId64",packets=%"PRIu32",interrupts=%"PRIu32",ax_raw=%d,ay_raw=%d,az_raw=%d,gx_raw=%d,gy_raw=%d,gz_raw=%d,timestamp_raw=%u,tick_steps=%"PRIu32",tick_step_mean=%.2f,host_us_per_tick=%.5f\n",

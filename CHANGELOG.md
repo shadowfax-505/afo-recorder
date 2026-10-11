@@ -1,5 +1,11 @@
 # Changelog
 
+## IMU timestamp scale, two-channel AD7606 / ICM firmware 1.8 — 11 October 2026
+
+- Convert ICM-42688 FIFO timestamp ticks as 32/30 µs instead of 1 µs. TDK's ICM-426xx driver states the ICM-42688 PLL runs at 19.2 MHz rather than 20.48 MHz; treating ticks as 1 µs compressed IMU host-time estimates by 6.25% (about 62 ms per second after anchoring). Stage 6 measures the scale; one constant in `imu_timing.h` changes it.
+- Record `imu_timestamp_tick_us` 1.0666667 in session metadata; the converter honours it, and older files default to 1 µs.
+- Stage 6/7 acceptance now expects about 4,687.5 ticks per 200 Hz sample and a counter wrap every 69.9 ms. 47 host tests, nine IMU timing groups, 16 ADC groups (ASan/UBSan), 38 native recorder cases and both offline pipelines pass. Physical validation remains pending; the five other designs are unchanged.
+
 ## Verification fixes, two-channel AD7606 / ICM firmware 1.7 — 10 October 2026
 
 - Moved the SD record queue to PSRAM and enlarged it from 2,048 to 20,480 records (about 0.244 s to 2.44 s); the old queue was shorter than the SD specification's 250-500 ms write-busy allowance.

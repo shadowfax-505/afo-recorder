@@ -14,7 +14,7 @@ The kit also includes a frozen [synthetic recording](../breadboard/recording-exa
 
 | Check | Observed result | Scope |
 |---|---|---|
-| Packaged host suite in a Python environment without Matplotlib | All 46 tests passed, including corruption/recovery, enabled channels, legacy decoding, wireless gaps, the 1,400-byte metadata limit, record-queue duration, absence of a compiled Wi-Fi password and the IMU clock screen | Reader/telemetry code and the fixed-two circuit/firmware contract; the C guard test uses a host compiler |
+| Packaged host suite in a Python environment without Matplotlib | All 47 tests passed, including corruption/recovery, enabled channels, legacy decoding, wireless gaps, the 1,400-byte metadata limit, record-queue duration, absence of a compiled Wi-Fi password and the IMU clock screen including 32/30 µs ICM-42688 ticks | Reader/telemetry code and the fixed-two circuit/firmware contract; the C guard test uses a host compiler |
 | Frozen saved-file conversion | 10,041 EMG frames, 263 foot samples, 252 shank samples, one status and one END; no detected saved-file gap | Correct decoding of this captured synthetic session |
 | Units and timing flags | Exactly two EMG columns; signed code × 5 / 32768 voltage scaling; all 515 IMU timing-estimate flags preserved | Interpretation; no measured calibration or timing alignment |
 | Optional plot environment | Default conversion with Matplotlib installed produced PNG and SVG plots; byte counts and hashes are in the receipt’s `plots` entry | Python plotting workflow on this macOS/Python environment |
@@ -48,4 +48,4 @@ Add `--plot-python /path/to/plot-environment/bin/python` to check plots as well.
 
 ## What still needs a lab
 
-Received-module straps, output logic levels, reference voltage, power startup/ripple, analog noise/crosstalk, physical SPI edges, actual SDMMC endurance, radio reception, temperature and battery runtime remain unmeasured. The six laboratory firmware profiles (source set 1.7) have not been flashed to an assembled recorder. All 30 rows of the [bench checklist](bench-checklist.csv) remain **NOT TESTED**. Continue with the [lab sequence](lab-quickstart.html) when hardware and instruments are available; these software checks do not recommend a PCB order.
+Received-module straps, output logic levels, reference voltage, power startup/ripple, analog noise/crosstalk, physical SPI edges, actual SDMMC endurance, radio reception, temperature and battery runtime remain unmeasured. The six laboratory firmware profiles (source set 1.8) have not been flashed to an assembled recorder. All 30 rows of the [bench checklist](bench-checklist.csv) remain **NOT TESTED**. Continue with the [lab sequence](lab-quickstart.html) when hardware and instruments are available; these software checks do not recommend a PCB order.

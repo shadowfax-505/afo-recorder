@@ -2,19 +2,19 @@
   "artifacts": {
     "synthetic.afolog": {
       "bytes": 32260800,
-      "sha256": "cf22d79b05fe41d006c72665231a6fe1c84822b80fe39d41854233fac818b243"
+      "sha256": "dd4142181da4a14e42fb321fb699a9e95b57529a2d0ee01d575d1b333e029196"
     },
     "emg.csv": {
       "bytes": 55373412,
       "sha256": "b400de28a1ae4e92edacea73ffeacaed24d3a1771332969e8d0de31684795837"
     },
     "foot.csv": {
-      "bytes": 1381322,
-      "sha256": "4a9deeb58f95e2f1d438892763fccfd4bee41c441279a72c8b6b558806c20465"
+      "bytes": 1381308,
+      "sha256": "7eb92190642e48fda0925c4f29c5ca6429082e00a21bff4db88e3e05ec9030ba"
     },
     "shank.csv": {
-      "bytes": 1368473,
-      "sha256": "9300e0c22989f04911100636483a31470717bea338c775a294025763002bcb5e"
+      "bytes": 1368457,
+      "sha256": "61a122892103c4c0da47b1d604e2bf68d5801e228e802e676e57e82b1e5f6c2c"
     },
     "status.csv": {
       "bytes": 219,

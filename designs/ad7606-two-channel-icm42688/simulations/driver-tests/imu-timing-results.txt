@@ -1,6 +1,7 @@
+PASS 32/30 us tick conversion
 PASS first IRQ anchor and sensor-counter rollover
 PASS interrupt re-anchoring cannot regress reconstructed sample time
-PASS 40s counter continuity across repeated 16-bit rollovers
+PASS 40s counter continuity across repeated 16-bit rollovers without rounding drift
 PASS independent foot and shank clocks
 PASS missing sample interval is explicitly flagged
 PASS duplicate and implausible sensor intervals are rejected

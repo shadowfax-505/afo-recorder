@@ -1,6 +1,6 @@
 # Rebuilding the recorder firmware
 
-Current profiles use source set **ad7606-2ch-1.7**, ESP-IDF v5.4.2 and the ESP32-S3 target. Use the [current breadboard lab kit](../breadboard/breadboard-lab-kit.zip) for the six breadboard images, or the [profile table](../firmware/builds/README.md) and individual manifests in the repository. The physical binaries were compiled but have not been flashed or executed on an assembled recorder. Activate that ESP-IDF environment first. Open a terminal in the chosen design's `firmware` folder. The ADC and IMU identities come from that package's sources; changing the EMG count does not change the sensor driver.
+Current profiles use source set **ad7606-2ch-1.8**, ESP-IDF v5.4.2 and the ESP32-S3 target. Use the [current breadboard lab kit](../breadboard/breadboard-lab-kit.zip) for the six breadboard images, or the [profile table](../firmware/builds/README.md) and individual manifests in the repository. The physical binaries were compiled but have not been flashed or executed on an assembled recorder. Activate that ESP-IDF environment first. Open a terminal in the chosen design's `firmware` folder. The ADC and IMU identities come from that package's sources; changing the EMG count does not change the sensor driver.
 
 For a two-channel breadboard recorder with Wi-Fi:
 

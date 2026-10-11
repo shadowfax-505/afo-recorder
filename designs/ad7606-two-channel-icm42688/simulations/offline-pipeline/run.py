@@ -33,7 +33,8 @@ def run(duration_seconds=2, output=None, compact_directory=None):
         simulation_engine='native C: real drivers/serializer; ideal peripheral API model',
         hardware_variant='offline-co-simulation',imu_time='modeled_fifo_delta',
         notes='No RTOS scheduler, SDMMC or radio execution; modeled SPI/read times',
-        modeled_duration_seconds=duration_seconds)
+        modeled_duration_seconds=duration_seconds,
+        imu_timestamp_tick_us=float(re.search(r'#define IMU_TICK_US_JSON "([^"]+)"',(ROOT/'firmware/main/imu_timing.h').read_text())[1]))
     metadata=result/'input-metadata.json';metadata.write_text(json.dumps(meta,separators=(',',':')))
     sources=[ROOT/'firmware/main'/name for name in
         ('adc_ad7606.c','sensors.c','sensors.h','imu_timing.h','format.c','format.h','board.h','variant.h')]
@@ -53,7 +54,7 @@ def run(duration_seconds=2, output=None, compact_directory=None):
     if duration_seconds>=10:
         for sensor,ppm in (('foot',70),('shank',-110)):
             clock=report['imu_clock'][sensor]
-            assert clock['median_tick_step']==5000 and abs(clock['sensor_tick_error_ppm']-ppm)<=5,(sensor,clock)
+            assert clock['median_tick_step'] in (4687,4687.5,4688) and abs(clock['sensor_tick_error_ppm']-ppm)<=5,(sensor,clock)
     original=[(int(r['code1']),int(r['code2'])) for r in csv.DictReader(stimulus.open())]
     with (export/'emg.csv').open() as f:
         for i,row in enumerate(csv.DictReader(f)):
@@ -70,14 +71,16 @@ def run(duration_seconds=2, output=None, compact_directory=None):
                 assert all(int(row[name])==0 for name in ('gx_raw','gy_raw','gz_raw'))
                 assert int(row['valid'])==1
                 if previous is not None:
-                    assert (ticks-previous[0])&65535==5000 and estimate-previous[1]==5000
+                    # 4687.5 ticks of 32/30 us per 5 ms sample; estimates round to whole us.
+                    assert (ticks-previous[0])&65535 in (4687,4688) and abs(estimate-previous[1]-5000)<=1
                     rollovers+=ticks<previous[0]
                 previous=(ticks,estimate);count+=1
         accounted=clock_accounting[sensor]
         assert count==report['counts'][sensor]==accounted['saved']
         assert count+accounted['pending_at_stop']==accounted['generated']
         assert rollovers==accounted['counter_rollovers']
-        if duration_seconds>=60:assert rollovers>=900
+        # 65,536 ticks of 32/30 us wrap every 69.9 ms: about 858 wraps per minute.
+        if duration_seconds>=60:assert rollovers>=850
     import shutil
     dest=result/'converted'
     if dest.exists():shutil.rmtree(dest)

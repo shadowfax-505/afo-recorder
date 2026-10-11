@@ -76,7 +76,7 @@
 </tr>
 <tr>
 <td>Host conversion / legacy / live reception / firmware limits</td>
-<td>46 tests pass</td>
+<td>47 tests pass</td>
 </tr>
 <tr>
 <td>Software acquisition faults</td>
@@ -84,7 +84,7 @@
 </tr>
 <tr>
 <td>Firmware</td>
-<td>All seven v1.7 laboratory profiles recompiled with ESP-IDF v5.4.2 (PSRAM record queue, per-device Wi-Fi password, IMU timestamp-scale checks); none rerun in Wokwi</td>
+<td>All seven v1.8 laboratory profiles recompiled with ESP-IDF v5.4.2 (32/30 µs IMU ticks, PSRAM record queue, per-device Wi-Fi password, IMU timestamp-scale checks); none rerun in Wokwi</td>
 </tr>
 <tr>
 <td>ngspice</td>
@@ -108,7 +108,7 @@
 </tr>
 <tr>
 <td>Native driver/timing logic</td>
-<td>16 current ADC groups and eight IMU timestamp-helper groups pass</td>
+<td>16 current ADC groups and nine IMU timestamp-helper groups pass (rerun with ASan/UBSan for 1.8)</td>
 </tr>
 <tr>
 <td>Integrated evidence runner</td>
@@ -167,7 +167,7 @@
 </ul>
 <h2>IMU path and timing</h2>
 <p>Use the selected MIKROE-4237 carrier with JP2–JP4 in SPI position (pads 1–2), 3.3 V power and the specified mikroBUS header orientation. SPI3 is shared on GPIO4/5/6 (MOSI/MISO/SCLK); separate CS GPIO7/15 and INT1 GPIO16/17 identify foot/shank. Verify carrier solder bridges, supply and connector orientation on the received parts.</p>
-<p>The firmware checks WHO_AM_I=0x47 and configuration readback, selects 200 Hz accel/gyro, ±16 g/±2000 dps, standard 16-byte FIFO records and 1 µs sensor timestamps. Byte order is big-endian. It detects full FIFO, invalid packet headers and missing/stale interrupt anchors. Sensor clocks are independent; FIFO timestamps wrap. ESP32 interrupt times and FIFO read windows are preserved. The first FIFO burst anchors an estimate; later samples advance by the sensor timestamp counter delta instead of re-anchoring every burst. Ambiguous counter/read intervals are rejected. Reconstructed sample times remain explicitly uncertain. No claim of calibrated EMG-to-IMU alignment is made.</p>
+<p>The firmware checks WHO_AM_I=0x47 and configuration readback, selects 200 Hz accel/gyro, ±16 g/±2000 dps, standard 16-byte FIFO records and sensor timestamps in 1 µs mode, whose ticks last 32/30 µs on the ICM-42688 (applied from firmware 1.8). Byte order is big-endian. It detects full FIFO, invalid packet headers and missing/stale interrupt anchors. Sensor clocks are independent; FIFO timestamps wrap. ESP32 interrupt times and FIFO read windows are preserved. The first FIFO burst anchors an estimate; later samples advance by the sensor timestamp counter delta instead of re-anchoring every burst. Ambiguous counter/read intervals are rejected. Reconstructed sample times remain explicitly uncertain. No claim of calibrated EMG-to-IMU alignment is made.</p>
 <h2>Sources and release gate</h2>
 <p>Primary references: <a href="https://www.analog.com/media/en/technical-documentation/data-sheets/AD7606_7606-6_7606-4.pdf">ADI AD7606 Rev G, Tables 2–3 and serial-interface sections</a>, <a href="https://www.invensense.tdk.com/en-us/products/6-axis/icm-42688-p">TDK ICM-42688-P</a>, <a href="https://www.mikroe.com/6dof-imu-14-click">MikroE carrier</a>, <a href="https://www.ti.com/product/TPS60150">TI TPS60150</a>, <a href="https://www.ti.com/product/TPS63070">TI TPS63070</a>, <a href="https://www.microchip.com/en-us/product/mcp6004">Microchip MCP6004</a>, <a href="https://assets.nexperia.com/documents/data-sheet/BAV199-Q.pdf">Nexperia BAV199</a>, <a href="https://docs.wokwi.com/guides/esp32">Wokwi ESP32 support</a>, <a href="https://docs.wokwi.com/chips-api/getting-started">Wokwi Chips API</a>.</p>
 <p>Completed checks pass within their stated scope. <strong>The current whole-system case matrix passes within its documented model/substitution limits</strong>; see the <a href="integrated-verification.html">case ledger</a>. Physical gates include received-module qualification, power/startup/ripple, analog noise/clipping/crosstalk, cable integrity, actual 8 kHz timing, sustained SD/Wi-Fi recording, battery runtime and final PCB layout review. No board order or human-use approval follows from this report.</p>

@@ -94,6 +94,87 @@
 </table>
 <p>For steps 3–6, diagnostic acquisition runs in approximately one-second windows and stops ADC triggering before printing. <strong>The spaces between diagnostic windows are intentional.</strong> Use the recording builds for continuous capture and endurance tests. The firmware’s 80 µs BUSY wait is a fault deadline, not acceptable normal conversion time. AD7606 has no external clock or separate DRDY output; shared net name ADC_DRDY means BUSY here.</p>
 <p>Use <code>record-2ch</code> only on the custom PCB (SD CMD GPIO38). It is not interchangeable with the breadboard image. Flash all three files at the addresses in the chosen manifest.</p>
+<h2>Reading the diagnostic serial lines</h2>
+<p>The first line names the firmware, for example <code>firmware=ad7606-2ch-1.8 stage=3 hardware=breadboard channels=2</code>; record it with the binary hash. Each acquisition window then prints one <code>ADC</code> line, and stage-6 images add one <code>IMU</code> line per sensor.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Meaning</th>
+<th>How to use it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>elapsed_us</code>, <code>edges</code>, <code>good</code></td>
+<td>Window length, BUSY falling edges and frames read</td>
+<td>Rate = <code>good</code> × 1,000,000 / <code>elapsed_us</code>; expect about 8,000 per second. Windows pause between prints, so use a logic-analyzer capture for the 125 µs interval gate</td>
+</tr>
+<tr>
+<td><code>chN_mean</code></td>
+<td>Mean signed code</td>
+<td>Volts at the ADC input = code × 5 / 32768. Ideal 1.000 V = 6,553.6 codes and 2.000 V = 13,107.2; compute from the measured source</td>
+</tr>
+<tr>
+<td><code>min</code>, <code>max</code></td>
+<td>Extreme codes in the window</td>
+<td>Clipping or spikes; −32,768 or 32,767 means the input range was exceeded</td>
+</tr>
+<tr>
+<td><code>rms_ac_codes</code></td>
+<td>RMS of the code minus its mean</td>
+<td>For a sine, peak-to-peak volts ≈ <code>rms_ac_codes</code> × 2.828 × 152.588 µV. With a DC-held input it is broadband noise up to 4 kHz in codes</td>
+</tr>
+<tr>
+<td><code>interval_us</code>, <code>packets</code>, <code>interrupts</code> (IMU)</td>
+<td>Host time covered by the IMU counts, FIFO packets and INT1 edges</td>
+<td>Rate = <code>packets</code> × 1,000,000 / <code>interval_us</code>; expect about 200 per second per sensor, with <code>interrupts</code> close to <code>packets</code></td>
+</tr>
+<tr>
+<td><code>ax_raw</code>…<code>gz_raw</code> (IMU)</td>
+<td>Last packet's raw axes</td>
+<td>±16 g: 2,048 counts per g. ±2000 °/s: 16.384 counts per °/s</td>
+</tr>
+<tr>
+<td><code>tick_step_mean</code>, <code>host_us_per_tick</code> (IMU)</td>
+<td>Mean FIFO timestamp step and ESP32 µs per sensor tick</td>
+<td>Expect about 4,687.5 and 1.067: ICM-42688 &quot;1 µs&quot; ticks last 32/30 µs. Average over at least 60 windows for the stage-6 check</td>
+</tr>
+</tbody>
+</table>
+<p>Nominal stage-4 values for a 100 mVpp sine at unity DC gain, from the two ideal 1,026 Hz poles only (the simulated tolerance envelope remains the acceptance reference):</p>
+<table>
+<thead>
+<tr>
+<th>Frequency</th>
+<th>Nominal gain</th>
+<th>Expected <code>rms_ac_codes</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>20 Hz</td>
+<td>−0.00 dB</td>
+<td>231.6</td>
+</tr>
+<tr>
+<td>100 Hz</td>
+<td>−0.08 dB</td>
+<td>229.5</td>
+</tr>
+<tr>
+<td>500 Hz</td>
+<td>−1.85 dB</td>
+<td>187.2</td>
+</tr>
+<tr>
+<td>1000 Hz</td>
+<td>−5.80 dB</td>
+<td>118.8</td>
+</tr>
+</tbody>
+</table>
+<p>Compute the gain from your measured input amplitude, not the generator display. A one-second window holds a whole number of cycles only for some frequencies; average several windows.</p>
 <h2>Results sheet</h2>
 <p>Copy one row per test; include failures and retests. Do not prefill these with simulator output.</p>
 <table>

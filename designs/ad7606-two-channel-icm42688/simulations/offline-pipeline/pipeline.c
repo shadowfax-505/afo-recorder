@@ -18,7 +18,7 @@ static bool recording_model;
 static int16_t stimulus[8000][2];
 static gptimer_event_callbacks_t callback;
 typedef struct {uint8_t regs[128],fifo[2048];unsigned used,generated;uint16_t ticks;
-    double next_us,period_us,last_irq_us;} imu_model_t;
+    double next_us,period_us,last_irq_us,tick_acc;} imu_model_t;
 static imu_model_t devices[2];
 static void advance_to(int64_t target){
     assert(target>=now_us);
@@ -27,7 +27,9 @@ static void advance_to(int64_t target){
         if(!m->next_us){m->period_us=5000*(1+(id?-110:70)*1e-6);m->next_us=target+m->period_us;}
         while(m->next_us<=target){
             if(m->regs[0x16]==0x40&&m->regs[0x4e]==0x0f){
-                uint8_t packet[16]={0x68,0,0,0,0,8,0};m->ticks+=5000;m->generated++;
+                uint8_t packet[16]={0x68,0,0,0,0,8,0};m->generated++;
+                // 5000 sensor-us per sample at 32/30 us per tick: 4687.5 ticks.
+                m->tick_acc+=5000.0*IMU_TICK_US_DEN/IMU_TICK_US_NUM;m->ticks=(uint16_t)(uint64_t)m->tick_acc;
                 m->last_irq_us=m->next_us; // modeled INT1 data-ready time
                 packet[2]=id+1;packet[14]=m->ticks>>8;packet[15]=m->ticks;
                 if(m->used+16<=2048){memcpy(m->fifo+m->used,packet,16);m->used+=16;}
@@ -141,7 +143,7 @@ int main(int argc,char **argv){
                 uint8_t *p=bytes+k*16;uint16_t ticks=((uint16_t)p[14]<<8)|p[15];uint64_t estimate;bool gap;
                 assert(imu_clock_step(&clocks[id],ticks,start-lag+k*5000,start,&estimate,&gap)&&!gap);
                 assert(p[1]==0&&p[2]==id+1&&p[3]==0&&p[4]==0&&p[5]==8&&p[6]==0);
-                if(counts[id]){assert((uint16_t)(ticks-last_ticks[id])==5000&&estimate>last_estimates[id]);if(ticks<last_ticks[id])rollovers[id]++;}
+                if(counts[id]){uint16_t step=(uint16_t)(ticks-last_ticks[id]);assert((step==4687||step==4688)&&estimate>last_estimates[id]);if(ticks<last_ticks[id])rollovers[id]++;}
                 last_ticks[id]=ticks;last_estimates[id]=estimate;
                 // Like the firmware, store the latest data-ready interrupt before the read.
                 uint64_t irq=devices[id].last_irq_us>0?(uint64_t)devices[id].last_irq_us:start;
