@@ -8,7 +8,7 @@
   "record_bytes_s": 537600,
   "two_hour_nominal_bytes_with_status_and_header": 3871184960,
   "source_sha256": "35c504dba592ac396f5a5744215ad239969026af7e15141d269daf46fa0ddaaa",
-  "board_h_sha256": "c86d918838b37426a31ab2434a2a7c2ee4bdf88c45e38a46495e37c2bcc16aba",
+  "board_h_sha256": "ccba73353a40e4d32d4dcc26b08046bccf88866ec93e60229081181065e782b3",
   "limits": [
     "Modeled write throughput and latencies are assumptions, not SD-card measurements",
     "Arrival/write counts only; no binary files, firmware, GPIO, scheduler or persistence",

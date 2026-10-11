@@ -2,7 +2,7 @@
   "artifacts": {
     "synthetic.afolog": {
       "bytes": 32260800,
-      "sha256": "0cc6c6feeb21ae8cb25bee36486e826af27ce1b518689daf8a4c469419297d0d"
+      "sha256": "cb4ed8ac02e658c0009400be96da2fc72120e711bf24815d730b5559814984d9"
     },
     "emg.csv": {
       "bytes": 55373412,

@@ -2,7 +2,7 @@
   "scope": "Extracted AD7606 fixed-two ICM breadboard kit",
   "hardware_measured": false,
   "physical_measurements_completed": 0,
-  "archive_sha256": "db8cdb962004463b9acd6a89f0726892cf93b2d222e4abf4fa79ec2fbd6ea5b6",
+  "archive_sha256": "eccf7f7afddbfc853858acd20b6871820865f61c56fdc16292522cd02b2574fb",
   "csv_test_environment": {
     "python": "3.14.7",
     "matplotlib_installed": false
@@ -88,6 +88,7 @@
         "sensor_tick_error_ppm": null,
         "fit_note": "needs at least 40 FIFO reads spanning 10 s",
         "within_1_percent": true,
+        "within_datasheet_tolerance": true,
         "host_time_fit": null
       },
       "shank": {
@@ -102,6 +103,7 @@
         "sensor_tick_error_ppm": null,
         "fit_note": "needs at least 40 FIFO reads spanning 10 s",
         "within_1_percent": true,
+        "within_datasheet_tolerance": true,
         "host_time_fit": null
       }
     },
@@ -136,7 +138,7 @@
     },
     "signals.svg": {
       "bytes": 82472,
-      "sha256": "5b2dfc157947527923e95bc61f8b9d4580a75bd66776d8bb8aac4418d5871011"
+      "sha256": "bcb50f00d7888034ba2de4d01116f40dcf0d6f0f61b77392a452e8bb93959502"
     }
   },
   "tampered_recording_rejected": true,
@@ -161,7 +163,8 @@
     "failed_asset_requests": 0,
     "external_requests": 0,
     "scope": "Local asset closure and page loading; geometry and wire bends remain illustrative; no physical hardware.",
-    "stage6_text_current": true
+    "stage6_text_current": true,
+    "clock_tolerance_text_current": true
   },
   "previous_archive_checks": {
     "note": "Recorded for the firmware 1.6 archive (a6cc76b9...); not repeated for later archives.",

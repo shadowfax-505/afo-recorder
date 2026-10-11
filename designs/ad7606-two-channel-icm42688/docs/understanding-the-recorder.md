@@ -165,7 +165,7 @@ A mounting-axis diagram identifies how sensor coordinates relate to each segment
 
 A FIFO is an ordered buffer of sensor packets. Delayed reading can still preserve samples, but a FIFO overflow loses information. The project retains sensor counter values, interrupt anchors, read windows and quality flags. Its reconstructed host times are estimates, not a shared hardware clock.
 
-The sensor timestamp is set to its "1 us" mode, but on the ICM-42688 each tick lasts 32/30 us (the internal PLL runs at 19.2 MHz rather than 20.48 MHz, per TDK's driver), so the 16-bit counter wraps after about 69.9 ms. Firmware 1.8 applies this scale; stage 6 measures it. A wrap is normal; a sufficiently long unexplained gap can make the number of wraps ambiguous. Do not invent elapsed cycles after corrupted or missing data. Two sensors starting at different moments can have different sample counts without a fault. Align by justified timing, never by matching row numbers. [P1, P3]
+The sensor timestamp is set to its "1 us" mode, but on the ICM-42688 each tick lasts 32/30 us (datasheet section 12.7, Timestamp Interval Scaling), so the 16-bit counter wraps after about 69.9 ms. Firmware 1.8 applies this scale; stage 6 measures it. A wrap is normal; a sufficiently long unexplained gap can make the number of wraps ambiguous. Do not invent elapsed cycles after corrupted or missing data. Two sensors starting at different moments can have different sample counts without a fault. Align by justified timing, never by matching row numbers. [P1, P3]
 
 ## 10. Synchronization and uncertainty
 

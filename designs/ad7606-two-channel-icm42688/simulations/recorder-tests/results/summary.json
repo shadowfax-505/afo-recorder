@@ -12,7 +12,7 @@
     "main.c": "56fde3df02a168b70ca748a51d9fafe7ea06c8b4c02f4fa95f8bcae4efa4cd5d",
     "format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
     "metadata.c": "03ee1645025484a6d421f2b4571d53894d76837da30f8f31006eabe86738182c",
-    "board.h": "c86d918838b37426a31ab2434a2a7c2ee4bdf88c45e38a46495e37c2bcc16aba",
+    "board.h": "ccba73353a40e4d32d4dcc26b08046bccf88866ec93e60229081181065e782b3",
     "variant.h": "55c2cdaef8b2d56e2ced2aa23984a289038adc6caaf9d164c92830c24b8cffb9"
   },
   "limits": [
@@ -34,14 +34,14 @@
       "writes": 5,
       "syncs": 3,
       "closes": 1,
-      "metadata_bytes": 1309,
+      "metadata_bytes": 1310,
       "profile": "pcb",
       "metadata_roundtrip_pass": true,
       "live_end_reason_pass": true,
       "laptop_stop_state_pass": true,
       "sd_live_end_identical": true,
       "quality": {
-        "source_sha256": "2b5ea2c5a29b399cffd479a079b7fd302479ddee2b3be14c5b761bbfdc987345",
+        "source_sha256": "660baf47eec1636a8e8143cfde535ff081183050ec01f00fd26b4e165d2e7f17",
         "synthetic": true,
         "counts": {
           "emg": 260,
@@ -98,6 +98,7 @@
             "sensor_tick_error_ppm": null,
             "fit_note": "needs at least 40 FIFO reads spanning 10 s",
             "within_1_percent": false,
+            "within_datasheet_tolerance": false,
             "host_time_fit": null
           },
           "shank": {
@@ -112,6 +113,7 @@
             "sensor_tick_error_ppm": null,
             "fit_note": "needs at least 40 FIFO reads spanning 10 s",
             "within_1_percent": false,
+            "within_datasheet_tolerance": false,
             "host_time_fit": null
           }
         },
@@ -134,14 +136,14 @@
       "writes": 69,
       "syncs": 3,
       "closes": 1,
-      "metadata_bytes": 1309,
+      "metadata_bytes": 1310,
       "profile": "pcb",
       "metadata_roundtrip_pass": true,
       "live_end_reason_pass": true,
       "laptop_stop_state_pass": true,
       "sd_live_end_identical": true,
       "quality": {
-        "source_sha256": "2b5ea2c5a29b399cffd479a079b7fd302479ddee2b3be14c5b761bbfdc987345",
+        "source_sha256": "660baf47eec1636a8e8143cfde535ff081183050ec01f00fd26b4e165d2e7f17",
         "synthetic": true,
         "counts": {
           "emg": 260,
@@ -198,6 +200,7 @@
             "sensor_tick_error_ppm": null,
             "fit_note": "needs at least 40 FIFO reads spanning 10 s",
             "within_1_percent": false,
+            "within_datasheet_tolerance": false,
             "host_time_fit": null
           },
           "shank": {
@@ -212,6 +215,7 @@
             "sensor_tick_error_ppm": null,
             "fit_note": "needs at least 40 FIFO reads spanning 10 s",
             "within_1_percent": false,
+            "within_datasheet_tolerance": false,
             "host_time_fit": null
           }
         },
@@ -234,14 +238,14 @@
       "writes": 5,
       "syncs": 3,
       "closes": 1,
-      "metadata_bytes": 1309,
+      "metadata_bytes": 1310,
       "profile": "pcb",
       "metadata_roundtrip_pass": true,
       "live_end_reason_pass": true,
       "laptop_stop_state_pass": true,
       "sd_live_end_identical": true,
       "quality": {
-        "source_sha256": "8e7c9c8498fe7a21a8e7887d399b1a2f3607d3987e0db691a245c074374d7227",
+        "source_sha256": "3fef78c48075988e4237ef3c5023024697e4769664d5bcc9463881d1f157108e",
         "synthetic": true,
         "counts": {
           "emg": 260,
@@ -303,6 +307,7 @@
             "sensor_tick_error_ppm": null,
             "fit_note": "needs at least 40 FIFO reads spanning 10 s",
             "within_1_percent": false,
+            "within_datasheet_tolerance": false,
             "host_time_fit": null
           },
           "shank": {
@@ -317,6 +322,7 @@
             "sensor_tick_error_ppm": null,
             "fit_note": "needs at least 40 FIFO reads spanning 10 s",
             "within_1_percent": false,
+            "within_datasheet_tolerance": false,
             "host_time_fit": null
           }
         },
@@ -339,14 +345,14 @@
       "writes": 162,
       "syncs": 3,
       "closes": 1,
-      "metadata_bytes": 1309,
+      "metadata_bytes": 1310,
       "profile": "pcb",
       "metadata_roundtrip_pass": true,
       "live_end_reason_pass": true,
       "laptop_stop_state_pass": true,
       "sd_live_end_identical": true,
       "quality": {
-        "source_sha256": "2b9c0151d78e4658ea950ce1bb695d5a9ef984fa1f066c9fa3d821ca42d543cd",
+        "source_sha256": "971af58ef23adeab37051aa4415bc960179a1dcdfa15c5e0badc0ab90e5b9744",
         "synthetic": true,
         "counts": {
           "emg": 19506,
@@ -414,6 +420,7 @@
             "sensor_tick_error_ppm": null,
             "fit_note": "needs at least 40 FIFO reads spanning 10 s",
             "within_1_percent": false,
+            "within_datasheet_tolerance": false,
             "host_time_fit": null
           },
           "shank": {
@@ -428,6 +435,7 @@
             "sensor_tick_error_ppm": null,
             "fit_note": "needs at least 40 FIFO reads spanning 10 s",
             "within_1_percent": false,
+            "within_datasheet_tolerance": false,
             "host_time_fit": null
           }
         },
@@ -450,13 +458,13 @@
       "writes": 2,
       "syncs": 1,
       "closes": 1,
-      "metadata_bytes": 1309,
+      "metadata_bytes": 1310,
       "profile": "pcb",
       "metadata_roundtrip_pass": true,
       "live_end_reason_pass": true,
       "laptop_stop_state_pass": true,
       "quality": {
-        "source_sha256": "54dfb3a6121a89b94724da25ffcf1854076f4d218bdd17d0a6fac84dffee5e92",
+        "source_sha256": "2683a8e7e1f66d5ee7736a924e4c678cb3ee7b7a89c16d0c2230484a2c46b67d",
         "synthetic": true,
         "counts": {
           "emg": 0,
@@ -526,13 +534,13 @@
       "writes": 3,
       "syncs": 1,
       "closes": 1,
-      "metadata_bytes": 1309,
+      "metadata_bytes": 1310,
       "profile": "pcb",
       "metadata_roundtrip_pass": true,
       "live_end_reason_pass": true,
       "laptop_stop_state_pass": true,
       "quality": {
-        "source_sha256": "955b2a17b8c404f3c41b6a92475e35979cf64c5d0b15d38b14508e727e657530",
+        "source_sha256": "90e4cd281ec579304f0dbd4800b30e5c1c3517904c7f57774c891fd05cfdf5ad",
         "synthetic": true,
         "counts": {
           "emg": 2,
@@ -603,13 +611,13 @@
       "writes": 2,
       "syncs": 1,
       "closes": 1,
-      "metadata_bytes": 1309,
+      "metadata_bytes": 1310,
       "profile": "pcb",
       "metadata_roundtrip_pass": true,
       "live_end_reason_pass": true,
       "laptop_stop_state_pass": true,
       "quality": {
-        "source_sha256": "54dfb3a6121a89b94724da25ffcf1854076f4d218bdd17d0a6fac84dffee5e92",
+        "source_sha256": "2683a8e7e1f66d5ee7736a924e4c678cb3ee7b7a89c16d0c2230484a2c46b67d",
         "synthetic": true,
         "counts": {
           "emg": 0,
@@ -699,7 +707,7 @@
       "metadata_bytes": 0,
       "profile": "pcb",
       "quality": {
-        "source_sha256": "54dfb3a6121a89b94724da25ffcf1854076f4d218bdd17d0a6fac84dffee5e92",
+        "source_sha256": "2683a8e7e1f66d5ee7736a924e4c678cb3ee7b7a89c16d0c2230484a2c46b67d",
         "synthetic": true,
         "counts": {
           "emg": 0,
@@ -769,13 +777,13 @@
       "writes": 4,
       "syncs": 2,
       "closes": 1,
-      "metadata_bytes": 1309,
+      "metadata_bytes": 1310,
       "profile": "pcb",
       "metadata_roundtrip_pass": true,
       "live_end_reason_pass": true,
       "laptop_stop_state_pass": true,
       "quality": {
-        "source_sha256": "a72921bac65511e2799914a99b99c0e110c682b6c30e9edf4b9b620c2be058ca",
+        "source_sha256": "b60fb06235aaca5b31a8ef95ea1025f8237b063b90c3751f99099cd1df35b337",
         "synthetic": true,
         "counts": {
           "emg": 260,
@@ -826,6 +834,7 @@
             "sensor_tick_error_ppm": null,
             "fit_note": "needs at least 40 FIFO reads spanning 10 s",
             "within_1_percent": false,
+            "within_datasheet_tolerance": false,
             "host_time_fit": null
           },
           "shank": {
@@ -840,6 +849,7 @@
             "sensor_tick_error_ppm": null,
             "fit_note": "needs at least 40 FIFO reads spanning 10 s",
             "within_1_percent": false,
+            "within_datasheet_tolerance": false,
             "host_time_fit": null
           }
         },
@@ -862,13 +872,13 @@
       "writes": 5,
       "syncs": 3,
       "closes": 1,
-      "metadata_bytes": 1309,
+      "metadata_bytes": 1310,
       "profile": "pcb",
       "metadata_roundtrip_pass": true,
       "live_end_reason_pass": true,
       "laptop_stop_state_pass": true,
       "quality": {
-        "source_sha256": "2b5ea2c5a29b399cffd479a079b7fd302479ddee2b3be14c5b761bbfdc987345",
+        "source_sha256": "660baf47eec1636a8e8143cfde535ff081183050ec01f00fd26b4e165d2e7f17",
         "synthetic": true,
         "counts": {
           "emg": 260,
@@ -925,6 +935,7 @@
             "sensor_tick_error_ppm": null,
             "fit_note": "needs at least 40 FIFO reads spanning 10 s",
             "within_1_percent": false,
+            "within_datasheet_tolerance": false,
             "host_time_fit": null
           },
           "shank": {
@@ -939,6 +950,7 @@
             "sensor_tick_error_ppm": null,
             "fit_note": "needs at least 40 FIFO reads spanning 10 s",
             "within_1_percent": false,
+            "within_datasheet_tolerance": false,
             "host_time_fit": null
           }
         },
@@ -961,13 +973,13 @@
       "writes": 5,
       "syncs": 3,
       "closes": 1,
-      "metadata_bytes": 1309,
+      "metadata_bytes": 1310,
       "profile": "pcb",
       "metadata_roundtrip_pass": true,
       "live_end_reason_pass": true,
       "laptop_stop_state_pass": true,
       "quality": {
-        "source_sha256": "2b5ea2c5a29b399cffd479a079b7fd302479ddee2b3be14c5b761bbfdc987345",
+        "source_sha256": "660baf47eec1636a8e8143cfde535ff081183050ec01f00fd26b4e165d2e7f17",
         "synthetic": true,
         "counts": {
           "emg": 260,
@@ -1024,6 +1036,7 @@
             "sensor_tick_error_ppm": null,
             "fit_note": "needs at least 40 FIFO reads spanning 10 s",
             "within_1_percent": false,
+            "within_datasheet_tolerance": false,
             "host_time_fit": null
           },
           "shank": {
@@ -1038,6 +1051,7 @@
             "sensor_tick_error_ppm": null,
             "fit_note": "needs at least 40 FIFO reads spanning 10 s",
             "within_1_percent": false,
+            "within_datasheet_tolerance": false,
             "host_time_fit": null
           }
         },
@@ -1060,11 +1074,11 @@
       "writes": 1,
       "syncs": 1,
       "closes": 1,
-      "metadata_bytes": 1309,
+      "metadata_bytes": 1310,
       "profile": "pcb",
       "metadata_roundtrip_pass": true,
       "quality": {
-        "source_sha256": "54dfb3a6121a89b94724da25ffcf1854076f4d218bdd17d0a6fac84dffee5e92",
+        "source_sha256": "2683a8e7e1f66d5ee7736a924e4c678cb3ee7b7a89c16d0c2230484a2c46b67d",
         "synthetic": true,
         "counts": {
           "emg": 0,
@@ -1134,11 +1148,11 @@
       "writes": 1,
       "syncs": 1,
       "closes": 1,
-      "metadata_bytes": 1309,
+      "metadata_bytes": 1310,
       "profile": "pcb",
       "metadata_roundtrip_pass": true,
       "quality": {
-        "source_sha256": "54dfb3a6121a89b94724da25ffcf1854076f4d218bdd17d0a6fac84dffee5e92",
+        "source_sha256": "2683a8e7e1f66d5ee7736a924e4c678cb3ee7b7a89c16d0c2230484a2c46b67d",
         "synthetic": true,
         "counts": {
           "emg": 0,
@@ -1208,14 +1222,14 @@
       "writes": 5,
       "syncs": 3,
       "closes": 1,
-      "metadata_bytes": 1309,
+      "metadata_bytes": 1310,
       "profile": "pcb",
       "metadata_roundtrip_pass": true,
       "live_end_reason_pass": true,
       "laptop_stop_state_pass": true,
       "sd_live_end_identical": true,
       "quality": {
-        "source_sha256": "3e11d8f662afcf8a860526f7214af96378c11d7ead77abbeab9c415e0d02fb8e",
+        "source_sha256": "e1a50788e07585b7d0c2f84222f04cc0e2b1067dfb8624c3f752d7998e8a3d3f",
         "synthetic": true,
         "counts": {
           "emg": 260,
@@ -1277,6 +1291,7 @@
             "sensor_tick_error_ppm": null,
             "fit_note": "needs at least 40 FIFO reads spanning 10 s",
             "within_1_percent": false,
+            "within_datasheet_tolerance": false,
             "host_time_fit": null
           },
           "shank": {
@@ -1291,6 +1306,7 @@
             "sensor_tick_error_ppm": null,
             "fit_note": "needs at least 40 FIFO reads spanning 10 s",
             "within_1_percent": false,
+            "within_datasheet_tolerance": false,
             "host_time_fit": null
           }
         },
@@ -1330,14 +1346,14 @@
       "writes": 5,
       "syncs": 3,
       "closes": 1,
-      "metadata_bytes": 1309,
+      "metadata_bytes": 1310,
       "profile": "pcb",
       "metadata_roundtrip_pass": true,
       "live_end_reason_pass": true,
       "laptop_stop_state_pass": true,
       "sd_live_end_identical": true,
       "quality": {
-        "source_sha256": "0fbc030d6757954a0f4e9a010587364c0b36db52f587e8c5f00b8690fa739661",
+        "source_sha256": "968d65ad3840e545eecddbf7b5a1a5b6be0e281dfb1a2b3ef5141e1c6ed10cc2",
         "synthetic": true,
         "counts": {
           "emg": 260,
@@ -1399,6 +1415,7 @@
             "sensor_tick_error_ppm": null,
             "fit_note": "needs at least 40 FIFO reads spanning 10 s",
             "within_1_percent": false,
+            "within_datasheet_tolerance": false,
             "host_time_fit": null
           },
           "shank": {
@@ -1413,6 +1430,7 @@
             "sensor_tick_error_ppm": null,
             "fit_note": "needs at least 40 FIFO reads spanning 10 s",
             "within_1_percent": false,
+            "within_datasheet_tolerance": false,
             "host_time_fit": null
           }
         },
@@ -1435,14 +1453,14 @@
       "writes": 7,
       "syncs": 6,
       "closes": 1,
-      "metadata_bytes": 1309,
+      "metadata_bytes": 1310,
       "profile": "pcb",
       "metadata_roundtrip_pass": true,
       "live_end_reason_pass": true,
       "laptop_stop_state_pass": true,
       "sd_live_end_identical": true,
       "quality": {
-        "source_sha256": "f8b4c5203ff1209b898af2a658da4dc04fa3de95545ddb3d6c38f3f7b06be438",
+        "source_sha256": "b3c0f2542eb7e0aed1a54355f85782c98682a06c6e5cd1e6446943afa50ac0ed",
         "synthetic": true,
         "counts": {
           "emg": 260,
@@ -1504,6 +1522,7 @@
             "sensor_tick_error_ppm": null,
             "fit_note": "needs at least 40 FIFO reads spanning 10 s",
             "within_1_percent": false,
+            "within_datasheet_tolerance": false,
             "host_time_fit": null
           },
           "shank": {
@@ -1518,6 +1537,7 @@
             "sensor_tick_error_ppm": null,
             "fit_note": "needs at least 40 FIFO reads spanning 10 s",
             "within_1_percent": false,
+            "within_datasheet_tolerance": false,
             "host_time_fit": null
           }
         },
@@ -1540,13 +1560,13 @@
       "writes": 4,
       "syncs": 2,
       "closes": 1,
-      "metadata_bytes": 1309,
+      "metadata_bytes": 1310,
       "profile": "pcb",
       "metadata_roundtrip_pass": true,
       "live_end_reason_pass": true,
       "laptop_stop_state_pass": true,
       "quality": {
-        "source_sha256": "4e7870dfdcb56082aa2cfcda3b1aaae815fb8a4d385cff9e78c65967485b3369",
+        "source_sha256": "2e850b941ad875ccfecfce8d56f59fbbb62dab9f7aa6ece31e686e7bcb68e754",
         "synthetic": true,
         "counts": {
           "emg": 260,
@@ -1608,6 +1628,7 @@
             "sensor_tick_error_ppm": null,
             "fit_note": "needs at least 40 FIFO reads spanning 10 s",
             "within_1_percent": false,
+            "within_datasheet_tolerance": false,
             "host_time_fit": null
           },
           "shank": {
@@ -1622,6 +1643,7 @@
             "sensor_tick_error_ppm": null,
             "fit_note": "needs at least 40 FIFO reads spanning 10 s",
             "within_1_percent": false,
+            "within_datasheet_tolerance": false,
             "host_time_fit": null
           }
         },
@@ -1644,14 +1666,14 @@
       "writes": 5,
       "syncs": 3,
       "closes": 1,
-      "metadata_bytes": 1316,
+      "metadata_bytes": 1317,
       "profile": "breadboard",
       "metadata_roundtrip_pass": true,
       "live_end_reason_pass": true,
       "laptop_stop_state_pass": true,
       "sd_live_end_identical": true,
       "quality": {
-        "source_sha256": "f88528605befb0ecf1c32b8835493a039d7cbfb20cb8d5c7b1eb799313d59f73",
+        "source_sha256": "47effe96e2c27dc0280d0351127bea8dad543cf18e2fb5e6151bacde2ad55efe",
         "synthetic": true,
         "counts": {
           "emg": 260,
@@ -1708,6 +1730,7 @@
             "sensor_tick_error_ppm": null,
             "fit_note": "needs at least 40 FIFO reads spanning 10 s",
             "within_1_percent": false,
+            "within_datasheet_tolerance": false,
             "host_time_fit": null
           },
           "shank": {
@@ -1722,6 +1745,7 @@
             "sensor_tick_error_ppm": null,
             "fit_note": "needs at least 40 FIFO reads spanning 10 s",
             "within_1_percent": false,
+            "within_datasheet_tolerance": false,
             "host_time_fit": null
           }
         },
@@ -1744,14 +1768,14 @@
       "writes": 69,
       "syncs": 3,
       "closes": 1,
-      "metadata_bytes": 1316,
+      "metadata_bytes": 1317,
       "profile": "breadboard",
       "metadata_roundtrip_pass": true,
       "live_end_reason_pass": true,
       "laptop_stop_state_pass": true,
       "sd_live_end_identical": true,
       "quality": {
-        "source_sha256": "f88528605befb0ecf1c32b8835493a039d7cbfb20cb8d5c7b1eb799313d59f73",
+        "source_sha256": "47effe96e2c27dc0280d0351127bea8dad543cf18e2fb5e6151bacde2ad55efe",
         "synthetic": true,
         "counts": {
           "emg": 260,
@@ -1808,6 +1832,7 @@
             "sensor_tick_error_ppm": null,
             "fit_note": "needs at least 40 FIFO reads spanning 10 s",
             "within_1_percent": false,
+            "within_datasheet_tolerance": false,
             "host_time_fit": null
           },
           "shank": {
@@ -1822,6 +1847,7 @@
             "sensor_tick_error_ppm": null,
             "fit_note": "needs at least 40 FIFO reads spanning 10 s",
             "within_1_percent": false,
+            "within_datasheet_tolerance": false,
             "host_time_fit": null
           }
         },
@@ -1844,14 +1870,14 @@
       "writes": 5,
       "syncs": 3,
       "closes": 1,
-      "metadata_bytes": 1316,
+      "metadata_bytes": 1317,
       "profile": "breadboard",
       "metadata_roundtrip_pass": true,
       "live_end_reason_pass": true,
       "laptop_stop_state_pass": true,
       "sd_live_end_identical": true,
       "quality": {
-        "source_sha256": "87799cc56ff0f9485b61caa089e080db1c4aa8470fefaebd0cf71da32007ff73",
+        "source_sha256": "c9fcee8af2595ae2c2d3cd3235020d4b03e00c6933adcb9261f6231747ede16e",
         "synthetic": true,
         "counts": {
           "emg": 260,
@@ -1913,6 +1939,7 @@
             "sensor_tick_error_ppm": null,
             "fit_note": "needs at least 40 FIFO reads spanning 10 s",
             "within_1_percent": false,
+            "within_datasheet_tolerance": false,
             "host_time_fit": null
           },
           "shank": {
@@ -1927,6 +1954,7 @@
             "sensor_tick_error_ppm": null,
             "fit_note": "needs at least 40 FIFO reads spanning 10 s",
             "within_1_percent": false,
+            "within_datasheet_tolerance": false,
             "host_time_fit": null
           }
         },
@@ -1949,14 +1977,14 @@
       "writes": 162,
       "syncs": 3,
       "closes": 1,
-      "metadata_bytes": 1316,
+      "metadata_bytes": 1317,
       "profile": "breadboard",
       "metadata_roundtrip_pass": true,
       "live_end_reason_pass": true,
       "laptop_stop_state_pass": true,
       "sd_live_end_identical": true,
       "quality": {
-        "source_sha256": "3af4076afed0c197212affcbe02dc880d483b1b40ef4a16627e46a8083790cb9",
+        "source_sha256": "c0b4dcd005a414080c919be798a4d6b3877e46f823bbf881e5e5d795862d45b6",
         "synthetic": true,
         "counts": {
           "emg": 19506,
@@ -2024,6 +2052,7 @@
             "sensor_tick_error_ppm": null,
             "fit_note": "needs at least 40 FIFO reads spanning 10 s",
             "within_1_percent": false,
+            "within_datasheet_tolerance": false,
             "host_time_fit": null
           },
           "shank": {
@@ -2038,6 +2067,7 @@
             "sensor_tick_error_ppm": null,
             "fit_note": "needs at least 40 FIFO reads spanning 10 s",
             "within_1_percent": false,
+            "within_datasheet_tolerance": false,
             "host_time_fit": null
           }
         },
@@ -2060,13 +2090,13 @@
       "writes": 2,
       "syncs": 1,
       "closes": 1,
-      "metadata_bytes": 1316,
+      "metadata_bytes": 1317,
       "profile": "breadboard",
       "metadata_roundtrip_pass": true,
       "live_end_reason_pass": true,
       "laptop_stop_state_pass": true,
       "quality": {
-        "source_sha256": "d50291804a6b0aa89bb886520fdea49411253687e42510c5ab6442d660cd1d74",
+        "source_sha256": "46fce5a3609d9dfa672bd13109f3e0c5a690f54d23513f53991a86c844407020",
         "synthetic": true,
         "counts": {
           "emg": 0,
@@ -2136,13 +2166,13 @@
       "writes": 3,
       "syncs": 1,
       "closes": 1,
-      "metadata_bytes": 1316,
+      "metadata_bytes": 1317,
       "profile": "breadboard",
       "metadata_roundtrip_pass": true,
       "live_end_reason_pass": true,
       "laptop_stop_state_pass": true,
       "quality": {
-        "source_sha256": "5db2e77a47d94a1a32b7055d65fc34c7dc061fc0d7999b6c829b7207faa5d4ab",
+        "source_sha256": "38464f8b6b006758172a3adc70905d90e2aad772f09cf339b21b5b82c69728ce",
         "synthetic": true,
         "counts": {
           "emg": 2,
@@ -2213,13 +2243,13 @@
       "writes": 2,
       "syncs": 1,
       "closes": 1,
-      "metadata_bytes": 1316,
+      "metadata_bytes": 1317,
       "profile": "breadboard",
       "metadata_roundtrip_pass": true,
       "live_end_reason_pass": true,
       "laptop_stop_state_pass": true,
       "quality": {
-        "source_sha256": "d50291804a6b0aa89bb886520fdea49411253687e42510c5ab6442d660cd1d74",
+        "source_sha256": "46fce5a3609d9dfa672bd13109f3e0c5a690f54d23513f53991a86c844407020",
         "synthetic": true,
         "counts": {
           "emg": 0,
@@ -2309,7 +2339,7 @@
       "metadata_bytes": 0,
       "profile": "breadboard",
       "quality": {
-        "source_sha256": "d50291804a6b0aa89bb886520fdea49411253687e42510c5ab6442d660cd1d74",
+        "source_sha256": "46fce5a3609d9dfa672bd13109f3e0c5a690f54d23513f53991a86c844407020",
         "synthetic": true,
         "counts": {
           "emg": 0,
@@ -2379,13 +2409,13 @@
       "writes": 4,
       "syncs": 2,
       "closes": 1,
-      "metadata_bytes": 1316,
+      "metadata_bytes": 1317,
       "profile": "breadboard",
       "metadata_roundtrip_pass": true,
       "live_end_reason_pass": true,
       "laptop_stop_state_pass": true,
       "quality": {
-        "source_sha256": "5721542fb6da13349ca62b5e33398e773f77c24f3797c781f14441b7caf15506",
+        "source_sha256": "2d68ee719e01daedf55a86ba88df3c70915e9c4f3fb29deca8e4d3d75323ab47",
         "synthetic": true,
         "counts": {
           "emg": 260,
@@ -2436,6 +2466,7 @@
             "sensor_tick_error_ppm": null,
             "fit_note": "needs at least 40 FIFO reads spanning 10 s",
             "within_1_percent": false,
+            "within_datasheet_tolerance": false,
             "host_time_fit": null
           },
           "shank": {
@@ -2450,6 +2481,7 @@
             "sensor_tick_error_ppm": null,
             "fit_note": "needs at least 40 FIFO reads spanning 10 s",
             "within_1_percent": false,
+            "within_datasheet_tolerance": false,
             "host_time_fit": null
           }
         },
@@ -2472,13 +2504,13 @@
       "writes": 5,
       "syncs": 3,
       "closes": 1,
-      "metadata_bytes": 1316,
+      "metadata_bytes": 1317,
       "profile": "breadboard",
       "metadata_roundtrip_pass": true,
       "live_end_reason_pass": true,
       "laptop_stop_state_pass": true,
       "quality": {
-        "source_sha256": "f88528605befb0ecf1c32b8835493a039d7cbfb20cb8d5c7b1eb799313d59f73",
+        "source_sha256": "47effe96e2c27dc0280d0351127bea8dad543cf18e2fb5e6151bacde2ad55efe",
         "synthetic": true,
         "counts": {
           "emg": 260,
@@ -2535,6 +2567,7 @@
             "sensor_tick_error_ppm": null,
             "fit_note": "needs at least 40 FIFO reads spanning 10 s",
             "within_1_percent": false,
+            "within_datasheet_tolerance": false,
             "host_time_fit": null
           },
           "shank": {
@@ -2549,6 +2582,7 @@
             "sensor_tick_error_ppm": null,
             "fit_note": "needs at least 40 FIFO reads spanning 10 s",
             "within_1_percent": false,
+            "within_datasheet_tolerance": false,
             "host_time_fit": null
           }
         },
@@ -2571,13 +2605,13 @@
       "writes": 5,
       "syncs": 3,
       "closes": 1,
-      "metadata_bytes": 1316,
+      "metadata_bytes": 1317,
       "profile": "breadboard",
       "metadata_roundtrip_pass": true,
       "live_end_reason_pass": true,
       "laptop_stop_state_pass": true,
       "quality": {
-        "source_sha256": "f88528605befb0ecf1c32b8835493a039d7cbfb20cb8d5c7b1eb799313d59f73",
+        "source_sha256": "47effe96e2c27dc0280d0351127bea8dad543cf18e2fb5e6151bacde2ad55efe",
         "synthetic": true,
         "counts": {
           "emg": 260,
@@ -2634,6 +2668,7 @@
             "sensor_tick_error_ppm": null,
             "fit_note": "needs at least 40 FIFO reads spanning 10 s",
             "within_1_percent": false,
+            "within_datasheet_tolerance": false,
             "host_time_fit": null
           },
           "shank": {
@@ -2648,6 +2683,7 @@
             "sensor_tick_error_ppm": null,
             "fit_note": "needs at least 40 FIFO reads spanning 10 s",
             "within_1_percent": false,
+            "within_datasheet_tolerance": false,
             "host_time_fit": null
           }
         },
@@ -2670,11 +2706,11 @@
       "writes": 1,
       "syncs": 1,
       "closes": 1,
-      "metadata_bytes": 1316,
+      "metadata_bytes": 1317,
       "profile": "breadboard",
       "metadata_roundtrip_pass": true,
       "quality": {
-        "source_sha256": "d50291804a6b0aa89bb886520fdea49411253687e42510c5ab6442d660cd1d74",
+        "source_sha256": "46fce5a3609d9dfa672bd13109f3e0c5a690f54d23513f53991a86c844407020",
         "synthetic": true,
         "counts": {
           "emg": 0,
@@ -2744,11 +2780,11 @@
       "writes": 1,
       "syncs": 1,
       "closes": 1,
-      "metadata_bytes": 1316,
+      "metadata_bytes": 1317,
       "profile": "breadboard",
       "metadata_roundtrip_pass": true,
       "quality": {
-        "source_sha256": "d50291804a6b0aa89bb886520fdea49411253687e42510c5ab6442d660cd1d74",
+        "source_sha256": "46fce5a3609d9dfa672bd13109f3e0c5a690f54d23513f53991a86c844407020",
         "synthetic": true,
         "counts": {
           "emg": 0,
@@ -2818,14 +2854,14 @@
       "writes": 5,
       "syncs": 3,
       "closes": 1,
-      "metadata_bytes": 1316,
+      "metadata_bytes": 1317,
       "profile": "breadboard",
       "metadata_roundtrip_pass": true,
       "live_end_reason_pass": true,
       "laptop_stop_state_pass": true,
       "sd_live_end_identical": true,
       "quality": {
-        "source_sha256": "122c8712db092cbb5c1e83dbded7b23746a9f6c97fa76ea41f290ac0fd682eb5",
+        "source_sha256": "f19629f660ca1cb34aeec6f50658c9ff89241632a66ea078b2851a30a2a5af8c",
         "synthetic": true,
         "counts": {
           "emg": 260,
@@ -2887,6 +2923,7 @@
             "sensor_tick_error_ppm": null,
             "fit_note": "needs at least 40 FIFO reads spanning 10 s",
             "within_1_percent": false,
+            "within_datasheet_tolerance": false,
             "host_time_fit": null
           },
           "shank": {
@@ -2901,6 +2938,7 @@
             "sensor_tick_error_ppm": null,
             "fit_note": "needs at least 40 FIFO reads spanning 10 s",
             "within_1_percent": false,
+            "within_datasheet_tolerance": false,
             "host_time_fit": null
           }
         },
@@ -2940,14 +2978,14 @@
       "writes": 5,
       "syncs": 3,
       "closes": 1,
-      "metadata_bytes": 1316,
+      "metadata_bytes": 1317,
       "profile": "breadboard",
       "metadata_roundtrip_pass": true,
       "live_end_reason_pass": true,
       "laptop_stop_state_pass": true,
       "sd_live_end_identical": true,
       "quality": {
-        "source_sha256": "29002a6d98b52b53edc51eb2ad38595244448e60300fd37f752ad222a992ae60",
+        "source_sha256": "abb197cf3223dd3aed7666b2ba774f175d709f94fffd28a7e3edb65415134527",
         "synthetic": true,
         "counts": {
           "emg": 260,
@@ -3009,6 +3047,7 @@
             "sensor_tick_error_ppm": null,
             "fit_note": "needs at least 40 FIFO reads spanning 10 s",
             "within_1_percent": false,
+            "within_datasheet_tolerance": false,
             "host_time_fit": null
           },
           "shank": {
@@ -3023,6 +3062,7 @@
             "sensor_tick_error_ppm": null,
             "fit_note": "needs at least 40 FIFO reads spanning 10 s",
             "within_1_percent": false,
+            "within_datasheet_tolerance": false,
             "host_time_fit": null
           }
         },
@@ -3045,14 +3085,14 @@
       "writes": 7,
       "syncs": 6,
       "closes": 1,
-      "metadata_bytes": 1316,
+      "metadata_bytes": 1317,
       "profile": "breadboard",
       "metadata_roundtrip_pass": true,
       "live_end_reason_pass": true,
       "laptop_stop_state_pass": true,
       "sd_live_end_identical": true,
       "quality": {
-        "source_sha256": "6bfeac48b62b251b3e6d3e37e9a1a5fafdc00c0976c0197fef83f87ddd9b931a",
+        "source_sha256": "d11ac088dde7d7cab6c81e0e45ff8097f48a880b38c47acc195a3dc1bab8b1e5",
         "synthetic": true,
         "counts": {
           "emg": 260,
@@ -3114,6 +3154,7 @@
             "sensor_tick_error_ppm": null,
             "fit_note": "needs at least 40 FIFO reads spanning 10 s",
             "within_1_percent": false,
+            "within_datasheet_tolerance": false,
             "host_time_fit": null
           },
           "shank": {
@@ -3128,6 +3169,7 @@
             "sensor_tick_error_ppm": null,
             "fit_note": "needs at least 40 FIFO reads spanning 10 s",
             "within_1_percent": false,
+            "within_datasheet_tolerance": false,
             "host_time_fit": null
           }
         },
@@ -3150,13 +3192,13 @@
       "writes": 4,
       "syncs": 2,
       "closes": 1,
-      "metadata_bytes": 1316,
+      "metadata_bytes": 1317,
       "profile": "breadboard",
       "metadata_roundtrip_pass": true,
       "live_end_reason_pass": true,
       "laptop_stop_state_pass": true,
       "quality": {
-        "source_sha256": "7dbc66fb25c935edf4d9c84865d8987ee1e059ef97f7e14d385ac5737e8150c8",
+        "source_sha256": "7905de111c0bcf1e0d879524343fe8b99bc4194e3bc4914144c1ce4619203294",
         "synthetic": true,
         "counts": {
           "emg": 260,
@@ -3218,6 +3260,7 @@
             "sensor_tick_error_ppm": null,
             "fit_note": "needs at least 40 FIFO reads spanning 10 s",
             "within_1_percent": false,
+            "within_datasheet_tolerance": false,
             "host_time_fit": null
           },
           "shank": {
@@ -3232,6 +3275,7 @@
             "sensor_tick_error_ppm": null,
             "fit_note": "needs at least 40 FIFO reads spanning 10 s",
             "within_1_percent": false,
+            "within_datasheet_tolerance": false,
             "host_time_fit": null
           }
         },

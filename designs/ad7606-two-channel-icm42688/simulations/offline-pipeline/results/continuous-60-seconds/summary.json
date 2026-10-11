@@ -6,10 +6,10 @@
     "adc_ad7606.c": "77164ec74b6c574a64885a44e9117409f2edaaaf90a82cb737c3834f4672b5e8",
     "sensors.c": "f5c6034a43b260de6282d902a1d76d3e4db60bcbca64d364ebd34fc733df84c9",
     "sensors.h": "880b651acda742396e7da66f113f6ad27022abc4db84a93f9fff6a162e32ff43",
-    "imu_timing.h": "57314a11652b10ef22639ead2a7afc940426680ed6a65e199ab09f254a07c2cd",
+    "imu_timing.h": "2018c0e64cbcb5e894d005c7a6a54ca335f8e7900e0345ad19263d85b298954f",
     "format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
     "format.h": "58b01a597eaa2c70a918ad5ee3b71c9e26fe64aedefc91ffba7d96430510c47b",
-    "board.h": "c86d918838b37426a31ab2434a2a7c2ee4bdf88c45e38a46495e37c2bcc16aba",
+    "board.h": "ccba73353a40e4d32d4dcc26b08046bccf88866ec93e60229081181065e782b3",
     "variant.h": "55c2cdaef8b2d56e2ced2aa23984a289038adc6caaf9d164c92830c24b8cffb9"
   },
   "stimulus_sha256": "c2d23fb153e84391c9d15172b9170dca5ed42f85f21512dfd61f593e45669e72",
@@ -49,7 +49,7 @@
   "boundary_note": "FIFO packets still buffered at the modeled stop are counted explicitly; no unseen packet is called a recorded measurement.",
   "groups_passed": 6,
   "quality": {
-    "source_sha256": "0cc6c6feeb21ae8cb25bee36486e826af27ce1b518689daf8a4c469419297d0d",
+    "source_sha256": "cb4ed8ac02e658c0009400be96da2fc72120e711bf24815d730b5559814984d9",
     "synthetic": true,
     "counts": {
       "emg": 480000,
@@ -106,6 +106,7 @@
         "sensor_tick_error_ppm": 70.0,
         "fit_note": null,
         "within_1_percent": true,
+        "within_datasheet_tolerance": true,
         "host_time_fit": {
           "intercept_us": 110009.4543236047,
           "host_us_per_sensor_tick": 1.0667413341950656,
@@ -126,6 +127,7 @@
         "sensor_tick_error_ppm": -110.0,
         "fit_note": null,
         "within_1_percent": true,
+        "within_datasheet_tolerance": true,
         "host_time_fit": {
           "intercept_us": 164983.59764083847,
           "host_us_per_sensor_tick": 1.066549333968424,
