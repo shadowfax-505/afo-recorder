@@ -97,11 +97,11 @@
         "Verify carrier supply, SPI jumpers and header orientation before signal leads. Shared MOSI GPIO4, MISO GPIO5, SCLK GPIO6.",
         "Foot CS/INT1 are GPIO7/16; shank CS/INT1 are GPIO15/17. Rotate one carrier at a time to prove identity and axis signs.",
         "Check WHO_AM_I 0x47, configuration readback, both 200 Hz interrupt streams and FIFO packet counts. Missing first IRQ beyond 100 ms, FIFO overflow or invalid packet is a failure.",
-        "During recording, retain raw 16-bit sensor timestamps, read_start_us/read_end_us and IRQ anchors. Normal counter rollover is every 65.536 ms; host times remain estimates.",
+        "During recording, retain raw 16-bit sensor timestamps, read_start_us/read_end_us and IRQ anchors. Normal counter rollover is every 65,536 ticks of 32/30 µs (about 69.9 ms); host times remain estimates.",
         "Foot/shank startup counts may differ. Do not pair rows by index or reject a sample merely because it arrived during a FIFO read. The converter checks the read-end bound."
       ],
       "troubleshoot": "Check SPI selection, shared GPIO4/5/6, distinct CS and INT1 wires, cable integrity and 3.3 V. Flag 2 means uncertain host-time reconstruction; gap/invalid flags and sensor/timing stop reasons require investigation.",
-      "acceptance": "WHO_AM_I 0x47 and readback pass. 200 Hz ±1% per sensor over 60 s; diagnostic tick_step_mean 5000 ±0.5% and mean host_us_per_tick 1.00 ±1% over ≥60 windows; no overflow, missing-IRQ or invalid-packet errors. ±16 g / ±2000 °/s configured; stationary gravity-axis within ±0.1 g of ±1 g, other axes within ±0.1 g and gyro per axis <5 °/s before calibration. Confirm identities, axis signs and cable length; characterize synchronization separately."
+      "acceptance": "WHO_AM_I 0x47 and readback pass. 200 Hz ±1% per sensor over 60 s; diagnostic tick_step_mean 4687.5 ±0.5% and mean host_us_per_tick 1.067 ±1% (32/30 µs ticks) over ≥60 windows; no overflow, missing-IRQ or invalid-packet errors. ±16 g / ±2000 °/s configured; stationary gravity-axis within ±0.1 g of ±1 g, other axes within ±0.1 g and gyro per axis <5 °/s before calibration. Confirm identities, axis signs and cable length; characterize synchronization separately."
     },
     {
       "title": "SD recording",
@@ -118,7 +118,7 @@
         "Repeat USB-attachment inhibition and sync/close error checks. GPIO21 is active low; preserve explicit stop/error evidence."
       ],
       "troubleshoot": "Check the breadboard profile and GPIO47/39/40, local card supply and queues. Keep original files and quality.json; never replace saved SD evidence with the wireless preview.",
-      "acceptance": "60 min and full 2 h runs, no unexplained SD sample loss, CRC errors or queue overflow; final queue_high_water ≤10,240 of 20,480; card make/model/capacity/speed class recorded; quality.json imu_clock median_tick_step 5000 ±0.5% and host_us_per_sensor_tick within ±1%. Refuse start without SD; report full-card stop. Recovery preserves complete valid records and reports truncated tail/missing END. Attach USB during synthetic recording: explicit stop."
+      "acceptance": "60 min and full 2 h runs, no unexplained SD sample loss, CRC errors or queue overflow; final queue_high_water ≤10,240 of 20,480; card make/model/capacity/speed class recorded; quality.json imu_clock median_tick_step 4687–4688 and host_us_per_sensor_tick 1.067 ±1%. Refuse start without SD; report full-card stop. Recovery preserves complete valid records and reports truncated tail/missing END. Attach USB during synthetic recording: explicit stop."
     },
     {
       "title": "Wi-Fi and SD",

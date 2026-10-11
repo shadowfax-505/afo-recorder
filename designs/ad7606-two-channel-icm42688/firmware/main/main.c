@@ -183,12 +183,14 @@ static void imu_task(void *arg) {
                 // An IRQ during the FIFO read (after!=before) adds no separate
                 // flag; counter gaps are checked by imu_clock_step below.
                 uint8_t flags=FLAG_TIMING_UNCERTAIN;
-                if(!clocks[id].initialized&&anchor<lag[k])flags|=FLAG_GAP;
+                // lag[] counts sensor ticks back from the newest packet; convert to us.
+                uint64_t lag_us=imu_ticks_to_us(lag[k]);
+                if(!clocks[id].initialized&&anchor<lag_us)flags|=FLAG_GAP;
                 for(unsigned j=1;j<13;j+=2)
                     if(p[j]==0x80&&p[j+1]==0) flags|=FLAG_INVALID;
                 uint64_t estimate;bool gap;
                 uint16_t ticks=((uint16_t)p[14]<<8)|p[15];
-                if(!imu_clock_step(&clocks[id],ticks,anchor>=lag[k]?anchor-lag[k]:0,
+                if(!imu_clock_step(&clocks[id],ticks,anchor>=lag_us?anchor-lag_us:0,
                     t0,&estimate,&gap)) {imu_errors++;set_fault(STOP_TIMING);continue;}
                 if(gap)flags|=FLAG_GAP;
                 afo_record_t r;afo_record_init(&r,id?REC_SHANK:REC_FOOT,flags,

@@ -88,6 +88,18 @@ class RecorderTests(unittest.TestCase):
         self.assertEqual(clock['median_tick_step'],4688)
         self.assertAlmostEqual(clock['host_us_per_sensor_tick'],5000/4688,places=4)
         self.assertFalse(clock['within_1_percent'])
+    def test_imu_clock_screen_icm42688_tick(self):
+        # ICM-42688 "1 us" ticks last 32/30 us: about 4687.5 ticks per 5 ms sample.
+        source=self.root/'icm.afolog';generate(source,11,imu_tick_step=4687.5,imu_tick_us=32/30)
+        report=convert(source,self.root/'icm',make_plots=False)
+        self.assertEqual(report['anomalies']['imu_timestamp_anomalies'],0)
+        clock=report['imu_clock']['foot']
+        self.assertIn(clock['median_tick_step'],(4687,4687.5,4688));self.assertAlmostEqual(clock['expected_tick_step'],4687.5)
+        self.assertAlmostEqual(clock['host_us_per_sensor_tick'],32/30,places=5)
+        self.assertLess(abs(clock['sensor_tick_error_ppm']),50);self.assertTrue(clock['within_1_percent'])
+        import csv
+        with (self.root/'icm'/'foot.csv').open() as f:rows=list(csv.DictReader(f))
+        self.assertAlmostEqual(int(rows[-1]['sensor_time_unwrapped_us'])-int(rows[0]['sensor_time_unwrapped_us']),(len(rows)-1)*5000,delta=2)
     def test_imu_clock_screen_needs_span(self):
         clock=self.run_export()['imu_clock']['foot']
         self.assertIsNone(clock['host_us_per_sensor_tick']);self.assertIsNotNone(clock['fit_note'])

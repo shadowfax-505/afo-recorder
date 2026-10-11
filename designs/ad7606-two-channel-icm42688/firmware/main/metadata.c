@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "board.h"
 #include "metadata.h"
+#include "imu_timing.h"
 #define AFO_STRINGIFY_(x) #x
 #define AFO_STRINGIFY(x) AFO_STRINGIFY_(x)
 int afo_session_metadata(char *out, size_t capacity, const char *trial_name) {
@@ -11,7 +12,7 @@ int afo_session_metadata(char *out, size_t capacity, const char *trial_name) {
       "\"emg_hz\":8000,\"imu_hz\":200,\"imu_enabled\":true,"
       "\"active_channel_count\":%d,\"emg_channels\":%s,"
       "\"calibration_state\":\"uncalibrated\",\"simultaneous\":true,"
-      "\"accel_range_g\":16,\"gyro_range_dps\":2000,\"imu_timestamp_tick_us\":1,"
+      "\"accel_range_g\":16,\"gyro_range_dps\":2000,\"imu_timestamp_tick_us\":" IMU_TICK_US_JSON ","
       "\"imu_timing_calibrated\":false,\"imu_locations\":[\"foot\",\"shank\"],"
       "\"imu_time\":\"fifo_delta_first_irq\","
       "\"placement_verified\":false,\"record_bytes\":64,\"usb_recording_inhibit\":true,"

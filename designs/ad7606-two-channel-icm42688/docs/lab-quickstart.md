@@ -24,6 +24,31 @@ For steps 3–6, diagnostic acquisition runs in approximately one-second windows
 
 Use `record-2ch` only on the custom PCB (SD CMD GPIO38). It is not interchangeable with the breadboard image. Flash all three files at the addresses in the chosen manifest.
 
+## Reading the diagnostic serial lines
+
+The first line names the firmware, for example `firmware=ad7606-2ch-1.8 stage=3 hardware=breadboard channels=2`; record it with the binary hash. Each acquisition window then prints one `ADC` line, and stage-6 images add one `IMU` line per sensor.
+
+| Field | Meaning | How to use it |
+|---|---|---|
+| `elapsed_us`, `edges`, `good` | Window length, BUSY falling edges and frames read | Rate = `good` × 1,000,000 / `elapsed_us`; expect about 8,000 per second. Windows pause between prints, so use a logic-analyzer capture for the 125 µs interval gate |
+| `chN_mean` | Mean signed code | Volts at the ADC input = code × 5 / 32768. Ideal 1.000 V = 6,553.6 codes and 2.000 V = 13,107.2; compute from the measured source |
+| `min`, `max` | Extreme codes in the window | Clipping or spikes; −32,768 or 32,767 means the input range was exceeded |
+| `rms_ac_codes` | RMS of the code minus its mean | For a sine, peak-to-peak volts ≈ `rms_ac_codes` × 2.828 × 152.588 µV. With a DC-held input it is broadband noise up to 4 kHz in codes |
+| `interval_us`, `packets`, `interrupts` (IMU) | Host time covered by the IMU counts, FIFO packets and INT1 edges | Rate = `packets` × 1,000,000 / `interval_us`; expect about 200 per second per sensor, with `interrupts` close to `packets` |
+| `ax_raw`…`gz_raw` (IMU) | Last packet's raw axes | ±16 g: 2,048 counts per g. ±2000 °/s: 16.384 counts per °/s |
+| `tick_step_mean`, `host_us_per_tick` (IMU) | Mean FIFO timestamp step and ESP32 µs per sensor tick | Expect about 4,687.5 and 1.067: ICM-42688 "1 µs" ticks last 32/30 µs. Average over at least 60 windows for the stage-6 check |
+
+Nominal stage-4 values for a 100 mVpp sine at unity DC gain, from the two ideal 1,026 Hz poles only (the simulated tolerance envelope remains the acceptance reference):
+
+| Frequency | Nominal gain | Expected `rms_ac_codes` |
+|---|---|---|
+| 20 Hz | −0.00 dB | 231.6 |
+| 100 Hz | −0.08 dB | 229.5 |
+| 500 Hz | −1.85 dB | 187.2 |
+| 1000 Hz | −5.80 dB | 118.8 |
+
+Compute the gain from your measured input amplitude, not the generator display. A one-second window holds a whole number of cycles only for some frequencies; average several windows.
+
 ## Results sheet
 
 Copy one row per test; include failures and retests. Do not prefill these with simulator output.

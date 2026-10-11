@@ -2,7 +2,7 @@
 
 **AD7606 · two EMG inputs · two ICM-42688-P carriers.** The simulation findings now inform the [guided assembly](../viewer/build.html), [wire tables](build-guide.html) and [short lab sequence](lab-quickstart.html). Use the [bench checklist](bench-checklist.csv) to collect physical results and the [probe table](../breadboard/probe-connections.csv) to connect instruments. Every measurement row starts as **NOT TESTED**.
 
-The existing connections already match the corrected firmware. This update adds specific checks and explanations at those connections. The current breadboard firmware is `ad7606-2ch-1.7`; its seven compiled profiles and source hashes were checked again. None of those laboratory images has been flashed to an assembled recorder. Wokwi executed a separate instrumented 1.6 image, not yet repeated for 1.7, with storage and wireless substitutions described in the [verification report](integrated-verification.html).
+The existing connections already match the corrected firmware. This update adds specific checks and explanations at those connections. The current breadboard firmware is `ad7606-2ch-1.8`; its seven compiled profiles and source hashes were checked again. None of those laboratory images has been flashed to an assembled recorder. Wokwi executed a separate instrumented 1.6 image, not yet repeated for 1.7 or 1.8, with storage and wireless substitutions described in the [verification report](integrated-verification.html).
 
 ## What to do differently at the bench
 
@@ -42,7 +42,7 @@ Retain the physical rate gate: **8 kHz ±0.1% averaged over 60 seconds**, and in
 
 For the selected MIKROE-4237 carriers, set JP2–JP4 to SPI positions 1–2 and use the documented 3.3 V supply. Shared MOSI is **GPIO4**, MISO **GPIO5**, and SCLK **GPIO6**. Foot CS/INT1 use **GPIO7/16**; shank CS/INT1 use **GPIO15/17**. These assignments come from this ICM build, not an MPU-6050 address-selection diagram.
 
-The firmware configures WHO_AM_I `0x47`, 200 Hz, ±16 g, ±2000 °/s, active-high INT1 pulses, and a standard 16-byte FIFO packet with a 1 µs timestamp counter. Check each carrier separately, then both together. In a recording, retained 16-bit sensor counters wrap every 65.536 ms. Normal wrap handling is different from an ambiguous long gap. Confirm FIFO order, sample counters and axis signs as well as interrupt activity.
+The firmware configures WHO_AM_I `0x47`, 200 Hz, ±16 g, ±2000 °/s, active-high INT1 pulses, and a standard 16-byte FIFO packet with a timestamp counter set to its 1 µs mode; on the ICM-42688 each tick lasts 32/30 µs, which firmware 1.8 applies. Check each carrier separately, then both together. In a recording, retained 16-bit sensor counters wrap every 65,536 ticks, about 69.9 ms. Normal wrap handling is different from an ambiguous long gap. Confirm FIFO order, sample counters and axis signs as well as interrupt activity.
 
 The `FLAG_TIMING_UNCERTAIN` bit (`2`) marks reconstructed host times as estimates; it is expected on these ICM records. A gap bit, invalid sample, FIFO overflow, missing interrupt or rejected timestamp requires investigation. Foot/shank start offsets and filter delays need physical characterization before a study depends on accurate inter-sensor alignment.
 

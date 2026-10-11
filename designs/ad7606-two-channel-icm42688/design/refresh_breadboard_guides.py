@@ -41,7 +41,7 @@ def refresh_wire_tables():
                    '<a href="bench-checklist.csv">Blank bench checklist</a> · '
                    '<a href="../breadboard/probe-connections.csv">Exact probe contacts</a> · '
                    '<a href="../breadboard/breadboard-lab-kit.zip">Current lab kit</a>. '
-                   'Use v1.7 laboratory profiles. See '
+                   'Use v1.8 laboratory profiles. See '
                    '<a href="integrated-verification.html">current integrated results</a>, '
                    '<a href="digital-timing.html">digital timing</a> and '
                    '<a href="data-interpretation.html">saved-data interpretation</a> for evidence and limits. '

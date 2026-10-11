@@ -6,16 +6,16 @@
     "adc_ad7606.c": "77164ec74b6c574a64885a44e9117409f2edaaaf90a82cb737c3834f4672b5e8",
     "sensors.c": "f5c6034a43b260de6282d902a1d76d3e4db60bcbca64d364ebd34fc733df84c9",
     "sensors.h": "880b651acda742396e7da66f113f6ad27022abc4db84a93f9fff6a162e32ff43",
-    "imu_timing.h": "787dcb29ba8319d5d9e8f9ef4477268f3f2c4da0dd05da3ccbfcc3b4258b5c01",
+    "imu_timing.h": "57314a11652b10ef22639ead2a7afc940426680ed6a65e199ab09f254a07c2cd",
     "format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
     "format.h": "58b01a597eaa2c70a918ad5ee3b71c9e26fe64aedefc91ffba7d96430510c47b",
-    "board.h": "b9a11159e5d1fcab21571b279d2e5dc8070e15d570360a86220696eadaffd23d",
+    "board.h": "050ba4c588de1ac944d0cb558e41ad03c9ab0fcea599588cd4dfa7fc00074d32",
     "variant.h": "55c2cdaef8b2d56e2ced2aa23984a289038adc6caaf9d164c92830c24b8cffb9"
   },
   "stimulus_sha256": "c2d23fb153e84391c9d15172b9170dca5ed42f85f21512dfd61f593e45669e72",
   "co_simulation_sha256": {
-    "pipeline.c": "0d7a8fe6a8a8f56fe97ea5be55ae2f8f7fc268aba714a1225912da94060c4807",
-    "run.py": "268ab71bc3d64e53ded40d09a633e930d0a7f9588b388c9fe25e6cf818269fc9",
+    "pipeline.c": "6db9343dfafe1ef40d5217ff74c8f69ea8d0c82aa5161681434edc1f83da8c47",
+    "run.py": "f9535fc68f5065165968b06229cc20db2ebe8548ef9bfd2d2c3b295a4f809d62",
     "mock_idf.h": "68faa0f6289a32b3c76cda1701c0878bf27f32f61b164e54de5112c8cb95616f"
   },
   "modeled_duration_seconds": 2,
@@ -27,14 +27,14 @@
       "generated": 411,
       "generated_before_capture": 11,
       "pending_at_stop": 1,
-      "counter_rollovers": 31
+      "counter_rollovers": 29
     },
     "shank": {
       "saved": 399,
       "generated": 400,
       "generated_before_capture": 0,
       "pending_at_stop": 1,
-      "counter_rollovers": 30
+      "counter_rollovers": 28
     }
   },
   "imu_clock_drift_ppm": {
@@ -49,7 +49,7 @@
   "boundary_note": "FIFO packets still buffered at the modeled stop are counted explicitly; no unseen packet is called a recorded measurement.",
   "groups_passed": 6,
   "quality": {
-    "source_sha256": "431d37fa94e51ff075b685fd820555e847a276a75b132f36c0a579f7f72618cd",
+    "source_sha256": "7e62d526a2678bea5b2ba38a4efba38241e226e984047e896700bcba401f50e7",
     "synthetic": true,
     "counts": {
       "emg": 16000,
@@ -96,9 +96,10 @@
     "imu_clock": {
       "foot": {
         "tick_steps": 409,
-        "median_tick_step": 5000.0,
-        "expected_tick_step": 5000.0,
-        "median_step_error_percent": 0.0,
+        "median_tick_step": 4688.0,
+        "expected_tick_step": 4687.4999,
+        "nominal_tick_us": 1.0666667,
+        "median_step_error_percent": 0.0107,
         "fit_reads": 400,
         "fit_span_s": null,
         "host_us_per_sensor_tick": null,
@@ -108,8 +109,9 @@
       },
       "shank": {
         "tick_steps": 398,
-        "median_tick_step": 5000.0,
-        "expected_tick_step": 5000.0,
+        "median_tick_step": 4687.5,
+        "expected_tick_step": 4687.4999,
+        "nominal_tick_us": 1.0666667,
         "median_step_error_percent": 0.0,
         "fit_reads": 399,
         "fit_span_s": null,
@@ -119,7 +121,7 @@
         "within_1_percent": true
       }
     },
-    "imu_clock_note": "Screen only: FIFO timestamp increments versus the configured 1 us tick, and sensor ticks versus ESP32 interrupt times. Includes interrupt latency; not a calibration.",
+    "imu_clock_note": "Screen only: FIFO timestamp increments versus the recorded nominal tick (imu_timestamp_tick_us), and sensor ticks versus ESP32 interrupt times. Includes interrupt latency; not a calibration.",
     "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
     "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
   },

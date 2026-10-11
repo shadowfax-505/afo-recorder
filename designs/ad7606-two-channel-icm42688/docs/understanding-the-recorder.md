@@ -165,7 +165,7 @@ A mounting-axis diagram identifies how sensor coordinates relate to each segment
 
 A FIFO is an ordered buffer of sensor packets. Delayed reading can still preserve samples, but a FIFO overflow loses information. The project retains sensor counter values, interrupt anchors, read windows and quality flags. Its reconstructed host times are estimates, not a shared hardware clock.
 
-At the configured 1 us tick, a 16-bit counter wraps after 65.536 ms. A wrap is normal; a sufficiently long unexplained gap can make the number of wraps ambiguous. Do not invent elapsed cycles after corrupted or missing data. Two sensors starting at different moments can have different sample counts without a fault. Align by justified timing, never by matching row numbers. [P1, P3]
+The sensor timestamp is set to its "1 us" mode, but on the ICM-42688 each tick lasts 32/30 us (the internal PLL runs at 19.2 MHz rather than 20.48 MHz, per TDK's driver), so the 16-bit counter wraps after about 69.9 ms. Firmware 1.8 applies this scale; stage 6 measures it. A wrap is normal; a sufficiently long unexplained gap can make the number of wraps ambiguous. Do not invent elapsed cycles after corrupted or missing data. Two sensors starting at different moments can have different sample counts without a fault. Align by justified timing, never by matching row numbers. [P1, P3]
 
 ## 10. Synchronization and uncertainty
 
@@ -315,7 +315,7 @@ The preserved circuit checks compare 390 schematic/PCB pin connections and 22 fi
 
 The reports retain 18 passing current integrated Wokwi cases, but not every case was run on an identical complete visual fixture. Historical images and incomplete attempts remain separate. QEMU nominal timing was unqualified. The current laboratory diagnostic images were compiled but not all rerun in Wokwi. Do not collapse these into “the whole hardware passed.”
 
-The latest preserved package receipt reports 46 host tests and nine evidence-checker tests. This expanded guide reviews those records; it is not a fresh execution of every historical test. No assembled-hardware results have been added.
+The latest preserved package receipt reports 47 host tests and nine evidence-checker tests. This expanded guide reviews those records; it is not a fresh execution of every historical test. No assembled-hardware results have been added.
 
 ## 18. Designing an AFO or neuromuscular study
 
@@ -431,7 +431,7 @@ Source labels distinguish manufacturer/research guidance (S) from this project's
 - **P1. Project circuit audit and source specification.** Values, pins, correction history and simulation limitations. https://shadowfax-505.github.io/afo-recorder/designs/ad7606-two-channel-icm42688/docs/circuit-audit.html
 - **P2. Bench/PCB differences.** Physical implementation exceptions. https://shadowfax-505.github.io/afo-recorder/designs/ad7606-two-channel-icm42688/docs/bench-pcb-differences.md
 - **P3. Integrated verification.** Execution scope, substitutions and preserved failures. https://shadowfax-505.github.io/afo-recorder/designs/ad7606-two-channel-icm42688/docs/integrated-verification.html
-- **P4. Package/data verification receipt.** Preserved synthetic counts, timing flags, nine intake tests and 46 host tests. https://shadowfax-505.github.io/afo-recorder/designs/ad7606-two-channel-icm42688/docs/kit-validation.json
+- **P4. Package/data verification receipt.** Preserved synthetic counts, timing flags, nine intake tests and 47 host tests. https://shadowfax-505.github.io/afo-recorder/designs/ad7606-two-channel-icm42688/docs/kit-validation.json
 - **P5. Sequential development workbook.** Exact stage evidence and unperformed physical gates. https://shadowfax-505.github.io/afo-recorder/designs/ad7606-two-channel-icm42688/development/index.html
 
 All diagrams in this guide are original explanatory drawings of the project. The separate detailed schematic is exported from the existing project KiCad source. Existing third-party notices remain applicable. This guide does not establish medical-device certification, intellectual-property clearance or research novelty.

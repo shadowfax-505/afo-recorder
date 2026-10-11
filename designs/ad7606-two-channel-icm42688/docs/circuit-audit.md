@@ -26,15 +26,15 @@ The authoritative source remains `design/circuit-spec.json`. `design/audit_conne
 | Connected schematic and actual PCB pads | 390 compared; 0 mismatches |
 | Firmware GPIOs | 22 per profile; 0 mismatches |
 | Breadboard topology | 184 wires, 402 occupied holes, 24 GPIO endpoint checks; 0 named-net splits, shorts, duplicate holes or connector contacts |
-| Host conversion / legacy / live reception / firmware limits | 46 tests pass |
+| Host conversion / legacy / live reception / firmware limits | 47 tests pass |
 | Software acquisition faults | 7 scenarios pass, including overflow, missing samples and interrupted file recovery |
-| Firmware | All seven v1.7 laboratory profiles recompiled with ESP-IDF v5.4.2 (PSRAM record queue, per-device Wi-Fi password, IMU timestamp-scale checks); none rerun in Wokwi |
+| Firmware | All seven v1.8 laboratory profiles recompiled with ESP-IDF v5.4.2 (32/30 µs IMU ticks, PSRAM record queue, per-device Wi-Fi password, IMU timestamp-scale checks); none rerun in Wokwi |
 | ngspice | Both channels; 16 tolerance corners; 54 DC/loading cases; unplugged-bias case; transient/ideal quantization checks |
 | Wokwi models | Both compile to WASM; native model unit tests pass |
 | Preserved v1.5 integrated Wokwi execution | Ten complete CLI/firmware passes; nominal firmware/file/UDP passes with optional trace failure; battery partial; four cases unexecuted due to quota. [Tested source/image snapshot](../simulations/integrated-recorder/tested-source-1.5/manifest.json) |
 | v1.6 integrated cloud execution (not repeated for 1.7) | All 18 current cases pass in the web editor; complete converter/decoder checks. Preserved v1.5 outcomes are separate |
 | Historical diagnostic Wokwi execution | Seven cases passed on the preserved earlier image; [source/image snapshot](../simulations/wokwi/tested-diagnostic-20260930/manifest.json) |
-| Native driver/timing logic | 16 current ADC groups and eight IMU timestamp-helper groups pass |
+| Native driver/timing logic | 16 current ADC groups and nine IMU timestamp-helper groups pass (rerun with ASan/UBSan for 1.8) |
 | Integrated evidence runner | 16 tests pass; partial/quota evidence is not counted as passed execution |
 | Current behavioral ADC model | 12 independent native groups pass with address/undefined sanitizers; no Wokwi runtime |
 | Native analog-to-file pipeline | 60 seconds: 480,000 EMG, 12,009 foot and 12,001 shank; 916/915 counter rollovers; no unexplained loss; pending FIFO data counted |
@@ -80,7 +80,7 @@ The received HW-AD7606-F4/RBD-3184 module's labelled header is documented, but a
 
 Use the selected MIKROE-4237 carrier with JP2–JP4 in SPI position (pads 1–2), 3.3 V power and the specified mikroBUS header orientation. SPI3 is shared on GPIO4/5/6 (MOSI/MISO/SCLK); separate CS GPIO7/15 and INT1 GPIO16/17 identify foot/shank. Verify carrier solder bridges, supply and connector orientation on the received parts.
 
-The firmware checks WHO_AM_I=0x47 and configuration readback, selects 200 Hz accel/gyro, ±16 g/±2000 dps, standard 16-byte FIFO records and 1 µs sensor timestamps. Byte order is big-endian. It detects full FIFO, invalid packet headers and missing/stale interrupt anchors. Sensor clocks are independent; FIFO timestamps wrap. ESP32 interrupt times and FIFO read windows are preserved. The first FIFO burst anchors an estimate; later samples advance by the sensor timestamp counter delta instead of re-anchoring every burst. Ambiguous counter/read intervals are rejected. Reconstructed sample times remain explicitly uncertain. No claim of calibrated EMG-to-IMU alignment is made.
+The firmware checks WHO_AM_I=0x47 and configuration readback, selects 200 Hz accel/gyro, ±16 g/±2000 dps, standard 16-byte FIFO records and sensor timestamps in 1 µs mode, whose ticks last 32/30 µs on the ICM-42688 (applied from firmware 1.8). Byte order is big-endian. It detects full FIFO, invalid packet headers and missing/stale interrupt anchors. Sensor clocks are independent; FIFO timestamps wrap. ESP32 interrupt times and FIFO read windows are preserved. The first FIFO burst anchors an estimate; later samples advance by the sensor timestamp counter delta instead of re-anchoring every burst. Ambiguous counter/read intervals are rejected. Reconstructed sample times remain explicitly uncertain. No claim of calibrated EMG-to-IMU alignment is made.
 
 ## Sources and release gate
 

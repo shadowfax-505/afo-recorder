@@ -66,7 +66,7 @@
 #define RECORD_QUEUE_LENGTH 20480
 #define SD_MOUNT "/sdcard"
 
-#define AFO_FIRMWARE_ID "ad7606-2ch-1.7"
+#define AFO_FIRMWARE_ID "ad7606-2ch-1.8"
 
 // Laptop preview uses a private WPA2 access point. No password is compiled in:
 // each recorder generates a random one on first boot, keeps it in NVS and

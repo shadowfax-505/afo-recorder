@@ -195,8 +195,8 @@ def main():
             report['integrity_and_example'] = json.loads((args.out / 'package-check.json').read_text())
             tests = run(python, kit, [kit / 'host/run_tests.py'], args.out / 'host-tests-console.txt')
             count = re.search(r'Ran (\d+) tests', tests.stderr)
-            assert count and int(count[1]) == 46
-            report['host_regression_tests'] = {'status': 'PASS', 'tests': 46, 'failures': 0}
+            assert count and int(count[1]) == 47
+            report['host_regression_tests'] = {'status': 'PASS', 'tests': 47, 'failures': 0}
             run(python, kit, [kit / 'host/convert.py', kit / 'breadboard/recording-example.afolog',
                               '--out', args.out / 'saved-csv', '--no-plots'],
                 args.out / 'saved-conversion-console.txt')

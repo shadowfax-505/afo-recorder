@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "build": "ad7606-two-channel-icm42688",
-  "firmware": "ad7606-2ch-1.7",
+  "firmware": "ad7606-2ch-1.8",
   "physical_status": "NOT TESTED",
   "stages": [
     {
@@ -197,7 +197,7 @@
         },
         {
           "id": "6-shank",
-          "acceptance": "Shank CS GPIO15 / INT1 GPIO17; 200 Hz \u00b11% per sensor over 60 s (packets \u00f7 interval_us, or INT1 capture); tick_step_mean 5000 \u00b10.5% and mean host_us_per_tick 1.00 \u00b11% per sensor over \u226560 windows; no FIFO/missing-IRQ/invalid-packet errors"
+          "acceptance": "Shank CS GPIO15 / INT1 GPIO17; 200 Hz \u00b11% per sensor over 60 s (packets \u00f7 interval_us, or INT1 capture); tick_step_mean 4687.5 \u00b10.5% and mean host_us_per_tick 1.067 \u00b11% (32/30 \u00b5s ticks; if both read 5000 and 1.00 instead, report it: the firmware tick constant must change) per sensor over \u226560 windows; no FIFO/missing-IRQ/invalid-packet errors"
         },
         {
           "id": "6-stationary",
@@ -242,7 +242,7 @@
         },
         {
           "id": "7-timestamps",
-          "acceptance": "Normal 65.536 ms counter wraps handled; host estimate flag 2 retained; startup count differences not row-aligned; quality.json imu_clock per sensor: median_tick_step 5000 \u00b10.5% and host_us_per_sensor_tick within \u00b11% (runs \u226510 min); no unexplained gap/invalid/timing rejection"
+          "acceptance": "Normal 16-bit counter wraps (every 65,536 ticks of 32/30 \u00b5s, about 69.9 ms) handled; host estimate flag 2 retained; startup count differences not row-aligned; quality.json imu_clock per sensor: median_tick_step 4687\u20134688 and host_us_per_sensor_tick 1.067 \u00b11% (sensor_tick_error_ppm within \u00b110,000) (runs \u226510 min); no unexplained gap/invalid/timing rejection"
         }
       ]
     },

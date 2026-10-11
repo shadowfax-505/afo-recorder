@@ -2,7 +2,7 @@
 
 Project lead: Muttakin Rahman · 1 October 2026, updated 10 October 2026 · AD7606 / two EMG inputs / ICM-42688-P
 
-**The updated recording firmware passes 38 native control-flow cases: 19 for the breadboard and 19 for the compact PCB.** The 38 cases were rerun on source set 1.7, whose queue-overflow case now needs 20,481 queued records. All seven current v1.7 laboratory profiles, including three recording and four diagnostic builds, compile with ESP-IDF v5.4.2. These native checks exercise the current recorder and serializer with explicit API shims. The [current integrated report](integrated-verification.html) adds actual recorder/FatFS/lwIP execution with modeled peripherals; its full matrix remains incomplete. The [seven earlier diagnostic scenarios](virtual-verification.html) remain historical evidence. None establishes physical SD or radio performance.
+**The updated recording firmware passes 38 native control-flow cases: 19 for the breadboard and 19 for the compact PCB.** The 38 cases were rerun on source sets 1.7 and 1.8, whose queue-overflow case now needs 20,481 queued records. All seven current v1.8 laboratory profiles, including three recording and four diagnostic builds, compile with ESP-IDF v5.4.2. These native checks exercise the current recorder and serializer with explicit API shims. The [current integrated report](integrated-verification.html) adds actual recorder/FatFS/lwIP execution with modeled peripherals; its full matrix remains incomplete. The [seven earlier diagnostic scenarios](virtual-verification.html) remain historical evidence. None establishes physical SD or radio performance.
 
 ## What was corrected
 

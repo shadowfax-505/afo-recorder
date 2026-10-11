@@ -2,7 +2,7 @@
 
 ## Integrated refinement — 1 October 2026
 
-The [fixed two-channel AD7606 / ICM build](../designs/ad7606-two-channel-icm42688/docs/integrated-verification.html) passes all 18 v1.6 integrated cases in Wokwi’s web editor. Current file and laptop socket/API/browser/archive checks pass with documented substitutes; wireless losses stay visible and saved nominal acquisition remains complete. All seven laboratory profiles compile; they now use source set 1.7 (2.44 s PSRAM record queue, per-device Wi-Fi password, IMU timestamp-scale checks), which has not been rerun in Wokwi. QEMU adds refusal evidence but fails nominal timing qualification. Historical diagnostic/lifecycle images and incomplete CLI outcomes remain preserved. No physical recorder has been measured. Other five packages are unchanged. The sections below describe the earlier six-package release.
+The [fixed two-channel AD7606 / ICM build](../designs/ad7606-two-channel-icm42688/docs/integrated-verification.html) passes all 18 v1.6 integrated cases in Wokwi’s web editor. Current file and laptop socket/API/browser/archive checks pass with documented substitutes; wireless losses stay visible and saved nominal acquisition remains complete. All seven laboratory profiles compile; they now use source set 1.8 (32/30 µs ICM-42688 timestamp ticks, 2.44 s PSRAM record queue, per-device Wi-Fi password, IMU timestamp-scale checks), which has not been rerun in Wokwi. QEMU adds refusal evidence but fails nominal timing qualification. Historical diagnostic/lifecycle images and incomplete CLI outcomes remain preserved. No physical recorder has been measured. Other five packages are unchanged. The sections below describe the earlier six-package release.
 
 ## Completed
 

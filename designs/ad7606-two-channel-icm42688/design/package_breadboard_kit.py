@@ -93,7 +93,7 @@ Project lead: Muttakin Rahman
 
 Use this kit for exactly two MyoWare RAW inputs and two ICM-42688-P carriers.
 Circuit routing remains revision 12; instructions apply the v1.6 simulation findings
-and the 1.7 firmware corrections.
+and the 1.7/1.8 firmware corrections.
 No physical measurement has been completed or certified.
 
 1. Open a terminal in this extracted folder and run:
@@ -119,7 +119,7 @@ CSV conversion, file-integrity checks and Wi-Fi reception need only Python.
 For optional plots, install host/requirements.txt in a Python virtual environment.
 Read docs/laptop-setup.html for the commands, units and troubleshooting.
 
-Included firmware uses source set ad7606-2ch-1.7 and ESP-IDF v5.4.2. It has been
+Included firmware uses source set ad7606-2ch-1.8 and ESP-IDF v5.4.2. It has been
 cross-compiled, not flashed to an assembled recorder. No Wi-Fi password is
 compiled in: each recorder creates one on first boot and prints it on the USB
 console at every boot. Keep it private; never commit it. The canonical validation

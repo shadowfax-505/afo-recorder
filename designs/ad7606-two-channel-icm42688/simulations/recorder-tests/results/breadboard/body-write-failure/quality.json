@@ -1,5 +1,5 @@
 {
-  "source_sha256": "cd70ad686f3d9578fd9f54e6d5ac144f724819084f4a03a99c7c24672fbec94f",
+  "source_sha256": "c87920eb2105e54871a5d0ca8bd1b8868cd1c82f4bdaa40b4738e179d747bab0",
   "synthetic": true,
   "counts": {
     "emg": 0,
@@ -50,7 +50,7 @@
     }
   ],
   "imu_clock": {},
-  "imu_clock_note": "Screen only: FIFO timestamp increments versus the configured 1 us tick, and sensor ticks versus ESP32 interrupt times. Includes interrupt latency; not a calibration.",
+  "imu_clock_note": "Screen only: FIFO timestamp increments versus the recorded nominal tick (imu_timestamp_tick_us), and sensor ticks versus ESP32 interrupt times. Includes interrupt latency; not a calibration.",
   "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
   "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
 }
