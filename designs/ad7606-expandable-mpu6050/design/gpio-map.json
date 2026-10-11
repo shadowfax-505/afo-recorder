@@ -27,5 +27,6 @@
   "44": "UART_RX",
   "43": "UART_TX",
   "2": "LED_LOW",
-  "1": "BAT_SENSE"
+  "1": "BAT_SENSE",
+  "14": "ADC_STBY"
 }
