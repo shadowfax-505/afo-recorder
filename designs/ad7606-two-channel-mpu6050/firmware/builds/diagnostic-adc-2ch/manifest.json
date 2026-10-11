@@ -13,19 +13,19 @@
     "application.bin": "0x10000"
   },
   "sha256": {
-    "application.bin": "f710d71127b95553de604c146f01d003437b4338535dd341bc302274677faea0",
-    "bootloader.bin": "f1066d520529151e9d8053553fea5102cbf403f1d70e83239685b83a394484c0",
+    "application.bin": "ff246b8f0ffa5f7dba94594f2727a1caed7eaa57fb17dfcef18c6ca2641b4ec8",
+    "bootloader.bin": "06a90b5fc960dd9b0267990e657fe5cfb96a6adf1a583a575062931b18f1275f",
     "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
   },
   "profile": "diagnostic-adc-2ch",
   "firmware": null,
   "source_sha256": {
     "main/CMakeLists.txt": "15e96ed63ff9b15393c36d34d35d4c6921043116f39b082fdb096b9b9b888a22",
-    "main/adc_ad7606.c": "77164ec74b6c574a64885a44e9117409f2edaaaf90a82cb737c3834f4672b5e8",
+    "main/adc_ad7606.c": "d54d117c7948e98d7fe83826dc625949f08876fbfa9eebaf77e198d008c0cdd4",
     "main/adc_ads131m04.c": "914ffa6db82ed58aed9d4f0beb1ae05645ac6fb47097ace88e2be8b6a3c6b6aa",
     "main/ads_crc.c": "31cbb5fd61f5e06c394a426e0fa48d14f3561be4d46fffe6a18e1837edad83cc",
     "main/ads_crc.h": "d08cf15ad6e5d8d837e5c532b9665bc9c07a045475ba06c6443eed6b4367aeac",
-    "main/board.h": "090d69d78332fe1df4e2de0c27e6509eede26070af9cc7a5b49a464ffd2ca7b2",
+    "main/board.h": "8d6d8c71327c3e3e816d4ff109c4e7bfe8850fb1c34de2e6d8d16d1ecc9073aa",
     "main/diagnostic.c": "d7671b98404e9b39d5f5af1eb7fc8e9ddad162b7bb9828dcd0bcf5694a455976",
     "main/format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
     "main/format.h": "1f9bb02632241a07c7fd3a048767bf88ef35e70a66948cd12e275594468e2536",
@@ -40,5 +40,5 @@
     "sdkconfig.defaults": "333b5513fd45d3959596dd93da6a9eb721a9182f82c1c6f75aa245ac170f0aad"
   },
   "idf_version": "v5.4.2",
-  "build_note": "Rebuilt 2026-10-11 after porting the fixed-two recorder corrections (worker lifecycle, fault latching, BUSY confirmation, windowed diagnostics) and the shared PSRAM-queue, Wi-Fi password and metadata-limit fixes. Cross-compiled only; not flashed or simulated."
+  "build_note": "Rebuilt 2026-10-12 after adding the AD7606 STBY start-up sequence (PCB builds release STBY on GPIO14, wait 30 ms, then reset; ADI AN-1091); earlier: fixed-two recorder corrections and shared PSRAM-queue, Wi-Fi password and metadata-limit fixes. Cross-compiled only; not flashed or simulated."
 }

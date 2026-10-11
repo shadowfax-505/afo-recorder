@@ -1,5 +1,15 @@
 # Changelog
 
+## AD7606 supply-ramp fix ported to the other AD7606 designs — 12 October 2026
+
+- Applied the same PCB and firmware change to `ad7606-expandable-icm42688`, `ad7606-expandable-mpu6050` and `ad7606-two-channel-mpu6050`. All three generate AVCC from 3V3D with the TPS60150, tie STBY to 3V3D and leave GPIO14 free.
+  - PCB: STBY on GPIO14 with R70 (100 kΩ pull-down), D30 BAT760 from 3V3D to 5V_ADC, and the RANGE ground tie re-routed.
+  - Checks: KiCad DRC 0 violations / 0 unconnected, ERC 0, package validators pass (435/435/395 functional pins). Manufacturing and viewer files re-exported. Not built.
+- Firmware `dual-1.4` (expandable ICM) and `mpu6050-1.4` (both AD7606 MPU designs): PCB builds release STBY, wait 30 ms, then reset; breadboard builds unchanged.
+  - The ADC driver is byte-identical to the tested fixed-two driver, and its 17-group native test (ASan/UBSan) passes against each design's own `board.h`.
+  - All 27 profiles rebuilt; host tests pass (43/46/50).
+- The two ADS131M04 designs are unchanged: TI's ADS131M04 data sheet (section 10.2) allows the supplies in any order, and they have no charge-pump rail.
+
 ## AD7606 supply-ramp fix: PCB STBY control and firmware 1.11 — 12 October 2026
 
 - PCB, approved by the project lead:

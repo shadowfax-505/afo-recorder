@@ -16,19 +16,19 @@
     "application.bin": "0x10000"
   },
   "sha256": {
-    "application.bin": "7c4269b160bfb7788063d8a8a7834f1363dc6b31a9667dfe97ab7bca3b11aab4",
-    "bootloader.bin": "b66f2347467adb1e8ec4f8072d41dcaefbde98ac7b970a126709fdb85da5763e",
+    "application.bin": "6cee57b16b91275ea8f4769db23a3bf93e100fd9af87dee462af29987b9e356b",
+    "bootloader.bin": "a7a013618395c33eca7ca0ada050b29a0a961760f293fe396a418768d4fd6c07",
     "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
   },
   "profile": "breadboard-record-4ch",
-  "firmware": "dual-1.3",
+  "firmware": "dual-1.4",
   "source_sha256": {
     "main/CMakeLists.txt": "72b70f6fd563d90c7791b795382ffc23161ea7fb489ba330c42f1cd36881540f",
-    "main/adc_ad7606.c": "77164ec74b6c574a64885a44e9117409f2edaaaf90a82cb737c3834f4672b5e8",
+    "main/adc_ad7606.c": "d54d117c7948e98d7fe83826dc625949f08876fbfa9eebaf77e198d008c0cdd4",
     "main/adc_ads131m04.c": "914ffa6db82ed58aed9d4f0beb1ae05645ac6fb47097ace88e2be8b6a3c6b6aa",
     "main/ads_crc.c": "31cbb5fd61f5e06c394a426e0fa48d14f3561be4d46fffe6a18e1837edad83cc",
     "main/ads_crc.h": "d08cf15ad6e5d8d837e5c532b9665bc9c07a045475ba06c6443eed6b4367aeac",
-    "main/board.h": "f54cc8f7f13d802adbc9794e00077e62340f656f4f869227e339d827f8fa70c0",
+    "main/board.h": "d71a30a84081b83b61d073849ff4468c0d096a90663aa54113f4a676b80bd4b4",
     "main/diagnostic.c": "56852f52e2b35fa946a38236ed3bff8ead1c91dbc61d7606ad2ae8454cf1cb8d",
     "main/format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
     "main/format.h": "58b01a597eaa2c70a918ad5ee3b71c9e26fe64aedefc91ffba7d96430510c47b",
@@ -43,5 +43,5 @@
     "sdkconfig.defaults": "333b5513fd45d3959596dd93da6a9eb721a9182f82c1c6f75aa245ac170f0aad"
   },
   "idf_version": "v5.4.2",
-  "build_note": "Rebuilt 2026-10-11 after porting the fixed-two recorder corrections (worker lifecycle, fault latching, BUSY confirmation, windowed diagnostics) and the shared PSRAM-queue, Wi-Fi password and metadata-limit fixes; ICM-42688 32/30 us ticks with continuous IMU clock. Cross-compiled only; not flashed or simulated."
+  "build_note": "Rebuilt 2026-10-12 after adding the AD7606 STBY start-up sequence (PCB builds release STBY on GPIO14, wait 30 ms, then reset; ADI AN-1091); earlier: fixed-two recorder corrections and shared PSRAM-queue, Wi-Fi password and metadata-limit fixes; ICM-42688 32/30 us ticks with continuous IMU clock. Cross-compiled only; not flashed or simulated."
 }
