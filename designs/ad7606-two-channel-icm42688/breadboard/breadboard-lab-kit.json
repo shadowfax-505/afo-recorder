@@ -1,17 +1,19 @@
 {
   "filename": "breadboard-lab-kit.zip",
-  "bytes": 8535630,
-  "sha256": "fd217961da72452af91decb7320372873243533fd6144c3e1a0b131c96515c8e",
-  "files": 336,
+  "bytes": 8848103,
+  "sha256": "db8cdb962004463b9acd6a89f0726892cf93b2d222e4abf4fa79ec2fbd6ea5b6",
+  "files": 344,
   "included_profiles": [
     "diagnostic-controller",
     "diagnostic-adc",
     "diagnostic-imu-one",
     "diagnostic-imu-two",
+    "diagnostic-imu-bench-one",
+    "diagnostic-imu-bench-two",
     "breadboard-sd-only-2ch",
     "breadboard-record-2ch"
   ],
-  "binary_hash_checks": 18,
+  "binary_hash_checks": 24,
   "status": "PASS",
   "physical_measurements_completed": 0,
   "note": "Current breadboard lab kit; full project and historical ZIPs are separate."

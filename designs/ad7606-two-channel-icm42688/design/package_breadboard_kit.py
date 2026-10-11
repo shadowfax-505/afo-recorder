@@ -11,7 +11,8 @@ VARIANT = Path(__file__).resolve().parent.parent
 REPO = VARIANT.parents[1]
 SITE = 'https://shadowfax-505.github.io/afo-recorder/'
 PROFILES = ['diagnostic-controller', 'diagnostic-adc', 'diagnostic-imu-one',
-            'diagnostic-imu-two', 'breadboard-sd-only-2ch', 'breadboard-record-2ch']
+            'diagnostic-imu-two', 'diagnostic-imu-bench-one', 'diagnostic-imu-bench-two',
+            'breadboard-sd-only-2ch', 'breadboard-record-2ch']
 ARCHIVE_ROOT = 'ad7606-two-channel-icm42688-breadboard'
 
 
@@ -103,7 +104,7 @@ No physical measurement has been completed or certified.
 3. Work through the stages with power off between additions. Use the exact hole
    tables and breadboard/probe-connections.csv; fill docs/bench-checklist.csv with
    real readings and evidence. All supplied outcomes are NOT TESTED.
-4. Flash one of the six included firmware/builds profiles, using all three files
+4. Flash one of the eight included firmware/builds profiles, using all three files
    and the offsets from its manifest. Keep the actual application hash with the trial.
    Breadboard SDMMC is CMD GPIO47 / CLK GPIO39 / D0 GPIO40.
 5. Convert an untouched SD copy with:
@@ -119,12 +120,13 @@ CSV conversion, file-integrity checks and Wi-Fi reception need only Python.
 For optional plots, install host/requirements.txt in a Python virtual environment.
 Read docs/laptop-setup.html for the commands, units and troubleshooting.
 
-Included firmware uses source set ad7606-2ch-1.8 and ESP-IDF v5.4.2. It has been
+Included firmware uses source set ad7606-2ch-1.9 and ESP-IDF v5.4.2. It has been
 cross-compiled, not flashed to an assembled recorder. No Wi-Fi password is
 compiled in: each recorder creates one on first boot and prints it on the USB
 console at every boot. Keep it private; never commit it. The canonical validation
-file describes seven compiled profiles; this archive intentionally includes only
-the six breadboard profiles. The PCB recording binary and Wokwi simulation-only
+file describes nine compiled profiles; this archive intentionally includes only
+the eight breadboard profiles. To test the ICM carriers as soon as they arrive,
+flash diagnostic-imu-bench-one or -two to the DevKit with only the carriers wired. The PCB recording binary and Wokwi simulation-only
 images are excluded. Do not flash an instrumented simulator image to hardware.
 
 The viewer uses local assets and an HTTP server. Offline guides and wire tables

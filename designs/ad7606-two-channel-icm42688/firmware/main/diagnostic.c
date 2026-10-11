@@ -21,6 +21,9 @@ static uint16_t imu_ticks[2];
 // Sums of consecutive FIFO timestamp increments, to compare sensor ticks with host time.
 static uint64_t imu_tick_sum[2];
 static uint32_t imu_tick_steps[2];
+// Sums of valid axis samples for window means (stage 7 bench verdicts).
+static int64_t imu_axis_sum[2][6];
+static uint32_t imu_valid[2];
 static atomic_bool diagnostic_fault;
 static void imu_irq(void *arg){
     unsigned id=(unsigned)(uintptr_t)arg;
@@ -52,7 +55,16 @@ static void imu_reader(void *arg){
                 if(have_tick[i]){step_sum+=(uint16_t)(tick-previous_tick[i]);steps++;}
                 previous_tick[i]=tick;have_tick[i]=true;
             }
+            int64_t axis_sum[6]={0};uint32_t valid=0;
+            for(size_t k=0;k<packets;k++){
+                const uint8_t *q=buf+k*16;bool ok=true;
+                for(unsigned j=1;j<13;j+=2)if(q[j]==0x80&&q[j+1]==0)ok=false;
+                if(!ok)continue;
+                for(unsigned axis=0;axis<6;axis++)axis_sum[axis]+=(int16_t)((q[1+2*axis]<<8)|q[2+2*axis]);
+                valid++;
+            }
             portENTER_CRITICAL(&lock);imu_packets[i]+=packets;imu_tick_sum[i]+=step_sum;imu_tick_steps[i]+=steps;
+            imu_valid[i]+=valid;for(unsigned axis=0;axis<6;axis++)imu_axis_sum[i][axis]+=axis_sum[axis];
             if(packets){
                 const uint8_t *last=buf+(packets-1)*16;
                 for(unsigned axis=0;axis<6;axis++)imu_last[i][axis]=(int16_t)((last[1+2*axis]<<8)|last[2+2*axis]);
@@ -61,6 +73,58 @@ static void imu_reader(void *arg){
             portEXIT_CRITICAL(&lock);
         }
         vTaskDelay(pdMS_TO_TICKS(10));
+    }
+}
+// Stage 7: IMU carriers only (no ADC). Prints per-second windows and, after
+// 60 windows, a SUMMARY with PASS/FAIL against the datasheet tolerances:
+// 200 Hz +/-1.5% (PLL ODR error up to +/-1%), interrupts matching packets,
+// FIFO tick step 4687.5 +/-0.5% (32/30 us ticks), 1.0667 us per tick +/-1.5%,
+// stationary |a| 1.00 +/-0.10 g and gyro bias under 5 deg/s per axis.
+static void imu_bench(void){
+    esp_err_t e=imu_bus_init(AFO_IMU_COUNT);
+    if(e!=ESP_OK){printf("VERDICT,identity_and_readback,FAIL,%s (check 3.3 V, GND, JP2-JP4 at 1-2, CS/SCK/MISO/MOSI wiring)\n",esp_err_to_name(e));fail("IMU init/identity/readback",e);}
+    printf("VERDICT,identity_and_readback,PASS,WHO_AM_I 0x47 and all configuration writes read back for %d sensor(s)\n",AFO_IMU_COUNT);
+    ESP_ERROR_CHECK(gpio_install_isr_service(0));
+    for(unsigned i=0;i<AFO_IMU_COUNT;i++){
+        unsigned pin=i?SHANK_INT:FOOT_INT;
+        gpio_config_t in={.pin_bit_mask=1ULL<<pin,.mode=GPIO_MODE_INPUT,.intr_type=GPIO_INTR_POSEDGE};
+        ESP_ERROR_CHECK(gpio_config(&in));ESP_ERROR_CHECK(gpio_isr_handler_add(pin,imu_irq,(void *)(uintptr_t)i));
+        e=imu_start(i);if(e!=ESP_OK)fail("IMU start",e);
+    }
+    if(xTaskCreatePinnedToCore(imu_reader,"diagnostic_imu",8192,NULL,10,NULL,0)!=pdPASS)fail("IMU task",ESP_ERR_NO_MEM);
+    vTaskDelay(pdMS_TO_TICKS(200)); // let both FIFOs and interrupt streams settle
+    uint32_t base_irq[2],base_packets[2],base_steps[2],base_valid[2];uint64_t base_ticks[2];int64_t base_axis[2][6];
+    portENTER_CRITICAL(&lock);
+    for(unsigned i=0;i<2;i++){base_irq[i]=imu_edges[i];base_packets[i]=imu_packets[i];base_steps[i]=imu_tick_steps[i];
+        base_ticks[i]=imu_tick_sum[i];base_valid[i]=imu_valid[i];for(unsigned a=0;a<6;a++)base_axis[i][a]=imu_axis_sum[i][a];}
+    portEXIT_CRITICAL(&lock);
+    int64_t start=esp_timer_get_time();
+    for(unsigned window=1;;window++){
+        vTaskDelay(pdMS_TO_TICKS(1000));
+        int64_t interval=esp_timer_get_time()-start;
+        for(unsigned i=0;i<AFO_IMU_COUNT;i++){
+            portENTER_CRITICAL(&lock);
+            uint32_t irq=imu_edges[i]-base_irq[i],packets=imu_packets[i]-base_packets[i],steps=imu_tick_steps[i]-base_steps[i],valid=imu_valid[i]-base_valid[i];
+            uint64_t ticks=imu_tick_sum[i]-base_ticks[i];double mean[6];
+            for(unsigned a=0;a<6;a++)mean[a]=valid?(double)(imu_axis_sum[i][a]-base_axis[i][a])/valid:0;
+            portEXIT_CRITICAL(&lock);
+            double rate=packets*1e6/interval,step=steps?(double)ticks/steps:0,per_tick=(packets&&step>0)?interval/(packets*step):0;
+            double ax=mean[0]/2048,ay=mean[1]/2048,az=mean[2]/2048,g=sqrt(ax*ax+ay*ay+az*az);
+            double gx=mean[3]/16.384,gy=mean[4]/16.384,gz=mean[5]/16.384;
+            printf("BENCH,%s,window=%u,elapsed_s=%.1f,rate_hz=%.2f,interrupts=%"PRIu32",packets=%"PRIu32",tick_step_mean=%.2f,host_us_per_tick=%.5f,ax_g=%.3f,ay_g=%.3f,az_g=%.3f,|a|_g=%.3f,gx_dps=%.2f,gy_dps=%.2f,gz_dps=%.2f\n",
+                i?"shank":"foot",window,interval/1e6,rate,irq,packets,step,per_tick,ax,ay,az,g,gx,gy,gz);
+            if(window==60){
+                const char *v;
+                v=fabs(rate/200-1)<=0.015?"PASS":"FAIL";printf("VERDICT,%s,rate_200Hz,%s,%.2f Hz\n",i?"shank":"foot",v,rate);
+                v=(irq>packets?irq-packets:packets-irq)<=5?"PASS":"FAIL";printf("VERDICT,%s,interrupts_match_packets,%s,%"PRIu32" vs %"PRIu32"\n",i?"shank":"foot",v,irq,packets);
+                v=fabs(step/4687.5-1)<=0.005?"PASS":fabs(step/5000-1)<=0.005?"FAIL (1 us ticks: set IMU_TICK_US_NUM/DEN to 1/1 in imu_timing.h)":"FAIL";
+                printf("VERDICT,%s,tick_step_4687.5,%s,%.2f\n",i?"shank":"foot",v,step);
+                v=fabs(per_tick/(32.0/30)-1)<=0.015?"PASS":"FAIL";printf("VERDICT,%s,host_us_per_tick_1.0667,%s,%.5f\n",i?"shank":"foot",v,per_tick);
+                v=fabs(g-1)<=0.10?"PASS":"FAIL";printf("VERDICT,%s,stationary_gravity_1g,%s,%.3f g (keep the carrier still)\n",i?"shank":"foot",v,g);
+                v=(fabs(gx)<5&&fabs(gy)<5&&fabs(gz)<5)?"PASS":"FAIL";printf("VERDICT,%s,gyro_bias_below_5dps,%s,%.2f/%.2f/%.2f\n",i?"shank":"foot",v,gx,gy,gz);
+            }
+        }
+        if(window==60)printf("SUMMARY_COMPLETE; record these lines with the board photos. Rotate each carrier to check axis signs.\n");
     }
 }
 void app_main(void){
@@ -74,6 +138,7 @@ void app_main(void){
         while(1){gpio_set_level(LED_RECORD,tick&1);gpio_set_level(LED_ERROR,(tick>>1)&1);gpio_set_level(LED_BATTERY,(tick>>2)&1);
             printf("CONTROLLER,tick=%u,button=%d,usb_attached=%d\n",tick++,!gpio_get_level(BUTTON_PIN),!gpio_get_level(USB_PRESENT_PIN));vTaskDelay(pdMS_TO_TICKS(500));}
     }
+    if(AFO_DIAGNOSTIC_STAGE==7){imu_bench();}
     esp_err_t e=adc_bus_init();if(e!=ESP_OK)fail("ADC bus/reset",e);
     reader=xTaskGetCurrentTaskHandle();
     gpio_config_t drdy={.pin_bit_mask=1ULL<<ADC_DRDY,.mode=GPIO_MODE_INPUT,.intr_type=GPIO_INTR_NEGEDGE};

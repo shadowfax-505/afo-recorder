@@ -6,16 +6,17 @@
 
 ## Add and test
 
-6A: foot MIKROE-4237 carrier at 3.3 V, SPI jumpers verified. 6B: add shank. Test each in six static orientations and rotate one at a time. Capture separate INT1 lines. These diagnostics also run the ADC; they are not standalone IMU-only images.
+Optional early check, any time after the carriers arrive: wire one carrier, then both, to the DevKit alone and run diagnostic-imu-bench-one / -two; keep each still for 60 s and record every VERDICT line. 6A: foot MIKROE-4237 carrier at 3.3 V, SPI jumpers verified. 6B: add shank. Test each in six static orientations and rotate one at a time. Capture separate INT1 lines. These diagnostics also run the ADC; they are not standalone IMU-only images.
 
 ## Acceptance checks
 
 - **6-foot:** SPI JP2–JP4 1–2; 3.3 V; WHO_AM_I 0x47/readback; foot CS GPIO7 / INT1 GPIO16; correct axis signs
-- **6-shank:** Shank CS GPIO15 / INT1 GPIO17; 200 Hz ±1% per sensor over 60 s (packets ÷ interval_us, or INT1 capture); tick_step_mean 4687.5 ±0.5% and mean host_us_per_tick 1.067 ±1% (32/30 µs ticks; if both read 5000 and 1.00 instead, report it: the firmware tick constant must change) per sensor over ≥60 windows; no FIFO/missing-IRQ/invalid-packet errors
+- **6-shank:** Shank CS GPIO15 / INT1 GPIO17; 200 Hz ±1.5% per sensor over 60 s (datasheet PLL ODR tolerance ±1%) (packets ÷ interval_us, or INT1 capture); tick_step_mean 4687.5 ±0.5% and mean host_us_per_tick 1.067 ±1.5% (32/30 µs ticks; if both read 5000 and 1.00 instead, report it: the firmware tick constant must change) per sensor over ≥60 windows; no FIFO/missing-IRQ/invalid-packet errors
 - **6-stationary:** ±16 g / ±2000 °/s configured; gravity axis ±1 g within ±0.1 g, cross axes within ±0.1 g; gyro per axis <5 °/s before calibration
 
 ## Send for review
 
+- VERDICT and BENCH lines from the IMU-only bench check
 - WHO/readback serial results
 - FIFO and interrupt counts over 60 s
 - IMU lines with interval_us, tick_step_mean and host_us_per_tick

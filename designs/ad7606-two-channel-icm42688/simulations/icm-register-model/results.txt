@@ -1,0 +1,17 @@
+PASS both sensors identify (WHO_AM_I 0x47) and every configuration write reads back
+PASS SPI3 uses GPIO4 MOSI, GPIO5 MISO, GPIO6 SCLK
+PASS foot CS GPIO7, shank CS GPIO15, SPI mode 0 at 1 MHz
+PASS final register state: I2C off, big-endian, byte count; 2000 dps/16 g at 200 Hz; 2nd-order 40 Hz filters; 1 us-mode timestamp; 16-byte packets; INT1 push-pull active-high pulsed, data-ready only
+PASS both sensors start in low-noise mode and stream to FIFO
+PASS no datasheet rule violated (1 ms reset wait, 200 us power-on write blackout, reserved bits, valid codes, INT1 setup, whole-packet FIFO reads)
+PASS foot: 12010 packets in 60 s (expect ~12000), no header error, overflow or invalid sample
+PASS foot: host-time estimate error max 0.0 us (first 0.0, last 0.0) with an exact sensor clock
+PASS shank: 12000 packets in 60 s (expect ~12000), no header error, overflow or invalid sample
+PASS shank: host-time estimate error max 0.0 us (first 0.0, last 0.0) with an exact sensor clock
+PASS stop after the 45 ms gyro minimum on-time
+INFO sensor clock +0.5%/-0.5%: estimate drift after 60 s foot -298500 us, shank 301475 us (estimates follow the sensor clock; correct offline from IRQ anchors)
+PASS 0.5% sensor clock error appears as about 300 ms drift per minute, exactly as modeled
+PASS shank with SPI jumpers in I2C position (no MISO response) fails identification
+PASS a register that does not accept writes fails configuration readback
+PASS an 800 ms polling stall overflows the 2048-byte FIFO and is reported, not silently skipped
+RESULT PASS

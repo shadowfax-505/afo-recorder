@@ -2,14 +2,14 @@
   "scope": "Extracted AD7606 fixed-two ICM breadboard kit",
   "hardware_measured": false,
   "physical_measurements_completed": 0,
-  "archive_sha256": "fd217961da72452af91decb7320372873243533fd6144c3e1a0b131c96515c8e",
+  "archive_sha256": "db8cdb962004463b9acd6a89f0726892cf93b2d222e4abf4fa79ec2fbd6ea5b6",
   "csv_test_environment": {
     "python": "3.14.7",
     "matplotlib_installed": false
   },
   "integrity_and_example": {
     "status": "PASS",
-    "package_files_verified": 335,
+    "package_files_verified": 343,
     "recording_sha256": "af8ac32aee08bd2fadbcc7370bded2c4383a52524bea9a1e56408e7d721f95b6",
     "converted_counts": {
       "emg": 10041,
@@ -27,7 +27,7 @@
   },
   "host_regression_tests": {
     "status": "PASS",
-    "tests": 47,
+    "tests": 48,
     "failures": 0
   },
   "saved_quality": {
@@ -87,7 +87,8 @@
         "host_us_per_sensor_tick": null,
         "sensor_tick_error_ppm": null,
         "fit_note": "needs at least 40 FIFO reads spanning 10 s",
-        "within_1_percent": true
+        "within_1_percent": true,
+        "host_time_fit": null
       },
       "shank": {
         "tick_steps": 251,
@@ -100,10 +101,11 @@
         "host_us_per_sensor_tick": null,
         "sensor_tick_error_ppm": null,
         "fit_note": "needs at least 40 FIFO reads spanning 10 s",
-        "within_1_percent": true
+        "within_1_percent": true,
+        "host_time_fit": null
       }
     },
-    "imu_clock_note": "Screen only: FIFO timestamp increments versus the recorded nominal tick (imu_timestamp_tick_us), and sensor ticks versus ESP32 interrupt times. Includes interrupt latency; not a calibration.",
+    "imu_clock_note": "Screen only: FIFO timestamp increments versus the recorded nominal tick (imu_timestamp_tick_us), and sensor ticks versus ESP32 interrupt times. Includes interrupt latency; not a calibration. host_time_fitted_us in foot.csv/shank.csv maps each sample onto the ESP32 clock using a least-squares fit of all interrupt anchors; use it, not host_time_estimate_us, to align IMU with EMG in recordings longer than a few seconds.",
     "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
     "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
   },
@@ -134,7 +136,7 @@
     },
     "signals.svg": {
       "bytes": 82472,
-      "sha256": "95b00e7c73e41ba858abbd64aae2069a141d0d6f4483f73f85c62999e5e6fe81"
+      "sha256": "5b2dfc157947527923e95bc61f8b9d4580a75bd66776d8bb8aac4418d5871011"
     }
   },
   "tampered_recording_rejected": true,
@@ -150,17 +152,16 @@
       "development/06/README.html",
       "docs/lab-quickstart.html",
       "docs/laptop-setup.html",
-      "docs/download-checks.html"
+      "docs/download-checks.html",
+      "docs/firmware-build-guide.html"
     ],
-    "local_links_checked": 79,
+    "local_links_checked": 89,
     "failed_links": 0,
     "console_errors": 0,
     "failed_asset_requests": 0,
     "external_requests": 0,
     "scope": "Local asset closure and page loading; geometry and wire bends remain illustrative; no physical hardware.",
-    "stage6_text_current": true,
-    "archive_sha256": "1b7276572a7f833f90349fc1bb016f33ad944eef6f185a148de180e30ce39ce2",
-    "note": "Browser checks ran on the archive named here; the current archive differs only in development/research-planning text."
+    "stage6_text_current": true
   },
   "previous_archive_checks": {
     "note": "Recorded for the firmware 1.6 archive (a6cc76b9...); not repeated for later archives.",

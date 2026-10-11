@@ -100,6 +100,17 @@ class RecorderTests(unittest.TestCase):
         import csv
         with (self.root/'icm'/'foot.csv').open() as f:rows=list(csv.DictReader(f))
         self.assertAlmostEqual(int(rows[-1]['sensor_time_unwrapped_us'])-int(rows[0]['sensor_time_unwrapped_us']),(len(rows)-1)*5000,delta=2)
+    def test_fitted_host_time_removes_sensor_clock_error(self):
+        # Sensor clock 0.5% slow: 4,687.5 x 0.995 ticks of nominal 32/30 us per 5 ms.
+        # The firmware estimate would drift ~25 ms over 5 s of samples; the fit must not.
+        source=self.root/'drift.afolog';generate(source,12,imu_tick_step=4687.5*0.995,imu_tick_us=32/30)
+        report=convert(source,self.root/'drift',make_plots=False)
+        fit=report['imu_clock']['foot']['host_time_fit']
+        self.assertAlmostEqual(fit['host_us_per_sensor_tick'],5000/(4687.5*0.995),places=4)
+        import csv
+        with (self.root/'drift'/'foot.csv').open() as f:rows=list(csv.DictReader(f))
+        worst=max(abs(int(r['host_time_fitted_us'])-int(r['host_time_estimate_us'])) for r in rows)
+        self.assertLessEqual(worst,2)
     def test_imu_clock_screen_needs_span(self):
         clock=self.run_export()['imu_clock']['foot']
         self.assertIsNone(clock['host_us_per_sensor_tick']);self.assertIsNotNone(clock['fit_note'])

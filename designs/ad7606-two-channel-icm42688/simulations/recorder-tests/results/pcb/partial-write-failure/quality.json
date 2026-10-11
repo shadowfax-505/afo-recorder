@@ -1,5 +1,5 @@
 {
-  "source_sha256": "60b9578c30219f70a6c67eee57a410e161762fad9690afcd5fd8420e7488fcba",
+  "source_sha256": "955b2a17b8c404f3c41b6a92475e35979cf64c5d0b15d38b14508e727e657530",
   "synthetic": true,
   "counts": {
     "emg": 2,
@@ -51,7 +51,7 @@
     }
   ],
   "imu_clock": {},
-  "imu_clock_note": "Screen only: FIFO timestamp increments versus the recorded nominal tick (imu_timestamp_tick_us), and sensor ticks versus ESP32 interrupt times. Includes interrupt latency; not a calibration.",
+  "imu_clock_note": "Screen only: FIFO timestamp increments versus the recorded nominal tick (imu_timestamp_tick_us), and sensor ticks versus ESP32 interrupt times. Includes interrupt latency; not a calibration. host_time_fitted_us in foot.csv/shank.csv maps each sample onto the ESP32 clock using a least-squares fit of all interrupt anchors; use it, not host_time_estimate_us, to align IMU with EMG in recordings longer than a few seconds.",
   "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
   "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
 }
