@@ -39,6 +39,16 @@
 #define AFO_SD_METADATA "\"sd_cmd_gpio\":38,\"sd_clk_gpio\":39,\"sd_d0_gpio\":40,"
 #endif
 #define SD_D0 40
+// AD7606 STBY (pin 7). On the PCB, AVCC (5V_ADC) is generated from 3V3D, so
+// VDRIVE rises first. A 100 k pull-down holds STBY low; with RANGE low that
+// is full shutdown (ADI AN-1091) until the firmware releases it. The
+// breadboard ADC module keeps its own STBY tie, so it has no STBY GPIO.
+#if AFO_BREADBOARD
+#define ADC_STBY -1
+#else
+#define ADC_STBY 14
+#endif
+#define ADC_WAKE_MS 30 // Rev. G Table 3 tWAKE-UP SHUTDOWN, internal reference (max).
 #define BUTTON_PIN 18
 #define LED_RECORD 41
 #define LED_ERROR 42
@@ -66,7 +76,7 @@
 #define RECORD_QUEUE_LENGTH 20480
 #define SD_MOUNT "/sdcard"
 
-#define AFO_FIRMWARE_ID "ad7606-2ch-1.10"
+#define AFO_FIRMWARE_ID "ad7606-2ch-1.11"
 
 // Laptop preview uses a private WPA2 access point. No password is compiled in:
 // each recorder generates a random one on first boot, keeps it in NVS and

@@ -3,13 +3,13 @@
   "hardware_measured": false,
   "esp32_executed": false,
   "production_sources_sha256": {
-    "adc_ad7606.c": "77164ec74b6c574a64885a44e9117409f2edaaaf90a82cb737c3834f4672b5e8",
+    "adc_ad7606.c": "d54d117c7948e98d7fe83826dc625949f08876fbfa9eebaf77e198d008c0cdd4",
     "sensors.c": "f5c6034a43b260de6282d902a1d76d3e4db60bcbca64d364ebd34fc733df84c9",
     "sensors.h": "880b651acda742396e7da66f113f6ad27022abc4db84a93f9fff6a162e32ff43",
     "imu_timing.h": "2018c0e64cbcb5e894d005c7a6a54ca335f8e7900e0345ad19263d85b298954f",
     "format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
     "format.h": "58b01a597eaa2c70a918ad5ee3b71c9e26fe64aedefc91ffba7d96430510c47b",
-    "board.h": "ccba73353a40e4d32d4dcc26b08046bccf88866ec93e60229081181065e782b3",
+    "board.h": "bd30da9cf045112e3935c0c8905034581e60e4836d74f6fb2a76f5527739beb5",
     "variant.h": "55c2cdaef8b2d56e2ced2aa23984a289038adc6caaf9d164c92830c24b8cffb9"
   },
   "stimulus_sha256": "c2d23fb153e84391c9d15172b9170dca5ed42f85f21512dfd61f593e45669e72",
@@ -49,7 +49,7 @@
   "boundary_note": "FIFO packets still buffered at the modeled stop are counted explicitly; no unseen packet is called a recorded measurement.",
   "groups_passed": 6,
   "quality": {
-    "source_sha256": "8b86ee68942e53b8a5ec9741aa58d9e92f1d98ad96936bf8f3017b538d6664d2",
+    "source_sha256": "7874e048da078f1700574dbf16a14abf78e61107559a4b7c6ce1f9afb15ebd1b",
     "synthetic": true,
     "counts": {
       "emg": 16000,

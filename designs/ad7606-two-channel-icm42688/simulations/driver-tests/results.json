@@ -1,8 +1,8 @@
 {
   "engine": "native C compiler and mocked ESP-IDF peripheral APIs",
-  "groups_passed": 16,
-  "production_source_sha256": "77164ec74b6c574a64885a44e9117409f2edaaaf90a82cb737c3834f4672b5e8",
-  "test_source_sha256": "7bfaf684365be7eaf67b730d1504e7272a74de3e2975a1d6ea78df676670e9c4",
+  "groups_passed": 17,
+  "production_source_sha256": "d54d117c7948e98d7fe83826dc625949f08876fbfa9eebaf77e198d008c0cdd4",
+  "test_source_sha256": "b3ce7aabad2fa657134dccda0ce9a75119e9a422bde66c3b31c7b9d023638984",
   "compiler_flags": [
     "-std=c11",
     "-Wall",

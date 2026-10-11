@@ -95,7 +95,7 @@
 <p>For steps 3–6, diagnostic acquisition runs in approximately one-second windows and stops ADC triggering before printing. <strong>The spaces between diagnostic windows are intentional.</strong> Use the recording builds for continuous capture and endurance tests. The firmware’s 80 µs BUSY wait is a fault deadline, not acceptable normal conversion time. AD7606 has no external clock or separate DRDY output; shared net name ADC_DRDY means BUSY here.</p>
 <p>Use <code>record-2ch</code> only on the custom PCB (SD CMD GPIO38). It is not interchangeable with the breadboard image. Flash all three files at the addresses in the chosen manifest.</p>
 <h2>Reading the diagnostic serial lines</h2>
-<p>The first line names the firmware, for example <code>firmware=ad7606-2ch-1.10 stage=3 hardware=breadboard channels=2</code>; record it with the binary hash. Each acquisition window then prints one <code>ADC</code> line, and stage-6 images add one <code>IMU</code> line per sensor.</p>
+<p>The first line names the firmware, for example <code>firmware=ad7606-2ch-1.11 stage=3 hardware=breadboard channels=2</code>; record it with the binary hash. Each acquisition window then prints one <code>ADC</code> line, and stage-6 images add one <code>IMU</code> line per sensor.</p>
 <table>
 <thead>
 <tr>

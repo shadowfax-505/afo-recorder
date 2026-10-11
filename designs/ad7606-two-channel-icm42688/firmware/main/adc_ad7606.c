@@ -71,7 +71,18 @@ esp_err_t adc_bus_init(void){
     TRY(spi_bus_initialize(SPI2_HOST,&b,SPI_DMA_DISABLED));
     // AD7606 updates DOUT on rising SCLK; sample on falling edge, idle high (mode 2).
     spi_device_interface_config_t d={.clock_speed_hz=8000000,.mode=2,.spics_io_num=ADC_CS,.queue_size=1};
-    TRY(spi_bus_add_device(SPI2_HOST,&d,&adc));TRY(adc_configure());
+    TRY(spi_bus_add_device(SPI2_HOST,&d,&adc));
+#if ADC_STBY >= 0
+    // AN-1091 sequence once per boot: both rails are long established when
+    // the application starts; leave full shutdown, wait the shutdown wake-up
+    // time, then RESET (adc_configure) configures the converter.
+    static bool awake;
+    if(!awake){
+        gpio_config_t s={.pin_bit_mask=1ULL<<ADC_STBY,.mode=GPIO_MODE_OUTPUT};TRY(gpio_config(&s));
+        gpio_set_level(ADC_STBY,1);vTaskDelay(pdMS_TO_TICKS(ADC_WAKE_MS));awake=true;
+    }
+#endif
+    TRY(adc_configure());
     gptimer_config_t c={.clk_src=GPTIMER_CLK_SRC_DEFAULT,.direction=GPTIMER_COUNT_UP,
         .resolution_hz=1000000};TRY(gptimer_new_timer(&c,&timer));
     gptimer_event_callbacks_t cb={.on_alarm=tick};TRY(gptimer_register_event_callbacks(timer,&cb,NULL));

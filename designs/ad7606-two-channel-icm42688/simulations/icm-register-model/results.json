@@ -7,7 +7,7 @@
   "production_sources_sha256": {
     "sensors.c": "f5c6034a43b260de6282d902a1d76d3e4db60bcbca64d364ebd34fc733df84c9",
     "imu_timing.h": "2018c0e64cbcb5e894d005c7a6a54ca335f8e7900e0345ad19263d85b298954f",
-    "board.h": "ccba73353a40e4d32d4dcc26b08046bccf88866ec93e60229081181065e782b3"
+    "board.h": "bd30da9cf045112e3935c0c8905034581e60e4836d74f6fb2a76f5527739beb5"
   },
   "model_sources_sha256": {
     "icm42688_model.c": "c58099a3ccc64081b23ddc3e317a3525c9a5b075391300e960c379e977d07fec",

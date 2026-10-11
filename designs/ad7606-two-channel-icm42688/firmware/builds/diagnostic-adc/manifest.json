@@ -14,20 +14,20 @@
     "application.bin": "0x10000"
   },
   "sha256": {
-    "application.bin": "60fef6a689db92636227bc4e0659f5b5bcf8f9e436753bd87347942534a45ead",
-    "bootloader.bin": "b4ce14fdd15305779b228901c429e2c47983f91d3fc1ad5568f0682e6a8c9f65",
+    "application.bin": "bb42830c1b952bb62f7ea9a01e1402ee93529ec6414afd9152b45ee8eb3fce97",
+    "bootloader.bin": "49460a2f15061982001713e025054e6b33e6ffbe601567e41c2e01ad28144263",
     "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
   },
   "profile": "diagnostic-adc",
-  "source_set": "ad7606-2ch-1.10",
+  "source_set": "ad7606-2ch-1.11",
   "entrypoint": "diagnostic.c",
   "source_sha256": {
     "main/CMakeLists.txt": "029e071b32b8fdaa7081c29d188204bf9f64c2fcca5cfe634741f25766f687b9",
-    "main/adc_ad7606.c": "77164ec74b6c574a64885a44e9117409f2edaaaf90a82cb737c3834f4672b5e8",
+    "main/adc_ad7606.c": "d54d117c7948e98d7fe83826dc625949f08876fbfa9eebaf77e198d008c0cdd4",
     "main/adc_ads131m04.c": "914ffa6db82ed58aed9d4f0beb1ae05645ac6fb47097ace88e2be8b6a3c6b6aa",
     "main/ads_crc.c": "31cbb5fd61f5e06c394a426e0fa48d14f3561be4d46fffe6a18e1837edad83cc",
     "main/ads_crc.h": "d08cf15ad6e5d8d837e5c532b9665bc9c07a045475ba06c6443eed6b4367aeac",
-    "main/board.h": "ccba73353a40e4d32d4dcc26b08046bccf88866ec93e60229081181065e782b3",
+    "main/board.h": "bd30da9cf045112e3935c0c8905034581e60e4836d74f6fb2a76f5527739beb5",
     "main/diagnostic.c": "df95a818330d5705f3f82fc3d87468f9d1b6ce3eef95644debe05326d593aaa8",
     "main/format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
     "main/format.h": "58b01a597eaa2c70a918ad5ee3b71c9e26fe64aedefc91ffba7d96430510c47b",

@@ -53,6 +53,11 @@ esp_err_t __wrap_imu_fifo(unsigned id,uint8_t *data,size_t cap,size_t *packets,b
 #define SECTOR_BYTES 512U
 #define PAGE_BYTES 16384U
 #define DISK_BYTES (128U*1024U*1024U)
+// PSRAM budget (8 MB): firmware record queue 1.31 MB (20,480 x 64 B, since
+// 1.7), UDP capture 2.5 MB (largest 1.6 capture 1.72 MB) and 1.75 MB of hot
+// disk pages (largest 1.6 recording 1.62 MB); later pages are allocated on demand.
+#define CAPTURE_BYTES (2560U*1024U)
+#define HOT_PAGES 112U
 static uint8_t *pages[DISK_BYTES/PAGE_BYTES];
 static unsigned pages_used,sector_reads,sector_writes;
 static FATFS *mounted_fs;
@@ -105,7 +110,7 @@ esp_err_t __wrap_esp_vfs_fat_sdmmc_mount(const char *path,const sdmmc_host_t *ho
     if(test_case==CASE_MOUNT_FAIL)return ESP_FAIL;
     // Reserve hot data pages before acquisition. Allocating/zeroing a PSRAM
     // page while interrupts are running is a fixture load, not an SD transaction.
-    for(unsigned i=0;i<192;i++) {
+    for(unsigned i=0;i<HOT_PAGES;i++) {
         pages[i]=heap_caps_calloc(1,PAGE_BYTES,MALLOC_CAP_SPIRAM|MALLOC_CAP_8BIT);
         assert(pages[i]);pages_used++;
     }
@@ -196,13 +201,13 @@ static void subscriber_task(void *arg) {
         if(test_case!=CASE_NO_SUBSCRIBER&&now-hello_at>=500000) {
             assert(sendto(sock,"AFO-LIVE1",9,0,(struct sockaddr*)&server,sizeof(server))==9);hello_at=now;
         }
-        uint8_t bytes[1400];ssize_t n;
+        uint8_t bytes[32+WIFI_LIVE_METADATA_MAX+1];ssize_t n; // +1 detects truncation
         while((n=recvfrom(sock,bytes,sizeof(bytes),0,NULL,NULL))>0) {
-            assert(n>=32&&n<=1312);udp_received++;
+            assert(n>=32&&n<=32+WIFI_LIVE_METADATA_MAX);udp_received++;
             bool drop=test_case==CASE_PACKET_LOSS&&bytes[5]==2&&udp_received%7==0;
             if(drop){udp_discarded++;continue;}
             if(atomic_load(&capture_packets)) {
-                assert(capture_used+2+n<=4U*1024U*1024U);
+                assert(capture_used+2+n<=CAPTURE_BYTES);
                 packet_capture[capture_used++]=n&255;packet_capture[capture_used++]=(unsigned)n>>8;
                 memcpy(packet_capture+capture_used,bytes,n);capture_used+=n;
             }
@@ -296,7 +301,7 @@ void app_main(void) {
     gpio_config_t config={.pin_bit_mask=(1ULL<<3)|(1ULL<<14)|(1ULL<<46)|(1ULL<<48),.mode=GPIO_MODE_INPUT};
     ESP_ERROR_CHECK(gpio_config(&config));
     for(unsigned i=0;i<4;i++)test_case|=__real_gpio_get_level(pins[i])<<i;
-    packet_capture=heap_caps_malloc(4U*1024U*1024U,MALLOC_CAP_SPIRAM|MALLOC_CAP_8BIT);assert(packet_capture);
+    packet_capture=heap_caps_malloc(CAPTURE_BYTES,MALLOC_CAP_SPIRAM|MALLOC_CAP_8BIT);assert(packet_capture);
     assert(xTaskCreatePinnedToCore(test_controller,"fixture",12288,NULL,1,NULL,0)==pdPASS);
     assert(xTaskCreatePinnedToCore(subscriber_task,"subscriber",4096,NULL,2,NULL,0)==pdPASS);
     printf("INTEGRATED_BEGIN,case=%u,production_adc_imu=true,storage=FatFS_sparse_RAM,network=lwIP_loopback\n",test_case);

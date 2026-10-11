@@ -1,5 +1,16 @@
 # Changelog
 
+## AD7606 supply-ramp fix: PCB STBY control and firmware 1.11 — 12 October 2026
+
+- PCB, approved by the project lead:
+  - AD7606 STBY (pin 7) now runs on new net ADC_STBY to ESP32 GPIO14, with R70 (100 kΩ) pulling it low, so the converter stays in full shutdown (RANGE low) until released.
+  - D30 (BAT760 Schottky) runs from 3V3D to 5V_ADC and limits VDRIVE − AVCC while the charge pump starts.
+  - The new copper was routed against the existing board. The RANGE (pin 8) ground tie that walled pin 7 in was re-routed to its own ground via.
+  - KiCad DRC: 0 violations, 0 unconnected. ERC: 0. Connection audit: 395 pins plus the firmware GPIO map. Package validator: pass. Manufacturing exports regenerated. The board has not been built.
+- Firmware `ad7606-2ch-1.11`: PCB builds release STBY once per boot, wait the 30 ms shutdown wake-up time, then reset the ADC (ADI AN-1091). Breadboard builds are unchanged. Nine profiles rebuilt. The native driver test checks the ordering, and the offline pipeline's timestamps shift by exactly that 30 ms.
+- Wokwi web editor, 1.11 integrated image: nominal, 50 ms write-delay and USB-attached cases pass with the production converter and live decoder. The other 15 are pending (the editor only runs while its window is visible). The first attempt exposed a fixture memory budget and a UDP buffer that predated the 1.7 PSRAM queue and 1,400-byte metadata limit; both fixed in the fixture only.
+- AD7606 data sheet Rev. G cross-check (tCONV 4.2 µs max confirmed; all interface timing, straps and decoupling pass) recorded in the circuit audit.
+
 ## AD7606 datasheet cross-check and 1.10 simulation image — 11 October 2026
 
 - Checked the fixed two-channel design against ADI's AD7606 data sheet Rev. G (supplied by the project lead; local reference only): conversion time (4.2 µs max confirmed), CONVST/BUSY/RESET timing, serial-mode edges and clock limit, Table 8 interface straps, oversampling/range/standby/reference straps, unused inputs and decoupling. All pass; see the circuit audit.

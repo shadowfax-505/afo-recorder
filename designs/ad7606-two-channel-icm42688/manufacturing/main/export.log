@@ -35,12 +35,12 @@ Could not add 3D model for SW1.
 File not found: ${KICAD10_3DMODEL_DIR}/Button_Switch_SMD.3dshapes/SW_SPDT_CK_JS102011SAQN.step
 STEP file '/Users/muttakinrahman/projects/afo-recorder/outputs/afo-recorder-project/designs/ad7606-two-channel-icm42688/manufacturing/main/afo_revb_main.step' created.
 
-Export time 17.382 s
+Export time 3.108 s
 
 pcb export glb --subst-models --include-tracks --include-pads --force -o /Users/muttakinrahman/projects/afo-recorder/outputs/afo-recorder-project/designs/ad7606-two-channel-icm42688/viewer/main.glb /Users/muttakinrahman/projects/afo-recorder/outputs/afo-recorder-project/designs/ad7606-two-channel-icm42688/hardware/main/afo_revb_main.kicad_pcb
 Could not add 3D model for SW1.
 File not found: ${KICAD10_3DMODEL_DIR}/Button_Switch_SMD.3dshapes/SW_SPDT_CK_JS102011SAQN.step
 Binary GLTF file '/Users/muttakinrahman/projects/afo-recorder/outputs/afo-recorder-project/designs/ad7606-two-channel-icm42688/viewer/main.glb' created.
 
-Export time 45.575 s
+Export time 5.681 s
 

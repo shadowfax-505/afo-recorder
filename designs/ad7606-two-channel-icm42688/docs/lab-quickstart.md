@@ -26,7 +26,7 @@ Use `record-2ch` only on the custom PCB (SD CMD GPIO38). It is not interchangeab
 
 ## Reading the diagnostic serial lines
 
-The first line names the firmware, for example `firmware=ad7606-2ch-1.10 stage=3 hardware=breadboard channels=2`; record it with the binary hash. Each acquisition window then prints one `ADC` line, and stage-6 images add one `IMU` line per sensor.
+The first line names the firmware, for example `firmware=ad7606-2ch-1.11 stage=3 hardware=breadboard channels=2`; record it with the binary hash. Each acquisition window then prints one `ADC` line, and stage-6 images add one `IMU` line per sensor.
 
 | Field | Meaning | How to use it |
 |---|---|---|

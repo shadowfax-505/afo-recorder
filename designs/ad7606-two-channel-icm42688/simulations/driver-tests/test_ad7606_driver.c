@@ -15,6 +15,7 @@ static bool late_during_read;
 static esp_err_t read_error,bus_error;
 static int16_t words[8];
 static gptimer_event_callbacks_t callback;
+static int64_t stby_high_at=-1,first_reset_at=-1;
 esp_err_t gpio_config(const gpio_config_t *c){(void)c;return ESP_OK;}
 int gpio_get_level(int pin){
  if(pin==ADC_DRDY){
@@ -24,6 +25,8 @@ int gpio_get_level(int pin){
  return levels[pin];
 }
 int gpio_set_level(int pin,int v){
+ if(pin==ADC_STBY&&v&&stby_high_at<0)stby_high_at=clock_us;
+ if(pin==ADC_RESET&&v&&first_reset_at<0)first_reset_at=clock_us;
  if(pin==ADC_CONVST&&v&&!levels[pin]){
   pulses++;
   // The default converter accepts CONVST immediately and asserts BUSY for
@@ -75,6 +78,8 @@ static bool notified(void *context){assert(context==(void*)42);notifications++;r
 int main(void){
  int32_t codes[4];uint16_t status,crc;
  reset_case();puts("PASS SPI mode primed during RESET before any measured conversion");
+ assert(levels[ADC_STBY]==1&&stby_high_at>=0&&first_reset_at-stby_high_at>=ADC_WAKE_MS*1000);
+ puts("PASS STBY released from full shutdown; RESET follows after the 30 ms wake-up time");
  reset_case();assert(emg_frame(codes,&status,&crc)==ESP_ERR_INVALID_STATE&&reads==0);
  puts("PASS no read before conversion");
  words[0]=6554;words[1]=-1234;words[2]=32767;words[3]=-32768;

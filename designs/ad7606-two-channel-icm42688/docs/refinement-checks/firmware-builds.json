@@ -15,20 +15,20 @@
       "application.bin": "0x10000"
     },
     "sha256": {
-      "application.bin": "75901c3fa2ae937ae44de6e5b6da4b754e73d8376b103aecbb5439bf40f12356",
-      "bootloader.bin": "b4ce14fdd15305779b228901c429e2c47983f91d3fc1ad5568f0682e6a8c9f65",
+      "application.bin": "871367225a4880521ee7a55609b5eb75c8648d7fc8295bb582b3b9bd47d7c189",
+      "bootloader.bin": "49460a2f15061982001713e025054e6b33e6ffbe601567e41c2e01ad28144263",
       "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
     },
     "profile": "breadboard-record-2ch",
-    "source_set": "ad7606-2ch-1.10",
+    "source_set": "ad7606-2ch-1.11",
     "entrypoint": "main.c",
     "source_sha256": {
       "main/CMakeLists.txt": "029e071b32b8fdaa7081c29d188204bf9f64c2fcca5cfe634741f25766f687b9",
-      "main/adc_ad7606.c": "77164ec74b6c574a64885a44e9117409f2edaaaf90a82cb737c3834f4672b5e8",
+      "main/adc_ad7606.c": "d54d117c7948e98d7fe83826dc625949f08876fbfa9eebaf77e198d008c0cdd4",
       "main/adc_ads131m04.c": "914ffa6db82ed58aed9d4f0beb1ae05645ac6fb47097ace88e2be8b6a3c6b6aa",
       "main/ads_crc.c": "31cbb5fd61f5e06c394a426e0fa48d14f3561be4d46fffe6a18e1837edad83cc",
       "main/ads_crc.h": "d08cf15ad6e5d8d837e5c532b9665bc9c07a045475ba06c6443eed6b4367aeac",
-      "main/board.h": "ccba73353a40e4d32d4dcc26b08046bccf88866ec93e60229081181065e782b3",
+      "main/board.h": "bd30da9cf045112e3935c0c8905034581e60e4836d74f6fb2a76f5527739beb5",
       "main/diagnostic.c": "df95a818330d5705f3f82fc3d87468f9d1b6ce3eef95644debe05326d593aaa8",
       "main/format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
       "main/format.h": "58b01a597eaa2c70a918ad5ee3b71c9e26fe64aedefc91ffba7d96430510c47b",
@@ -45,7 +45,7 @@
       "sdkconfig.defaults": "efa1f6cc8603f5d99512b34847cccd83cac16af42cf8758570f3ed0b1bc01fd2"
     },
     "current_binary_hardware_tested": false,
-    "recording_firmware": "ad7606-2ch-1.10",
+    "recording_firmware": "ad7606-2ch-1.11",
     "current_binary_wokwi_executed": false,
     "execution_note": "Cross-compiled only; not flashed and not executed in Wokwi or QEMU. The preserved instrumented Wokwi image tested source set ad7606-2ch-1.6."
   },
@@ -65,20 +65,20 @@
       "application.bin": "0x10000"
     },
     "sha256": {
-      "application.bin": "494562f8d1970cd7dcebc681a3dd5a362954e0e4c84e0ad1c89eb3485a0db437",
-      "bootloader.bin": "b4ce14fdd15305779b228901c429e2c47983f91d3fc1ad5568f0682e6a8c9f65",
+      "application.bin": "393b22f66abcba5969f3f14120dd1ac9fc513e16a7cb6e56d67e8c0c76c45989",
+      "bootloader.bin": "49460a2f15061982001713e025054e6b33e6ffbe601567e41c2e01ad28144263",
       "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
     },
     "profile": "breadboard-sd-only-2ch",
-    "source_set": "ad7606-2ch-1.10",
+    "source_set": "ad7606-2ch-1.11",
     "entrypoint": "main.c",
     "source_sha256": {
       "main/CMakeLists.txt": "029e071b32b8fdaa7081c29d188204bf9f64c2fcca5cfe634741f25766f687b9",
-      "main/adc_ad7606.c": "77164ec74b6c574a64885a44e9117409f2edaaaf90a82cb737c3834f4672b5e8",
+      "main/adc_ad7606.c": "d54d117c7948e98d7fe83826dc625949f08876fbfa9eebaf77e198d008c0cdd4",
       "main/adc_ads131m04.c": "914ffa6db82ed58aed9d4f0beb1ae05645ac6fb47097ace88e2be8b6a3c6b6aa",
       "main/ads_crc.c": "31cbb5fd61f5e06c394a426e0fa48d14f3561be4d46fffe6a18e1837edad83cc",
       "main/ads_crc.h": "d08cf15ad6e5d8d837e5c532b9665bc9c07a045475ba06c6443eed6b4367aeac",
-      "main/board.h": "ccba73353a40e4d32d4dcc26b08046bccf88866ec93e60229081181065e782b3",
+      "main/board.h": "bd30da9cf045112e3935c0c8905034581e60e4836d74f6fb2a76f5527739beb5",
       "main/diagnostic.c": "df95a818330d5705f3f82fc3d87468f9d1b6ce3eef95644debe05326d593aaa8",
       "main/format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
       "main/format.h": "58b01a597eaa2c70a918ad5ee3b71c9e26fe64aedefc91ffba7d96430510c47b",
@@ -95,7 +95,7 @@
       "sdkconfig.defaults": "efa1f6cc8603f5d99512b34847cccd83cac16af42cf8758570f3ed0b1bc01fd2"
     },
     "current_binary_hardware_tested": false,
-    "recording_firmware": "ad7606-2ch-1.10",
+    "recording_firmware": "ad7606-2ch-1.11",
     "current_binary_wokwi_executed": false,
     "execution_note": "Cross-compiled only; not flashed and not executed in Wokwi or QEMU. The preserved instrumented Wokwi image tested source set ad7606-2ch-1.6."
   },
@@ -115,20 +115,20 @@
       "application.bin": "0x10000"
     },
     "sha256": {
-      "application.bin": "60fef6a689db92636227bc4e0659f5b5bcf8f9e436753bd87347942534a45ead",
-      "bootloader.bin": "b4ce14fdd15305779b228901c429e2c47983f91d3fc1ad5568f0682e6a8c9f65",
+      "application.bin": "bb42830c1b952bb62f7ea9a01e1402ee93529ec6414afd9152b45ee8eb3fce97",
+      "bootloader.bin": "49460a2f15061982001713e025054e6b33e6ffbe601567e41c2e01ad28144263",
       "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
     },
     "profile": "diagnostic-adc",
-    "source_set": "ad7606-2ch-1.10",
+    "source_set": "ad7606-2ch-1.11",
     "entrypoint": "diagnostic.c",
     "source_sha256": {
       "main/CMakeLists.txt": "029e071b32b8fdaa7081c29d188204bf9f64c2fcca5cfe634741f25766f687b9",
-      "main/adc_ad7606.c": "77164ec74b6c574a64885a44e9117409f2edaaaf90a82cb737c3834f4672b5e8",
+      "main/adc_ad7606.c": "d54d117c7948e98d7fe83826dc625949f08876fbfa9eebaf77e198d008c0cdd4",
       "main/adc_ads131m04.c": "914ffa6db82ed58aed9d4f0beb1ae05645ac6fb47097ace88e2be8b6a3c6b6aa",
       "main/ads_crc.c": "31cbb5fd61f5e06c394a426e0fa48d14f3561be4d46fffe6a18e1837edad83cc",
       "main/ads_crc.h": "d08cf15ad6e5d8d837e5c532b9665bc9c07a045475ba06c6443eed6b4367aeac",
-      "main/board.h": "ccba73353a40e4d32d4dcc26b08046bccf88866ec93e60229081181065e782b3",
+      "main/board.h": "bd30da9cf045112e3935c0c8905034581e60e4836d74f6fb2a76f5527739beb5",
       "main/diagnostic.c": "df95a818330d5705f3f82fc3d87468f9d1b6ce3eef95644debe05326d593aaa8",
       "main/format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
       "main/format.h": "58b01a597eaa2c70a918ad5ee3b71c9e26fe64aedefc91ffba7d96430510c47b",
@@ -164,20 +164,20 @@
       "application.bin": "0x10000"
     },
     "sha256": {
-      "application.bin": "0d3bd93e6420ce654a8681a1be40dc61804f8bd8c248802cb7107a635cd3c3ff",
-      "bootloader.bin": "b4ce14fdd15305779b228901c429e2c47983f91d3fc1ad5568f0682e6a8c9f65",
+      "application.bin": "6a4a234ba1983baa82758454c6e28666cf9cfd38668db6401d247ecc91a0e3a5",
+      "bootloader.bin": "49460a2f15061982001713e025054e6b33e6ffbe601567e41c2e01ad28144263",
       "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
     },
     "profile": "diagnostic-controller",
-    "source_set": "ad7606-2ch-1.10",
+    "source_set": "ad7606-2ch-1.11",
     "entrypoint": "diagnostic.c",
     "source_sha256": {
       "main/CMakeLists.txt": "029e071b32b8fdaa7081c29d188204bf9f64c2fcca5cfe634741f25766f687b9",
-      "main/adc_ad7606.c": "77164ec74b6c574a64885a44e9117409f2edaaaf90a82cb737c3834f4672b5e8",
+      "main/adc_ad7606.c": "d54d117c7948e98d7fe83826dc625949f08876fbfa9eebaf77e198d008c0cdd4",
       "main/adc_ads131m04.c": "914ffa6db82ed58aed9d4f0beb1ae05645ac6fb47097ace88e2be8b6a3c6b6aa",
       "main/ads_crc.c": "31cbb5fd61f5e06c394a426e0fa48d14f3561be4d46fffe6a18e1837edad83cc",
       "main/ads_crc.h": "d08cf15ad6e5d8d837e5c532b9665bc9c07a045475ba06c6443eed6b4367aeac",
-      "main/board.h": "ccba73353a40e4d32d4dcc26b08046bccf88866ec93e60229081181065e782b3",
+      "main/board.h": "bd30da9cf045112e3935c0c8905034581e60e4836d74f6fb2a76f5527739beb5",
       "main/diagnostic.c": "df95a818330d5705f3f82fc3d87468f9d1b6ce3eef95644debe05326d593aaa8",
       "main/format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
       "main/format.h": "58b01a597eaa2c70a918ad5ee3b71c9e26fe64aedefc91ffba7d96430510c47b",
@@ -213,20 +213,20 @@
       "application.bin": "0x10000"
     },
     "sha256": {
-      "application.bin": "3e42d2a603ba0b9f13167bba7e37fec2416e64682f61e0d27477ef2d3911c5ce",
-      "bootloader.bin": "b4ce14fdd15305779b228901c429e2c47983f91d3fc1ad5568f0682e6a8c9f65",
+      "application.bin": "dbd32c1f82f040e9e281a7c34c37ec975317951ab1d93b733f8bc66fa83860de",
+      "bootloader.bin": "49460a2f15061982001713e025054e6b33e6ffbe601567e41c2e01ad28144263",
       "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
     },
     "profile": "diagnostic-imu-one",
-    "source_set": "ad7606-2ch-1.10",
+    "source_set": "ad7606-2ch-1.11",
     "entrypoint": "diagnostic.c",
     "source_sha256": {
       "main/CMakeLists.txt": "029e071b32b8fdaa7081c29d188204bf9f64c2fcca5cfe634741f25766f687b9",
-      "main/adc_ad7606.c": "77164ec74b6c574a64885a44e9117409f2edaaaf90a82cb737c3834f4672b5e8",
+      "main/adc_ad7606.c": "d54d117c7948e98d7fe83826dc625949f08876fbfa9eebaf77e198d008c0cdd4",
       "main/adc_ads131m04.c": "914ffa6db82ed58aed9d4f0beb1ae05645ac6fb47097ace88e2be8b6a3c6b6aa",
       "main/ads_crc.c": "31cbb5fd61f5e06c394a426e0fa48d14f3561be4d46fffe6a18e1837edad83cc",
       "main/ads_crc.h": "d08cf15ad6e5d8d837e5c532b9665bc9c07a045475ba06c6443eed6b4367aeac",
-      "main/board.h": "ccba73353a40e4d32d4dcc26b08046bccf88866ec93e60229081181065e782b3",
+      "main/board.h": "bd30da9cf045112e3935c0c8905034581e60e4836d74f6fb2a76f5527739beb5",
       "main/diagnostic.c": "df95a818330d5705f3f82fc3d87468f9d1b6ce3eef95644debe05326d593aaa8",
       "main/format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
       "main/format.h": "58b01a597eaa2c70a918ad5ee3b71c9e26fe64aedefc91ffba7d96430510c47b",
@@ -262,20 +262,20 @@
       "application.bin": "0x10000"
     },
     "sha256": {
-      "application.bin": "eda95ef93e7c532b8aa4e8a966168a33bb2ff0d1b6a2b8d69261a1827a218e71",
-      "bootloader.bin": "b4ce14fdd15305779b228901c429e2c47983f91d3fc1ad5568f0682e6a8c9f65",
+      "application.bin": "c92258a2b7a2307ae40b423893b65f6ba260ba8541d80f1094f8762d351bba50",
+      "bootloader.bin": "49460a2f15061982001713e025054e6b33e6ffbe601567e41c2e01ad28144263",
       "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
     },
     "profile": "diagnostic-imu-two",
-    "source_set": "ad7606-2ch-1.10",
+    "source_set": "ad7606-2ch-1.11",
     "entrypoint": "diagnostic.c",
     "source_sha256": {
       "main/CMakeLists.txt": "029e071b32b8fdaa7081c29d188204bf9f64c2fcca5cfe634741f25766f687b9",
-      "main/adc_ad7606.c": "77164ec74b6c574a64885a44e9117409f2edaaaf90a82cb737c3834f4672b5e8",
+      "main/adc_ad7606.c": "d54d117c7948e98d7fe83826dc625949f08876fbfa9eebaf77e198d008c0cdd4",
       "main/adc_ads131m04.c": "914ffa6db82ed58aed9d4f0beb1ae05645ac6fb47097ace88e2be8b6a3c6b6aa",
       "main/ads_crc.c": "31cbb5fd61f5e06c394a426e0fa48d14f3561be4d46fffe6a18e1837edad83cc",
       "main/ads_crc.h": "d08cf15ad6e5d8d837e5c532b9665bc9c07a045475ba06c6443eed6b4367aeac",
-      "main/board.h": "ccba73353a40e4d32d4dcc26b08046bccf88866ec93e60229081181065e782b3",
+      "main/board.h": "bd30da9cf045112e3935c0c8905034581e60e4836d74f6fb2a76f5527739beb5",
       "main/diagnostic.c": "df95a818330d5705f3f82fc3d87468f9d1b6ce3eef95644debe05326d593aaa8",
       "main/format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
       "main/format.h": "58b01a597eaa2c70a918ad5ee3b71c9e26fe64aedefc91ffba7d96430510c47b",
@@ -311,20 +311,20 @@
       "application.bin": "0x10000"
     },
     "sha256": {
-      "application.bin": "ac9448e599994282c3de9984e0872568c6748bdb2f0bc2bafc26964430124998",
-      "bootloader.bin": "b4ce14fdd15305779b228901c429e2c47983f91d3fc1ad5568f0682e6a8c9f65",
+      "application.bin": "d8e4011dadca6265d6566c15bf04e186c38d4a16289c5a27a8c9f4cff108d0ac",
+      "bootloader.bin": "49460a2f15061982001713e025054e6b33e6ffbe601567e41c2e01ad28144263",
       "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
     },
     "profile": "diagnostic-imu-bench-one",
-    "source_set": "ad7606-2ch-1.10",
+    "source_set": "ad7606-2ch-1.11",
     "entrypoint": "diagnostic.c",
     "source_sha256": {
       "main/CMakeLists.txt": "029e071b32b8fdaa7081c29d188204bf9f64c2fcca5cfe634741f25766f687b9",
-      "main/adc_ad7606.c": "77164ec74b6c574a64885a44e9117409f2edaaaf90a82cb737c3834f4672b5e8",
+      "main/adc_ad7606.c": "d54d117c7948e98d7fe83826dc625949f08876fbfa9eebaf77e198d008c0cdd4",
       "main/adc_ads131m04.c": "914ffa6db82ed58aed9d4f0beb1ae05645ac6fb47097ace88e2be8b6a3c6b6aa",
       "main/ads_crc.c": "31cbb5fd61f5e06c394a426e0fa48d14f3561be4d46fffe6a18e1837edad83cc",
       "main/ads_crc.h": "d08cf15ad6e5d8d837e5c532b9665bc9c07a045475ba06c6443eed6b4367aeac",
-      "main/board.h": "ccba73353a40e4d32d4dcc26b08046bccf88866ec93e60229081181065e782b3",
+      "main/board.h": "bd30da9cf045112e3935c0c8905034581e60e4836d74f6fb2a76f5527739beb5",
       "main/diagnostic.c": "df95a818330d5705f3f82fc3d87468f9d1b6ce3eef95644debe05326d593aaa8",
       "main/format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
       "main/format.h": "58b01a597eaa2c70a918ad5ee3b71c9e26fe64aedefc91ffba7d96430510c47b",
@@ -360,20 +360,20 @@
       "application.bin": "0x10000"
     },
     "sha256": {
-      "application.bin": "245989cd6dad052d7e115245e572ae0decc7d8acddc0cd26197b501c286f080f",
-      "bootloader.bin": "b4ce14fdd15305779b228901c429e2c47983f91d3fc1ad5568f0682e6a8c9f65",
+      "application.bin": "2cef832eadaa0a3740eaf264d2ccb726ef8fce9248b625404e41df7aaf61a82f",
+      "bootloader.bin": "49460a2f15061982001713e025054e6b33e6ffbe601567e41c2e01ad28144263",
       "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
     },
     "profile": "diagnostic-imu-bench-two",
-    "source_set": "ad7606-2ch-1.10",
+    "source_set": "ad7606-2ch-1.11",
     "entrypoint": "diagnostic.c",
     "source_sha256": {
       "main/CMakeLists.txt": "029e071b32b8fdaa7081c29d188204bf9f64c2fcca5cfe634741f25766f687b9",
-      "main/adc_ad7606.c": "77164ec74b6c574a64885a44e9117409f2edaaaf90a82cb737c3834f4672b5e8",
+      "main/adc_ad7606.c": "d54d117c7948e98d7fe83826dc625949f08876fbfa9eebaf77e198d008c0cdd4",
       "main/adc_ads131m04.c": "914ffa6db82ed58aed9d4f0beb1ae05645ac6fb47097ace88e2be8b6a3c6b6aa",
       "main/ads_crc.c": "31cbb5fd61f5e06c394a426e0fa48d14f3561be4d46fffe6a18e1837edad83cc",
       "main/ads_crc.h": "d08cf15ad6e5d8d837e5c532b9665bc9c07a045475ba06c6443eed6b4367aeac",
-      "main/board.h": "ccba73353a40e4d32d4dcc26b08046bccf88866ec93e60229081181065e782b3",
+      "main/board.h": "bd30da9cf045112e3935c0c8905034581e60e4836d74f6fb2a76f5527739beb5",
       "main/diagnostic.c": "df95a818330d5705f3f82fc3d87468f9d1b6ce3eef95644debe05326d593aaa8",
       "main/format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
       "main/format.h": "58b01a597eaa2c70a918ad5ee3b71c9e26fe64aedefc91ffba7d96430510c47b",
@@ -409,20 +409,20 @@
       "application.bin": "0x10000"
     },
     "sha256": {
-      "application.bin": "ba2be7eec66754b7fe47cfa58af9773c0385122bdab283220bd17aa85a97d5f1",
-      "bootloader.bin": "b4ce14fdd15305779b228901c429e2c47983f91d3fc1ad5568f0682e6a8c9f65",
+      "application.bin": "0f8df84f51aebe4f06a33d5c4460d74e052071df9f6f4795a06d55904d597136",
+      "bootloader.bin": "49460a2f15061982001713e025054e6b33e6ffbe601567e41c2e01ad28144263",
       "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
     },
     "profile": "record-2ch",
-    "source_set": "ad7606-2ch-1.10",
+    "source_set": "ad7606-2ch-1.11",
     "entrypoint": "main.c",
     "source_sha256": {
       "main/CMakeLists.txt": "029e071b32b8fdaa7081c29d188204bf9f64c2fcca5cfe634741f25766f687b9",
-      "main/adc_ad7606.c": "77164ec74b6c574a64885a44e9117409f2edaaaf90a82cb737c3834f4672b5e8",
+      "main/adc_ad7606.c": "d54d117c7948e98d7fe83826dc625949f08876fbfa9eebaf77e198d008c0cdd4",
       "main/adc_ads131m04.c": "914ffa6db82ed58aed9d4f0beb1ae05645ac6fb47097ace88e2be8b6a3c6b6aa",
       "main/ads_crc.c": "31cbb5fd61f5e06c394a426e0fa48d14f3561be4d46fffe6a18e1837edad83cc",
       "main/ads_crc.h": "d08cf15ad6e5d8d837e5c532b9665bc9c07a045475ba06c6443eed6b4367aeac",
-      "main/board.h": "ccba73353a40e4d32d4dcc26b08046bccf88866ec93e60229081181065e782b3",
+      "main/board.h": "bd30da9cf045112e3935c0c8905034581e60e4836d74f6fb2a76f5527739beb5",
       "main/diagnostic.c": "df95a818330d5705f3f82fc3d87468f9d1b6ce3eef95644debe05326d593aaa8",
       "main/format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
       "main/format.h": "58b01a597eaa2c70a918ad5ee3b71c9e26fe64aedefc91ffba7d96430510c47b",
@@ -439,7 +439,7 @@
       "sdkconfig.defaults": "efa1f6cc8603f5d99512b34847cccd83cac16af42cf8758570f3ed0b1bc01fd2"
     },
     "current_binary_hardware_tested": false,
-    "recording_firmware": "ad7606-2ch-1.10",
+    "recording_firmware": "ad7606-2ch-1.11",
     "current_binary_wokwi_executed": false,
     "execution_note": "Cross-compiled only; not flashed and not executed in Wokwi or QEMU. The preserved instrumented Wokwi image tested source set ad7606-2ch-1.6."
   }

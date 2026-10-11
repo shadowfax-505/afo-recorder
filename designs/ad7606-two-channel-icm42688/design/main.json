@@ -31,7 +31,7 @@
         "19": "ADC_CONVST",
         "20": "ADC_SCK",
         "21": "ADC_MISO",
-        "22": null,
+        "22": "ADC_STBY",
         "23": "USB_PRESENT_N",
         "24": "EXP_SDA",
         "25": "EXP_SCL",
@@ -646,7 +646,7 @@
         "4": "GND",
         "5": "GND",
         "6": "3V3D",
-        "7": "3V3D",
+        "7": "ADC_STBY",
         "8": "GND",
         "9": "ADC_CONVST",
         "10": "ADC_CONVST",
@@ -1846,6 +1846,39 @@
       "mpn": "GRM188R61A105KA61D",
       "section": "Power",
       "names": {}
+    },
+    {
+      "ref": "R70",
+      "value": "100k",
+      "footprint": "Resistor_SMD:R_0603_1608Metric",
+      "pins": {
+        "1": "ADC_STBY",
+        "2": "GND"
+      },
+      "x": 23.62,
+      "y": 27.38,
+      "rotation": 0,
+      "mpn": "RC0603FR-07100KL",
+      "section": "ADC",
+      "names": {}
+    },
+    {
+      "ref": "D30",
+      "value": "BAT760",
+      "footprint": "Diode_SMD:D_SOD-323",
+      "pins": {
+        "1": "5V_ADC",
+        "2": "3V3D"
+      },
+      "x": 38.85,
+      "y": 19.55,
+      "rotation": 90,
+      "mpn": "BAT760,115",
+      "section": "Power",
+      "names": {
+        "1": "K",
+        "2": "A"
+      }
     }
   ],
   "adc_model": "AD7606",
