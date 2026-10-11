@@ -17,11 +17,34 @@
       "application.bin": "0x10000"
     },
     "sha256": {
-      "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
-      "application.bin": "9a0f4e31d6bcd973612dc6d82ed27f4ee552d18b1aee47fb9b4c721973a24a2b",
-      "bootloader.bin": "d66f90e73f0bea316916c3daa19e02de8d6e4aadf231e98959cb5e20d7ba7e8f"
+      "application.bin": "fa2c688e0b9a5fd4b4739bc2b697e233061c0b398987b60345ebb401b75e74c2",
+      "bootloader.bin": "d0cbde0f2485efa7ed4f266da709069a33bfa9a8684eaa8644ac3ce4c4f2d361",
+      "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
     },
-    "profile": "breadboard-record-2ch"
+    "profile": "breadboard-record-2ch",
+    "firmware": "mpu6050-1.2",
+    "source_sha256": {
+      "main/CMakeLists.txt": "0e2c67d98221736b9e01f2d49d1596264d6af338a087a0447b1fa09aa4ef3fab",
+      "main/adc_ad7606.c": "a17495f9e6b02f8956291498fdf866a13232cd8be2cbcc802ae7b19db0cadb5d",
+      "main/adc_ads131m04.c": "914ffa6db82ed58aed9d4f0beb1ae05645ac6fb47097ace88e2be8b6a3c6b6aa",
+      "main/ads_crc.c": "31cbb5fd61f5e06c394a426e0fa48d14f3561be4d46fffe6a18e1837edad83cc",
+      "main/ads_crc.h": "d08cf15ad6e5d8d837e5c532b9665bc9c07a045475ba06c6443eed6b4367aeac",
+      "main/board.h": "6aedad50ce7fd687fc047e00f105a5afb8d1194e231ffe7d41153b2477bf8e55",
+      "main/diagnostic.c": "c799a5539a5e2b41a8cdb1d889c62ec1d524c468eff236b816b94ad7d71156bf",
+      "main/format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
+      "main/format.h": "1f9bb02632241a07c7fd3a048767bf88ef35e70a66948cd12e275594468e2536",
+      "main/main.c": "f552444132b5a0e8341ee9f281892c32f1a3794ff9b16bd76e4277dca19031fe",
+      "main/mpu_timing.h": "4b8763ba8993df4267a2c4d3d942fa1b0908da716435900d1427e70c04e4604d",
+      "main/sensors.c": "c30cdea676e4bf998e235f8deadbb17339813a0fd35e50e04194c392e47debf3",
+      "main/sensors.h": "ef7cdd16559c82d9f7552aeeb14e46400645ce694ec352da3cc8344fbc333dea",
+      "main/variant.h": "8a06bb6358937ea8829753c2ec9c3dd4da858eda82bb012015c3bb8c723d6328",
+      "main/wifi_live.c": "e84da31b9f0c796215bbf855726897c2e7d760d46e566b4f957eb0b3b36c8d45",
+      "main/wifi_live.h": "99d2bea23a26f0271f9f5bb8056ff9ec80d1bfaf1edcd33dcf6551bf7926bf6f",
+      "CMakeLists.txt": "ccdcd61455a4cd61ba17da36add6811ccd35d3f880115a07c709f883ebc2b0c6",
+      "sdkconfig.defaults": "333b5513fd45d3959596dd93da6a9eb721a9182f82c1c6f75aa245ac170f0aad"
+    },
+    "idf_version": "v5.4.2",
+    "build_note": "Rebuilt 2026-10-11 after the shared PSRAM-queue, per-device Wi-Fi password and metadata-limit fixes. Cross-compiled only; not flashed or simulated."
   },
   {
     "package": "ad7606-expandable-mpu6050",
@@ -41,11 +64,34 @@
       "application.bin": "0x10000"
     },
     "sha256": {
-      "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
-      "application.bin": "597b71babc758cc28957b7a8cd51b0d4bd325c10176754ba57aca7072edebad7",
-      "bootloader.bin": "d66f90e73f0bea316916c3daa19e02de8d6e4aadf231e98959cb5e20d7ba7e8f"
+      "application.bin": "85d874f59c75a27589e95f34a4b08d4c422ad6f8c14df52a28f785a6a5b4477e",
+      "bootloader.bin": "d0cbde0f2485efa7ed4f266da709069a33bfa9a8684eaa8644ac3ce4c4f2d361",
+      "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
     },
-    "profile": "breadboard-record-4ch"
+    "profile": "breadboard-record-4ch",
+    "firmware": "mpu6050-1.2",
+    "source_sha256": {
+      "main/CMakeLists.txt": "0e2c67d98221736b9e01f2d49d1596264d6af338a087a0447b1fa09aa4ef3fab",
+      "main/adc_ad7606.c": "a17495f9e6b02f8956291498fdf866a13232cd8be2cbcc802ae7b19db0cadb5d",
+      "main/adc_ads131m04.c": "914ffa6db82ed58aed9d4f0beb1ae05645ac6fb47097ace88e2be8b6a3c6b6aa",
+      "main/ads_crc.c": "31cbb5fd61f5e06c394a426e0fa48d14f3561be4d46fffe6a18e1837edad83cc",
+      "main/ads_crc.h": "d08cf15ad6e5d8d837e5c532b9665bc9c07a045475ba06c6443eed6b4367aeac",
+      "main/board.h": "6aedad50ce7fd687fc047e00f105a5afb8d1194e231ffe7d41153b2477bf8e55",
+      "main/diagnostic.c": "c799a5539a5e2b41a8cdb1d889c62ec1d524c468eff236b816b94ad7d71156bf",
+      "main/format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
+      "main/format.h": "1f9bb02632241a07c7fd3a048767bf88ef35e70a66948cd12e275594468e2536",
+      "main/main.c": "f552444132b5a0e8341ee9f281892c32f1a3794ff9b16bd76e4277dca19031fe",
+      "main/mpu_timing.h": "4b8763ba8993df4267a2c4d3d942fa1b0908da716435900d1427e70c04e4604d",
+      "main/sensors.c": "c30cdea676e4bf998e235f8deadbb17339813a0fd35e50e04194c392e47debf3",
+      "main/sensors.h": "ef7cdd16559c82d9f7552aeeb14e46400645ce694ec352da3cc8344fbc333dea",
+      "main/variant.h": "8a06bb6358937ea8829753c2ec9c3dd4da858eda82bb012015c3bb8c723d6328",
+      "main/wifi_live.c": "e84da31b9f0c796215bbf855726897c2e7d760d46e566b4f957eb0b3b36c8d45",
+      "main/wifi_live.h": "99d2bea23a26f0271f9f5bb8056ff9ec80d1bfaf1edcd33dcf6551bf7926bf6f",
+      "CMakeLists.txt": "ccdcd61455a4cd61ba17da36add6811ccd35d3f880115a07c709f883ebc2b0c6",
+      "sdkconfig.defaults": "333b5513fd45d3959596dd93da6a9eb721a9182f82c1c6f75aa245ac170f0aad"
+    },
+    "idf_version": "v5.4.2",
+    "build_note": "Rebuilt 2026-10-11 after the shared PSRAM-queue, per-device Wi-Fi password and metadata-limit fixes. Cross-compiled only; not flashed or simulated."
   },
   {
     "package": "ad7606-expandable-mpu6050",
@@ -65,11 +111,34 @@
       "application.bin": "0x10000"
     },
     "sha256": {
-      "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
-      "application.bin": "5f783231a348f68a4be27472985d8784e8a091943680bd4e52b836ceea908742",
-      "bootloader.bin": "d66f90e73f0bea316916c3daa19e02de8d6e4aadf231e98959cb5e20d7ba7e8f"
+      "application.bin": "2b44a11afe845e98b6d920b0420acc9f9c63cff4e7315b67e00c9f7369999cf4",
+      "bootloader.bin": "d0cbde0f2485efa7ed4f266da709069a33bfa9a8684eaa8644ac3ce4c4f2d361",
+      "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
     },
-    "profile": "breadboard-sd-only-2ch"
+    "profile": "breadboard-sd-only-2ch",
+    "firmware": "mpu6050-1.2",
+    "source_sha256": {
+      "main/CMakeLists.txt": "0e2c67d98221736b9e01f2d49d1596264d6af338a087a0447b1fa09aa4ef3fab",
+      "main/adc_ad7606.c": "a17495f9e6b02f8956291498fdf866a13232cd8be2cbcc802ae7b19db0cadb5d",
+      "main/adc_ads131m04.c": "914ffa6db82ed58aed9d4f0beb1ae05645ac6fb47097ace88e2be8b6a3c6b6aa",
+      "main/ads_crc.c": "31cbb5fd61f5e06c394a426e0fa48d14f3561be4d46fffe6a18e1837edad83cc",
+      "main/ads_crc.h": "d08cf15ad6e5d8d837e5c532b9665bc9c07a045475ba06c6443eed6b4367aeac",
+      "main/board.h": "6aedad50ce7fd687fc047e00f105a5afb8d1194e231ffe7d41153b2477bf8e55",
+      "main/diagnostic.c": "c799a5539a5e2b41a8cdb1d889c62ec1d524c468eff236b816b94ad7d71156bf",
+      "main/format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
+      "main/format.h": "1f9bb02632241a07c7fd3a048767bf88ef35e70a66948cd12e275594468e2536",
+      "main/main.c": "f552444132b5a0e8341ee9f281892c32f1a3794ff9b16bd76e4277dca19031fe",
+      "main/mpu_timing.h": "4b8763ba8993df4267a2c4d3d942fa1b0908da716435900d1427e70c04e4604d",
+      "main/sensors.c": "c30cdea676e4bf998e235f8deadbb17339813a0fd35e50e04194c392e47debf3",
+      "main/sensors.h": "ef7cdd16559c82d9f7552aeeb14e46400645ce694ec352da3cc8344fbc333dea",
+      "main/variant.h": "8a06bb6358937ea8829753c2ec9c3dd4da858eda82bb012015c3bb8c723d6328",
+      "main/wifi_live.c": "e84da31b9f0c796215bbf855726897c2e7d760d46e566b4f957eb0b3b36c8d45",
+      "main/wifi_live.h": "99d2bea23a26f0271f9f5bb8056ff9ec80d1bfaf1edcd33dcf6551bf7926bf6f",
+      "CMakeLists.txt": "ccdcd61455a4cd61ba17da36add6811ccd35d3f880115a07c709f883ebc2b0c6",
+      "sdkconfig.defaults": "333b5513fd45d3959596dd93da6a9eb721a9182f82c1c6f75aa245ac170f0aad"
+    },
+    "idf_version": "v5.4.2",
+    "build_note": "Rebuilt 2026-10-11 after the shared PSRAM-queue, per-device Wi-Fi password and metadata-limit fixes. Cross-compiled only; not flashed or simulated."
   },
   {
     "package": "afo-ad7606-mpu6050",
@@ -86,11 +155,34 @@
       "application.bin": "0x10000"
     },
     "sha256": {
-      "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
-      "application.bin": "a41cd69f91d55a1122d58378a0279984bf4a0e3ae894c29c5a51ae9893aa714b",
-      "bootloader.bin": "82181cbacf350640aeba0fee8d010efdcd911aaad08339888fe30219edbeb0c2"
+      "application.bin": "df5904bcee5a8f4934a45235e88ea60ddf6e223fd331d2db28589674347285e2",
+      "bootloader.bin": "d0cbde0f2485efa7ed4f266da709069a33bfa9a8684eaa8644ac3ce4c4f2d361",
+      "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
     },
-    "profile": "diagnostic-adc-2ch"
+    "profile": "diagnostic-adc-2ch",
+    "firmware": null,
+    "source_sha256": {
+      "main/CMakeLists.txt": "0e2c67d98221736b9e01f2d49d1596264d6af338a087a0447b1fa09aa4ef3fab",
+      "main/adc_ad7606.c": "a17495f9e6b02f8956291498fdf866a13232cd8be2cbcc802ae7b19db0cadb5d",
+      "main/adc_ads131m04.c": "914ffa6db82ed58aed9d4f0beb1ae05645ac6fb47097ace88e2be8b6a3c6b6aa",
+      "main/ads_crc.c": "31cbb5fd61f5e06c394a426e0fa48d14f3561be4d46fffe6a18e1837edad83cc",
+      "main/ads_crc.h": "d08cf15ad6e5d8d837e5c532b9665bc9c07a045475ba06c6443eed6b4367aeac",
+      "main/board.h": "6aedad50ce7fd687fc047e00f105a5afb8d1194e231ffe7d41153b2477bf8e55",
+      "main/diagnostic.c": "c799a5539a5e2b41a8cdb1d889c62ec1d524c468eff236b816b94ad7d71156bf",
+      "main/format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
+      "main/format.h": "1f9bb02632241a07c7fd3a048767bf88ef35e70a66948cd12e275594468e2536",
+      "main/main.c": "f552444132b5a0e8341ee9f281892c32f1a3794ff9b16bd76e4277dca19031fe",
+      "main/mpu_timing.h": "4b8763ba8993df4267a2c4d3d942fa1b0908da716435900d1427e70c04e4604d",
+      "main/sensors.c": "c30cdea676e4bf998e235f8deadbb17339813a0fd35e50e04194c392e47debf3",
+      "main/sensors.h": "ef7cdd16559c82d9f7552aeeb14e46400645ce694ec352da3cc8344fbc333dea",
+      "main/variant.h": "8a06bb6358937ea8829753c2ec9c3dd4da858eda82bb012015c3bb8c723d6328",
+      "main/wifi_live.c": "e84da31b9f0c796215bbf855726897c2e7d760d46e566b4f957eb0b3b36c8d45",
+      "main/wifi_live.h": "99d2bea23a26f0271f9f5bb8056ff9ec80d1bfaf1edcd33dcf6551bf7926bf6f",
+      "CMakeLists.txt": "ccdcd61455a4cd61ba17da36add6811ccd35d3f880115a07c709f883ebc2b0c6",
+      "sdkconfig.defaults": "333b5513fd45d3959596dd93da6a9eb721a9182f82c1c6f75aa245ac170f0aad"
+    },
+    "idf_version": "v5.4.2",
+    "build_note": "Rebuilt 2026-10-11 after the shared PSRAM-queue, per-device Wi-Fi password and metadata-limit fixes. Cross-compiled only; not flashed or simulated."
   },
   {
     "package": "afo-ad7606-mpu6050",
@@ -107,11 +199,34 @@
       "application.bin": "0x10000"
     },
     "sha256": {
-      "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
-      "application.bin": "642abf1e68fadb2a9e3f4f23449f21dd543a1ce531e19bdaf64f8e10cd5b65e2",
-      "bootloader.bin": "82181cbacf350640aeba0fee8d010efdcd911aaad08339888fe30219edbeb0c2"
+      "application.bin": "160885b49066fb4e9be69abfc806973b1e281fbfbe1599ed5baa37462985fe26",
+      "bootloader.bin": "d0cbde0f2485efa7ed4f266da709069a33bfa9a8684eaa8644ac3ce4c4f2d361",
+      "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
     },
-    "profile": "diagnostic-adc-4ch"
+    "profile": "diagnostic-adc-4ch",
+    "firmware": null,
+    "source_sha256": {
+      "main/CMakeLists.txt": "0e2c67d98221736b9e01f2d49d1596264d6af338a087a0447b1fa09aa4ef3fab",
+      "main/adc_ad7606.c": "a17495f9e6b02f8956291498fdf866a13232cd8be2cbcc802ae7b19db0cadb5d",
+      "main/adc_ads131m04.c": "914ffa6db82ed58aed9d4f0beb1ae05645ac6fb47097ace88e2be8b6a3c6b6aa",
+      "main/ads_crc.c": "31cbb5fd61f5e06c394a426e0fa48d14f3561be4d46fffe6a18e1837edad83cc",
+      "main/ads_crc.h": "d08cf15ad6e5d8d837e5c532b9665bc9c07a045475ba06c6443eed6b4367aeac",
+      "main/board.h": "6aedad50ce7fd687fc047e00f105a5afb8d1194e231ffe7d41153b2477bf8e55",
+      "main/diagnostic.c": "c799a5539a5e2b41a8cdb1d889c62ec1d524c468eff236b816b94ad7d71156bf",
+      "main/format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
+      "main/format.h": "1f9bb02632241a07c7fd3a048767bf88ef35e70a66948cd12e275594468e2536",
+      "main/main.c": "f552444132b5a0e8341ee9f281892c32f1a3794ff9b16bd76e4277dca19031fe",
+      "main/mpu_timing.h": "4b8763ba8993df4267a2c4d3d942fa1b0908da716435900d1427e70c04e4604d",
+      "main/sensors.c": "c30cdea676e4bf998e235f8deadbb17339813a0fd35e50e04194c392e47debf3",
+      "main/sensors.h": "ef7cdd16559c82d9f7552aeeb14e46400645ce694ec352da3cc8344fbc333dea",
+      "main/variant.h": "8a06bb6358937ea8829753c2ec9c3dd4da858eda82bb012015c3bb8c723d6328",
+      "main/wifi_live.c": "e84da31b9f0c796215bbf855726897c2e7d760d46e566b4f957eb0b3b36c8d45",
+      "main/wifi_live.h": "99d2bea23a26f0271f9f5bb8056ff9ec80d1bfaf1edcd33dcf6551bf7926bf6f",
+      "CMakeLists.txt": "ccdcd61455a4cd61ba17da36add6811ccd35d3f880115a07c709f883ebc2b0c6",
+      "sdkconfig.defaults": "333b5513fd45d3959596dd93da6a9eb721a9182f82c1c6f75aa245ac170f0aad"
+    },
+    "idf_version": "v5.4.2",
+    "build_note": "Rebuilt 2026-10-11 after the shared PSRAM-queue, per-device Wi-Fi password and metadata-limit fixes. Cross-compiled only; not flashed or simulated."
   },
   {
     "package": "afo-ad7606-mpu6050",
@@ -128,11 +243,34 @@
       "application.bin": "0x10000"
     },
     "sha256": {
-      "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
-      "application.bin": "f83a669678d37f545e2bdcb061832df4fd663f16f63d0e3220aef28a22f87ca1",
-      "bootloader.bin": "82181cbacf350640aeba0fee8d010efdcd911aaad08339888fe30219edbeb0c2"
+      "application.bin": "8a2b296637a90ddb8ed29c65f64c7c8ecbb0f033cec964e3a4e761dd7e8fc6f9",
+      "bootloader.bin": "d0cbde0f2485efa7ed4f266da709069a33bfa9a8684eaa8644ac3ce4c4f2d361",
+      "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
     },
-    "profile": "diagnostic-controller"
+    "profile": "diagnostic-controller",
+    "firmware": null,
+    "source_sha256": {
+      "main/CMakeLists.txt": "0e2c67d98221736b9e01f2d49d1596264d6af338a087a0447b1fa09aa4ef3fab",
+      "main/adc_ad7606.c": "a17495f9e6b02f8956291498fdf866a13232cd8be2cbcc802ae7b19db0cadb5d",
+      "main/adc_ads131m04.c": "914ffa6db82ed58aed9d4f0beb1ae05645ac6fb47097ace88e2be8b6a3c6b6aa",
+      "main/ads_crc.c": "31cbb5fd61f5e06c394a426e0fa48d14f3561be4d46fffe6a18e1837edad83cc",
+      "main/ads_crc.h": "d08cf15ad6e5d8d837e5c532b9665bc9c07a045475ba06c6443eed6b4367aeac",
+      "main/board.h": "6aedad50ce7fd687fc047e00f105a5afb8d1194e231ffe7d41153b2477bf8e55",
+      "main/diagnostic.c": "c799a5539a5e2b41a8cdb1d889c62ec1d524c468eff236b816b94ad7d71156bf",
+      "main/format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
+      "main/format.h": "1f9bb02632241a07c7fd3a048767bf88ef35e70a66948cd12e275594468e2536",
+      "main/main.c": "f552444132b5a0e8341ee9f281892c32f1a3794ff9b16bd76e4277dca19031fe",
+      "main/mpu_timing.h": "4b8763ba8993df4267a2c4d3d942fa1b0908da716435900d1427e70c04e4604d",
+      "main/sensors.c": "c30cdea676e4bf998e235f8deadbb17339813a0fd35e50e04194c392e47debf3",
+      "main/sensors.h": "ef7cdd16559c82d9f7552aeeb14e46400645ce694ec352da3cc8344fbc333dea",
+      "main/variant.h": "8a06bb6358937ea8829753c2ec9c3dd4da858eda82bb012015c3bb8c723d6328",
+      "main/wifi_live.c": "e84da31b9f0c796215bbf855726897c2e7d760d46e566b4f957eb0b3b36c8d45",
+      "main/wifi_live.h": "99d2bea23a26f0271f9f5bb8056ff9ec80d1bfaf1edcd33dcf6551bf7926bf6f",
+      "CMakeLists.txt": "ccdcd61455a4cd61ba17da36add6811ccd35d3f880115a07c709f883ebc2b0c6",
+      "sdkconfig.defaults": "333b5513fd45d3959596dd93da6a9eb721a9182f82c1c6f75aa245ac170f0aad"
+    },
+    "idf_version": "v5.4.2",
+    "build_note": "Rebuilt 2026-10-11 after the shared PSRAM-queue, per-device Wi-Fi password and metadata-limit fixes. Cross-compiled only; not flashed or simulated."
   },
   {
     "package": "afo-ad7606-mpu6050",
@@ -149,11 +287,34 @@
       "application.bin": "0x10000"
     },
     "sha256": {
-      "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
-      "application.bin": "647686da68193018309dd58ed14c6b8d0daacc7026175800b5287e7eb5748d6a",
-      "bootloader.bin": "82181cbacf350640aeba0fee8d010efdcd911aaad08339888fe30219edbeb0c2"
+      "application.bin": "fdc235f285e5dd25658da0cb36b8defb7084bb07979e1b221cbb158d16ea32f8",
+      "bootloader.bin": "d0cbde0f2485efa7ed4f266da709069a33bfa9a8684eaa8644ac3ce4c4f2d361",
+      "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
     },
-    "profile": "diagnostic-imu-one"
+    "profile": "diagnostic-imu-one",
+    "firmware": null,
+    "source_sha256": {
+      "main/CMakeLists.txt": "0e2c67d98221736b9e01f2d49d1596264d6af338a087a0447b1fa09aa4ef3fab",
+      "main/adc_ad7606.c": "a17495f9e6b02f8956291498fdf866a13232cd8be2cbcc802ae7b19db0cadb5d",
+      "main/adc_ads131m04.c": "914ffa6db82ed58aed9d4f0beb1ae05645ac6fb47097ace88e2be8b6a3c6b6aa",
+      "main/ads_crc.c": "31cbb5fd61f5e06c394a426e0fa48d14f3561be4d46fffe6a18e1837edad83cc",
+      "main/ads_crc.h": "d08cf15ad6e5d8d837e5c532b9665bc9c07a045475ba06c6443eed6b4367aeac",
+      "main/board.h": "6aedad50ce7fd687fc047e00f105a5afb8d1194e231ffe7d41153b2477bf8e55",
+      "main/diagnostic.c": "c799a5539a5e2b41a8cdb1d889c62ec1d524c468eff236b816b94ad7d71156bf",
+      "main/format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
+      "main/format.h": "1f9bb02632241a07c7fd3a048767bf88ef35e70a66948cd12e275594468e2536",
+      "main/main.c": "f552444132b5a0e8341ee9f281892c32f1a3794ff9b16bd76e4277dca19031fe",
+      "main/mpu_timing.h": "4b8763ba8993df4267a2c4d3d942fa1b0908da716435900d1427e70c04e4604d",
+      "main/sensors.c": "c30cdea676e4bf998e235f8deadbb17339813a0fd35e50e04194c392e47debf3",
+      "main/sensors.h": "ef7cdd16559c82d9f7552aeeb14e46400645ce694ec352da3cc8344fbc333dea",
+      "main/variant.h": "8a06bb6358937ea8829753c2ec9c3dd4da858eda82bb012015c3bb8c723d6328",
+      "main/wifi_live.c": "e84da31b9f0c796215bbf855726897c2e7d760d46e566b4f957eb0b3b36c8d45",
+      "main/wifi_live.h": "99d2bea23a26f0271f9f5bb8056ff9ec80d1bfaf1edcd33dcf6551bf7926bf6f",
+      "CMakeLists.txt": "ccdcd61455a4cd61ba17da36add6811ccd35d3f880115a07c709f883ebc2b0c6",
+      "sdkconfig.defaults": "333b5513fd45d3959596dd93da6a9eb721a9182f82c1c6f75aa245ac170f0aad"
+    },
+    "idf_version": "v5.4.2",
+    "build_note": "Rebuilt 2026-10-11 after the shared PSRAM-queue, per-device Wi-Fi password and metadata-limit fixes. Cross-compiled only; not flashed or simulated."
   },
   {
     "package": "afo-ad7606-mpu6050",
@@ -170,11 +331,34 @@
       "application.bin": "0x10000"
     },
     "sha256": {
-      "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
-      "application.bin": "03323b5b2bbbf973d319277265d709a166712176c10e41dcb04bf5229a9acd76",
-      "bootloader.bin": "82181cbacf350640aeba0fee8d010efdcd911aaad08339888fe30219edbeb0c2"
+      "application.bin": "9f24183a5b5807f9e1d00c1034cd02bd0caebd7d76115f2691ebe6caf274f3de",
+      "bootloader.bin": "d0cbde0f2485efa7ed4f266da709069a33bfa9a8684eaa8644ac3ce4c4f2d361",
+      "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
     },
-    "profile": "diagnostic-imu-two"
+    "profile": "diagnostic-imu-two",
+    "firmware": null,
+    "source_sha256": {
+      "main/CMakeLists.txt": "0e2c67d98221736b9e01f2d49d1596264d6af338a087a0447b1fa09aa4ef3fab",
+      "main/adc_ad7606.c": "a17495f9e6b02f8956291498fdf866a13232cd8be2cbcc802ae7b19db0cadb5d",
+      "main/adc_ads131m04.c": "914ffa6db82ed58aed9d4f0beb1ae05645ac6fb47097ace88e2be8b6a3c6b6aa",
+      "main/ads_crc.c": "31cbb5fd61f5e06c394a426e0fa48d14f3561be4d46fffe6a18e1837edad83cc",
+      "main/ads_crc.h": "d08cf15ad6e5d8d837e5c532b9665bc9c07a045475ba06c6443eed6b4367aeac",
+      "main/board.h": "6aedad50ce7fd687fc047e00f105a5afb8d1194e231ffe7d41153b2477bf8e55",
+      "main/diagnostic.c": "c799a5539a5e2b41a8cdb1d889c62ec1d524c468eff236b816b94ad7d71156bf",
+      "main/format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
+      "main/format.h": "1f9bb02632241a07c7fd3a048767bf88ef35e70a66948cd12e275594468e2536",
+      "main/main.c": "f552444132b5a0e8341ee9f281892c32f1a3794ff9b16bd76e4277dca19031fe",
+      "main/mpu_timing.h": "4b8763ba8993df4267a2c4d3d942fa1b0908da716435900d1427e70c04e4604d",
+      "main/sensors.c": "c30cdea676e4bf998e235f8deadbb17339813a0fd35e50e04194c392e47debf3",
+      "main/sensors.h": "ef7cdd16559c82d9f7552aeeb14e46400645ce694ec352da3cc8344fbc333dea",
+      "main/variant.h": "8a06bb6358937ea8829753c2ec9c3dd4da858eda82bb012015c3bb8c723d6328",
+      "main/wifi_live.c": "e84da31b9f0c796215bbf855726897c2e7d760d46e566b4f957eb0b3b36c8d45",
+      "main/wifi_live.h": "99d2bea23a26f0271f9f5bb8056ff9ec80d1bfaf1edcd33dcf6551bf7926bf6f",
+      "CMakeLists.txt": "ccdcd61455a4cd61ba17da36add6811ccd35d3f880115a07c709f883ebc2b0c6",
+      "sdkconfig.defaults": "333b5513fd45d3959596dd93da6a9eb721a9182f82c1c6f75aa245ac170f0aad"
+    },
+    "idf_version": "v5.4.2",
+    "build_note": "Rebuilt 2026-10-11 after the shared PSRAM-queue, per-device Wi-Fi password and metadata-limit fixes. Cross-compiled only; not flashed or simulated."
   },
   {
     "package": "ad7606-expandable-mpu6050",
@@ -194,11 +378,34 @@
       "application.bin": "0x10000"
     },
     "sha256": {
-      "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
-      "application.bin": "9fb405b2d02278bb59cd2a1227e2040ba0f725203b9f4ff94bcb2a0c332f6330",
-      "bootloader.bin": "d66f90e73f0bea316916c3daa19e02de8d6e4aadf231e98959cb5e20d7ba7e8f"
+      "application.bin": "4cb87679a24996f8a14684494cd6f532c07f2f28f9257f68ece03a68ade5955e",
+      "bootloader.bin": "d0cbde0f2485efa7ed4f266da709069a33bfa9a8684eaa8644ac3ce4c4f2d361",
+      "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
     },
-    "profile": "record-2ch"
+    "profile": "record-2ch",
+    "firmware": "mpu6050-1.2",
+    "source_sha256": {
+      "main/CMakeLists.txt": "0e2c67d98221736b9e01f2d49d1596264d6af338a087a0447b1fa09aa4ef3fab",
+      "main/adc_ad7606.c": "a17495f9e6b02f8956291498fdf866a13232cd8be2cbcc802ae7b19db0cadb5d",
+      "main/adc_ads131m04.c": "914ffa6db82ed58aed9d4f0beb1ae05645ac6fb47097ace88e2be8b6a3c6b6aa",
+      "main/ads_crc.c": "31cbb5fd61f5e06c394a426e0fa48d14f3561be4d46fffe6a18e1837edad83cc",
+      "main/ads_crc.h": "d08cf15ad6e5d8d837e5c532b9665bc9c07a045475ba06c6443eed6b4367aeac",
+      "main/board.h": "6aedad50ce7fd687fc047e00f105a5afb8d1194e231ffe7d41153b2477bf8e55",
+      "main/diagnostic.c": "c799a5539a5e2b41a8cdb1d889c62ec1d524c468eff236b816b94ad7d71156bf",
+      "main/format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
+      "main/format.h": "1f9bb02632241a07c7fd3a048767bf88ef35e70a66948cd12e275594468e2536",
+      "main/main.c": "f552444132b5a0e8341ee9f281892c32f1a3794ff9b16bd76e4277dca19031fe",
+      "main/mpu_timing.h": "4b8763ba8993df4267a2c4d3d942fa1b0908da716435900d1427e70c04e4604d",
+      "main/sensors.c": "c30cdea676e4bf998e235f8deadbb17339813a0fd35e50e04194c392e47debf3",
+      "main/sensors.h": "ef7cdd16559c82d9f7552aeeb14e46400645ce694ec352da3cc8344fbc333dea",
+      "main/variant.h": "8a06bb6358937ea8829753c2ec9c3dd4da858eda82bb012015c3bb8c723d6328",
+      "main/wifi_live.c": "e84da31b9f0c796215bbf855726897c2e7d760d46e566b4f957eb0b3b36c8d45",
+      "main/wifi_live.h": "99d2bea23a26f0271f9f5bb8056ff9ec80d1bfaf1edcd33dcf6551bf7926bf6f",
+      "CMakeLists.txt": "ccdcd61455a4cd61ba17da36add6811ccd35d3f880115a07c709f883ebc2b0c6",
+      "sdkconfig.defaults": "333b5513fd45d3959596dd93da6a9eb721a9182f82c1c6f75aa245ac170f0aad"
+    },
+    "idf_version": "v5.4.2",
+    "build_note": "Rebuilt 2026-10-11 after the shared PSRAM-queue, per-device Wi-Fi password and metadata-limit fixes. Cross-compiled only; not flashed or simulated."
   },
   {
     "package": "ad7606-expandable-mpu6050",
@@ -218,10 +425,33 @@
       "application.bin": "0x10000"
     },
     "sha256": {
-      "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
-      "application.bin": "e31d2f3c46518e5360516a9d447a9268af7800b00bdfa26e47b4c0ffcb8189d3",
-      "bootloader.bin": "d66f90e73f0bea316916c3daa19e02de8d6e4aadf231e98959cb5e20d7ba7e8f"
+      "application.bin": "0c30eaf90d9142ecd5d9937a67e60619683bbfa9775bafe487d3f4e18dfe552a",
+      "bootloader.bin": "d0cbde0f2485efa7ed4f266da709069a33bfa9a8684eaa8644ac3ce4c4f2d361",
+      "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
     },
-    "profile": "record-4ch"
+    "profile": "record-4ch",
+    "firmware": "mpu6050-1.2",
+    "source_sha256": {
+      "main/CMakeLists.txt": "0e2c67d98221736b9e01f2d49d1596264d6af338a087a0447b1fa09aa4ef3fab",
+      "main/adc_ad7606.c": "a17495f9e6b02f8956291498fdf866a13232cd8be2cbcc802ae7b19db0cadb5d",
+      "main/adc_ads131m04.c": "914ffa6db82ed58aed9d4f0beb1ae05645ac6fb47097ace88e2be8b6a3c6b6aa",
+      "main/ads_crc.c": "31cbb5fd61f5e06c394a426e0fa48d14f3561be4d46fffe6a18e1837edad83cc",
+      "main/ads_crc.h": "d08cf15ad6e5d8d837e5c532b9665bc9c07a045475ba06c6443eed6b4367aeac",
+      "main/board.h": "6aedad50ce7fd687fc047e00f105a5afb8d1194e231ffe7d41153b2477bf8e55",
+      "main/diagnostic.c": "c799a5539a5e2b41a8cdb1d889c62ec1d524c468eff236b816b94ad7d71156bf",
+      "main/format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
+      "main/format.h": "1f9bb02632241a07c7fd3a048767bf88ef35e70a66948cd12e275594468e2536",
+      "main/main.c": "f552444132b5a0e8341ee9f281892c32f1a3794ff9b16bd76e4277dca19031fe",
+      "main/mpu_timing.h": "4b8763ba8993df4267a2c4d3d942fa1b0908da716435900d1427e70c04e4604d",
+      "main/sensors.c": "c30cdea676e4bf998e235f8deadbb17339813a0fd35e50e04194c392e47debf3",
+      "main/sensors.h": "ef7cdd16559c82d9f7552aeeb14e46400645ce694ec352da3cc8344fbc333dea",
+      "main/variant.h": "8a06bb6358937ea8829753c2ec9c3dd4da858eda82bb012015c3bb8c723d6328",
+      "main/wifi_live.c": "e84da31b9f0c796215bbf855726897c2e7d760d46e566b4f957eb0b3b36c8d45",
+      "main/wifi_live.h": "99d2bea23a26f0271f9f5bb8056ff9ec80d1bfaf1edcd33dcf6551bf7926bf6f",
+      "CMakeLists.txt": "ccdcd61455a4cd61ba17da36add6811ccd35d3f880115a07c709f883ebc2b0c6",
+      "sdkconfig.defaults": "333b5513fd45d3959596dd93da6a9eb721a9182f82c1c6f75aa245ac170f0aad"
+    },
+    "idf_version": "v5.4.2",
+    "build_note": "Rebuilt 2026-10-11 after the shared PSRAM-queue, per-device Wi-Fi password and metadata-limit fixes. Cross-compiled only; not flashed or simulated."
   }
 ]

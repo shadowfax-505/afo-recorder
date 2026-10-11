@@ -18,7 +18,7 @@ endif()
 idf_component_register(SRCS "ads_crc.c" "adc_ads131m04.c" "adc_ad7606.c" ${AFO_ENTRY} "sensors.c" "format.c" "wifi_live.c"
     INCLUDE_DIRS "."
     REQUIRES esp_driver_gpio esp_driver_spi esp_driver_gptimer esp_driver_sdmmc
-             esp_timer esp_adc fatfs sdmmc esp_wifi esp_netif esp_event nvs_flash lwip)
+             esp_timer esp_adc fatfs sdmmc esp_wifi esp_netif esp_event nvs_flash lwip bootloader_support)
 
 if(NOT DEFINED EMG_CHANNEL_COUNT)
   set(EMG_CHANNEL_COUNT 2)

@@ -1,5 +1,12 @@
 # Changelog
 
+## Shared fixes for the other five designs — 11 October 2026
+
+- Applied to `ad7606-expandable-icm42688`, `ad7606-expandable-mpu6050`, `ad7606-two-channel-mpu6050`, `ads131m04-expandable-icm42688` and `ads131m04-expandable-mpu6050`: PSRAM record queue of 20,480 records (about 2.44 s), no compiled Wi-Fi password (per-device password generated on first boot, stored in NVS, printed on the USB console), and a live-metadata limit with a host test that compiles the real metadata for every profile.
+- MPU-6050 packages: their session metadata (about 1,360–1,430 bytes) exceeded the previous 1,280-byte limit, so the published firmware disabled the Wi-Fi preview on every recording. The limit is now 1,800 bytes (the metadata datagram is IP-fragmented).
+- ICM-42688 packages: FIFO timestamp ticks are converted as 32/30 µs; their converter now honours `imu_timestamp_tick_us` and reports an `imu_clock` screen.
+- Firmware identities `dual-1.2` and `mpu6050-1.2`; all 47 profiles rebuilt and cross-compiled only. These packages keep the earlier recorder generation and lack the later fixed-two lifecycle and BUSY-confirmation corrections.
+
 ## IMU timestamp scale, two-channel AD7606 / ICM firmware 1.8 — 11 October 2026
 
 - Convert ICM-42688 FIFO timestamp ticks as 32/30 µs instead of 1 µs. TDK's ICM-426xx driver states the ICM-42688 PLL runs at 19.2 MHz rather than 20.48 MHz; treating ticks as 1 µs compressed IMU host-time estimates by 6.25% (about 62 ms per second after anchoring). Stage 6 measures the scale; one constant in `imu_timing.h` changes it.

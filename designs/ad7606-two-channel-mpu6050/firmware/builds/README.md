@@ -1,3 +1,5 @@
 # Firmware profiles
 
 Use the matching ADC package and channel count. `record-*` targets the compact PCB; `breadboard-record-*` records SD and Wi-Fi using the bench hardware identity; `breadboard-sd-only-2ch` disables Wi-Fi. Bench wiring must reproduce USB detection and battery sensing before recorder use. Breadboard recorder builds now use GPIO47 for SD CMD; PCB builds retain GPIO38. See docs/sd-card-wiring.md. `diagnostic-imu-one` and `diagnostic-imu-two` require only power, controller and IMU wiring. Diagnostics never attach electrodes and do not mount SD or start Wi-Fi. Flash offsets and hashes are in each manifest. Physical operation remains untested.
+
+Profiles were rebuilt on 11 October 2026 from firmware `mpu6050-1.2`; each manifest lists the source hashes. Recording profiles hold no Wi-Fi password: read the per-device password from the USB console at first boot. Not flashed or simulated.

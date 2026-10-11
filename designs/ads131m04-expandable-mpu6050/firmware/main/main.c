@@ -22,6 +22,8 @@
 #include "freertos/task.h"
 #include "freertos/queue.h"
 #include "freertos/event_groups.h"
+#include "freertos/idf_additions.h"
+#include "esp_heap_caps.h"
 
 static const char *TAG="afo";
 enum { STOP_NORMAL=0, STOP_STORAGE=1, STOP_QUEUE=2, STOP_SENSOR=3,
@@ -194,7 +196,7 @@ static void record_session(void) {
     char meta[2048];
     snprintf(meta,sizeof(meta),
       "{" AFO_ADC_METADATA AFO_SD_METADATA
-      "\"firmware\":\"mpu6050-1.1\",\"hardware_variant\":\"" HARDWARE_VARIANT "\","
+      "\"firmware\":\"mpu6050-1.2\",\"hardware_variant\":\"" HARDWARE_VARIANT "\","
       "\"synthetic\":false,\"trial_id\":\"%s\",\"clock\":\"esp_timer_boot_us\","
       "\"emg_hz\":8000,\"imu_hz\":200,\"imu_enabled\":true,"
       "\"active_channel_count\":%d,\"emg_channels\":%s,"
@@ -285,7 +287,13 @@ void app_main(void) {
     gpio_config_t drdy={.pin_bit_mask=1ULL<<ADC_DRDY,.mode=GPIO_MODE_INPUT,.intr_type=GPIO_INTR_NEGEDGE};
     ESP_ERROR_CHECK(gpio_config(&drdy));ESP_ERROR_CHECK(gpio_isr_handler_add(ADC_DRDY,adc_irq,NULL));
     gpio_intr_disable(ADC_DRDY);
-    queue=xQueueCreate(RECORD_QUEUE_LENGTH,sizeof(afo_record_t));done=xEventGroupCreate();
+    // Wi-Fi credentials first: first-boot password generation briefly uses the
+    // SAR-ADC entropy source, which must finish before the battery ADC starts.
+    esp_err_t credential_result=wifi_live_prepare_credentials();
+    if(credential_result!=ESP_OK)ESP_LOGW(TAG,"Wi-Fi credentials unavailable (%s)",esp_err_to_name(credential_result));
+    // The record queue is used only by tasks, never by an ISR, so it can live
+    // in PSRAM. Its size absorbs SD write-busy periods.
+    queue=xQueueCreateWithCaps(RECORD_QUEUE_LENGTH,sizeof(afo_record_t),MALLOC_CAP_SPIRAM);done=xEventGroupCreate();
     if(!queue||!done||sensors_init()!=ESP_OK||battery_init()!=ESP_OK)goto failed;
     sdmmc_host_t host=SDMMC_HOST_DEFAULT();host.max_freq_khz=SDMMC_FREQ_DEFAULT;
     sdmmc_slot_config_t slot=SDMMC_SLOT_CONFIG_DEFAULT();

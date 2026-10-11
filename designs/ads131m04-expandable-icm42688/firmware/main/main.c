@@ -10,6 +10,7 @@
 #include "format.h"
 #include "sensors.h"
 #include "wifi_live.h"
+#include "imu_tick.h"
 #include "driver/gpio.h"
 
 #include "driver/sdmmc_host.h"
@@ -21,6 +22,8 @@
 #include "freertos/task.h"
 #include "freertos/queue.h"
 #include "freertos/event_groups.h"
+#include "freertos/idf_additions.h"
+#include "esp_heap_caps.h"
 
 static const char *TAG="afo";
 enum { STOP_NORMAL=0, STOP_STORAGE=1, STOP_QUEUE=2, STOP_SENSOR=3,
@@ -126,10 +129,12 @@ static void imu_task(void *arg) {
                 imu_payload_t out;memcpy(out.fifo_packet,p,16);
                 out.read_start_us=t0;out.read_end_us=t1;out.irq_anchor_us=anchor;
                 uint8_t flags=FLAG_TIMING_UNCERTAIN;
-                if(after!=before||anchor<lag[k]) flags|=FLAG_GAP;
+                // lag[] counts sensor ticks back from the newest packet; convert to us.
+                uint64_t lag_us=imu_ticks_to_us(lag[k]);
+                if(after!=before||anchor<lag_us) flags|=FLAG_GAP;
                 for(unsigned j=1;j<13;j+=2)
                     if(p[j]==0x80&&p[j+1]==0) flags|=FLAG_INVALID;
-                uint64_t estimate=anchor>=lag[k]?anchor-lag[k]:0;
+                uint64_t estimate=anchor>=lag_us?anchor-lag_us:0;
                 afo_record_t r;afo_record_init(&r,id?REC_SHANK:REC_FOOT,flags,
                     ++seq[id],estimate,&out,sizeof(out));
                 if(id)shank_records++;else foot_records++;
@@ -201,12 +206,12 @@ static void record_session(void) {
     char meta[2048];
     snprintf(meta,sizeof(meta),
       "{" AFO_ADC_METADATA AFO_SD_METADATA
-      "\"firmware\":\"dual-1.1\",\"hardware_variant\":\"" HARDWARE_VARIANT "\","
+      "\"firmware\":\"dual-1.2\",\"hardware_variant\":\"" HARDWARE_VARIANT "\","
       "\"synthetic\":false,\"trial_id\":\"%s\",\"clock\":\"esp_timer_boot_us\","
       "\"emg_hz\":8000,\"imu_hz\":200,\"imu_enabled\":true,"
       "\"active_channel_count\":%d,\"emg_channels\":%s,"
       "\"calibration_state\":\"uncalibrated\",\"simultaneous\":true,"
-      "\"accel_range_g\":16,\"gyro_range_dps\":2000,\"imu_timestamp_tick_us\":1,"
+      "\"accel_range_g\":16,\"gyro_range_dps\":2000,\"imu_timestamp_tick_us\":" IMU_TICK_US_JSON ","
       "\"imu_timing_calibrated\":false,\"imu_locations\":[\"foot\",\"shank\"],"
       "\"placement_verified\":false,\"record_bytes\":64,\"usb_recording_inhibit\":true,"
       "\"analog_filter\":\"3.3k/47nF buffer; equal 6.65k RAW/VMID mixer and 47nF buffer; 100R per ADC leg and 1nF differential\","
@@ -292,7 +297,13 @@ void app_main(void) {
     gpio_config_t drdy={.pin_bit_mask=1ULL<<ADC_DRDY,.mode=GPIO_MODE_INPUT,.intr_type=GPIO_INTR_NEGEDGE};
     ESP_ERROR_CHECK(gpio_config(&drdy));ESP_ERROR_CHECK(gpio_isr_handler_add(ADC_DRDY,adc_irq,NULL));
     gpio_intr_disable(ADC_DRDY);
-    queue=xQueueCreate(RECORD_QUEUE_LENGTH,sizeof(afo_record_t));done=xEventGroupCreate();
+    // Wi-Fi credentials first: first-boot password generation briefly uses the
+    // SAR-ADC entropy source, which must finish before the battery ADC starts.
+    esp_err_t credential_result=wifi_live_prepare_credentials();
+    if(credential_result!=ESP_OK)ESP_LOGW(TAG,"Wi-Fi credentials unavailable (%s)",esp_err_to_name(credential_result));
+    // The record queue is used only by tasks, never by an ISR, so it can live
+    // in PSRAM. Its size absorbs SD write-busy periods.
+    queue=xQueueCreateWithCaps(RECORD_QUEUE_LENGTH,sizeof(afo_record_t),MALLOC_CAP_SPIRAM);done=xEventGroupCreate();
     if(!queue||!done||sensors_init()!=ESP_OK||battery_init()!=ESP_OK)goto failed;
     sdmmc_host_t host=SDMMC_HOST_DEFAULT();host.max_freq_khz=SDMMC_FREQ_DEFAULT;
     sdmmc_slot_config_t slot=SDMMC_SLOT_CONFIG_DEFAULT();

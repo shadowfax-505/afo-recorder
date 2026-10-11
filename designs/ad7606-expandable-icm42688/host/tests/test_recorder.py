@@ -71,6 +71,38 @@ class RecorderTests(unittest.TestCase):
         import csv
         with (self.root/'export'/'foot.csv').open() as f:rows=list(csv.DictReader(f))
         self.assertEqual(int(rows[-1]['sensor_time_unwrapped_us']),200000)
+    def test_imu_clock_screen_nominal(self):
+        source=self.root/'long.afolog';generate(source,11)
+        clock=convert(source,self.root/'long',make_plots=False)['imu_clock']
+        for name in ('foot','shank'):
+            self.assertEqual(clock[name]['median_tick_step'],5000)
+            self.assertAlmostEqual(clock[name]['host_us_per_sensor_tick'],1.0,places=6)
+            self.assertTrue(clock[name]['within_1_percent'])
+    def test_imu_clock_screen_reports_wrong_tick_scale(self):
+        # Sensor ticks 6.7% longer than 1 us: still inside the +/-20% anomaly
+        # window, so only the clock screen reveals it.
+        source=self.root/'scaled.afolog';generate(source,11,imu_tick_step=4688)
+        report=convert(source,self.root/'scaled',make_plots=False)
+        self.assertEqual(report['anomalies']['imu_timestamp_anomalies'],0)
+        clock=report['imu_clock']['foot']
+        self.assertEqual(clock['median_tick_step'],4688)
+        self.assertAlmostEqual(clock['host_us_per_sensor_tick'],5000/4688,places=4)
+        self.assertFalse(clock['within_1_percent'])
+    def test_imu_clock_screen_icm42688_tick(self):
+        # ICM-42688 "1 us" ticks last 32/30 us: about 4687.5 ticks per 5 ms sample.
+        source=self.root/'icm.afolog';generate(source,11,imu_tick_step=4687.5,imu_tick_us=32/30)
+        report=convert(source,self.root/'icm',make_plots=False)
+        self.assertEqual(report['anomalies']['imu_timestamp_anomalies'],0)
+        clock=report['imu_clock']['foot']
+        self.assertIn(clock['median_tick_step'],(4687,4687.5,4688));self.assertAlmostEqual(clock['expected_tick_step'],4687.5)
+        self.assertAlmostEqual(clock['host_us_per_sensor_tick'],32/30,places=5)
+        self.assertLess(abs(clock['sensor_tick_error_ppm']),50);self.assertTrue(clock['within_1_percent'])
+        import csv
+        with (self.root/'icm'/'foot.csv').open() as f:rows=list(csv.DictReader(f))
+        self.assertAlmostEqual(int(rows[-1]['sensor_time_unwrapped_us'])-int(rows[0]['sensor_time_unwrapped_us']),(len(rows)-1)*5000,delta=2)
+    def test_imu_clock_screen_needs_span(self):
+        clock=self.run_export()['imu_clock']['foot']
+        self.assertIsNone(clock['host_us_per_sensor_tick']);self.assertIsNotNone(clock['fit_note'])
     def test_no_overwrite(self):
         self.run_export()
         with self.assertRaises(ValueError):self.run_export()
