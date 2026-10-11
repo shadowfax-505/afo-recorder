@@ -2,7 +2,7 @@
   "scope": "Extracted AD7606 fixed-two ICM breadboard kit",
   "hardware_measured": false,
   "physical_measurements_completed": 0,
-  "archive_sha256": "f89acc7f23254fd7972080c13770be7f8998b1ca83372f255658aaaf7da20214",
+  "archive_sha256": "5788b0fc4485fac2d79c9f2ec62514da06882c98fd1bad75d285a39d283e7461",
   "csv_test_environment": {
     "python": "3.14.7",
     "matplotlib_installed": false
@@ -138,7 +138,7 @@
     },
     "signals.svg": {
       "bytes": 82472,
-      "sha256": "c9f27851f0493592d7a96ec167781d5970247f2a75040f2158fe545687915b6b"
+      "sha256": "f60d7bae809e8f3bd9f7fe523d8c2499217e84f62f2268133ab872ec2b969865"
     }
   },
   "tampered_recording_rejected": true,
@@ -167,7 +167,8 @@
     "stage6_text_current": true,
     "clock_tolerance_text_current": true,
     "archive_sha256": "f89acc7f23254fd7972080c13770be7f8998b1ca83372f255658aaaf7da20214",
-    "link_count_note": "Unique same-origin href/src targets parsed from the listed pages (fetched with no-store), plus all runtime requests while loading the viewer pages; counted differently from the earlier 89-link figure."
+    "link_count_note": "Unique same-origin href/src targets parsed from the listed pages (fetched with no-store), plus all runtime requests while loading the viewer pages; counted differently from the earlier 89-link figure.",
+    "note": "Browser checks were recorded on archive f89acc7f; this archive changes only the text of docs/circuit-audit and docs/integrated-verification (AD7606 datasheet cross-check, prepared 1.10 simulation rerun). Not repeated in a browser."
   },
   "previous_archive_checks": {
     "note": "Recorded for the firmware 1.6 archive (a6cc76b9...); not repeated for later archives.",
@@ -199,6 +200,31 @@
       "physical_measurements_completed": 0,
       "packaged_intake_suite_executed": true,
       "required_measurement_ids_enforced": true
+    },
+    "documentation_checks_f89acc7f": {
+      "browser": "Claude desktop built-in browser",
+      "server": "python3 -m http.server on 127.0.0.1, extracted archive",
+      "pages": [
+        "viewer/build.html?stage=6",
+        "viewer/index.html?stage=10",
+        "development/index.html",
+        "development/06/README.html",
+        "docs/lab-quickstart.html",
+        "docs/laptop-setup.html",
+        "docs/download-checks.html",
+        "docs/firmware-build-guide.html",
+        "docs/breadboard-refinements.html"
+      ],
+      "local_links_checked": 58,
+      "failed_links": 0,
+      "console_errors": 0,
+      "failed_asset_requests": 0,
+      "external_requests": 0,
+      "scope": "Local asset closure and page loading; geometry and wire bends remain illustrative; no physical hardware.",
+      "stage6_text_current": true,
+      "clock_tolerance_text_current": true,
+      "archive_sha256": "f89acc7f23254fd7972080c13770be7f8998b1ca83372f255658aaaf7da20214",
+      "link_count_note": "Unique same-origin href/src targets parsed from the listed pages (fetched with no-store), plus all runtime requests while loading the viewer pages; counted differently from the earlier 89-link figure."
     }
   }
 }

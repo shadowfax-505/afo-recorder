@@ -50,7 +50,8 @@ def emg_timing(rows):
             "pass": not errors, "errors": sorted(set(errors))}
 
 
-def imu_timing(rows):
+def imu_timing(rows, tick_num=1, tick_den=1):
+    """tick_num/tick_den is the recorded microseconds per sensor tick (32/30 from firmware 1.8)."""
     errors = []
     times = [int(r["host_time_estimate_us"]) for r in rows]
     raw = [int(r["sensor_timestamp_raw"]) for r in rows]
@@ -62,14 +63,18 @@ def imu_timing(rows):
         if int(r["read_end_us"]) < int(r["read_start_us"]): errors.append("FIFO read window regresses")
         if t > int(r["read_end_us"]): errors.append("sample estimate is later than the FIFO read completion in this fixed-clock model")
         if not int(r["flags"]) & 2: errors.append("uncalibrated reconstructed timestamp lacks uncertainty flag")
-    for d, dt, current in zip(deltas, estimate_deltas, rows[1:]):
+    elapsed = 0
+    for d, t, current in zip(deltas, times[1:], rows[1:]):
         if d == 0 or d > 10000: errors.append("sensor interval duplicates or exceeds configured helper limit")
-        if d != dt: errors.append("host estimate does not follow the raw modulo-16-bit counter delta")
+        elapsed += d
+        # Firmware converts total elapsed ticks from its first anchor in one step.
+        if t != times[0] + elapsed * tick_num // tick_den:
+            errors.append("host estimate does not follow the raw modulo-16-bit counter delta")
         if d > 7500 and not int(current["flags"]) & 1: errors.append("missing sensor interval lacks GAP flag")
     observed_rate = rate(times)
     if observed_rate is not None and not 198 <= observed_rate <= 202:
         errors.append("capture mean sensor-counter rate differs from modeled 200 Hz by more than 1 percent")
-    return {"samples": len(rows), "first_estimate_us": times[0] if times else None,
+    return {"samples": len(rows), "tick_us": f"{tick_num}/{tick_den}", "first_estimate_us": times[0] if times else None,
             "last_estimate_us": times[-1] if times else None,
             "sensor_counter_rate_hz": observed_rate, "raw_counter_delta_us": distribution(deltas),
             "estimate_to_read_end_us": distribution(read_delay), "irq_anchor_age_at_read_us": distribution(anchor_age),
@@ -79,22 +84,37 @@ def imu_timing(rows):
             "pass": not errors, "errors": sorted(set(errors))}
 
 
+def capture_metadata(folder):
+    """Tick scale and live-metadata limit recorded by the firmware that produced this capture."""
+    raw = folder / "recorder-output.raw"
+    head = raw.read_bytes()[:4096] if raw.exists() else b""
+    firmware = re.search(rb'"firmware":"([^"]*)"', head)
+    firmware = firmware[1].decode() if firmware else None
+    # 1.7 raised the Wi-Fi metadata limit to 1400 bytes; 1.8 recorded 32/30 us ticks.
+    old = firmware is None or re.fullmatch(r"ad7606-2ch-1\.[0-6]", firmware) is not None
+    tick = re.search(rb'"imu_timestamp_tick_us":([0-9.]+)', head)
+    num, den = ((32, 30) if tick and abs(float(tick[1]) - 32 / 30) < 1e-6 else (1, 1))
+    return firmware, num, den, 1280 if old else 1400
+
+
 def audit_capture(folder):
     result = {"case": folder.name, "scope": "post-processing of existing saved capture", "streams": {}, "sha256": {}}
+    firmware, num, den, capacity = capture_metadata(folder)
+    result["firmware"] = firmware
     for name in ("emg", "foot", "shank"):
         path = folder / "converted" / (name + ".csv")
         if not path.exists(): continue
         result["sha256"][str(path.relative_to(folder))] = hashlib.sha256(path.read_bytes()).hexdigest()
         with path.open() as file: rows = list(csv.DictReader(file))
-        result["streams"][name] = emg_timing(rows) if name == "emg" else imu_timing(rows)
+        result["streams"][name] = emg_timing(rows) if name == "emg" else imu_timing(rows, num, den)
     raw = folder / "recorder-output.raw"
     if raw.exists():
         content = raw.read_bytes()
         result["sha256"][raw.name] = hashlib.sha256(content).hexdigest()
         length = struct.unpack_from("<I", content, 12)[0]
         result["production_metadata_bytes"] = length
-        result["wifi_metadata_capacity_bytes"] = 1280
-        result["wifi_metadata_remaining_bytes"] = 1280 - length
+        result["wifi_metadata_capacity_bytes"] = capacity
+        result["wifi_metadata_remaining_bytes"] = capacity - length
     foot, shank = result["streams"].get("foot"), result["streams"].get("shank")
     if foot and shank and foot["samples"] and shank["samples"]:
         offset = shank["first_estimate_us"] - foot["first_estimate_us"]

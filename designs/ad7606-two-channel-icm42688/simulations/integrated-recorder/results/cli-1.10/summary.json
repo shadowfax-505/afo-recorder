@@ -1,0 +1,20 @@
+{
+  "engine": "Wokwi ESP32-S3 with real ESP-IDF FreeRTOS, FatFS and lwIP",
+  "hardware_measured": false,
+  "physical_acceptance_pass": false,
+  "substitutions": [
+    "SDMMC replaced by sparse PSRAM disk",
+    "Battery/controls replaced by fixture values",
+    "Laptop radio link replaced by MCU UDP loopback subscriber"
+  ],
+  "cases_passed": 0,
+  "cases": [
+    {
+      "case": "normal",
+      "pass": null,
+      "exit_code": 1,
+      "status": "not_run_quota",
+      "error": "Wokwi monthly CI quota exhausted"
+    }
+  ]
+}

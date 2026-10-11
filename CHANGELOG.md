@@ -1,5 +1,11 @@
 # Changelog
 
+## AD7606 datasheet cross-check and 1.10 simulation image — 11 October 2026
+
+- Checked the fixed two-channel design against ADI's AD7606 data sheet Rev. G (supplied by the project lead; local reference only): conversion time (4.2 µs max confirmed), CONVST/BUSY/RESET timing, serial-mode edges and clock limit, Table 8 interface straps, oversampling/range/standby/reference straps, unused inputs and decoupling. All pass; see the circuit audit.
+- Open design item: AVCC is generated from 3V3D, so VDRIVE rises before AVCC. That conflicts with the absolute-maximum VDRIVE ≤ AVCC + 0.3 V and with ADI AN-1091's slow-ramp procedure. The proposed PCB change (STBY on GPIO14 with a pull-down, plus a Schottky diode from 3V3D to 5V_ADC) waits for the project lead's decision. No PCB file changed.
+- The integrated Wokwi image was rebuilt from the 1.10 sources. The ICM model now emits 32/30 µs timestamp ticks, and the timing audit reads each capture's own tick scale. The CLI run was refused on the Free-plan monthly CI quota and is recorded as not run; the v1.6 results remain the latest executed matrix.
+
 ## Website and packages refreshed, release v0.1.6 — 11 October 2026
 
 - The documentation page, project and validation status pages and README now describe firmware 1.10: the official-datasheet ICM-42688-P cross-check, the register-level sensor model, the IMU-only bench builds and `host_time_fitted_us`, and the other five designs at `dual-1.3` / `mpu6050-1.3`.

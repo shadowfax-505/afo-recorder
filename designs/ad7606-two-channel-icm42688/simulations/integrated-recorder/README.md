@@ -8,6 +8,8 @@ Read [the integrated report](../../docs/integrated-verification.html) before int
 
 The current image is **v1.6**, including BUSY-high confirmation and the startup stack-allocation correction. **All eighteen current cases pass through the supported Wokwi web editor**, with complete file/UDP exports and actual host checks. [Current ledger](results/web-current/summary.json) · [web reproduction files](web/README.md). Current byte/capture timing checks do not establish a downloaded VCD; no current waveform retrieval is claimed. The preserved CLI quota refusal and v1.5 partial outcomes remain unchanged. Twelve independent native model groups separately pass under sanitizers. Physical acceptance remains unperformed.
 
+**1.10 image (11 October 2026):** `firmware/` now holds a simulation image rebuilt from the 1.10 sources, including `metadata.c`. The ICM model emits 32/30 µs FIFO timestamp ticks. `audit_timing.py` takes each capture's tick scale and Wi-Fi metadata limit from that capture's own metadata. The first CLI run was refused on the Free-plan monthly CI quota (`results/cli-1.10/normal`), so this image has not yet been executed. The web-editor procedure in `web/` does not use CI quota.
+
 ## Reproduce
 
 Activate ESP-IDF v5.4.2 with the ESP32-S3 toolchain, then run:
