@@ -14,7 +14,7 @@ class FirmwareLimitTests(unittest.TestCase):
         start=text.index('snprintf(meta,sizeof(meta),')
         end=text.index(');',text.index('EMG_CHANNEL_COUNT==2?',start))
         args=text[start+len('snprintf(meta,sizeof(meta),'):end].replace("strrchr(path,'/')+1",'"trial_deadbeef.afolog"')
-        extra='#include "imu_tick.h"\n' if (MAIN/'imu_tick.h').exists() else ''
+        extra='#include "imu_timing.h"\n' if (MAIN/'imu_timing.h').exists() else ''
         with tempfile.TemporaryDirectory() as temp:
             source=Path(temp)/'probe.c';binary=Path(temp)/'probe'
             source.write_text('#include <stdio.h>\n#include <string.h>\n#include "board.h"\n'+extra+

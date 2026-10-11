@@ -1,5 +1,12 @@
 # Changelog
 
+## Fixed-two recorder corrections ported to the other five designs — 11 October 2026
+
+- Worker lifecycle (suspend, then join and delete by the recorder), fault latching that stops acquisition, both IMU stops attempted, data synced before END and the wireless stop verdict sent after final sync/close, 2 ms Wi-Fi batching, first-interrupt grace for IMUs, acquisition interrupts allocated on core 1, and windowed diagnostics.
+- AD7606 designs: BUSY confirmation after every CONVST and an 80 µs BUSY-fall deadline (`adc_ad7606.c` from the fixed-two design). ADS131M04 designs keep their DRDY interrupt.
+- ICM-42688 designs: continuous IMU clock (`imu_timing.h`, 32/30 µs ticks). MPU-6050 designs keep their nominal-period estimator with the same lifecycle fixes.
+- Firmware `dual-1.3` and `mpu6050-1.3`; the fixed-two 19-case native recorder harness passes for every design, channel count and board (342 runs, ASan/UBSan). All 47 profiles rebuilt and cross-compiled only.
+
 ## Shared fixes for the other five designs — 11 October 2026
 
 - Applied to `ad7606-expandable-icm42688`, `ad7606-expandable-mpu6050`, `ad7606-two-channel-mpu6050`, `ads131m04-expandable-icm42688` and `ads131m04-expandable-mpu6050`: PSRAM record queue of 20,480 records (about 2.44 s), no compiled Wi-Fi password (per-device password generated on first boot, stored in NVS, printed on the USB console), and a live-metadata limit with a host test that compiles the real metadata for every profile.
