@@ -2,7 +2,7 @@
   "scope": "Extracted AD7606 fixed-two ICM breadboard kit",
   "hardware_measured": false,
   "physical_measurements_completed": 0,
-  "archive_sha256": "1b7276572a7f833f90349fc1bb016f33ad944eef6f185a148de180e30ce39ce2",
+  "archive_sha256": "fd217961da72452af91decb7320372873243533fd6144c3e1a0b131c96515c8e",
   "csv_test_environment": {
     "python": "3.14.7",
     "matplotlib_installed": false
@@ -134,7 +134,7 @@
     },
     "signals.svg": {
       "bytes": 82472,
-      "sha256": "4ef91e3ccde26982933feeaa50a0240ffc6b716ab8f22ff111d15b07ff6a1a34"
+      "sha256": "95b00e7c73e41ba858abbd64aae2069a141d0d6f4483f73f85c62999e5e6fe81"
     }
   },
   "tampered_recording_rejected": true,
@@ -158,7 +158,9 @@
     "failed_asset_requests": 0,
     "external_requests": 0,
     "scope": "Local asset closure and page loading; geometry and wire bends remain illustrative; no physical hardware.",
-    "stage6_text_current": true
+    "stage6_text_current": true,
+    "archive_sha256": "1b7276572a7f833f90349fc1bb016f33ad944eef6f185a148de180e30ce39ce2",
+    "note": "Browser checks ran on the archive named here; the current archive differs only in development/research-planning text."
   },
   "previous_archive_checks": {
     "note": "Recorded for the firmware 1.6 archive (a6cc76b9...); not repeated for later archives.",
