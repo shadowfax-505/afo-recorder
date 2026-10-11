@@ -1,4 +1,5 @@
 PASS SPI mode primed during RESET before any measured conversion
+PASS STBY released from full shutdown; RESET follows after the 30 ms wake-up time
 PASS no read before conversion
 PASS 128-clock read, signed order, disabled channels and trigger timestamp
 PASS ordinary BUSY assertion is confirmed; complete conversion precedes the 16us serial read

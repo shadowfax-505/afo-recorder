@@ -29,7 +29,7 @@ for part in spec['parts']:
   if pads.get(k)!={net}:result['errors'].append(['actual PCB pad',*k,net,sorted(pads.get(k,[]))])
 result['checks']['direct_schematic_and_pcb_pins']=count
 # Independently transcribed ESP32-S3-WROOM-1 pad/GPIO map; compiler handles profile #if.
-module={4:4,5:5,6:6,7:7,8:15,9:16,10:17,11:18,12:8,17:9,18:10,19:11,20:12,21:13,23:21,31:38,32:39,33:40,34:41,35:42,38:2,39:1}
+module={4:4,5:5,6:6,7:7,8:15,9:16,10:17,11:18,12:8,17:9,18:10,19:11,20:12,21:13,22:14,23:21,31:38,32:39,33:40,34:41,35:42,38:2,39:1}
 expected={'ADC_CS':10,'ADC_CONVST':11,'ADC_RESET':9,'ADC_DRDY':8,'ADC_SCK':12,'ADC_MISO':13,'IMU_MOSI':4,'IMU_MISO':5,'IMU_SCK':6,'FOOT_CS':7,'SHANK_CS':15,'FOOT_INT':16,'SHANK_INT':17,'SD_CLK':39,'SD_D0':40,'USB_PRESENT_PIN':21,'BUTTON_PIN':18,'LED_RECORD':41,'LED_ERROR':42,'LED_BATTERY':2,'BATTERY_PIN':1}
 alias={'SD_CLK':'SD_CLK_MCU','USB_PRESENT_PIN':'USB_PRESENT_N','BUTTON_PIN':'BUTTON','LED_RECORD':'LED_REC','LED_ERROR':'LED_ERR','LED_BATTERY':'LED_LOW','BATTERY_PIN':'BAT_SENSE'}
 for profile in ['pcb','breadboard']:
@@ -37,6 +37,9 @@ for profile in ['pcb','breadboard']:
  r=subprocess.run(['cc','-E','-dM','-x','c',*flags,str(P/'firmware/main/board.h')],capture_output=True,text=True);r.check_returncode()
  macros=dict(re.findall(r'^#define\s+(\w+)\s+(\d+)\b',r.stdout,re.M))
  values=dict(expected,SD_CMD=47 if profile=='breadboard' else 38)
+ # AD7606 STBY is driven only on the PCB (AN-1091 sequence); the breadboard module keeps its own tie.
+ if profile=='pcb':values['ADC_STBY']=14
+ elif 'ADC_STBY' in macros and macros['ADC_STBY']!='-1':result['errors'].append(['firmware GPIO','breadboard','ADC_STBY',macros['ADC_STBY'],-1])
  for name,gpio in values.items():
   if int(macros.get(name,-1))!=gpio:result['errors'].append(['firmware GPIO',profile,name,macros.get(name),gpio])
   if profile=='pcb':

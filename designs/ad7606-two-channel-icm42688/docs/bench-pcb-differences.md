@@ -8,6 +8,7 @@ The laboratory assembly and recorder PCB share ADC family, signal-conditioning t
 | Digital power | Selected Pololu regulator | TPS63070 and its PCB switching loop; bench success does not validate that loop |
 | Analog rail | TPS7A2030 on soldered adapter with local capacitors | Same regulator on PCB; repeat ripple, stability and load checks |
 | AD7606 5 V | Pololu 5 V regulator/module supply | TPS60150 charge pump; independently verify current capability, ripple and startup |
+| AD7606 start-up | Module STBY tie (verified high); separate 5 V and 3.3 V regulators | STBY on GPIO14 with 100 kΩ pull-down and BAT760 clamp from 3V3D to 5V_ADC; firmware releases STBY, waits 30 ms, then resets (ADI AN-1091). Record 3V3D, 5V_ADC and STBY at power-up |
 | Reverse polarity | Protected battery with verified source polarity | PCB reverse-polarity MOSFET; separately verify correct and reversed-input behavior with limited energy |
 | Analog amplifiers | MCP6002 DIP packages | MCP6004/MCP6001 same family in SMD packages; layout, offsets, parasitics and noise differ |
 | ADC | Qualified RBD-3184 AD7606 module | Bare AD7606 plus local reference/decoupling; verify power, filter and timing after assembly |

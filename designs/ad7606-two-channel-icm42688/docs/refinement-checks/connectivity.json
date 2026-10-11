@@ -7,8 +7,8 @@
     "drc": {
       "violations": 0
     },
-    "direct_schematic_and_pcb_pins": 390,
-    "pcb_firmware_gpio_count": 22,
+    "direct_schematic_and_pcb_pins": 395,
+    "pcb_firmware_gpio_count": 23,
     "breadboard_firmware_gpio_count": 22
   },
   "errors": [],

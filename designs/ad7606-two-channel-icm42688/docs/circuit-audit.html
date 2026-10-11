@@ -84,7 +84,7 @@
 </tr>
 <tr>
 <td>Firmware</td>
-<td>All nine v1.10 laboratory profiles (including two IMU-only bench diagnostics) recompiled with ESP-IDF v5.4.2 (32/30 µs IMU ticks, PSRAM record queue, per-device Wi-Fi password, IMU timestamp-scale checks); none rerun in Wokwi</td>
+<td>All nine v1.11 laboratory profiles (including two IMU-only bench diagnostics) recompiled with ESP-IDF v5.4.2 (32/30 µs IMU ticks, PSRAM record queue, per-device Wi-Fi password, IMU timestamp-scale checks, AN-1091 STBY sequence on the PCB); three web cases rerun on the 1.11 image, the rest pending</td>
 </tr>
 <tr>
 <td>ngspice</td>
@@ -152,7 +152,7 @@
 <p>The BAV199 orientation is ground → junction → 3V0A, with the junction at the first filter node. A diode drop can exceed an amplifier's permitted input overdrive; these clamps and the series resistor do not make the MyoWare connector tolerant of arbitrary ±5 V or ±10 V signals. Keep tests within the intended 0–3 V source domain. Validate overload/current behavior before claiming protection performance.</p>
 <p>Original AD7606 ±5 V coding gives 152.588 µV/code. A 0–3 V sensor uses only about 30% of the total bipolar code range; “16-bit” describes the word, not 16 effective bits at the muscle sensor. Reference, gain, bias, ADC offset and analog noise require calibration. Synthetic waveforms do not establish physiological performance.</p>
 <h2>ADC protocol and board differences</h2>
-<p>On the custom PCB: AVCC is 5V_ADC; VDRIVE is 3V3D. PAR/SER and STBY are high; RANGE and OS0–OS2 are low. CVA and CVB share GPIO11. GPIO8 monitors BUSY; GPIO9 resets. SPI2 uses GPIO12 SCLK, GPIO13 DOUTA and GPIO10 CS at 8 MHz, idle-high/falling-edge sampling (mode 2). A 1 µs CONVST pulse exceeds the specified 25 ns minimum. Eight words require 128 clocks (16 µs); maximum listed conversion time with oversampling off is 4.2 µs. This fits a 125 µs period arithmetically, but does not prove ESP32 task latency under SD/Wi-Fi load.</p>
+<p>On the custom PCB: AVCC is 5V_ADC; VDRIVE is 3V3D. PAR/SER is high; STBY is driven by GPIO14 with a 100 kΩ pull-down (see the supply-ramp section below); RANGE and OS0–OS2 are low. CVA and CVB share GPIO11. GPIO8 monitors BUSY; GPIO9 resets. SPI2 uses GPIO12 SCLK, GPIO13 DOUTA and GPIO10 CS at 8 MHz, idle-high/falling-edge sampling (mode 2). A 1 µs CONVST pulse exceeds the specified 25 ns minimum. Eight words require 128 clocks (16 µs); maximum listed conversion time with oversampling off is 4.2 µs. This fits a 125 µs period arithmetically, but does not prove ESP32 task latency under SD/Wi-Fi load.</p>
 <p>The AD7606 has no identification/configuration register readback and no sensor-frame CRC. File/container CRC protects transport/storage bytes only. Wrong range, mode or wiring can produce plausible data: apply two different known voltages and verify both codes, ground and polarity before recording sensors. A late conversion or unread previous result stops the driver instead of assigning a new timestamp to old data. In the current recording build, the conversion timer timestamps and wakes the ADC task directly; the task waits for BUSY to clear with an 80 µs deadline. This avoids the delayed falling-BUSY interrupt wake-up exposed by integrated execution. BUSY remains connected and monitored; ADC diagnostic windows use their own interrupt path.</p>
 <p>The received HW-AD7606-F4/RBD-3184 module's labelled header is documented, but a photograph cannot prove its serial strap, VIO routing, reference choice or component substitutions. Verify the module electrically. The single-chip PCB does not reproduce undocumented breakout-board internals. See <a href="bench-pcb-differences.md">bench/PCB differences</a> and <a href="module-qualification.md">module qualification</a>.</p>
 <h2>Power, reference and controls</h2>
@@ -282,16 +282,45 @@
 </tbody>
 </table>
 <p><strong>Series resistor without a matching VxGND resistor (Fig. 36).</strong> The data sheet notes an offset when only Vx has series resistance. The input current (2.5 µA at 5 V, Fig. 31, so about 1.5 µA at 3 V) through R104/R114 (100 Ω) gives at most about 0.25 mV, under 2 LSB. That is well inside the bipolar-zero error (±12 LSB max at ±5 V), and the stage-3 two-point DC calibration removes it. No change is needed.</p>
-<p><strong>Open design item: supply ramp order (needs a decision before the PCB order).</strong> AVCC (5V_ADC) is made from 3V3D by the TPS60150 charge pump. Its enable is tied to its input, its output is disconnected while it is off, and it soft-starts in about 150 µs (TI data sheet). So at every power-up VDRIVE (3V3D) is present before AVCC. This conflicts with two ADI statements:</p>
+<p><strong>Supply ramp order: implemented on 12 October 2026 (PCB and firmware 1.11).</strong> AVCC (5V_ADC) is made from 3V3D by the TPS60150 charge pump. Its enable is tied to its input, its output is disconnected while it is off, and it soft-starts in about 150 µs (TI data sheet). So VDRIVE (3V3D) is always present before AVCC. Table 4 limits VDRIVE to AVCC + 0.3 V, and ADI application note <strong>AN-1091</strong> covers delayed AVCC/VDRIVE ramps: hold STBY and RANGE low until both supplies are up, then raise STBY, wait tWAKE-UP SHUTDOWN (30 ms with the internal reference) and apply RESET. The project lead approved the following change:</p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Change</th>
+<th>Check</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>STBY control</td>
+<td>AD7606 pin 7 moved from 3V3D to new net ADC_STBY, driven by ESP32 GPIO14 (module pad 22, not a strapping pin). R70 (100 kΩ, 0603) pulls it low, so with RANGE low the ADC stays in full shutdown until the firmware releases it</td>
+<td>Schematic, netlist and every PCB pad agree (connection audit: 395 pins, PCB GPIO map 23 entries)</td>
+</tr>
+<tr>
+<td>Ramp clamp</td>
+<td>D30, a BAT760 Schottky (SOD-323), from 3V3D (anode) to 5V_ADC (cathode). It pre-charges AVCC while 3V3D rises and is reverse-biased once the pump reaches 5 V</td>
+<td>BAT760 VF max 270 mV at 10 mA and 350 mV at 100 mA; reverse leakage 5 µA typ at 5 V (Nexperia data sheet)</td>
+</tr>
+<tr>
+<td>Firmware 1.11</td>
+<td>PCB builds drive STBY high once per boot, wait 30 ms, then pulse RESET. Breadboard builds do not touch GPIO14</td>
+<td>Native driver test: STBY rises at least 30 ms before the first RESET (17 groups, ASan/UBSan); nine profiles rebuilt</td>
+</tr>
+<tr>
+<td>Layout</td>
+<td>STBY: 49 mm of 0.15 mm track (F.Cu, In2.Cu, B.Cu) with 7 vias, entering pin 7 from inside the package. Pin 8 (RANGE, tied to GND, no current) used to reach ground through a 0.2 mm track around the inside of pins 4–8 that blocked pin 7. That track and the pin 6–7 stub were removed; pin 8 now reaches the In1 ground plane through its own 0.15 mm track and via. D30's anode reaches the 3V3D pour on In2 through a via; its cathode joins 5V_ADC copper directly</td>
+<td>KiCad DRC with the project rules: 0 violations, 0 unconnected; ERC: 0. Schematic parity matches the earlier board apart from the existing missing-MPN-field note on the two new footprints</td>
+</tr>
+</tbody>
+</table>
+<p>Margins and limits: the TPS63070 soft-starts 3V3D in roughly 0.4 ms. Charging the ~12.5 µF on 5V_ADC through D30 then takes about 0.1 A, so VDRIVE − AVCC stays near 0.30–0.35 V for well under a millisecond. Without the diode it can be the full 3.3 V. That is still at, not comfortably below, the 0.3 V absolute-maximum figure, which is why the firmware also follows the AN-1091 sequence. The TI data sheet does not describe starting the TPS60150 into a pre-charged output. The new copper was routed by a script against the exported board geometry and accepted only after KiCad's DRC.</p>
+<p>Remaining checks:</p>
 <ul>
-<li>Table 4 (absolute maximum) limits VDRIVE to AVCC + 0.3 V.</li>
-<li>ADI application note <strong>AN-1091</strong> (&quot;Configuring the AD7606/AD7607 for Slow Supply Ramp Conditions&quot;) addresses a delay between the AVCC and VDRIVE ramps. It says to hold STBY and RANGE low until both supplies are established, then bring STBY high (pulse ≥ 500 ns), wait tWAKE-UP SHUTDOWN (30 ms with the internal reference), then apply RESET.</li>
+<li>On the first assembled PCB, record 3V3D, 5V_ADC and STBY at power-up on the oscilloscope.</li>
+<li>Confirm the TPS60150 starts normally with the pre-charged output.</li>
+<li>Confirm BAT760 availability before ordering.</li>
+<li>Review the new copper in the final layout review.</li>
 </ul>
-<p>On this PCB STBY is tied to 3V3D, so the firmware cannot follow AN-1091. The firmware already resets the ADC several hundred milliseconds after power-up, which meets the data sheet's reset requirement. It does not provide the AN-1091 sequence or limit VDRIVE − AVCC during the ramp. The proposed PCB change is:</p>
-<ol>
-<li>Route AD7606 pin 7 (STBY) to the unused ESP32 GPIO14 (module pin 22, not a strapping pin), with a 100 kΩ pull-down. RANGE is already low, so the ADC stays in full shutdown until the firmware releases it.</li>
-<li>Add a low-forward-voltage Schottky diode from 3V3D (anode) to 5V_ADC (cathode). It pre-charges AVCC so VDRIVE − AVCC stays near one Schottky drop during the ramp. It is reverse-biased once the pump reaches 5 V.</li>
-<li>Firmware: drive STBY high, wait 30 ms, then pulse RESET. The firmware change is small; it waits for this decision.</li>
-</ol>
-<p>The breadboard uses separate 5 V and 3.3 V regulator modules and the module's own STBY tie. Stage 3 should record the power-up order of the two rails on the oscilloscope. Until the PCB change is approved, this item stays open and does not affect the simulated or software-tested results.</p>
+<p>The breadboard uses separate 5 V and 3.3 V regulator modules and the ADC module's own STBY tie. Its stage 3 still records the power-up order of the two rails.</p>
 </main></html>
