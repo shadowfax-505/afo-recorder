@@ -111,3 +111,39 @@ The driver now requires BUSY high at the end of the 1 µs CONVST pulse, before m
 ## Current full-system execution
 
 All 18 v1.6 web cases pass. A startup stack-allocation correction is included in the rebuilt images. Current laptop replays retain one nominal preview drop and 158 deliberately missing packets visibly, with exact archived measurement bytes. QEMU establishes additional refusal behavior but fails nominal timing qualification; it is not counted as continuous-acquisition evidence. Current web byte/capture timing checks are distinct from the preserved diagnostic VCDs. See the [integrated report](integrated-verification.html).
+
+## Official AD7606 datasheet cross-check — 11 October 2026
+
+The project lead supplied ADI's AD7606/AD7606-6/AD7606-4 data sheet, **Rev. G (2/2025)**. It is used as a local reference only and is not redistributed. Every AD7606 pin in the PCB netlist (`hardware/main/netlist.xml`, U2) and every firmware timing value were compared with it.
+
+| Item | Data sheet (Rev. G) | This design | Result |
+|---|---|---|---|
+| Conversion time, oversampling off | tCONV 3.45 / 4 / **4.2 µs** min/typ/max (Table 3) | Documents use 4.2 µs max | Confirmed; the 4.15 µs recollection was wrong |
+| CONVST to BUSY high | t1 ≤ 40 ns (45 ns at 0.3/0.7 VDRIVE levels) | BUSY sampled 1 µs after CONVST rises | Pass |
+| CONVST high/low pulse | t3, t2 ≥ 25 ns | 1 µs high, ≈124 µs low | Pass |
+| CONVST A to CONVST B | t5 ≤ 0.5 ms | Both on GPIO11 | Pass (simultaneous) |
+| RESET | tRESET ≥ 50 ns; RESET low to CONVST ≥ 25 ns (t7); reset required after power-up | 2 µs pulse at start-up, 10 ms before first conversion | Pass |
+| Read timing | Read after BUSY falls (t4 ≥ 0); CONVST ignored while BUSY is high | Driver waits for BUSY low (80 µs deadline); faults if BUSY is still high at the next trigger | Pass |
+| Serial clock at VDRIVE 3.3 V | fSCLK ≤ 17 MHz (15 MHz at 0.3/0.7 levels) | 8 MHz | Pass |
+| Serial data edges | MSB valid at first SCLK falling edge after CS (t18 ≤ 23 ns); later bits change on rising edge, valid ≤ 26 ns (t19), hold ≥ 7 ns (t22) | SPI mode 2 (idle high, sample on falling edge); 62.5 ns half period; IO-MUX pins GPIO10/12/13 | Pass, ≥ 36 ns setup margin before the ESP32 input delay |
+| Single-line read | DOUTA carries V1…V8 in 128 SCLK; unused DOUTB left unconnected | 128-bit read on DOUTA; DOUTB unconnected | Pass |
+| Interface straps (Table 8) | PAR/SER/BYTE SEL = 1, DB15/BYTE SEL = 0; DB[15:9], DB[6:0] and DB14/HBEN to ground in serial mode | Pin 6 to 3V3D; pins 16–22 and 27–33 to GND | Pass |
+| Other straps | OS[2:0] = 000 (no oversampling); RANGE low = ±5 V; STBY high = normal; REF SELECT high = internal reference; unused inputs to AGND | Pins 3–5 GND, 8 GND, 7 to 3V3D, 34 to 3V3D, V3–V8 and all VxGND to GND | Pass; firmware full scale 5000 mV matches ±5 V |
+| Decoupling (Fig. 43) | 100 nF per AVCC pin (pins 37/38 may share) plus 10 µF; 10 µF on REFIN/REFOUT; REFCAPA+REFCAPB shorted with 10 µF; 1 µF per REGCAP | C200–C203 (3 × 100 nF + 10 µF), C207 10 µF, C208 10 µF on the shorted pair, C205/C206 1 µF | Pass |
+| Supply ranges | AVCC 4.75–5.25 V; VDRIVE 2.3–5.25 V, recommended < 3.6 V | TPS60150 5 V (4.8–5.2 V); VDRIVE 3.3 V | Pass |
+| Analog input | 1 MΩ input; ±5 V range LSB 152.58 µV; −3 dB 15 kHz, group delay 15 µs | 100 Ω/1 nF after the 660 Hz board filter | Pass; see the offset note below |
+
+**Series resistor without a matching VxGND resistor (Fig. 36).** The data sheet notes an offset when only Vx has series resistance. The input current (2.5 µA at 5 V, Fig. 31, so about 1.5 µA at 3 V) through R104/R114 (100 Ω) gives at most about 0.25 mV, under 2 LSB. That is well inside the bipolar-zero error (±12 LSB max at ±5 V), and the stage-3 two-point DC calibration removes it. No change is needed.
+
+**Open design item: supply ramp order (needs a decision before the PCB order).** AVCC (5V_ADC) is made from 3V3D by the TPS60150 charge pump. Its enable is tied to its input, its output is disconnected while it is off, and it soft-starts in about 150 µs (TI data sheet). So at every power-up VDRIVE (3V3D) is present before AVCC. This conflicts with two ADI statements:
+
+- Table 4 (absolute maximum) limits VDRIVE to AVCC + 0.3 V.
+- ADI application note **AN-1091** ("Configuring the AD7606/AD7607 for Slow Supply Ramp Conditions") addresses a delay between the AVCC and VDRIVE ramps. It says to hold STBY and RANGE low until both supplies are established, then bring STBY high (pulse ≥ 500 ns), wait tWAKE-UP SHUTDOWN (30 ms with the internal reference), then apply RESET.
+
+On this PCB STBY is tied to 3V3D, so the firmware cannot follow AN-1091. The firmware already resets the ADC several hundred milliseconds after power-up, which meets the data sheet's reset requirement. It does not provide the AN-1091 sequence or limit VDRIVE − AVCC during the ramp. The proposed PCB change is:
+
+1. Route AD7606 pin 7 (STBY) to the unused ESP32 GPIO14 (module pin 22, not a strapping pin), with a 100 kΩ pull-down. RANGE is already low, so the ADC stays in full shutdown until the firmware releases it.
+2. Add a low-forward-voltage Schottky diode from 3V3D (anode) to 5V_ADC (cathode). It pre-charges AVCC so VDRIVE − AVCC stays near one Schottky drop during the ramp. It is reverse-biased once the pump reaches 5 V.
+3. Firmware: drive STBY high, wait 30 ms, then pulse RESET. The firmware change is small; it waits for this decision.
+
+The breadboard uses separate 5 V and 3.3 V regulator modules and the module's own STBY tie. Stage 3 should record the power-up order of the two rails on the oscilloscope. Until the PCB change is approved, this item stays open and does not affect the simulated or software-tested results.

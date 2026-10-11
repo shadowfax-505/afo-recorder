@@ -24,6 +24,17 @@ class TimingAuditTests(unittest.TestCase):
         self.assertTrue(result['pass']); self.assertEqual(result['sensor_counter_rate_hz'], 200)
         self.assertEqual(result['counter_rollovers'], 1)
 
+    def test_imu_32_30_tick_scale(self):
+        steps = [4688, 4687, 4688]; raw = 60000; total = 0
+        rows = [dict(host_time_estimate_us='100000', sensor_timestamp_raw=str(raw), read_start_us='100100',
+                     read_end_us='100400', irq_anchor_us='100000', flags='2')]
+        for i, step in enumerate(steps, 1):
+            raw = (raw + step) & 65535; total += step; t = 100000 + total * 32 // 30
+            rows.append(dict(host_time_estimate_us=str(t), sensor_timestamp_raw=str(raw), read_start_us=str(t + 100),
+                             read_end_us=str(t + 400), irq_anchor_us=str(t), flags='2'))
+        self.assertTrue(audit.imu_timing(rows, 32, 30)['pass'])
+        self.assertFalse(audit.imu_timing(rows)['pass'])
+
     def test_estimate_reanchor_rejected(self):
         rows = imu_rows(); rows[1]['host_time_estimate_us'] = '104900'
         self.assertFalse(audit.imu_timing(rows)['pass'])

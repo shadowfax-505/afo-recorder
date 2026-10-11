@@ -1,15 +1,17 @@
 // Register/FIFO subset for the recorder, not a manufacturer sensor model.
-// 200Hz standard 16-byte packets, 1us rolling timestamp, independent chip timers.
+// 200Hz standard 16-byte packets, independent chip timers. The rolling 16-bit
+// timestamp counts 32/30 us ticks (DS-000347 section 12.7): 4687.5 ticks per
+// 5 ms sample, emitted as floor(n*9375/2) so the 4687/4688 steps never drift.
 #include "wokwi-api.h"
 #include <stdlib.h>
 #include <string.h>
 typedef struct {pin_t cs,irq;spi_dev_t spi;timer_t tick,pulse;uint32_t fault,identity;
- uint8_t reg[128],fifo[2048],byte,addr;bool command,read,fifo_read;unsigned used,head;uint16_t stamp;} chip_t;
+ uint8_t reg[128],fifo[2048],byte,addr;bool command,read,fifo_read;unsigned used,head;uint16_t stamp;uint32_t samples;} chip_t;
 static void irq_low(void *p){chip_t *s=p;pin_write(s->irq,0);}
 static void sample(void *p){
  chip_t *s=p;if(s->reg[0x16]!=0x40||s->reg[0x4e]!=0x0f)return;
  uint32_t fault=attr_read(s->fault);if(fault==1)return;
- s->stamp+=5000;
+ s->samples++;s->stamp=(uint16_t)(((uint64_t)s->samples*9375u)/2u);
  uint8_t packet[16]={0x68,0,0,0,0,8,0,0,0,0,0,0,0,0,(uint8_t)(s->stamp>>8),(uint8_t)s->stamp};
  packet[2]=attr_read(s->identity); // foot/shank marker on accel X
  if(s->used+16<=2048){for(unsigned i=0;i<16;i++)s->fifo[(s->head+s->used+i)%2048]=packet[i];s->used+=16;}

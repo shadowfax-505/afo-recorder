@@ -23,7 +23,7 @@ subprocess.run([sys.executable,'-m','esptool','--chip','esp32s3','merge_bin',
     '0x10000',str(build/'integrated_recorder.bin')],check=True)
 root=P.parent.parent
 sources=[root/'firmware/main'/n for n in ('main.c','adc_ad7606.c','sensors.c','sensors.h',
-    'imu_timing.h','format.c','format.h','wifi_live.c','wifi_live.h','board.h','variant.h')]
+    'imu_timing.h','format.c','format.h','wifi_live.c','wifi_live.h','metadata.c','metadata.h','board.h','variant.h')]
 sources += [P/'main/integration.c',P/'main/CMakeLists.txt',P/'CMakeLists.txt',P/'sdkconfig.defaults',
     P/'build_firmware.py',P/'wokwi.toml']
 sources += sorted(f for f in (P/'chips').iterdir() if f.is_file())
