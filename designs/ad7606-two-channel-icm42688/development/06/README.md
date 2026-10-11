@@ -11,7 +11,7 @@ Optional early check, any time after the carriers arrive: wire one carrier, then
 ## Acceptance checks
 
 - **6-foot:** SPI JP2–JP4 1–2; 3.3 V; WHO_AM_I 0x47/readback; foot CS GPIO7 / INT1 GPIO16; correct axis signs
-- **6-shank:** Shank CS GPIO15 / INT1 GPIO17; 200 Hz ±1.5% per sensor over 60 s (datasheet PLL ODR tolerance ±1%) (packets ÷ interval_us, or INT1 capture); tick_step_mean 4687.5 ±0.5% and mean host_us_per_tick 1.067 ±1.5% (32/30 µs ticks; if both read 5000 and 1.00 instead, report it: the firmware tick constant must change) per sensor over ≥60 windows; no FIFO/missing-IRQ/invalid-packet errors
+- **6-shank:** Shank CS GPIO15 / INT1 GPIO17; 200 Hz ±2% per sensor over 60 s (datasheet internal clock ±1.5% at 25 °C, ±2% over temperature) (packets ÷ interval_us, or INT1 capture); tick_step_mean 4687.5 ±0.5% and mean host_us_per_tick 1.067 ±2% (32/30 µs ticks; if both read 5000 and 1.00 instead, report it: the firmware tick constant must change) per sensor over ≥60 windows; no FIFO/missing-IRQ/invalid-packet errors
 - **6-stationary:** ±16 g / ±2000 °/s configured; gravity axis ±1 g within ±0.1 g, cross axes within ±0.1 g; gyro per axis <5 °/s before calibration
 
 ## Send for review

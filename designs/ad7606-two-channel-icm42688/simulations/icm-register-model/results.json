@@ -3,11 +3,11 @@
   "checks_passed": 15,
   "checks_failed": 0,
   "pass": true,
-  "sanitizers": false,
+  "sanitizers": true,
   "production_sources_sha256": {
     "sensors.c": "f5c6034a43b260de6282d902a1d76d3e4db60bcbca64d364ebd34fc733df84c9",
-    "imu_timing.h": "57314a11652b10ef22639ead2a7afc940426680ed6a65e199ab09f254a07c2cd",
-    "board.h": "c86d918838b37426a31ab2434a2a7c2ee4bdf88c45e38a46495e37c2bcc16aba"
+    "imu_timing.h": "2018c0e64cbcb5e894d005c7a6a54ca335f8e7900e0345ad19263d85b298954f",
+    "board.h": "ccba73353a40e4d32d4dcc26b08046bccf88866ec93e60229081181065e782b3"
   },
   "model_sources_sha256": {
     "icm42688_model.c": "c58099a3ccc64081b23ddc3e317a3525c9a5b075391300e960c379e977d07fec",
@@ -19,7 +19,7 @@
     "Behavioral register model written from the datasheet; it cannot reveal silicon errata, counterfeit parts, wrong jumpers or wiring faults beyond the modeled cases",
     "No analog sensor physics: noise, bias, scale error, temperature and vibration are not modeled",
     "SPI is transaction-level; signal integrity on a breadboard is not modeled",
-    "The 32/30 us tick follows the TDK driver PLL scale factor and must be confirmed at stage 6"
+    "The 32/30 us tick follows DS-000347 section 12.7 and is confirmed by the stage-6 bench check"
   ],
   "stdout": [
     "PASS both sensors identify (WHO_AM_I 0x47) and every configuration write reads back",

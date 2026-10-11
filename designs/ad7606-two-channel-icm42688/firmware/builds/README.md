@@ -1,6 +1,6 @@
 # Firmware builds
 
-These profiles use source set **ad7606-2ch-1.9** (previous: 1.8, 1.7, 1.6). All nine were cross-compiled with ESP-IDF v5.4.2; their source and binary SHA-256 hashes are in `validation.json` and each profile's manifest. The laboratory binaries have not been flashed or executed on an assembled recorder. Wokwi used a separate instrumented image.
+These profiles use source set **ad7606-2ch-1.10** (previous: 1.9, 1.8, 1.7, 1.6). All nine were cross-compiled with ESP-IDF v5.4.2; their source and binary SHA-256 hashes are in `validation.json` and each profile's manifest. The laboratory binaries have not been flashed or executed on an assembled recorder. Wokwi used a separate instrumented image.
 
 | Build stage | Profile | Hardware / dependencies |
 |---|---|---|

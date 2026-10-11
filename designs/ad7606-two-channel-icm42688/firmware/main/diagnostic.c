@@ -77,8 +77,9 @@ static void imu_reader(void *arg){
 }
 // Stage 7: IMU carriers only (no ADC). Prints per-second windows and, after
 // 60 windows, a SUMMARY with PASS/FAIL against the datasheet tolerances:
-// 200 Hz +/-1.5% (PLL ODR error up to +/-1%), interrupts matching packets,
-// FIFO tick step 4687.5 +/-0.5% (32/30 us ticks), 1.0667 us per tick +/-1.5%,
+// 200 Hz +/-2% (DS-000347 Table 4: internal clock +/-1.5% at 25 C, +/-2% over
+// temperature), interrupts matching packets, FIFO tick step 4687.5 +/-0.5%
+// (32/30 us ticks, section 12.7), 1.0667 us per tick +/-2%,
 // stationary |a| 1.00 +/-0.10 g and gyro bias under 5 deg/s per axis.
 static void imu_bench(void){
     esp_err_t e=imu_bus_init(AFO_IMU_COUNT);
@@ -115,11 +116,11 @@ static void imu_bench(void){
                 i?"shank":"foot",window,interval/1e6,rate,irq,packets,step,per_tick,ax,ay,az,g,gx,gy,gz);
             if(window==60){
                 const char *v;
-                v=fabs(rate/200-1)<=0.015?"PASS":"FAIL";printf("VERDICT,%s,rate_200Hz,%s,%.2f Hz\n",i?"shank":"foot",v,rate);
+                v=fabs(rate/200-1)<=0.02?"PASS":"FAIL";printf("VERDICT,%s,rate_200Hz,%s,%.2f Hz\n",i?"shank":"foot",v,rate);
                 v=(irq>packets?irq-packets:packets-irq)<=5?"PASS":"FAIL";printf("VERDICT,%s,interrupts_match_packets,%s,%"PRIu32" vs %"PRIu32"\n",i?"shank":"foot",v,irq,packets);
                 v=fabs(step/4687.5-1)<=0.005?"PASS":fabs(step/5000-1)<=0.005?"FAIL (1 us ticks: set IMU_TICK_US_NUM/DEN to 1/1 in imu_timing.h)":"FAIL";
                 printf("VERDICT,%s,tick_step_4687.5,%s,%.2f\n",i?"shank":"foot",v,step);
-                v=fabs(per_tick/(32.0/30)-1)<=0.015?"PASS":"FAIL";printf("VERDICT,%s,host_us_per_tick_1.0667,%s,%.5f\n",i?"shank":"foot",v,per_tick);
+                v=fabs(per_tick/(32.0/30)-1)<=0.02?"PASS":"FAIL";printf("VERDICT,%s,host_us_per_tick_1.0667,%s,%.5f\n",i?"shank":"foot",v,per_tick);
                 v=fabs(g-1)<=0.10?"PASS":"FAIL";printf("VERDICT,%s,stationary_gravity_1g,%s,%.3f g (keep the carrier still)\n",i?"shank":"foot",v,g);
                 v=(fabs(gx)<5&&fabs(gy)<5&&fabs(gz)<5)?"PASS":"FAIL";printf("VERDICT,%s,gyro_bias_below_5dps,%s,%.2f/%.2f/%.2f\n",i?"shank":"foot",v,gx,gy,gz);
             }
@@ -197,7 +198,7 @@ void app_main(void){
             unsigned ticks=imu_ticks[i];portEXIT_CRITICAL(&lock);
             int64_t imu_interval=esp_timer_get_time()-imu_window_start;
             // Expected tick_step_mean is about 4687.5 at 200 Hz: ICM-42688 "1 us" ticks
-            // last 32/30 us (see imu_timing.h). host_us_per_tick should be about 1.0667.
+            // last 32/30 us (DS-000347 section 12.7). host_us_per_tick about 1.0667.
             double step_mean=steps?(double)tick_sum/steps:0;
             double host_per_tick=(packets&&step_mean>0)?(double)imu_interval/(packets*step_mean):0;
             printf("IMU,%u,interval_us=%"PRId64",packets=%"PRIu32",interrupts=%"PRIu32",ax_raw=%d,ay_raw=%d,az_raw=%d,gx_raw=%d,gy_raw=%d,gz_raw=%d,timestamp_raw=%u,tick_steps=%"PRIu32",tick_step_mean=%.2f,host_us_per_tick=%.5f\n",

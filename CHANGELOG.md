@@ -1,5 +1,12 @@
 # Changelog
 
+## Official ICM-42688-P datasheet cross-check, firmware 1.10 — 11 October 2026
+
+- Re-verified the ICM setup against the official datasheet DS-000347 revision 1.6 (supplied by the project lead; kept as a local reference, not redistributed): every register value, reserved bits, packet 3 layout and header, invalid-sample marker, FIFO count latching, 4-wire SPI timing, I/O levels at 3.3 V, supply limits, start-up times and the section 12.3 SPI-mode defaults. No firmware register change was needed.
+- Section 12.7 (Timestamp Interval Scaling) states the 32/30 timestamp scaling directly; firmware comments and documents now cite it.
+- Table 4 gives the internal clock tolerance as ±1.5 % at 25 °C and ±2 % over temperature (wider than the ±1 % narrative figure used earlier). The bench verdicts and stage-6/7 gates for the 200 Hz rate and µs-per-tick now use ±2 %, so an in-specification part is not failed; the converter adds `within_datasheet_tolerance`. The same clock error scales gyroscope rates unless calibrated.
+- All nine profiles rebuilt as `ad7606-2ch-1.10` (cross-compiled only); the ICM model test, native suites, 48 host tests, KiCad checks, the extracted-kit verifier and browser checks pass.
+
 ## ICM-42688 verification and IMU-only bench check, firmware 1.9 — 11 October 2026
 
 - Checked the ICM setup against the MIKROE 6DOF IMU 14 Click v100 schematic, the ICM-42688-P datasheet register descriptions, TDK's ICM-426xx driver definitions and ArduPilot's ICM-42688 driver: supply, jumpers, pin 9 grounding, every register address and value, reserved bits, packet header check, SPI timing and reset/power-on delays.

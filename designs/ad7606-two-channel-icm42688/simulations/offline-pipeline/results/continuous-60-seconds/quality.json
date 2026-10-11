@@ -1,5 +1,5 @@
 {
-  "source_sha256": "0cc6c6feeb21ae8cb25bee36486e826af27ce1b518689daf8a4c469419297d0d",
+  "source_sha256": "cb4ed8ac02e658c0009400be96da2fc72120e711bf24815d730b5559814984d9",
   "synthetic": true,
   "counts": {
     "emg": 480000,
@@ -56,6 +56,7 @@
       "sensor_tick_error_ppm": 70.0,
       "fit_note": null,
       "within_1_percent": true,
+      "within_datasheet_tolerance": true,
       "host_time_fit": {
         "intercept_us": 110009.4543236047,
         "host_us_per_sensor_tick": 1.0667413341950656,
@@ -76,6 +77,7 @@
       "sensor_tick_error_ppm": -110.0,
       "fit_note": null,
       "within_1_percent": true,
+      "within_datasheet_tolerance": true,
       "host_time_fit": {
         "intercept_us": 164983.59764083847,
         "host_us_per_sensor_tick": 1.066549333968424,

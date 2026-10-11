@@ -32,8 +32,8 @@ For machine learning, split by participant when claiming generalization to new p
 | EMG sampling | 8,000 simultaneous frames/s; one code = 152.588 µV at the ADC input (±5 V range) | Ample for surface-EMG bandwidth; values are MyoWare RAW-output volts, not electrode-referred microvolts |
 | EMG analog path | Two buffered 3.3 kΩ/47 nF poles (each about 1,026 Hz; combined −3 dB about 660 Hz, −1.85 dB at 500 Hz) plus the MyoWare's own RAW filtering | Report both filters; frequency features (for example median frequency) depend on them |
 | IMU sampling | 200 Hz per sensor, ±16 g and ±2000 °/s (2,048 counts per g; 16.384 counts per °/s) | Samples are 5 ms apart; event timing from motion alone has millisecond-scale uncertainty |
-| IMU filtering | On-chip UI filter, second order, bandwidth index 4 (`GYRO_ACCEL_CONFIG0 = 0x44`). TDK's driver names this the "/10" setting; the datasheet scales it from max(400 Hz, ODR), giving roughly 40 Hz at 200 Hz | Suitable for segment kinematics; it attenuates sharp heel-strike impact transients. If impacts are an outcome, the ODR and filter must change and be revalidated |
-| IMU time | Sensor clocks are independent; FIFO ticks last 32/30 µs (firmware 1.8); host times are estimates anchored to interrupts | Measure offset and drift against a reference before claiming EMG–motion timing |
+| IMU filtering | On-chip UI filter, second order, bandwidth index 4 (`GYRO_ACCEL_CONFIG0 = 0x44`). the datasheet defines it as max(400 Hz, ODR)/10, i.e. 40 Hz at 200 Hz | Suitable for segment kinematics; it attenuates sharp heel-strike impact transients. If impacts are an outcome, the ODR and filter must change and be revalidated |
+| IMU time | Sensor clocks are independent and may be off by up to ±1.5 % at 25 °C (±2 % over temperature); FIFO ticks last 32/30 µs; host times are estimates, so use `host_time_fitted_us`. The same clock error scales gyroscope rates unless calibrated | Measure offset and drift against a reference before claiming EMG–motion timing |
 
 ## Bench timing-alignment check (before participants)
 

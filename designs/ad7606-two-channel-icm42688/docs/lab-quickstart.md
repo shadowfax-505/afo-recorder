@@ -26,7 +26,7 @@ Use `record-2ch` only on the custom PCB (SD CMD GPIO38). It is not interchangeab
 
 ## Reading the diagnostic serial lines
 
-The first line names the firmware, for example `firmware=ad7606-2ch-1.9 stage=3 hardware=breadboard channels=2`; record it with the binary hash. Each acquisition window then prints one `ADC` line, and stage-6 images add one `IMU` line per sensor.
+The first line names the firmware, for example `firmware=ad7606-2ch-1.10 stage=3 hardware=breadboard channels=2`; record it with the binary hash. Each acquisition window then prints one `ADC` line, and stage-6 images add one `IMU` line per sensor.
 
 | Field | Meaning | How to use it |
 |---|---|---|
@@ -38,7 +38,7 @@ The first line names the firmware, for example `firmware=ad7606-2ch-1.9 stage=3 
 | `ax_raw`…`gz_raw` (IMU) | Last packet's raw axes | ±16 g: 2,048 counts per g. ±2000 °/s: 16.384 counts per °/s |
 | `tick_step_mean`, `host_us_per_tick` (IMU) | Mean FIFO timestamp step and ESP32 µs per sensor tick | Expect about 4,687.5 and 1.067: ICM-42688 "1 µs" ticks last 32/30 µs. Average over at least 60 windows for the stage-6 check |
 
-The IMU-only bench builds (`diagnostic-imu-bench-one` / `-two`, DevKit and carriers only) print `BENCH` lines with the same IMU quantities every second. After 60 s they print `VERDICT,<sensor>,<check>,PASS|FAIL,<value>` for: identity and readback, 200 Hz ±1.5 %, interrupts matching packets, tick step 4,687.5 ±0.5 %, 1.0667 µs per tick ±1.5 %, stationary |a| 1.00 ±0.10 g and gyro bias under 5 °/s. Keep the carrier still during those 60 s, then rotate it to check axis signs. A tick step near 5,000 means the 32/30 µs scale does not apply to your parts; send the lines before changing firmware.
+The IMU-only bench builds (`diagnostic-imu-bench-one` / `-two`, DevKit and carriers only) print `BENCH` lines with the same IMU quantities every second. After 60 s they print `VERDICT,<sensor>,<check>,PASS|FAIL,<value>` for: identity and readback, 200 Hz ±2 %, interrupts matching packets, tick step 4,687.5 ±0.5 %, 1.0667 µs per tick ±2 % (the datasheet allows the sensor clock ±1.5 % at 25 °C and ±2 % over temperature), stationary |a| 1.00 ±0.10 g and gyro bias under 5 °/s. Keep the carrier still during those 60 s, then rotate it to check axis signs. A tick step near 5,000 means the 32/30 µs scale does not apply to your parts; send the lines before changing firmware.
 
 Nominal stage-4 values for a 100 mVpp sine at unity DC gain, from the two ideal 1,026 Hz poles only (the simulated tolerance envelope remains the acceptance reference):
 

@@ -1,5 +1,5 @@
 {
-  "source_sha256": "3af4076afed0c197212affcbe02dc880d483b1b40ef4a16627e46a8083790cb9",
+  "source_sha256": "c0b4dcd005a414080c919be798a4d6b3877e46f823bbf881e5e5d795862d45b6",
   "synthetic": true,
   "counts": {
     "emg": 19506,
@@ -67,6 +67,7 @@
       "sensor_tick_error_ppm": null,
       "fit_note": "needs at least 40 FIFO reads spanning 10 s",
       "within_1_percent": false,
+      "within_datasheet_tolerance": false,
       "host_time_fit": null
     },
     "shank": {
@@ -81,6 +82,7 @@
       "sensor_tick_error_ppm": null,
       "fit_note": "needs at least 40 FIFO reads spanning 10 s",
       "within_1_percent": false,
+      "within_datasheet_tolerance": false,
       "host_time_fit": null
     }
   },

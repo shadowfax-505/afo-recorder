@@ -2,13 +2,13 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-// The configured ICM FIFO contains a 16-bit timestamp with TMST_RES=0. On
-// ICM-42688 parts the internal PLL runs at 19.2 MHz instead of the nominal
-// 20.48 MHz, so one "1 us" tick lasts 32/30 us (TDK ICM-426xx driver,
-// PLL_SCALE_FACTOR_Q24, used when neither CLKIN/RTC nor the wake-up oscillator
-// clocks the sensor). A 200 Hz stream therefore advances about 4687.5 ticks per
-// sample. Stage 6 measures this scale; change only these two constants if the
-// measured ticks disagree.
+// The configured ICM FIFO contains a 16-bit timestamp with TMST_RES=0. Without
+// RTC/CLKIN, the datasheet requires scaling that timestamp interval by 32/30
+// (DS-000347 section 12.7, Timestamp Interval Scaling: 937/938 counts per 1 ms at
+// 1 kHz ODR; TDK's ICM-426xx driver applies the same PLL_SCALE_FACTOR). A 200 Hz
+// stream therefore advances about 4687.5 ticks per sample. The sensor clock
+// itself may differ from nominal by up to 1.5% at 25 C and 2% over temperature
+// (Table 4); use the converter's fitted host time to remove that error.
 #define IMU_TICK_US_NUM 32u
 #define IMU_TICK_US_DEN 30u
 #define IMU_TICK_US_JSON "1.0666667"

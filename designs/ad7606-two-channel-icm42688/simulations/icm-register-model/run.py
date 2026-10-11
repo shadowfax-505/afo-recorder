@@ -22,7 +22,7 @@ def main():
             'limits':['Behavioral register model written from the datasheet; it cannot reveal silicon errata, counterfeit parts, wrong jumpers or wiring faults beyond the modeled cases',
                       'No analog sensor physics: noise, bias, scale error, temperature and vibration are not modeled',
                       'SPI is transaction-level; signal integrity on a breadboard is not modeled',
-                      'The 32/30 us tick follows the TDK driver PLL scale factor and must be confirmed at stage 6'],
+                      'The 32/30 us tick follows DS-000347 section 12.7 and is confirmed by the stage-6 bench check'],
             'stdout':lines}
     (HERE/'results.json').write_text(json.dumps(report,indent=2)+'\n')
     print(run.stdout,end='');return run.returncode

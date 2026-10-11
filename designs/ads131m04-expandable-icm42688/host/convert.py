@@ -87,6 +87,8 @@ def imu_clock_summary(steps, bursts, nominal, tick_us=1.0):
                        None if summary['sensor_tick_error_ppm'] is None else summary['sensor_tick_error_ppm']/1e4)
            if x is not None]
     summary['within_1_percent']=bool(known) and all(abs(x)<=1 for x in known)
+    # DS-000347 Table 4: internal clock +/-1.5% at 25 C and +/-2% over temperature.
+    summary['within_datasheet_tolerance']=bool(known) and all(abs(x)<=2 for x in known)
     return summary
 
 def fit_host_time(bursts, tick_us=1.0):

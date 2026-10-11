@@ -105,12 +105,12 @@
 </tr>
 <tr>
 <td>IMU filtering</td>
-<td>On-chip UI filter, second order, bandwidth index 4 (<code>GYRO_ACCEL_CONFIG0 = 0x44</code>). TDK's driver names this the &quot;/10&quot; setting; the datasheet scales it from max(400 Hz, ODR), giving roughly 40 Hz at 200 Hz</td>
+<td>On-chip UI filter, second order, bandwidth index 4 (<code>GYRO_ACCEL_CONFIG0 = 0x44</code>). the datasheet defines it as max(400 Hz, ODR)/10, i.e. 40 Hz at 200 Hz</td>
 <td>Suitable for segment kinematics; it attenuates sharp heel-strike impact transients. If impacts are an outcome, the ODR and filter must change and be revalidated</td>
 </tr>
 <tr>
 <td>IMU time</td>
-<td>Sensor clocks are independent; FIFO ticks last 32/30 µs (firmware 1.8); host times are estimates anchored to interrupts</td>
+<td>Sensor clocks are independent and may be off by up to ±1.5 % at 25 °C (±2 % over temperature); FIFO ticks last 32/30 µs; host times are estimates, so use <code>host_time_fitted_us</code>. The same clock error scales gyroscope rates unless calibrated</td>
 <td>Measure offset and drift against a reference before claiming EMG–motion timing</td>
 </tr>
 </tbody>
