@@ -1,5 +1,11 @@
 # Changelog
 
+## Website and packages refreshed, release v0.1.6 — 11 October 2026
+
+- The documentation page, project and validation status pages and README now describe firmware 1.10: the official-datasheet ICM-42688-P cross-check, the register-level sensor model, the IMU-only bench builds and `host_time_fitted_us`, and the other five designs at `dual-1.3` / `mpu6050-1.3`.
+- Pre-release v0.1.6 publishes current ZIPs of all six designs; the home page and documentation link to it. Each package's `SHA256SUMS.json` was regenerated for its current files. Earlier releases (v0.1.0–v0.1.5) are unchanged.
+- The fixed two-channel lab kit was repackaged for two corrected sentences (source set 1.10, nine profiles) and passed the extracted-kit verifier and browser checks again.
+
 ## Official ICM-42688-P datasheet cross-check, firmware 1.10 — 11 October 2026
 
 - Re-verified the ICM setup against the official datasheet DS-000347 revision 1.6 (supplied by the project lead; kept as a local reference, not redistributed): every register value, reserved bits, packet 3 layout and header, invalid-sample marker, FIFO count latching, 4-wire SPI timing, I/O levels at 3.3 V, supply limits, start-up times and the section 12.3 SPI-mode defaults. No firmware register change was needed.
