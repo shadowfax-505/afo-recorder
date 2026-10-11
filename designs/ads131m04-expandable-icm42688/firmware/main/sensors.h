@@ -18,3 +18,6 @@ esp_err_t imu_bus_init(unsigned count);
 esp_err_t adc_stream_start(void);
 void adc_stream_stop(void);
 uint64_t adc_sample_timestamp(void);
+// Called once after each conversion pulse, in the timer ISR. Return whether
+// a higher-priority acquisition task was woken. NULL retains BUSY-IRQ diagnostics.
+void adc_set_trigger_callback(bool (*callback)(void *),void *context);
