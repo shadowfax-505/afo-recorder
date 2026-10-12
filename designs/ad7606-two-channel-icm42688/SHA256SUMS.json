@@ -1,6 +1,6 @@
 {
   ".gitattributes": "8b1c59d7303cccf5ff3fda5ac8107254674059a6097da7970f17919b00212583",
-  "README.md": "d71d49b15ab415d7a179efa8a1979ca431b19697e66649619ce2399eb9edf157",
+  "README.md": "b1d97dfefb2fd4ff09369b2a460021eea661de2a3488230588b82c21eac50818",
   "THIRD_PARTY_NOTICES.md": "84ccd8ca9d6189eea71e17e9a14dc4cf210cb729c2c452bf85d16b34321e8d54",
   "breadboard/assembly-checks.json": "2cc0416787363339f01763953ba2097461ed404e646403c88859090acf53a3c6",
   "breadboard/assembly-steps.csv": "23dba7d10c14940d4609a5d6eb1b8dda9f8b9aa44da1f8bb3664e782e9208166",
@@ -2223,5 +2223,7 @@
   "viewer/src/precision.js": "ef1745ca1b90ae3cbaf637e813acac0d31c4fd3aa2b3bad57a0aa2dbe43f893a",
   "viewer/style.css": "da156b75a42b5b919d1b378a457874f5a05c434b4e1d60a6c129a49950c1f9b2",
   "viewer/ui.css": "b0d72a81ac8c362870cfcc6997b15a182a84c37093c7f7b8554cf5611deccd5b",
-  "viewer/walkthrough.js": "56d0b271b4ce9320869ddf85048089dc89d25f0524a41f2866abf972e010ecd5"
+  "viewer/walkthrough.js": "56d0b271b4ce9320869ddf85048089dc89d25f0524a41f2866abf972e010ecd5",
+  "design/build_setup_reference.py": "9fa96955428a74307e5b1bfacf1a4acf2d5f640cea0eb55e8e43798814b7dcb0",
+  "docs/main-setup-reference.pdf": "167364d2b242dd60e6426a2f9d89f0d8def418361444e9c52a13227d8eb5b393"
 }

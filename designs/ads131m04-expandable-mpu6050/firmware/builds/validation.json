@@ -17,19 +17,19 @@
       "application.bin": "0x10000"
     },
     "sha256": {
-      "application.bin": "2bbd48a9e000c6066bf78e9c6444da1c2ff653e69f994a1641afe333f970a0db",
-      "bootloader.bin": "beaba3ced9ffdc2c5209ce009428749e66249dedb0fa3b631418b303aa3e80ec",
+      "application.bin": "e06c9e30c9fec22a8d038fce49bd26cc5bebd3f05b12357b4f473c4a399f670b",
+      "bootloader.bin": "6e69e0514bf73fe95acd479885e68a5c20aac6cc9361036ea37795df965adb44",
       "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
     },
     "profile": "breadboard-record-2ch",
-    "firmware": "mpu6050-1.3",
+    "firmware": "mpu6050-1.5",
     "source_sha256": {
       "main/CMakeLists.txt": "0e2c67d98221736b9e01f2d49d1596264d6af338a087a0447b1fa09aa4ef3fab",
       "main/adc_ad7606.c": "77164ec74b6c574a64885a44e9117409f2edaaaf90a82cb737c3834f4672b5e8",
       "main/adc_ads131m04.c": "914ffa6db82ed58aed9d4f0beb1ae05645ac6fb47097ace88e2be8b6a3c6b6aa",
       "main/ads_crc.c": "31cbb5fd61f5e06c394a426e0fa48d14f3561be4d46fffe6a18e1837edad83cc",
       "main/ads_crc.h": "d08cf15ad6e5d8d837e5c532b9665bc9c07a045475ba06c6443eed6b4367aeac",
-      "main/board.h": "83968637dcdf487a1248d8efb2a7965e0e271c49d8e9f9804a71d87c43b1ad27",
+      "main/board.h": "cf4553bf1f480d5c4b8fbc08ee07de3248d3910942aeb86e75be50873bd232b3",
       "main/diagnostic.c": "d7671b98404e9b39d5f5af1eb7fc8e9ddad162b7bb9828dcd0bcf5694a455976",
       "main/format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
       "main/format.h": "1f9bb02632241a07c7fd3a048767bf88ef35e70a66948cd12e275594468e2536",
@@ -38,13 +38,13 @@
       "main/sensors.c": "c30cdea676e4bf998e235f8deadbb17339813a0fd35e50e04194c392e47debf3",
       "main/sensors.h": "880b651acda742396e7da66f113f6ad27022abc4db84a93f9fff6a162e32ff43",
       "main/variant.h": "b4759dd8c2a32f50343eaa2b4ce7f93d18c2fa8488afdad4c14b5d1707d595ff",
-      "main/wifi_live.c": "81a3e010a18b01f0ba20783ec0df5e14970bfa509305fb523beb00975c99e20a",
+      "main/wifi_live.c": "8ce9df841a1b78cbdbc10073ae294556af1e801f9fe7e5e461fcd84b9ed969d5",
       "main/wifi_live.h": "99d2bea23a26f0271f9f5bb8056ff9ec80d1bfaf1edcd33dcf6551bf7926bf6f",
       "CMakeLists.txt": "ccdcd61455a4cd61ba17da36add6811ccd35d3f880115a07c709f883ebc2b0c6",
       "sdkconfig.defaults": "333b5513fd45d3959596dd93da6a9eb721a9182f82c1c6f75aa245ac170f0aad"
     },
     "idf_version": "v5.4.2",
-    "build_note": "Rebuilt 2026-10-11 after porting the fixed-two recorder corrections (worker lifecycle, fault latching, BUSY confirmation, windowed diagnostics) and the shared PSRAM-queue, Wi-Fi password and metadata-limit fixes. Cross-compiled only; not flashed or simulated."
+    "build_note": "Rebuilt 2026-10-12 after porting the fixed-two 1.12 Wi-Fi preview fix (the live task announces a new session's metadata before that session's first data packet); earlier: porting the fixed-two recorder corrections (worker lifecycle, fault latching, BUSY confirmation, windowed diagnostics) and the shared PSRAM-queue, Wi-Fi password and metadata-limit fixes. Cross-compiled only; not flashed or simulated."
   },
   {
     "package": "ads131m04-expandable-mpu6050",
@@ -64,19 +64,19 @@
       "application.bin": "0x10000"
     },
     "sha256": {
-      "application.bin": "10856fc1c72f268c4beeffc530ba3cdaed90f7feda89bc770111907db8e696bf",
-      "bootloader.bin": "beaba3ced9ffdc2c5209ce009428749e66249dedb0fa3b631418b303aa3e80ec",
+      "application.bin": "7eadb754669cf33081aabfc0a82048a3cee0c290f29ea10f8bd5c0466dd65581",
+      "bootloader.bin": "a9c60bfa0f7920ecb32b25a2d1b07f59141aca709d594b5e9c8ff5e50875cd02",
       "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
     },
     "profile": "breadboard-record-4ch",
-    "firmware": "mpu6050-1.3",
+    "firmware": "mpu6050-1.5",
     "source_sha256": {
       "main/CMakeLists.txt": "0e2c67d98221736b9e01f2d49d1596264d6af338a087a0447b1fa09aa4ef3fab",
       "main/adc_ad7606.c": "77164ec74b6c574a64885a44e9117409f2edaaaf90a82cb737c3834f4672b5e8",
       "main/adc_ads131m04.c": "914ffa6db82ed58aed9d4f0beb1ae05645ac6fb47097ace88e2be8b6a3c6b6aa",
       "main/ads_crc.c": "31cbb5fd61f5e06c394a426e0fa48d14f3561be4d46fffe6a18e1837edad83cc",
       "main/ads_crc.h": "d08cf15ad6e5d8d837e5c532b9665bc9c07a045475ba06c6443eed6b4367aeac",
-      "main/board.h": "83968637dcdf487a1248d8efb2a7965e0e271c49d8e9f9804a71d87c43b1ad27",
+      "main/board.h": "cf4553bf1f480d5c4b8fbc08ee07de3248d3910942aeb86e75be50873bd232b3",
       "main/diagnostic.c": "d7671b98404e9b39d5f5af1eb7fc8e9ddad162b7bb9828dcd0bcf5694a455976",
       "main/format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
       "main/format.h": "1f9bb02632241a07c7fd3a048767bf88ef35e70a66948cd12e275594468e2536",
@@ -85,13 +85,13 @@
       "main/sensors.c": "c30cdea676e4bf998e235f8deadbb17339813a0fd35e50e04194c392e47debf3",
       "main/sensors.h": "880b651acda742396e7da66f113f6ad27022abc4db84a93f9fff6a162e32ff43",
       "main/variant.h": "b4759dd8c2a32f50343eaa2b4ce7f93d18c2fa8488afdad4c14b5d1707d595ff",
-      "main/wifi_live.c": "81a3e010a18b01f0ba20783ec0df5e14970bfa509305fb523beb00975c99e20a",
+      "main/wifi_live.c": "8ce9df841a1b78cbdbc10073ae294556af1e801f9fe7e5e461fcd84b9ed969d5",
       "main/wifi_live.h": "99d2bea23a26f0271f9f5bb8056ff9ec80d1bfaf1edcd33dcf6551bf7926bf6f",
       "CMakeLists.txt": "ccdcd61455a4cd61ba17da36add6811ccd35d3f880115a07c709f883ebc2b0c6",
       "sdkconfig.defaults": "333b5513fd45d3959596dd93da6a9eb721a9182f82c1c6f75aa245ac170f0aad"
     },
     "idf_version": "v5.4.2",
-    "build_note": "Rebuilt 2026-10-11 after porting the fixed-two recorder corrections (worker lifecycle, fault latching, BUSY confirmation, windowed diagnostics) and the shared PSRAM-queue, Wi-Fi password and metadata-limit fixes. Cross-compiled only; not flashed or simulated."
+    "build_note": "Rebuilt 2026-10-12 after porting the fixed-two 1.12 Wi-Fi preview fix (the live task announces a new session's metadata before that session's first data packet); earlier: porting the fixed-two recorder corrections (worker lifecycle, fault latching, BUSY confirmation, windowed diagnostics) and the shared PSRAM-queue, Wi-Fi password and metadata-limit fixes. Cross-compiled only; not flashed or simulated."
   },
   {
     "package": "ads131m04-expandable-mpu6050",
@@ -111,19 +111,19 @@
       "application.bin": "0x10000"
     },
     "sha256": {
-      "application.bin": "3a7a82a7fda8ec2bac02ab9ffdcdb71183567220231a8ee84656f67245dc18a4",
-      "bootloader.bin": "beaba3ced9ffdc2c5209ce009428749e66249dedb0fa3b631418b303aa3e80ec",
+      "application.bin": "56c1feae639d4c6148dfbffbd8a8beb935cc9080070e44c90c05b88b1ff1ff1b",
+      "bootloader.bin": "16652321303c200284dcf4b464d90a1120ffedeca60b90089d9b514287c61de4",
       "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
     },
     "profile": "breadboard-sd-only-2ch",
-    "firmware": "mpu6050-1.3",
+    "firmware": "mpu6050-1.5",
     "source_sha256": {
       "main/CMakeLists.txt": "0e2c67d98221736b9e01f2d49d1596264d6af338a087a0447b1fa09aa4ef3fab",
       "main/adc_ad7606.c": "77164ec74b6c574a64885a44e9117409f2edaaaf90a82cb737c3834f4672b5e8",
       "main/adc_ads131m04.c": "914ffa6db82ed58aed9d4f0beb1ae05645ac6fb47097ace88e2be8b6a3c6b6aa",
       "main/ads_crc.c": "31cbb5fd61f5e06c394a426e0fa48d14f3561be4d46fffe6a18e1837edad83cc",
       "main/ads_crc.h": "d08cf15ad6e5d8d837e5c532b9665bc9c07a045475ba06c6443eed6b4367aeac",
-      "main/board.h": "83968637dcdf487a1248d8efb2a7965e0e271c49d8e9f9804a71d87c43b1ad27",
+      "main/board.h": "cf4553bf1f480d5c4b8fbc08ee07de3248d3910942aeb86e75be50873bd232b3",
       "main/diagnostic.c": "d7671b98404e9b39d5f5af1eb7fc8e9ddad162b7bb9828dcd0bcf5694a455976",
       "main/format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
       "main/format.h": "1f9bb02632241a07c7fd3a048767bf88ef35e70a66948cd12e275594468e2536",
@@ -132,13 +132,13 @@
       "main/sensors.c": "c30cdea676e4bf998e235f8deadbb17339813a0fd35e50e04194c392e47debf3",
       "main/sensors.h": "880b651acda742396e7da66f113f6ad27022abc4db84a93f9fff6a162e32ff43",
       "main/variant.h": "b4759dd8c2a32f50343eaa2b4ce7f93d18c2fa8488afdad4c14b5d1707d595ff",
-      "main/wifi_live.c": "81a3e010a18b01f0ba20783ec0df5e14970bfa509305fb523beb00975c99e20a",
+      "main/wifi_live.c": "8ce9df841a1b78cbdbc10073ae294556af1e801f9fe7e5e461fcd84b9ed969d5",
       "main/wifi_live.h": "99d2bea23a26f0271f9f5bb8056ff9ec80d1bfaf1edcd33dcf6551bf7926bf6f",
       "CMakeLists.txt": "ccdcd61455a4cd61ba17da36add6811ccd35d3f880115a07c709f883ebc2b0c6",
       "sdkconfig.defaults": "333b5513fd45d3959596dd93da6a9eb721a9182f82c1c6f75aa245ac170f0aad"
     },
     "idf_version": "v5.4.2",
-    "build_note": "Rebuilt 2026-10-11 after porting the fixed-two recorder corrections (worker lifecycle, fault latching, BUSY confirmation, windowed diagnostics) and the shared PSRAM-queue, Wi-Fi password and metadata-limit fixes. Cross-compiled only; not flashed or simulated."
+    "build_note": "Rebuilt 2026-10-12 after porting the fixed-two 1.12 Wi-Fi preview fix (the live task announces a new session's metadata before that session's first data packet); earlier: porting the fixed-two recorder corrections (worker lifecycle, fault latching, BUSY confirmation, windowed diagnostics) and the shared PSRAM-queue, Wi-Fi password and metadata-limit fixes. Cross-compiled only; not flashed or simulated."
   },
   {
     "package": "afo-ads131m04-mpu6050",
@@ -155,19 +155,19 @@
       "application.bin": "0x10000"
     },
     "sha256": {
-      "application.bin": "cd243a5066016921969f68a03e9c38fddb70261103d27a6c7cdf833c33f7e6e5",
-      "bootloader.bin": "beaba3ced9ffdc2c5209ce009428749e66249dedb0fa3b631418b303aa3e80ec",
+      "application.bin": "b8aa1375b44baab098dfd90e07317e48fc32d11632b01b11b53db47ac7ca6cae",
+      "bootloader.bin": "721cb2aba77ab8201e29c9ce919aba481dc5fb423ba6e67904e2140d87006922",
       "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
     },
     "profile": "diagnostic-adc-2ch",
-    "firmware": null,
+    "firmware": "mpu6050-1.5",
     "source_sha256": {
       "main/CMakeLists.txt": "0e2c67d98221736b9e01f2d49d1596264d6af338a087a0447b1fa09aa4ef3fab",
       "main/adc_ad7606.c": "77164ec74b6c574a64885a44e9117409f2edaaaf90a82cb737c3834f4672b5e8",
       "main/adc_ads131m04.c": "914ffa6db82ed58aed9d4f0beb1ae05645ac6fb47097ace88e2be8b6a3c6b6aa",
       "main/ads_crc.c": "31cbb5fd61f5e06c394a426e0fa48d14f3561be4d46fffe6a18e1837edad83cc",
       "main/ads_crc.h": "d08cf15ad6e5d8d837e5c532b9665bc9c07a045475ba06c6443eed6b4367aeac",
-      "main/board.h": "83968637dcdf487a1248d8efb2a7965e0e271c49d8e9f9804a71d87c43b1ad27",
+      "main/board.h": "cf4553bf1f480d5c4b8fbc08ee07de3248d3910942aeb86e75be50873bd232b3",
       "main/diagnostic.c": "d7671b98404e9b39d5f5af1eb7fc8e9ddad162b7bb9828dcd0bcf5694a455976",
       "main/format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
       "main/format.h": "1f9bb02632241a07c7fd3a048767bf88ef35e70a66948cd12e275594468e2536",
@@ -176,13 +176,13 @@
       "main/sensors.c": "c30cdea676e4bf998e235f8deadbb17339813a0fd35e50e04194c392e47debf3",
       "main/sensors.h": "880b651acda742396e7da66f113f6ad27022abc4db84a93f9fff6a162e32ff43",
       "main/variant.h": "b4759dd8c2a32f50343eaa2b4ce7f93d18c2fa8488afdad4c14b5d1707d595ff",
-      "main/wifi_live.c": "81a3e010a18b01f0ba20783ec0df5e14970bfa509305fb523beb00975c99e20a",
+      "main/wifi_live.c": "8ce9df841a1b78cbdbc10073ae294556af1e801f9fe7e5e461fcd84b9ed969d5",
       "main/wifi_live.h": "99d2bea23a26f0271f9f5bb8056ff9ec80d1bfaf1edcd33dcf6551bf7926bf6f",
       "CMakeLists.txt": "ccdcd61455a4cd61ba17da36add6811ccd35d3f880115a07c709f883ebc2b0c6",
       "sdkconfig.defaults": "333b5513fd45d3959596dd93da6a9eb721a9182f82c1c6f75aa245ac170f0aad"
     },
     "idf_version": "v5.4.2",
-    "build_note": "Rebuilt 2026-10-11 after porting the fixed-two recorder corrections (worker lifecycle, fault latching, BUSY confirmation, windowed diagnostics) and the shared PSRAM-queue, Wi-Fi password and metadata-limit fixes. Cross-compiled only; not flashed or simulated."
+    "build_note": "Rebuilt 2026-10-12 after porting the fixed-two 1.12 Wi-Fi preview fix (the live task announces a new session's metadata before that session's first data packet); earlier: porting the fixed-two recorder corrections (worker lifecycle, fault latching, BUSY confirmation, windowed diagnostics) and the shared PSRAM-queue, Wi-Fi password and metadata-limit fixes. Cross-compiled only; not flashed or simulated."
   },
   {
     "package": "afo-ads131m04-mpu6050",
@@ -199,19 +199,19 @@
       "application.bin": "0x10000"
     },
     "sha256": {
-      "application.bin": "399ea1a5cda100bd7f066f8ed0a89ba82ba515adfd52d5088be5fa3f14f8f79d",
-      "bootloader.bin": "beaba3ced9ffdc2c5209ce009428749e66249dedb0fa3b631418b303aa3e80ec",
+      "application.bin": "479f0ae8a5b5a5227bd9855980838948d6f953604b307d89565a76443505e790",
+      "bootloader.bin": "c38a3e545f7c61bce575e28914349ed14e1f477b5f9b8d5bb3722931cb935aeb",
       "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
     },
     "profile": "diagnostic-adc-4ch",
-    "firmware": null,
+    "firmware": "mpu6050-1.5",
     "source_sha256": {
       "main/CMakeLists.txt": "0e2c67d98221736b9e01f2d49d1596264d6af338a087a0447b1fa09aa4ef3fab",
       "main/adc_ad7606.c": "77164ec74b6c574a64885a44e9117409f2edaaaf90a82cb737c3834f4672b5e8",
       "main/adc_ads131m04.c": "914ffa6db82ed58aed9d4f0beb1ae05645ac6fb47097ace88e2be8b6a3c6b6aa",
       "main/ads_crc.c": "31cbb5fd61f5e06c394a426e0fa48d14f3561be4d46fffe6a18e1837edad83cc",
       "main/ads_crc.h": "d08cf15ad6e5d8d837e5c532b9665bc9c07a045475ba06c6443eed6b4367aeac",
-      "main/board.h": "83968637dcdf487a1248d8efb2a7965e0e271c49d8e9f9804a71d87c43b1ad27",
+      "main/board.h": "cf4553bf1f480d5c4b8fbc08ee07de3248d3910942aeb86e75be50873bd232b3",
       "main/diagnostic.c": "d7671b98404e9b39d5f5af1eb7fc8e9ddad162b7bb9828dcd0bcf5694a455976",
       "main/format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
       "main/format.h": "1f9bb02632241a07c7fd3a048767bf88ef35e70a66948cd12e275594468e2536",
@@ -220,13 +220,13 @@
       "main/sensors.c": "c30cdea676e4bf998e235f8deadbb17339813a0fd35e50e04194c392e47debf3",
       "main/sensors.h": "880b651acda742396e7da66f113f6ad27022abc4db84a93f9fff6a162e32ff43",
       "main/variant.h": "b4759dd8c2a32f50343eaa2b4ce7f93d18c2fa8488afdad4c14b5d1707d595ff",
-      "main/wifi_live.c": "81a3e010a18b01f0ba20783ec0df5e14970bfa509305fb523beb00975c99e20a",
+      "main/wifi_live.c": "8ce9df841a1b78cbdbc10073ae294556af1e801f9fe7e5e461fcd84b9ed969d5",
       "main/wifi_live.h": "99d2bea23a26f0271f9f5bb8056ff9ec80d1bfaf1edcd33dcf6551bf7926bf6f",
       "CMakeLists.txt": "ccdcd61455a4cd61ba17da36add6811ccd35d3f880115a07c709f883ebc2b0c6",
       "sdkconfig.defaults": "333b5513fd45d3959596dd93da6a9eb721a9182f82c1c6f75aa245ac170f0aad"
     },
     "idf_version": "v5.4.2",
-    "build_note": "Rebuilt 2026-10-11 after porting the fixed-two recorder corrections (worker lifecycle, fault latching, BUSY confirmation, windowed diagnostics) and the shared PSRAM-queue, Wi-Fi password and metadata-limit fixes. Cross-compiled only; not flashed or simulated."
+    "build_note": "Rebuilt 2026-10-12 after porting the fixed-two 1.12 Wi-Fi preview fix (the live task announces a new session's metadata before that session's first data packet); earlier: porting the fixed-two recorder corrections (worker lifecycle, fault latching, BUSY confirmation, windowed diagnostics) and the shared PSRAM-queue, Wi-Fi password and metadata-limit fixes. Cross-compiled only; not flashed or simulated."
   },
   {
     "package": "afo-ads131m04-mpu6050",
@@ -243,19 +243,19 @@
       "application.bin": "0x10000"
     },
     "sha256": {
-      "application.bin": "c5e303ad121ebd310573f4a412dc51b3848390db51ea2b0cb392d8de75dc0977",
-      "bootloader.bin": "beaba3ced9ffdc2c5209ce009428749e66249dedb0fa3b631418b303aa3e80ec",
+      "application.bin": "3a56d2b0a329fcb57eb1fca5e64681c77d2df81ad53f1c659314317c4edd76de",
+      "bootloader.bin": "ecab4851eab3567ec6e9ce154e0ab1ce6f94beba7544b51e811bded18158a551",
       "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
     },
     "profile": "diagnostic-controller",
-    "firmware": null,
+    "firmware": "mpu6050-1.5",
     "source_sha256": {
       "main/CMakeLists.txt": "0e2c67d98221736b9e01f2d49d1596264d6af338a087a0447b1fa09aa4ef3fab",
       "main/adc_ad7606.c": "77164ec74b6c574a64885a44e9117409f2edaaaf90a82cb737c3834f4672b5e8",
       "main/adc_ads131m04.c": "914ffa6db82ed58aed9d4f0beb1ae05645ac6fb47097ace88e2be8b6a3c6b6aa",
       "main/ads_crc.c": "31cbb5fd61f5e06c394a426e0fa48d14f3561be4d46fffe6a18e1837edad83cc",
       "main/ads_crc.h": "d08cf15ad6e5d8d837e5c532b9665bc9c07a045475ba06c6443eed6b4367aeac",
-      "main/board.h": "83968637dcdf487a1248d8efb2a7965e0e271c49d8e9f9804a71d87c43b1ad27",
+      "main/board.h": "cf4553bf1f480d5c4b8fbc08ee07de3248d3910942aeb86e75be50873bd232b3",
       "main/diagnostic.c": "d7671b98404e9b39d5f5af1eb7fc8e9ddad162b7bb9828dcd0bcf5694a455976",
       "main/format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
       "main/format.h": "1f9bb02632241a07c7fd3a048767bf88ef35e70a66948cd12e275594468e2536",
@@ -264,13 +264,13 @@
       "main/sensors.c": "c30cdea676e4bf998e235f8deadbb17339813a0fd35e50e04194c392e47debf3",
       "main/sensors.h": "880b651acda742396e7da66f113f6ad27022abc4db84a93f9fff6a162e32ff43",
       "main/variant.h": "b4759dd8c2a32f50343eaa2b4ce7f93d18c2fa8488afdad4c14b5d1707d595ff",
-      "main/wifi_live.c": "81a3e010a18b01f0ba20783ec0df5e14970bfa509305fb523beb00975c99e20a",
+      "main/wifi_live.c": "8ce9df841a1b78cbdbc10073ae294556af1e801f9fe7e5e461fcd84b9ed969d5",
       "main/wifi_live.h": "99d2bea23a26f0271f9f5bb8056ff9ec80d1bfaf1edcd33dcf6551bf7926bf6f",
       "CMakeLists.txt": "ccdcd61455a4cd61ba17da36add6811ccd35d3f880115a07c709f883ebc2b0c6",
       "sdkconfig.defaults": "333b5513fd45d3959596dd93da6a9eb721a9182f82c1c6f75aa245ac170f0aad"
     },
     "idf_version": "v5.4.2",
-    "build_note": "Rebuilt 2026-10-11 after porting the fixed-two recorder corrections (worker lifecycle, fault latching, BUSY confirmation, windowed diagnostics) and the shared PSRAM-queue, Wi-Fi password and metadata-limit fixes. Cross-compiled only; not flashed or simulated."
+    "build_note": "Rebuilt 2026-10-12 after porting the fixed-two 1.12 Wi-Fi preview fix (the live task announces a new session's metadata before that session's first data packet); earlier: porting the fixed-two recorder corrections (worker lifecycle, fault latching, BUSY confirmation, windowed diagnostics) and the shared PSRAM-queue, Wi-Fi password and metadata-limit fixes. Cross-compiled only; not flashed or simulated."
   },
   {
     "package": "afo-ads131m04-mpu6050",
@@ -287,19 +287,19 @@
       "application.bin": "0x10000"
     },
     "sha256": {
-      "application.bin": "3649b66c2366a6f490303313a9f3461ff78a9464f304b6cd0a6f43e76eb0322e",
-      "bootloader.bin": "beaba3ced9ffdc2c5209ce009428749e66249dedb0fa3b631418b303aa3e80ec",
+      "application.bin": "9f99710df3f04ff4c07d02f9e57def51e72d7a144b23376f76d7feaaf253bf89",
+      "bootloader.bin": "76bf0736c00d2a6be7f2ded58bef9a47bb2f62fb89c1ee1ea55483ee0852a506",
       "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
     },
     "profile": "diagnostic-imu-one",
-    "firmware": null,
+    "firmware": "mpu6050-1.5",
     "source_sha256": {
       "main/CMakeLists.txt": "0e2c67d98221736b9e01f2d49d1596264d6af338a087a0447b1fa09aa4ef3fab",
       "main/adc_ad7606.c": "77164ec74b6c574a64885a44e9117409f2edaaaf90a82cb737c3834f4672b5e8",
       "main/adc_ads131m04.c": "914ffa6db82ed58aed9d4f0beb1ae05645ac6fb47097ace88e2be8b6a3c6b6aa",
       "main/ads_crc.c": "31cbb5fd61f5e06c394a426e0fa48d14f3561be4d46fffe6a18e1837edad83cc",
       "main/ads_crc.h": "d08cf15ad6e5d8d837e5c532b9665bc9c07a045475ba06c6443eed6b4367aeac",
-      "main/board.h": "83968637dcdf487a1248d8efb2a7965e0e271c49d8e9f9804a71d87c43b1ad27",
+      "main/board.h": "cf4553bf1f480d5c4b8fbc08ee07de3248d3910942aeb86e75be50873bd232b3",
       "main/diagnostic.c": "d7671b98404e9b39d5f5af1eb7fc8e9ddad162b7bb9828dcd0bcf5694a455976",
       "main/format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
       "main/format.h": "1f9bb02632241a07c7fd3a048767bf88ef35e70a66948cd12e275594468e2536",
@@ -308,13 +308,13 @@
       "main/sensors.c": "c30cdea676e4bf998e235f8deadbb17339813a0fd35e50e04194c392e47debf3",
       "main/sensors.h": "880b651acda742396e7da66f113f6ad27022abc4db84a93f9fff6a162e32ff43",
       "main/variant.h": "b4759dd8c2a32f50343eaa2b4ce7f93d18c2fa8488afdad4c14b5d1707d595ff",
-      "main/wifi_live.c": "81a3e010a18b01f0ba20783ec0df5e14970bfa509305fb523beb00975c99e20a",
+      "main/wifi_live.c": "8ce9df841a1b78cbdbc10073ae294556af1e801f9fe7e5e461fcd84b9ed969d5",
       "main/wifi_live.h": "99d2bea23a26f0271f9f5bb8056ff9ec80d1bfaf1edcd33dcf6551bf7926bf6f",
       "CMakeLists.txt": "ccdcd61455a4cd61ba17da36add6811ccd35d3f880115a07c709f883ebc2b0c6",
       "sdkconfig.defaults": "333b5513fd45d3959596dd93da6a9eb721a9182f82c1c6f75aa245ac170f0aad"
     },
     "idf_version": "v5.4.2",
-    "build_note": "Rebuilt 2026-10-11 after porting the fixed-two recorder corrections (worker lifecycle, fault latching, BUSY confirmation, windowed diagnostics) and the shared PSRAM-queue, Wi-Fi password and metadata-limit fixes. Cross-compiled only; not flashed or simulated."
+    "build_note": "Rebuilt 2026-10-12 after porting the fixed-two 1.12 Wi-Fi preview fix (the live task announces a new session's metadata before that session's first data packet); earlier: porting the fixed-two recorder corrections (worker lifecycle, fault latching, BUSY confirmation, windowed diagnostics) and the shared PSRAM-queue, Wi-Fi password and metadata-limit fixes. Cross-compiled only; not flashed or simulated."
   },
   {
     "package": "afo-ads131m04-mpu6050",
@@ -331,19 +331,19 @@
       "application.bin": "0x10000"
     },
     "sha256": {
-      "application.bin": "e049683088db08b4da59fa841d816ebfd619abf72b37e9b40465306be3253008",
-      "bootloader.bin": "beaba3ced9ffdc2c5209ce009428749e66249dedb0fa3b631418b303aa3e80ec",
+      "application.bin": "d2c23457a0f900482c11234d86204620d338fc4077be88e42bed9a9fd2cbf7de",
+      "bootloader.bin": "01c070a2f438ac738e86abcd0d53852680d4e90eb322211b3eb2bd99b0be090d",
       "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
     },
     "profile": "diagnostic-imu-two",
-    "firmware": null,
+    "firmware": "mpu6050-1.5",
     "source_sha256": {
       "main/CMakeLists.txt": "0e2c67d98221736b9e01f2d49d1596264d6af338a087a0447b1fa09aa4ef3fab",
       "main/adc_ad7606.c": "77164ec74b6c574a64885a44e9117409f2edaaaf90a82cb737c3834f4672b5e8",
       "main/adc_ads131m04.c": "914ffa6db82ed58aed9d4f0beb1ae05645ac6fb47097ace88e2be8b6a3c6b6aa",
       "main/ads_crc.c": "31cbb5fd61f5e06c394a426e0fa48d14f3561be4d46fffe6a18e1837edad83cc",
       "main/ads_crc.h": "d08cf15ad6e5d8d837e5c532b9665bc9c07a045475ba06c6443eed6b4367aeac",
-      "main/board.h": "83968637dcdf487a1248d8efb2a7965e0e271c49d8e9f9804a71d87c43b1ad27",
+      "main/board.h": "cf4553bf1f480d5c4b8fbc08ee07de3248d3910942aeb86e75be50873bd232b3",
       "main/diagnostic.c": "d7671b98404e9b39d5f5af1eb7fc8e9ddad162b7bb9828dcd0bcf5694a455976",
       "main/format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
       "main/format.h": "1f9bb02632241a07c7fd3a048767bf88ef35e70a66948cd12e275594468e2536",
@@ -352,13 +352,13 @@
       "main/sensors.c": "c30cdea676e4bf998e235f8deadbb17339813a0fd35e50e04194c392e47debf3",
       "main/sensors.h": "880b651acda742396e7da66f113f6ad27022abc4db84a93f9fff6a162e32ff43",
       "main/variant.h": "b4759dd8c2a32f50343eaa2b4ce7f93d18c2fa8488afdad4c14b5d1707d595ff",
-      "main/wifi_live.c": "81a3e010a18b01f0ba20783ec0df5e14970bfa509305fb523beb00975c99e20a",
+      "main/wifi_live.c": "8ce9df841a1b78cbdbc10073ae294556af1e801f9fe7e5e461fcd84b9ed969d5",
       "main/wifi_live.h": "99d2bea23a26f0271f9f5bb8056ff9ec80d1bfaf1edcd33dcf6551bf7926bf6f",
       "CMakeLists.txt": "ccdcd61455a4cd61ba17da36add6811ccd35d3f880115a07c709f883ebc2b0c6",
       "sdkconfig.defaults": "333b5513fd45d3959596dd93da6a9eb721a9182f82c1c6f75aa245ac170f0aad"
     },
     "idf_version": "v5.4.2",
-    "build_note": "Rebuilt 2026-10-11 after porting the fixed-two recorder corrections (worker lifecycle, fault latching, BUSY confirmation, windowed diagnostics) and the shared PSRAM-queue, Wi-Fi password and metadata-limit fixes. Cross-compiled only; not flashed or simulated."
+    "build_note": "Rebuilt 2026-10-12 after porting the fixed-two 1.12 Wi-Fi preview fix (the live task announces a new session's metadata before that session's first data packet); earlier: porting the fixed-two recorder corrections (worker lifecycle, fault latching, BUSY confirmation, windowed diagnostics) and the shared PSRAM-queue, Wi-Fi password and metadata-limit fixes. Cross-compiled only; not flashed or simulated."
   },
   {
     "package": "ads131m04-expandable-mpu6050",
@@ -378,19 +378,19 @@
       "application.bin": "0x10000"
     },
     "sha256": {
-      "application.bin": "ce8b123f5ae83f33048e8d5f95a53299323e1e3787673e9931aabb3545506ff4",
-      "bootloader.bin": "beaba3ced9ffdc2c5209ce009428749e66249dedb0fa3b631418b303aa3e80ec",
+      "application.bin": "d548fb9165cb8817b11a7ace03c3721f8248ec70047bc988199e7e0559f0a233",
+      "bootloader.bin": "442f680fe2cafd3ed83b0ab89edd2257250b87334969164ebdded7f0174dac10",
       "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
     },
     "profile": "record-2ch",
-    "firmware": "mpu6050-1.3",
+    "firmware": "mpu6050-1.5",
     "source_sha256": {
       "main/CMakeLists.txt": "0e2c67d98221736b9e01f2d49d1596264d6af338a087a0447b1fa09aa4ef3fab",
       "main/adc_ad7606.c": "77164ec74b6c574a64885a44e9117409f2edaaaf90a82cb737c3834f4672b5e8",
       "main/adc_ads131m04.c": "914ffa6db82ed58aed9d4f0beb1ae05645ac6fb47097ace88e2be8b6a3c6b6aa",
       "main/ads_crc.c": "31cbb5fd61f5e06c394a426e0fa48d14f3561be4d46fffe6a18e1837edad83cc",
       "main/ads_crc.h": "d08cf15ad6e5d8d837e5c532b9665bc9c07a045475ba06c6443eed6b4367aeac",
-      "main/board.h": "83968637dcdf487a1248d8efb2a7965e0e271c49d8e9f9804a71d87c43b1ad27",
+      "main/board.h": "cf4553bf1f480d5c4b8fbc08ee07de3248d3910942aeb86e75be50873bd232b3",
       "main/diagnostic.c": "d7671b98404e9b39d5f5af1eb7fc8e9ddad162b7bb9828dcd0bcf5694a455976",
       "main/format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
       "main/format.h": "1f9bb02632241a07c7fd3a048767bf88ef35e70a66948cd12e275594468e2536",
@@ -399,13 +399,13 @@
       "main/sensors.c": "c30cdea676e4bf998e235f8deadbb17339813a0fd35e50e04194c392e47debf3",
       "main/sensors.h": "880b651acda742396e7da66f113f6ad27022abc4db84a93f9fff6a162e32ff43",
       "main/variant.h": "b4759dd8c2a32f50343eaa2b4ce7f93d18c2fa8488afdad4c14b5d1707d595ff",
-      "main/wifi_live.c": "81a3e010a18b01f0ba20783ec0df5e14970bfa509305fb523beb00975c99e20a",
+      "main/wifi_live.c": "8ce9df841a1b78cbdbc10073ae294556af1e801f9fe7e5e461fcd84b9ed969d5",
       "main/wifi_live.h": "99d2bea23a26f0271f9f5bb8056ff9ec80d1bfaf1edcd33dcf6551bf7926bf6f",
       "CMakeLists.txt": "ccdcd61455a4cd61ba17da36add6811ccd35d3f880115a07c709f883ebc2b0c6",
       "sdkconfig.defaults": "333b5513fd45d3959596dd93da6a9eb721a9182f82c1c6f75aa245ac170f0aad"
     },
     "idf_version": "v5.4.2",
-    "build_note": "Rebuilt 2026-10-11 after porting the fixed-two recorder corrections (worker lifecycle, fault latching, BUSY confirmation, windowed diagnostics) and the shared PSRAM-queue, Wi-Fi password and metadata-limit fixes. Cross-compiled only; not flashed or simulated."
+    "build_note": "Rebuilt 2026-10-12 after porting the fixed-two 1.12 Wi-Fi preview fix (the live task announces a new session's metadata before that session's first data packet); earlier: porting the fixed-two recorder corrections (worker lifecycle, fault latching, BUSY confirmation, windowed diagnostics) and the shared PSRAM-queue, Wi-Fi password and metadata-limit fixes. Cross-compiled only; not flashed or simulated."
   },
   {
     "package": "ads131m04-expandable-mpu6050",
@@ -425,19 +425,19 @@
       "application.bin": "0x10000"
     },
     "sha256": {
-      "application.bin": "de100d9b41e64d183301ce6e6fa40804ccfa39909ad57c0a7cbc53e573d78f2c",
-      "bootloader.bin": "beaba3ced9ffdc2c5209ce009428749e66249dedb0fa3b631418b303aa3e80ec",
+      "application.bin": "0bcacc5d70de0ec9f7dc28be919557ecf2d773c2e45af9a028f6e05eeb96042f",
+      "bootloader.bin": "e307ecad00563b9d0291bedb811eff3fc3a101d19b8b97cce1b91fb6d251ecfd",
       "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
     },
     "profile": "record-4ch",
-    "firmware": "mpu6050-1.3",
+    "firmware": "mpu6050-1.5",
     "source_sha256": {
       "main/CMakeLists.txt": "0e2c67d98221736b9e01f2d49d1596264d6af338a087a0447b1fa09aa4ef3fab",
       "main/adc_ad7606.c": "77164ec74b6c574a64885a44e9117409f2edaaaf90a82cb737c3834f4672b5e8",
       "main/adc_ads131m04.c": "914ffa6db82ed58aed9d4f0beb1ae05645ac6fb47097ace88e2be8b6a3c6b6aa",
       "main/ads_crc.c": "31cbb5fd61f5e06c394a426e0fa48d14f3561be4d46fffe6a18e1837edad83cc",
       "main/ads_crc.h": "d08cf15ad6e5d8d837e5c532b9665bc9c07a045475ba06c6443eed6b4367aeac",
-      "main/board.h": "83968637dcdf487a1248d8efb2a7965e0e271c49d8e9f9804a71d87c43b1ad27",
+      "main/board.h": "cf4553bf1f480d5c4b8fbc08ee07de3248d3910942aeb86e75be50873bd232b3",
       "main/diagnostic.c": "d7671b98404e9b39d5f5af1eb7fc8e9ddad162b7bb9828dcd0bcf5694a455976",
       "main/format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
       "main/format.h": "1f9bb02632241a07c7fd3a048767bf88ef35e70a66948cd12e275594468e2536",
@@ -446,12 +446,12 @@
       "main/sensors.c": "c30cdea676e4bf998e235f8deadbb17339813a0fd35e50e04194c392e47debf3",
       "main/sensors.h": "880b651acda742396e7da66f113f6ad27022abc4db84a93f9fff6a162e32ff43",
       "main/variant.h": "b4759dd8c2a32f50343eaa2b4ce7f93d18c2fa8488afdad4c14b5d1707d595ff",
-      "main/wifi_live.c": "81a3e010a18b01f0ba20783ec0df5e14970bfa509305fb523beb00975c99e20a",
+      "main/wifi_live.c": "8ce9df841a1b78cbdbc10073ae294556af1e801f9fe7e5e461fcd84b9ed969d5",
       "main/wifi_live.h": "99d2bea23a26f0271f9f5bb8056ff9ec80d1bfaf1edcd33dcf6551bf7926bf6f",
       "CMakeLists.txt": "ccdcd61455a4cd61ba17da36add6811ccd35d3f880115a07c709f883ebc2b0c6",
       "sdkconfig.defaults": "333b5513fd45d3959596dd93da6a9eb721a9182f82c1c6f75aa245ac170f0aad"
     },
     "idf_version": "v5.4.2",
-    "build_note": "Rebuilt 2026-10-11 after porting the fixed-two recorder corrections (worker lifecycle, fault latching, BUSY confirmation, windowed diagnostics) and the shared PSRAM-queue, Wi-Fi password and metadata-limit fixes. Cross-compiled only; not flashed or simulated."
+    "build_note": "Rebuilt 2026-10-12 after porting the fixed-two 1.12 Wi-Fi preview fix (the live task announces a new session's metadata before that session's first data packet); earlier: porting the fixed-two recorder corrections (worker lifecycle, fault latching, BUSY confirmation, windowed diagnostics) and the shared PSRAM-queue, Wi-Fi password and metadata-limit fixes. Cross-compiled only; not flashed or simulated."
   }
 ]
