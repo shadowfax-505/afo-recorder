@@ -56,6 +56,7 @@ static void live_task(void *arg) {
     (void)arg;
     const int sock=live_socket;
     struct sockaddr_in peer={0};int64_t hello_at=0,meta_at=0;item_t pending;bool has_pending=false;uint32_t sent_sid=0;
+    static char copy[META_MAX+1]; // live_task is the only user
     for(;;) {
         char hello[32];struct sockaddr_in source;socklen_t slen=sizeof(source);
         int n=recvfrom(sock,hello,sizeof(hello),0,(struct sockaddr*)&source,&slen);
@@ -69,7 +70,7 @@ static void live_task(void *arg) {
         if(now-hello_at>3000000)atomic_store(&subscribed,false);
         if(!atomic_load(&subscribed)) {has_pending=false;vTaskDelay(pdMS_TO_TICKS(20));continue;}
         if(now-meta_at>=1000000||meta_at==0||sent_sid!=atomic_load(&session_id)) {
-            static char copy[META_MAX+1];uint32_t sid;
+            uint32_t sid;
             xSemaphoreTake(meta_lock,portMAX_DELAY);strcpy(copy,metadata);sid=atomic_load(&session_id);xSemaphoreGive(meta_lock);
             send_packet(sock,&peer,1,sid,copy,(uint16_t)strlen(copy),0);meta_at=now;sent_sid=sid;
         }
@@ -84,6 +85,16 @@ static void live_task(void *arg) {
               xQueueReceive(live_queue,&item,pdMS_TO_TICKS(1))==pdTRUE) {
             if(item.session!=sid){pending=item;has_pending=true;break;}
             records[count++]=item.record;
+        }
+        if(sid!=sent_sid) {
+            // A new session's first record can be dequeued after the metadata
+            // check above ran for the previous session. Announce the session
+            // before its data so the receiver never sees an unknown session;
+            // records left over from an ended session are discarded.
+            uint32_t current;
+            xSemaphoreTake(meta_lock,portMAX_DELAY);strcpy(copy,metadata);current=atomic_load(&session_id);xSemaphoreGive(meta_lock);
+            if(current!=sid)continue;
+            send_packet(sock,&peer,1,sid,copy,(uint16_t)strlen(copy),0);meta_at=esp_timer_get_time();sent_sid=sid;
         }
         send_packet(sock,&peer,2,sid,records,count*sizeof(afo_record_t),count);
     }
