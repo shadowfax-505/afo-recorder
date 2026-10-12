@@ -23,7 +23,7 @@
     "firmware/main/metadata.h": "d4c4fc8ac3d6eb21a482139108424bf4b03aad7920c6e8090eb4c4f4942a29bf",
     "firmware/main/board.h": "bd30da9cf045112e3935c0c8905034581e60e4836d74f6fb2a76f5527739beb5",
     "firmware/main/variant.h": "55c2cdaef8b2d56e2ced2aa23984a289038adc6caaf9d164c92830c24b8cffb9",
-    "simulations/integrated-recorder/main/integration.c": "eb0935a2d58a679e63f420b073139cccee5769baa4517dfce26a3b9fe889ed8c",
+    "simulations/integrated-recorder/main/integration.c": "7d42ffa5ec8c55dc70607e2794cea3288dd94a83abb256bf7b495c832ca9272e",
     "simulations/integrated-recorder/main/CMakeLists.txt": "258724ebeb4a10b7645027bde3df1975d400167e41a599b3e08688e4410b527f",
     "simulations/integrated-recorder/CMakeLists.txt": "81c58935850316a86ef265cb96b8b5daac1f1d7c25f3c7ba71bd3a60325395ba",
     "simulations/integrated-recorder/sdkconfig.defaults": "b16030fc4b7ea7fb63b5c7895e6b2c0b306ade20f5f5daca39a7ea355b2cc8b1",
@@ -40,8 +40,8 @@
     "simulations/integrated-recorder/chips/icm42688.chip.wasm": "8583bbc7d6f518efa6f2348717a4c40586070794968c2f6fcfd694649269d986",
     "simulations/integrated-recorder/chips/stimulus.h": "61ddf5ba66c9c3f234279bf82dec12f848fa73b2b09d66980c193959b7234717",
     "simulations/integrated-recorder/chips/wokwi-api.h": "f72cbb878f7b54017b3eae0450a410905759934e00fbb508cad198951a016c57",
-    "simulations/integrated-recorder/firmware/merged.bin": "bb34b4d3360405fbdc46b225b3379f5a21b0ab60a25c3ccbd981e7bc8b232e18",
-    "simulations/integrated-recorder/firmware/integrated_recorder.elf": "f9df8a7474d5b64b77d4ba77e65403a1570befdc96314558a12372f4eb37a7f0",
+    "simulations/integrated-recorder/firmware/merged.bin": "bd3fc1b79f5095642310a30530dc0a1fbc44dcb81c0a0ed0d801fe87dc70f16b",
+    "simulations/integrated-recorder/firmware/integrated_recorder.elf": "ae4e460e6154247110dc540464826592dc01cf77a535c6c8ca2149b81143182c",
     "simulations/integrated-recorder/firmware/effective-sdkconfig.txt": "c79ea9477db3935ac85868b56fdfbc8c01390820e7bc213441e356653a8b4810"
   }
 }

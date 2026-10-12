@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "build": "ad7606-two-channel-icm42688",
-  "firmware": "ad7606-2ch-1.11",
+  "firmware": "ad7606-2ch-1.12",
   "physical_status": "NOT TESTED",
   "stages": [
     {

@@ -2,7 +2,7 @@
   "scope": "Extracted AD7606 fixed-two ICM breadboard kit",
   "hardware_measured": false,
   "physical_measurements_completed": 0,
-  "archive_sha256": "160a349ad8f5da75e581a1af345a058bf274e94b2e6f9b7ac4ba71203589a912",
+  "archive_sha256": "014a1921bfcbb5d94eac77db9d2ed7d8e3d7622b42a6900f57e1d3cb211249d4",
   "csv_test_environment": {
     "python": "3.14.7",
     "matplotlib_installed": false
@@ -138,7 +138,7 @@
     },
     "signals.svg": {
       "bytes": 82472,
-      "sha256": "97567b9c2935480e6ea088dfd6a94c28c9c61af361631c30f09e17ae442b3b89"
+      "sha256": "cc2a92fcf5f62969726a0e92fa12a7aa09f4b157bcfab3c339978c784c9547b8"
     }
   },
   "tampered_recording_rejected": true,

@@ -1,0 +1,13 @@
+{
+  "pass": true,
+  "refused": true,
+  "reason": "Initialization failed; recording disabled.",
+  "case": "storage-mount-failure",
+  "engine": "Wokwi web editor",
+  "firmware": "ad7606-2ch-1.12",
+  "hardware_measured": false,
+  "serial_sha256": "4b51a122c2f5f0505e2b406c5f347e81db34697dc08dd5a42f964de3752ada6d",
+  "assessor_sha256": "a8be32e469cc56ed7c6f4daae19ed5ba16caaaae91f2aa385800f3aa8db9bc76",
+  "merged_image_sha256": "1430e1aebf43a683c66e730069adcbcbe66df05a724f9cb2d7491c5577613d2d",
+  "build_identity_checked_against_tree": true
+}

@@ -1,0 +1,7 @@
+{
+  "case": "imu-missing-interrupt",
+  "pass": false,
+  "error": "production UDP framing/session decode failed",
+  "engine": "Wokwi web editor",
+  "hardware_measured": false
+}

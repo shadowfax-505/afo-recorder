@@ -8,7 +8,12 @@ Read [the integrated report](../../docs/integrated-verification.html) before int
 
 The current image is **v1.6**, including BUSY-high confirmation and the startup stack-allocation correction. **All eighteen current cases pass through the supported Wokwi web editor**, with complete file/UDP exports and actual host checks. [Current ledger](results/web-current/summary.json) · [web reproduction files](web/README.md). Current byte/capture timing checks do not establish a downloaded VCD; no current waveform retrieval is claimed. The preserved CLI quota refusal and v1.5 partial outcomes remain unchanged. Twelve independent native model groups separately pass under sanitizers. Physical acceptance remains unperformed.
 
-**1.11 image (12 October 2026):** `firmware/` holds a simulation image rebuilt from the 1.11 sources, including `metadata.c`. Breadboard-profile builds do not drive the new PCB STBY pin, so the fixture is unaffected by it. The fixture now fits the firmware’s 1.31 MB PSRAM record queue (1.75 MB of hot disk pages, 2.5 MB UDP capture) and accepts 1,432-byte metadata datagrams. Web results are in `results/web-1.11/` (nominal, write-delay and USB-attached pass; the other cases are pending). Earlier note: The ICM model emits 32/30 µs FIFO timestamp ticks. `audit_timing.py` takes each capture's tick scale and Wi-Fi metadata limit from that capture's own metadata. The first CLI run was refused on the Free-plan monthly CI quota (`results/cli-1.10/normal`), so this image has not yet been executed. The web-editor procedure in `web/` does not use CI quota.
+**1.12 image (12 October 2026):** `firmware/` holds the simulation image built from the 1.12 sources. All 18 cases pass in the web editor; the evidence is in `results/web-1.12/`, with its ledger and timing audit. The 1.11 run (`results/web-1.11/`) found a Wi-Fi preview race that 1.12 fixes. Fixture changes since 1.6:
+- The PSRAM budget fits the firmware's 1.31 MB queue (1.75 MB hot disk pages, 2.5 MB UDP capture).
+- The UDP buffer accepts 1,432-byte datagrams.
+- The 350 ms queue stall expects a normal stop, because the 1.7+ queue absorbs it.
+
+`assess_web.py` labels each result with the firmware named in its boot banner. `--historical` re-assesses superseded evidence whose image no longer matches the tree. Breadboard-profile builds do not drive the PCB STBY pin, so the fixture is unaffected by it. Earlier note: The ICM model emits 32/30 µs FIFO timestamp ticks. `audit_timing.py` takes each capture's tick scale and Wi-Fi metadata limit from that capture's own metadata. The first CLI run was refused on the Free-plan monthly CI quota (`results/cli-1.10/normal`), so this image has not yet been executed. The web-editor procedure in `web/` does not use CI quota.
 
 ## Reproduce
 

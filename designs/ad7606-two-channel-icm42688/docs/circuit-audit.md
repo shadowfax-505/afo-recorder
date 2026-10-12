@@ -28,7 +28,7 @@ The authoritative source remains `design/circuit-spec.json`. `design/audit_conne
 | Breadboard topology | 184 wires, 402 occupied holes, 24 GPIO endpoint checks; 0 named-net splits, shorts, duplicate holes or connector contacts |
 | Host conversion / legacy / live reception / firmware limits | 47 tests pass |
 | Software acquisition faults | 7 scenarios pass, including overflow, missing samples and interrupted file recovery |
-| Firmware | All nine v1.11 laboratory profiles (including two IMU-only bench diagnostics) recompiled with ESP-IDF v5.4.2 (32/30 µs IMU ticks, PSRAM record queue, per-device Wi-Fi password, IMU timestamp-scale checks, AN-1091 STBY sequence on the PCB); three web cases rerun on the 1.11 image, the rest pending |
+| Firmware | All nine v1.12 laboratory profiles (including two IMU-only bench diagnostics) recompiled with ESP-IDF v5.4.2 (32/30 µs IMU ticks, PSRAM record queue, per-device Wi-Fi password, IMU timestamp-scale checks, AN-1091 STBY sequence on the PCB, Wi-Fi preview session announced before data); all 18 web cases pass on the 1.12 image |
 | ngspice | Both channels; 16 tolerance corners; 54 DC/loading cases; unplugged-bias case; transient/ideal quantization checks |
 | Wokwi models | Both compile to WASM; native model unit tests pass |
 | Preserved v1.5 integrated Wokwi execution | Ten complete CLI/firmware passes; nominal firmware/file/UDP passes with optional trace failure; battery partial; four cases unexecuted due to quota. [Tested source/image snapshot](../simulations/integrated-recorder/tested-source-1.5/manifest.json) |

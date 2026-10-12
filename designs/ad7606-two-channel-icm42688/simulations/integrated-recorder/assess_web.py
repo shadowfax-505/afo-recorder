@@ -9,6 +9,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import re
 from pathlib import Path
 import shutil
 import tempfile
@@ -23,11 +24,15 @@ def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def assess_case(case, out):
+def assess_case(case, out, historical=False):
     manifest = json.loads((out / 'tested-build.json').read_text())
-    for name, digest in manifest['sha256'].items():
-        if sha(ROOT / name) != digest:
-            raise ValueError(f'tested build differs from release: {name}')
+    changed = [name for name, digest in manifest['sha256'].items()
+               if not (ROOT / name).is_file() or sha(ROOT / name) != digest]
+    # Historical evidence: the transcript and its tested-build manifest are kept,
+    # but later sources no longer match it. Re-assess the transcript and record
+    # that the image could not be re-identified against the current tree.
+    if changed and not historical:
+        raise ValueError(f'tested build differs from release: {changed[0]}')
     actual = json.loads((out / 'diagram.json').read_text())
     expected = integrated.make_diagram(case)
     # Explicit zero attributes and omitted attributes have identical defaults.
@@ -61,18 +66,28 @@ def assess_case(case, out):
             else:
                 shutil.copyfile(source, destination)
     result.update(case=case, engine='Wokwi web editor',
-                  firmware='ad7606-2ch-1.6', hardware_measured=False,
+                  firmware=firmware_id(out / 'serial.txt'), hardware_measured=False,
                   serial_sha256=sha(out / 'serial.txt'),
                   assessor_sha256=sha(P / 'run.py'),
                   merged_image_sha256=manifest['sha256'][
-                      'simulations/integrated-recorder/firmware/merged.bin'])
+                      'simulations/integrated-recorder/firmware/merged.bin'],
+                  build_identity_checked_against_tree=not changed)
+    if changed:result['files_changed_since_test'] = changed
     return result
+
+
+def firmware_id(serial):
+    """Firmware identity from the recorder's boot banner (1.7+), else the 1.6 image."""
+    match = re.search(r'afo: Firmware (\S+?);', serial.read_text(errors='replace'))
+    return match[1] if match else 'ad7606-2ch-1.6'
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--results', type=Path, default=P / 'results/web-current')
     parser.add_argument('--case', choices=list(integrated.CASES))
+    parser.add_argument('--historical', action='store_true',
+                        help='re-assess superseded evidence without requiring the current tree to match its build')
     args = parser.parse_args()
     cases = [args.case] if args.case else list(integrated.CASES)
     rows = []
@@ -82,7 +97,7 @@ def main():
             rows.append({'case': case, 'pass': None, 'executed': False})
             continue
         try:
-            result = assess_case(case, out)
+            result = assess_case(case, out, args.historical)
         except (ValueError, OSError, KeyError) as exc:
             result = {'case': case, 'pass': False, 'error': str(exc),
                       'engine': 'Wokwi web editor', 'hardware_measured': False}
@@ -90,7 +105,8 @@ def main():
         rows.append(dict(result, executed=True))
         print(json.dumps({k: result[k] for k in ('case', 'pass', 'error') if k in result}))
     if not args.case:
-        summary = dict(engine='Wokwi web editor', firmware='ad7606-2ch-1.6',
+        firmwares = sorted({x.get('firmware') for x in rows if x.get('firmware')})
+        summary = dict(engine='Wokwi web editor', firmware=firmwares[0] if len(firmwares) == 1 else firmwares,
                        hardware_measured=False, planned_cases=len(cases),
                        executed_cases=sum(x['executed'] for x in rows),
                        passed_cases=sum(x['pass'] is True for x in rows),

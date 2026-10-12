@@ -9,7 +9,7 @@
     "imu_timing.h": "2018c0e64cbcb5e894d005c7a6a54ca335f8e7900e0345ad19263d85b298954f",
     "format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
     "format.h": "58b01a597eaa2c70a918ad5ee3b71c9e26fe64aedefc91ffba7d96430510c47b",
-    "board.h": "bd30da9cf045112e3935c0c8905034581e60e4836d74f6fb2a76f5527739beb5",
+    "board.h": "7c69a5213382e10fb67435285c4a0a53fb302b12466c22309292dd845d33e670",
     "variant.h": "55c2cdaef8b2d56e2ced2aa23984a289038adc6caaf9d164c92830c24b8cffb9"
   },
   "stimulus_sha256": "c2d23fb153e84391c9d15172b9170dca5ed42f85f21512dfd61f593e45669e72",
@@ -49,7 +49,7 @@
   "boundary_note": "FIFO packets still buffered at the modeled stop are counted explicitly; no unseen packet is called a recorded measurement.",
   "groups_passed": 6,
   "quality": {
-    "source_sha256": "7874e048da078f1700574dbf16a14abf78e61107559a4b7c6ce1f9afb15ebd1b",
+    "source_sha256": "6637087d124ce989748cf934d02bc54d445cadb02e332c16e791123bd9ad9c13",
     "synthetic": true,
     "counts": {
       "emg": 16000,

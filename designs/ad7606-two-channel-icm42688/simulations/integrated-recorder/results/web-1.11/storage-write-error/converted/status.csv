@@ -1,0 +1,1 @@
+kind,sequence,timestamp_us,flags,timer_missed,queue_dropped,imu_errors,fifo_overflows,adc_errors,emg_records,foot_records,shank_records,battery_mv,queue_high_water

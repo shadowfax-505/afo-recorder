@@ -1,5 +1,18 @@
 # Changelog
 
+## Full Wokwi matrix on firmware 1.12, Wi-Fi preview race fixed — 12 October 2026
+
+- All 18 integrated cases pass in Wokwi’s web editor on the fixed two-channel AD7606 / ICM simulation image built from `ad7606-2ch-1.12`, checked with the production converter and live decoder.
+  - Timing audit: 32/30 µs IMU ticks at 200 Hz, about 7,984 Hz EMG triggers in the fixture, and 1,317 of 1,400 metadata bytes.
+  - Each case keeps its logic-analyzer trace.
+- Firmware 1.12: the Wi-Fi live task now announces a new session (metadata packet) before that session's first data packet. On 1.11, a record dequeued just after the per-loop metadata check could be sent first, and the laptop receiver dropped it as an unknown session; the Wokwi IMU missing-interrupt case caught this. Nine profiles rebuilt.
+  - The same `wifi_live.c` is in the other five designs, which are unchanged pending the project lead's decision.
+- Simulation fixture:
+  - PSRAM budget and UDP buffer updated for the 1.7+ queue and 1,400-byte metadata limit.
+  - The 350 ms queue-stall case now expects a normal stop, since the 2.44 s queue absorbs it.
+  - The assessor labels results with the firmware named in each transcript, and has a `--historical` mode for superseded evidence.
+  - 1.11 (10 of 11 executed cases passed) and the superseded first-fixture runs are kept.
+
 ## AD7606 supply-ramp fix ported to the other AD7606 designs — 12 October 2026
 
 - Applied the same PCB and firmware change to `ad7606-expandable-icm42688`, `ad7606-expandable-mpu6050` and `ad7606-two-channel-mpu6050`. All three generate AVCC from 3V3D with the TPS60150, tie STBY to 3V3D and leave GPIO14 free.
