@@ -56,8 +56,7 @@ esp_err_t __wrap_imu_fifo(unsigned id,uint8_t *data,size_t cap,size_t *packets,b
 // PSRAM budget (8 MB): firmware record queue 1.31 MB (20,480 x 64 B, since
 // 1.7), UDP capture 2.5 MB (largest 1.6 capture 1.72 MB) and 1.75 MB of hot
 // disk pages (largest 1.6 recording 1.62 MB); later pages are allocated on demand.
-#define CAPTURE_BYTES (2560U*1024U)
-#define HOT_PAGES 112U
+static const unsigned capture_bytes=2560U*1024U,hot_pages=112U;
 static uint8_t *pages[DISK_BYTES/PAGE_BYTES];
 static unsigned pages_used,sector_reads,sector_writes;
 static FATFS *mounted_fs;
@@ -110,7 +109,7 @@ esp_err_t __wrap_esp_vfs_fat_sdmmc_mount(const char *path,const sdmmc_host_t *ho
     if(test_case==CASE_MOUNT_FAIL)return ESP_FAIL;
     // Reserve hot data pages before acquisition. Allocating/zeroing a PSRAM
     // page while interrupts are running is a fixture load, not an SD transaction.
-    for(unsigned i=0;i<HOT_PAGES;i++) {
+    for(unsigned i=0;i<hot_pages;i++) {
         pages[i]=heap_caps_calloc(1,PAGE_BYTES,MALLOC_CAP_SPIRAM|MALLOC_CAP_8BIT);
         assert(pages[i]);pages_used++;
     }
@@ -167,6 +166,8 @@ ssize_t __wrap_write(int fd,const void *data,size_t size) {
         if(write_calls==2&&!injected) {
             injected=true;
             if(test_case==CASE_DELAY_WRITE)vTaskDelay(pdMS_TO_TICKS(50));
+            // Since 1.7 the 2.44 s PSRAM queue absorbs one 350 ms SD busy period
+            // (the SD write-busy allowance is 250-500 ms); 1.6 overflowed here.
             if(test_case==CASE_QUEUE_STALL)vTaskDelay(pdMS_TO_TICKS(350));
         }
         if(test_case==CASE_WRITE_FAIL&&write_calls==3){errno=EIO;return -1;}
@@ -207,7 +208,7 @@ static void subscriber_task(void *arg) {
             bool drop=test_case==CASE_PACKET_LOSS&&bytes[5]==2&&udp_received%7==0;
             if(drop){udp_discarded++;continue;}
             if(atomic_load(&capture_packets)) {
-                assert(capture_used+2+n<=CAPTURE_BYTES);
+                assert(capture_used+2+n<=capture_bytes);
                 packet_capture[capture_used++]=n&255;packet_capture[capture_used++]=(unsigned)n>>8;
                 memcpy(packet_capture+capture_used,bytes,n);capture_used+=n;
             }
@@ -275,7 +276,7 @@ static void test_controller(void *arg) {
         assert(f_mount(NULL,mounted_drive,0)==FR_OK);
         assert(f_mount(mounted_fs,mounted_drive,1)==FR_OK);record_fd=-1;
     }
-    else if(test_case==CASE_NORMAL||test_case==CASE_DELAY_WRITE||test_case==CASE_NO_SUBSCRIBER||test_case==CASE_PACKET_LOSS||test_case==CASE_WAVEFORM) {
+    else if(test_case==CASE_NORMAL||test_case==CASE_DELAY_WRITE||test_case==CASE_QUEUE_STALL||test_case==CASE_NO_SUBSCRIBER||test_case==CASE_PACKET_LOSS||test_case==CASE_WAVEFORM) {
         deadline=esp_timer_get_time()+1200000;
         while(atomic_load(&running)&&esp_timer_get_time()<deadline)vTaskDelay(pdMS_TO_TICKS(10));
         if(atomic_load(&running)) {
@@ -301,7 +302,7 @@ void app_main(void) {
     gpio_config_t config={.pin_bit_mask=(1ULL<<3)|(1ULL<<14)|(1ULL<<46)|(1ULL<<48),.mode=GPIO_MODE_INPUT};
     ESP_ERROR_CHECK(gpio_config(&config));
     for(unsigned i=0;i<4;i++)test_case|=__real_gpio_get_level(pins[i])<<i;
-    packet_capture=heap_caps_malloc(CAPTURE_BYTES,MALLOC_CAP_SPIRAM|MALLOC_CAP_8BIT);assert(packet_capture);
+    packet_capture=heap_caps_malloc(capture_bytes,MALLOC_CAP_SPIRAM|MALLOC_CAP_8BIT);assert(packet_capture);
     assert(xTaskCreatePinnedToCore(test_controller,"fixture",12288,NULL,1,NULL,0)==pdPASS);
     assert(xTaskCreatePinnedToCore(subscriber_task,"subscriber",4096,NULL,2,NULL,0)==pdPASS);
     printf("INTEGRATED_BEGIN,case=%u,production_adc_imu=true,storage=FatFS_sparse_RAM,network=lwIP_loopback\n",test_case);

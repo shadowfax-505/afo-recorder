@@ -24,7 +24,7 @@ from live_protocol import decode_packet,encode_packet
 from live_receiver import Capture
 
 CASES={
-    'normal':(0,0), 'write-delay-50ms':(1,0), 'queue-stall-350ms':(2,2),
+    'normal':(0,0), 'write-delay-50ms':(1,0), 'queue-stall-350ms':(2,0),
     'storage-write-error':(3,1), 'usb-attached-during-recording':(4,7),
     'battery-low':(5,4), 'adc-stuck-busy':(6,6), 'imu-fifo-overflow':(7,3),
     'imu-missing-interrupt':(8,3), 'no-wireless-subscriber':(9,0),

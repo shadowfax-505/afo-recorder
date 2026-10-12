@@ -8,7 +8,7 @@
     "device_queue_drops": 0
   },
   "error": null,
-  "session": "c3a680e4-487c9216",
+  "session": "56562457-94c9fb0f",
   "imu": {
     "foot": {
       "accel_g": [
@@ -74,7 +74,7 @@
     "firmware": "ad7606-2ch-1.11",
     "hardware_variant": "breadboard",
     "synthetic": true,
-    "trial_id": "trial_fac3f301.afolog",
+    "trial_id": "trial_368f6f03.afolog",
     "clock": "esp_timer_boot_us",
     "emg_hz": 8000,
     "imu_hz": 200,

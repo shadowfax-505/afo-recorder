@@ -14,12 +14,12 @@
     "application.bin": "0x10000"
   },
   "sha256": {
-    "application.bin": "c92258a2b7a2307ae40b423893b65f6ba260ba8541d80f1094f8762d351bba50",
-    "bootloader.bin": "49460a2f15061982001713e025054e6b33e6ffbe601567e41c2e01ad28144263",
+    "application.bin": "ae43b54b0baf60068a1256a9c7d2739703edebe86fe849803ed5328dc41ecc3c",
+    "bootloader.bin": "bcabf76d0f0f1b633f8fcd7397811cf859ff5b43d0c4f2becb48b0e8bcb66af6",
     "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
   },
   "profile": "diagnostic-imu-two",
-  "source_set": "ad7606-2ch-1.11",
+  "source_set": "ad7606-2ch-1.12",
   "entrypoint": "diagnostic.c",
   "source_sha256": {
     "main/CMakeLists.txt": "029e071b32b8fdaa7081c29d188204bf9f64c2fcca5cfe634741f25766f687b9",
@@ -27,7 +27,7 @@
     "main/adc_ads131m04.c": "914ffa6db82ed58aed9d4f0beb1ae05645ac6fb47097ace88e2be8b6a3c6b6aa",
     "main/ads_crc.c": "31cbb5fd61f5e06c394a426e0fa48d14f3561be4d46fffe6a18e1837edad83cc",
     "main/ads_crc.h": "d08cf15ad6e5d8d837e5c532b9665bc9c07a045475ba06c6443eed6b4367aeac",
-    "main/board.h": "bd30da9cf045112e3935c0c8905034581e60e4836d74f6fb2a76f5527739beb5",
+    "main/board.h": "7c69a5213382e10fb67435285c4a0a53fb302b12466c22309292dd845d33e670",
     "main/diagnostic.c": "df95a818330d5705f3f82fc3d87468f9d1b6ce3eef95644debe05326d593aaa8",
     "main/format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
     "main/format.h": "58b01a597eaa2c70a918ad5ee3b71c9e26fe64aedefc91ffba7d96430510c47b",
@@ -38,7 +38,7 @@
     "main/sensors.c": "f5c6034a43b260de6282d902a1d76d3e4db60bcbca64d364ebd34fc733df84c9",
     "main/sensors.h": "880b651acda742396e7da66f113f6ad27022abc4db84a93f9fff6a162e32ff43",
     "main/variant.h": "55c2cdaef8b2d56e2ced2aa23984a289038adc6caaf9d164c92830c24b8cffb9",
-    "main/wifi_live.c": "81a3e010a18b01f0ba20783ec0df5e14970bfa509305fb523beb00975c99e20a",
+    "main/wifi_live.c": "8ce9df841a1b78cbdbc10073ae294556af1e801f9fe7e5e461fcd84b9ed969d5",
     "main/wifi_live.h": "99d2bea23a26f0271f9f5bb8056ff9ec80d1bfaf1edcd33dcf6551bf7926bf6f",
     "CMakeLists.txt": "ccdcd61455a4cd61ba17da36add6811ccd35d3f880115a07c709f883ebc2b0c6",
     "sdkconfig.defaults": "efa1f6cc8603f5d99512b34847cccd83cac16af42cf8758570f3ed0b1bc01fd2"

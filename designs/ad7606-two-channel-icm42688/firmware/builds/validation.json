@@ -4,9 +4,12 @@
   "recording_profiles_recompiled": 3,
   "diagnostic_profiles_recompiled": 6,
   "idf_version": "v5.4.2",
-  "source_set": "ad7606-2ch-1.11",
-  "previous_source_set": "ad7606-2ch-1.10",
+  "source_set": "ad7606-2ch-1.12",
+  "previous_source_set": "ad7606-2ch-1.11",
   "changes_from_previous": [
+    "Wi-Fi live preview announces a new session (metadata packet) before its first data packet; a race could send the first data batch first, which the laptop receiver discarded as an unknown session (found by the Wokwi integrated matrix)"
+  ],
+  "source_set_1_11_changes": [
     "PCB builds release AD7606 STBY on GPIO14 once per boot, wait tWAKE-UP SHUTDOWN (30 ms, internal reference) and then RESET (ADI AN-1091); breadboard builds keep the ADC module STBY tie and do not drive GPIO14"
   ],
   "source_set_1_10_changes": [
@@ -32,7 +35,7 @@
     "main/adc_ads131m04.c": "914ffa6db82ed58aed9d4f0beb1ae05645ac6fb47097ace88e2be8b6a3c6b6aa",
     "main/ads_crc.c": "31cbb5fd61f5e06c394a426e0fa48d14f3561be4d46fffe6a18e1837edad83cc",
     "main/ads_crc.h": "d08cf15ad6e5d8d837e5c532b9665bc9c07a045475ba06c6443eed6b4367aeac",
-    "main/board.h": "bd30da9cf045112e3935c0c8905034581e60e4836d74f6fb2a76f5527739beb5",
+    "main/board.h": "7c69a5213382e10fb67435285c4a0a53fb302b12466c22309292dd845d33e670",
     "main/diagnostic.c": "df95a818330d5705f3f82fc3d87468f9d1b6ce3eef95644debe05326d593aaa8",
     "main/format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
     "main/format.h": "58b01a597eaa2c70a918ad5ee3b71c9e26fe64aedefc91ffba7d96430510c47b",
@@ -43,7 +46,7 @@
     "main/sensors.c": "f5c6034a43b260de6282d902a1d76d3e4db60bcbca64d364ebd34fc733df84c9",
     "main/sensors.h": "880b651acda742396e7da66f113f6ad27022abc4db84a93f9fff6a162e32ff43",
     "main/variant.h": "55c2cdaef8b2d56e2ced2aa23984a289038adc6caaf9d164c92830c24b8cffb9",
-    "main/wifi_live.c": "81a3e010a18b01f0ba20783ec0df5e14970bfa509305fb523beb00975c99e20a",
+    "main/wifi_live.c": "8ce9df841a1b78cbdbc10073ae294556af1e801f9fe7e5e461fcd84b9ed969d5",
     "main/wifi_live.h": "99d2bea23a26f0271f9f5bb8056ff9ec80d1bfaf1edcd33dcf6551bf7926bf6f",
     "CMakeLists.txt": "ccdcd61455a4cd61ba17da36add6811ccd35d3f880115a07c709f883ebc2b0c6",
     "sdkconfig.defaults": "efa1f6cc8603f5d99512b34847cccd83cac16af42cf8758570f3ed0b1bc01fd2"
@@ -65,12 +68,12 @@
         "application.bin": "0x10000"
       },
       "sha256": {
-        "application.bin": "871367225a4880521ee7a55609b5eb75c8648d7fc8295bb582b3b9bd47d7c189",
-        "bootloader.bin": "49460a2f15061982001713e025054e6b33e6ffbe601567e41c2e01ad28144263",
+        "application.bin": "90b66ff2bd1a2efd781d1d1265c06c9f50a3a76c2729763b95357b3d0c026277",
+        "bootloader.bin": "bcabf76d0f0f1b633f8fcd7397811cf859ff5b43d0c4f2becb48b0e8bcb66af6",
         "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
       },
       "profile": "breadboard-record-2ch",
-      "source_set": "ad7606-2ch-1.11",
+      "source_set": "ad7606-2ch-1.12",
       "entrypoint": "main.c",
       "source_sha256": {
         "main/CMakeLists.txt": "029e071b32b8fdaa7081c29d188204bf9f64c2fcca5cfe634741f25766f687b9",
@@ -78,7 +81,7 @@
         "main/adc_ads131m04.c": "914ffa6db82ed58aed9d4f0beb1ae05645ac6fb47097ace88e2be8b6a3c6b6aa",
         "main/ads_crc.c": "31cbb5fd61f5e06c394a426e0fa48d14f3561be4d46fffe6a18e1837edad83cc",
         "main/ads_crc.h": "d08cf15ad6e5d8d837e5c532b9665bc9c07a045475ba06c6443eed6b4367aeac",
-        "main/board.h": "bd30da9cf045112e3935c0c8905034581e60e4836d74f6fb2a76f5527739beb5",
+        "main/board.h": "7c69a5213382e10fb67435285c4a0a53fb302b12466c22309292dd845d33e670",
         "main/diagnostic.c": "df95a818330d5705f3f82fc3d87468f9d1b6ce3eef95644debe05326d593aaa8",
         "main/format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
         "main/format.h": "58b01a597eaa2c70a918ad5ee3b71c9e26fe64aedefc91ffba7d96430510c47b",
@@ -89,13 +92,13 @@
         "main/sensors.c": "f5c6034a43b260de6282d902a1d76d3e4db60bcbca64d364ebd34fc733df84c9",
         "main/sensors.h": "880b651acda742396e7da66f113f6ad27022abc4db84a93f9fff6a162e32ff43",
         "main/variant.h": "55c2cdaef8b2d56e2ced2aa23984a289038adc6caaf9d164c92830c24b8cffb9",
-        "main/wifi_live.c": "81a3e010a18b01f0ba20783ec0df5e14970bfa509305fb523beb00975c99e20a",
+        "main/wifi_live.c": "8ce9df841a1b78cbdbc10073ae294556af1e801f9fe7e5e461fcd84b9ed969d5",
         "main/wifi_live.h": "99d2bea23a26f0271f9f5bb8056ff9ec80d1bfaf1edcd33dcf6551bf7926bf6f",
         "CMakeLists.txt": "ccdcd61455a4cd61ba17da36add6811ccd35d3f880115a07c709f883ebc2b0c6",
         "sdkconfig.defaults": "efa1f6cc8603f5d99512b34847cccd83cac16af42cf8758570f3ed0b1bc01fd2"
       },
       "current_binary_hardware_tested": false,
-      "recording_firmware": "ad7606-2ch-1.11",
+      "recording_firmware": "ad7606-2ch-1.12",
       "current_binary_wokwi_executed": false,
       "execution_note": "Cross-compiled only; not flashed and not executed in Wokwi or QEMU. The preserved instrumented Wokwi image tested source set ad7606-2ch-1.6."
     },
@@ -115,12 +118,12 @@
         "application.bin": "0x10000"
       },
       "sha256": {
-        "application.bin": "393b22f66abcba5969f3f14120dd1ac9fc513e16a7cb6e56d67e8c0c76c45989",
-        "bootloader.bin": "49460a2f15061982001713e025054e6b33e6ffbe601567e41c2e01ad28144263",
+        "application.bin": "8d71a8a85816d5eb4a27f587033097b10a37edcdcd1f00bfdeea4a4d891130cd",
+        "bootloader.bin": "bcabf76d0f0f1b633f8fcd7397811cf859ff5b43d0c4f2becb48b0e8bcb66af6",
         "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
       },
       "profile": "breadboard-sd-only-2ch",
-      "source_set": "ad7606-2ch-1.11",
+      "source_set": "ad7606-2ch-1.12",
       "entrypoint": "main.c",
       "source_sha256": {
         "main/CMakeLists.txt": "029e071b32b8fdaa7081c29d188204bf9f64c2fcca5cfe634741f25766f687b9",
@@ -128,7 +131,7 @@
         "main/adc_ads131m04.c": "914ffa6db82ed58aed9d4f0beb1ae05645ac6fb47097ace88e2be8b6a3c6b6aa",
         "main/ads_crc.c": "31cbb5fd61f5e06c394a426e0fa48d14f3561be4d46fffe6a18e1837edad83cc",
         "main/ads_crc.h": "d08cf15ad6e5d8d837e5c532b9665bc9c07a045475ba06c6443eed6b4367aeac",
-        "main/board.h": "bd30da9cf045112e3935c0c8905034581e60e4836d74f6fb2a76f5527739beb5",
+        "main/board.h": "7c69a5213382e10fb67435285c4a0a53fb302b12466c22309292dd845d33e670",
         "main/diagnostic.c": "df95a818330d5705f3f82fc3d87468f9d1b6ce3eef95644debe05326d593aaa8",
         "main/format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
         "main/format.h": "58b01a597eaa2c70a918ad5ee3b71c9e26fe64aedefc91ffba7d96430510c47b",
@@ -139,13 +142,13 @@
         "main/sensors.c": "f5c6034a43b260de6282d902a1d76d3e4db60bcbca64d364ebd34fc733df84c9",
         "main/sensors.h": "880b651acda742396e7da66f113f6ad27022abc4db84a93f9fff6a162e32ff43",
         "main/variant.h": "55c2cdaef8b2d56e2ced2aa23984a289038adc6caaf9d164c92830c24b8cffb9",
-        "main/wifi_live.c": "81a3e010a18b01f0ba20783ec0df5e14970bfa509305fb523beb00975c99e20a",
+        "main/wifi_live.c": "8ce9df841a1b78cbdbc10073ae294556af1e801f9fe7e5e461fcd84b9ed969d5",
         "main/wifi_live.h": "99d2bea23a26f0271f9f5bb8056ff9ec80d1bfaf1edcd33dcf6551bf7926bf6f",
         "CMakeLists.txt": "ccdcd61455a4cd61ba17da36add6811ccd35d3f880115a07c709f883ebc2b0c6",
         "sdkconfig.defaults": "efa1f6cc8603f5d99512b34847cccd83cac16af42cf8758570f3ed0b1bc01fd2"
       },
       "current_binary_hardware_tested": false,
-      "recording_firmware": "ad7606-2ch-1.11",
+      "recording_firmware": "ad7606-2ch-1.12",
       "current_binary_wokwi_executed": false,
       "execution_note": "Cross-compiled only; not flashed and not executed in Wokwi or QEMU. The preserved instrumented Wokwi image tested source set ad7606-2ch-1.6."
     },
@@ -165,12 +168,12 @@
         "application.bin": "0x10000"
       },
       "sha256": {
-        "application.bin": "bb42830c1b952bb62f7ea9a01e1402ee93529ec6414afd9152b45ee8eb3fce97",
-        "bootloader.bin": "49460a2f15061982001713e025054e6b33e6ffbe601567e41c2e01ad28144263",
+        "application.bin": "4ae7661262376a3b64d0d1931744923ec303f1dbb72609d0b608cdb96f1b7da9",
+        "bootloader.bin": "bcabf76d0f0f1b633f8fcd7397811cf859ff5b43d0c4f2becb48b0e8bcb66af6",
         "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
       },
       "profile": "diagnostic-adc",
-      "source_set": "ad7606-2ch-1.11",
+      "source_set": "ad7606-2ch-1.12",
       "entrypoint": "diagnostic.c",
       "source_sha256": {
         "main/CMakeLists.txt": "029e071b32b8fdaa7081c29d188204bf9f64c2fcca5cfe634741f25766f687b9",
@@ -178,7 +181,7 @@
         "main/adc_ads131m04.c": "914ffa6db82ed58aed9d4f0beb1ae05645ac6fb47097ace88e2be8b6a3c6b6aa",
         "main/ads_crc.c": "31cbb5fd61f5e06c394a426e0fa48d14f3561be4d46fffe6a18e1837edad83cc",
         "main/ads_crc.h": "d08cf15ad6e5d8d837e5c532b9665bc9c07a045475ba06c6443eed6b4367aeac",
-        "main/board.h": "bd30da9cf045112e3935c0c8905034581e60e4836d74f6fb2a76f5527739beb5",
+        "main/board.h": "7c69a5213382e10fb67435285c4a0a53fb302b12466c22309292dd845d33e670",
         "main/diagnostic.c": "df95a818330d5705f3f82fc3d87468f9d1b6ce3eef95644debe05326d593aaa8",
         "main/format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
         "main/format.h": "58b01a597eaa2c70a918ad5ee3b71c9e26fe64aedefc91ffba7d96430510c47b",
@@ -189,7 +192,7 @@
         "main/sensors.c": "f5c6034a43b260de6282d902a1d76d3e4db60bcbca64d364ebd34fc733df84c9",
         "main/sensors.h": "880b651acda742396e7da66f113f6ad27022abc4db84a93f9fff6a162e32ff43",
         "main/variant.h": "55c2cdaef8b2d56e2ced2aa23984a289038adc6caaf9d164c92830c24b8cffb9",
-        "main/wifi_live.c": "81a3e010a18b01f0ba20783ec0df5e14970bfa509305fb523beb00975c99e20a",
+        "main/wifi_live.c": "8ce9df841a1b78cbdbc10073ae294556af1e801f9fe7e5e461fcd84b9ed969d5",
         "main/wifi_live.h": "99d2bea23a26f0271f9f5bb8056ff9ec80d1bfaf1edcd33dcf6551bf7926bf6f",
         "CMakeLists.txt": "ccdcd61455a4cd61ba17da36add6811ccd35d3f880115a07c709f883ebc2b0c6",
         "sdkconfig.defaults": "efa1f6cc8603f5d99512b34847cccd83cac16af42cf8758570f3ed0b1bc01fd2"
@@ -214,12 +217,12 @@
         "application.bin": "0x10000"
       },
       "sha256": {
-        "application.bin": "6a4a234ba1983baa82758454c6e28666cf9cfd38668db6401d247ecc91a0e3a5",
-        "bootloader.bin": "49460a2f15061982001713e025054e6b33e6ffbe601567e41c2e01ad28144263",
+        "application.bin": "97c3cc29ae92b70404f6eae07a1f60cd2ce5c8b280686e91787599fb68c4335a",
+        "bootloader.bin": "bcabf76d0f0f1b633f8fcd7397811cf859ff5b43d0c4f2becb48b0e8bcb66af6",
         "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
       },
       "profile": "diagnostic-controller",
-      "source_set": "ad7606-2ch-1.11",
+      "source_set": "ad7606-2ch-1.12",
       "entrypoint": "diagnostic.c",
       "source_sha256": {
         "main/CMakeLists.txt": "029e071b32b8fdaa7081c29d188204bf9f64c2fcca5cfe634741f25766f687b9",
@@ -227,7 +230,7 @@
         "main/adc_ads131m04.c": "914ffa6db82ed58aed9d4f0beb1ae05645ac6fb47097ace88e2be8b6a3c6b6aa",
         "main/ads_crc.c": "31cbb5fd61f5e06c394a426e0fa48d14f3561be4d46fffe6a18e1837edad83cc",
         "main/ads_crc.h": "d08cf15ad6e5d8d837e5c532b9665bc9c07a045475ba06c6443eed6b4367aeac",
-        "main/board.h": "bd30da9cf045112e3935c0c8905034581e60e4836d74f6fb2a76f5527739beb5",
+        "main/board.h": "7c69a5213382e10fb67435285c4a0a53fb302b12466c22309292dd845d33e670",
         "main/diagnostic.c": "df95a818330d5705f3f82fc3d87468f9d1b6ce3eef95644debe05326d593aaa8",
         "main/format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
         "main/format.h": "58b01a597eaa2c70a918ad5ee3b71c9e26fe64aedefc91ffba7d96430510c47b",
@@ -238,7 +241,7 @@
         "main/sensors.c": "f5c6034a43b260de6282d902a1d76d3e4db60bcbca64d364ebd34fc733df84c9",
         "main/sensors.h": "880b651acda742396e7da66f113f6ad27022abc4db84a93f9fff6a162e32ff43",
         "main/variant.h": "55c2cdaef8b2d56e2ced2aa23984a289038adc6caaf9d164c92830c24b8cffb9",
-        "main/wifi_live.c": "81a3e010a18b01f0ba20783ec0df5e14970bfa509305fb523beb00975c99e20a",
+        "main/wifi_live.c": "8ce9df841a1b78cbdbc10073ae294556af1e801f9fe7e5e461fcd84b9ed969d5",
         "main/wifi_live.h": "99d2bea23a26f0271f9f5bb8056ff9ec80d1bfaf1edcd33dcf6551bf7926bf6f",
         "CMakeLists.txt": "ccdcd61455a4cd61ba17da36add6811ccd35d3f880115a07c709f883ebc2b0c6",
         "sdkconfig.defaults": "efa1f6cc8603f5d99512b34847cccd83cac16af42cf8758570f3ed0b1bc01fd2"
@@ -263,12 +266,12 @@
         "application.bin": "0x10000"
       },
       "sha256": {
-        "application.bin": "dbd32c1f82f040e9e281a7c34c37ec975317951ab1d93b733f8bc66fa83860de",
-        "bootloader.bin": "49460a2f15061982001713e025054e6b33e6ffbe601567e41c2e01ad28144263",
+        "application.bin": "b70a485bef6f2278fe1d922a6a163c365511688312ec1fc5cc4c9e5b5d23c4bf",
+        "bootloader.bin": "bcabf76d0f0f1b633f8fcd7397811cf859ff5b43d0c4f2becb48b0e8bcb66af6",
         "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
       },
       "profile": "diagnostic-imu-one",
-      "source_set": "ad7606-2ch-1.11",
+      "source_set": "ad7606-2ch-1.12",
       "entrypoint": "diagnostic.c",
       "source_sha256": {
         "main/CMakeLists.txt": "029e071b32b8fdaa7081c29d188204bf9f64c2fcca5cfe634741f25766f687b9",
@@ -276,7 +279,7 @@
         "main/adc_ads131m04.c": "914ffa6db82ed58aed9d4f0beb1ae05645ac6fb47097ace88e2be8b6a3c6b6aa",
         "main/ads_crc.c": "31cbb5fd61f5e06c394a426e0fa48d14f3561be4d46fffe6a18e1837edad83cc",
         "main/ads_crc.h": "d08cf15ad6e5d8d837e5c532b9665bc9c07a045475ba06c6443eed6b4367aeac",
-        "main/board.h": "bd30da9cf045112e3935c0c8905034581e60e4836d74f6fb2a76f5527739beb5",
+        "main/board.h": "7c69a5213382e10fb67435285c4a0a53fb302b12466c22309292dd845d33e670",
         "main/diagnostic.c": "df95a818330d5705f3f82fc3d87468f9d1b6ce3eef95644debe05326d593aaa8",
         "main/format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
         "main/format.h": "58b01a597eaa2c70a918ad5ee3b71c9e26fe64aedefc91ffba7d96430510c47b",
@@ -287,7 +290,7 @@
         "main/sensors.c": "f5c6034a43b260de6282d902a1d76d3e4db60bcbca64d364ebd34fc733df84c9",
         "main/sensors.h": "880b651acda742396e7da66f113f6ad27022abc4db84a93f9fff6a162e32ff43",
         "main/variant.h": "55c2cdaef8b2d56e2ced2aa23984a289038adc6caaf9d164c92830c24b8cffb9",
-        "main/wifi_live.c": "81a3e010a18b01f0ba20783ec0df5e14970bfa509305fb523beb00975c99e20a",
+        "main/wifi_live.c": "8ce9df841a1b78cbdbc10073ae294556af1e801f9fe7e5e461fcd84b9ed969d5",
         "main/wifi_live.h": "99d2bea23a26f0271f9f5bb8056ff9ec80d1bfaf1edcd33dcf6551bf7926bf6f",
         "CMakeLists.txt": "ccdcd61455a4cd61ba17da36add6811ccd35d3f880115a07c709f883ebc2b0c6",
         "sdkconfig.defaults": "efa1f6cc8603f5d99512b34847cccd83cac16af42cf8758570f3ed0b1bc01fd2"
@@ -312,12 +315,12 @@
         "application.bin": "0x10000"
       },
       "sha256": {
-        "application.bin": "c92258a2b7a2307ae40b423893b65f6ba260ba8541d80f1094f8762d351bba50",
-        "bootloader.bin": "49460a2f15061982001713e025054e6b33e6ffbe601567e41c2e01ad28144263",
+        "application.bin": "ae43b54b0baf60068a1256a9c7d2739703edebe86fe849803ed5328dc41ecc3c",
+        "bootloader.bin": "bcabf76d0f0f1b633f8fcd7397811cf859ff5b43d0c4f2becb48b0e8bcb66af6",
         "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
       },
       "profile": "diagnostic-imu-two",
-      "source_set": "ad7606-2ch-1.11",
+      "source_set": "ad7606-2ch-1.12",
       "entrypoint": "diagnostic.c",
       "source_sha256": {
         "main/CMakeLists.txt": "029e071b32b8fdaa7081c29d188204bf9f64c2fcca5cfe634741f25766f687b9",
@@ -325,7 +328,7 @@
         "main/adc_ads131m04.c": "914ffa6db82ed58aed9d4f0beb1ae05645ac6fb47097ace88e2be8b6a3c6b6aa",
         "main/ads_crc.c": "31cbb5fd61f5e06c394a426e0fa48d14f3561be4d46fffe6a18e1837edad83cc",
         "main/ads_crc.h": "d08cf15ad6e5d8d837e5c532b9665bc9c07a045475ba06c6443eed6b4367aeac",
-        "main/board.h": "bd30da9cf045112e3935c0c8905034581e60e4836d74f6fb2a76f5527739beb5",
+        "main/board.h": "7c69a5213382e10fb67435285c4a0a53fb302b12466c22309292dd845d33e670",
         "main/diagnostic.c": "df95a818330d5705f3f82fc3d87468f9d1b6ce3eef95644debe05326d593aaa8",
         "main/format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
         "main/format.h": "58b01a597eaa2c70a918ad5ee3b71c9e26fe64aedefc91ffba7d96430510c47b",
@@ -336,7 +339,7 @@
         "main/sensors.c": "f5c6034a43b260de6282d902a1d76d3e4db60bcbca64d364ebd34fc733df84c9",
         "main/sensors.h": "880b651acda742396e7da66f113f6ad27022abc4db84a93f9fff6a162e32ff43",
         "main/variant.h": "55c2cdaef8b2d56e2ced2aa23984a289038adc6caaf9d164c92830c24b8cffb9",
-        "main/wifi_live.c": "81a3e010a18b01f0ba20783ec0df5e14970bfa509305fb523beb00975c99e20a",
+        "main/wifi_live.c": "8ce9df841a1b78cbdbc10073ae294556af1e801f9fe7e5e461fcd84b9ed969d5",
         "main/wifi_live.h": "99d2bea23a26f0271f9f5bb8056ff9ec80d1bfaf1edcd33dcf6551bf7926bf6f",
         "CMakeLists.txt": "ccdcd61455a4cd61ba17da36add6811ccd35d3f880115a07c709f883ebc2b0c6",
         "sdkconfig.defaults": "efa1f6cc8603f5d99512b34847cccd83cac16af42cf8758570f3ed0b1bc01fd2"
@@ -361,12 +364,12 @@
         "application.bin": "0x10000"
       },
       "sha256": {
-        "application.bin": "d8e4011dadca6265d6566c15bf04e186c38d4a16289c5a27a8c9f4cff108d0ac",
-        "bootloader.bin": "49460a2f15061982001713e025054e6b33e6ffbe601567e41c2e01ad28144263",
+        "application.bin": "db229b898f14e29f39be8486b37d3c0c8944cb43461a5fa11537f07ac5d214b9",
+        "bootloader.bin": "bcabf76d0f0f1b633f8fcd7397811cf859ff5b43d0c4f2becb48b0e8bcb66af6",
         "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
       },
       "profile": "diagnostic-imu-bench-one",
-      "source_set": "ad7606-2ch-1.11",
+      "source_set": "ad7606-2ch-1.12",
       "entrypoint": "diagnostic.c",
       "source_sha256": {
         "main/CMakeLists.txt": "029e071b32b8fdaa7081c29d188204bf9f64c2fcca5cfe634741f25766f687b9",
@@ -374,7 +377,7 @@
         "main/adc_ads131m04.c": "914ffa6db82ed58aed9d4f0beb1ae05645ac6fb47097ace88e2be8b6a3c6b6aa",
         "main/ads_crc.c": "31cbb5fd61f5e06c394a426e0fa48d14f3561be4d46fffe6a18e1837edad83cc",
         "main/ads_crc.h": "d08cf15ad6e5d8d837e5c532b9665bc9c07a045475ba06c6443eed6b4367aeac",
-        "main/board.h": "bd30da9cf045112e3935c0c8905034581e60e4836d74f6fb2a76f5527739beb5",
+        "main/board.h": "7c69a5213382e10fb67435285c4a0a53fb302b12466c22309292dd845d33e670",
         "main/diagnostic.c": "df95a818330d5705f3f82fc3d87468f9d1b6ce3eef95644debe05326d593aaa8",
         "main/format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
         "main/format.h": "58b01a597eaa2c70a918ad5ee3b71c9e26fe64aedefc91ffba7d96430510c47b",
@@ -385,7 +388,7 @@
         "main/sensors.c": "f5c6034a43b260de6282d902a1d76d3e4db60bcbca64d364ebd34fc733df84c9",
         "main/sensors.h": "880b651acda742396e7da66f113f6ad27022abc4db84a93f9fff6a162e32ff43",
         "main/variant.h": "55c2cdaef8b2d56e2ced2aa23984a289038adc6caaf9d164c92830c24b8cffb9",
-        "main/wifi_live.c": "81a3e010a18b01f0ba20783ec0df5e14970bfa509305fb523beb00975c99e20a",
+        "main/wifi_live.c": "8ce9df841a1b78cbdbc10073ae294556af1e801f9fe7e5e461fcd84b9ed969d5",
         "main/wifi_live.h": "99d2bea23a26f0271f9f5bb8056ff9ec80d1bfaf1edcd33dcf6551bf7926bf6f",
         "CMakeLists.txt": "ccdcd61455a4cd61ba17da36add6811ccd35d3f880115a07c709f883ebc2b0c6",
         "sdkconfig.defaults": "efa1f6cc8603f5d99512b34847cccd83cac16af42cf8758570f3ed0b1bc01fd2"
@@ -410,12 +413,12 @@
         "application.bin": "0x10000"
       },
       "sha256": {
-        "application.bin": "2cef832eadaa0a3740eaf264d2ccb726ef8fce9248b625404e41df7aaf61a82f",
-        "bootloader.bin": "49460a2f15061982001713e025054e6b33e6ffbe601567e41c2e01ad28144263",
+        "application.bin": "1c4ea59ca9392751e0d543e15be8dd3e128be046901e42609ca5acdf65c04dba",
+        "bootloader.bin": "bcabf76d0f0f1b633f8fcd7397811cf859ff5b43d0c4f2becb48b0e8bcb66af6",
         "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
       },
       "profile": "diagnostic-imu-bench-two",
-      "source_set": "ad7606-2ch-1.11",
+      "source_set": "ad7606-2ch-1.12",
       "entrypoint": "diagnostic.c",
       "source_sha256": {
         "main/CMakeLists.txt": "029e071b32b8fdaa7081c29d188204bf9f64c2fcca5cfe634741f25766f687b9",
@@ -423,7 +426,7 @@
         "main/adc_ads131m04.c": "914ffa6db82ed58aed9d4f0beb1ae05645ac6fb47097ace88e2be8b6a3c6b6aa",
         "main/ads_crc.c": "31cbb5fd61f5e06c394a426e0fa48d14f3561be4d46fffe6a18e1837edad83cc",
         "main/ads_crc.h": "d08cf15ad6e5d8d837e5c532b9665bc9c07a045475ba06c6443eed6b4367aeac",
-        "main/board.h": "bd30da9cf045112e3935c0c8905034581e60e4836d74f6fb2a76f5527739beb5",
+        "main/board.h": "7c69a5213382e10fb67435285c4a0a53fb302b12466c22309292dd845d33e670",
         "main/diagnostic.c": "df95a818330d5705f3f82fc3d87468f9d1b6ce3eef95644debe05326d593aaa8",
         "main/format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
         "main/format.h": "58b01a597eaa2c70a918ad5ee3b71c9e26fe64aedefc91ffba7d96430510c47b",
@@ -434,7 +437,7 @@
         "main/sensors.c": "f5c6034a43b260de6282d902a1d76d3e4db60bcbca64d364ebd34fc733df84c9",
         "main/sensors.h": "880b651acda742396e7da66f113f6ad27022abc4db84a93f9fff6a162e32ff43",
         "main/variant.h": "55c2cdaef8b2d56e2ced2aa23984a289038adc6caaf9d164c92830c24b8cffb9",
-        "main/wifi_live.c": "81a3e010a18b01f0ba20783ec0df5e14970bfa509305fb523beb00975c99e20a",
+        "main/wifi_live.c": "8ce9df841a1b78cbdbc10073ae294556af1e801f9fe7e5e461fcd84b9ed969d5",
         "main/wifi_live.h": "99d2bea23a26f0271f9f5bb8056ff9ec80d1bfaf1edcd33dcf6551bf7926bf6f",
         "CMakeLists.txt": "ccdcd61455a4cd61ba17da36add6811ccd35d3f880115a07c709f883ebc2b0c6",
         "sdkconfig.defaults": "efa1f6cc8603f5d99512b34847cccd83cac16af42cf8758570f3ed0b1bc01fd2"
@@ -459,12 +462,12 @@
         "application.bin": "0x10000"
       },
       "sha256": {
-        "application.bin": "0f8df84f51aebe4f06a33d5c4460d74e052071df9f6f4795a06d55904d597136",
-        "bootloader.bin": "49460a2f15061982001713e025054e6b33e6ffbe601567e41c2e01ad28144263",
+        "application.bin": "ed3dc90453ab2067a8a7e431977b77731e9d259ec297e04c058aa022bacf4f04",
+        "bootloader.bin": "bcabf76d0f0f1b633f8fcd7397811cf859ff5b43d0c4f2becb48b0e8bcb66af6",
         "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
       },
       "profile": "record-2ch",
-      "source_set": "ad7606-2ch-1.11",
+      "source_set": "ad7606-2ch-1.12",
       "entrypoint": "main.c",
       "source_sha256": {
         "main/CMakeLists.txt": "029e071b32b8fdaa7081c29d188204bf9f64c2fcca5cfe634741f25766f687b9",
@@ -472,7 +475,7 @@
         "main/adc_ads131m04.c": "914ffa6db82ed58aed9d4f0beb1ae05645ac6fb47097ace88e2be8b6a3c6b6aa",
         "main/ads_crc.c": "31cbb5fd61f5e06c394a426e0fa48d14f3561be4d46fffe6a18e1837edad83cc",
         "main/ads_crc.h": "d08cf15ad6e5d8d837e5c532b9665bc9c07a045475ba06c6443eed6b4367aeac",
-        "main/board.h": "bd30da9cf045112e3935c0c8905034581e60e4836d74f6fb2a76f5527739beb5",
+        "main/board.h": "7c69a5213382e10fb67435285c4a0a53fb302b12466c22309292dd845d33e670",
         "main/diagnostic.c": "df95a818330d5705f3f82fc3d87468f9d1b6ce3eef95644debe05326d593aaa8",
         "main/format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
         "main/format.h": "58b01a597eaa2c70a918ad5ee3b71c9e26fe64aedefc91ffba7d96430510c47b",
@@ -483,13 +486,13 @@
         "main/sensors.c": "f5c6034a43b260de6282d902a1d76d3e4db60bcbca64d364ebd34fc733df84c9",
         "main/sensors.h": "880b651acda742396e7da66f113f6ad27022abc4db84a93f9fff6a162e32ff43",
         "main/variant.h": "55c2cdaef8b2d56e2ced2aa23984a289038adc6caaf9d164c92830c24b8cffb9",
-        "main/wifi_live.c": "81a3e010a18b01f0ba20783ec0df5e14970bfa509305fb523beb00975c99e20a",
+        "main/wifi_live.c": "8ce9df841a1b78cbdbc10073ae294556af1e801f9fe7e5e461fcd84b9ed969d5",
         "main/wifi_live.h": "99d2bea23a26f0271f9f5bb8056ff9ec80d1bfaf1edcd33dcf6551bf7926bf6f",
         "CMakeLists.txt": "ccdcd61455a4cd61ba17da36add6811ccd35d3f880115a07c709f883ebc2b0c6",
         "sdkconfig.defaults": "efa1f6cc8603f5d99512b34847cccd83cac16af42cf8758570f3ed0b1bc01fd2"
       },
       "current_binary_hardware_tested": false,
-      "recording_firmware": "ad7606-2ch-1.11",
+      "recording_firmware": "ad7606-2ch-1.12",
       "current_binary_wokwi_executed": false,
       "execution_note": "Cross-compiled only; not flashed and not executed in Wokwi or QEMU. The preserved instrumented Wokwi image tested source set ad7606-2ch-1.6."
     }

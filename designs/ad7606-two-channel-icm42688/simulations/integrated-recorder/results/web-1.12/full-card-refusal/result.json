@@ -1,0 +1,13 @@
+{
+  "pass": true,
+  "refused": true,
+  "reason": "Start refused:",
+  "case": "full-card-refusal",
+  "engine": "Wokwi web editor",
+  "firmware": "ad7606-2ch-1.12",
+  "hardware_measured": false,
+  "serial_sha256": "3dcffb6fa36df273d61f64de1a3e3baf75b4fa6821a72179afab5d7c5bc437b3",
+  "assessor_sha256": "a8be32e469cc56ed7c6f4daae19ed5ba16caaaae91f2aa385800f3aa8db9bc76",
+  "merged_image_sha256": "1430e1aebf43a683c66e730069adcbcbe66df05a724f9cb2d7491c5577613d2d",
+  "build_identity_checked_against_tree": true
+}

@@ -1,0 +1,235 @@
+{
+  "pass": true,
+  "failures": [],
+  "production": {
+    "case": 3,
+    "fault": 1,
+    "emg": 234,
+    "foot": 17,
+    "shank": 6,
+    "missed": 0,
+    "dropped": 0,
+    "imu_errors": 0,
+    "fifo_overflows": 0,
+    "adc_errors": 0,
+    "queue_peak": 11,
+    "udp": 34,
+    "discarded": 0,
+    "writes": 3,
+    "syncs": 1,
+    "closes": 1,
+    "pages": 112
+  },
+  "saved_record_count": 128,
+  "saved_bytes": 12288,
+  "quality": {
+    "source_sha256": "87d0b30b0ece59458a44dfcc73939241a5d744159f5b1c4358c658bd5e82321d",
+    "synthetic": true,
+    "counts": {
+      "emg": 111,
+      "foot": 14,
+      "shank": 3,
+      "status": 0,
+      "end": 0
+    },
+    "session_finalized": false,
+    "structurally_complete": false,
+    "no_detected_sample_loss": false,
+    "signal_checks_pass": true,
+    "research_ready": false,
+    "sequence_gaps": {
+      "emg": 0,
+      "foot": 0,
+      "shank": 0
+    },
+    "anomalies": {
+      "sequence_regressions": 0,
+      "timestamp_regressions": 0,
+      "emg_clipped_samples": 0,
+      "emg_out_of_range": 0,
+      "imu_invalid_samples": 0,
+      "imu_timestamp_anomalies": 0,
+      "timing_uncertain_records": 17,
+      "flagged_gap_records": 0
+    },
+    "emg_observed_skipped_slots": 0,
+    "emg_rate_from_host_timestamps_hz": 7983.742197706489,
+    "last_status": null,
+    "issues": [
+      {
+        "kind": "missing_end",
+        "message": "Unfinalized session; trailing samples may be lost."
+      }
+    ],
+    "imu_clock": {
+      "foot": {
+        "tick_steps": 13,
+        "median_tick_step": 4688.0,
+        "expected_tick_step": 4687.4999,
+        "nominal_tick_us": 1.0666667,
+        "median_step_error_percent": 0.0107,
+        "fit_reads": 4,
+        "fit_span_s": null,
+        "host_us_per_sensor_tick": null,
+        "sensor_tick_error_ppm": null,
+        "fit_note": "needs at least 40 FIFO reads spanning 10 s",
+        "within_1_percent": true,
+        "within_datasheet_tolerance": true,
+        "host_time_fit": null
+      },
+      "shank": {
+        "tick_steps": 2,
+        "median_tick_step": 4687.5,
+        "expected_tick_step": 4687.4999,
+        "nominal_tick_us": 1.0666667,
+        "median_step_error_percent": 0.0,
+        "fit_reads": 3,
+        "fit_span_s": null,
+        "host_us_per_sensor_tick": null,
+        "sensor_tick_error_ppm": null,
+        "fit_note": "needs at least 40 FIFO reads spanning 10 s",
+        "within_1_percent": true,
+        "within_datasheet_tolerance": true,
+        "host_time_fit": null
+      }
+    },
+    "imu_clock_note": "Screen only: FIFO timestamp increments versus the recorded nominal tick (imu_timestamp_tick_us), and sensor ticks versus ESP32 interrupt times. Includes interrupt latency; not a calibration. host_time_fitted_us in foot.csv/shank.csv maps each sample onto the ESP32 clock using a least-squares fit of all interrupt anchors; use it, not host_time_estimate_us, to align IMU with EMG in recordings longer than a few seconds.",
+    "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
+    "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
+  },
+  "live": {
+    "stats": {
+      "packets": 34,
+      "packet_gaps": 0,
+      "reordered_or_duplicate": 0,
+      "invalid_packets": 0,
+      "unknown_session_packets": 0,
+      "device_queue_drops": 0
+    },
+    "error": null,
+    "session": "22995314-7a35fab1",
+    "imu": {
+      "foot": {
+        "accel_g": [
+          0.00048828125,
+          0.0,
+          1.0
+        ],
+        "gyro_dps": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "sequence": 17,
+        "timestamp_us": 955001,
+        "flags": 2
+      },
+      "shank": {
+        "accel_g": [
+          0.0009765625,
+          0.0,
+          1.0
+        ],
+        "gyro_dps": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "sequence": 6,
+        "timestamp_us": 955002,
+        "flags": 2
+      }
+    },
+    "health": {
+      "timer_missed": 0,
+      "queue_dropped": 0,
+      "imu_errors": 0,
+      "fifo_overflows": 0,
+      "adc_errors": 0,
+      "emg_records": 234,
+      "foot_records": 17,
+      "shank_records": 6,
+      "battery_mv": 3800,
+      "queue_high_water": 11
+    },
+    "metadata": {
+      "hardware_design": "AD7606_TWO_FIXED",
+      "schema": "afo-recorder/3",
+      "adc_model": "AD7606",
+      "adc_bits": 16,
+      "adc_reference_mv": 5000,
+      "adc_reference_measured": false,
+      "input_scale": 1,
+      "input_midpoint_mv": 0,
+      "adc_pga": 1,
+      "adc_osr": 1,
+      "adc_sensor_crc_supported": false,
+      "adc_filter": "oversampling disabled; internal analog filter",
+      "sample_timestamp_event": "CONVST GPIO write software timestamp",
+      "adc_clock_hz": 0,
+      "sd_cmd_gpio": 47,
+      "sd_clk_gpio": 39,
+      "sd_d0_gpio": 40,
+      "firmware": "ad7606-2ch-1.11",
+      "hardware_variant": "breadboard",
+      "synthetic": true,
+      "trial_id": "trial_70c4e89a.afolog",
+      "clock": "esp_timer_boot_us",
+      "emg_hz": 8000,
+      "imu_hz": 200,
+      "imu_enabled": true,
+      "active_channel_count": 2,
+      "emg_channels": [
+        "EMG1",
+        "EMG2"
+      ],
+      "calibration_state": "uncalibrated",
+      "simultaneous": true,
+      "accel_range_g": 16,
+      "gyro_range_dps": 2000,
+      "imu_timestamp_tick_us": 1.0666667,
+      "imu_timing_calibrated": false,
+      "imu_locations": [
+        "foot",
+        "shank"
+      ],
+      "imu_time": "fifo_delta_first_irq",
+      "placement_verified": false,
+      "record_bytes": 64,
+      "usb_recording_inhibit": true,
+      "record_queue_entries": 20480,
+      "analog_filter": "two cascaded 3.3k/47nF low-pass sections, each unity buffered; 100R series output, 1nF to ground; single-ended ADC",
+      "unplugged_input_bias_mv": 1500,
+      "unplugged_input_bias_ohm": 1000000,
+      "clock_or_filter_delay_correction": "none",
+      "notes": "Engineering prototype; physical validation pending",
+      "transport": "wifi_udp",
+      "live_capture": true
+    },
+    "records": 257,
+    "ended": true,
+    "first_sequence": {
+      "2": 1,
+      "7": 1,
+      "3": 1
+    },
+    "sequence_gaps": {},
+    "stop_reason": 1
+  },
+  "udp_packets": 34,
+  "source_sha256": "c3b2ce82bb9cfd28cf0829819142e911bc7a2106622af00b0c3b45d732a2e16b",
+  "case": "storage-write-error",
+  "engine": "Wokwi web editor",
+  "firmware": "ad7606-2ch-1.11",
+  "hardware_measured": false,
+  "serial_sha256": "3cf212b7ad5410552f7da7bf4717425a4631dff6df43027492dc033a19ab2482",
+  "assessor_sha256": "a8be32e469cc56ed7c6f4daae19ed5ba16caaaae91f2aa385800f3aa8db9bc76",
+  "merged_image_sha256": "bd3fc1b79f5095642310a30530dc0a1fbc44dcb81c0a0ed0d801fe87dc70f16b",
+  "build_identity_checked_against_tree": false,
+  "files_changed_since_test": [
+    "firmware/main/wifi_live.c",
+    "firmware/main/board.h",
+    "simulations/integrated-recorder/firmware/merged.bin",
+    "simulations/integrated-recorder/firmware/integrated_recorder.elf"
+  ]
+}

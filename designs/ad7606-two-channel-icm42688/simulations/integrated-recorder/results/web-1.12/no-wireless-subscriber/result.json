@@ -1,0 +1,130 @@
+{
+  "pass": true,
+  "failures": [],
+  "production": {
+    "case": 9,
+    "fault": 0,
+    "emg": 10040,
+    "foot": 262,
+    "shank": 251,
+    "missed": 0,
+    "dropped": 0,
+    "imu_errors": 0,
+    "fifo_overflows": 0,
+    "adc_errors": 0,
+    "queue_peak": 58,
+    "udp": 0,
+    "discarded": 0,
+    "writes": 85,
+    "syncs": 4,
+    "closes": 1,
+    "pages": 112
+  },
+  "saved_record_count": 10555,
+  "saved_bytes": 679616,
+  "quality": {
+    "source_sha256": "3e98d052bc067520dbb4da57e46e9f5167ddc4c86f2df2a34ff9cb75b059e9a4",
+    "synthetic": true,
+    "counts": {
+      "emg": 10040,
+      "foot": 262,
+      "shank": 251,
+      "status": 1,
+      "end": 1
+    },
+    "session_finalized": true,
+    "structurally_complete": true,
+    "no_detected_sample_loss": true,
+    "signal_checks_pass": true,
+    "research_ready": false,
+    "sequence_gaps": {
+      "emg": 0,
+      "foot": 0,
+      "shank": 0
+    },
+    "anomalies": {
+      "sequence_regressions": 0,
+      "timestamp_regressions": 0,
+      "emg_clipped_samples": 0,
+      "emg_out_of_range": 0,
+      "imu_invalid_samples": 0,
+      "imu_timestamp_anomalies": 0,
+      "timing_uncertain_records": 513,
+      "flagged_gap_records": 0
+    },
+    "emg_observed_skipped_slots": 0,
+    "emg_rate_from_host_timestamps_hz": 7983.935104183235,
+    "last_status": {
+      "timer_missed": 0,
+      "queue_dropped": 0,
+      "imu_errors": 0,
+      "fifo_overflows": 0,
+      "adc_errors": 0,
+      "emg_records": 10040,
+      "foot_records": 262,
+      "shank_records": 251,
+      "battery_mv": 3800,
+      "queue_high_water": 58
+    },
+    "issues": [],
+    "imu_clock": {
+      "foot": {
+        "tick_steps": 261,
+        "median_tick_step": 4688.0,
+        "expected_tick_step": 4687.4999,
+        "nominal_tick_us": 1.0666667,
+        "median_step_error_percent": 0.0107,
+        "fit_reads": 248,
+        "fit_span_s": null,
+        "host_us_per_sensor_tick": null,
+        "sensor_tick_error_ppm": null,
+        "fit_note": "needs at least 40 FIFO reads spanning 10 s",
+        "within_1_percent": true,
+        "within_datasheet_tolerance": true,
+        "host_time_fit": null
+      },
+      "shank": {
+        "tick_steps": 250,
+        "median_tick_step": 4687.5,
+        "expected_tick_step": 4687.4999,
+        "nominal_tick_us": 1.0666667,
+        "median_step_error_percent": 0.0,
+        "fit_reads": 246,
+        "fit_span_s": null,
+        "host_us_per_sensor_tick": null,
+        "sensor_tick_error_ppm": null,
+        "fit_note": "needs at least 40 FIFO reads spanning 10 s",
+        "within_1_percent": true,
+        "within_datasheet_tolerance": true,
+        "host_time_fit": null
+      }
+    },
+    "imu_clock_note": "Screen only: FIFO timestamp increments versus the recorded nominal tick (imu_timestamp_tick_us), and sensor ticks versus ESP32 interrupt times. Includes interrupt latency; not a calibration. host_time_fitted_us in foot.csv/shank.csv maps each sample onto the ESP32 clock using a least-squares fit of all interrupt anchors; use it, not host_time_estimate_us, to align IMU with EMG in recordings longer than a few seconds.",
+    "timing_note": "IMU host timestamps are estimates. Internal clock drift and sensor/analog filter delays are uncorrected.",
+    "recovery_note": "Timestamp unwrapping is ambiguous across long gaps; never infer missing cycles after corruption."
+  },
+  "live": {
+    "stats": {
+      "packets": 0,
+      "packet_gaps": 0,
+      "reordered_or_duplicate": 0,
+      "invalid_packets": 0,
+      "unknown_session_packets": 0,
+      "device_queue_drops": 0
+    },
+    "error": null,
+    "session": null,
+    "imu": {},
+    "health": {}
+  },
+  "udp_packets": 0,
+  "source_sha256": "216fd4ae51a52382ed81e8a67a7890be996573ad8aa250495cdcb4d9d5944b62",
+  "case": "no-wireless-subscriber",
+  "engine": "Wokwi web editor",
+  "firmware": "ad7606-2ch-1.12",
+  "hardware_measured": false,
+  "serial_sha256": "bf779f763d890285e6806074d3aab13c70d4277a997f2d5ce32d973cf93c4c3f",
+  "assessor_sha256": "a8be32e469cc56ed7c6f4daae19ed5ba16caaaae91f2aa385800f3aa8db9bc76",
+  "merged_image_sha256": "1430e1aebf43a683c66e730069adcbcbe66df05a724f9cb2d7491c5577613d2d",
+  "build_identity_checked_against_tree": true
+}
