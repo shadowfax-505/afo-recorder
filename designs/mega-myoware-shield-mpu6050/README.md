@@ -34,7 +34,7 @@ What the photos show is marked **seen**; the rest is what the sketch assumes, so
 | IMU SDA / SCL | **20 / 21** (same as the shield's SDA / SCL pins) | seen: orange SDA, green SCL, white VCC, blue GND on the GY-521 |
 | IMU A address | AD0 to GND → **0x68** | confirmed by the owner (28 Oct 2026) |
 | IMU B address | AD0 to **3.3 V** → **0x69** | owner has it on 5 V (28 Oct 2026); move it to the Mega's 3.3 V pin, see below |
-| ZS-040 TXD → Mega RX, RXD → Mega TX | **Serial1 (19 RX, 18 TX)**, Serial2 (17, 16) or Serial3 (15, 14) | the header end is not visible; the sketch listens on all three, so any of them works |
+| ZS-040 TXD → Mega RX, RXD → Mega TX | **Serial1 (19 RX, 18 TX)** | confirmed over the link (28 Oct 2026); the sketch also listens on Serial2 (17, 16) and Serial3 (15, 14) |
 | ZS-040 VCC / GND | 5 V / GND | assumed |
 
 Things to check before powering up:
@@ -55,6 +55,8 @@ arduino-cli board list                     # find the port, e.g. COM5, /dev/ttyA
 arduino-cli upload -p COM5 --fqbn arduino:avr:mega designs/mega-myoware-shield-mpu6050/firmware/mega_myoware_stream
 arduino-cli monitor -p COM5 -c baudrate=115200
 ```
+
+On a Mac, pair the module in System Settings → Bluetooth (PIN 1234). It then appears as `/dev/cu.HC-05`, which Chrome lists in the Connect picker. On the first test it carried 29 samples per second at 9600 baud with no errors.
 
 If `board list` shows nothing (it did on one Mac even with a genuine Mega attached), pass the port from `ls /dev/cu.usb*` straight to `-p`.
 
