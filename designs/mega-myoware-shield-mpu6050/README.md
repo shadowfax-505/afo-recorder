@@ -22,7 +22,7 @@ host/tests/                     protocol and browser tests
 | ZS-040 Bluetooth (HC-05 / HC-06) | serial over Bluetooth (SPP) |
 | 3.7 V LiPo pouch cell (423450) | capacity print is overstamped in the photo |
 | USB-C charger board (CA-033T) | charges the cell |
-| XL6009 boost converter | raises the cell voltage for the Mega |
+| XL6009 boost converter | raises the cell to 5 V for the Mega (owner-measured) |
 
 ## Wiring
 
@@ -32,17 +32,17 @@ What the photos show is marked **seen**; the rest is what the sketch assumes, so
 |---|---|---|
 | MyoWare sensor (TRS) | shield jack **A0** by default; any of A0–A5 can be switched on in the app | seen: one sensor plugged into the shield |
 | IMU SDA / SCL | **20 / 21** (same as the shield's SDA / SCL pins) | seen: orange SDA, green SCL, white VCC, blue GND on the GY-521 |
-| IMU A address | AD0 to GND or left floating → **0x68** | seen: a black wire on AD0 of both GY-521s; where it ends is not visible |
-| IMU B address | AD0 to 3.3 V or 5 V → **0x69** | assumed |
+| IMU A address | AD0 to GND → **0x68** | confirmed by the owner (28 Oct 2026) |
+| IMU B address | AD0 to **3.3 V** → **0x69** | owner has it on 5 V (28 Oct 2026); move it to the Mega's 3.3 V pin, see below |
 | ZS-040 TXD → Mega RX, RXD → Mega TX | **Serial1 (19 RX, 18 TX)**, Serial2 (17, 16) or Serial3 (15, 14) | the header end is not visible; the sketch listens on all three, so any of them works |
 | ZS-040 VCC / GND | 5 V / GND | assumed |
 
 Things to check before powering up:
 
-1. **Two IMUs need different addresses.** If both AD0 wires go to GND, both answer at 0x68 and the readings will be garbage. Move IMU B's AD0 to 3.3 V. The app's IMU tile shows which addresses answered.
+1. **Two IMUs need different addresses, and AD0 must stay at 3.3 V.** IMU A's AD0 goes to GND (0x68) and IMU B's to the Mega's **3.3 V** pin (0x69). On the GY-521, AD0 connects straight to the MPU-6050, which runs at 3.3 V from the module's regulator. The MPU-6050 datasheet's absolute maximum for AD0 (and SDA/SCL) is VDD + 0.5 V, about 3.8 V, so 5 V on AD0 is out of spec. The app's IMU tile shows which addresses answered.
 2. **ZS-040 RXD is 3.3 V logic.** Feed it from the Mega TX through a divider (for example 1 kΩ in series, 2 kΩ to GND). The ZS-040 TXD can go straight to the Mega RX.
 3. **Not on pins 0 and 1.** Those are the USB port. If the module is there, move it to 18/19, otherwise flashing fails and the stream collides with USB.
-4. **Boost output.** If the XL6009 feeds the Mega's VIN or barrel jack, set it to about 7–9 V. If it feeds the 5 V pin, set it to exactly 5.0 V with a meter before connecting, because that pin bypasses the regulator.
+4. **Boost output.** The XL6009 is set to 5 V, which suits the Mega's 5 V pin (that pin bypasses the regulator, so keep it at 5.0 V). It would be too low for VIN or the barrel jack, which need about 7–9 V.
 
 ## Flash the sketch
 
