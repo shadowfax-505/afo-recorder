@@ -51,10 +51,12 @@ With arduino-cli on your computer, from the repository root:
 ```sh
 arduino-cli core install arduino:avr
 arduino-cli compile --fqbn arduino:avr:mega designs/mega-myoware-shield-mpu6050/firmware/mega_myoware_stream
-arduino-cli board list                     # find the port, e.g. COM5 or /dev/ttyACM0
+arduino-cli board list                     # find the port, e.g. COM5, /dev/ttyACM0 or /dev/cu.usbmodem101
 arduino-cli upload -p COM5 --fqbn arduino:avr:mega designs/mega-myoware-shield-mpu6050/firmware/mega_myoware_stream
 arduino-cli monitor -p COM5 -c baudrate=115200
 ```
+
+If `board list` shows nothing (it did on one Mac even with a genuine Mega attached), pass the port from `ls /dev/cu.usb*` straight to `-p`.
 
 In the monitor you should see `# mega-myoware-1.0 ready. imu_mask=3.` (3 = both IMUs found, 1 = only A, 2 = only B, 0 = none). Type `p` and Enter to print CSV samples, `x` to stop.
 

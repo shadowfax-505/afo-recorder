@@ -130,13 +130,25 @@ try {
         let ctrl;
         this.readable = new ReadableStream({ start: (c) => (ctrl = c) });
         dev.onBytes = (b) => ctrl.enqueue(b);
-        // a USB open resets the Mega: silent for ~2 s, then the banner
-        setTimeout(() => dev.open(), 2000);
+        // A USB open resets the Mega. Its stk500v2 bootloader waits ~1 s for
+        // an upload and starts again on every byte it receives, so the sketch
+        // (and its banner) only starts once the line has been quiet for 1 s,
+        // and never sooner than 1.6 s after the open.
+        const openedAt = performance.now();
+        let lastRx = openedAt;
+        const boot = setInterval(() => {
+          const now = performance.now();
+          if (now - openedAt > 1600 && now - lastRx > 1000) {
+            clearInterval(boot);
+            dev.open();
+          }
+        }, 50);
         this.writable = new WritableStream({
           write: (chunk) => {
             const text = new TextDecoder().decode(chunk);
             written.push(text);
             if (dev.timer) dev.write(text);
+            else lastRx = performance.now(); // swallowed by the bootloader
           },
         });
         this.dev = dev;

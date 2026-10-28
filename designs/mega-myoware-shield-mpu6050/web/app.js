@@ -141,6 +141,7 @@ const st = {
   lastSampleAt: 0,
   rateWindow: [], // [performance.now(), received] pairs
   infoWaiter: null,
+  bannerWaiter: null,
 };
 
 // ---------- UI helpers ----------
@@ -317,6 +318,18 @@ function waitForInfo(ms) {
   });
 }
 
+function waitForBanner(ms) {
+  return new Promise((resolve) => {
+    const done = () => {
+      clearTimeout(timer);
+      st.bannerWaiter = null;
+      resolve();
+    };
+    const timer = setTimeout(done, ms);
+    st.bannerWaiter = done;
+  });
+}
+
 async function connect(transport) {
   if (st.transport) await disconnect();
   showMessage('');
@@ -325,7 +338,10 @@ async function connect(transport) {
     onSample,
     onInfo,
     onLog: (t) => log(t),
-    onText: (t) => log(t),
+    onText: (t) => {
+      log(t);
+      if (st.bannerWaiter && t.includes('ready')) st.bannerWaiter();
+    },
   });
   transport.onBytes = (b) => st.parser.push(b);
   transport.onClose = (err) => {
@@ -344,11 +360,17 @@ async function connect(transport) {
   $('demo').hidden = true;
   $('disconnect').hidden = false;
 
-  // Opening the Mega's USB port resets it; it answers after about 2 s.
+  // Opening the Mega's USB port resets it. Its bootloader restarts its wait on
+  // every byte it receives, so stay quiet until the sketch prints its banner
+  // (about 2 s). Bluetooth links don't reset the board and print no banner.
+  if (transport.label === 'USB') {
+    setStatus('Waiting for the board to restart…');
+    await waitForBanner(4000);
+  }
   let info = null;
-  for (let attempt = 0; attempt < 8 && !info && st.transport === transport; attempt++) {
+  for (let attempt = 0; attempt < 6 && !info && st.transport === transport; attempt++) {
     send('?');
-    info = await waitForInfo(700);
+    info = await waitForInfo(1000);
   }
   if (st.transport !== transport) return;
   if (!info) {
