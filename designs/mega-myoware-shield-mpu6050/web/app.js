@@ -142,6 +142,10 @@ const st = {
   rateWindow: [], // [performance.now(), received] pairs
   infoWaiter: null,
   bannerWaiter: null,
+  bannerSeen: false,
+  bytes: 0,
+  streamAskedAt: 0,
+  streamRetried: false,
 };
 
 // ---------- UI helpers ----------
@@ -340,10 +344,19 @@ async function connect(transport) {
     onLog: (t) => log(t),
     onText: (t) => {
       log(t);
+      if (t.includes('ready')) st.bannerSeen = true;
       if (st.bannerWaiter && t.includes('ready')) st.bannerWaiter();
     },
   });
-  transport.onBytes = (b) => st.parser.push(b);
+  st.bytes = 0;
+  st.lastSampleAt = 0;
+  st.streamAskedAt = 0;
+  st.streamRetried = false;
+  st.bannerSeen = false;
+  transport.onBytes = (b) => {
+    st.bytes += b.length;
+    st.parser.push(b);
+  };
   transport.onClose = (err) => {
     log(err.message);
     disconnect(err.message);
@@ -352,9 +365,12 @@ async function connect(transport) {
     await transport.open();
   } catch (e) {
     setStatus('Not connected');
-    if (e.name !== 'NotFoundError') showMessage(`Could not open the port: ${e.message}`, true);
+    if (e.name === 'NotFoundError') showMessage('No port was chosen. Press Connect and pick the Arduino Mega 2560 (usbmodem) entry.');
+    else showMessage(`Could not open the port: ${e.message}`, true);
+    log(`open failed: ${e.name} ${e.message}`);
     return;
   }
+  log(`opened ${transport.detail || transport.label} at ${transport.baud} baud`);
   st.transport = transport;
   $('connect').hidden = true;
   $('demo').hidden = true;
@@ -365,7 +381,9 @@ async function connect(transport) {
   // (about 2 s). Bluetooth links don't reset the board and print no banner.
   if (transport.label === 'USB') {
     setStatus('Waiting for the board to restart…');
+    const t0 = performance.now();
     await waitForBanner(4000);
+    log(st.bannerSeen ? `board ready after ${Math.round(performance.now() - t0)} ms` : `no banner after 4 s (${st.bytes} bytes received), asking anyway`);
   }
   let info = null;
   for (let attempt = 0; attempt < 6 && !info && st.transport === transport; attempt++) {
@@ -374,6 +392,7 @@ async function connect(transport) {
   }
   if (st.transport !== transport) return;
   if (!info) {
+    log(`no settings frame after 6 tries; ${st.bytes} bytes received, ${st.parser.stats.crcErrors} corrupt frames`);
     setStatus('No reply', 'error');
     showMessage(
       'The port opened but the board did not answer. Check that mega_myoware_stream is flashed, that the baud matches (USB 115200; the Bluetooth module 9600 unless you changed it), and that the ZS-040 LED blinks twice every few seconds (paired).',
@@ -389,7 +408,9 @@ async function connect(transport) {
   live.clear();
   st.rateWindow = [];
   await send('s');
-  setStatus(`Streaming · ${transport.label}`, 'live');
+  st.streamAskedAt = performance.now();
+  log('asked the board to start streaming');
+  setStatus('Starting stream…');
   $('record').disabled = false;
   $('rescan').disabled = false;
 }
@@ -507,6 +528,19 @@ function renderLive() {
     $('t-lost-sub').textContent = `${total ? ((100 * clock.lost) / total).toFixed(2) : '0.00'} % · ${crc} corrupt frames`;
     if (st.lastSampleAt && now - st.lastSampleAt > 2000 && st.info) setStatus('No data for 2 s', 'error');
     else if (st.lastSampleAt) setStatus(`Streaming · ${st.transport.label}`, 'live');
+    else if (st.streamAskedAt && now - st.streamAskedAt > 3000) {
+      if (!st.streamRetried) {
+        st.streamRetried = true;
+        st.streamAskedAt = now;
+        log(`no samples 3 s after asking (${st.bytes} bytes received); asking again`);
+        send('s');
+      } else {
+        st.streamAskedAt = 0;
+        setStatus('No samples', 'error');
+        showMessage('The board answered but sent no samples. Open Device messages below and send those lines to the maintainer.', true);
+      }
+    }
+    if (!st.info) $('t-link-sub').textContent = `${st.bytes || 0} bytes received`;
   }
   if (st.recorder) $('rec-elapsed').textContent = fmtDuration((now - st.recStart) / 1000);
   if (!st.paused && live.n && !$('live').hidden) {

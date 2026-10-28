@@ -144,7 +144,10 @@ try {
           }
         }, 50);
         this.writable = new WritableStream({
-          write: (chunk) => {
+          // Real serial writes complete asynchronously; a second getWriter()
+          // while one is pending throws, as in Chrome.
+          write: async (chunk) => {
+            await new Promise((r) => setTimeout(r, 15));
             const text = new TextDecoder().decode(chunk);
             written.push(text);
             if (dev.timer) dev.write(text);
@@ -160,6 +163,8 @@ try {
     Object.defineProperty(navigator, 'serial', { value: { requestPort: async () => port } });
   });
   await page2.goto(url);
+  // A saved jack choice makes connect() send e<mask> right before s.
+  await page2.check('#emg-mask input[value="1"]');
   await page2.click('#connect');
   await page2.waitForFunction(() => document.querySelector('#status').textContent.startsWith('Streaming'), null, { timeout: 10000 });
   await page2.waitForTimeout(1200);
@@ -174,7 +179,7 @@ try {
   const slow = await num(page2, 't-rate');
   assert.ok(slow > 40 && slow < 60, `rate after r50: ${slow}`);
   await page2.click('#disconnect');
-  assert.ok((await page2.evaluate(() => window.__serialWrites.join(''))).includes('x\n'));
+  await page2.waitForFunction(() => window.__serialWrites.join('').includes('x\n'), null, { timeout: 2000 });
   await ctx2.close();
 
   // ---- 3. phone width, light and dark ----

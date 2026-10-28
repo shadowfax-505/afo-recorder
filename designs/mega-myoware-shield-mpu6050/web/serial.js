@@ -22,6 +22,8 @@ export class SerialTransport {
     await this.port.open({ baudRate: this.baud, bufferSize: 1 << 16 });
     const info = this.port.getInfo();
     this.label = info.bluetoothServiceClassId ? 'Bluetooth' : info.usbVendorId ? 'USB' : 'Serial port';
+    const hex = (v) => (v === undefined ? '?' : v.toString(16).padStart(4, '0'));
+    this.detail = info.usbVendorId ? `USB ${hex(info.usbVendorId)}:${hex(info.usbProductId)}` : this.label;
     this.loopDone = this.readLoop();
   }
 
@@ -50,7 +52,15 @@ export class SerialTransport {
     if (!this.closing) this.onClose(new Error('The serial port closed (cable unplugged or Bluetooth out of range).'));
   }
 
-  async write(text) {
+  // Writes are queued: Chrome throws if a second writer is taken while a
+  // write is still pending, which used to drop the 's' that starts the stream.
+  write(text) {
+    const p = (this.writeChain || Promise.resolve()).then(() => this.writeNow(text));
+    this.writeChain = p.catch(() => {});
+    return p;
+  }
+
+  async writeNow(text) {
     if (!this.port || !this.port.writable) return;
     const w = this.port.writable.getWriter();
     try {
