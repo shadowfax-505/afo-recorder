@@ -8,6 +8,7 @@ A battery-powered bench setup that streams MyoWare 2.0 EMG and up to two MPU-605
 firmware/mega_myoware_stream/   the sketch to flash (streams EMG + IMU)
 firmware/hc05_setup/            optional: raise the ZS-040 to 115200 baud, rename it
 firmware/a5_plot/               optional: plot only jack A5 in the Arduino Serial Plotter
+firmware/a5_bt_terminal/        optional: send only jack A5 as text to a Bluetooth terminal app
 web/                            the web app (static files, no build step)
 host/tests/                     protocol and browser tests
 ```
