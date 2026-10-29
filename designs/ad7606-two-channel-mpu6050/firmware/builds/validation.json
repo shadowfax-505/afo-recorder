@@ -17,19 +17,19 @@
       "application.bin": "0x10000"
     },
     "sha256": {
-      "application.bin": "9ffedaaa6931cb17e6ff0ad25cd7d35d43484bebc7d59440fa205cbca2ac2ea8",
-      "bootloader.bin": "06a90b5fc960dd9b0267990e657fe5cfb96a6adf1a583a575062931b18f1275f",
+      "application.bin": "eb972a2faf56b81937aeeaa3ab15bde44661fce618b7401a61d8166880824175",
+      "bootloader.bin": "38b89c278f3686a454428f554b9cde25bdd5fad89703e67c0348f921ffd62270",
       "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
     },
     "profile": "breadboard-record-2ch",
-    "firmware": "mpu6050-1.4",
+    "firmware": "mpu6050-1.5",
     "source_sha256": {
       "main/CMakeLists.txt": "15e96ed63ff9b15393c36d34d35d4c6921043116f39b082fdb096b9b9b888a22",
       "main/adc_ad7606.c": "d54d117c7948e98d7fe83826dc625949f08876fbfa9eebaf77e198d008c0cdd4",
       "main/adc_ads131m04.c": "914ffa6db82ed58aed9d4f0beb1ae05645ac6fb47097ace88e2be8b6a3c6b6aa",
       "main/ads_crc.c": "31cbb5fd61f5e06c394a426e0fa48d14f3561be4d46fffe6a18e1837edad83cc",
       "main/ads_crc.h": "d08cf15ad6e5d8d837e5c532b9665bc9c07a045475ba06c6443eed6b4367aeac",
-      "main/board.h": "8d6d8c71327c3e3e816d4ff109c4e7bfe8850fb1c34de2e6d8d16d1ecc9073aa",
+      "main/board.h": "14d5dc71e12d5159ef7bc787ca4d17bbe3876227b0edcde6babb4b6e08e858e4",
       "main/diagnostic.c": "d7671b98404e9b39d5f5af1eb7fc8e9ddad162b7bb9828dcd0bcf5694a455976",
       "main/format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
       "main/format.h": "1f9bb02632241a07c7fd3a048767bf88ef35e70a66948cd12e275594468e2536",
@@ -38,13 +38,13 @@
       "main/sensors.c": "c30cdea676e4bf998e235f8deadbb17339813a0fd35e50e04194c392e47debf3",
       "main/sensors.h": "880b651acda742396e7da66f113f6ad27022abc4db84a93f9fff6a162e32ff43",
       "main/variant.h": "55c2cdaef8b2d56e2ced2aa23984a289038adc6caaf9d164c92830c24b8cffb9",
-      "main/wifi_live.c": "81a3e010a18b01f0ba20783ec0df5e14970bfa509305fb523beb00975c99e20a",
+      "main/wifi_live.c": "8ce9df841a1b78cbdbc10073ae294556af1e801f9fe7e5e461fcd84b9ed969d5",
       "main/wifi_live.h": "99d2bea23a26f0271f9f5bb8056ff9ec80d1bfaf1edcd33dcf6551bf7926bf6f",
       "CMakeLists.txt": "ccdcd61455a4cd61ba17da36add6811ccd35d3f880115a07c709f883ebc2b0c6",
       "sdkconfig.defaults": "333b5513fd45d3959596dd93da6a9eb721a9182f82c1c6f75aa245ac170f0aad"
     },
     "idf_version": "v5.4.2",
-    "build_note": "Rebuilt 2026-10-12 after adding the AD7606 STBY start-up sequence (PCB builds release STBY on GPIO14, wait 30 ms, then reset; ADI AN-1091); earlier: fixed-two recorder corrections and shared PSRAM-queue, Wi-Fi password and metadata-limit fixes. Cross-compiled only; not flashed or simulated."
+    "build_note": "Rebuilt 2026-10-12 after porting the fixed-two 1.12 Wi-Fi preview fix (the live task announces a new session's metadata before that session's first data packet); earlier: adding the AD7606 STBY start-up sequence (PCB builds release STBY on GPIO14, wait 30 ms, then reset; ADI AN-1091); fixed-two recorder corrections and shared PSRAM-queue, Wi-Fi password and metadata-limit fixes. Cross-compiled only; not flashed or simulated."
   },
   {
     "package": "ad7606-two-channel-mpu6050",
@@ -64,19 +64,19 @@
       "application.bin": "0x10000"
     },
     "sha256": {
-      "application.bin": "32d1bf486eae07876f56796bef89fecdb9bdd1a4e78529286bdfb2a2ffd997fd",
-      "bootloader.bin": "06a90b5fc960dd9b0267990e657fe5cfb96a6adf1a583a575062931b18f1275f",
+      "application.bin": "769cc5d2c5740c724f3362b6d05031377377b015f4615767fe8894e337f9bd40",
+      "bootloader.bin": "85556cdc78a3732b3a1949e117b3ded5d052664a2f12abbe591551200f26cf15",
       "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
     },
     "profile": "breadboard-sd-only-2ch",
-    "firmware": "mpu6050-1.4",
+    "firmware": "mpu6050-1.5",
     "source_sha256": {
       "main/CMakeLists.txt": "15e96ed63ff9b15393c36d34d35d4c6921043116f39b082fdb096b9b9b888a22",
       "main/adc_ad7606.c": "d54d117c7948e98d7fe83826dc625949f08876fbfa9eebaf77e198d008c0cdd4",
       "main/adc_ads131m04.c": "914ffa6db82ed58aed9d4f0beb1ae05645ac6fb47097ace88e2be8b6a3c6b6aa",
       "main/ads_crc.c": "31cbb5fd61f5e06c394a426e0fa48d14f3561be4d46fffe6a18e1837edad83cc",
       "main/ads_crc.h": "d08cf15ad6e5d8d837e5c532b9665bc9c07a045475ba06c6443eed6b4367aeac",
-      "main/board.h": "8d6d8c71327c3e3e816d4ff109c4e7bfe8850fb1c34de2e6d8d16d1ecc9073aa",
+      "main/board.h": "14d5dc71e12d5159ef7bc787ca4d17bbe3876227b0edcde6babb4b6e08e858e4",
       "main/diagnostic.c": "d7671b98404e9b39d5f5af1eb7fc8e9ddad162b7bb9828dcd0bcf5694a455976",
       "main/format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
       "main/format.h": "1f9bb02632241a07c7fd3a048767bf88ef35e70a66948cd12e275594468e2536",
@@ -85,13 +85,13 @@
       "main/sensors.c": "c30cdea676e4bf998e235f8deadbb17339813a0fd35e50e04194c392e47debf3",
       "main/sensors.h": "880b651acda742396e7da66f113f6ad27022abc4db84a93f9fff6a162e32ff43",
       "main/variant.h": "55c2cdaef8b2d56e2ced2aa23984a289038adc6caaf9d164c92830c24b8cffb9",
-      "main/wifi_live.c": "81a3e010a18b01f0ba20783ec0df5e14970bfa509305fb523beb00975c99e20a",
+      "main/wifi_live.c": "8ce9df841a1b78cbdbc10073ae294556af1e801f9fe7e5e461fcd84b9ed969d5",
       "main/wifi_live.h": "99d2bea23a26f0271f9f5bb8056ff9ec80d1bfaf1edcd33dcf6551bf7926bf6f",
       "CMakeLists.txt": "ccdcd61455a4cd61ba17da36add6811ccd35d3f880115a07c709f883ebc2b0c6",
       "sdkconfig.defaults": "333b5513fd45d3959596dd93da6a9eb721a9182f82c1c6f75aa245ac170f0aad"
     },
     "idf_version": "v5.4.2",
-    "build_note": "Rebuilt 2026-10-12 after adding the AD7606 STBY start-up sequence (PCB builds release STBY on GPIO14, wait 30 ms, then reset; ADI AN-1091); earlier: fixed-two recorder corrections and shared PSRAM-queue, Wi-Fi password and metadata-limit fixes. Cross-compiled only; not flashed or simulated."
+    "build_note": "Rebuilt 2026-10-12 after porting the fixed-two 1.12 Wi-Fi preview fix (the live task announces a new session's metadata before that session's first data packet); earlier: adding the AD7606 STBY start-up sequence (PCB builds release STBY on GPIO14, wait 30 ms, then reset; ADI AN-1091); fixed-two recorder corrections and shared PSRAM-queue, Wi-Fi password and metadata-limit fixes. Cross-compiled only; not flashed or simulated."
   },
   {
     "package": "afo-ad7606-two-mpu6050",
@@ -108,19 +108,19 @@
       "application.bin": "0x10000"
     },
     "sha256": {
-      "application.bin": "ff246b8f0ffa5f7dba94594f2727a1caed7eaa57fb17dfcef18c6ca2641b4ec8",
-      "bootloader.bin": "06a90b5fc960dd9b0267990e657fe5cfb96a6adf1a583a575062931b18f1275f",
+      "application.bin": "dbaed3d106261f14a9b20206a980a102715a563890b5f1a3ce5e3dfb74581f10",
+      "bootloader.bin": "7fd44b478aa3cec5671acabaae3e4029f4063e20388372bae2afe553dfbb52b3",
       "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
     },
     "profile": "diagnostic-adc-2ch",
-    "firmware": null,
+    "firmware": "mpu6050-1.5",
     "source_sha256": {
       "main/CMakeLists.txt": "15e96ed63ff9b15393c36d34d35d4c6921043116f39b082fdb096b9b9b888a22",
       "main/adc_ad7606.c": "d54d117c7948e98d7fe83826dc625949f08876fbfa9eebaf77e198d008c0cdd4",
       "main/adc_ads131m04.c": "914ffa6db82ed58aed9d4f0beb1ae05645ac6fb47097ace88e2be8b6a3c6b6aa",
       "main/ads_crc.c": "31cbb5fd61f5e06c394a426e0fa48d14f3561be4d46fffe6a18e1837edad83cc",
       "main/ads_crc.h": "d08cf15ad6e5d8d837e5c532b9665bc9c07a045475ba06c6443eed6b4367aeac",
-      "main/board.h": "8d6d8c71327c3e3e816d4ff109c4e7bfe8850fb1c34de2e6d8d16d1ecc9073aa",
+      "main/board.h": "14d5dc71e12d5159ef7bc787ca4d17bbe3876227b0edcde6babb4b6e08e858e4",
       "main/diagnostic.c": "d7671b98404e9b39d5f5af1eb7fc8e9ddad162b7bb9828dcd0bcf5694a455976",
       "main/format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
       "main/format.h": "1f9bb02632241a07c7fd3a048767bf88ef35e70a66948cd12e275594468e2536",
@@ -129,13 +129,13 @@
       "main/sensors.c": "c30cdea676e4bf998e235f8deadbb17339813a0fd35e50e04194c392e47debf3",
       "main/sensors.h": "880b651acda742396e7da66f113f6ad27022abc4db84a93f9fff6a162e32ff43",
       "main/variant.h": "55c2cdaef8b2d56e2ced2aa23984a289038adc6caaf9d164c92830c24b8cffb9",
-      "main/wifi_live.c": "81a3e010a18b01f0ba20783ec0df5e14970bfa509305fb523beb00975c99e20a",
+      "main/wifi_live.c": "8ce9df841a1b78cbdbc10073ae294556af1e801f9fe7e5e461fcd84b9ed969d5",
       "main/wifi_live.h": "99d2bea23a26f0271f9f5bb8056ff9ec80d1bfaf1edcd33dcf6551bf7926bf6f",
       "CMakeLists.txt": "ccdcd61455a4cd61ba17da36add6811ccd35d3f880115a07c709f883ebc2b0c6",
       "sdkconfig.defaults": "333b5513fd45d3959596dd93da6a9eb721a9182f82c1c6f75aa245ac170f0aad"
     },
     "idf_version": "v5.4.2",
-    "build_note": "Rebuilt 2026-10-12 after adding the AD7606 STBY start-up sequence (PCB builds release STBY on GPIO14, wait 30 ms, then reset; ADI AN-1091); earlier: fixed-two recorder corrections and shared PSRAM-queue, Wi-Fi password and metadata-limit fixes. Cross-compiled only; not flashed or simulated."
+    "build_note": "Rebuilt 2026-10-12 after porting the fixed-two 1.12 Wi-Fi preview fix (the live task announces a new session's metadata before that session's first data packet); earlier: adding the AD7606 STBY start-up sequence (PCB builds release STBY on GPIO14, wait 30 ms, then reset; ADI AN-1091); fixed-two recorder corrections and shared PSRAM-queue, Wi-Fi password and metadata-limit fixes. Cross-compiled only; not flashed or simulated."
   },
   {
     "package": "afo-ad7606-two-mpu6050",
@@ -152,19 +152,19 @@
       "application.bin": "0x10000"
     },
     "sha256": {
-      "application.bin": "77dfbf39d2bc44dc791a38e46a008efc2bf0d7ac4e9bfe1d591196cdfc821b30",
-      "bootloader.bin": "06a90b5fc960dd9b0267990e657fe5cfb96a6adf1a583a575062931b18f1275f",
+      "application.bin": "9cc230586aa00a9c40c3d1a363b52977007bcf976157773c52c3f341101f4dbb",
+      "bootloader.bin": "37f88e2ab85b31c7187b021e17d2126406aeae4a3ef18929b7b78e52e91eb517",
       "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
     },
     "profile": "diagnostic-controller",
-    "firmware": null,
+    "firmware": "mpu6050-1.5",
     "source_sha256": {
       "main/CMakeLists.txt": "15e96ed63ff9b15393c36d34d35d4c6921043116f39b082fdb096b9b9b888a22",
       "main/adc_ad7606.c": "d54d117c7948e98d7fe83826dc625949f08876fbfa9eebaf77e198d008c0cdd4",
       "main/adc_ads131m04.c": "914ffa6db82ed58aed9d4f0beb1ae05645ac6fb47097ace88e2be8b6a3c6b6aa",
       "main/ads_crc.c": "31cbb5fd61f5e06c394a426e0fa48d14f3561be4d46fffe6a18e1837edad83cc",
       "main/ads_crc.h": "d08cf15ad6e5d8d837e5c532b9665bc9c07a045475ba06c6443eed6b4367aeac",
-      "main/board.h": "8d6d8c71327c3e3e816d4ff109c4e7bfe8850fb1c34de2e6d8d16d1ecc9073aa",
+      "main/board.h": "14d5dc71e12d5159ef7bc787ca4d17bbe3876227b0edcde6babb4b6e08e858e4",
       "main/diagnostic.c": "d7671b98404e9b39d5f5af1eb7fc8e9ddad162b7bb9828dcd0bcf5694a455976",
       "main/format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
       "main/format.h": "1f9bb02632241a07c7fd3a048767bf88ef35e70a66948cd12e275594468e2536",
@@ -173,13 +173,13 @@
       "main/sensors.c": "c30cdea676e4bf998e235f8deadbb17339813a0fd35e50e04194c392e47debf3",
       "main/sensors.h": "880b651acda742396e7da66f113f6ad27022abc4db84a93f9fff6a162e32ff43",
       "main/variant.h": "55c2cdaef8b2d56e2ced2aa23984a289038adc6caaf9d164c92830c24b8cffb9",
-      "main/wifi_live.c": "81a3e010a18b01f0ba20783ec0df5e14970bfa509305fb523beb00975c99e20a",
+      "main/wifi_live.c": "8ce9df841a1b78cbdbc10073ae294556af1e801f9fe7e5e461fcd84b9ed969d5",
       "main/wifi_live.h": "99d2bea23a26f0271f9f5bb8056ff9ec80d1bfaf1edcd33dcf6551bf7926bf6f",
       "CMakeLists.txt": "ccdcd61455a4cd61ba17da36add6811ccd35d3f880115a07c709f883ebc2b0c6",
       "sdkconfig.defaults": "333b5513fd45d3959596dd93da6a9eb721a9182f82c1c6f75aa245ac170f0aad"
     },
     "idf_version": "v5.4.2",
-    "build_note": "Rebuilt 2026-10-12 after adding the AD7606 STBY start-up sequence (PCB builds release STBY on GPIO14, wait 30 ms, then reset; ADI AN-1091); earlier: fixed-two recorder corrections and shared PSRAM-queue, Wi-Fi password and metadata-limit fixes. Cross-compiled only; not flashed or simulated."
+    "build_note": "Rebuilt 2026-10-12 after porting the fixed-two 1.12 Wi-Fi preview fix (the live task announces a new session's metadata before that session's first data packet); earlier: adding the AD7606 STBY start-up sequence (PCB builds release STBY on GPIO14, wait 30 ms, then reset; ADI AN-1091); fixed-two recorder corrections and shared PSRAM-queue, Wi-Fi password and metadata-limit fixes. Cross-compiled only; not flashed or simulated."
   },
   {
     "package": "afo-ad7606-two-mpu6050",
@@ -196,19 +196,19 @@
       "application.bin": "0x10000"
     },
     "sha256": {
-      "application.bin": "3df940fe1753ac1cde07a96ec099937ef52a0c7f5da92bf099df9edaa3c5a58c",
-      "bootloader.bin": "06a90b5fc960dd9b0267990e657fe5cfb96a6adf1a583a575062931b18f1275f",
+      "application.bin": "9953741c9bb1ec2feb80cf3fb3b38e498e01111ca23de2c697980af0db83f8ba",
+      "bootloader.bin": "ffe2a58c2830d66657af6af74e04b2e13d68a1defe7c1cc7b649d2684bb273fd",
       "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
     },
     "profile": "diagnostic-imu-one",
-    "firmware": null,
+    "firmware": "mpu6050-1.5",
     "source_sha256": {
       "main/CMakeLists.txt": "15e96ed63ff9b15393c36d34d35d4c6921043116f39b082fdb096b9b9b888a22",
       "main/adc_ad7606.c": "d54d117c7948e98d7fe83826dc625949f08876fbfa9eebaf77e198d008c0cdd4",
       "main/adc_ads131m04.c": "914ffa6db82ed58aed9d4f0beb1ae05645ac6fb47097ace88e2be8b6a3c6b6aa",
       "main/ads_crc.c": "31cbb5fd61f5e06c394a426e0fa48d14f3561be4d46fffe6a18e1837edad83cc",
       "main/ads_crc.h": "d08cf15ad6e5d8d837e5c532b9665bc9c07a045475ba06c6443eed6b4367aeac",
-      "main/board.h": "8d6d8c71327c3e3e816d4ff109c4e7bfe8850fb1c34de2e6d8d16d1ecc9073aa",
+      "main/board.h": "14d5dc71e12d5159ef7bc787ca4d17bbe3876227b0edcde6babb4b6e08e858e4",
       "main/diagnostic.c": "d7671b98404e9b39d5f5af1eb7fc8e9ddad162b7bb9828dcd0bcf5694a455976",
       "main/format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
       "main/format.h": "1f9bb02632241a07c7fd3a048767bf88ef35e70a66948cd12e275594468e2536",
@@ -217,13 +217,13 @@
       "main/sensors.c": "c30cdea676e4bf998e235f8deadbb17339813a0fd35e50e04194c392e47debf3",
       "main/sensors.h": "880b651acda742396e7da66f113f6ad27022abc4db84a93f9fff6a162e32ff43",
       "main/variant.h": "55c2cdaef8b2d56e2ced2aa23984a289038adc6caaf9d164c92830c24b8cffb9",
-      "main/wifi_live.c": "81a3e010a18b01f0ba20783ec0df5e14970bfa509305fb523beb00975c99e20a",
+      "main/wifi_live.c": "8ce9df841a1b78cbdbc10073ae294556af1e801f9fe7e5e461fcd84b9ed969d5",
       "main/wifi_live.h": "99d2bea23a26f0271f9f5bb8056ff9ec80d1bfaf1edcd33dcf6551bf7926bf6f",
       "CMakeLists.txt": "ccdcd61455a4cd61ba17da36add6811ccd35d3f880115a07c709f883ebc2b0c6",
       "sdkconfig.defaults": "333b5513fd45d3959596dd93da6a9eb721a9182f82c1c6f75aa245ac170f0aad"
     },
     "idf_version": "v5.4.2",
-    "build_note": "Rebuilt 2026-10-12 after adding the AD7606 STBY start-up sequence (PCB builds release STBY on GPIO14, wait 30 ms, then reset; ADI AN-1091); earlier: fixed-two recorder corrections and shared PSRAM-queue, Wi-Fi password and metadata-limit fixes. Cross-compiled only; not flashed or simulated."
+    "build_note": "Rebuilt 2026-10-12 after porting the fixed-two 1.12 Wi-Fi preview fix (the live task announces a new session's metadata before that session's first data packet); earlier: adding the AD7606 STBY start-up sequence (PCB builds release STBY on GPIO14, wait 30 ms, then reset; ADI AN-1091); fixed-two recorder corrections and shared PSRAM-queue, Wi-Fi password and metadata-limit fixes. Cross-compiled only; not flashed or simulated."
   },
   {
     "package": "afo-ad7606-two-mpu6050",
@@ -240,19 +240,19 @@
       "application.bin": "0x10000"
     },
     "sha256": {
-      "application.bin": "bd95fb59c8cd21905779d0c2e76171b7e8a3bb4864653f87e87a1efdfa6054f1",
-      "bootloader.bin": "06a90b5fc960dd9b0267990e657fe5cfb96a6adf1a583a575062931b18f1275f",
+      "application.bin": "ae183c3ab6a9780e68b2c181d0cf047fe3487e8009e6f6d02594cd450784b992",
+      "bootloader.bin": "b96ced389a15534c114944578e34eaf4971074c6a49a7f0d4926e335651870ec",
       "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
     },
     "profile": "diagnostic-imu-two",
-    "firmware": null,
+    "firmware": "mpu6050-1.5",
     "source_sha256": {
       "main/CMakeLists.txt": "15e96ed63ff9b15393c36d34d35d4c6921043116f39b082fdb096b9b9b888a22",
       "main/adc_ad7606.c": "d54d117c7948e98d7fe83826dc625949f08876fbfa9eebaf77e198d008c0cdd4",
       "main/adc_ads131m04.c": "914ffa6db82ed58aed9d4f0beb1ae05645ac6fb47097ace88e2be8b6a3c6b6aa",
       "main/ads_crc.c": "31cbb5fd61f5e06c394a426e0fa48d14f3561be4d46fffe6a18e1837edad83cc",
       "main/ads_crc.h": "d08cf15ad6e5d8d837e5c532b9665bc9c07a045475ba06c6443eed6b4367aeac",
-      "main/board.h": "8d6d8c71327c3e3e816d4ff109c4e7bfe8850fb1c34de2e6d8d16d1ecc9073aa",
+      "main/board.h": "14d5dc71e12d5159ef7bc787ca4d17bbe3876227b0edcde6babb4b6e08e858e4",
       "main/diagnostic.c": "d7671b98404e9b39d5f5af1eb7fc8e9ddad162b7bb9828dcd0bcf5694a455976",
       "main/format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
       "main/format.h": "1f9bb02632241a07c7fd3a048767bf88ef35e70a66948cd12e275594468e2536",
@@ -261,13 +261,13 @@
       "main/sensors.c": "c30cdea676e4bf998e235f8deadbb17339813a0fd35e50e04194c392e47debf3",
       "main/sensors.h": "880b651acda742396e7da66f113f6ad27022abc4db84a93f9fff6a162e32ff43",
       "main/variant.h": "55c2cdaef8b2d56e2ced2aa23984a289038adc6caaf9d164c92830c24b8cffb9",
-      "main/wifi_live.c": "81a3e010a18b01f0ba20783ec0df5e14970bfa509305fb523beb00975c99e20a",
+      "main/wifi_live.c": "8ce9df841a1b78cbdbc10073ae294556af1e801f9fe7e5e461fcd84b9ed969d5",
       "main/wifi_live.h": "99d2bea23a26f0271f9f5bb8056ff9ec80d1bfaf1edcd33dcf6551bf7926bf6f",
       "CMakeLists.txt": "ccdcd61455a4cd61ba17da36add6811ccd35d3f880115a07c709f883ebc2b0c6",
       "sdkconfig.defaults": "333b5513fd45d3959596dd93da6a9eb721a9182f82c1c6f75aa245ac170f0aad"
     },
     "idf_version": "v5.4.2",
-    "build_note": "Rebuilt 2026-10-12 after adding the AD7606 STBY start-up sequence (PCB builds release STBY on GPIO14, wait 30 ms, then reset; ADI AN-1091); earlier: fixed-two recorder corrections and shared PSRAM-queue, Wi-Fi password and metadata-limit fixes. Cross-compiled only; not flashed or simulated."
+    "build_note": "Rebuilt 2026-10-12 after porting the fixed-two 1.12 Wi-Fi preview fix (the live task announces a new session's metadata before that session's first data packet); earlier: adding the AD7606 STBY start-up sequence (PCB builds release STBY on GPIO14, wait 30 ms, then reset; ADI AN-1091); fixed-two recorder corrections and shared PSRAM-queue, Wi-Fi password and metadata-limit fixes. Cross-compiled only; not flashed or simulated."
   },
   {
     "package": "ad7606-two-channel-mpu6050",
@@ -287,19 +287,19 @@
       "application.bin": "0x10000"
     },
     "sha256": {
-      "application.bin": "565eb70088e78ad50dccc614e995d75871099711ff8f9b20672b5fc4fc0347a5",
-      "bootloader.bin": "06a90b5fc960dd9b0267990e657fe5cfb96a6adf1a583a575062931b18f1275f",
+      "application.bin": "da8e111c229f04a6f10ea6b883c368748699d415e2b707a377da38d376dc9464",
+      "bootloader.bin": "02bea1b1460a285b36acb475d64634ffed0a1744083a7ca83d5e6b40fe395456",
       "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
     },
     "profile": "record-2ch",
-    "firmware": "mpu6050-1.4",
+    "firmware": "mpu6050-1.5",
     "source_sha256": {
       "main/CMakeLists.txt": "15e96ed63ff9b15393c36d34d35d4c6921043116f39b082fdb096b9b9b888a22",
       "main/adc_ad7606.c": "d54d117c7948e98d7fe83826dc625949f08876fbfa9eebaf77e198d008c0cdd4",
       "main/adc_ads131m04.c": "914ffa6db82ed58aed9d4f0beb1ae05645ac6fb47097ace88e2be8b6a3c6b6aa",
       "main/ads_crc.c": "31cbb5fd61f5e06c394a426e0fa48d14f3561be4d46fffe6a18e1837edad83cc",
       "main/ads_crc.h": "d08cf15ad6e5d8d837e5c532b9665bc9c07a045475ba06c6443eed6b4367aeac",
-      "main/board.h": "8d6d8c71327c3e3e816d4ff109c4e7bfe8850fb1c34de2e6d8d16d1ecc9073aa",
+      "main/board.h": "14d5dc71e12d5159ef7bc787ca4d17bbe3876227b0edcde6babb4b6e08e858e4",
       "main/diagnostic.c": "d7671b98404e9b39d5f5af1eb7fc8e9ddad162b7bb9828dcd0bcf5694a455976",
       "main/format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
       "main/format.h": "1f9bb02632241a07c7fd3a048767bf88ef35e70a66948cd12e275594468e2536",
@@ -308,12 +308,12 @@
       "main/sensors.c": "c30cdea676e4bf998e235f8deadbb17339813a0fd35e50e04194c392e47debf3",
       "main/sensors.h": "880b651acda742396e7da66f113f6ad27022abc4db84a93f9fff6a162e32ff43",
       "main/variant.h": "55c2cdaef8b2d56e2ced2aa23984a289038adc6caaf9d164c92830c24b8cffb9",
-      "main/wifi_live.c": "81a3e010a18b01f0ba20783ec0df5e14970bfa509305fb523beb00975c99e20a",
+      "main/wifi_live.c": "8ce9df841a1b78cbdbc10073ae294556af1e801f9fe7e5e461fcd84b9ed969d5",
       "main/wifi_live.h": "99d2bea23a26f0271f9f5bb8056ff9ec80d1bfaf1edcd33dcf6551bf7926bf6f",
       "CMakeLists.txt": "ccdcd61455a4cd61ba17da36add6811ccd35d3f880115a07c709f883ebc2b0c6",
       "sdkconfig.defaults": "333b5513fd45d3959596dd93da6a9eb721a9182f82c1c6f75aa245ac170f0aad"
     },
     "idf_version": "v5.4.2",
-    "build_note": "Rebuilt 2026-10-12 after adding the AD7606 STBY start-up sequence (PCB builds release STBY on GPIO14, wait 30 ms, then reset; ADI AN-1091); earlier: fixed-two recorder corrections and shared PSRAM-queue, Wi-Fi password and metadata-limit fixes. Cross-compiled only; not flashed or simulated."
+    "build_note": "Rebuilt 2026-10-12 after porting the fixed-two 1.12 Wi-Fi preview fix (the live task announces a new session's metadata before that session's first data packet); earlier: adding the AD7606 STBY start-up sequence (PCB builds release STBY on GPIO14, wait 30 ms, then reset; ADI AN-1091); fixed-two recorder corrections and shared PSRAM-queue, Wi-Fi password and metadata-limit fixes. Cross-compiled only; not flashed or simulated."
   }
 ]

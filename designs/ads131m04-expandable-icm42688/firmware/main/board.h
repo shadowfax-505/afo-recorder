@@ -63,7 +63,7 @@
 // 500 ms (SDXC); the older 2,048-entry internal queue held only 0.244 s.
 #define RECORD_QUEUE_LENGTH 20480
 
-#define AFO_FIRMWARE_ID "dual-1.3"
+#define AFO_FIRMWARE_ID "dual-1.5"
 #define SD_MOUNT "/sdcard"
 
 // Laptop preview uses a private access point. Change this bench password before deployment.
