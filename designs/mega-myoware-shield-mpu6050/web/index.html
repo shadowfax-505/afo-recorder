@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mega EMG Recorder</title>
+<meta name="description" content="Live EMG and IMU readings from the Arduino Mega + MyoWare 2.0 + MPU-6050 setup, with recordings saved in this browser.">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <span class="mark" aria-hidden="true">A</span>
+    <div>
+      <div class="eyebrow">AFO recorder · Mega + MyoWare 2.0 + MPU-6050</div>
+      <h1>Live readings and recordings</h1>
+    </div>
+  </div>
+  <div class="conn">
+    <span id="status" class="pill" role="status">Not connected</span>
+    <label class="field small">Baud
+      <select id="baud" title="USB is 115200. Bluetooth ports ignore this setting.">
+        <option>9600</option><option>38400</option><option>57600</option><option selected>115200</option>
+      </select>
+    </label>
+    <button id="connect" class="primary">Connect</button>
+    <button id="demo">Try demo</button>
+    <button id="disconnect" hidden>Disconnect</button>
+  </div>
+</header>
+
+<nav class="tabs" role="tablist">
+  <button role="tab" id="tab-live" aria-selected="true" aria-controls="live">Live</button>
+  <button role="tab" id="tab-recordings" aria-selected="false" aria-controls="recordings">Recordings <span id="rec-count" class="count"></span></button>
+</nav>
+
+<main>
+<section id="live" role="tabpanel" aria-labelledby="tab-live">
+  <p id="no-serial" class="notice" hidden>This browser has no Web Serial. Open the page in Chrome or Edge on a computer to connect to the board. The demo works everywhere.</p>
+  <p id="message" class="notice" hidden></p>
+
+  <div class="toolbar">
+    <div class="group">
+      <span class="label">EMG jacks</span>
+      <div id="emg-mask" class="chips"></div>
+    </div>
+    <div class="group">
+      <label class="field">Sample rate
+        <span class="inline"><input id="rate" type="number" min="1" max="500" step="1" inputmode="numeric"><button id="rate-apply">Set</button></span>
+      </label>
+      <span id="rate-max" class="hint"></span>
+    </div>
+    <div class="group">
+      <button id="rescan" disabled>Rescan IMUs</button>
+    </div>
+    <div class="group push">
+      <label class="field">Window
+        <select id="window"><option value="5">5 s</option><option value="10" selected>10 s</option><option value="30">30 s</option><option value="60">60 s</option></select>
+      </label>
+      <button id="pause" aria-pressed="false">Pause view</button>
+    </div>
+  </div>
+
+  <div class="recordbar">
+    <label class="field grow">Recording name<input id="rec-name" type="text" placeholder="e.g. walk-trial-1"></label>
+    <label class="field grow">Notes<input id="rec-notes" type="text" placeholder="electrode site, speed, shoe…"></label>
+    <button id="record" class="record" disabled><span class="dot" aria-hidden="true"></span><span id="record-label">Record</span></button>
+    <span id="rec-elapsed" class="elapsed">00:00</span>
+  </div>
+
+  <div class="tiles">
+    <div class="tile"><span class="label">Samples per second</span><strong id="t-rate">–</strong><small id="t-rate-sub">target –</small></div>
+    <div class="tile"><span class="label">Samples lost</span><strong id="t-lost">–</strong><small id="t-lost-sub">since connect</small></div>
+    <div class="tile"><span class="label">IMUs</span><strong id="t-imu">–</strong><small id="t-imu-sub">A 0x68 · B 0x69</small></div>
+    <div class="tile"><span class="label">Link</span><strong id="t-link">–</strong><small id="t-link-sub">–</small></div>
+  </div>
+
+  <div id="live-charts" class="charts"></div>
+
+  <details class="log">
+    <summary>Device messages</summary>
+    <pre id="log"></pre>
+  </details>
+</section>
+
+<section id="recordings" role="tabpanel" aria-labelledby="tab-recordings" hidden>
+  <div class="toolbar">
+    <p class="hint grow">Recordings are stored in this browser on this computer. Download a backup to move them or keep them safe.</p>
+    <label class="button">Import backup<input id="import" type="file" accept=".json,application/json" hidden></label>
+  </div>
+  <div class="rec-layout">
+    <div class="rec-list">
+      <table>
+        <thead><tr><th>Name</th><th>Started</th><th class="num">Length</th><th class="num">Lost</th></tr></thead>
+        <tbody id="rec-rows"></tbody>
+      </table>
+      <p id="rec-empty" class="hint">No recordings yet. Connect the board (or the demo) on the Live tab and press Record.</p>
+    </div>
+    <div id="rec-detail" class="rec-detail" hidden>
+      <div class="detail-head">
+        <div>
+          <h2 id="d-name"></h2>
+          <p id="d-meta" class="hint"></p>
+          <p id="d-notes"></p>
+        </div>
+        <div class="actions">
+          <button id="d-csv" class="primary">Export CSV</button>
+          <button id="d-backup">Download backup</button>
+          <button id="d-rename">Rename</button>
+          <button id="d-delete" class="danger">Delete</button>
+        </div>
+      </div>
+      <p class="hint">Drag across a chart to zoom, double-click to zoom out. <button id="d-reset" class="link">Show all</button></p>
+      <div id="d-charts" class="charts"></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  Research prototype. Not a medical device. Run on battery with the laptop unplugged from mains when electrodes are on a person.
+  <span id="fw"></span>
+</footer>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>
