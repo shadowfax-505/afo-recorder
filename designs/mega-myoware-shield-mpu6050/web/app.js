@@ -3,12 +3,16 @@ import { StripChart } from './chart.js';
 import * as store from './store.js';
 import { DemoTransport } from './demo.js';
 import { SerialTransport, serialSupported } from './serial.js';
+import { analyzeSource, stridesCsv } from './gait.js';
+import { GaitPanel } from './gaitui.js';
 
 const $ = (id) => document.getElementById(id);
 const KEY_COUNT = 18; // A0..A5, IMU A ax..gz, IMU B ax..gz
 const LIVE_CAPACITY = 500 * 60;
 const CHUNK_FLUSH_MS = 2000;
 const SERIES = ['--series-1', '--series-2', '--series-3', '--series-4', '--series-5', '--series-6'];
+const GAIT_EVERY_MS = 1000;
+const GAIT_DEFAULTS = { sides: { A: 'right', B: 'left' }, distanceM: 0, windowS: 20 };
 
 // ---------- preferences (per-browser convenience only) ----------
 
@@ -146,6 +150,7 @@ const st = {
   bytes: 0,
   streamAskedAt: 0,
   streamRetried: false,
+  gaitDue: 0,
 };
 
 // ---------- UI helpers ----------
@@ -233,6 +238,35 @@ function drawCharts(c, src, t0, t1, gapS) {
 
 const liveCharts = buildCharts($('live-charts'), null);
 applyMasks(liveCharts, prefs.get('emgMask', 1), 0);
+
+// ---------- gait analysis (live) ----------
+
+const liveGait = new GaitPanel($('live-gait'), {
+  live: true,
+  idPrefix: 'lg',
+  settings: { ...GAIT_DEFAULTS, ...prefs.get('gait', {}) },
+  onChange: (s) => {
+    prefs.set('gait', s);
+    st.gaitDue = 0;
+  },
+});
+
+// Re-runs the analysis on the chosen stretch of the live buffer about once a second.
+function updateLiveGait(now) {
+  if (now < st.gaitDue || !live.n || $('live').hidden || st.paused) return;
+  st.gaitDue = now + GAIT_EVERY_MS;
+  const s = liveGait.settings;
+  const t1 = live.latest;
+  let t0 = t1 - (s.windowS || 60);
+  if (!s.windowS && st.recorder && st.recorder.t0 !== null) t0 = st.recorder.t0;
+  try {
+    liveGait.render(
+      analyzeSource(live, { t0, t1, imuMask: st.info ? st.info.imu_mask : 3, sides: s.sides, distanceM: s.distanceM, accelRangeG: 32768 / st.scales.accelLsbPerG }),
+    );
+  } catch (e) {
+    log(`gait analysis failed: ${e.message}`);
+  }
+}
 
 // ---------- EMG jack chips ----------
 
@@ -482,6 +516,7 @@ async function startRecording() {
     emgMask: 0,
     imuMask: 0,
     scales: { ...st.scales },
+    gait: structuredClone(liveGait.settings),
     device: info,
     samples: 0,
     durationS: 0,
@@ -548,6 +583,7 @@ function renderLive() {
     const period = st.info && st.info.rate ? 1 / st.info.rate : 0.01;
     drawCharts(liveCharts, live, t1 - st.window, t1, period * 3.5);
   }
+  updateLiveGait(now);
   requestAnimationFrame(renderLive);
 }
 requestAnimationFrame(renderLive);
@@ -555,7 +591,7 @@ requestAnimationFrame(renderLive);
 // ---------- recordings tab ----------
 
 let selectedId = null;
-let detail = null; // {meta, data, charts, src, t0, t1}
+let detail = null; // {meta, data, charts, src, t0, t1, gait, gaitResult}
 
 function recordingSource(meta, d) {
   const sc = meta.scales || scalesFromInfo(null);
@@ -629,6 +665,24 @@ async function openRecording(id) {
   const charts = buildCharts($('d-charts'), zoom);
   applyMasks(charts, meta.emgMask, meta.imuMask);
   detail = { meta, data, charts, src: recordingSource(meta, data), t0: 0, t1: data.n ? Math.max(data.t[data.n - 1], 0.001) : 1 };
+  const gait = new GaitPanel($('d-gait'), {
+    live: false,
+    idPrefix: 'dg',
+    settings: { ...GAIT_DEFAULTS, ...prefs.get('gait', {}), ...(meta.gait || {}) },
+    onZoom: zoom,
+    onChange: async (s) => {
+      if (!detail || detail.gait !== gait) return;
+      detail.meta.gait = s;
+      runDetailGait();
+      await store.putRecording(detail.meta);
+    },
+  });
+  gait.hidden = !meta.imuMask;
+  gait.strideCsv.addEventListener('click', () => {
+    if (detail && detail.gaitResult) download(`${safeName(detail.meta.name)}.gait.csv`, new Blob([stridesCsv(detail.gaitResult, detail.meta.name)], { type: 'text/csv' }));
+  });
+  detail.gait = gait;
+  if (meta.imuMask) runDetailGait();
   $('rec-detail').hidden = false;
   $('d-name').textContent = meta.name;
   const rate = data.n > 1 ? (data.n - 1) / (data.t[data.n - 1] || 1) : 0;
@@ -644,10 +698,24 @@ async function openRecording(id) {
   requestAnimationFrame(drawDetail);
 }
 
+function runDetailGait() {
+  const { meta, src, gait } = detail;
+  const s = gait.settings;
+  try {
+    const accelRangeG = 32768 / (meta.scales || scalesFromInfo(null)).accelLsbPerG;
+    detail.gaitResult = analyzeSource(src, { imuMask: meta.imuMask, sides: s.sides, distanceM: s.distanceM, accelRangeG });
+    gait.render(detail.gaitResult);
+    gait.draw(detail.t0, detail.t1);
+  } catch (e) {
+    showMessage(`Gait analysis failed: ${e.message}`, true);
+  }
+}
+
 function drawDetail() {
   if (!detail || $('recordings').hidden) return;
   const rate = detail.meta.rateHz || 100;
   drawCharts(detail.charts, detail.src, detail.t0, detail.t1, 3.5 / rate);
+  if (detail.gait) detail.gait.draw(detail.t0, detail.t1);
 }
 
 $('d-reset').addEventListener('click', () => {

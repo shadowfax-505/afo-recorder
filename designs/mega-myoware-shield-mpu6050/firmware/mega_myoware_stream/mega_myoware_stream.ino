@@ -22,7 +22,7 @@
 #include <Wire.h>
 #include "frame.h"
 
-#define FW_VERSION "mega-myoware-1.0"
+#define FW_VERSION "mega-myoware-1.1"
 
 // The ZS-040 ships at 9600 baud. After raising it with ../hc05_setup
 // (AT+UART=115200,0,0), change this to 115200 for much higher sample rates.
@@ -34,8 +34,9 @@
 #define DEFAULT_EMG_MASK 0x01
 
 const uint8_t MPU_ADDR[frame::MAX_IMU] = {0x68, 0x69};
-// ±4 g and ±500 °/s; the web app reads these scales from the info frame.
-const uint16_t ACCEL_LSB_PER_G = 8192;
+// ±8 g and ±500 °/s; the web app reads these scales from the info frame.
+// (1.0 used ±4 g, which a sensor at the ankle can exceed in swing.)
+const uint16_t ACCEL_LSB_PER_G = 4096;
 const char GYRO_LSB_PER_DPS[] = "65.5";
 
 struct Port {
@@ -99,7 +100,7 @@ bool mpuInit(uint8_t slot) {
          mpuWrite(addr, 0x19, 0x00) &&   // sample rate divider: 1 kHz internal
          mpuWrite(addr, 0x1A, 0x03) &&   // DLPF 44 Hz accel / 42 Hz gyro
          mpuWrite(addr, 0x1B, 0x08) &&   // gyro ±500 °/s
-         mpuWrite(addr, 0x1C, 0x08);     // accel ±4 g
+         mpuWrite(addr, 0x1C, 0x10);     // accel ±8 g
 }
 
 void scanImus() {
