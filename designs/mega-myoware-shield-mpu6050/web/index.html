@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Mega EMG Recorder</title>
-<meta name="description" content="Live EMG and IMU readings from the Arduino Mega + MyoWare 2.0 + MPU-6050 setup, with recordings saved in this browser.">
+<title>Mega EMG Gait Recorder</title>
+<meta name="description" content="Live EMG, IMU and gait parameters from the Arduino Mega + MyoWare 2.0 + MPU-6050 setup, with recordings saved in this browser.">
 <link rel="icon" href="data:,">
 <link rel="stylesheet" href="app.css">
 </head>
@@ -14,7 +14,7 @@
     <span class="mark" aria-hidden="true">A</span>
     <div>
       <div class="eyebrow">AFO recorder · Mega + MyoWare 2.0 + MPU-6050</div>
-      <h1>Live readings and recordings</h1>
+      <h1>Live readings, gait analysis and recordings</h1>
     </div>
   </div>
   <div class="conn">
@@ -76,6 +76,8 @@
     <div class="tile"><span class="label">Link</span><strong id="t-link">–</strong><small id="t-link-sub">–</small></div>
   </div>
 
+  <div id="live-gait"></div>
+
   <div id="live-charts" class="charts"></div>
 
   <details class="log">
@@ -112,6 +114,7 @@
         </div>
       </div>
       <p class="hint">Drag across a chart to zoom, double-click to zoom out. <button id="d-reset" class="link">Show all</button></p>
+      <div id="d-gait"></div>
       <div id="d-charts" class="charts"></div>
     </div>
   </div>

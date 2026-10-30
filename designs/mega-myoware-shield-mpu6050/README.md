@@ -1,6 +1,6 @@
 # Arduino Mega · MyoWare 2.0 shield · MPU-6050 · ZS-040 Bluetooth
 
-A battery-powered bench setup that streams MyoWare 2.0 EMG and up to two MPU-6050 IMUs from an Arduino Mega 2560 to a browser over Bluetooth (or USB). The web app shows live readings and keeps recordings in the browser for later viewing and CSV export.
+A battery-powered bench setup that streams MyoWare 2.0 EMG and up to two MPU-6050 IMUs from an Arduino Mega 2560 to a browser over Bluetooth (or USB). The web app shows live readings and gait parameters (heel strike, toe-off, stride, stance and swing time, cadence, double support, stride length, gait speed), and keeps recordings in the browser for later viewing, gait analysis and CSV export.
 
 > **Status:** the sketch compiles for the Mega 2560 (arduino-cli 1.2.2, arduino:avr 1.8.8, no warnings) and its frame encoder is checked byte-for-byte against the web app's decoder. The web app passes a Playwright test against a synthetic stream and a simulated Web Serial port. **Nothing here has run on the physical board yet.** Sample rates, Bluetooth range, battery life and signal quality are unmeasured.
 
@@ -62,7 +62,7 @@ On a Mac, pair the module in System Settings → Bluetooth (PIN 1234). It then a
 
 If `board list` shows nothing (it did on one Mac even with a genuine Mega attached), pass the port from `ls /dev/cu.usb*` straight to `-p`.
 
-In the monitor you should see `# mega-myoware-1.0 ready. imu_mask=3.` (3 = both IMUs found, 1 = only A, 2 = only B, 0 = none). Type `p` and Enter to print CSV samples, `x` to stop.
+In the monitor you should see `# mega-myoware-1.1 ready. imu_mask=3.` (3 = both IMUs found, 1 = only A, 2 = only B, 0 = none). Type `p` and Enter to print CSV samples, `x` to stop.
 
 ## Bluetooth speed
 
@@ -96,7 +96,46 @@ Recordings live in that browser's storage on that computer. Use **Download backu
 
 ### CSV columns
 
-`time_s` (board clock, from the first sample), `seq` (sample counter; a jump means samples were lost on the link), `flags` (bit 0 / bit 1 = IMU A / B read failed), then for each enabled jack `A<n>_counts` and `A<n>_volts` (counts × 5 / 1023), then for each IMU `ax ay az` in g (±4 g range) and `gx gy gz` in °/s (±500 °/s range).
+`time_s` (board clock, from the first sample), `seq` (sample counter; a jump means samples were lost on the link), `flags` (bit 0 / bit 1 = IMU A / B read failed), then for each enabled jack `A<n>_counts` and `A<n>_volts` (counts × 5 / 1023), then for each IMU `ax ay az` in g (±8 g range from firmware 1.1, ±4 g in 1.0) and `gx gy gz` in °/s (±500 °/s range).
+
+## Gait analysis
+
+The **Gait analysis** panel (Live tab and each recording) implements the pipeline in the reference papers the owner supplied (`gait-papers.pdf`, 30 Oct 2026):
+
+- Quiguanas-López et al., *Feasibility of gait analysis for children with cerebral palsy using inertial measurement units*, Results in Engineering 29 (2026) 109173: two MPU-6050s above the lateral malleoli at 100 Hz, Python gaitmap pipeline, spatio-temporal parameters by its Eqs. 1–4.
+- Carcreff et al., *What is the best configuration of wearable sensors to measure spatiotemporal gait parameters in children with cerebral palsy?*, Sensors 18 (2018) 394: the "Shanks" event detection (Salarian et al.) and the "Feet" de-drifted double integration (Mariani et al.).
+- Küderle et al., *Gaitmap — an open ecosystem for IMU-based human gait analysis and algorithm benchmarking*, IEEE OJEMB 5 (2024) 163.
+
+**Sensor placement.** One IMU on each shank, just above the outer ankle bone, as in Fig. 1 of the first paper. Pick which IMU is on which leg in the panel (the owner's physical labels are the reverse of the app's, see Wiring). Start each trial by standing still for about 2 s.
+
+**What the code does** ([`web/gait.js`](web/gait.js)):
+
+| Step | Paper | Here |
+|---|---|---|
+| Bias correction | gyro offset from a resting window at the start | per-axis mean of the stillest 1 s window |
+| Axis alignment | gaitmap orientation alignment, PCA, forward-direction correction | PCA of the gyro gives the medio-lateral axis; sign set so mid-swing peaks are positive |
+| Gait sequences | `UllrichGaitSequenceDetection` (dominant frequency, peak prominence, window) | 4 s windows with a clear dominant stride frequency (0.35–2.5 Hz) and enough motion |
+| Events | peak detection on shank pitch angular velocity (Carcreff, Shanks) | mid-swing = large positive peak; HS = minimum after it; TO = minimum before it; sub-sample refined |
+| Stride segmentation | pre-trained HMM (gaitmap) | from consecutive heel strikes (the HMM's weights are not published) |
+| Stride / stance / swing | Eqs. 1–3 | per stride, with plausibility limits (0.45–3 s, stance 30–85 %) |
+| Mean stride length | Eq. 4: distance ÷ strides | enter the walk distance (e.g. 10 m) in the panel |
+| Gait speed | distance over time | walk distance ÷ time from first to last heel strike |
+| Cadence | strides per minute | shown as strides/min and steps/min |
+| Stride length per stride | Feet configuration: de-drifted double integration between zero-velocity instants | same, in the sagittal plane between mid-stance instants of the ankle-level sensor (an estimate; see below) |
+
+With both legs it also gives step time, double support and stance/swing symmetry. **Export gait CSV** on a recording writes one row per stride.
+
+**What this setup cannot do, or only approximately:**
+
+- **Sample rate.** The papers used 100 Hz. Over the ZS-040 at 9600 baud the stream is about 20–29 Hz, which adds roughly ±20 ms to each event and about ±3 % to stance/swing percentages in the tests. Raise the module to 115200 (see Bluetooth speed) for about 245 Hz.
+- **Sensor stride length is an estimate.** The Feet method assumes the sensor is still at mid-stance, which holds for a foot sensor. Just above the ankle it is nearly but not exactly still, so expect a bias of several centimetres per stride. It has not been checked against a walkway or motion capture. Eq. 4 with a measured distance is the reference method from the paper.
+- **Thigh-based methods** (the ShTh double pendulum model, knee and thigh angles, knee range of motion) need sensors on the thighs. With only two IMUs you can have both shanks or one shank and thigh, not both.
+- **Foot features** from the Feet configuration (foot clearance, foot angles at strike and off, turning angle) need IMUs on the feet; turning angle also needs a magnetometer, which the MPU-6050 does not have.
+- **The gaitmap HMM and `HerzerEventDetection`** are trained for or written for foot-mounted sensors; they are replaced here by the shank-specific steps above.
+- **Validation equipment** in the papers (25 fps optical capture, Vicon, force plates, GaitRite) and the clinical scales (GMFCS, GMFM, MACS, FMS, WeeFIM) are outside this setup. Scale scores can be typed into a recording's notes.
+- **Accelerometer range.** Firmware 1.0 set ±4 g, which an ankle sensor can exceed in swing. Firmware 1.1 sets ±8 g; strides with clipped samples are reported and get no sensor length.
+
+The tests in `host/tests/gait.test.mjs` check the pipeline against synthetic shank signals with known events and stride length (`web/gaitsim.js`, which also drives the demo) at 29, 100 and 245 Hz. That shows the code does what it says; it does not show agreement with a real walk.
 
 ## Serial protocol
 
@@ -106,6 +145,7 @@ Commands are single ASCII lines: `?` info, `s` binary stream, `p` CSV stream, `x
 
 ```sh
 node --test designs/mega-myoware-shield-mpu6050/host/tests/protocol.test.mjs   # needs g++
+node --test designs/mega-myoware-shield-mpu6050/host/tests/gait.test.mjs
 node designs/mega-myoware-shield-mpu6050/host/tests/webapp.e2e.mjs             # needs Playwright + Chromium
 ```
 

@@ -255,9 +255,37 @@ td .tag { font: 10px var(--mono); color: var(--notice-ink); display: block; }
 .rec-detail > .hint { margin-bottom: 10px; }
 .rec-detail .charts { grid-template-columns: minmax(0, 1fr); }
 
+.gait {
+  background: var(--surface-1); border: 1px solid var(--border); border-radius: 8px;
+  padding: 14px 16px; margin: 14px 0; min-width: 0;
+}
+.gait-head { margin-bottom: 12px; }
+.gait-head h2 { font-size: 16px; font-weight: 600; }
+.gait-head .hint { max-width: 80ch; margin-top: 2px; }
+.gait .toolbar { margin-bottom: 10px; }
+.gait .field input { width: 110px; }
+.gait-warn { margin: 0 0 12px; padding-left: 28px; }
+.gait-warn li + li { margin-top: 4px; }
+.gait-tiles { grid-template-columns: repeat(6, minmax(0, 1fr)); margin: 10px 0 14px; }
+.gait-tiles .tile { background: var(--page); }
+.table-scroll { overflow-x: auto; margin-bottom: 14px; }
+.gait-table th[scope="row"] { color: var(--text-primary); font-weight: 500; }
+.gait-table th small { display: block; color: var(--text-muted); font-weight: 400; font-size: 11px; }
+.gait-table td { white-space: nowrap; }
+.gait tbody tr { cursor: default; }
+.gait tbody tr:hover { background: none; }
+.gait-charts { grid-template-columns: minmax(0, 1fr); }
+.gait .chart { background: var(--page); }
+.strides { margin-top: 12px; }
+.strides summary { cursor: pointer; font-size: 13px; color: var(--text-secondary); margin-bottom: 8px; }
+.strides .actions { margin-bottom: 8px; }
+
 .foot { padding: 18px 24px 26px; font-size: 11px; color: var(--text-muted); max-width: 1500px; margin: 0 auto; }
 .foot span { display: block; font-family: var(--mono); margin-top: 4px; }
 
+@media (max-width: 1300px) {
+  .gait-tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
 @media (max-width: 1000px) {
   .charts { grid-template-columns: minmax(0, 1fr); }
   .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }

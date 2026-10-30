@@ -3,6 +3,8 @@
 // Serves ../../web, then:
 //   1. streams from the built-in demo, records ~3 s, checks the saved
 //      recording, its CSV export and a backup/import round trip;
+//   1b. records ~11 s of the demo's synthetic walk and checks the gait
+//      parameters live, on the saved recording, and in the gait CSV;
 //   2. replaces navigator.serial with a fake port that answers like the
 //      sketch (including the ~2 s silence after a USB reset) to exercise the
 //      real Web Serial code path;
@@ -96,8 +98,11 @@ try {
   );
   const rows = lines.filter((l) => !l.startsWith('#') && l !== header);
   assert.equal(rows.length, samples);
-  const az = rows.map((r) => Number(r.split(',')[9]));
-  assert.ok(Math.max(...az) > 1.1 && Math.min(...az) < 0.9, 'accel z in g swings around 1 g');
+  const mag = rows.map((r) => Math.hypot(...r.split(',').slice(7, 10).map(Number)));
+  const sortedMag = mag.slice().sort((a, b) => a - b);
+  const medMag = sortedMag[sortedMag.length >> 1];
+  assert.ok(medMag > 0.9 && medMag < 1.1, `IMU A |accel| median ${medMag} g`);
+  assert.ok(sortedMag[sortedMag.length - 1] > 1.3, 'IMU A sees the walk');
 
   const [bkDl] = await Promise.all([page.waitForEvent('download'), page.click('#d-backup')]);
   const backupPath = await bkDl.path();
@@ -112,6 +117,61 @@ try {
   await page.click('#tab-live');
   await page.click('#disconnect');
   await ctx.close();
+
+  // ---- 1b. gait analysis, live and on a saved recording ----
+  {
+    const gctx = await browser.newContext({ viewport: { width: 1360, height: 1000 }, acceptDownloads: true });
+    const gp = await gctx.newPage();
+    watch(gp);
+    await gp.goto(url);
+    await gp.selectOption('#lg-window', '0'); // since Record was pressed
+    await gp.fill('#lg-distance', '10');
+    await gp.dispatchEvent('#lg-distance', 'change');
+    await gp.click('#demo');
+    await gp.waitForFunction(() => document.querySelector('#status').textContent.startsWith('Streaming'));
+    await gp.fill('#rec-name', 'e2e gait');
+    await gp.click('#record');
+    // the demo stands for 1.5 s, then walks 12 strides of ~1.1 s
+    await gp.waitForTimeout(11000);
+    const tileVal = (host, label) =>
+      gp.evaluate(
+        ([h, l]) => {
+          const t = [...document.querySelectorAll(`${h} .gait-tiles .tile`)].find((x) => x.querySelector('.label').textContent === l);
+          return Number(t.querySelector('strong').textContent);
+        },
+        [host, label],
+      );
+    const liveCad = await tileVal('#live-gait', 'Cadence');
+    assert.ok(liveCad > 100 && liveCad < 118, `live cadence ${liveCad}`);
+    const liveStance = await gp.textContent('#live-gait .gait-tiles .tile:nth-child(5) strong');
+    assert.match(liveStance, /^6\d \/ 3\d$/, `stance/swing ${liveStance}`);
+    if (shots) await gp.screenshot({ path: join(shots, 'gait-live.png'), fullPage: true });
+    await gp.click('#record');
+    await gp.waitForFunction(() => document.querySelector('#rec-count').textContent === '1');
+    await gp.click('#tab-recordings');
+    await gp.click('#rec-rows tr');
+    await gp.waitForFunction(() => document.querySelectorAll('#d-gait .strides tbody tr').length > 0);
+    const rowsN = await gp.locator('#d-gait .strides tbody tr').count();
+    assert.ok(rowsN >= 12, `${rowsN} strides in the recording (both legs)`);
+    assert.equal(await gp.inputValue('#dg-distance'), '10', 'walk distance saved with the recording');
+    const recLen = await tileVal('#d-gait', 'Mean stride length');
+    assert.ok(recLen > 0.4 && recLen < 2, `Eq. 4 stride length ${recLen}`);
+    const sensorLen = await gp.evaluate(() => {
+      const row = [...document.querySelectorAll('#d-gait .gait-table tbody tr')].find((r) => r.querySelector('th').textContent.startsWith('Stride length, sensor'));
+      return Number(row.lastElementChild.textContent.split(' ')[0]);
+    });
+    assert.ok(Math.abs(sensorLen - 1.2) < 0.12, `sensor stride length ${sensorLen} (demo walks 1.2 m strides)`);
+    await gp.click('#d-gait .strides summary');
+    if (shots) await gp.screenshot({ path: join(shots, 'gait-recording.png'), fullPage: true });
+    const [gDl] = await Promise.all([gp.waitForEvent('download'), gp.click('#dg-csv')]);
+    const gcsv = (await readFile(await gDl.path(), 'utf8')).trim().split('\n');
+    assert.ok(gcsv[1].startsWith('leg,imu,stride,hs_s'));
+    assert.equal(gcsv.length - 2, rowsN);
+    // changing a leg re-runs the analysis and is saved
+    await gp.selectOption('#dg-side-B', 'off');
+    await gp.waitForFunction(() => document.querySelectorAll('#d-gait .gait-table thead th').length === 3);
+    await gctx.close();
+  }
 
   // ---- 2. fake Web Serial port that behaves like the sketch over USB ----
   const ctx2 = await browser.newContext({ viewport: { width: 1280, height: 900 } });
