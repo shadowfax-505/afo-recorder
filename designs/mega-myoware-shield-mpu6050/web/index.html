@@ -25,6 +25,12 @@
       </select>
     </label>
     <button id="connect" class="primary">Connect</button>
+    <span id="wifi-box" class="wifi-box">
+      <label class="field small">ESP32
+        <input id="wifi-host" type="text" size="13" spellcheck="false" autocomplete="off" placeholder="afo-mega.local" title="The ESP32 Wi-Fi bridge: afo-mega.local, or the IP address it prints on USB (192.168.4.1 when you join its own AFO-MEGA network).">
+      </label>
+      <button id="wifi-connect" title="Connect through the ESP32 Wi-Fi bridge">Connect Wi-Fi</button>
+    </span>
     <button id="demo">Try demo</button>
     <button id="disconnect" hidden>Disconnect</button>
   </div>

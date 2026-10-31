@@ -129,6 +129,9 @@ h1, h2, h3, p { margin: 0; }
 }
 h1 { font-size: 18px; font-weight: 600; letter-spacing: -0.02em; }
 .conn { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.wifi-box { display: inline-flex; gap: 8px; align-items: center; }
+.wifi-box[hidden] { display: none; }
+.wifi-box input { width: 9.5em; }
 .pill {
   font: 11px var(--mono);
   padding: 5px 9px;
