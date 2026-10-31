@@ -497,8 +497,9 @@ function integrateStride(af, au, wm, fs, i0, i1) {
 
 // src: {n, t(i), v(key, i)} with keys 6..11 = IMU A ax..gz and 12..17 = IMU B
 // (g and °/s), as the app's live buffer and recording sources provide.
-// sides: {A: 'right'|'left'|'off', B: ...}; distanceM: walked distance for Eq. 4.
-export function analyzeSource(src, { t0 = -Infinity, t1 = Infinity, imuMask = 3, sides = { A: 'right', B: 'left' }, distanceM = 0, accelRangeG = 8, opts = {} } = {}) {
+// sides: {A: 'right'|'left'|'off', B: ...}; distanceM: walked distance for Eq. 4;
+// personStrideM: this person's own measured stride length (see combine).
+export function analyzeSource(src, { t0 = -Infinity, t1 = Infinity, imuMask = 3, sides = { A: 'right', B: 'left' }, distanceM = 0, personStrideM = 0, accelRangeG = 8, opts = {} } = {}) {
   let i0 = 0;
   while (i0 < src.n && src.t(i0) < t0) i0++;
   let i1 = i0;
@@ -533,7 +534,7 @@ export function analyzeSource(src, { t0 = -Infinity, t1 = Infinity, imuMask = 3,
     leg.side = side;
     out.legs[side in out.legs ? `${side}-${name}` : side] = leg;
   }
-  out.combined = combine(out.legs, distanceM);
+  out.combined = combine(out.legs, distanceM, personStrideM);
   return out;
 }
 
@@ -552,16 +553,30 @@ function legSummary(leg) {
     strideCv: strideT.n > 1 ? (100 * strideT.sd) / strideT.mean : NaN,
     length: pick('length'),
     speed: pick('speed'),
+    personLength: pick('personLength'),
+    personSpeed: pick('personSpeed'),
   };
 }
 
 const si = (a, b) => (Number.isFinite(a) && Number.isFinite(b) && a + b ? (200 * Math.abs(a - b)) / (a + b) : NaN);
 
-export function combine(legs, distanceM) {
+// Stride length comes from one of three sources, best first:
+//   'eq4'    a walk distance was entered: Eq. 4, distance ÷ strides;
+//   'person' the person's own stride length, measured once (it differs from
+//            person to person); the sensor estimates are scaled to average to it,
+//            keeping their stride-to-stride variation;
+//   'sensor' the ankle sensor's de-drifted integration alone.
+export function combine(legs, distanceM, personStrideM = 0) {
   const names = Object.keys(legs);
-  const sum = {};
-  for (const k of names) sum[k] = legSummary(legs[k]);
   const all = names.flatMap((k) => legs[k].strides);
+  const sensorMean = meanSd(all.map((s) => s.length)).mean;
+  const k = personStrideM > 0 && sensorMean > 0 ? personStrideM / sensorMean : NaN;
+  for (const s of all) {
+    s.personLength = s.length * k;
+    s.personSpeed = s.personLength / s.strideT;
+  }
+  const sum = {};
+  for (const n of names) sum[n] = legSummary(legs[n]);
   const c = {
     perLeg: sum,
     strides: all.length,
@@ -579,6 +594,12 @@ export function combine(legs, distanceM) {
     walkTimeS: NaN,
     meanStrideLength: NaN, // Eq. 4, needs a known distance
     gaitSpeed: NaN,
+    personStrideM: personStrideM > 0 ? personStrideM : NaN,
+    personScale: k,
+    personLength: meanSd(all.map((s) => s.personLength)),
+    personSpeed: meanSd(all.map((s) => s.personSpeed)),
+    strideLength: { value: NaN, source: '' }, // the best available, see above
+    speed: { value: NaN, source: '' },
     symmetry: {},
   };
   if (c.strideT.n) {
@@ -629,17 +650,32 @@ export function combine(legs, distanceM) {
       c.gaitSpeed = distanceM / c.walkTimeS;
     }
   }
+  if (Number.isFinite(c.meanStrideLength)) {
+    c.strideLength = { value: c.meanStrideLength, source: 'eq4' };
+    c.speed = { value: c.gaitSpeed, source: 'eq4' };
+  } else if (personStrideM > 0 && c.strideT.n) {
+    c.strideLength = { value: personStrideM, source: 'person' };
+    c.speed = { value: personStrideM / c.strideT.mean, source: 'person' };
+  } else if (c.sensorLength.n) {
+    c.strideLength = { value: c.sensorLength.mean, source: 'sensor' };
+    c.speed = { value: c.sensorSpeed.mean, source: 'sensor' };
+  }
   return c;
+}
+
+// A person's stride length from a measured walk: one stride is two steps.
+export function strideFromWalk(distanceM, steps) {
+  return distanceM > 0 && steps >= 2 ? (2 * distanceM) / steps : NaN;
 }
 
 // One row per stride, for CSV export.
 export function stridesCsv(result, name = '') {
-  const head = ['leg', 'imu', 'stride', 'hs_s', 'to_s', 'next_hs_s', 'stride_s', 'stance_s', 'swing_s', 'stance_pct', 'swing_pct', 'stride_length_m', 'stride_speed_m_s'];
-  const lines = [`# gait strides${name ? ` for ${name}` : ''}; heel strike (HS) = initial contact, TO = toe-off; length/speed from the ankle sensor (de-drifted integration)`, head.join(',')];
+  const head = ['leg', 'imu', 'stride', 'hs_s', 'to_s', 'next_hs_s', 'stride_s', 'stance_s', 'swing_s', 'stance_pct', 'swing_pct', 'stride_length_m', 'stride_speed_m_s', 'stride_length_person_m', 'stride_speed_person_m_s'];
+  const lines = [`# gait strides${name ? ` for ${name}` : ''}; heel strike (HS) = initial contact, TO = toe-off; length/speed from the ankle sensor (de-drifted integration); _person columns scaled to the person's measured stride length`, head.join(',')];
   for (const [side, leg] of Object.entries(result.legs))
     leg.strides.forEach((s, i) => {
       lines.push(
-        [side, leg.imu, i + 1, s.hs.toFixed(3), s.to.toFixed(3), s.hsNext.toFixed(3), s.strideT.toFixed(3), s.stanceT.toFixed(3), s.swingT.toFixed(3), s.stancePct.toFixed(1), s.swingPct.toFixed(1), Number.isFinite(s.length) ? s.length.toFixed(3) : '', Number.isFinite(s.speed) ? s.speed.toFixed(3) : ''].join(','),
+        [side, leg.imu, i + 1, s.hs.toFixed(3), s.to.toFixed(3), s.hsNext.toFixed(3), s.strideT.toFixed(3), s.stanceT.toFixed(3), s.swingT.toFixed(3), s.stancePct.toFixed(1), s.swingPct.toFixed(1), Number.isFinite(s.length) ? s.length.toFixed(3) : '', Number.isFinite(s.speed) ? s.speed.toFixed(3) : '', Number.isFinite(s.personLength) ? s.personLength.toFixed(3) : '', Number.isFinite(s.personSpeed) ? s.personSpeed.toFixed(3) : ''].join(','),
       );
     });
   return lines.join('\n') + '\n';

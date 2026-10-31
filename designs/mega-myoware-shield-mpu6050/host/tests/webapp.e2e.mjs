@@ -167,6 +167,23 @@ try {
     const gcsv = (await readFile(await gDl.path(), 'utf8')).trim().split('\n');
     assert.ok(gcsv[1].startsWith('leg,imu,stride,hs_s'));
     assert.equal(gcsv.length - 2, rowsN);
+    // a person's own stride length: measured by a counted walk, then used
+    await gp.fill('#dg-person', 'Rafi');
+    await gp.dispatchEvent('#dg-person', 'change');
+    await gp.click('#d-gait .measure summary');
+    await gp.fill('#dg-m-dist', '10');
+    await gp.fill('#dg-m-steps', '16');
+    assert.equal(await gp.textContent('#dg-m-out'), '1.25 m per stride');
+    await gp.click('#dg-m-use');
+    assert.equal(await gp.inputValue('#dg-stride'), '1.25');
+    await gp.fill('#dg-distance', '');
+    await gp.dispatchEvent('#dg-distance', 'change');
+    await gp.waitForFunction(() => document.querySelector('#d-gait .gait-tiles .tile:nth-child(3) small').textContent.includes('person'));
+    assert.equal(await tileVal('#d-gait', 'Mean stride length'), 1.25);
+    const people = await gp.evaluate(() => JSON.parse(localStorage.getItem('mega-myoware-prefs')).people);
+    assert.deepEqual(people, { Rafi: 1.25 });
+    if (shots) await gp.screenshot({ path: join(shots, 'gait-person.png'), fullPage: true });
+
     // changing a leg re-runs the analysis and is saved
     await gp.selectOption('#dg-side-B', 'off');
     await gp.waitForFunction(() => document.querySelectorAll('#d-gait .gait-table thead th').length === 3);

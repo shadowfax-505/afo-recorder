@@ -276,6 +276,13 @@ td .tag { font: 10px var(--mono); color: var(--notice-ink); display: block; }
 .gait tbody tr:hover { background: none; }
 .gait-charts { grid-template-columns: minmax(0, 1fr); }
 .gait .chart { background: var(--page); }
+.person { border-top: 1px solid var(--border); padding-top: 10px; margin-bottom: 6px; }
+.person .toolbar { margin-bottom: 6px; }
+.person input[type="text"] { width: 150px; }
+.measure { margin: 0 0 10px; }
+.measure summary { cursor: pointer; font-size: 13px; color: var(--text-secondary); }
+.measure .hint { max-width: 80ch; margin: 6px 0 8px; }
+.measure .field strong { font-size: 15px; padding: 6px 0; }
 .strides { margin-top: 12px; }
 .strides summary { cursor: pointer; font-size: 13px; color: var(--text-secondary); margin-bottom: 8px; }
 .strides .actions { margin-bottom: 8px; }

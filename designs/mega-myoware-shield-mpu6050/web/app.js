@@ -12,7 +12,7 @@ const LIVE_CAPACITY = 500 * 60;
 const CHUNK_FLUSH_MS = 2000;
 const SERIES = ['--series-1', '--series-2', '--series-3', '--series-4', '--series-5', '--series-6'];
 const GAIT_EVERY_MS = 1000;
-const GAIT_DEFAULTS = { sides: { A: 'right', B: 'left' }, distanceM: 0, windowS: 20 };
+const GAIT_DEFAULTS = { sides: { A: 'right', B: 'left' }, distanceM: 0, windowS: 20, person: '', personStrideM: 0 };
 
 // ---------- preferences (per-browser convenience only) ----------
 
@@ -241,9 +241,18 @@ applyMasks(liveCharts, prefs.get('emgMask', 1), 0);
 
 // ---------- gait analysis (live) ----------
 
+// People's measured stride lengths, kept in this browser by name.
+const people = {
+  list: () => Object.entries(prefs.get('people', {})).map(([name, strideM]) => ({ name, strideM })).sort((a, b) => a.name.localeCompare(b.name)),
+  save(name, strideM) {
+    prefs.set('people', { ...prefs.get('people', {}), [name]: strideM });
+  },
+};
+
 const liveGait = new GaitPanel($('live-gait'), {
   live: true,
   idPrefix: 'lg',
+  profiles: people,
   settings: { ...GAIT_DEFAULTS, ...prefs.get('gait', {}) },
   onChange: (s) => {
     prefs.set('gait', s);
@@ -261,7 +270,7 @@ function updateLiveGait(now) {
   if (!s.windowS && st.recorder && st.recorder.t0 !== null) t0 = st.recorder.t0;
   try {
     liveGait.render(
-      analyzeSource(live, { t0, t1, imuMask: st.info ? st.info.imu_mask : 3, sides: s.sides, distanceM: s.distanceM, accelRangeG: 32768 / st.scales.accelLsbPerG }),
+      analyzeSource(live, { t0, t1, imuMask: st.info ? st.info.imu_mask : 3, sides: s.sides, distanceM: s.distanceM, personStrideM: s.personStrideM, accelRangeG: 32768 / st.scales.accelLsbPerG }),
     );
   } catch (e) {
     log(`gait analysis failed: ${e.message}`);
@@ -668,6 +677,7 @@ async function openRecording(id) {
   const gait = new GaitPanel($('d-gait'), {
     live: false,
     idPrefix: 'dg',
+    profiles: people,
     settings: { ...GAIT_DEFAULTS, ...prefs.get('gait', {}), ...(meta.gait || {}) },
     onZoom: zoom,
     onChange: async (s) => {
@@ -703,7 +713,7 @@ function runDetailGait() {
   const s = gait.settings;
   try {
     const accelRangeG = 32768 / (meta.scales || scalesFromInfo(null)).accelLsbPerG;
-    detail.gaitResult = analyzeSource(src, { imuMask: meta.imuMask, sides: s.sides, distanceM: s.distanceM, accelRangeG });
+    detail.gaitResult = analyzeSource(src, { imuMask: meta.imuMask, sides: s.sides, distanceM: s.distanceM, personStrideM: s.personStrideM, accelRangeG });
     gait.render(detail.gaitResult);
     gait.draw(detail.t0, detail.t1);
   } catch (e) {

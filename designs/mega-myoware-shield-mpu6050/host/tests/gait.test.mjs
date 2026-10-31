@@ -6,7 +6,7 @@
 // does what it says, not that a real shank looks exactly like this.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { analyzeLeg, analyzeSource, combine, lowpass, resample, stridesCsv } from '../../web/gait.js';
+import { analyzeLeg, analyzeSource, combine, lowpass, resample, stridesCsv, strideFromWalk } from '../../web/gait.js';
 import { simulateWalk } from '../../web/gaitsim.js';
 
 const nearest = (list, x) => Math.min(...list.map((v) => Math.abs(v - x)));
@@ -119,4 +119,24 @@ test('strides with a clipped accelerometer get no sensor length', () => {
   assert.ok(leg.strides.length >= 6);
   assert.ok(leg.strides.every((s) => Number.isNaN(s.length)));
   assert.match(leg.warnings.join(' '), /±2 g limit/);
+});
+
+test('a person’s measured stride length sets length and speed, and scales the sensor estimate', () => {
+  const sim = simulateWalk({ fs: 100, strides: 10, sl: 1.15, seed: 12 });
+  const src = { n: sim.t.length, t: (i) => sim.t[i], v: (key, i) => sim.imu[key < 12 ? 0 : 1][(key - 6) % 6][i] };
+  assert.equal(strideFromWalk(10, 16), 1.25);
+  assert.ok(Number.isNaN(strideFromWalk(10, 0)));
+  const plain = analyzeSource(src).combined;
+  assert.equal(plain.strideLength.source, 'sensor');
+  const p = analyzeSource(src, { personStrideM: 0.9 }).combined;
+  assert.equal(p.strideLength.source, 'person');
+  assert.equal(p.strideLength.value, 0.9);
+  assert.ok(Math.abs(p.speed.value - 0.9 / p.strideT.mean) < 1e-12);
+  assert.ok(Math.abs(p.personLength.mean - 0.9) < 1e-9, 'scaled lengths average to the measured stride');
+  assert.ok(p.personLength.sd > 0, 'stride-to-stride variation kept');
+  // a walk distance (Eq. 4) still wins
+  const e = analyzeSource(src, { personStrideM: 0.9, distanceM: 10 }).combined;
+  assert.equal(e.strideLength.source, 'eq4');
+  const csv = stridesCsv(analyzeSource(src, { personStrideM: 0.9 }), 'p').trim().split('\n');
+  assert.ok(csv[1].endsWith('stride_length_person_m,stride_speed_person_m_s'));
 });
