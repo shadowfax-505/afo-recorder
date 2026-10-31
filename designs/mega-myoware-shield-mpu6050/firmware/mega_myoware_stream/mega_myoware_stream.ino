@@ -1,15 +1,17 @@
 // Arduino Mega 2560 + MyoWare 2.0 Arduino Shield + up to two MPU-6050 (GY-521)
-// + ZS-040 (HC-05 / HC-06) Bluetooth. Streams EMG and IMU samples to the web
-// app in ../../web over USB or Bluetooth.
+// + ZS-040 (HC-05 / HC-06) Bluetooth + optional ESP32 Wi-Fi bridge. Streams
+// EMG and IMU samples to the web app in ../../web over USB, Bluetooth or Wi-Fi.
 //
 // Pins
 //   MyoWare shield jacks  A0..A5 (the shield routes jack n to An)
 //   MPU-6050 SDA / SCL    20 / 21 (the shield's SDA / SCL pins are the same bus)
 //   IMU A                 AD0 to GND (or floating) -> address 0x68
 //   IMU B                 AD0 to 3.3 V / 5 V       -> address 0x69
-//   ZS-040                any of Serial1 (18 TX, 19 RX), Serial2 (16, 17) or
-//                         Serial3 (14, 15). The sketch listens on all three and
-//                         streams to whichever port sends it a command.
+//   ZS-040                Serial1 (18 TX, 19 RX) or Serial3 (14 TX, 15 RX)
+//   ESP32 Wi-Fi bridge    Serial2 (16 TX2 -> divider -> ESP32 GPIO16,
+//                         17 RX2 <- ESP32 GPIO17), see ../esp32_wifi_bridge
+//   The sketch listens on all ports and streams to whichever port sends it a
+//   command.
 //
 // Commands (ASCII, one per line, on USB or Bluetooth)
 //   ?        send an info frame
@@ -22,20 +24,26 @@
 #include <Wire.h>
 #include "frame.h"
 
-#define FW_VERSION "mega-myoware-1.0"
+#define FW_VERSION "mega-myoware-1.2"
 
 // The ZS-040 ships at 9600 baud. After raising it with ../hc05_setup
 // (AT+UART=115200,0,0), change this to 115200 for much higher sample rates.
 #ifndef BT_BAUD
 #define BT_BAUD 9600UL
 #endif
+// Serial2 talks to the ESP32 Wi-Fi bridge. 500000 is exact on a 16 MHz Mega
+// (921600 would be 8 % off) and carries every sample rate the sketch allows.
+#ifndef WIFI_BAUD
+#define WIFI_BAUD 500000UL
+#endif
 #define USB_BAUD 115200UL
 #define MAX_RATE_HZ 500
 #define DEFAULT_EMG_MASK 0x01
 
 const uint8_t MPU_ADDR[frame::MAX_IMU] = {0x68, 0x69};
-// ±4 g and ±500 °/s; the web app reads these scales from the info frame.
-const uint16_t ACCEL_LSB_PER_G = 8192;
+// ±8 g and ±500 °/s; the web app reads these scales from the info frame.
+// (1.0 used ±4 g, which a sensor at the ankle can exceed in swing.)
+const uint16_t ACCEL_LSB_PER_G = 4096;
 const char GYRO_LSB_PER_DPS[] = "65.5";
 
 struct Port {
@@ -49,7 +57,7 @@ struct Port {
 Port ports[] = {
   {&Serial, "USB", USB_BAUD, {0}, 0},
   {&Serial1, "Serial1", BT_BAUD, {0}, 0},
-  {&Serial2, "Serial2", BT_BAUD, {0}, 0},
+  {&Serial2, "Serial2", WIFI_BAUD, {0}, 0},
   {&Serial3, "Serial3", BT_BAUD, {0}, 0},
 };
 const uint8_t PORT_COUNT = sizeof(ports) / sizeof(ports[0]);
@@ -99,7 +107,7 @@ bool mpuInit(uint8_t slot) {
          mpuWrite(addr, 0x19, 0x00) &&   // sample rate divider: 1 kHz internal
          mpuWrite(addr, 0x1A, 0x03) &&   // DLPF 44 Hz accel / 42 Hz gyro
          mpuWrite(addr, 0x1B, 0x08) &&   // gyro ±500 °/s
-         mpuWrite(addr, 0x1C, 0x08);     // accel ±4 g
+         mpuWrite(addr, 0x1C, 0x10);     // accel ±8 g
 }
 
 void scanImus() {
