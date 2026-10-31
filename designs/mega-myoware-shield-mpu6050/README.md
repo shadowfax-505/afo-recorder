@@ -116,7 +116,7 @@ The **Gait analysis** panel (Live tab and each recording) implements the pipelin
 | Axis alignment | gaitmap orientation alignment, PCA, forward-direction correction | PCA of the gyro gives the medio-lateral axis; sign set so mid-swing peaks are positive |
 | Gait sequences | `UllrichGaitSequenceDetection` (dominant frequency, peak prominence, window) | 4 s windows with a clear dominant stride frequency (0.35–2.5 Hz) and enough motion |
 | Events | peak detection on shank pitch angular velocity (Carcreff, Shanks) | mid-swing = large positive peak; HS = minimum after it; TO = minimum before it; sub-sample refined |
-| Stride segmentation | pre-trained HMM (gaitmap) | from consecutive heel strikes (the HMM's weights are not published) |
+| Stride segmentation | pre-trained HMM (gaitmap) | choose in the panel: **Peak rules** (from consecutive mid-swing peaks, the default) or **Trained HMM**, an exact port of gaitmap's published model (below) |
 | Stride / stance / swing | Eqs. 1–3 | per stride, with plausibility limits (0.45–3 s, stance 30–85 %) |
 | Mean stride length | Eq. 4: distance ÷ strides | enter the walk distance (e.g. 10 m) in the panel |
 | Gait speed | distance over time | walk distance ÷ time from first to last heel strike |
@@ -131,9 +131,16 @@ With both legs it also gives step time, double support and stance/swing symmetry
 - **Sensor stride length is an estimate.** The Feet method assumes the sensor is still at mid-stance, which holds for a foot sensor. Just above the ankle it is nearly but not exactly still, so expect a bias of several centimetres per stride. It has not been checked against a walkway or motion capture. Eq. 4 with a measured distance is the reference method from the paper.
 - **Thigh-based methods** (the ShTh double pendulum model, knee and thigh angles, knee range of motion) need sensors on the thighs. With only two IMUs you can have both shanks or one shank and thigh, not both.
 - **Foot features** from the Feet configuration (foot clearance, foot angles at strike and off, turning angle) need IMUs on the feet; turning angle also needs a magnetometer, which the MPU-6050 does not have.
-- **The gaitmap HMM and `HerzerEventDetection`** are trained for or written for foot-mounted sensors; they are replaced here by the shank-specific steps above.
+- **`HerzerEventDetection`** is written for foot-mounted sensors; it is replaced here by the shank-specific event rules above.
 - **Validation equipment** in the papers (25 fps optical capture, Vicon, force plates, GaitRite) and the clinical scales (GMFCS, GMFM, MACS, FMS, WeeFIM) are outside this setup. Scale scores can be typed into a recording's notes.
 - **Accelerometer range.** Firmware 1.0 set ±4 g, which an ankle sensor can exceed in swing. Firmware 1.1 sets ±8 g; strides with clipped samples are reported and get no sensor length.
+
+**Trained stride model (gaitmap HMM).** [`web/hmm.js`](web/hmm.js) is a JavaScript port of gaitmap's `HmmStrideSegmentation` with `PreTrainedRothSegmentationModel` (Roth et al., J NeuroEng Rehabil 18, 93, 2021), and [`web/models/roth-hmm.js`](web/models/roth-hmm.js) holds that model's published numbers, copied unchanged from gaitmap_mad 2.6.0's `fallriskpd_at_lab_model.json` by [`host/tools/export_gaitmap_hmm.py`](host/tools/export_gaitmap_hmm.py). It filters the sagittal gyro (4th-order Butterworth, 10 Hz), resamples to 51.2 Hz, takes the signal and its 0.2 s slope, z-scores both, and decodes 5 "between strides" and 20 "in a stride" states, each a 2-D Gaussian mixture, with Viterbi. A stride runs from one pre-swing gyro minimum (about toe-off) to the next. Inside each one the app then finds mid-swing, heel strike and toe-off with the same rules as the peak method, so only *which* strides are counted changes, not how they are timed. On gaitmap's own example recording and on simulated shank walks at 60, 100 and 245 Hz the port gives the same states and the same strides as gaitmap itself (`host/tests/hmm.test.mjs`; the reference output in `host/tests/fixtures/` came from gaitmap 2.6.0 under Python 3.9 with pomegranate 0.14.6). Limits:
+- It needs at least 51.2 samples per second; below that the app says so and uses the peak rules. Over the ZS-040 that means 115200 baud.
+- It was trained on foot sensors of people with Parkinson's disease walking in a lab. This setup has shank sensors and is for children with cerebral palsy, so it is offered to compare against the peak rules, not as validated here. Retraining on your own labelled walks is the next step if it is to be trusted.
+- It only counts whole toe-off-to-toe-off strides, so when a recording stops mid-stride it can miss the last stride of each leg that the peak rules still get.
+- Because each recording is z-scored, it can label swaying or fidgeting as strides; those are dropped by the app's mid-swing (> 50 °/s), stride time and stance-% checks.
+- gaitmap_mad is AGPL-3.0-or-later, so `hmm.js` and the model file are too (see `THIRD_PARTY_NOTICES.md`). If you host the app for other people, offer them the source; this public repository does.
 
 The tests in `host/tests/gait.test.mjs` check the pipeline against synthetic shank signals with known events and stride length (`web/gaitsim.js`, which also drives the demo) at 29, 100 and 245 Hz. That shows the code does what it says; it does not show agreement with a real walk.
 
@@ -146,6 +153,7 @@ Commands are single ASCII lines: `?` info, `s` binary stream, `p` CSV stream, `x
 ```sh
 node --test designs/mega-myoware-shield-mpu6050/host/tests/protocol.test.mjs   # needs g++
 node --test designs/mega-myoware-shield-mpu6050/host/tests/gait.test.mjs
+node --test designs/mega-myoware-shield-mpu6050/host/tests/hmm.test.mjs
 node designs/mega-myoware-shield-mpu6050/host/tests/webapp.e2e.mjs             # needs Playwright + Chromium
 ```
 

@@ -15,12 +15,15 @@
 //     velocity is close to zero at mid-stance.
 //
 // The gaitmap steps the first paper names (UllrichGaitSequenceDetection,
-// the pre-trained stride HMM, HerzerEventDetection) are reproduced in spirit,
-// not byte for byte: the HMM's trained weights are not published in the paper,
-// so strides are segmented from the detected events instead.
+// HerzerEventDetection) are reproduced in spirit, not byte for byte. The
+// pre-trained stride HMM is ported exactly in hmm.js (gaitmap's published
+// model) and can replace the peak rules as the stride finder with
+// opts.segmenter = 'hmm'; event timing inside each stride stays the same.
 //
 // Everything here is plain functions on arrays so it runs in the browser and
 // under node for tests.
+
+import { segment as hmmSegment, MODEL as HMM_MODEL } from './hmm.js';
 
 const G = 9.80665;
 const RAD = Math.PI / 180;
@@ -37,6 +40,7 @@ export const DEFAULTS = {
   strideTRange: [0.45, 3.0], // s
   stancePctRange: [30, 85], // %
   accelRangeG: 8, // full scale; strides with clipped acceleration get no length
+  segmenter: 'peaks', // 'peaks' (Salarian rules) or 'hmm' (gaitmap's trained model)
 };
 
 // ---------- small numeric helpers ----------
@@ -320,6 +324,18 @@ export function analyzeLeg(t, acc, gyr, fs, opts = {}) {
   }
   res.axis = m;
   res.w = w;
+  const at = (x) => t[0] + x / fs; // fractional index to time
+  res.segmenter = 'peaks';
+  if (o.segmenter === 'hmm') {
+    if (fs >= HMM_MODEL.featureSpaceHz) {
+      hmmEvents(res, gyr, bias, m, w, fs, at, o.msMinDps);
+      res.segmenter = 'hmm';
+    } else
+      res.warnings.push(
+        `The trained stride model needs at least ${HMM_MODEL.featureSpaceHz} samples per second and this stream has ${fs.toFixed(0)}, so the peak rules were used. Raise the Bluetooth module to 115200 baud.`,
+      );
+  }
+  if (res.segmenter === 'peaks') {
   seqs = detectSequences(w, fs, o);
   res.sequences = seqs.map(([a, b]) => [t[a], t[Math.min(b, n - 1)]]);
   if (!seqs.length) {
@@ -328,7 +344,6 @@ export function analyzeLeg(t, acc, gyr, fs, opts = {}) {
   }
 
   // 4. Events per sequence.
-  const at = (x) => t[0] + x / fs; // fractional index to time
   for (const [a, b] of seqs) {
     // candidate mid-swing peaks
     let peaks = [];
@@ -357,6 +372,11 @@ export function analyzeLeg(t, acc, gyr, fs, opts = {}) {
     res.ic.push(NaN);
     res.to.push(NaN);
   }
+  }
+  if (res.segmenter === 'hmm' && !res.ms.some(Number.isFinite)) {
+    res.warnings.push('The trained stride model found no strides in this stretch.');
+    return res;
+  }
 
   // 5. Strides: Eqs. 1–3 of the first paper.
   //   stride(i) = HS(i+1) − HS(i); stance(i) = TO(i) − HS(i); swing(i) = HS(i+1) − TO(i)
@@ -380,6 +400,46 @@ export function analyzeLeg(t, acc, gyr, fs, opts = {}) {
   if (clipped)
     res.warnings.push(`The accelerometer hit its ±${o.accelRangeG} g limit in ${clipped} stride${clipped > 1 ? 's' : ''}, so ${clipped > 1 ? 'they have' : 'it has'} no sensor stride length.`);
   return res;
+}
+
+// Stride finding with gaitmap's trained HMM (hmm.js). Its strides run from
+// one pre-swing gyro minimum (about toe-off) to the next, so each one holds
+// exactly one mid-swing peak; IC and TO are then found around that peak with
+// the same rules as the peak method.
+function hmmEvents(res, gyr, bias, m, w, fs, at, minPeak) {
+  const n = w.length;
+  // gaitmap feeds the unfiltered gyro (its own 10 Hz filter is in the features)
+  const raw = new Float64Array(n);
+  for (let i = 0; i < n; i++) raw[i] = m[0] * (gyr[0][i] - bias[0]) + m[1] * (gyr[1][i] - bias[1]) + m[2] * (gyr[2][i] - bias[2]);
+  const seg = hmmSegment(raw, fs);
+  res.hmm = { strides: seg.strides.map(([a, b]) => [at(a), at(Math.min(b, n - 1))]), model: HMM_MODEL.source };
+  let runStart = -1;
+  let prevEnd = -1;
+  const close = () => {
+    if (runStart < 0) return;
+    res.sequences.push([at(runStart), at(Math.min(prevEnd, n - 1))]);
+    res.ms.push(NaN);
+    res.ic.push(NaN);
+    res.to.push(NaN);
+  };
+  for (const [a, b] of seg.strides) {
+    if (a !== prevEnd) {
+      close();
+      runStart = a;
+    }
+    prevEnd = b;
+    const e = Math.min(b, n - 1);
+    let p = a;
+    for (let i = a; i <= e; i++) if (w[i] > w[p]) p = i;
+    const T = b - a;
+    const ok = w[p] > minPeak && p > a && p < e;
+    const ic = ok ? argmin(w, p + 1, Math.min(n, p + Math.round(0.45 * T))) : -1;
+    const to = ok ? argmin(w, Math.max(0, p - Math.round(0.45 * T)), p) : -1;
+    res.ms.push(ok ? at(p) : NaN);
+    res.ic.push(ic > 0 && ic < n - 1 && w[ic] < w[p] ? at(refine(w, ic)) : NaN);
+    res.to.push(to > 0 && w[to] < w[p] ? at(refine(w, to)) : NaN);
+  }
+  close();
 }
 
 function suppress(peaks, w, gap) {

@@ -167,6 +167,16 @@ try {
     const gcsv = (await readFile(await gDl.path(), 'utf8')).trim().split('\n');
     assert.ok(gcsv[1].startsWith('leg,imu,stride,hs_s'));
     assert.equal(gcsv.length - 2, rowsN);
+    // gaitmap's trained HMM as the stride finder finds the same strides
+    await gp.selectOption('#dg-finder', 'hmm');
+    // (it only takes whole toe-off-to-toe-off strides, so a recording that
+    // stops mid-stride can lose the last one per leg)
+    await gp.waitForFunction((n) => {
+      const k = document.querySelectorAll('#d-gait .strides tbody tr').length;
+      return k >= n - 2 && k <= n && document.querySelector('#dg-finder').value === 'hmm';
+    }, rowsN);
+    assert.ok(!(await gp.textContent('#d-gait .gait-warn')).includes('51.2'), 'HMM ran (stream above 51.2 samples/s)');
+    await gp.selectOption('#dg-finder', 'peaks');
     // a person's own stride length: measured by a counted walk, then used
     await gp.fill('#dg-person', 'Rafi');
     await gp.dispatchEvent('#dg-person', 'change');

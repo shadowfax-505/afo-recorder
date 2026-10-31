@@ -89,7 +89,25 @@ export class GaitPanel {
       this.settings.distanceM = Math.max(0, Number(dist.value) || 0);
       this.changed();
     });
-    const controls = el('div', { class: 'toolbar gait-controls' }, sideSelect('A'), sideSelect('B'), el('label', { class: 'field' }, 'Walk distance (m)', dist));
+    const finder = el(
+      'select',
+      { id: `${opts.idPrefix}-finder` },
+      el('option', { value: 'peaks' }, 'Peak rules (Salarian)'),
+      el('option', { value: 'hmm' }, 'Trained HMM (gaitmap, Roth 2021)'),
+    );
+    finder.value = this.settings.segmenter || 'peaks';
+    finder.addEventListener('change', () => {
+      this.settings.segmenter = finder.value;
+      this.changed();
+    });
+    const controls = el(
+      'div',
+      { class: 'toolbar gait-controls' },
+      sideSelect('A'),
+      sideSelect('B'),
+      el('label', { class: 'field' }, 'Walk distance (m)', dist),
+      el('label', { class: 'field', title: 'Which method finds the strides. Event timing inside each stride is the same for both. The HMM is gaitmap’s published model, trained on foot sensors of people with Parkinson’s disease, and needs at least 51.2 samples per second.' }, 'Stride finder', finder),
+    );
     if (opts.live) {
       const win = el(
         'select',
