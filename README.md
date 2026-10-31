@@ -31,6 +31,10 @@ All packages target 8 kHz per enabled EMG channel and 200 Hz from each foot/shan
 
 Use one package end to end. Do not combine an ICM wiring plan with MPU firmware or a breadboard binary with the compact-PCB SD pin assignment. The fixed-two packages intentionally reject four-channel builds.
 
+### Arduino Mega bench setup
+
+A separate, simpler setup lives in [`designs/mega-myoware-shield-mpu6050`](designs/mega-myoware-shield-mpu6050/README.md): an Arduino Mega 2560 with the MyoWare 2.0 Arduino Shield, up to two MPU-6050 IMUs and a ZS-040 Bluetooth module, plus a browser app for live readings and saved recordings. It uses the Mega's 10-bit ADC at up to a few hundred samples per second, so it is not a substitute for the six packages above.
+
 ## Start here
 
 1. Read the [project manual](documentation/README.md) and choose one package.
