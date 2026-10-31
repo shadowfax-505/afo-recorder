@@ -2,6 +2,7 @@
 // tiles, a parameter table per leg, the shank angular velocity with detected
 // events, and (for recordings) a per-stride table.
 import { StripChart } from './chart.js';
+import { strideFromWalk } from './gait.js';
 
 const LEG_COLOR = { right: '--series-1', left: '--series-2' };
 const SIDES = [
@@ -43,6 +44,9 @@ const ROWS = [
   ['Stride time variability (CV %)', '', (s) => num(s.strideCv, 1), () => ''],
   ['Stride length, sensor (m)', 'de-drifted integration at the ankle; estimate', (s) => ms(s.length, 2), (c) => ms(c.sensorLength, 2)],
   ['Stride velocity, sensor (m/s)', 'sensor stride length ÷ stride time; estimate', (s) => ms(s.speed, 2), (c) => ms(c.sensorSpeed, 2)],
+  ['Stride length, person-scaled (m)', 'sensor estimate scaled so it averages to the person’s measured stride', (s) => ms(s.personLength, 2), (c) => ms(c.personLength, 2)],
+  ['Stride velocity, person-scaled (m/s)', 'person-scaled stride length ÷ stride time', (s) => ms(s.personSpeed, 2), (c) => ms(c.personSpeed, 2)],
+  ['Person’s measured stride length (m)', 'entered or measured for this person', () => '', (c) => num(c.personStrideM, 2)],
   ['Mean stride length, Eq. 4 (m)', 'walk distance ÷ strides; enter the distance', () => '', (c) => num(c.meanStrideLength, 2)],
   ['Gait speed (m/s)', 'walk distance ÷ walking time; enter the distance', () => '', (c) => num(c.gaitSpeed, 2)],
   ['Walking time (s)', 'first to last heel strike', () => '', (c) => num(c.walkTimeS, 1)],
@@ -50,7 +54,8 @@ const ROWS = [
 ];
 
 export class GaitPanel {
-  // opts: {live: bool, settings: {sides:{A,B}, distanceM, windowS}, onChange(settings), onZoom}
+  // opts: {live: bool, settings: {sides:{A,B}, distanceM, windowS, person, personStrideM},
+  //        profiles: {list() -> [{name, strideM}], save(name, strideM)}, onChange(settings), onZoom}
   constructor(host, opts) {
     this.opts = opts;
     this.settings = structuredClone(opts.settings);
@@ -105,6 +110,7 @@ export class GaitPanel {
       controls.append(el('label', { class: 'field' }, 'Analyse', win));
     }
     controls.append(el('p', { class: 'hint grow' }, 'The walk distance is the measured length walked in this stretch (for example 10 m in a 10 m walk test). It gives Eq. 4’s mean stride length and the gait speed.'));
+    const person = this.buildPerson(opts);
 
     this.warn = el('ul', { class: 'notice gait-warn', hidden: true });
     this.tiles = el('div', { class: 'tiles gait-tiles' });
@@ -119,7 +125,7 @@ export class GaitPanel {
       onZoom: opts.onZoom || null,
     });
     this.chart.el.classList.add('wide');
-    this.root.append(head, controls, this.warn, this.tiles, tableWrap, this.chartHost);
+    this.root.append(head, controls, person, this.warn, this.tiles, tableWrap, this.chartHost);
     if (!opts.live) {
       this.strideBody = el('tbody');
       this.strideCsv = el('button', { type: 'button', id: `${opts.idPrefix}-csv` }, 'Export gait CSV');
@@ -135,13 +141,86 @@ export class GaitPanel {
             el(
               'table',
               {},
-              el('thead', {}, el('tr', {}, ...['Leg', '#', 'HS (s)', 'TO (s)', 'Stride (s)', 'Stance (s)', 'Swing (s)', 'Stance %', 'Length (m)', 'Velocity (m/s)'].map((h) => el('th', { class: h === 'Leg' ? '' : 'num' }, h)))),
+              el('thead', {}, el('tr', {}, ...['Leg', '#', 'HS (s)', 'TO (s)', 'Stride (s)', 'Stance (s)', 'Swing (s)', 'Stance %', 'Length (m)', 'Velocity (m/s)', 'Person-scaled (m)'].map((h) => el('th', { class: h === 'Leg' ? '' : 'num' }, h)))),
               this.strideBody,
             ),
           ),
         ),
       );
     }
+  }
+
+  // Each person's stride length is their own: enter it, measure it with a
+  // counted walk, or (on a recording with a walk distance) take Eq. 4's result.
+  buildPerson(opts) {
+    const p = opts.idPrefix;
+    const profiles = opts.profiles || { list: () => [], save: () => {} };
+    const list = el('datalist', { id: `${p}-people` });
+    const fillList = () => list.replaceChildren(...profiles.list().map((x) => el('option', { value: x.name }, `${x.strideM.toFixed(2)} m`)));
+    fillList();
+    const name = el('input', { type: 'text', id: `${p}-person`, placeholder: 'e.g. Rafi', autocomplete: 'off' });
+    name.setAttribute('list', list.id);
+    name.value = this.settings.person || '';
+    const stride = el('input', { type: 'number', min: '0', step: '0.01', inputMode: 'decimal', placeholder: 'e.g. 1.10', id: `${p}-stride` });
+    stride.value = this.settings.personStrideM || '';
+    const setStride = (v, save = true) => {
+      this.settings.personStrideM = v > 0 ? Math.round(v * 1000) / 1000 : 0;
+      stride.value = this.settings.personStrideM || '';
+      if (save && this.settings.person && this.settings.personStrideM) {
+        profiles.save(this.settings.person, this.settings.personStrideM);
+        fillList();
+      }
+      this.changed();
+    };
+    this.setPersonStride = setStride;
+    name.addEventListener('change', () => {
+      this.settings.person = name.value.trim();
+      const found = profiles.list().find((x) => x.name === this.settings.person);
+      if (found) setStride(found.strideM, false);
+      else if (this.settings.person && this.settings.personStrideM) setStride(this.settings.personStrideM);
+      else this.changed();
+    });
+    stride.addEventListener('change', () => setStride(Math.max(0, Number(stride.value) || 0)));
+
+    // counted-walk helper
+    const dist = el('input', { type: 'number', min: '0', step: '0.1', inputMode: 'decimal', value: '10', id: `${p}-m-dist` });
+    const steps = el('input', { type: 'number', min: '0', step: '1', inputMode: 'numeric', placeholder: 'e.g. 18', id: `${p}-m-steps` });
+    const out = el('strong', { id: `${p}-m-out` }, '–');
+    const use = el('button', { type: 'button', id: `${p}-m-use`, disabled: true }, 'Use this stride length');
+    const calc = () => {
+      const v = strideFromWalk(Number(dist.value), Number(steps.value));
+      out.textContent = Number.isFinite(v) ? `${v.toFixed(2)} m per stride` : '–';
+      use.disabled = !Number.isFinite(v);
+      return v;
+    };
+    dist.addEventListener('input', calc);
+    steps.addEventListener('input', calc);
+    use.addEventListener('click', () => setStride(calc()));
+    const measure = el(
+      'details',
+      { class: 'measure' },
+      el('summary', {}, 'Measure it'),
+      el('p', { class: 'hint' }, 'Mark a straight distance on the floor (10 m is easy), have the person walk it at their normal pace from a standing start, and count every step, left and right. One stride is two steps, so stride length = 2 × distance ÷ steps.'),
+      el('div', { class: 'toolbar' }, el('label', { class: 'field' }, 'Distance walked (m)', dist), el('label', { class: 'field' }, 'Steps counted', steps), el('div', { class: 'field' }, 'Stride length', out), use),
+    );
+    this.eq4Btn = el('button', { type: 'button', id: `${p}-use-eq4`, hidden: true }, 'Save this recording’s Eq. 4 stride length for the person');
+    this.eq4Btn.addEventListener('click', () => {
+      const c = this.result && this.result.combined;
+      if (c && Number.isFinite(c.meanStrideLength)) setStride(c.meanStrideLength);
+    });
+    return el(
+      'div',
+      { class: 'person' },
+      el(
+        'div',
+        { class: 'toolbar' },
+        el('label', { class: 'field' }, 'Person', name, list),
+        el('label', { class: 'field' }, 'Their stride length (m)', stride),
+        el('p', { class: 'hint grow' }, 'Stride length differs from person to person. Enter it once (or measure it below) and it is kept for that name in this browser. It sets the stride length and gait speed when no walk distance is given, and scales the sensor’s stride-by-stride estimate.'),
+        this.eq4Btn,
+      ),
+      measure,
+    );
   }
 
   changed() {
@@ -165,18 +244,20 @@ export class GaitPanel {
     this.warn.replaceChildren(...[...new Set(warnings)].map((w) => el('li', {}, w)));
     this.warn.hidden = !warnings.length;
 
-    // headline tiles
-    const speedFromDistance = c && ok(c.gaitSpeed);
-    const lenFromDistance = c && ok(c.meanStrideLength);
+    // headline tiles: stride length and speed from the best source available
+    const SRC = { eq4: ['Eq. 4', 'distance ÷ time'], person: ['person’s stride', 'person’s stride ÷ stride time'], sensor: ['sensor estimate', 'sensor estimate'] };
+    const lenSrc = c && c.strideLength.source ? SRC[c.strideLength.source][0] : 'enter a distance or stride';
+    const spdSrc = c && c.speed.source ? SRC[c.speed.source][1] : 'enter a distance or stride';
     const tiles = [
       ['Cadence', c ? num(c.cadenceSteps, 0) : '–', 'steps per minute'],
-      ['Gait speed', c ? num(speedFromDistance ? c.gaitSpeed : c.sensorSpeed.mean, 2) : '–', speedFromDistance ? 'm/s · distance ÷ time' : 'm/s · sensor estimate'],
-      ['Mean stride length', c ? num(lenFromDistance ? c.meanStrideLength : c.sensorLength.mean, 2) : '–', lenFromDistance ? 'm · Eq. 4' : 'm · sensor estimate'],
+      ['Gait speed', c ? num(c.speed.value, 2) : '–', `m/s · ${spdSrc}`],
+      ['Mean stride length', c ? num(c.strideLength.value, 2) : '–', `m · ${lenSrc}`],
       ['Stride time', c ? num(c.strideT.mean, 2) : '–', 's'],
       ['Stance / swing', c && ok(c.stancePct.mean) ? `${c.stancePct.mean.toFixed(0)} / ${c.swingPct.mean.toFixed(0)}` : '–', '% of stride'],
       ['Double support', c ? num(c.doubleSupportPct.mean, 0) : '–', '% of stride'],
     ];
     this.tiles.replaceChildren(...tiles.map(([l, v, s]) => el('div', { class: 'tile' }, el('span', { class: 'label' }, l), el('strong', {}, v), el('small', {}, s))));
+    this.eq4Btn.hidden = !(c && ok(c.meanStrideLength) && this.settings.person);
 
     // parameter table
     const cols = names.map((k) => [label(k), c.perLeg[k]]);
@@ -217,7 +298,7 @@ export class GaitPanel {
               'tr',
               {},
               el('td', {}, label(k)),
-              ...[i + 1, s.hs.toFixed(3), s.to.toFixed(3), s.strideT.toFixed(3), s.stanceT.toFixed(3), s.swingT.toFixed(3), s.stancePct.toFixed(1), num(s.length, 2), num(s.speed, 2)].map((v) => el('td', { class: 'num' }, String(v))),
+              ...[i + 1, s.hs.toFixed(3), s.to.toFixed(3), s.strideT.toFixed(3), s.stanceT.toFixed(3), s.swingT.toFixed(3), s.stancePct.toFixed(1), num(s.length, 2), num(s.speed, 2), num(s.personLength, 2)].map((v) => el('td', { class: 'num' }, String(v))),
             ),
           ),
         );
