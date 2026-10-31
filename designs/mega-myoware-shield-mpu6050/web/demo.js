@@ -1,6 +1,10 @@
 // A software stand-in for the Mega sketch: same commands, same binary frames,
 // synthetic signals. Lets the app be tried (and tested) with no hardware.
 import { encodeData, encodeText, popcount, TYPE_INFO } from './protocol.js';
+import { makeScenario } from './gaitsim.js';
+
+// IMU A on the right shank, IMU B on the left: stand 3 s, walk 12 strides, repeat.
+const WALK = makeScenario({ standS: 3, strides: 12, T: 1.1, jitter: 0.04, sl: 1.2, seed: 11 });
 
 export class DemoTransport {
   constructor({ baud = 115200, dropRate = 0 } = {}) {
@@ -39,7 +43,7 @@ export class DemoTransport {
       emg_mask: this.emgMask,
       imu_mask: this.imuMask,
       who: [104, 104],
-      accel_lsb_per_g: 8192,
+      accel_lsb_per_g: 4096,
       gyro_lsb_per_dps: 65.5,
       adc_ref_v: 5.0,
       synthetic: true,
@@ -48,7 +52,8 @@ export class DemoTransport {
 
   async open() {
     this.setRate(0);
-    this.us = Math.floor(Math.random() * 1e9);
+    // A random spot on the board clock, 1.5 s before the synthetic walk starts.
+    this.us = (Math.floor(Math.random() * (1e9 / (WALK.period * 1e6))) * WALK.period + WALK.walkStart - 1.5) * 1e6;
     this.emit(new TextEncoder().encode('# demo-synthetic ready. Send p for CSV, s for binary, ? for info.\n'));
     this.timer = setInterval(() => this.tick(), 20);
   }
@@ -107,16 +112,12 @@ export class DemoTransport {
       const level = 60 + 520 * burst * (1 - ch * 0.12) * (0.85 + 0.3 * Math.random());
       emg.push(Math.max(0, Math.min(1023, Math.round(level + 15 * (Math.random() - 0.5)))));
     }
-    const w = 2 * Math.PI * phase;
+    const tw = t % WALK.period;
     const imu = [0, 1].map((k) => {
-      const a = k ? 1.6 : 1;
+      const { acc, gyr } = WALK.at(tw, k);
       return [
-        Math.round(8192 * (0.25 * a * Math.sin(w) + 0.02 * (Math.random() - 0.5))),
-        Math.round(8192 * (0.1 * Math.cos(2 * w))),
-        Math.round(8192 * (1 + 0.35 * a * Math.sin(2 * w + 0.5))),
-        Math.round(65.5 * (20 * Math.cos(w))),
-        Math.round(65.5 * (180 * a * Math.sin(w + k) + 3 * (Math.random() - 0.5))),
-        Math.round(65.5 * (15 * Math.sin(3 * w))),
+        ...acc.map((v) => Math.round(4096 * (v + 0.006 * (Math.random() - 0.5)))),
+        ...gyr.map((v, a) => Math.round(65.5 * (v + (k ? -1.2 : 0.8) * (a - 1) + 1.0 * (Math.random() - 0.5)))),
       ];
     });
     return { seq: this.seq, tUs: Math.floor(this.us), emgMask: this.emgMask, imuMask: this.imuMask, flags: 0, emg, imu };
