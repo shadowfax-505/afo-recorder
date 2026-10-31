@@ -3,6 +3,7 @@ import { StripChart } from './chart.js';
 import * as store from './store.js';
 import { DemoTransport } from './demo.js';
 import { SerialTransport, serialSupported } from './serial.js';
+import { WifiTransport, DEFAULT_HOST } from './wifi.js';
 import { analyzeSource, stridesCsv } from './gait.js';
 import { GaitPanel } from './gaitui.js';
 
@@ -417,6 +418,7 @@ async function connect(transport) {
   st.transport = transport;
   $('connect').hidden = true;
   $('demo').hidden = true;
+  $('wifi-box').hidden = true;
   $('disconnect').hidden = false;
 
   // Opening the Mega's USB port resets it. Its bootloader restarts its wait on
@@ -438,7 +440,9 @@ async function connect(transport) {
     log(`no settings frame after 6 tries; ${st.bytes} bytes received, ${st.parser.stats.crcErrors} corrupt frames`);
     setStatus('No reply', 'error');
     showMessage(
-      'The port opened but the board did not answer. Check that mega_myoware_stream is flashed, that the baud matches (USB 115200; the Bluetooth module 9600 unless you changed it), and that the ZS-040 LED blinks twice every few seconds (paired).',
+      transport.label === 'Wi-Fi'
+        ? 'The ESP32 answered but the Mega did not. Check that mega_myoware_stream 1.2 or later is flashed (Serial2 at 500000 baud), the three wires (Mega 16 → divider → ESP32 GPIO16, Mega 17 ← ESP32 GPIO17, GND to GND), and that the Mega is powered.'
+        : 'The port opened but the board did not answer. Check that mega_myoware_stream is flashed, that the baud matches (USB 115200; the Bluetooth module 9600 unless you changed it), and that the ZS-040 LED blinks twice every few seconds (paired).',
       true,
     );
     return;
@@ -471,6 +475,7 @@ async function disconnect(reason) {
   if (reason) showMessage(reason, true);
   $('connect').hidden = false;
   $('demo').hidden = false;
+  $('wifi-box').hidden = false;
   $('disconnect').hidden = true;
   $('record').disabled = true;
   $('rescan').disabled = true;
@@ -484,6 +489,15 @@ $('connect').addEventListener('click', () => {
   connect(new SerialTransport({ baud: Number($('baud').value) }));
 });
 $('demo').addEventListener('click', () => connect(new DemoTransport({ baud: Number($('baud').value), dropRate: 0.002 })));
+$('wifi-host').value = prefs.get('wifiHost', DEFAULT_HOST);
+$('wifi-connect').addEventListener('click', () => {
+  const host = $('wifi-host').value.trim() || DEFAULT_HOST;
+  prefs.set('wifiHost', host);
+  connect(new WifiTransport({ host }));
+});
+$('wifi-host').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') $('wifi-connect').click();
+});
 $('disconnect').addEventListener('click', () => disconnect());
 $('baud').value = String(prefs.get('baud', 115200));
 $('baud').addEventListener('change', () => prefs.set('baud', Number($('baud').value)));

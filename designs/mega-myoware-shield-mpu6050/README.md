@@ -7,6 +7,7 @@ A battery-powered bench setup that streams MyoWare 2.0 EMG and up to two MPU-605
 ```text
 firmware/mega_myoware_stream/   the sketch to flash (streams EMG + IMU)
 firmware/hc05_setup/            optional: raise the ZS-040 to 115200 baud, rename it
+firmware/esp32_wifi_bridge/     optional: ESP32 DevKitC that carries the stream over Wi-Fi
 firmware/a5_plot/               optional: plot only jack A5 in the Arduino Serial Plotter
 firmware/a5_bt_terminal/        optional: send only jack A5 as text to a Bluetooth terminal app
 web/                            the web app (static files, no build step)
@@ -36,7 +37,7 @@ What the photos show is marked **seen**; the rest is what the sketch assumes, so
 | IMU SDA / SCL | **20 / 21** (same as the shield's SDA / SCL pins) | seen: orange SDA, green SCL, white VCC, blue GND on the GY-521 |
 | IMU A address | AD0 to GND → **0x68** | confirmed by the owner (28 Oct 2026) |
 | IMU B address | AD0 to **3.3 V** → **0x69** | owner has it on 5 V (28 Oct 2026); move it to the Mega's 3.3 V pin, see below |
-| ZS-040 TXD → Mega RX, RXD → Mega TX | **Serial1 (19 RX, 18 TX)** | confirmed over the link (28 Oct 2026); the sketch also listens on Serial2 (17, 16) and Serial3 (15, 14) |
+| ZS-040 TXD → Mega RX, RXD → Mega TX | **Serial1 (19 RX, 18 TX)** | confirmed over the link (28 Oct 2026); Serial3 (15, 14) also works. Serial2 is kept for the ESP32 (below) |
 | ZS-040 VCC / GND | 5 V / GND | assumed |
 
 Things to check before powering up:
@@ -62,7 +63,36 @@ On a Mac, pair the module in System Settings → Bluetooth (PIN 1234). It then a
 
 If `board list` shows nothing (it did on one Mac even with a genuine Mega attached), pass the port from `ls /dev/cu.usb*` straight to `-p`.
 
-In the monitor you should see `# mega-myoware-1.1 ready. imu_mask=3.` (3 = both IMUs found, 1 = only A, 2 = only B, 0 = none). Type `p` and Enter to print CSV samples, `x` to stop.
+In the monitor you should see `# mega-myoware-1.2 ready. imu_mask=3.` (3 = both IMUs found, 1 = only A, 2 = only B, 0 = none). Type `p` and Enter to print CSV samples, `x` to stop.
+
+## Wi-Fi through an ESP32 (optional)
+
+An ESP32 DevKitC on the Mega's Serial2 carries the same stream over Wi-Fi, at the full rate (Serial2 runs at 500000 baud, exact on a 16 MHz Mega). The Bluetooth module stays on Serial1, and the app can use either link.
+
+| Mega | ESP32 DevKitC | Note |
+|---|---|---|
+| 16 (TX2) | GPIO16 (RX2) | **through a divider**: 1 kΩ in series, 2 kΩ from GPIO16 to GND (5 V → 3.3 V) |
+| 17 (RX2) | GPIO17 (TX2) | direct; the Mega reads 3.3 V as high |
+| GND | GND | shared ground |
+| 5 V (XL6009) | 5V | Wi-Fi peaks are about 250 mA; don't also plug in the ESP32's USB |
+
+On a DevKitC with an ESP32-**WROVER** module, GPIO16/17 belong to its PSRAM: use GPIO25 (RX) and GPIO26 (TX) and set `MEGA_RX_PIN` / `MEGA_TX_PIN` in the sketch.
+
+Flash the bridge (board "ESP32 Dev Module", esp32 core 3.x, no extra libraries; it compiles with 3.3.12):
+
+```sh
+arduino-cli core install esp32:esp32 --additional-urls https://espressif.github.io/arduino-esp32/package_esp32_index.json
+arduino-cli compile --fqbn esp32:esp32:esp32 designs/mega-myoware-shield-mpu6050/firmware/esp32_wifi_bridge
+arduino-cli upload -p /dev/cu.usbserial-XXXX --fqbn esp32:esp32:esp32 designs/mega-myoware-shield-mpu6050/firmware/esp32_wifi_bridge
+```
+
+Also flash the Mega with mega_myoware_stream 1.2 or later (that sets Serial2's speed).
+
+**Its own network (default).** The ESP32 makes a network called `AFO-MEGA` (password `afo-mega-1`). Join it from the computer, open the app from http://localhost, type `192.168.4.1` in the ESP32 box and press **Connect Wi-Fi**.
+
+**Your own Wi-Fi.** Open the ESP32's USB port at 115200 (`arduino-cli monitor -p … -c baudrate=115200`) and type `ssid YourNetwork`, `pass YourPassword`, `restart`. It prints its IP address; `afo-mega.local` also works on a Mac. `forget` goes back to its own network and `status` shows byte counters. http://afo-mega.local/ shows the same status in a browser.
+
+Limits: browsers do not allow a `ws://` link from an `https://` page, so use the app from http://localhost (as now), not the GitHub Pages copy, for Wi-Fi. One app at a time can connect; a new connection replaces the old one. The bridge has been compiled and the app tested against a simulated bridge; it has not yet run on the real ESP32.
 
 ## Bluetooth speed
 
@@ -154,6 +184,7 @@ Commands are single ASCII lines: `?` info, `s` binary stream, `p` CSV stream, `x
 node --test designs/mega-myoware-shield-mpu6050/host/tests/protocol.test.mjs   # needs g++
 node --test designs/mega-myoware-shield-mpu6050/host/tests/gait.test.mjs
 node --test designs/mega-myoware-shield-mpu6050/host/tests/hmm.test.mjs
+node --test designs/mega-myoware-shield-mpu6050/host/tests/wifi.test.mjs
 node designs/mega-myoware-shield-mpu6050/host/tests/webapp.e2e.mjs             # needs Playwright + Chromium
 ```
 

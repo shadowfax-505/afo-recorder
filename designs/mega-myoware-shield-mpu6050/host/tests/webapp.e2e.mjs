@@ -269,6 +269,61 @@ try {
   await page2.waitForFunction(() => window.__serialWrites.join('').includes('x\n'), null, { timeout: 2000 });
   await ctx2.close();
 
+  // ---- 2b. Wi-Fi: a fake WebSocket that behaves like the ESP32 bridge ----
+  const ctxW = await browser.newContext({ viewport: { width: 1280, height: 900 } });
+  const pw = await ctxW.newPage();
+  watch(pw);
+  await pw.addInitScript(() => {
+    window.__wsLog = [];
+    window.WebSocket = class {
+      constructor(url) {
+        window.__wsLog.push(`open ${url}`);
+        this.readyState = 0;
+        import('/demo.js').then(({ DemoTransport }) => {
+          this.dev = new DemoTransport({ baud: 500000 });
+          // the bridge batches the Mega's bytes into ~8 ms messages
+          let pending = [];
+          this.dev.onBytes = (b) => pending.push(...b);
+          this.flush = setInterval(() => {
+            if (!pending.length || this.readyState !== 1) return;
+            const buf = new Uint8Array(pending).buffer;
+            pending = [];
+            this.onmessage?.({ data: buf });
+          }, 8);
+          this.dev.open();
+          this.readyState = 1;
+          this.onopen?.();
+        });
+      }
+      send(b) {
+        const text = new TextDecoder().decode(b);
+        window.__wsLog.push(text);
+        this.dev.write(text);
+      }
+      close() {
+        clearInterval(this.flush);
+        this.dev.close();
+        this.readyState = 3;
+        window.__wsLog.push('closed');
+        this.onclose?.({ code: 1000 });
+      }
+    };
+  });
+  await pw.goto(url);
+  await pw.fill('#wifi-host', '192.168.4.1');
+  await pw.click('#wifi-connect');
+  await pw.waitForFunction(() => document.querySelector('#status').textContent.startsWith('Streaming'), null, { timeout: 10000 });
+  await pw.waitForTimeout(1200);
+  assert.equal(await pw.textContent('#t-link'), 'Wi-Fi');
+  assert.ok((await num(pw, 't-rate')) > 200, 'full rate over the 500000 baud bridge');
+  assert.ok(await pw.isHidden('#wifi-box'));
+  await pw.click('#disconnect');
+  const wsLog = await pw.evaluate(() => window.__wsLog);
+  assert.equal(wsLog[0], 'open ws://192.168.4.1/ws');
+  assert.ok(wsLog.includes('?\n') && wsLog.includes('s\n') && wsLog.includes('x\n') && wsLog.at(-1) === 'closed', JSON.stringify(wsLog));
+  assert.equal(await pw.evaluate(() => JSON.parse(localStorage.getItem('mega-myoware-prefs')).wifiHost), '192.168.4.1');
+  await ctxW.close();
+
   // ---- 3. phone width, light and dark ----
   for (const scheme of ['light', 'dark']) {
     const ctx3 = await browser.newContext({ viewport: { width: 390, height: 844 }, colorScheme: scheme, isMobile: true, hasTouch: true });
