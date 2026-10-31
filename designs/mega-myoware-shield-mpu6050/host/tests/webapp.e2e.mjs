@@ -3,6 +3,8 @@
 // Serves ../../web, then:
 //   1. streams from the built-in demo, records ~3 s, checks the saved
 //      recording, its CSV export and a backup/import round trip;
+//   1b. records ~11 s of the demo's synthetic walk and checks the gait
+//      parameters live, on the saved recording, and in the gait CSV;
 //   2. replaces navigator.serial with a fake port that answers like the
 //      sketch (including the ~2 s silence after a USB reset) to exercise the
 //      real Web Serial code path;
@@ -96,8 +98,11 @@ try {
   );
   const rows = lines.filter((l) => !l.startsWith('#') && l !== header);
   assert.equal(rows.length, samples);
-  const az = rows.map((r) => Number(r.split(',')[9]));
-  assert.ok(Math.max(...az) > 1.1 && Math.min(...az) < 0.9, 'accel z in g swings around 1 g');
+  const mag = rows.map((r) => Math.hypot(...r.split(',').slice(7, 10).map(Number)));
+  const sortedMag = mag.slice().sort((a, b) => a - b);
+  const medMag = sortedMag[sortedMag.length >> 1];
+  assert.ok(medMag > 0.9 && medMag < 1.1, `IMU A |accel| median ${medMag} g`);
+  assert.ok(sortedMag[sortedMag.length - 1] > 1.3, 'IMU A sees the walk');
 
   const [bkDl] = await Promise.all([page.waitForEvent('download'), page.click('#d-backup')]);
   const backupPath = await bkDl.path();
@@ -112,6 +117,88 @@ try {
   await page.click('#tab-live');
   await page.click('#disconnect');
   await ctx.close();
+
+  // ---- 1b. gait analysis, live and on a saved recording ----
+  {
+    const gctx = await browser.newContext({ viewport: { width: 1360, height: 1000 }, acceptDownloads: true });
+    const gp = await gctx.newPage();
+    watch(gp);
+    await gp.goto(url);
+    await gp.selectOption('#lg-window', '0'); // since Record was pressed
+    await gp.fill('#lg-distance', '10');
+    await gp.dispatchEvent('#lg-distance', 'change');
+    await gp.click('#demo');
+    await gp.waitForFunction(() => document.querySelector('#status').textContent.startsWith('Streaming'));
+    await gp.fill('#rec-name', 'e2e gait');
+    await gp.click('#record');
+    // the demo stands for 1.5 s, then walks 12 strides of ~1.1 s
+    await gp.waitForTimeout(11000);
+    const tileVal = (host, label) =>
+      gp.evaluate(
+        ([h, l]) => {
+          const t = [...document.querySelectorAll(`${h} .gait-tiles .tile`)].find((x) => x.querySelector('.label').textContent === l);
+          return Number(t.querySelector('strong').textContent);
+        },
+        [host, label],
+      );
+    const liveCad = await tileVal('#live-gait', 'Cadence');
+    assert.ok(liveCad > 100 && liveCad < 118, `live cadence ${liveCad}`);
+    const liveStance = await gp.textContent('#live-gait .gait-tiles .tile:nth-child(5) strong');
+    assert.match(liveStance, /^6\d \/ 3\d$/, `stance/swing ${liveStance}`);
+    if (shots) await gp.screenshot({ path: join(shots, 'gait-live.png'), fullPage: true });
+    await gp.click('#record');
+    await gp.waitForFunction(() => document.querySelector('#rec-count').textContent === '1');
+    await gp.click('#tab-recordings');
+    await gp.click('#rec-rows tr');
+    await gp.waitForFunction(() => document.querySelectorAll('#d-gait .strides tbody tr').length > 0);
+    const rowsN = await gp.locator('#d-gait .strides tbody tr').count();
+    assert.ok(rowsN >= 12, `${rowsN} strides in the recording (both legs)`);
+    assert.equal(await gp.inputValue('#dg-distance'), '10', 'walk distance saved with the recording');
+    const recLen = await tileVal('#d-gait', 'Mean stride length');
+    assert.ok(recLen > 0.4 && recLen < 2, `Eq. 4 stride length ${recLen}`);
+    const sensorLen = await gp.evaluate(() => {
+      const row = [...document.querySelectorAll('#d-gait .gait-table tbody tr')].find((r) => r.querySelector('th').textContent.startsWith('Stride length, sensor'));
+      return Number(row.lastElementChild.textContent.split(' ')[0]);
+    });
+    assert.ok(Math.abs(sensorLen - 1.2) < 0.12, `sensor stride length ${sensorLen} (demo walks 1.2 m strides)`);
+    await gp.click('#d-gait .strides summary');
+    if (shots) await gp.screenshot({ path: join(shots, 'gait-recording.png'), fullPage: true });
+    const [gDl] = await Promise.all([gp.waitForEvent('download'), gp.click('#dg-csv')]);
+    const gcsv = (await readFile(await gDl.path(), 'utf8')).trim().split('\n');
+    assert.ok(gcsv[1].startsWith('leg,imu,stride,hs_s'));
+    assert.equal(gcsv.length - 2, rowsN);
+    // gaitmap's trained HMM as the stride finder finds the same strides
+    await gp.selectOption('#dg-finder', 'hmm');
+    // (it only takes whole toe-off-to-toe-off strides, so a recording that
+    // stops mid-stride can lose the last one per leg)
+    await gp.waitForFunction((n) => {
+      const k = document.querySelectorAll('#d-gait .strides tbody tr').length;
+      return k >= n - 2 && k <= n && document.querySelector('#dg-finder').value === 'hmm';
+    }, rowsN);
+    assert.ok(!(await gp.textContent('#d-gait .gait-warn')).includes('51.2'), 'HMM ran (stream above 51.2 samples/s)');
+    await gp.selectOption('#dg-finder', 'peaks');
+    // a person's own stride length: measured by a counted walk, then used
+    await gp.fill('#dg-person', 'Rafi');
+    await gp.dispatchEvent('#dg-person', 'change');
+    await gp.click('#d-gait .measure summary');
+    await gp.fill('#dg-m-dist', '10');
+    await gp.fill('#dg-m-steps', '16');
+    assert.equal(await gp.textContent('#dg-m-out'), '1.25 m per stride');
+    await gp.click('#dg-m-use');
+    assert.equal(await gp.inputValue('#dg-stride'), '1.25');
+    await gp.fill('#dg-distance', '');
+    await gp.dispatchEvent('#dg-distance', 'change');
+    await gp.waitForFunction(() => document.querySelector('#d-gait .gait-tiles .tile:nth-child(3) small').textContent.includes('person'));
+    assert.equal(await tileVal('#d-gait', 'Mean stride length'), 1.25);
+    const people = await gp.evaluate(() => JSON.parse(localStorage.getItem('mega-myoware-prefs')).people);
+    assert.deepEqual(people, { Rafi: 1.25 });
+    if (shots) await gp.screenshot({ path: join(shots, 'gait-person.png'), fullPage: true });
+
+    // changing a leg re-runs the analysis and is saved
+    await gp.selectOption('#dg-side-B', 'off');
+    await gp.waitForFunction(() => document.querySelectorAll('#d-gait .gait-table thead th').length === 3);
+    await gctx.close();
+  }
 
   // ---- 2. fake Web Serial port that behaves like the sketch over USB ----
   const ctx2 = await browser.newContext({ viewport: { width: 1280, height: 900 } });
@@ -181,6 +268,61 @@ try {
   await page2.click('#disconnect');
   await page2.waitForFunction(() => window.__serialWrites.join('').includes('x\n'), null, { timeout: 2000 });
   await ctx2.close();
+
+  // ---- 2b. Wi-Fi: a fake WebSocket that behaves like the ESP32 bridge ----
+  const ctxW = await browser.newContext({ viewport: { width: 1280, height: 900 } });
+  const pw = await ctxW.newPage();
+  watch(pw);
+  await pw.addInitScript(() => {
+    window.__wsLog = [];
+    window.WebSocket = class {
+      constructor(url) {
+        window.__wsLog.push(`open ${url}`);
+        this.readyState = 0;
+        import('/demo.js').then(({ DemoTransport }) => {
+          this.dev = new DemoTransport({ baud: 500000 });
+          // the bridge batches the Mega's bytes into ~8 ms messages
+          let pending = [];
+          this.dev.onBytes = (b) => pending.push(...b);
+          this.flush = setInterval(() => {
+            if (!pending.length || this.readyState !== 1) return;
+            const buf = new Uint8Array(pending).buffer;
+            pending = [];
+            this.onmessage?.({ data: buf });
+          }, 8);
+          this.dev.open();
+          this.readyState = 1;
+          this.onopen?.();
+        });
+      }
+      send(b) {
+        const text = new TextDecoder().decode(b);
+        window.__wsLog.push(text);
+        this.dev.write(text);
+      }
+      close() {
+        clearInterval(this.flush);
+        this.dev.close();
+        this.readyState = 3;
+        window.__wsLog.push('closed');
+        this.onclose?.({ code: 1000 });
+      }
+    };
+  });
+  await pw.goto(url);
+  await pw.fill('#wifi-host', '192.168.4.1');
+  await pw.click('#wifi-connect');
+  await pw.waitForFunction(() => document.querySelector('#status').textContent.startsWith('Streaming'), null, { timeout: 10000 });
+  await pw.waitForTimeout(1200);
+  assert.equal(await pw.textContent('#t-link'), 'Wi-Fi');
+  assert.ok((await num(pw, 't-rate')) > 200, 'full rate over the 500000 baud bridge');
+  assert.ok(await pw.isHidden('#wifi-box'));
+  await pw.click('#disconnect');
+  const wsLog = await pw.evaluate(() => window.__wsLog);
+  assert.equal(wsLog[0], 'open ws://192.168.4.1/ws');
+  assert.ok(wsLog.includes('?\n') && wsLog.includes('s\n') && wsLog.includes('x\n') && wsLog.at(-1) === 'closed', JSON.stringify(wsLog));
+  assert.equal(await pw.evaluate(() => JSON.parse(localStorage.getItem('mega-myoware-prefs')).wifiHost), '192.168.4.1');
+  await ctxW.close();
 
   // ---- 3. phone width, light and dark ----
   for (const scheme of ['light', 'dark']) {

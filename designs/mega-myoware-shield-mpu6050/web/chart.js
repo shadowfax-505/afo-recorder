@@ -40,6 +40,7 @@ export class StripChart {
     this.onZoom = onZoom;
     this.hoverX = null;
     this.drag = null;
+    this.markers = []; // [{t, color, dashed}] vertical event lines
     this.last = null;
 
     this.el = document.createElement('figure');
@@ -259,6 +260,25 @@ export class StripChart {
       }
       g.stroke();
     }
+
+    // event markers (gait heel strikes and toe-offs)
+    g.lineWidth = 1;
+    for (const m of this.markers) {
+      if (m.t < tMin || m.t > tMax) continue;
+      const x = Math.round(X(m.t)) + 0.5;
+      g.strokeStyle = css(m.color);
+      g.fillStyle = css(m.color);
+      g.setLineDash(m.dashed ? [3, 3] : []);
+      g.beginPath();
+      g.moveTo(x, plot.y);
+      g.lineTo(x, plot.y + plot.h);
+      g.stroke();
+      g.beginPath();
+      if (m.dashed) g.rect(x - 3, plot.y, 6, 6);
+      else g.arc(x, plot.y + 3, 3.5, 0, Math.PI * 2);
+      g.fill();
+    }
+    g.setLineDash([]);
     g.restore();
 
     // drag selection
