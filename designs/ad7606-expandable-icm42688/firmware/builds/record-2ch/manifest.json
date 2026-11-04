@@ -16,19 +16,19 @@
     "application.bin": "0x10000"
   },
   "sha256": {
-    "application.bin": "f702f9864c5fe944d861d857c9ec3a0b203e9ef923f8abb67411134850151710",
-    "bootloader.bin": "a7a013618395c33eca7ca0ada050b29a0a961760f293fe396a418768d4fd6c07",
+    "application.bin": "1b91429266aa16e2ee7ef679ea66fa1fcb6e45b09a29efc213d26040e101ab1b",
+    "bootloader.bin": "4a09ef10142b912c5a0c1bd11d4998e5c7ea2cb76f51a66cb56694957aacd21f",
     "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
   },
   "profile": "record-2ch",
-  "firmware": "dual-1.4",
+  "firmware": "dual-1.5",
   "source_sha256": {
     "main/CMakeLists.txt": "72b70f6fd563d90c7791b795382ffc23161ea7fb489ba330c42f1cd36881540f",
     "main/adc_ad7606.c": "d54d117c7948e98d7fe83826dc625949f08876fbfa9eebaf77e198d008c0cdd4",
     "main/adc_ads131m04.c": "914ffa6db82ed58aed9d4f0beb1ae05645ac6fb47097ace88e2be8b6a3c6b6aa",
     "main/ads_crc.c": "31cbb5fd61f5e06c394a426e0fa48d14f3561be4d46fffe6a18e1837edad83cc",
     "main/ads_crc.h": "d08cf15ad6e5d8d837e5c532b9665bc9c07a045475ba06c6443eed6b4367aeac",
-    "main/board.h": "d71a30a84081b83b61d073849ff4468c0d096a90663aa54113f4a676b80bd4b4",
+    "main/board.h": "168c413c6824476dac581492116c284b7748367210803e5519dfa0b26f35998b",
     "main/diagnostic.c": "56852f52e2b35fa946a38236ed3bff8ead1c91dbc61d7606ad2ae8454cf1cb8d",
     "main/format.c": "16f6340c64845a8d092ee426b5700bd2bf2ed5a58131e5c045a64d2f4fc687bc",
     "main/format.h": "58b01a597eaa2c70a918ad5ee3b71c9e26fe64aedefc91ffba7d96430510c47b",
@@ -37,11 +37,11 @@
     "main/sensors.c": "f5c6034a43b260de6282d902a1d76d3e4db60bcbca64d364ebd34fc733df84c9",
     "main/sensors.h": "880b651acda742396e7da66f113f6ad27022abc4db84a93f9fff6a162e32ff43",
     "main/variant.h": "8a06bb6358937ea8829753c2ec9c3dd4da858eda82bb012015c3bb8c723d6328",
-    "main/wifi_live.c": "81a3e010a18b01f0ba20783ec0df5e14970bfa509305fb523beb00975c99e20a",
+    "main/wifi_live.c": "8ce9df841a1b78cbdbc10073ae294556af1e801f9fe7e5e461fcd84b9ed969d5",
     "main/wifi_live.h": "99d2bea23a26f0271f9f5bb8056ff9ec80d1bfaf1edcd33dcf6551bf7926bf6f",
     "CMakeLists.txt": "ccdcd61455a4cd61ba17da36add6811ccd35d3f880115a07c709f883ebc2b0c6",
     "sdkconfig.defaults": "333b5513fd45d3959596dd93da6a9eb721a9182f82c1c6f75aa245ac170f0aad"
   },
   "idf_version": "v5.4.2",
-  "build_note": "Rebuilt 2026-10-12 after adding the AD7606 STBY start-up sequence (PCB builds release STBY on GPIO14, wait 30 ms, then reset; ADI AN-1091); earlier: fixed-two recorder corrections and shared PSRAM-queue, Wi-Fi password and metadata-limit fixes; ICM-42688 32/30 us ticks with continuous IMU clock. Cross-compiled only; not flashed or simulated."
+  "build_note": "Rebuilt 2026-10-12 after porting the fixed-two 1.12 Wi-Fi preview fix (the live task announces a new session's metadata before that session's first data packet); earlier: adding the AD7606 STBY start-up sequence (PCB builds release STBY on GPIO14, wait 30 ms, then reset; ADI AN-1091); fixed-two recorder corrections and shared PSRAM-queue, Wi-Fi password and metadata-limit fixes; ICM-42688 32/30 us ticks with continuous IMU clock. Cross-compiled only; not flashed or simulated."
 }
