@@ -54,7 +54,7 @@ For each trial:
 5. Press **Record** again to stop. Name it `Name_Condition_T#`, for example `Rafi_AFO_T1`.
 6. Walk back to the start **without recording** (turns are not analysed and spoil the axis estimate).
 
-Repeat until you have **at least 5 trials per condition**, which gives about 25–35 strides on the instrumented leg. Three to four strides per 10 m trial are usual for a child, so more trials are better than longer ones. Rest whenever needed.
+Repeat until you have **at least 5 trials per condition**. A 10 m walk is about 8–12 strides of the instrumented leg (one stride = two steps), of which the first and last, where the person speeds up and slows down, are the least typical; 5 trials give 40 or more strides, enough for stable means and stride-time variability. Rest whenever needed.
 
 **Conditions.** If the clinician allows it, record **with AFO** and **without AFO** (same shoes), and randomise which comes first. Optionally add a **fast** speed block ("as fast as you safely can, no running").
 
