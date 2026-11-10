@@ -126,7 +126,7 @@ Recordings live in that browser's storage on that computer. Use **Download backu
 
 ### CSV columns
 
-`time_s` (board clock, from the first sample), `seq` (sample counter; a jump means samples were lost on the link), `flags` (bit 0 / bit 1 = IMU A / B read failed), then for each enabled jack `A<n>_counts` and `A<n>_volts` (counts × 5 / 1023), then for each IMU `ax ay az` in g (±8 g range from firmware 1.1, ±4 g in 1.0) and `gx gy gz` in °/s (±500 °/s range).
+`time_s` (board clock, from the first sample), `seq` (sample counter; a jump means samples were lost on the link), `flags` (bit 0 / bit 1 = IMU A / B read failed), then for each enabled jack `A<n>_counts` and `A<n>_volts` (counts × 5 / 1023), then for each IMU `ax ay az` in g (±8 g range from firmware 1.1, ±4 g in 1.0) and `gx gy gz` in °/s (±500 °/s range on the Mega; ±1000 °/s on the ESP32 standalone firmware 1.1).
 
 ## Gait analysis
 
@@ -135,6 +135,25 @@ The **Gait analysis** panel (Live tab and each recording) implements the pipelin
 - Quiguanas-López et al., *Feasibility of gait analysis for children with cerebral palsy using inertial measurement units*, Results in Engineering 29 (2026) 109173: two MPU-6050s above the lateral malleoli at 100 Hz, Python gaitmap pipeline, spatio-temporal parameters by its Eqs. 1–4.
 - Carcreff et al., *What is the best configuration of wearable sensors to measure spatiotemporal gait parameters in children with cerebral palsy?*, Sensors 18 (2018) 394: the "Shanks" event detection (Salarian et al.) and the "Feet" de-drifted double integration (Mariani et al.).
 - Küderle et al., *Gaitmap — an open ecosystem for IMU-based human gait analysis and algorithm benchmarking*, IEEE OJEMB 5 (2024) 163.
+
+### One leg, shank + foot (ESP32 standalone, from 10 Nov 2026)
+
+The current setup has both IMUs on **one leg**: IMU A on the shank, IMU B on the foot, read directly by the ESP32 ([`firmware/esp32_standalone_stream`](firmware/esp32_standalone_stream), 250 Hz over Wi-Fi). Pick **Sensor layout → One leg: shank + foot** in the panel (the default). The step-by-step data collection and calibration protocol is in [`docs/shank-foot-protocol.md`](docs/shank-foot-protocol.md).
+
+What changes against the both-shanks pipeline below, and why:
+
+| Quantity | Both shanks (Quiguanas-López 2026) | One leg, shank + foot (now) | Basis |
+|---|---|---|---|
+| HS, TO, stride/stance/swing (Eqs. 1–3) | shank gyro, Salarian rules | **unchanged**, from the shank | Carcreff 2018: shank-based events were the most robust in children with CP (GMFCS II–III) |
+| Stride length and velocity per stride | shank, de-drifted integration (biased: the shank is not still at mid-stance) | **foot**, de-drifted integration between foot-flat instants, where the foot really is still | Carcreff 2018 "Feet" config (Mariani 2010): lowest stride-length error in most groups; shank-only was "not appropriate" (about 11–14 % bias) |
+| Ankle angle (dorsiflexion +) | not possible | foot tilt − shank tilt, each from its own gyro about its own flexion axis, gravity-corrected at every foot-flat, 0° = quiet standing (+ goniometer value) | Seel, Raisch & Schauer 2014: about 1–2° RMS for the ankle with two IMUs on adjacent segments |
+| Ankle features per stride | – | angle at heel strike and toe-off, peak stance dorsiflexion, push-off plantarflexion, swing dorsiflexion (foot clearance), range; foot angle at strike (heel- vs toe-first) and at toe-off; mean ± SD curve over the cycle | – |
+| Step time, double support, symmetry | from both legs | **not available** (needs the other leg); double support shown as an estimate, 2 × (stance % − 50), which assumes the other leg mirrors this one | – |
+| Eq. 4, gait speed, cadence, person stride | | unchanged | |
+
+The static calibration is the quiet stand at the start of each recording (both sensors still for at least 1 s; stand 5 s): it sets each sensor's gyro offset and its "upright" reference. Each sensor's flexion axis comes from its own gyro during the walk (PCA), so the sensors need no exact alignment on the leg. Firmware 1.1 raises the gyro range to ±1000 °/s because a foot in swing can pass ±500 °/s; the app warns if either gyro clips. `host/tests/gait.test.mjs` checks this layout on a simulated shank + foot walk at 50, 100 and 250 Hz (ankle angle RMS under 1.5–2°, foot stride length within 3 %); the simulated foot is perfectly still in mid-stance, so real walks will be worse, and nothing here has been compared with motion capture yet.
+
+### Both shanks (the original layout)
 
 **Sensor placement.** One IMU on each shank, just above the outer ankle bone, as in Fig. 1 of the first paper. Pick which IMU is on which leg in the panel (the owner's physical labels are the reverse of the app's, see Wiring). Start each trial by standing still for about 2 s.
 

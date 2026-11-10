@@ -152,7 +152,12 @@ try {
     await gp.click('#rec-rows tr');
     await gp.waitForFunction(() => document.querySelectorAll('#d-gait .strides tbody tr').length > 0);
     const rowsN = await gp.locator('#d-gait .strides tbody tr').count();
-    assert.ok(rowsN >= 12, `${rowsN} strides in the recording (both legs)`);
+    assert.ok(rowsN >= 6, `${rowsN} strides in the recording (one leg, shank + foot)`);
+    const ankleIc = await tileVal('#d-gait', 'Ankle at heel strike');
+    assert.ok(Number.isFinite(ankleIc) && Math.abs(ankleIc) < 10, `ankle at heel strike ${ankleIc}`);
+    const pushOff = await tileVal('#d-gait', 'Push-off plantarflexion');
+    assert.ok(pushOff < -15, `push-off ${pushOff}`);
+    assert.ok(await gp.isVisible('#d-gait .gait-cycle svg'), 'gait-cycle ankle curve drawn');
     assert.equal(await gp.inputValue('#dg-distance'), '10', 'walk distance saved with the recording');
     const recLen = await tileVal('#d-gait', 'Mean stride length');
     assert.ok(recLen > 0.4 && recLen < 2, `Eq. 4 stride length ${recLen}`);
@@ -160,7 +165,7 @@ try {
       const row = [...document.querySelectorAll('#d-gait .gait-table tbody tr')].find((r) => r.querySelector('th').textContent.startsWith('Stride length, sensor'));
       return Number(row.lastElementChild.textContent.split(' ')[0]);
     });
-    assert.ok(Math.abs(sensorLen - 1.2) < 0.12, `sensor stride length ${sensorLen} (demo walks 1.2 m strides)`);
+    assert.ok(Math.abs(sensorLen - 1.2) < 0.06, `foot sensor stride length ${sensorLen} (demo walks 1.2 m strides)`);
     await gp.click('#d-gait .strides summary');
     if (shots) await gp.screenshot({ path: join(shots, 'gait-recording.png'), fullPage: true });
     const [gDl] = await Promise.all([gp.waitForEvent('download'), gp.click('#dg-csv')]);
@@ -194,7 +199,8 @@ try {
     assert.deepEqual(people, { Rafi: 1.25 });
     if (shots) await gp.screenshot({ path: join(shots, 'gait-person.png'), fullPage: true });
 
-    // changing a leg re-runs the analysis and is saved
+    // the both-shanks layout is still there; changing a leg re-runs the analysis
+    await gp.selectOption('#dg-layout', 'bilateral');
     await gp.selectOption('#dg-side-B', 'off');
     await gp.waitForFunction(() => document.querySelectorAll('#d-gait .gait-table thead th').length === 3);
     await gctx.close();

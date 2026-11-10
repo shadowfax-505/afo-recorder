@@ -3,8 +3,8 @@
 import { encodeData, encodeText, popcount, TYPE_INFO } from './protocol.js';
 import { makeScenario } from './gaitsim.js';
 
-// IMU A on the right shank, IMU B on the left: stand 3 s, walk 12 strides, repeat.
-const WALK = makeScenario({ standS: 3, strides: 12, T: 1.1, jitter: 0.04, sl: 1.2, seed: 11 });
+// One leg: IMU A on the shank, IMU B on the foot: stand 3 s, walk 12 strides, repeat.
+const WALK = makeScenario({ standS: 3, strides: 12, T: 1.1, jitter: 0.04, sl: 1.2, seed: 11, limb: 'shank-foot' });
 
 export class DemoTransport {
   constructor({ baud = 115200, dropRate = 0 } = {}) {

@@ -2,7 +2,7 @@
 // tiles, a parameter table per leg, the shank angular velocity with detected
 // events, and (for recordings) a per-stride table.
 import { StripChart } from './chart.js';
-import { strideFromWalk } from './gait.js';
+import { strideFromWalk, ANKLE_FEATURES } from './gait.js';
 
 const LEG_COLOR = { right: '--series-1', left: '--series-2' };
 const SIDES = [
@@ -39,10 +39,11 @@ const ROWS = [
   ['Swing (% of stride)', '', (s) => ms(s.swingPct, 1), (c) => ms(c.swingPct, 1)],
   ['Step time (s)', 'HS to the other leg’s HS; needs both legs', () => '', (c) => ms(c.stepT, 3)],
   ['Double support (% of stride)', 'both feet down; needs both legs', () => '', (c) => ms(c.doubleSupportPct, 1)],
+  ['Double support, estimated (%)', 'one leg: 2 × (stance % − 50); assumes the other leg mirrors this one', () => '', (c) => num(c.doubleSupportEstPct, 1)],
   ['Cadence (steps/min)', 'from step time, or 2 × strides/min with one leg', (s) => num(2 * s.cadenceStrides, 1), (c) => num(c.cadenceSteps, 1)],
   ['Cadence (strides/min)', 'the paper’s definition', (s) => num(s.cadenceStrides, 1), (c) => num(c.cadenceStrides, 1)],
   ['Stride time variability (CV %)', '', (s) => num(s.strideCv, 1), () => ''],
-  ['Stride length, sensor (m)', 'de-drifted integration at the ankle; estimate', (s) => ms(s.length, 2), (c) => ms(c.sensorLength, 2)],
+  ['Stride length, sensor (m)', 'de-drifted integration between still instants (foot sensor when on the foot); estimate', (s) => ms(s.length, 2), (c) => ms(c.sensorLength, 2)],
   ['Stride velocity, sensor (m/s)', 'sensor stride length ÷ stride time; estimate', (s) => ms(s.speed, 2), (c) => ms(c.sensorSpeed, 2)],
   ['Stride length, person-scaled (m)', 'sensor estimate scaled so it averages to the person’s measured stride', (s) => ms(s.personLength, 2), (c) => ms(c.personLength, 2)],
   ['Stride velocity, person-scaled (m/s)', 'person-scaled stride length ÷ stride time', (s) => ms(s.personSpeed, 2), (c) => ms(c.personSpeed, 2)],
@@ -52,6 +53,9 @@ const ROWS = [
   ['Walking time (s)', 'first to last heel strike', () => '', (c) => num(c.walkTimeS, 1)],
   ['Symmetry index, stance / swing (%)', '0 = symmetric; needs both legs', () => '', (c) => (c.symmetry && ok(c.symmetry.stanceT) ? `${num(c.symmetry.stanceT, 1)} / ${num(c.symmetry.swingT, 1)}` : '–')],
 ];
+
+const ANKLE_ROWS = ANKLE_FEATURES.map(([k, lab, note]) => [lab, note, (s) => ms(s[k], 1), (c) => ms(c[k], 1)]);
+const BILATERAL_ONLY = new Set(['Step time (s)', 'Double support (% of stride)', 'Symmetry index, stance / swing (%)']);
 
 export class GaitPanel {
   // opts: {live: bool, settings: {sides:{A,B}, distanceM, windowS, person, personStrideM},
@@ -70,7 +74,7 @@ export class GaitPanel {
       el(
         'p',
         { class: 'hint' },
-        'Wear one IMU on each shank just above the outer ankle bone, stand still for 2 s, then walk. Events come from the shank’s angular velocity: toe-off (TO) is the dip before the swing peak, heel strike (HS) the dip after it.',
+        'Shank + foot: one IMU on the shank just above the outer ankle bone, one on top of the foot (midfoot or shoe laces). Stand still for 3 s, then walk. Events come from the shank’s angular velocity (toe-off is the dip before the swing peak, heel strike the dip after it); stride length comes from the foot, and the ankle angle from the two sensors, 0° = quiet standing.',
       ),
     );
 
@@ -83,6 +87,45 @@ export class GaitPanel {
       });
       return el('label', { class: 'field' }, `IMU ${name} (${name === 'A' ? '0x68' : '0x69'}) is on`, s);
     };
+    const pick = (id, options, value, onChange) => {
+      const s = el('select', { id: `${opts.idPrefix}-${id}` }, ...options.map(([v, l]) => el('option', { value: v }, l)));
+      s.value = value;
+      s.addEventListener('change', () => onChange(s.value));
+      return s;
+    };
+    this.settings.limb = { shank: 'A', side: 'right', ...(this.settings.limb || {}) };
+    const layout = pick(
+      'layout',
+      [
+        ['shank-foot', 'One leg: shank + foot'],
+        ['bilateral', 'Both legs: one IMU on each shank'],
+      ],
+      this.settings.layout || 'bilateral',
+      (v) => {
+        this.settings.layout = v;
+        this.showLayout();
+        this.changed();
+      },
+    );
+    const shankImu = pick('shank-imu', [['A', 'IMU A (0x68)'], ['B', 'IMU B (0x69)']], this.settings.limb.shank, (v) => {
+      this.settings.limb.shank = v;
+      this.changed();
+    });
+    const limbSide = pick('limb-side', [['right', 'Right'], ['left', 'Left']], this.settings.limb.side, (v) => {
+      this.settings.limb.side = v;
+      this.changed();
+    });
+    const stand = el('input', { type: 'number', step: '1', inputMode: 'decimal', placeholder: '0', id: `${opts.idPrefix}-stand-ankle` });
+    stand.value = this.settings.standingAnkleDeg || '';
+    stand.addEventListener('change', () => {
+      this.settings.standingAnkleDeg = Number(stand.value) || 0;
+      this.changed();
+    });
+    this.oneLegFields = [
+      el('label', { class: 'field' }, 'Shank sensor', shankImu),
+      el('label', { class: 'field' }, 'Leg', limbSide),
+      el('label', { class: 'field', title: 'The ankle angle while standing for the calibration, measured with a goniometer (dorsiflexion +). Leave 0 to measure every angle from the standing pose.' }, 'Standing ankle (°)', stand),
+    ];
     const dist = el('input', { type: 'number', min: '0', step: '0.1', inputMode: 'decimal', placeholder: 'e.g. 10', id: `${opts.idPrefix}-distance` });
     dist.value = this.settings.distanceM || '';
     dist.addEventListener('change', () => {
@@ -103,8 +146,10 @@ export class GaitPanel {
     const controls = el(
       'div',
       { class: 'toolbar gait-controls' },
-      sideSelect('A'),
-      sideSelect('B'),
+      el('label', { class: 'field' }, 'Sensor layout', layout),
+      ...this.oneLegFields,
+      (this.sideA = sideSelect('A')),
+      (this.sideB = sideSelect('B')),
       el('label', { class: 'field' }, 'Walk distance (m)', dist),
       el('label', { class: 'field', title: 'Which method finds the strides. Event timing inside each stride is the same for both. The HMM is gaitmap’s published model, trained on foot sensors of people with Parkinson’s disease, and needs at least 51.2 samples per second.' }, 'Stride finder', finder),
     );
@@ -143,6 +188,16 @@ export class GaitPanel {
       onZoom: opts.onZoom || null,
     });
     this.chart.el.classList.add('wide');
+    this.ankleChart = new StripChart(this.chartHost, {
+      title: 'Ankle angle',
+      unit: '° · dorsiflexion + · 0 = standing · ● HS · ■ TO',
+      series: [],
+      minSpan: 20,
+      onZoom: opts.onZoom || null,
+    });
+    this.ankleChart.el.classList.add('wide');
+    this.cycle = el('figure', { class: 'chart wide gait-cycle' });
+    this.chartHost.append(this.cycle);
     this.root.append(head, controls, person, this.warn, this.tiles, tableWrap, this.chartHost);
     if (!opts.live) {
       this.strideBody = el('tbody');
@@ -159,13 +214,22 @@ export class GaitPanel {
             el(
               'table',
               {},
-              el('thead', {}, el('tr', {}, ...['Leg', '#', 'HS (s)', 'TO (s)', 'Stride (s)', 'Stance (s)', 'Swing (s)', 'Stance %', 'Length (m)', 'Velocity (m/s)', 'Person-scaled (m)'].map((h) => el('th', { class: h === 'Leg' ? '' : 'num' }, h)))),
+              el('thead', {}, el('tr', {}, ...['Leg', '#', 'HS (s)', 'TO (s)', 'Stride (s)', 'Stance (s)', 'Swing (s)', 'Stance %', 'Length (m)', 'Velocity (m/s)', 'Person-scaled (m)', 'Ankle IC (°)', 'Push-off PF (°)', 'Swing DF (°)'].map((h) => el('th', { class: h === 'Leg' ? '' : 'num' }, h)))),
               this.strideBody,
             ),
           ),
         ),
       );
     }
+    this.showLayout();
+  }
+
+  showLayout() {
+    const one = this.settings.layout === 'shank-foot';
+    const show = (e, v) => (e.style.display = v ? '' : 'none');
+    for (const f of this.oneLegFields) show(f, one);
+    show(this.sideA, !one);
+    show(this.sideB, !one);
   }
 
   // Each person's stride length is their own: enter it, measure it with a
@@ -272,15 +336,25 @@ export class GaitPanel {
       ['Mean stride length', c ? num(c.strideLength.value, 2) : '–', `m · ${lenSrc}`],
       ['Stride time', c ? num(c.strideT.mean, 2) : '–', 's'],
       ['Stance / swing', c && ok(c.stancePct.mean) ? `${c.stancePct.mean.toFixed(0)} / ${c.swingPct.mean.toFixed(0)}` : '–', '% of stride'],
-      ['Double support', c ? num(c.doubleSupportPct.mean, 0) : '–', '% of stride'],
+      ['Double support', c ? num(ok(c.doubleSupportPct.mean) ? c.doubleSupportPct.mean : c.doubleSupportEstPct, 0) : '–', c && !ok(c.doubleSupportPct.mean) && ok(c.doubleSupportEstPct) ? '% of stride · one-leg estimate' : '% of stride'],
     ];
+    const ankleLeg = names.map((k) => legs[k]).find((l) => l.layout === 'shank-foot');
+    if (ankleLeg && c) {
+      tiles.push(
+        ['Ankle at heel strike', num(c.ankleIc.mean, 0), '° · mean, dorsiflexion +'],
+        ['Push-off plantarflexion', num(c.anklePushOffPf.mean, 0), '° · mean peak, around toe-off'],
+        ['Swing dorsiflexion', num(c.ankleSwingMaxDf.mean, 0), '° · mean peak, foot clearance'],
+      );
+    }
     this.tiles.replaceChildren(...tiles.map(([l, v, s]) => el('div', { class: 'tile' }, el('span', { class: 'label' }, l), el('strong', {}, v), el('small', {}, s))));
     this.eq4Btn.hidden = !(c && ok(c.meanStrideLength) && this.settings.person);
 
     // parameter table
     const cols = names.map((k) => [label(k), c.perLeg[k]]);
     const head = el('tr', {}, el('th', {}, 'Parameter'), ...cols.map(([l]) => el('th', { class: 'num' }, l)), el('th', { class: 'num' }, names.length > 1 ? 'Both legs' : 'All strides'));
-    const body = ROWS.map(([lab, note, perLeg, both]) =>
+    const oneLeg = names.some((k) => legs[k].layout === 'shank-foot');
+    const rows = oneLeg ? [...ROWS.filter((r) => !BILATERAL_ONLY.has(r[0])), ...ANKLE_ROWS] : ROWS.filter((r) => !r[0].startsWith('Double support, estimated'));
+    const body = rows.map(([lab, note, perLeg, both]) =>
       el(
         'tr',
         {},
@@ -305,6 +379,11 @@ export class GaitPanel {
     });
     this.src = T ? { n: T.length, t: (i) => T[i], v: (key, i) => legs[names[key]].w[i] } : { n: 0, t: () => 0, v: () => NaN };
     this.chart.el.hidden = !names.length;
+    this.ankleChart.setSeries(ankleLeg ? [{ key: 0, label: label(names.find((k) => legs[k] === ankleLeg)), color: LEG_COLOR[ankleLeg.side] || '--series-3' }] : []);
+    this.ankleChart.markers = this.chart.markers;
+    this.ankleSrc = ankleLeg && T ? { n: T.length, t: (i) => T[i], v: (key, i) => ankleLeg.ankle[i] } : null;
+    this.ankleChart.el.hidden = !this.ankleSrc;
+    this.renderCycle(ankleLeg);
     this.draw();
 
     if (this.strideBody) {
@@ -316,7 +395,7 @@ export class GaitPanel {
               'tr',
               {},
               el('td', {}, label(k)),
-              ...[i + 1, s.hs.toFixed(3), s.to.toFixed(3), s.strideT.toFixed(3), s.stanceT.toFixed(3), s.swingT.toFixed(3), s.stancePct.toFixed(1), num(s.length, 2), num(s.speed, 2), num(s.personLength, 2)].map((v) => el('td', { class: 'num' }, String(v))),
+              ...[i + 1, s.hs.toFixed(3), s.to.toFixed(3), s.strideT.toFixed(3), s.stanceT.toFixed(3), s.swingT.toFixed(3), s.stancePct.toFixed(1), num(s.length, 2), num(s.speed, 2), num(s.personLength, 2), num(s.ankleIc, 1), num(s.anklePushOffPf, 1), num(s.ankleSwingMaxDf, 1)].map((v) => el('td', { class: 'num' }, String(v))),
             ),
           ),
         );
@@ -330,6 +409,37 @@ export class GaitPanel {
     const a = t0 ?? this.src.t(0);
     const b = t1 ?? this.src.t(this.src.n - 1);
     this.chart.draw(this.src, a, Math.max(b, a + 0.001), 3.5 / (this.result.fs || 100));
+    if (this.ankleSrc) this.ankleChart.draw(this.ankleSrc, a, Math.max(b, a + 0.001), 3.5 / (this.result.fs || 100));
+  }
+
+  // Mean ± SD ankle angle over the gait cycle (heel strike to heel strike).
+  renderCycle(leg) {
+    const cv = leg && leg.ankleCurve;
+    this.cycle.hidden = !(cv && cv.n);
+    if (this.cycle.hidden) return;
+    const W = 640;
+    const H = 220;
+    const P = { l: 40, r: 12, t: 12, b: 28 };
+    const lo = Math.min(-30, ...Array.from(cv.mean, (m, j) => m - (cv.sd[j] || 0)).filter(ok));
+    const hi = Math.max(20, ...Array.from(cv.mean, (m, j) => m + (cv.sd[j] || 0)).filter(ok));
+    const x = (j) => P.l + ((W - P.l - P.r) * j) / (cv.mean.length - 1);
+    const y = (v) => P.t + ((H - P.t - P.b) * (hi - v)) / (hi - lo);
+    const line = (f) => Array.from(cv.mean, (_, j) => `${j ? 'L' : 'M'}${x(j).toFixed(1)},${y(f(j)).toFixed(1)}`).join('');
+    const band = `${line((j) => cv.mean[j] + (cv.sd[j] || 0))}${Array.from(cv.mean, (_, j) => j)
+      .reverse()
+      .map((j) => `L${x(j).toFixed(1)},${y(cv.mean[j] - (cv.sd[j] || 0)).toFixed(1)}`)
+      .join('')}Z`;
+    const stance = this.result.combined.stancePct.mean;
+    const ticks = [];
+    for (let v = Math.ceil(lo / 10) * 10; v <= hi; v += 10) ticks.push(v);
+    const color = `var(${LEG_COLOR[leg.side] || '--series-3'})`;
+    this.cycle.innerHTML = `<figcaption><h3>Ankle angle over the gait cycle <span class="unit">° · mean ± SD of ${cv.n} strides · 0 % = heel strike</span></h3></figcaption>
+<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Mean ankle angle over the gait cycle" style="width:100%;height:auto;display:block">
+${ticks.map((v) => `<line x1="${P.l}" x2="${W - P.r}" y1="${y(v)}" y2="${y(v)}" stroke="var(--grid, #8884)" stroke-width="${v ? 0.5 : 1}"/><text x="${P.l - 6}" y="${y(v) + 4}" text-anchor="end" font-size="11" fill="currentColor">${v}</text>`).join('')}
+${ok(stance) ? `<line x1="${x(stance)}" x2="${x(stance)}" y1="${P.t}" y2="${H - P.b}" stroke="currentColor" stroke-dasharray="4 3" opacity="0.6"/><text x="${x(stance) + 4}" y="${P.t + 10}" font-size="11" fill="currentColor">toe-off</text>` : ''}
+<path d="${band}" fill="${color}" opacity="0.18"/><path d="${line((j) => cv.mean[j])}" fill="none" stroke="${color}" stroke-width="2"/>
+${[0, 25, 50, 75, 100].map((p) => `<text x="${x(p)}" y="${H - 8}" text-anchor="middle" font-size="11" fill="currentColor">${p} %</text>`).join('')}
+</svg>`;
   }
 }
 

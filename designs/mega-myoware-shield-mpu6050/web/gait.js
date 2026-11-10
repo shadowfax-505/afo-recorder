@@ -41,6 +41,8 @@ export const DEFAULTS = {
   stancePctRange: [30, 85], // %
   accelRangeG: 8, // full scale; strides with clipped acceleration get no length
   segmenter: 'peaks', // 'peaks' (Salarian rules) or 'hmm' (gaitmap's trained model)
+  gyroRangeDps: 0, // full scale; 0 = unknown (no clipping check)
+  standingAnkleDeg: 0, // ankle angle in quiet standing, measured with a goniometer
 };
 
 // ---------- small numeric helpers ----------
@@ -553,13 +555,283 @@ function integrateStride(af, au, wm, fs, i0, i1) {
   return Math.abs(pf);
 }
 
+// ---------- one leg, shank + foot ----------
+//
+// Two IMUs on the same leg: one on the shank (just above the outer ankle bone)
+// and one on the foot (top of the midfoot, or the shoe's laces). Following:
+//   Carcreff et al., Sensors 18 (2018) 394: shank events (Salarian rules, the
+//     most robust in children with CP, GMFCS II-III) and the "Feet" stride
+//     length, de-drifted double integration between foot-flat instants
+//     (Mariani et al., J Biomech 43 (2010) 2999), which had the lowest stride
+//     length error in most groups.
+//   Seel, Raisch & Schauer, Sensors 14 (2014) 6891: sagittal joint angle from
+//     two IMUs on adjacent segments, each segment's flexion axis taken from its
+//     own gyro, gyro-integrated angle corrected by the accelerometer's gravity
+//     inclination (about 1-2° RMS for the ankle). Here the correction happens at
+//     every foot-flat instant, where the foot is truly still, and the zero of
+//     each segment is its pose in quiet standing (the static calibration).
+//
+// Ankle angle convention: dorsiflexion positive, 0° = the standing pose plus
+// the goniometer value entered as opts.standingAnkleDeg.
+
+// Sagittal tilt of one segment relative to its standing pose, piecewise
+// between anchor samples (still instants): integrate the gyro from the
+// gravity inclination at one anchor and spread the mismatch with the next
+// anchor linearly over the interval. Intervals longer than maxGap are left NaN.
+function segmentTilt(af, au, wm, fs, anchors, maxGapS = 3) {
+  const n = af.length;
+  const th = new Float64Array(n).fill(NaN);
+  const dt = 1 / fs;
+  for (let k = 0; k + 1 < anchors.length; k++) {
+    const i0 = anchors[k];
+    const i1 = anchors[k + 1];
+    const L = i1 - i0;
+    if (L < 2 || L > maxGapS * fs) continue;
+    const a0 = Math.atan2(af[i0], au[i0]);
+    const a1 = Math.atan2(af[i1], au[i1]);
+    const seg = new Float64Array(L + 1);
+    seg[0] = a0;
+    for (let j = 1; j <= L; j++) seg[j] = seg[j - 1] + 0.5 * (wm[i0 + j - 1] + wm[i0 + j]) * dt;
+    const drift = seg[L] - a1;
+    for (let j = 0; j <= L; j++) th[i0 + j] = (seg[j] - (drift * j) / L) / RAD;
+  }
+  return th;
+}
+
+// Projects a segment's acceleration and gyro onto its sagittal plane: m is the
+// flexion (medio-lateral) axis, u0 the standing "up" (gravity at rest with the
+// m component removed) and f0 = u0 x m. Returns af, au in g and wm in rad/s.
+function sagittal(ac, g, m, g0) {
+  const d = dot(g0, m);
+  const u0 = unit([g0[0] - d * m[0], g0[1] - d * m[1], g0[2] - d * m[2]]);
+  const f0 = cross(u0, m);
+  const n = ac[0].length;
+  const af = new Float64Array(n);
+  const au = new Float64Array(n);
+  const wm = new Float64Array(n);
+  for (let i = 0; i < n; i++) {
+    const v = [ac[0][i], ac[1][i], ac[2][i]];
+    af[i] = dot(v, f0);
+    au[i] = dot(v, u0);
+    wm[i] = (m[0] * g[0][i] + m[1] * g[1][i] + m[2] * g[2][i]) * RAD;
+  }
+  return { af, au, wm, u0, f0 };
+}
+
+// Window where every given gyro is stillest (the static calibration stand).
+function stillWindow(gyros, fs, o) {
+  const n = gyros[0][0].length;
+  const rw = Math.max(4, Math.round(o.restWindowS * fs));
+  let bestSd = Infinity;
+  let bestAt = -1;
+  for (let s = 0; s + rw <= n; s += Math.max(1, rw >> 2)) {
+    let worst = 0;
+    for (const gyr of gyros) for (let a = 0; a < 3; a++) worst = Math.max(worst, meanSd(Array.from(gyr[a].subarray(s, s + rw))).sd);
+    if (worst < bestSd) {
+      bestSd = worst;
+      bestAt = s;
+    }
+  }
+  return { at: bestAt, len: rw, ok: bestSd <= o.restGyroSd };
+}
+
+const winMean = (x, a, len) => {
+  let s = 0;
+  for (let i = a; i < a + len; i++) s += x[i];
+  return s / len;
+};
+
+// Per-stride ankle and foot features, in degrees.
+export const ANKLE_FEATURES = [
+  ['ankleIc', 'Ankle at initial contact (°)', 'dorsiflexion +, plantarflexion −'],
+  ['ankleStanceMaxDf', 'Peak dorsiflexion in stance (°)', 'tibia rolling over the foot (2nd rocker)'],
+  ['anklePushOffPf', 'Peak plantarflexion at push-off (°)', 'around toe-off (3rd rocker); most negative'],
+  ['ankleSwingMaxDf', 'Peak dorsiflexion in swing (°)', 'foot clearance; drop foot shows as negative'],
+  ['ankleTo', 'Ankle at toe-off (°)', ''],
+  ['ankleRom', 'Ankle range of motion (°)', 'max − min over the stride'],
+  ['footIc', 'Foot angle at initial contact (°)', '+ = heel first (toes up), − = toes first'],
+  ['footTo', 'Foot angle at toe-off (°)', 'heel up / push-off angle, normally negative'],
+];
+
+function ankleFeatures(s, t0, fs, ankle, foot) {
+  const idx = (tt) => Math.round((tt - t0) * fs);
+  const val = (x, tt) => {
+    const fi = (tt - t0) * fs;
+    const i = Math.floor(fi);
+    if (i < 0 || i + 1 >= x.length) return NaN;
+    return x[i] + (x[i + 1] - x[i]) * (fi - i);
+  };
+  const span = (x, ta, tb, f) => {
+    let r = NaN;
+    for (let i = Math.max(0, idx(ta)); i <= Math.min(x.length - 1, idx(tb)); i++) {
+      if (!Number.isFinite(x[i])) return NaN; // a gap: no value
+      r = Number.isFinite(r) ? f(r, x[i]) : x[i];
+    }
+    return r;
+  };
+  const T = s.strideT;
+  s.ankleIc = val(ankle, s.hs);
+  s.ankleTo = val(ankle, s.to);
+  s.ankleStanceMaxDf = span(ankle, s.hs, s.to, Math.max);
+  s.anklePushOffPf = span(ankle, s.to - 0.1 * T, s.to + 0.2 * T, Math.min);
+  s.ankleSwingMaxDf = span(ankle, s.to + 0.1 * T, s.hsNext, Math.max);
+  const hi = span(ankle, s.hs, s.hsNext, Math.max);
+  const lo = span(ankle, s.hs, s.hsNext, Math.min);
+  s.ankleRom = hi - lo;
+  s.footIc = val(foot, s.hs);
+  s.footTo = val(foot, s.to);
+}
+
+// Mean ± SD curve over the gait cycle (0..100 % from heel strike to heel strike).
+function cycleCurve(strides, t0, fs, x, points = 101) {
+  const rows = [];
+  for (const s of strides) {
+    const r = new Float64Array(points);
+    let good = true;
+    for (let j = 0; j < points; j++) {
+      const tt = s.hs + (j / (points - 1)) * s.strideT;
+      const fi = (tt - t0) * fs;
+      const i = Math.floor(fi);
+      const a = x[i];
+      const b = x[Math.min(i + 1, x.length - 1)];
+      if (!Number.isFinite(a) || !Number.isFinite(b)) {
+        good = false;
+        break;
+      }
+      r[j] = a + (b - a) * (fi - i);
+    }
+    if (good) rows.push(r);
+  }
+  const mean = new Float64Array(points).fill(NaN);
+  const sd = new Float64Array(points).fill(NaN);
+  if (!rows.length) return { mean, sd, n: 0 };
+  for (let j = 0; j < points; j++) {
+    const m = meanSd(rows.map((r) => r[j]));
+    mean[j] = m.mean;
+    sd[j] = m.sd;
+  }
+  return { mean, sd, n: rows.length };
+}
+
+// shank, foot: {acc: [ax, ay, az] in g, gyr: [gx, gy, gz] in °/s}, same grid t.
+export function analyzeShankFoot(t, shank, foot, fs, opts = {}) {
+  const o = { ...DEFAULTS, ...opts };
+  const n = t.length;
+  // Gait events and the shank's flexion axis from the shank (Salarian rules).
+  const leg = analyzeLeg(t, shank.acc, shank.gyr, fs, o);
+  leg.layout = 'shank-foot';
+  leg.ankle = new Float64Array(n).fill(NaN);
+  leg.footW = new Float64Array(n);
+  leg.ankleCurve = { mean: new Float64Array(0), sd: new Float64Array(0), n: 0 };
+  if (n < fs * 3) return leg;
+
+  // Static calibration: one window where both sensors are still.
+  const still = stillWindow([shank.gyr, foot.gyr], fs, o);
+  if (!still.ok) {
+    leg.warnings.push('No moment where both sensors were still, so the angles have no standing reference. Stand still for 3 s at the start of every trial.');
+    return leg;
+  }
+  leg.calibration = { t: t[still.at] - t[0], seconds: still.len / fs };
+  const biasOf = (gyr) => [0, 1, 2].map((a) => winMean(gyr[a], still.at, still.len));
+  const g0Of = (acc) => [0, 1, 2].map((a) => winMean(acc[a], still.at, still.len));
+
+  const fc = Math.min(8, 0.35 * fs);
+  const fb = biasOf(foot.gyr);
+  const fg = foot.gyr.map((x, a) => lowpass(x.map((v) => v - fb[a]), fs, fc));
+  const fac = foot.acc.map((x) => lowpass(x, fs, Math.min(15, 0.4 * fs)));
+  const sb = biasOf(shank.gyr);
+  const sg = shank.gyr.map((x, a) => lowpass(x.map((v) => v - sb[a]), fs, fc));
+  const sac = shank.acc.map((x) => lowpass(x, fs, Math.min(15, 0.4 * fs)));
+
+  // Clipping: gyro full scale
+  if (o.gyroRangeDps > 0) {
+    const lim = 0.98 * o.gyroRangeDps;
+    for (const [name, gyr] of [['shank', shank.gyr], ['foot', foot.gyr]]) {
+      let c = 0;
+      for (let i = 0; i < n; i++) if (Math.abs(gyr[0][i]) >= lim || Math.abs(gyr[1][i]) >= lim || Math.abs(gyr[2][i]) >= lim) c++;
+      if (c) leg.warnings.push(`The ${name} gyro hit its ±${o.gyroRangeDps.toFixed(0)} °/s limit in ${c} samples; angles and stride length there are unreliable. Use firmware with the ±1000 °/s range.`);
+    }
+  }
+
+  // Foot flexion axis: PCA over the walking part, signed so the foot turns the
+  // same way as the shank (both rotate forward in swing).
+  const idx = [];
+  for (const [a, b] of leg.sequences.map(([ta, tb]) => [Math.round((ta - t[0]) * fs), Math.round((tb - t[0]) * fs)])) for (let i = Math.max(0, a); i < Math.min(n, b); i++) idx.push(i);
+  if (!idx.length || !leg.axis || !leg.strides.length) return leg;
+  let mf = principalAxis(fg, idx);
+  let corr = 0;
+  for (const i of idx) corr += (mf[0] * fg[0][i] + mf[1] * fg[1][i] + mf[2] * fg[2][i]) * leg.w[i];
+  if (corr < 0) mf = mf.map((v) => -v);
+  leg.footAxis = mf;
+
+  const S = sagittal(sac, sg, leg.axis, g0Of(shank.acc));
+  const F = sagittal(fac, fg, mf, g0Of(foot.acc));
+  for (let i = 0; i < n; i++) leg.footW[i] = F.wm[i] / RAD;
+
+  // Foot-flat instants: the stillest foot sample in each stance (15-75 %).
+  const footFlat = (hs, to) => midStance(t, fg, fs, hs, to);
+  const anchors = [];
+  const flatOf = new Map();
+  const stances = [];
+  for (const s of leg.strides) stances.push([s.hs, s.to]);
+  // the stance that closes the last stride, when its toe-off was found
+  const last = leg.strides[leg.strides.length - 1];
+  const nextTo = leg.to.find((x) => Number.isFinite(x) && x > last.hsNext && x < last.hsNext + last.strideT);
+  if (nextTo !== undefined) stances.push([last.hsNext, nextTo]);
+  for (const [hs, to] of stances) {
+    const i = footFlat(hs, to);
+    if (i >= 0) {
+      anchors.push(i);
+      flatOf.set(hs, i);
+    }
+  }
+  anchors.sort((a, b) => a - b);
+
+  // Stride length from the foot: zero velocity at both foot-flat instants.
+  const sat = new Uint8Array(n);
+  const lim = 0.98 * o.accelRangeG;
+  for (let i = 0; i < n; i++) if (Math.abs(foot.acc[0][i]) >= lim || Math.abs(foot.acc[1][i]) >= lim || Math.abs(foot.acc[2][i]) >= lim) sat[i] = 1;
+  let clipped = 0;
+  for (const s of leg.strides) {
+    s.shankLength = s.length;
+    s.length = NaN;
+    s.speed = NaN;
+    const i0 = flatOf.get(s.hs);
+    const i1 = flatOf.get(s.hsNext);
+    if (i0 === undefined || i1 === undefined || i1 <= i0 + 2 || i1 - i0 > 3 * fs) continue;
+    if (sat.subarray(i0, i1 + 1).some((x) => x)) {
+      clipped++;
+      continue;
+    }
+    s.length = integrateStride(F.af, F.au, F.wm, fs, i0, i1);
+    s.speed = s.length / s.strideT;
+  }
+  // the shank-only clipping note no longer applies to the foot's length
+  leg.warnings = leg.warnings.filter((w) => !w.startsWith('The accelerometer hit'));
+  if (clipped) leg.warnings.push(`The foot accelerometer hit its ±${o.accelRangeG} g limit in ${clipped} stride${clipped > 1 ? 's' : ''}, so ${clipped > 1 ? 'they have' : 'it has'} no stride length.`);
+
+  // Segment tilts and the ankle angle.
+  const thS = segmentTilt(S.af, S.au, S.wm, fs, anchors);
+  const thF = segmentTilt(F.af, F.au, F.wm, fs, anchors);
+  for (let i = 0; i < n; i++) leg.ankle[i] = thF[i] - thS[i] + (o.standingAnkleDeg || 0);
+  leg.shankTilt = thS;
+  leg.footTilt = thF;
+  for (const s of leg.strides) ankleFeatures(s, t[0], fs, leg.ankle, thF);
+  leg.ankleCurve = cycleCurve(leg.strides, t[0], fs, leg.ankle);
+  return leg;
+}
+
 // ---------- both legs ----------
 
 // src: {n, t(i), v(key, i)} with keys 6..11 = IMU A ax..gz and 12..17 = IMU B
 // (g and °/s), as the app's live buffer and recording sources provide.
 // sides: {A: 'right'|'left'|'off', B: ...}; distanceM: walked distance for Eq. 4;
 // personStrideM: this person's own measured stride length (see combine).
-export function analyzeSource(src, { t0 = -Infinity, t1 = Infinity, imuMask = 3, sides = { A: 'right', B: 'left' }, distanceM = 0, personStrideM = 0, accelRangeG = 8, opts = {} } = {}) {
+//
+// layout 'bilateral' (default): IMU A and B each on one shank, sides says which.
+// layout 'shank-foot': both IMUs on one leg; limb = {shank: 'A'|'B', side:
+// 'right'|'left'} says which IMU is on the shank (the other is on the foot).
+export function analyzeSource(src, { t0 = -Infinity, t1 = Infinity, imuMask = 3, sides = { A: 'right', B: 'left' }, layout = 'bilateral', limb = { shank: 'A', side: 'right' }, distanceM = 0, personStrideM = 0, accelRangeG = 8, gyroRangeDps = 0, opts = {} } = {}) {
   let i0 = 0;
   while (i0 < src.n && src.t(i0) < t0) i0++;
   let i1 = i0;
@@ -578,16 +850,37 @@ export function analyzeSource(src, { t0 = -Infinity, t1 = Infinity, imuMask = 3,
     out.warnings.push(
       `The stream is ${fs.toFixed(0)} samples per second; the papers used 100. Event times are interpolated between samples, but expect about ±${Math.round(500 / fs)} ms of extra timing error. Raise the Bluetooth module to 115200 baud (README, "Bluetooth speed") for ~245 per second.`,
     );
-  for (const [k, name] of [[0, 'A'], [1, 'B']]) {
-    const side = sides[name];
-    if (!(imuMask & (1 << k)) || side === 'off') continue;
+  const channelsOf = (k) => {
     const chans = [];
     for (let a = 0; a < 6; a++) {
       const x = new Float64Array(i1 - i0);
       for (let i = i0; i < i1; i++) x[i - i0] = src.v(6 + k * 6 + a, i);
       chans.push(x);
     }
-    const r = resample(traw, chans, fs);
+    return resample(traw, chans, fs);
+  };
+  if (layout === 'shank-foot') {
+    const ks = limb.shank === 'B' ? 1 : 0;
+    const kf = 1 - ks;
+    if ((imuMask & 3) !== 3) {
+      out.warnings.push('The shank + foot layout needs both IMUs, and only one is answering.');
+      out.combined = combine({}, distanceM, personStrideM);
+      return out;
+    }
+    const rs = channelsOf(ks);
+    const rf = channelsOf(kf);
+    out.t = rs.t;
+    const leg = analyzeShankFoot(rs.t, { acc: rs.channels.slice(0, 3), gyr: rs.channels.slice(3, 6) }, { acc: rf.channels.slice(0, 3), gyr: rf.channels.slice(3, 6) }, fs, { accelRangeG, gyroRangeDps, ...opts });
+    leg.imu = ks ? 'B' : 'A';
+    leg.side = limb.side || 'right';
+    out.legs[leg.side] = leg;
+    out.combined = combine(out.legs, distanceM, personStrideM);
+    return out;
+  }
+  for (const [k, name] of [[0, 'A'], [1, 'B']]) {
+    const side = sides[name];
+    if (!(imuMask & (1 << k)) || side === 'off') continue;
+    const r = channelsOf(k);
     out.t = r.t;
     const leg = analyzeLeg(r.t, r.channels.slice(0, 3), r.channels.slice(3, 6), fs, { accelRangeG, ...opts });
     leg.imu = name;
@@ -615,6 +908,7 @@ function legSummary(leg) {
     speed: pick('speed'),
     personLength: pick('personLength'),
     personSpeed: pick('personSpeed'),
+    ...Object.fromEntries(ANKLE_FEATURES.map(([k]) => [k, pick(k)])),
   };
 }
 
@@ -649,6 +943,7 @@ export function combine(legs, distanceM, personStrideM = 0) {
     sensorSpeed: meanSd(all.map((s) => s.speed)),
     stepT: meanSd([]),
     doubleSupportPct: meanSd([]),
+    doubleSupportEstPct: NaN,
     cadenceSteps: NaN,
     cadenceStrides: NaN,
     walkTimeS: NaN,
@@ -697,7 +992,13 @@ export function combine(legs, distanceM, personStrideM = 0) {
       swingT: si(sl.swingT.mean, sr.swingT.mean),
       length: si(sl.length.mean, sr.length.mean),
     };
+  } else if (c.stancePct.n) {
+    // One leg only: if the other leg mirrors this one, each stride holds two
+    // double-support periods, so DS % = 2 x (stance % - 50). An estimate that
+    // assumes symmetric gait; not valid for hemiplegic or very asymmetric gait.
+    c.doubleSupportEstPct = 2 * (c.stancePct.mean - 50);
   }
+  for (const [k] of ANKLE_FEATURES) c[k] = meanSd(all.map((s) => s[k]));
   // Eq. 4 and gait speed over a measured walk (e.g. the 10 m walk test):
   // walking time from the first to the last heel strike seen on either leg,
   // strides = walking time / mean stride time.
@@ -730,12 +1031,16 @@ export function strideFromWalk(distanceM, steps) {
 
 // One row per stride, for CSV export.
 export function stridesCsv(result, name = '') {
-  const head = ['leg', 'imu', 'stride', 'hs_s', 'to_s', 'next_hs_s', 'stride_s', 'stance_s', 'swing_s', 'stance_pct', 'swing_pct', 'stride_length_m', 'stride_speed_m_s', 'stride_length_person_m', 'stride_speed_person_m_s'];
-  const lines = [`# gait strides${name ? ` for ${name}` : ''}; heel strike (HS) = initial contact, TO = toe-off; length/speed from the ankle sensor (de-drifted integration); _person columns scaled to the person's measured stride length`, head.join(',')];
+  const ankleCols = ['ankle_ic_deg', 'ankle_stance_max_df_deg', 'ankle_pushoff_pf_deg', 'ankle_swing_max_df_deg', 'ankle_to_deg', 'ankle_rom_deg', 'foot_ic_deg', 'foot_to_deg'];
+  const hasAnkle = Object.values(result.legs).some((l) => l.layout === 'shank-foot');
+  const head = ['leg', 'imu', 'stride', 'hs_s', 'to_s', 'next_hs_s', 'stride_s', 'stance_s', 'swing_s', 'stance_pct', 'swing_pct', 'stride_length_m', 'stride_speed_m_s', 'stride_length_person_m', 'stride_speed_person_m_s', ...(hasAnkle ? ankleCols : [])];
+  const src = hasAnkle ? 'the foot sensor (de-drifted integration between foot-flat instants)' : 'the ankle sensor (de-drifted integration)';
+  const lines = [`# gait strides${name ? ` for ${name}` : ''}; heel strike (HS) = initial contact, TO = toe-off; length/speed from ${src}; _person columns scaled to the person's measured stride length${hasAnkle ? '; ankle angles in degrees, dorsiflexion positive, 0 = quiet standing' : ''}`, head.join(',')];
+  const f1 = (v) => (Number.isFinite(v) ? v.toFixed(1) : '');
   for (const [side, leg] of Object.entries(result.legs))
     leg.strides.forEach((s, i) => {
       lines.push(
-        [side, leg.imu, i + 1, s.hs.toFixed(3), s.to.toFixed(3), s.hsNext.toFixed(3), s.strideT.toFixed(3), s.stanceT.toFixed(3), s.swingT.toFixed(3), s.stancePct.toFixed(1), s.swingPct.toFixed(1), Number.isFinite(s.length) ? s.length.toFixed(3) : '', Number.isFinite(s.speed) ? s.speed.toFixed(3) : '', Number.isFinite(s.personLength) ? s.personLength.toFixed(3) : '', Number.isFinite(s.personSpeed) ? s.personSpeed.toFixed(3) : ''].join(','),
+        [side, leg.imu, i + 1, s.hs.toFixed(3), s.to.toFixed(3), s.hsNext.toFixed(3), s.strideT.toFixed(3), s.stanceT.toFixed(3), s.swingT.toFixed(3), s.stancePct.toFixed(1), s.swingPct.toFixed(1), Number.isFinite(s.length) ? s.length.toFixed(3) : '', Number.isFinite(s.speed) ? s.speed.toFixed(3) : '', Number.isFinite(s.personLength) ? s.personLength.toFixed(3) : '', Number.isFinite(s.personSpeed) ? s.personSpeed.toFixed(3) : '', ...(hasAnkle ? ANKLE_FEATURES.map(([k]) => f1(s[k])) : [])].join(','),
       );
     });
   return lines.join('\n') + '\n';

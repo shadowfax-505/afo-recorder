@@ -13,7 +13,21 @@ const LIVE_CAPACITY = 500 * 60;
 const CHUNK_FLUSH_MS = 2000;
 const SERIES = ['--series-1', '--series-2', '--series-3', '--series-4', '--series-5', '--series-6'];
 const GAIT_EVERY_MS = 1000;
-const GAIT_DEFAULTS = { sides: { A: 'right', B: 'left' }, distanceM: 0, windowS: 20, person: '', personStrideM: 0, segmenter: 'peaks' };
+const GAIT_DEFAULTS = { layout: 'shank-foot', limb: { shank: 'A', side: 'right' }, standingAnkleDeg: 0, sides: { A: 'right', B: 'left' }, distanceM: 0, windowS: 20, person: '', personStrideM: 0, segmenter: 'peaks' };
+
+// Analysis options from the panel settings and the stream's scales.
+function gaitArgs(s, scales) {
+  return {
+    layout: s.layout || 'bilateral',
+    limb: s.limb || GAIT_DEFAULTS.limb,
+    sides: s.sides,
+    distanceM: s.distanceM,
+    personStrideM: s.personStrideM,
+    accelRangeG: 32768 / scales.accelLsbPerG,
+    gyroRangeDps: 32768 / scales.gyroLsbPerDps,
+    opts: { segmenter: s.segmenter, standingAnkleDeg: s.standingAnkleDeg || 0 },
+  };
+}
 
 // ---------- preferences (per-browser convenience only) ----------
 
@@ -271,7 +285,7 @@ function updateLiveGait(now) {
   if (!s.windowS && st.recorder && st.recorder.t0 !== null) t0 = st.recorder.t0;
   try {
     liveGait.render(
-      analyzeSource(live, { t0, t1, imuMask: st.info ? st.info.imu_mask : 3, sides: s.sides, distanceM: s.distanceM, personStrideM: s.personStrideM, accelRangeG: 32768 / st.scales.accelLsbPerG, opts: { segmenter: s.segmenter } }),
+      analyzeSource(live, { t0, t1, imuMask: st.info ? st.info.imu_mask : 3, ...gaitArgs(s, st.scales) }),
     );
   } catch (e) {
     log(`gait analysis failed: ${e.message}`);
@@ -692,7 +706,8 @@ async function openRecording(id) {
     live: false,
     idPrefix: 'dg',
     profiles: people,
-    settings: { ...GAIT_DEFAULTS, ...prefs.get('gait', {}), ...(meta.gait || {}) },
+    // recordings saved before the one-leg layout existed were both-shank walks
+    settings: { ...GAIT_DEFAULTS, ...prefs.get('gait', {}), ...(meta.gait ? { layout: 'bilateral', ...meta.gait } : {}) },
     onZoom: zoom,
     onChange: async (s) => {
       if (!detail || detail.gait !== gait) return;
@@ -726,8 +741,7 @@ function runDetailGait() {
   const { meta, src, gait } = detail;
   const s = gait.settings;
   try {
-    const accelRangeG = 32768 / (meta.scales || scalesFromInfo(null)).accelLsbPerG;
-    detail.gaitResult = analyzeSource(src, { imuMask: meta.imuMask, sides: s.sides, distanceM: s.distanceM, personStrideM: s.personStrideM, accelRangeG, opts: { segmenter: s.segmenter } });
+    detail.gaitResult = analyzeSource(src, { imuMask: meta.imuMask, ...gaitArgs(s, meta.scales || scalesFromInfo(null)) });
     gait.render(detail.gaitResult);
     gait.draw(detail.t0, detail.t1);
   } catch (e) {
