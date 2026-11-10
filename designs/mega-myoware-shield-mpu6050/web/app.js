@@ -13,11 +13,12 @@ const LIVE_CAPACITY = 500 * 60;
 const CHUNK_FLUSH_MS = 2000;
 const SERIES = ['--series-1', '--series-2', '--series-3', '--series-4', '--series-5', '--series-6'];
 const GAIT_EVERY_MS = 1000;
-const GAIT_DEFAULTS = { layout: 'shank-foot', limb: { shank: 'A', side: 'right' }, standingAnkleDeg: 0, sides: { A: 'right', B: 'left' }, distanceM: 0, windowS: 20, person: '', personStrideM: 0, segmenter: 'peaks' };
+const GAIT_DEFAULTS = { emgSignal: 'env', muscles: { 0: 'Tibialis anterior', 1: 'Gastrocnemius (medial)' }, layout: 'shank-foot', limb: { shank: 'A', side: 'right' }, standingAnkleDeg: 0, sides: { A: 'right', B: 'left' }, distanceM: 0, windowS: 20, person: '', personStrideM: 0, segmenter: 'peaks' };
 
 // Analysis options from the panel settings and the stream's scales.
-function gaitArgs(s, scales) {
+function gaitArgs(s, scales, emgMask = 0) {
   return {
+    emg: { mask: emgMask, adcRefV: scales.adcRefV, signal: s.emgSignal || 'env', muscles: s.muscles || {} },
     layout: s.layout || 'bilateral',
     limb: s.limb || GAIT_DEFAULTS.limb,
     sides: s.sides,
@@ -285,7 +286,7 @@ function updateLiveGait(now) {
   if (!s.windowS && st.recorder && st.recorder.t0 !== null) t0 = st.recorder.t0;
   try {
     liveGait.render(
-      analyzeSource(live, { t0, t1, imuMask: st.info ? st.info.imu_mask : 3, ...gaitArgs(s, st.scales) }),
+      analyzeSource(live, { t0, t1, imuMask: st.info ? st.info.imu_mask : 3, ...gaitArgs(s, st.scales, st.info ? st.info.emg_mask : 0) }),
     );
   } catch (e) {
     log(`gait analysis failed: ${e.message}`);
@@ -741,7 +742,7 @@ function runDetailGait() {
   const { meta, src, gait } = detail;
   const s = gait.settings;
   try {
-    detail.gaitResult = analyzeSource(src, { imuMask: meta.imuMask, ...gaitArgs(s, meta.scales || scalesFromInfo(null)) });
+    detail.gaitResult = analyzeSource(src, { imuMask: meta.imuMask, ...gaitArgs(s, meta.scales || scalesFromInfo(null), meta.emgMask) });
     gait.render(detail.gaitResult);
     gait.draw(detail.t0, detail.t1);
   } catch (e) {

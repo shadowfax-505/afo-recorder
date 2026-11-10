@@ -24,6 +24,7 @@
 // under node for tests.
 
 import { segment as hmmSegment, MODEL as HMM_MODEL } from './hmm.js';
+import { analyzeEmg } from './emg.js';
 
 const G = 9.80665;
 const RAD = Math.PI / 180;
@@ -831,7 +832,7 @@ export function analyzeShankFoot(t, shank, foot, fs, opts = {}) {
 // layout 'bilateral' (default): IMU A and B each on one shank, sides says which.
 // layout 'shank-foot': both IMUs on one leg; limb = {shank: 'A'|'B', side:
 // 'right'|'left'} says which IMU is on the shank (the other is on the foot).
-export function analyzeSource(src, { t0 = -Infinity, t1 = Infinity, imuMask = 3, sides = { A: 'right', B: 'left' }, layout = 'bilateral', limb = { shank: 'A', side: 'right' }, distanceM = 0, personStrideM = 0, accelRangeG = 8, gyroRangeDps = 0, opts = {} } = {}) {
+export function analyzeSource(src, { t0 = -Infinity, t1 = Infinity, imuMask = 3, sides = { A: 'right', B: 'left' }, layout = 'bilateral', limb = { shank: 'A', side: 'right' }, distanceM = 0, personStrideM = 0, accelRangeG = 8, gyroRangeDps = 0, emg = null, opts = {} } = {}) {
   let i0 = 0;
   while (i0 < src.n && src.t(i0) < t0) i0++;
   let i1 = i0;
@@ -865,6 +866,7 @@ export function analyzeSource(src, { t0 = -Infinity, t1 = Infinity, imuMask = 3,
     if ((imuMask & 3) !== 3) {
       out.warnings.push('The shank + foot layout needs both IMUs, and only one is answering.');
       out.combined = combine({}, distanceM, personStrideM);
+      addEmg(out, src, i0, i1, traw, fs, emg);
       return out;
     }
     const rs = channelsOf(ks);
@@ -875,6 +877,7 @@ export function analyzeSource(src, { t0 = -Infinity, t1 = Infinity, imuMask = 3,
     leg.side = limb.side || 'right';
     out.legs[leg.side] = leg;
     out.combined = combine(out.legs, distanceM, personStrideM);
+    addEmg(out, src, i0, i1, traw, fs, emg);
     return out;
   }
   for (const [k, name] of [[0, 'A'], [1, 'B']]) {
@@ -888,7 +891,36 @@ export function analyzeSource(src, { t0 = -Infinity, t1 = Infinity, imuMask = 3,
     out.legs[side in out.legs ? `${side}-${name}` : side] = leg;
   }
   out.combined = combine(out.legs, distanceM, personStrideM);
+  addEmg(out, src, i0, i1, traw, fs, emg);
   return out;
+}
+
+// EMG of the enabled jacks, timed by the strides of one leg (emg.leg, or the
+// first leg analysed). emg: {mask, adcRefV, signal, muscles: {ch: name}, leg}.
+function addEmg(out, src, i0, i1, traw, fs, emg) {
+  if (!emg || !emg.mask) return;
+  const chans = [];
+  const ids = [];
+  for (let ch = 0; ch < 6; ch++)
+    if (emg.mask & (1 << ch)) {
+      const x = new Float64Array(i1 - i0);
+      for (let i = i0; i < i1; i++) x[i - i0] = src.v(ch, i);
+      chans.push(x);
+      ids.push(ch);
+    }
+  const r = resample(traw, chans, fs);
+  const names = Object.keys(out.legs);
+  const legName = emg.leg && out.legs[emg.leg] ? emg.leg : names[0];
+  const strides = legName ? out.legs[legName].strides : [];
+  out.emg = analyzeEmg(
+    r.t,
+    ids.map((ch, k) => ({ ch, counts: r.channels[k], muscle: (emg.muscles && emg.muscles[ch]) || '' })),
+    fs,
+    strides,
+    { adcRefV: emg.adcRefV, signal: emg.signal || 'env' },
+  );
+  out.emg.leg = legName || '';
+  if (!out.t) out.t = r.t;
 }
 
 function legSummary(leg) {

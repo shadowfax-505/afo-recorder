@@ -184,7 +184,19 @@ export function makeScenario({ standS = 2.5, strides = 12, T = 1.1, jitter = 0, 
   }
   if (limb) truth[1] = truth[0];
 
-  return { at, truth, ankle, period, durs, sl, stancePct: 100 * (TPL.pTo - TPL.pIc), walkStart: standS, walkEnd };
+  // MyoWare ENV output (ADC counts) of two muscles on leg 0, phase 0 = heel
+  // strike: tibialis anterior active around heel strike and in swing,
+  // gastrocnemius in mid/terminal stance peaking at about 45 % of the cycle.
+  // Rest level 40 counts when standing or between bursts.
+  function emgAt(t, ch) {
+    const { p, rate } = phase(t, 0);
+    if (!rate) return 40;
+    const q = p - Math.floor(p);
+    if (ch === 0) return 40 + 420 * gauss(q, 0.03, 0.05) + 220 * gauss(q, 0.8, 0.09);
+    return 40 + 560 * gauss(q, 0.45, 0.07);
+  }
+
+  return { at, truth, ankle, emgAt, period, durs, sl, stancePct: 100 * (TPL.pTo - TPL.pIc), walkStart: standS, walkEnd };
 }
 
 // Samples a scenario on a grid with sensor noise and gyro offset.

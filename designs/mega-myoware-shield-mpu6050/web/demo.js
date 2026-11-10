@@ -105,14 +105,14 @@ export class DemoTransport {
 
   sample() {
     const t = this.us / 1e6;
-    const phase = (t % 1.1) / 1.1; // ~55 strides per minute
-    const burst = Math.exp(-(((phase - 0.3) / 0.09) ** 2));
+    const tw = t % WALK.period;
+    // A0 = tibialis anterior, A1 = gastrocnemius, timed by the simulated walk;
+    // the other jacks echo them at lower gain.
     const emg = [];
     for (let ch = 0; ch < 6; ch++) {
-      const level = 60 + 520 * burst * (1 - ch * 0.12) * (0.85 + 0.3 * Math.random());
-      emg.push(Math.max(0, Math.min(1023, Math.round(level + 15 * (Math.random() - 0.5)))));
+      const level = WALK.emgAt(tw, ch % 2) * (1 - Math.floor(ch / 2) * 0.25) * (0.9 + 0.2 * Math.random());
+      emg.push(Math.max(0, Math.min(1023, Math.round(level + 12 * (Math.random() - 0.5)))));
     }
-    const tw = t % WALK.period;
     const imu = [0, 1].map((k) => {
       const { acc, gyr } = WALK.at(tw, k);
       return [

@@ -158,6 +158,14 @@ try {
     const pushOff = await tileVal('#d-gait', 'Push-off plantarflexion');
     assert.ok(pushOff < -15, `push-off ${pushOff}`);
     assert.ok(await gp.isVisible('#d-gait .gait-cycle svg'), 'gait-cycle ankle curve drawn');
+    // EMG: the demo's A0 is a tibialis anterior, peaking just after heel strike
+    assert.ok(await gp.isVisible('#d-gait .emg-gait .emg-cycle svg'), 'EMG gait-cycle curve drawn');
+    const taPeak = await gp.evaluate(() => {
+      const row = [...document.querySelectorAll('#d-gait .emg-gait tbody tr')].find((r) => r.querySelector('th').textContent.startsWith('Peak timing'));
+      return Number(row.querySelector('td').textContent.split(' ')[0]);
+    });
+    assert.ok(taPeak >= 0 && taPeak < 12, `tibialis anterior peak at ${taPeak} % of the cycle`);
+    assert.equal(await gp.inputValue('#dg-muscle-0'), 'Tibialis anterior');
     assert.equal(await gp.inputValue('#dg-distance'), '10', 'walk distance saved with the recording');
     const recLen = await tileVal('#d-gait', 'Mean stride length');
     assert.ok(recLen > 0.4 && recLen < 2, `Eq. 4 stride length ${recLen}`);
@@ -202,7 +210,7 @@ try {
     // the both-shanks layout is still there; changing a leg re-runs the analysis
     await gp.selectOption('#dg-layout', 'bilateral');
     await gp.selectOption('#dg-side-B', 'off');
-    await gp.waitForFunction(() => document.querySelectorAll('#d-gait .gait-table thead th').length === 3);
+    await gp.waitForFunction(() => document.querySelectorAll('#d-gait .gait-table:not(.emg-table) thead th').length === 3);
     await gctx.close();
   }
 

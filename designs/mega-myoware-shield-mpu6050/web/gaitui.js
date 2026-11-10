@@ -3,6 +3,7 @@
 // events, and (for recordings) a per-stride table.
 import { StripChart } from './chart.js';
 import { strideFromWalk, ANKLE_FEATURES } from './gait.js';
+import { MUSCLES, EMG_ROWS } from './emg.js';
 
 const LEG_COLOR = { right: '--series-1', left: '--series-2' };
 const SIDES = [
@@ -198,7 +199,8 @@ export class GaitPanel {
     this.ankleChart.el.classList.add('wide');
     this.cycle = el('figure', { class: 'chart wide gait-cycle' });
     this.chartHost.append(this.cycle);
-    this.root.append(head, controls, person, this.warn, this.tiles, tableWrap, this.chartHost);
+    this.emgBox = this.buildEmg(opts);
+    this.root.append(head, controls, person, this.warn, this.tiles, tableWrap, this.chartHost, this.emgBox);
     if (!opts.live) {
       this.strideBody = el('tbody');
       this.strideCsv = el('button', { type: 'button', id: `${opts.idPrefix}-csv` }, 'Export gait CSV');
@@ -222,6 +224,111 @@ export class GaitPanel {
       );
     }
     this.showLayout();
+  }
+
+  // EMG section: signal type, a muscle name per enabled jack, parameter table,
+  // mean envelope over the gait cycle.
+  buildEmg(opts) {
+    this.settings.muscles = { ...(this.settings.muscles || {}) };
+    const sig = el('select', { id: `${opts.idPrefix}-emg-signal` }, el('option', { value: 'env' }, 'ENV (MyoWare envelope, default)'), el('option', { value: 'raw' }, 'RAW (needs ~1000 samples/s)'));
+    sig.value = this.settings.emgSignal || 'env';
+    sig.addEventListener('change', () => {
+      this.settings.emgSignal = sig.value;
+      this.changed();
+    });
+    this.muscleBar = el('div', { class: 'toolbar' });
+    this.muscleList = el('datalist', { id: `${opts.idPrefix}-muscles` }, ...MUSCLES.map((m) => el('option', { value: m })));
+    this.emgTable = el('table', { class: 'gait-table emg-table' });
+    this.emgCycle = el('figure', { class: 'chart wide gait-cycle emg-cycle' });
+    this.emgWarn = el('ul', { class: 'notice gait-warn', hidden: true });
+    this.emgChans = '';
+    return el(
+      'section',
+      { class: 'emg-gait', hidden: true },
+      el('h3', { class: 'emg-title' }, 'Muscle activity (EMG) over the gait cycle'),
+      el(
+        'p',
+        { class: 'hint' },
+        'Envelope of each MyoWare channel, timed by the heel strikes and toe-offs above. Amplitudes in % are relative to the peak of that muscle’s own mean curve (no maximum-contraction test is recorded). On/off: envelope above rest + 3 SD for at least 30 ms.',
+      ),
+      el('div', { class: 'toolbar' }, el('label', { class: 'field' }, 'EMG signal (MyoWare OUTPUT switch)', sig), this.muscleList),
+      this.muscleBar,
+      this.emgWarn,
+      el('div', { class: 'table-scroll' }, this.emgTable),
+      this.emgCycle,
+    );
+  }
+
+  renderEmg(e) {
+    this.emgBox.hidden = !(e && e.channels.length);
+    if (this.emgBox.hidden) return;
+    const key = e.channels.map((c) => c.ch).join(',');
+    if (key !== this.emgChans) {
+      this.emgChans = key;
+      this.muscleBar.replaceChildren(
+        ...e.channels.map((c) => {
+          const inp = el('input', { type: 'text', id: `${this.opts.idPrefix}-muscle-${c.ch}`, placeholder: 'e.g. Tibialis anterior', autocomplete: 'off' });
+          inp.setAttribute('list', this.muscleList.id);
+          inp.value = this.settings.muscles[c.ch] || '';
+          inp.addEventListener('change', () => {
+            this.settings.muscles[c.ch] = inp.value.trim();
+            this.changed();
+          });
+          return el('label', { class: 'field' }, `Jack A${c.ch} muscle`, inp);
+        }),
+      );
+    }
+    this.emgWarn.replaceChildren(...e.warnings.map((w) => el('li', {}, w)));
+    this.emgWarn.hidden = !e.warnings.length;
+    const name = (c) => c.muscle || `A${c.ch}`;
+    const f = (x, d, scale = 1) => (x && ok(x.mean) ? (x.n > 1 && ok(x.sd) ? `${(x.mean * scale).toFixed(d)} ± ${(x.sd * scale).toFixed(d)}` : (x.mean * scale).toFixed(d)) : '–');
+    const rows = [
+      ['Strides analysed', '', (c) => String(c.curve ? c.curve.n : 0)],
+      ['Resting level (V)', 'quietest 0.5 s', (c) => `${c.baseline.mean.toFixed(3)} ± ${(c.baseline.sd || 0).toFixed(3)}`],
+      ['Activity threshold (V)', 'rest + 3 SD (at least 10 % of range)', (c) => c.threshold.toFixed(3)],
+      ...EMG_ROWS.map(([k, lab, note, d, scale]) => [lab, note, (c) => f(c.summary[k], d, scale || 1)]),
+      ['Peak variability (CV %)', 'stride to stride', (c) => num(c.summary.peakCv, 1)],
+      ['Whole stretch: mean / peak (V)', 'including standing', (c) => `${c.overall.meanV.toFixed(3)} / ${c.overall.peakV.toFixed(3)}`],
+      ['Whole stretch: active (%)', '', (c) => num(c.overall.activePct, 0)],
+    ];
+    const head = el('tr', {}, el('th', {}, 'EMG parameter'), ...e.channels.map((c) => el('th', { class: 'num' }, `A${c.ch} ${c.muscle ? '· ' + c.muscle : ''}`)));
+    const body = rows.map(([lab, note, fn]) => el('tr', {}, el('th', { scope: 'row' }, lab, note ? el('small', {}, note) : null), ...e.channels.map((c) => el('td', { class: 'num' }, fn(c)))));
+    for (const x of e.cci)
+      body.push(el('tr', {}, el('th', { scope: 'row' }, `Co-contraction ${x.label} (%)`, el('small', {}, 'Falconer & Winter index; whole stride / stance')), el('td', { class: 'num', colSpan: e.channels.length }, `${f(x.stride, 0)} / ${f(x.stance, 0)}`)));
+    this.emgTable.replaceChildren(el('thead', {}, head), el('tbody', {}, ...body));
+
+    // mean ± SD normalised envelope over the cycle, all channels on one plot
+    const chans = e.channels.filter((c) => c.curveNorm && c.curveNorm.n);
+    this.emgCycle.hidden = !chans.length;
+    if (!chans.length) return;
+    const W = 640;
+    const H = 220;
+    const P = { l: 40, r: 12, t: 12, b: 28 };
+    const lo = -10;
+    const hi = 120;
+    const x = (j) => P.l + ((W - P.l - P.r) * j) / 100;
+    const y = (v) => P.t + ((H - P.t - P.b) * (hi - Math.max(lo, Math.min(hi, v)))) / (hi - lo);
+    const COLORS = ['--series-1', '--series-2', '--series-3', '--series-4', '--series-5', '--series-6'];
+    const stance = this.result && this.result.combined ? this.result.combined.stancePct.mean : NaN;
+    const paths = chans
+      .map((c, i) => {
+        const m = c.curveNorm.mean;
+        const sd = c.curveNorm.sd;
+        const col = `var(${COLORS[c.ch % 6]})`;
+        const line = (fn) => Array.from(m, (_, j) => `${j ? 'L' : 'M'}${x(j).toFixed(1)},${y(fn(j)).toFixed(1)}`).join('');
+        const band = `${line((j) => m[j] + (sd[j] || 0))}${Array.from(m, (_, j) => 100 - j)
+          .map((j) => `L${x(j).toFixed(1)},${y(m[j] - (sd[j] || 0)).toFixed(1)}`)
+          .join('')}Z`;
+        return `<path d="${band}" fill="${col}" opacity="0.15"/><path d="${line((j) => m[j])}" fill="none" stroke="${col}" stroke-width="2"/><text x="${W - P.r - 4}" y="${P.t + 14 + i * 16}" text-anchor="end" font-size="12" fill="${col}">A${c.ch} ${name(c)}</text>`;
+      })
+      .join('');
+    this.emgCycle.innerHTML = `<figcaption><h3>EMG envelope over the gait cycle <span class="unit">% of each muscle’s peak · mean ± SD · 0 % = heel strike</span></h3></figcaption>
+<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Mean EMG envelope over the gait cycle" style="width:100%;height:auto;display:block">
+${[0, 25, 50, 75, 100].map((v) => `<line x1="${P.l}" x2="${W - P.r}" y1="${y(v)}" y2="${y(v)}" stroke="var(--grid, #8884)" stroke-width="${v ? 0.5 : 1}"/><text x="${P.l - 6}" y="${y(v) + 4}" text-anchor="end" font-size="11" fill="currentColor">${v}</text>`).join('')}
+${ok(stance) ? `<line x1="${x(stance)}" x2="${x(stance)}" y1="${P.t}" y2="${H - P.b}" stroke="currentColor" stroke-dasharray="4 3" opacity="0.6"/><text x="${x(stance) + 4}" y="${H - P.b - 6}" font-size="11" fill="currentColor">toe-off</text>` : ''}
+${paths}
+${[0, 25, 50, 75, 100].map((p) => `<text x="${x(p)}" y="${H - 8}" text-anchor="middle" font-size="11" fill="currentColor">${p} %</text>`).join('')}
+</svg>`;
   }
 
   showLayout() {
@@ -384,6 +491,7 @@ export class GaitPanel {
     this.ankleSrc = ankleLeg && T ? { n: T.length, t: (i) => T[i], v: (key, i) => ankleLeg.ankle[i] } : null;
     this.ankleChart.el.hidden = !this.ankleSrc;
     this.renderCycle(ankleLeg);
+    this.renderEmg(result && result.emg);
     this.draw();
 
     if (this.strideBody) {

@@ -308,3 +308,7 @@ td .tag { font: 10px var(--mono); color: var(--notice-ink); display: block; }
   .plot canvas, .chart.wide .plot canvas { height: 170px; }
   .tile strong { font-size: 18px; }
 }
+.emg-gait { margin-top: 18px; }
+.emg-gait .emg-title { font-size: 15px; font-weight: 600; margin-bottom: 2px; }
+.emg-gait .hint { max-width: 80ch; margin-bottom: 8px; }
+.emg-gait .field input[type=text] { width: 190px; }
