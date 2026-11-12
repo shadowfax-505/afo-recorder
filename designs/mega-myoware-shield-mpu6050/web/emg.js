@@ -6,8 +6,11 @@
 //      (already rectified and smoothed on the sensor), which is only low-passed
 //      again here (zero-phase, 6 Hz). For the RAW output the app removes the
 //      offset (20 Hz high-pass), full-wave rectifies and low-passes at 6 Hz.
-//      RAW EMG holds energy up to ~450 Hz, so at 250 samples/s it is aliased;
-//      use ENV with this recorder.
+//      RAW EMG holds energy up to ~450 Hz, so at 250 samples/s it is aliased.
+//      ESP32 firmware 1.2 and later samples the EMG at 2 kHz and, with the
+//      switch on RAW, sends the average rectified value (ARV) of each frame
+//      after a 20-450 Hz band-pass (signal 'arv'); the app then only
+//      low-passes it at 6 Hz, as for ENV.
 //   3. Resting baseline: the quietest 0.5 s of the envelope (mean mu, SD sd).
 //   4. Activity (on/off): envelope above mu + 3 SD (Hodges & Bui 1996), and at
 //      least 10 % of the channel's dynamic range above mu so sensor noise alone
@@ -27,7 +30,7 @@ import { lowpass, meanSd } from './gait.js';
 export const MUSCLES = ['Tibialis anterior', 'Gastrocnemius (medial)', 'Gastrocnemius (lateral)', 'Soleus', 'Peroneus longus', 'Rectus femoris', 'Vastus lateralis', 'Hamstrings', 'Other'];
 
 export const EMG_DEFAULTS = {
-  signal: 'env', // 'env' (MyoWare ENV, the default switch position) or 'raw'
+  signal: 'env', // 'env' (MyoWare ENV), 'raw' (RAW sampled per frame) or 'arv' (RAW rectified on the ESP32 at 2 kHz)
   lowpassHz: 6,
   baselineS: 0.5,
   k: 3, // threshold SDs above rest
@@ -113,7 +116,7 @@ export function analyzeEmg(t, channels, fs, strides, opts = {}) {
   const ref = opts.adcRefV || 3.3;
   const P = 101;
   const out = { fs, signal: o.signal, channels: [], cci: [], warnings: [] };
-  if (o.signal === 'raw' && fs < 900) out.warnings.push(`RAW EMG needs about 1000 samples per second and this stream has ${fs.toFixed(0)}; it is aliased. Set the MyoWare OUTPUT switch to ENV and the panel's EMG signal to ENV.`);
+  if (o.signal === 'raw' && fs < 900) out.warnings.push(`RAW EMG needs about 1000 samples per second and this stream has ${fs.toFixed(0)}; it is aliased. Flash ESP32 firmware 1.2 or later, which samples the EMG at 2 kHz and rectifies RAW on the board, or set the MyoWare OUTPUT switch and the panel's EMG signal to ENV.`);
   const t0 = t[0];
   for (const { ch, counts, muscle } of channels) {
     const volts = Float64Array.from(counts, (c) => (c * ref) / 1023);

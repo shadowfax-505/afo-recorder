@@ -153,6 +153,17 @@ What changes against the both-shanks pipeline below, and why:
 
 The static calibration is the quiet stand at the start of each recording (both sensors still for at least 1 s; stand 5 s): it sets each sensor's gyro offset and its "upright" reference. Each sensor's flexion axis comes from its own gyro during the walk (PCA), so the sensors need no exact alignment on the leg. Firmware 1.1 raises the gyro range to ±1000 °/s because a foot in swing can pass ±500 °/s; the app warns if either gyro clips. `host/tests/gait.test.mjs` checks this layout on a simulated shank + foot walk at 50, 100 and 250 Hz (ankle angle RMS under 1.5–2°, foot stride length within 3 %); the simulated foot is perfectly still in mid-stance, so real walks will be worse, and nothing here has been compared with motion capture yet.
 
+#### EMG sampling (ESP32 firmware 1.2, from 12 Nov 2026)
+
+Firmware 1.1 read each EMG jack once per 250 Hz frame. That is fine for the MyoWare **ENV** output, but **RAW** EMG holds energy up to about 450 Hz and aliases at 250 Hz. Firmware 1.2 samples the EMG on its own 2 kHz timer (8 ADC samples per frame) and sends one value per frame:
+
+| MyoWare OUTPUT switch | Panel "EMG signal" | Board (`g` command) | Frame value | App |
+|---|---|---|---|---|
+| ENV (default) | ENV | `g0`, info `emg_proc: "avg"` | mean of the 8 samples, 10-bit counts, 3.3 V full scale | 6 Hz zero-phase low-pass |
+| RAW | RAW | `g1`, info `emg_proc: "arv"` | 20 Hz 4th-order high-pass, 450 Hz low-pass, full-wave rectified, mean of the 8 samples (ARV), counts × 0.8244 / 1023 V | 6 Hz zero-phase low-pass |
+
+The app sends `g0`/`g1` itself when you change the panel's EMG signal, and the info frame carries `emg_hz` (2000), `emg_proc` and the matching `adc_ref_v`, so recordings keep the right scale. The 8-sample mean has zeros at 250, 500 and 750 Hz, so almost nothing folds back below the frame Nyquist. `host/tests/emgdsp.test.mjs` runs the firmware's filter code (`emgdsp.h`, compiled with g++) on simulated RAW EMG: the envelope error is about 9 % against the true envelope, against about 18 % for one sample per frame. Use RAW when you want the band-passed signal; ENV still works and needs nothing new.
+
 ### Both shanks (the original layout)
 
 **Sensor placement.** One IMU on each shank, just above the outer ankle bone, as in Fig. 1 of the first paper. Pick which IMU is on which leg in the panel (the owner's physical labels are the reverse of the app's, see Wiring). Start each trial by standing still for about 2 s.
@@ -195,7 +206,7 @@ The tests in `host/tests/gait.test.mjs` check the pipeline against synthetic sha
 
 ## Serial protocol
 
-Commands are single ASCII lines: `?` info, `s` binary stream, `p` CSV stream, `x` stop, `r<hz>` rate, `e<mask>` EMG jacks (bit n = An), `i` rescan IMUs. The board streams to whichever port sent the command. Binary frames are `A5 5A type len payload crc8`; the layout is documented in [`frame.h`](firmware/mega_myoware_stream/frame.h).
+Commands are single ASCII lines: `?` info, `s` binary stream, `p` CSV stream, `x` stop, `r<hz>` rate, `e<mask>` EMG jacks (bit n = An), `i` rescan IMUs, and on the ESP32 standalone firmware 1.2 `g0`/`g1` EMG processing for the ENV/RAW output. The board streams to whichever port sent the command. Binary frames are `A5 5A type len payload crc8`; the layout is documented in [`frame.h`](firmware/mega_myoware_stream/frame.h).
 
 ## Tests
 
@@ -204,6 +215,8 @@ node --test designs/mega-myoware-shield-mpu6050/host/tests/protocol.test.mjs   #
 node --test designs/mega-myoware-shield-mpu6050/host/tests/gait.test.mjs
 node --test designs/mega-myoware-shield-mpu6050/host/tests/hmm.test.mjs
 node --test designs/mega-myoware-shield-mpu6050/host/tests/wifi.test.mjs
+node --test designs/mega-myoware-shield-mpu6050/host/tests/emg.test.mjs
+node --test designs/mega-myoware-shield-mpu6050/host/tests/emgdsp.test.mjs     # needs g++
 node designs/mega-myoware-shield-mpu6050/host/tests/webapp.e2e.mjs             # needs Playwright + Chromium
 ```
 

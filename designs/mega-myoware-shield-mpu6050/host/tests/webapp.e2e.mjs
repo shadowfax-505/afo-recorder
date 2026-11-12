@@ -132,7 +132,7 @@ try {
     await gp.fill('#rec-name', 'e2e gait');
     await gp.click('#record');
     // the demo stands for 1.5 s, then walks 12 strides of ~1.1 s
-    await gp.waitForTimeout(11000);
+    await gp.waitForTimeout(14000);
     const tileVal = (host, label) =>
       gp.evaluate(
         ([h, l]) => {

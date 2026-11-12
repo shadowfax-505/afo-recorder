@@ -6,6 +6,10 @@
 // 1.1 (2026-11-10): fixes the duplicated scanBus() header that stopped the
 // 8 Nov sketch compiling; gyro range ±1000 °/s (was ±500) so the foot sensor
 // does not clip in swing. The app reads the scale from the info frame.
+// 1.2 (2026-11-12): EMG is sampled at 2 kHz on its own timer, not once per
+// 250 Hz frame, so the MyoWare RAW output no longer aliases. Each frame
+// carries the mean of the 8 samples (ENV, "g0", default) or, for RAW ("g1"),
+// the average rectified value after a 20-450 Hz band-pass (see emgdsp.h).
 // Streams data over WebSocket (ws://afo-mega.local/ws) and USB Serial to the web app.
 //
 // Wiring:
@@ -35,9 +39,11 @@
 #include <Preferences.h>
 #include <esp_http_server.h>
 #include <Wire.h>
+#include <esp_timer.h>
 #include "frame.h"
+#include "emgdsp.h"
 
-#define FW_VERSION "esp32-stream-1.1"
+#define FW_VERSION "esp32-stream-1.2"
 #define PIN_I2C0_SDA 21
 #define PIN_I2C0_SCL 22
 #define PIN_I2C1_SDA 18
@@ -77,6 +83,14 @@ uint32_t dropped = 0;
 uint32_t framesSent = 0;
 uint32_t sendErrors = 0;
 uint32_t clients = 0;
+
+// EMG at 2 kHz (emgdsp.h). The timer task fills emgCh; loopTask takes one
+// value per channel per frame under emgMux.
+emgdsp::Channel emgCh[frame::MAX_EMG];
+emgdsp::Proc emgProc = emgdsp::PROC_AVG;
+portMUX_TYPE emgMux = portMUX_INITIALIZER_UNLOCKED;
+esp_timer_handle_t emgTimer = nullptr;
+volatile uint16_t emgLastRaw = 0;  // channel 0, for the status page
 
 String netInfo;
 char usbLine[96];
@@ -218,6 +232,38 @@ void scanImus() {
 
 // ---------- sampling ----------
 
+static void emgTick(void*) {
+  uint8_t mask = emgMask;
+  uint16_t raw[frame::MAX_EMG];
+  for (uint8_t ch = 0; ch < frame::MAX_EMG; ch++)
+    if (mask & (1 << ch)) raw[ch] = (uint16_t)analogRead(EMG_PINS[ch]);
+  if (mask & 1) emgLastRaw = raw[0];
+  portENTER_CRITICAL(&emgMux);
+  for (uint8_t ch = 0; ch < frame::MAX_EMG; ch++)
+    if (mask & (1 << ch)) emgCh[ch].add(raw[ch], emgProc);
+  portEXIT_CRITICAL(&emgMux);
+}
+
+void setEmg(uint8_t mask, emgdsp::Proc proc) {
+  portENTER_CRITICAL(&emgMux);
+  emgMask = mask;
+  emgProc = proc;
+  for (uint8_t ch = 0; ch < frame::MAX_EMG; ch++) emgCh[ch].reset();
+  portEXIT_CRITICAL(&emgMux);
+}
+
+void startEmgTimer() {
+  for (uint8_t ch = 0; ch < frame::MAX_EMG; ch++) {
+    analogSetPinAttenuation(EMG_PINS[ch], ADC_11db);
+    emgCh[ch].reset();
+  }
+  analogReadResolution(12);
+  esp_timer_create_args_t args = {};
+  args.callback = emgTick;
+  args.name = "emg2k";
+  if (esp_timer_create(&args, &emgTimer) == ESP_OK) esp_timer_start_periodic(emgTimer, emgdsp::TICK_US);
+}
+
 void setRate(uint16_t hz) {
   if (hz == 0 || hz > MAX_RATE_HZ) hz = MAX_RATE_HZ;
   rateHz = hz;
@@ -230,15 +276,13 @@ void takeSample(frame::Sample& s) {
   s.emgMask = emgMask;
   s.imuMask = imuMask;
   s.flags = 0;
-  for (uint8_t ch = 0; ch < frame::MAX_EMG; ch++) {
-    if (emgMask & (1 << ch)) {
-      uint32_t raw = analogRead(EMG_PINS[ch]);
-      // Scale 12-bit (0..4095) to 10-bit (0..1023) for standard protocol counts
-      s.emg[ch] = (uint16_t)(raw >> 2);
-    } else {
-      s.emg[ch] = 0;
-    }
-  }
+  float v[frame::MAX_EMG];
+  portENTER_CRITICAL(&emgMux);
+  for (uint8_t ch = 0; ch < frame::MAX_EMG; ch++) v[ch] = (emgMask & (1 << ch)) ? emgCh[ch].take() : 0;
+  emgdsp::Proc proc = emgProc;
+  portEXIT_CRITICAL(&emgMux);
+  // 0..1023 counts; the volts per 1023 counts are in the info frame (adc_ref_v).
+  for (uint8_t ch = 0; ch < frame::MAX_EMG; ch++) s.emg[ch] = (emgMask & (1 << ch)) ? emgdsp::toCounts(v[ch], proc) : 0;
   for (uint8_t k = 0; k < frame::MAX_IMU; k++) {
     if (!(imuMask & (1 << k)) || !imuBus[k]) continue;
     if (!mpuReadMotion(*imuBus[k], imuAddr[k], s.imu[k])) {
@@ -286,14 +330,21 @@ void queueWs(const uint8_t* data, size_t len) {
 }
 
 void sendInfo() {
-  char json[256];
-  snprintf(json, sizeof(json),
+  char json[320];
+  // emg_hz: ADC rate per EMG channel; emg_proc: avg (ENV) or arv (RAW, rectified on the board).
+  int n = snprintf(json, sizeof(json),
            "{\"fw\":\"%s\",\"port\":\"%s\",\"baud\":%lu,\"rate\":%u,\"max_rate\":%u,"
            "\"emg_mask\":%u,\"imu_mask\":%u,\"who\":[%u,%u],\"accel_lsb_per_g\":%u,"
-           "\"gyro_lsb_per_dps\":%s,\"adc_ref_v\":3.3,\"sent\":%lu,\"dropped\":%lu}",
+           "\"gyro_lsb_per_dps\":%s,\"adc_ref_v\":%s,\"emg_hz\":%lu,\"emg_proc\":\"%s\","
+           "\"sent\":%lu,\"dropped\":%lu}",
            FW_VERSION, "Wi-Fi", 115200UL, rateHz, MAX_RATE_HZ, emgMask, imuMask,
            imuWhoAmI[0], imuWhoAmI[1], ACCEL_LSB_PER_G, GYRO_LSB_PER_DPS,
+           emgdsp::refVolts(emgProc), (unsigned long)emgdsp::FS_HZ, emgdsp::name(emgProc),
            (unsigned long)sent, (unsigned long)dropped);
+  if (n < 0 || n > 255) {  // a frame payload is at most 255 bytes: drop the counters
+    char* tail = strstr(json, ",\"sent\"");
+    if (tail) strcpy(tail, "}");
+  }
 
   uint8_t buf[256 + frame::OVERHEAD];
   size_t len = frame::wrap(buf, frame::TYPE_INFO, (const uint8_t*)json, (uint8_t)strlen(json));
@@ -379,10 +430,14 @@ void handleCommand(const char* cmd) {
     }
     case 'e': {
       int m = atoi(cmd + 1);
-      if (m >= 0 && m < (1 << frame::MAX_EMG)) emgMask = (uint8_t)m;
+      if (m >= 0 && m < (1 << frame::MAX_EMG)) setEmg((uint8_t)m, emgProc);
       sendInfo();
       break;
     }
+    case 'g':  // g0: ENV output (mean), g1: RAW output (band-pass, rectify, mean)
+      setEmg(emgMask, atoi(cmd + 1) == 1 ? emgdsp::PROC_ARV : emgdsp::PROC_AVG);
+      sendInfo();
+      break;
     case 'i':
       scanImus();
       sendInfo();
@@ -445,7 +500,7 @@ static esp_err_t statusHandler(httpd_req_t* req) {
   html += netInfo;
   html += F("</p><p>Web app: <b>http://localhost:8000</b></p><pre>");
   html += "Mode: " + String(mode == MODE_BINARY ? "STREAMING BINARY" : mode == MODE_CSV ? "CSV" : "IDLE") + "\n";
-  html += "EMG A0 live: " + String(analogRead(34) >> 2) + "\n";
+  html += "EMG A0 live (12-bit, 2 kHz): " + String(emgLastRaw) + ", mode " + String(emgdsp::name(emgProc)) + "\n";
   html += "IMU Mask: " + String(imuMask) + " (IMU A 0x68: " + String(imuMask & 1 ? "FOUND" : "not found") +
           ", IMU B 0x69: " + String(imuMask & 2 ? "FOUND" : "not found") + ")\n";
   html += "Rate: " + String(rateHz) + " Hz\n";
@@ -553,9 +608,8 @@ void setup() {
   Serial.begin(115200);
   delay(100);
 
-  // Set ADC attenuation for 0 - 3.3V range
-  analogSetPinAttenuation(34, ADC_11db);
-  analogSetPinAttenuation(35, ADC_11db);
+  // ADC 0-3.3 V on all six EMG pins, sampled at 2 kHz by its own timer
+  startEmgTimer();
 
   // Initialize I2C Bus 0 (IMU A) on GPIO 21 / 22
   Wire.begin(PIN_I2C0_SDA, PIN_I2C0_SCL);

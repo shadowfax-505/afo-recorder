@@ -4,16 +4,16 @@ For the ESP32 standalone recorder with two MPU-6050s on one leg (IMU A on the sh
 
 ## What you need
 
-- ESP32 with firmware `esp32-stream-1.1` (gyro ±1000 °/s), charged LiPo, the web app on a laptop served from `localhost` (Wi-Fi does not work from the https copy).
+- ESP32 with firmware `esp32-stream-1.2` (gyro ±1000 °/s, EMG sampled at 2 kHz), charged LiPo, the web app on a laptop served from `localhost` (Wi-Fi does not work from the https copy).
 - Double-sided tape (toupee or electrode tape), a 3–5 cm elastic Velcro strap, and medical tape to hold cables.
 - A goniometer, a tape measure, floor tape, and a phone that can film slow motion (optional, for checking events).
 
 ## 1. Before the person arrives (5 min)
 
-1. Flash or confirm the firmware. On the serial monitor at 115200 the boot line must read `esp32-stream-1.1 ready. imu_mask=3 (IMU A: OK, IMU B: OK)`. If either IMU is missing, fix the wiring first.
+1. Flash or confirm the firmware. On the serial monitor at 115200 the boot line must read `esp32-stream-1.2 ready. imu_mask=3 (IMU A: OK, IMU B: OK)`. If either IMU is missing, fix the wiring first.
 2. Mark the walkway with floor tape: a **start line** and a **stop line exactly 10 m apart**, in a straight corridor with at least 1 m free beyond each line. Measure it with the tape measure, not by tiles.
 3. Connect the app over Wi-Fi, press **Stream**, and check the rate reads about 250 samples per second with 0 lost.
-4. In the gait panel set **Sensor layout: One leg: shank + foot**, **Shank sensor: IMU A (0x68)**, **Leg:** the leg wearing the sensors, **Walk distance: 10**, and type the person's name.
+4. In the gait panel set **Sensor layout: One leg: shank + foot**, **Shank sensor: IMU A (0x68)**, **Leg:** the leg wearing the sensors, **Walk distance: 10**, and type the person's name. Set **EMG signal** to match the MyoWare OUTPUT switch (ENV or RAW); the app tells the board which one to process.
 
 ## 2. Put the sensors on (5 min)
 

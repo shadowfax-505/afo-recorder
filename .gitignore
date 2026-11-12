@@ -3,3 +3,4 @@ __pycache__/
 *.pyc
 downloads/*.zip
 validation/**/usb-inventory.txt
+.pio/

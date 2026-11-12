@@ -15,10 +15,25 @@ const SERIES = ['--series-1', '--series-2', '--series-3', '--series-4', '--serie
 const GAIT_EVERY_MS = 1000;
 const GAIT_DEFAULTS = { emgSignal: 'env', muscles: { 0: 'Tibialis anterior', 1: 'Gastrocnemius (medial)' }, layout: 'shank-foot', limb: { shank: 'A', side: 'right' }, standingAnkleDeg: 0, sides: { A: 'right', B: 'left' }, distanceM: 0, windowS: 20, person: '', personStrideM: 0, segmenter: 'peaks' };
 
+// EMG signal the analysis sees. Boards that rectify RAW themselves (ESP32
+// fw 1.2+, emg_proc 'arv') send an envelope-like signal whatever the panel says.
+function emgSignal(s, scales) {
+  if (scales.emgProc === 'arv') return 'arv';
+  return s.emgSignal || 'env';
+}
+
+// Asks a 2 kHz-EMG board (ESP32 fw 1.2+) to process the switch position the panel names.
+function syncEmgProc() {
+  const info = st.info;
+  if (!info || !info.emg_hz) return;
+  const want = liveGait.settings.emgSignal === 'raw' ? 'arv' : 'avg';
+  if (info.emg_proc !== want) send(`g${want === 'arv' ? 1 : 0}`);
+}
+
 // Analysis options from the panel settings and the stream's scales.
 function gaitArgs(s, scales, emgMask = 0) {
   return {
-    emg: { mask: emgMask, adcRefV: scales.adcRefV, signal: s.emgSignal || 'env', muscles: s.muscles || {} },
+    emg: { mask: emgMask, adcRefV: scales.adcRefV, signal: emgSignal(s, scales), muscles: s.muscles || {} },
     layout: s.layout || 'bilateral',
     limb: s.limb || GAIT_DEFAULTS.limb,
     sides: s.sides,
@@ -273,6 +288,7 @@ const liveGait = new GaitPanel($('live-gait'), {
   onChange: (s) => {
     prefs.set('gait', s);
     st.gaitDue = 0;
+    if (!st.recorder) syncEmgProc();
   },
 });
 
@@ -464,6 +480,7 @@ async function connect(transport) {
   }
   const wantMask = prefs.get('emgMask', 1);
   if (wantMask !== info.emg_mask) send(`e${wantMask}`);
+  syncEmgProc();
   const wantRate = prefs.get('rate', 0);
   if (wantRate) send(`r${wantRate}`);
   clock.reset();

@@ -230,7 +230,7 @@ export class GaitPanel {
   // mean envelope over the gait cycle.
   buildEmg(opts) {
     this.settings.muscles = { ...(this.settings.muscles || {}) };
-    const sig = el('select', { id: `${opts.idPrefix}-emg-signal` }, el('option', { value: 'env' }, 'ENV (MyoWare envelope, default)'), el('option', { value: 'raw' }, 'RAW (needs ~1000 samples/s)'));
+    const sig = el('select', { id: `${opts.idPrefix}-emg-signal` }, el('option', { value: 'env' }, 'ENV (MyoWare envelope, default)'), el('option', { value: 'raw' }, 'RAW (ESP32 firmware 1.2+ filters it at 2 kHz)'));
     sig.value = this.settings.emgSignal || 'env';
     sig.addEventListener('change', () => {
       this.settings.emgSignal = sig.value;
