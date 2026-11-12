@@ -210,5 +210,8 @@ export function scalesFromInfo(info) {
     accelLsbPerG: (info && info.accel_lsb_per_g) || 8192,
     gyroLsbPerDps: (info && info.gyro_lsb_per_dps) || 65.5,
     adcRefV: (info && info.adc_ref_v) || 5.0,
+    // ESP32 fw 1.2+: EMG sampled at emg_hz; 'arv' = RAW band-passed and rectified on the board.
+    emgHz: (info && info.emg_hz) || 0,
+    emgProc: (info && info.emg_proc) || '',
   };
 }

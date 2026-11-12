@@ -126,7 +126,7 @@ Recordings live in that browser's storage on that computer. Use **Download backu
 
 ### CSV columns
 
-`time_s` (board clock, from the first sample), `seq` (sample counter; a jump means samples were lost on the link), `flags` (bit 0 / bit 1 = IMU A / B read failed), then for each enabled jack `A<n>_counts` and `A<n>_volts` (counts × 5 / 1023), then for each IMU `ax ay az` in g (±8 g range from firmware 1.1, ±4 g in 1.0) and `gx gy gz` in °/s (±500 °/s range).
+`time_s` (board clock, from the first sample), `seq` (sample counter; a jump means samples were lost on the link), `flags` (bit 0 / bit 1 = IMU A / B read failed), then for each enabled jack `A<n>_counts` and `A<n>_volts` (counts × 5 / 1023), then for each IMU `ax ay az` in g (±8 g range from firmware 1.1, ±4 g in 1.0) and `gx gy gz` in °/s (±500 °/s range on the Mega; ±1000 °/s on the ESP32 standalone firmware 1.1).
 
 ## Gait analysis
 
@@ -135,6 +135,36 @@ The **Gait analysis** panel (Live tab and each recording) implements the pipelin
 - Quiguanas-López et al., *Feasibility of gait analysis for children with cerebral palsy using inertial measurement units*, Results in Engineering 29 (2026) 109173: two MPU-6050s above the lateral malleoli at 100 Hz, Python gaitmap pipeline, spatio-temporal parameters by its Eqs. 1–4.
 - Carcreff et al., *What is the best configuration of wearable sensors to measure spatiotemporal gait parameters in children with cerebral palsy?*, Sensors 18 (2018) 394: the "Shanks" event detection (Salarian et al.) and the "Feet" de-drifted double integration (Mariani et al.).
 - Küderle et al., *Gaitmap — an open ecosystem for IMU-based human gait analysis and algorithm benchmarking*, IEEE OJEMB 5 (2024) 163.
+
+### One leg, shank + foot (ESP32 standalone, from 10 Nov 2026)
+
+The current setup has both IMUs on **one leg**: IMU A on the shank, IMU B on the foot, read directly by the ESP32 ([`firmware/esp32_standalone_stream`](firmware/esp32_standalone_stream), 250 Hz over Wi-Fi). Pick **Sensor layout → One leg: shank + foot** in the panel (the default). The step-by-step data collection and calibration protocol is in [`docs/shank-foot-protocol.md`](docs/shank-foot-protocol.md).
+
+What changes against the both-shanks pipeline below, and why:
+
+| Quantity | Both shanks (Quiguanas-López 2026) | One leg, shank + foot (now) | Basis |
+|---|---|---|---|
+| HS, TO, stride/stance/swing (Eqs. 1–3) | shank gyro, Salarian rules | **unchanged**, from the shank | Carcreff 2018: shank-based events were the most robust in children with CP (GMFCS II–III) |
+| Stride length and velocity per stride | shank, de-drifted integration (biased: the shank is not still at mid-stance) | **foot**, de-drifted integration between foot-flat instants, where the foot really is still | Carcreff 2018 "Feet" config (Mariani 2010): lowest stride-length error in most groups; shank-only was "not appropriate" (about 11–14 % bias) |
+| Ankle angle (dorsiflexion +) | not possible | foot tilt − shank tilt, each from its own gyro about its own flexion axis, gravity-corrected at every foot-flat, 0° = quiet standing (+ goniometer value) | Seel, Raisch & Schauer 2014: about 1–2° RMS for the ankle with two IMUs on adjacent segments |
+| Ankle features per stride | – | angle at heel strike and toe-off, peak stance dorsiflexion, push-off plantarflexion, swing dorsiflexion (foot clearance), range; foot angle at strike (heel- vs toe-first) and at toe-off; mean ± SD curve over the cycle | – |
+| Step time, double support, symmetry | from both legs | **not available** (needs the other leg); double support shown as an estimate, 2 × (stance % − 50), which assumes the other leg mirrors this one | – |
+| Eq. 4, gait speed, cadence, person stride | | unchanged | |
+
+The static calibration is the quiet stand at the start of each recording (both sensors still for at least 1 s; stand 5 s): it sets each sensor's gyro offset and its "upright" reference. Each sensor's flexion axis comes from its own gyro during the walk (PCA), so the sensors need no exact alignment on the leg. Firmware 1.1 raises the gyro range to ±1000 °/s because a foot in swing can pass ±500 °/s; the app warns if either gyro clips. `host/tests/gait.test.mjs` checks this layout on a simulated shank + foot walk at 50, 100 and 250 Hz (ankle angle RMS under 1.5–2°, foot stride length within 3 %); the simulated foot is perfectly still in mid-stance, so real walks will be worse, and nothing here has been compared with motion capture yet.
+
+#### EMG sampling (ESP32 firmware 1.2, from 12 Nov 2026)
+
+Firmware 1.1 read each EMG jack once per 250 Hz frame. That is fine for the MyoWare **ENV** output, but **RAW** EMG holds energy up to about 450 Hz and aliases at 250 Hz. Firmware 1.2 samples the EMG on its own 2 kHz timer (8 ADC samples per frame) and sends one value per frame:
+
+| MyoWare OUTPUT switch | Panel "EMG signal" | Board (`g` command) | Frame value | App |
+|---|---|---|---|---|
+| ENV (default) | ENV | `g0`, info `emg_proc: "avg"` | mean of the 8 samples, 10-bit counts, 3.3 V full scale | 6 Hz zero-phase low-pass |
+| RAW | RAW | `g1`, info `emg_proc: "arv"` | 20 Hz 4th-order high-pass, 450 Hz low-pass, full-wave rectified, mean of the 8 samples (ARV), counts × 0.8244 / 1023 V | 6 Hz zero-phase low-pass |
+
+The app sends `g0`/`g1` itself when you change the panel's EMG signal, and the info frame carries `emg_hz` (2000), `emg_proc` and the matching `adc_ref_v`, so recordings keep the right scale. The 8-sample mean has zeros at 250, 500 and 750 Hz, so almost nothing folds back below the frame Nyquist. `host/tests/emgdsp.test.mjs` runs the firmware's filter code (`emgdsp.h`, compiled with g++) on simulated RAW EMG: the envelope error is about 9 % against the true envelope, against about 18 % for one sample per frame. Use RAW when you want the band-passed signal; ENV still works and needs nothing new.
+
+### Both shanks (the original layout)
 
 **Sensor placement.** One IMU on each shank, just above the outer ankle bone, as in Fig. 1 of the first paper. Pick which IMU is on which leg in the panel (the owner's physical labels are the reverse of the app's, see Wiring). Start each trial by standing still for about 2 s.
 
@@ -176,7 +206,7 @@ The tests in `host/tests/gait.test.mjs` check the pipeline against synthetic sha
 
 ## Serial protocol
 
-Commands are single ASCII lines: `?` info, `s` binary stream, `p` CSV stream, `x` stop, `r<hz>` rate, `e<mask>` EMG jacks (bit n = An), `i` rescan IMUs. The board streams to whichever port sent the command. Binary frames are `A5 5A type len payload crc8`; the layout is documented in [`frame.h`](firmware/mega_myoware_stream/frame.h).
+Commands are single ASCII lines: `?` info, `s` binary stream, `p` CSV stream, `x` stop, `r<hz>` rate, `e<mask>` EMG jacks (bit n = An), `i` rescan IMUs, and on the ESP32 standalone firmware 1.2 `g0`/`g1` EMG processing for the ENV/RAW output. The board streams to whichever port sent the command. Binary frames are `A5 5A type len payload crc8`; the layout is documented in [`frame.h`](firmware/mega_myoware_stream/frame.h).
 
 ## Tests
 
@@ -185,6 +215,8 @@ node --test designs/mega-myoware-shield-mpu6050/host/tests/protocol.test.mjs   #
 node --test designs/mega-myoware-shield-mpu6050/host/tests/gait.test.mjs
 node --test designs/mega-myoware-shield-mpu6050/host/tests/hmm.test.mjs
 node --test designs/mega-myoware-shield-mpu6050/host/tests/wifi.test.mjs
+node --test designs/mega-myoware-shield-mpu6050/host/tests/emg.test.mjs
+node --test designs/mega-myoware-shield-mpu6050/host/tests/emgdsp.test.mjs     # needs g++
 node designs/mega-myoware-shield-mpu6050/host/tests/webapp.e2e.mjs             # needs Playwright + Chromium
 ```
 

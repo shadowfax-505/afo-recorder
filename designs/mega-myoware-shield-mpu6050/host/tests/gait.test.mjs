@@ -140,3 +140,64 @@ test('a person’s measured stride length sets length and speed, and scales the 
   const csv = stridesCsv(analyzeSource(src, { personStrideM: 0.9 }), 'p').trim().split('\n');
   assert.ok(csv[1].endsWith('stride_length_person_m,stride_speed_person_m_s'));
 });
+
+// One leg, IMU A on the shank and IMU B on the foot (the ESP32 standalone
+// setup). The simulated foot is flat and still through mid-stance, so the
+// foot-flat zero-velocity update and the gravity reference are exact here;
+// on a real leg expect a few degrees and a few centimetres more error.
+for (const [fs, tolDeg] of [
+  [250, 1.5],
+  [100, 1.5],
+  [50, 2],
+]) {
+  test(`shank + foot on one leg at ${fs} Hz: events, foot stride length, ankle angle`, () => {
+    const sim = simulateWalk({ fs, strides: 14, jitter: 0.06, sl: 1.15, seed: fs, limb: 'shank-foot' });
+    const src = { n: sim.t.length, t: (i) => sim.t[i], v: (k, i) => sim.imu[Math.floor((k - 6) / 6)][(k - 6) % 6][i] };
+    const r = analyzeSource(src, { layout: 'shank-foot', limb: { shank: 'A', side: 'left' }, distanceM: 0, gyroRangeDps: 1000 });
+    assert.deepEqual(Object.keys(r.legs), ['left']);
+    const leg = r.legs.left;
+    assert.equal(leg.layout, 'shank-foot');
+    assert.deepEqual(leg.warnings, []);
+    assert.ok(leg.strides.length >= sim.truth[0].ic.length - 3);
+    for (const s of leg.strides) {
+      assert.ok(nearest(sim.truth[0].ic, s.hs) * 1000 < 12, `HS ${s.hs}`);
+      assert.ok(nearest(sim.truth[0].to, s.to) * 1000 < 12, `TO ${s.to}`);
+    }
+    const lengths = leg.strides.map((s) => s.length).filter(Number.isFinite);
+    assert.ok(lengths.length >= leg.strides.length - 1);
+    for (const l of lengths) assert.ok(Math.abs(l - sim.sl) / sim.sl < 0.03, `foot stride length ${l}`);
+    // ankle angle against the true one, sample by sample
+    let se = 0;
+    let n = 0;
+    for (let i = 0; i < sim.t.length; i++)
+      if (Number.isFinite(leg.ankle[i])) {
+        se += (leg.ankle[i] - sim.ankle(sim.t[i])) ** 2;
+        n++;
+      }
+    assert.ok(n > 8 * fs, `ankle angle covers ${n} samples`);
+    assert.ok(Math.sqrt(se / n) < tolDeg, `ankle RMS ${Math.sqrt(se / n)}`);
+    for (const s of leg.strides) if (Number.isFinite(s.ankleIc)) assert.ok(Math.abs(s.ankleIc - sim.ankle(s.hs)) < tolDeg + 1, `ankle at IC ${s.ankleIc}`);
+    const c = r.combined;
+    assert.ok(c.anklePushOffPf.mean < -20 && c.footIc.mean > 10, `push-off ${c.anklePushOffPf.mean}, foot at IC ${c.footIc.mean}`);
+    assert.ok(Math.abs(c.doubleSupportEstPct - 2 * (sim.stancePct - 50)) < 3);
+    assert.ok(Number.isNaN(c.stepT.mean), 'no step time from one leg');
+    assert.ok(leg.ankleCurve.n >= leg.strides.length - 3 && leg.ankleCurve.mean.length === 101);
+    // the goniometer value shifts every angle
+    const r2 = analyzeSource(src, { layout: 'shank-foot', limb: { shank: 'A', side: 'left' }, opts: { standingAnkleDeg: 5 } });
+    assert.ok(Math.abs(r2.combined.ankleIc.mean - c.ankleIc.mean - 5) < 1e-9);
+    const csv = stridesCsv(r, 'sf');
+    assert.match(csv.split('\n')[1], /ankle_ic_deg,.*foot_to_deg$/);
+  });
+}
+
+test('shank + foot with IMU B on the shank, and with one IMU missing', () => {
+  const fs = 100;
+  const sim = simulateWalk({ fs, strides: 10, sl: 1.0, seed: 11, limb: 'shank-foot' });
+  // swap: IMU A carries the foot, IMU B the shank
+  const src = { n: sim.t.length, t: (i) => sim.t[i], v: (k, i) => sim.imu[1 - Math.floor((k - 6) / 6)][(k - 6) % 6][i] };
+  const r = analyzeSource(src, { layout: 'shank-foot', limb: { shank: 'B', side: 'right' } });
+  assert.ok(r.legs.right.strides.length >= 8);
+  assert.ok(Math.abs(r.combined.sensorLength.mean - 1.0) < 0.03);
+  const one = analyzeSource(src, { layout: 'shank-foot', imuMask: 1 });
+  assert.match(one.warnings.join(' '), /needs both IMUs/);
+});

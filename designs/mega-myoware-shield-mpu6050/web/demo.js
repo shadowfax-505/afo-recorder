@@ -3,8 +3,8 @@
 import { encodeData, encodeText, popcount, TYPE_INFO } from './protocol.js';
 import { makeScenario } from './gaitsim.js';
 
-// IMU A on the right shank, IMU B on the left: stand 3 s, walk 12 strides, repeat.
-const WALK = makeScenario({ standS: 3, strides: 12, T: 1.1, jitter: 0.04, sl: 1.2, seed: 11 });
+// One leg: IMU A on the shank, IMU B on the foot: stand 3 s, walk 12 strides, repeat.
+const WALK = makeScenario({ standS: 3, strides: 12, T: 1.1, jitter: 0.04, sl: 1.2, seed: 11, limb: 'shank-foot' });
 
 export class DemoTransport {
   constructor({ baud = 115200, dropRate = 0 } = {}) {
@@ -105,14 +105,14 @@ export class DemoTransport {
 
   sample() {
     const t = this.us / 1e6;
-    const phase = (t % 1.1) / 1.1; // ~55 strides per minute
-    const burst = Math.exp(-(((phase - 0.3) / 0.09) ** 2));
+    const tw = t % WALK.period;
+    // A0 = tibialis anterior, A1 = gastrocnemius, timed by the simulated walk;
+    // the other jacks echo them at lower gain.
     const emg = [];
     for (let ch = 0; ch < 6; ch++) {
-      const level = 60 + 520 * burst * (1 - ch * 0.12) * (0.85 + 0.3 * Math.random());
-      emg.push(Math.max(0, Math.min(1023, Math.round(level + 15 * (Math.random() - 0.5)))));
+      const level = WALK.emgAt(tw, ch % 2) * (1 - Math.floor(ch / 2) * 0.25) * (0.9 + 0.2 * Math.random());
+      emg.push(Math.max(0, Math.min(1023, Math.round(level + 12 * (Math.random() - 0.5)))));
     }
-    const tw = t % WALK.period;
     const imu = [0, 1].map((k) => {
       const { acc, gyr } = WALK.at(tw, k);
       return [

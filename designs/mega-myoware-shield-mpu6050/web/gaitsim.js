@@ -49,6 +49,19 @@ function buildTemplate() {
 
 const TPL = buildTemplate();
 
+// Foot pitch (degrees, toe up positive) over one cycle, phase 0 = initial
+// contact: heel-first contact with the toes up, flat through mid-stance,
+// heel rise and push-off (toes down) peaking just after toe-off, toes back up
+// in swing. Zero at mid-stance (phase 0.3), which is also the standing pose.
+function footTemplate() {
+  const raw = (p) => 18 * gauss(p, 0.0, 0.045) - 50 * gauss(p, 0.64, 0.065) + 6 * gauss(p, 0.85, 0.06);
+  const f = new Float64Array(N + 1);
+  const off = raw(0.3);
+  for (let i = 0; i <= N; i++) f[i] = raw(i / N) - off;
+  return f;
+}
+const FOOT = footTemplate();
+
 function interp(tab, p) {
   const x = (p - Math.floor(p)) * N;
   const i = Math.floor(x);
@@ -82,7 +95,9 @@ function rotation(r) {
 }
 
 // strides: number of strides per leg; T: mean stride time; jitter: relative SD.
-export function makeScenario({ standS = 2.5, strides = 12, T = 1.1, jitter = 0, sl = 1.1, seed = 7, mounts = null } = {}) {
+// limb: null = one IMU on each shank (IMU A right, IMU B left);
+// 'shank-foot' = both on one leg, IMU A on the shank and IMU B on the foot.
+export function makeScenario({ standS = 2.5, strides = 12, T = 1.1, jitter = 0, sl = 1.1, seed = 7, mounts = null, limb = null } = {}) {
   const r = rng(seed);
   const durs = [];
   for (let k = 0; k < strides; k++) durs.push(T * (1 + jitter * 2 * (r() - 0.5) * Math.sqrt(3)));
@@ -122,10 +137,12 @@ export function makeScenario({ standS = 2.5, strides = 12, T = 1.1, jitter = 0, 
 
   // Sensor readings of leg k (0 = IMU A, 1 = IMU B) at time t: acc in g, gyro in °/s.
   function at(t, k) {
-    const { p, rate } = phase(t, k);
-    const thDeg = interp(TPL.th, p);
+    const onFoot = limb === 'shank-foot' && k === 1;
+    const { p, rate } = phase(t, limb ? 0 : k);
+    const tab = onFoot ? FOOT : TPL.th;
+    const thDeg = interp(tab, p);
     const eps = 1 / N;
-    const wDps = rate ? ((interp(TPL.th, p + eps) - interp(TPL.th, p - eps)) / (2 * eps)) * rate : 0;
+    const wDps = rate ? ((interp(tab, p + eps) - interp(tab, p - eps)) / (2 * eps)) * rate : 0;
     const [ax, az] = ankleAcc(p, rate);
     // body-frame specific force: R(-θ) · (a + g·up)
     const th = (thDeg * Math.PI) / 180;
@@ -160,7 +177,26 @@ export function makeScenario({ standS = 2.5, strides = 12, T = 1.1, jitter = 0, 
     return { ic, to };
   });
 
-  return { at, truth, period, durs, sl, stancePct: 100 * (TPL.pTo - TPL.pIc), walkStart: standS, walkEnd };
+  // true ankle angle (dorsiflexion positive) of the one-leg layout at time t
+  function ankle(t) {
+    const { p } = phase(t, 0);
+    return interp(FOOT, p) - interp(TPL.th, p);
+  }
+  if (limb) truth[1] = truth[0];
+
+  // MyoWare ENV output (ADC counts) of two muscles on leg 0, phase 0 = heel
+  // strike: tibialis anterior active around heel strike and in swing,
+  // gastrocnemius in mid/terminal stance peaking at about 45 % of the cycle.
+  // Rest level 40 counts when standing or between bursts.
+  function emgAt(t, ch) {
+    const { p, rate } = phase(t, 0);
+    if (!rate) return 40;
+    const q = p - Math.floor(p);
+    if (ch === 0) return 40 + 420 * gauss(q, 0.03, 0.05) + 220 * gauss(q, 0.8, 0.09);
+    return 40 + 560 * gauss(q, 0.45, 0.07);
+  }
+
+  return { at, truth, ankle, emgAt, period, durs, sl, stancePct: 100 * (TPL.pTo - TPL.pIc), walkStart: standS, walkEnd };
 }
 
 // Samples a scenario on a grid with sensor noise and gyro offset.
