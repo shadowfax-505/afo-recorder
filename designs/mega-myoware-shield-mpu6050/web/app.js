@@ -1,4 +1,4 @@
-import { FrameParser, SampleClock, scalesFromInfo, IMU_AXES, IMU_NAMES, MAX_EMG } from './protocol.js';
+import { FrameParser, SampleClock, RawClock, scalesFromInfo, popcount, IMU_AXES, IMU_NAMES, MAX_EMG } from './protocol.js';
 import { StripChart } from './chart.js';
 import * as store from './store.js';
 import { DemoTransport } from './demo.js';
@@ -6,6 +6,7 @@ import { SerialTransport, serialSupported } from './serial.js';
 import { WifiTransport, DEFAULT_HOST } from './wifi.js';
 import { analyzeSource, stridesCsv } from './gait.js';
 import { GaitPanel } from './gaitui.js';
+import { CoherencePanel } from './coherenceui.js';
 
 const $ = (id) => document.getElementById(id);
 const KEY_COUNT = 18; // A0..A5, IMU A ax..gz, IMU B ax..gz
@@ -108,6 +109,11 @@ class Recorder {
     this.lastSeq = 0;
     this.lastT = 0;
     this.n = 0;
+    this.raw = new store.RawBuilder(4096); // raw 2 kHz EMG, when the board streams it
+    this.rawIdx = 0;
+    this.rawSi0 = null;
+    this.rawN = 0;
+    this.rawLast = 0;
     this.chain = store.putRecording(meta).then((id) => {
       this.meta.id = id;
     });
@@ -128,6 +134,19 @@ class Recorder {
     if (this.builder.full) this.flush();
   }
 
+  // One 'E' frame: first = unwrapped index of its first sample, off = stream
+  // time (s) of raw sample index 0.
+  addRaw(first, r, hz, off) {
+    if (this.t0 === null) return; // wait for the first data frame: it sets time zero
+    if (this.rawSi0 === null) this.rawSi0 = first;
+    const pc = popcount(r.mask);
+    for (let i = 0; i < r.n; i++) this.raw.add(first + i - this.rawSi0, r.mask, r.rows, i * pc);
+    this.rawN += r.n;
+    this.rawLast = first + r.n - 1 - this.rawSi0;
+    this.meta.raw = { hz, mask: (this.meta.raw ? this.meta.raw.mask : 0) | r.mask, t0: off + this.rawSi0 / hz - this.t0, n: this.rawN, lost: this.rawLast + 1 - this.rawN };
+    if (this.raw.full) this.flush();
+  }
+
   summary() {
     this.meta.samples = this.n;
     this.meta.durationS = this.lastT;
@@ -135,6 +154,11 @@ class Recorder {
   }
 
   flush() {
+    if (this.raw.n) {
+      const rc = this.raw.take();
+      const ri = this.rawIdx++;
+      this.chain = this.chain.then(() => store.putRawChunk(this.meta.id, ri, rc)).catch((e) => showMessage(`Saving raw EMG failed: ${e.message}.`, true));
+    }
     if (!this.builder.n) return this.chain;
     const chunk = this.builder.take();
     const idx = this.idx++;
@@ -164,6 +188,7 @@ class Recorder {
 
 const live = new LiveBuffer(LIVE_CAPACITY);
 const clock = new SampleClock();
+const rawClock = new RawClock();
 const st = {
   transport: null,
   parser: null,
@@ -182,6 +207,8 @@ const st = {
   streamAskedAt: 0,
   streamRetried: false,
   gaitDue: 0,
+  rawOff: Infinity, // stream time (s) of raw sample index 0: the smallest estimate wins
+  rawRate: [],
 };
 
 // ---------- UI helpers ----------
@@ -384,6 +411,33 @@ function onSample(s) {
   if (st.recorder) st.recorder.add(t, seq, s);
 }
 
+// Raw 2 kHz EMG ('E' frames, ESP32 fw 1.3+). Each frame says when the board
+// drained its buffer; the newest sample in it was taken just before that. The
+// frame that waited least gives the best estimate of where sample 0 sits on
+// the stream clock, so the smallest estimate is kept.
+function onRaw(r) {
+  const restarts = rawClock.restarts;
+  const first = rawClock.step(r);
+  if (rawClock.restarts !== restarts) st.rawOff = Infinity;
+  const hz = st.scales.emgHz || 2000;
+  const us = clock.at(r.tUs);
+  if (us === null) return;
+  st.rawOff = Math.min(st.rawOff, us / 1e6 - (first + r.n - 1) / hz);
+  if (st.recorder) st.recorder.addRaw(first, r, hz, st.rawOff);
+}
+
+function syncRaw() {
+  const info = st.info;
+  const box = $('raw-emg');
+  const can = !!(info && info.emg_hz && 'emg_raw' in info);
+  box.disabled = !can || !!st.recorder;
+  $('raw-emg-box').hidden = !can;
+  if (!can) return;
+  const want = !!prefs.get('rawEmg', false);
+  box.checked = want;
+  if (!!info.emg_raw !== want) send(`w${want ? 1 : 0}`);
+}
+
 function waitForInfo(ms) {
   return new Promise((resolve) => {
     const timer = setTimeout(() => {
@@ -415,6 +469,7 @@ async function connect(transport) {
   setStatus('Connecting…');
   st.parser = new FrameParser({
     onSample,
+    onRaw,
     onInfo,
     onLog: (t) => log(t),
     onText: (t) => {
@@ -481,9 +536,13 @@ async function connect(transport) {
   const wantMask = prefs.get('emgMask', 1);
   if (wantMask !== info.emg_mask) send(`e${wantMask}`);
   syncEmgProc();
+  syncRaw();
   const wantRate = prefs.get('rate', 0);
   if (wantRate) send(`r${wantRate}`);
   clock.reset();
+  rawClock.reset();
+  st.rawOff = Infinity;
+  st.rawRate = [];
   live.clear();
   st.rateWindow = [];
   await send('s');
@@ -543,6 +602,12 @@ $('rate').addEventListener('keydown', (e) => {
   if (e.key === 'Enter') $('rate-apply').click();
 });
 $('rescan').addEventListener('click', () => send('i'));
+$('raw-emg').addEventListener('change', () => {
+  prefs.set('rawEmg', $('raw-emg').checked);
+  rawClock.reset();
+  st.rawOff = Infinity;
+  send(`w${$('raw-emg').checked ? 1 : 0}`);
+});
 $('window').value = String(st.window);
 $('window').addEventListener('change', () => {
   st.window = Number($('window').value);
@@ -582,7 +647,7 @@ async function startRecording() {
   $('record').classList.add('on');
   $('record-label').textContent = 'Stop';
   $('rec-elapsed').classList.add('on');
-  document.querySelectorAll('#emg-mask input, #rate, #rate-apply, #rescan').forEach((el) => (el.disabled = true));
+  document.querySelectorAll('#emg-mask input, #rate, #rate-apply, #rescan, #raw-emg').forEach((el) => (el.disabled = true));
 }
 
 async function stopRecording() {
@@ -593,10 +658,11 @@ async function stopRecording() {
   $('rec-elapsed').classList.remove('on');
   document.querySelectorAll('#emg-mask input, #rate, #rate-apply').forEach((el) => (el.disabled = false));
   $('rescan').disabled = !st.transport;
+  $('raw-emg').disabled = !(st.info && 'emg_raw' in st.info);
   if (!r) return;
   const meta = await r.stop();
   $('rec-name').value = '';
-  log(`saved "${meta.name}": ${meta.samples} samples, ${meta.durationS.toFixed(1)} s, ${meta.lost} lost`);
+  log(`saved "${meta.name}": ${meta.samples} samples, ${meta.durationS.toFixed(1)} s, ${meta.lost} lost${meta.raw ? `; raw EMG ${meta.raw.n} samples, ${meta.raw.lost} lost` : ''}`);
   await refreshList();
 }
 
@@ -616,6 +682,13 @@ function renderLive() {
     $('t-lost').textContent = clock.lost.toLocaleString();
     const crc = st.parser ? st.parser.stats.crcErrors : 0;
     $('t-lost-sub').textContent = `${total ? ((100 * clock.lost) / total).toFixed(2) : '0.00'} % · ${crc} corrupt frames`;
+    if (st.info && st.info.emg_raw) {
+      st.rawRate.push([now, rawClock.received]);
+      while (st.rawRate.length > 2 && now - st.rawRate[0][0] > 2000) st.rawRate.shift();
+      const [rt, rn] = st.rawRate[0];
+      const rhz = now - rt > 300 ? ((rawClock.received - rn) * 1000) / (now - rt) : 0;
+      $('raw-emg-stat').textContent = `${rhz.toFixed(0)} samples/s · ${rawClock.lost.toLocaleString()} lost`;
+    } else $('raw-emg-stat').textContent = '';
     if (st.lastSampleAt && now - st.lastSampleAt > 2000 && st.info) setStatus('No data for 2 s', 'error');
     else if (st.lastSampleAt) setStatus(`Streaming · ${st.transport.label}`, 'live');
     else if (st.streamAskedAt && now - st.streamAskedAt > 3000) {
@@ -711,6 +784,7 @@ async function openRecording(id) {
   document.querySelectorAll('#rec-rows tr').forEach((tr) => tr.setAttribute('aria-selected', 'false'));
   const meta = await store.getRecording(id);
   const data = await store.loadSamples(id);
+  const raw = meta.raw ? await store.loadRaw(id) : null;
   await refreshList();
   const zoom = (a, b) => {
     detail.t0 = a ?? 0;
@@ -719,7 +793,7 @@ async function openRecording(id) {
   };
   const charts = buildCharts($('d-charts'), zoom);
   applyMasks(charts, meta.emgMask, meta.imuMask);
-  detail = { meta, data, charts, src: recordingSource(meta, data), t0: 0, t1: data.n ? Math.max(data.t[data.n - 1], 0.001) : 1 };
+  detail = { meta, data, raw, charts, src: recordingSource(meta, data), t0: 0, t1: data.n ? Math.max(data.t[data.n - 1], 0.001) : 1 };
   const gait = new GaitPanel($('d-gait'), {
     live: false,
     idPrefix: 'dg',
@@ -739,7 +813,25 @@ async function openRecording(id) {
     if (detail && detail.gaitResult) download(`${safeName(detail.meta.name)}.gait.csv`, new Blob([stridesCsv(detail.gaitResult, detail.meta.name)], { type: 'text/csv' }));
   });
   detail.gait = gait;
+  const coh = new CoherencePanel($('d-coh'), {
+    idPrefix: 'dc',
+    settings: meta.coherence,
+    getContext: () => {
+      const legs = detail && detail.gaitResult ? Object.values(detail.gaitResult.legs) : [];
+      return { raw: detail.raw, rawMeta: detail.meta.raw, strides: legs.length ? legs[0].strides : [], zoom: [detail.t0, detail.t1] };
+    },
+    onChange: async (cs) => {
+      if (!detail || detail.coh !== coh) return;
+      detail.meta.coherence = cs;
+      await store.putRecording(detail.meta);
+    },
+    onCsv: (text) => download(`${safeName(detail.meta.name)}.coherence.csv`, new Blob([text], { type: 'text/csv' })),
+  });
+  coh.hidden = !(raw && raw.n);
+  detail.coh = coh;
+  $('d-raw-csv').hidden = !(raw && raw.n);
   if (meta.imuMask) runDetailGait();
+  if (raw && raw.n) coh.setChannels(meta.raw.mask, (gait.settings && gait.settings.muscles) || {});
   $('rec-detail').hidden = false;
   $('d-name').textContent = meta.name;
   const rate = data.n > 1 ? (data.n - 1) / (data.t[data.n - 1] || 1) : 0;
@@ -749,6 +841,7 @@ async function openRecording(id) {
     `${data.n.toLocaleString()} samples`,
     `${rate.toFixed(1)} Hz measured`,
     `${(meta.lost || 0).toLocaleString()} lost`,
+    ...(meta.raw ? [`raw EMG ${meta.raw.hz} Hz: ${meta.raw.n.toLocaleString()} samples, ${meta.raw.lost.toLocaleString()} lost`] : []),
     meta.source,
   ].join(' · ');
   $('d-notes').textContent = meta.notes || '';
@@ -762,6 +855,7 @@ function runDetailGait() {
     detail.gaitResult = analyzeSource(src, { imuMask: meta.imuMask, ...gaitArgs(s, meta.scales || scalesFromInfo(null), meta.emgMask) });
     gait.render(detail.gaitResult);
     gait.draw(detail.t0, detail.t1);
+    if (detail.coh && detail.raw && detail.raw.n) detail.coh.run(); // swing and stance windows follow the gait events
   } catch (e) {
     showMessage(`Gait analysis failed: ${e.message}`, true);
   }
@@ -772,6 +866,10 @@ function drawDetail() {
   const rate = detail.meta.rateHz || 100;
   drawCharts(detail.charts, detail.src, detail.t0, detail.t1, 3.5 / rate);
   if (detail.gait) detail.gait.draw(detail.t0, detail.t1);
+  if (detail.coh) {
+    if (detail.coh.settings.phase === 'zoom' && detail.raw && detail.raw.n) detail.coh.run();
+    else detail.coh.draw();
+  }
 }
 
 $('d-reset').addEventListener('click', () => {
@@ -832,9 +930,38 @@ $('d-csv').addEventListener('click', () => {
   if (detail) download(`${safeName(detail.meta.name)}.csv`, toCsv(detail.meta, detail.data));
 });
 
+// Raw 2 kHz EMG as its own CSV: time on the recording axis, sample index, counts.
+export function rawToCsv(meta, raw) {
+  const chans = [];
+  for (let ch = 0; ch < 6; ch++) if (meta.raw.mask & (1 << ch)) chans.push(ch);
+  const parts = [
+    [
+      `# ${meta.name}: raw EMG, ${meta.raw.hz} samples per second, 12-bit ADC counts (volts = counts * 3.3 / 4095 before calibration)`,
+      `# time_s is on the same axis as the main CSV; gaps in sample mean lost samples (${meta.raw.lost} lost)`,
+      ['time_s', 'sample', ...chans.map((ch) => `A${ch}_counts`)].join(','),
+    ].join('\n') + '\n',
+  ];
+  let buf = [];
+  for (let i = 0; i < raw.n; i++) {
+    const row = [(meta.raw.t0 + raw.si[i] / meta.raw.hz).toFixed(5), raw.si[i]];
+    for (const ch of chans) row.push(raw.v[i * 6 + ch]);
+    buf.push(row.join(','));
+    if (buf.length === 20000) {
+      parts.push(buf.join('\n') + '\n');
+      buf = [];
+    }
+  }
+  if (buf.length) parts.push(buf.join('\n') + '\n');
+  return new Blob(parts, { type: 'text/csv' });
+}
+
+$('d-raw-csv').addEventListener('click', () => {
+  if (detail && detail.raw && detail.raw.n) download(`${safeName(detail.meta.name)}.emg-raw.csv`, rawToCsv(detail.meta, detail.raw));
+});
+
 $('d-backup').addEventListener('click', () => {
   if (!detail) return;
-  const { meta, data } = detail;
+  const { meta, data, raw } = detail;
   const backup = {
     format: 'mega-myoware-recording',
     version: 1,
@@ -845,6 +972,7 @@ $('d-backup').addEventListener('click', () => {
     flags: Array.from(data.flags),
     emg: Array.from(data.emg),
     imu: Array.from(data.imu),
+    ...(raw && raw.n ? { raw: { n: raw.n, si: Array.from(raw.si), v: Array.from(raw.v) } } : {}),
   };
   download(`${safeName(meta.name)}.backup.json`, new Blob([JSON.stringify(backup)], { type: 'application/json' }));
 });
@@ -891,6 +1019,8 @@ $('import').addEventListener('change', async (e) => {
       imu: Int16Array.from(b.imu),
     };
     await store.putChunk(id, 0, chunk);
+    if (b.raw && b.raw.n) await store.putRawChunk(id, 0, { n: b.raw.n, si: Uint32Array.from(b.raw.si), v: Uint16Array.from(b.raw.v) });
+    else delete meta.raw;
     await store.putRecording({ ...meta, id, chunks: 1 });
     await refreshList();
     openRecording(id);

@@ -60,6 +60,10 @@
     <div class="group">
       <button id="rescan" disabled>Rescan IMUs</button>
     </div>
+    <div class="group" id="raw-emg-box" hidden>
+      <label class="field check" title="ESP32 firmware 1.3 or later: also stream and record every 2 kHz EMG sample, unprocessed. Needed for coherence and spectra. Use Wi-Fi; USB at 115200 baud is too slow. Set the MyoWare OUTPUT switch to RAW."><span>Raw 2 kHz EMG</span><input id="raw-emg" type="checkbox" disabled></label>
+      <span id="raw-emg-stat" class="hint"></span>
+    </div>
     <div class="group push">
       <label class="field">Window
         <select id="window"><option value="5">5 s</option><option value="10" selected>10 s</option><option value="30">30 s</option><option value="60">60 s</option></select>
@@ -114,6 +118,7 @@
         </div>
         <div class="actions">
           <button id="d-csv" class="primary">Export CSV</button>
+          <button id="d-raw-csv" hidden>Raw EMG CSV</button>
           <button id="d-backup">Download backup</button>
           <button id="d-rename">Rename</button>
           <button id="d-delete" class="danger">Delete</button>
@@ -121,6 +126,7 @@
       </div>
       <p class="hint">Drag across a chart to zoom, double-click to zoom out. <button id="d-reset" class="link">Show all</button></p>
       <div id="d-gait"></div>
+      <div id="d-coh"></div>
       <div id="d-charts" class="charts"></div>
     </div>
   </div>

@@ -312,3 +312,12 @@ td .tag { font: 10px var(--mono); color: var(--notice-ink); display: block; }
 .emg-gait .emg-title { font-size: 15px; font-weight: 600; margin-bottom: 2px; }
 .emg-gait .hint { max-width: 80ch; margin-bottom: 8px; }
 .emg-gait .field input[type=text] { width: 190px; }
+
+/* raw EMG toggle and coherence panel */
+.field.check { flex-direction: row; align-items: center; gap: 6px; }
+.field.check input { width: auto; }
+.coh .field input[type=number] { width: 72px; }
+.coh-table td.hint { white-space: normal; max-width: 60ch; }
+.coh-charts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.coh-charts .plot canvas { width: 100%; height: 200px; display: block; }
+@media (max-width: 760px) { .coh-charts { grid-template-columns: minmax(0, 1fr); } }
