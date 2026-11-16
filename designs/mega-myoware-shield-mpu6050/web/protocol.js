@@ -285,5 +285,7 @@ export function scalesFromInfo(info) {
     emgHz: (info && info.emg_hz) || 0,
     emgProc: (info && info.emg_proc) || '',
     emgRaw: !!(info && info.emg_raw),
+    // ESP32 fw 1.4+: jacks marked as footswitches (never rectified on the board).
+    fsw: info && Number.isInteger(info.fsw) ? info.fsw : -1,
   };
 }

@@ -25,6 +25,7 @@
 
 import { segment as hmmSegment, MODEL as HMM_MODEL } from './hmm.js';
 import { analyzeEmg } from './emg.js';
+import { validateEvents } from './footswitch.js';
 
 const G = 9.80665;
 const RAD = Math.PI / 180;
@@ -832,7 +833,8 @@ export function analyzeShankFoot(t, shank, foot, fs, opts = {}) {
 // layout 'bilateral' (default): IMU A and B each on one shank, sides says which.
 // layout 'shank-foot': both IMUs on one leg; limb = {shank: 'A'|'B', side:
 // 'right'|'left'} says which IMU is on the shank (the other is on the foot).
-export function analyzeSource(src, { t0 = -Infinity, t1 = Infinity, imuMask = 3, sides = { A: 'right', B: 'left' }, layout = 'bilateral', limb = { shank: 'A', side: 'right' }, distanceM = 0, personStrideM = 0, accelRangeG = 8, gyroRangeDps = 0, emg = null, opts = {} } = {}) {
+export function analyzeSource(src, { t0 = -Infinity, t1 = Infinity, imuMask = 3, sides = { A: 'right', B: 'left' }, layout = 'bilateral', limb = { shank: 'A', side: 'right' }, distanceM = 0, personStrideM = 0, accelRangeG = 8, gyroRangeDps = 0, emg = null, switches = null, opts = {} } = {}) {
+  const addEmg = (o, ...rest) => (addEmgChannels(o, ...rest, switches), addSwitches(o, ...rest, switches));
   let i0 = 0;
   while (i0 < src.n && src.t(i0) < t0) i0++;
   let i1 = i0;
@@ -897,12 +899,15 @@ export function analyzeSource(src, { t0 = -Infinity, t1 = Infinity, imuMask = 3,
 
 // EMG of the enabled jacks, timed by the strides of one leg (emg.leg, or the
 // first leg analysed). emg: {mask, adcRefV, signal, muscles: {ch: name}, leg}.
-function addEmg(out, src, i0, i1, traw, fs, emg) {
+function addEmgChannels(out, src, i0, i1, traw, fs, emg, switches) {
   if (!emg || !emg.mask) return;
+  let mask = emg.mask;
+  for (const ch of switchJacks(switches)) mask &= ~(1 << ch); // footswitch jacks are not muscles
+  if (!mask) return;
   const chans = [];
   const ids = [];
   for (let ch = 0; ch < 6; ch++)
-    if (emg.mask & (1 << ch)) {
+    if (mask & (1 << ch)) {
       const x = new Float64Array(i1 - i0);
       for (let i = i0; i < i1; i++) x[i - i0] = src.v(ch, i);
       chans.push(x);
@@ -921,6 +926,34 @@ function addEmg(out, src, i0, i1, traw, fs, emg) {
   );
   out.emg.leg = legName || '';
   if (!out.t) out.t = r.t;
+}
+
+const switchJacks = (sw) => (sw ? [sw.heel, sw.toe].filter((ch) => Number.isInteger(ch) && ch >= 0 && ch < 6) : []);
+
+// Footswitches on spare jacks (footswitch.js) against the IMU events of one
+// leg. switches: {heel: jack or -1, toe: jack or -1, leg, invert}.
+function addSwitches(out, src, i0, i1, traw, fs, emg, switches) {
+  const jacks = switchJacks(switches);
+  if (!jacks.length) return;
+  const names = Object.keys(out.legs);
+  const legName = switches.leg && out.legs[switches.leg] ? switches.leg : names[0];
+  const mask = emg ? emg.mask : 0;
+  const closed = jacks.filter((ch) => !(mask & (1 << ch)));
+  if (closed.length || (jacks.length === 2 && jacks[0] === jacks[1])) {
+    const why = closed.length ? `Jack ${closed.map((ch) => `A${ch}`).join(' and ')} is not enabled, so the footswitch on it was not recorded. Tick it under EMG jacks.` : 'The heel and forefoot switches are set to the same jack.';
+    out.footswitch = { ok: false, leg: legName || '', warnings: [why], rows: [], stances: [], switches: {}, contact: {} };
+    return;
+  }
+  const chans = jacks.map((ch) => {
+    const x = new Float64Array(i1 - i0);
+    for (let i = i0; i < i1; i++) x[i - i0] = src.v(ch, i);
+    return x;
+  });
+  const r = resample(traw, chans, fs);
+  const pick = (ch) => (Number.isInteger(ch) && ch >= 0 && ch < 6 ? r.channels[jacks.indexOf(ch)] : null);
+  out.footswitch = validateEvents(r.t, pick(switches.heel), pick(switches.toe), legName ? out.legs[legName].strides : [], { invert: !!switches.invert });
+  out.footswitch.leg = legName || '';
+  out.footswitch.jacks = { heel: switches.heel, toe: switches.toe };
 }
 
 function legSummary(leg) {

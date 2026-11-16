@@ -15,7 +15,7 @@ that each one rules out one of them.
 
 ## How to record raw EMG
 
-1. Flash `firmware/esp32_standalone_stream` (1.3). Set each MyoWare **OUTPUT**
+1. Flash `firmware/esp32_standalone_stream` (1.3 or later). Set each MyoWare **OUTPUT**
    switch to **RAW**. Power the shield from the ESP32 **3V3** pin, so the
    resting level sits near 1.65 V, inside the ADC's usable range.
 2. Connect over **Wi-Fi**. USB at 115200 baud is too slow for the raw stream.

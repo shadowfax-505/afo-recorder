@@ -14,6 +14,9 @@
 // 'E' frames next to the 250 Hz frames (emgraw.h). This is what coherence,
 // spectra and noise checks need. Use it over Wi-Fi: USB at 115200 baud is too
 // slow for it. The status page shows late ADC ticks and ring overruns.
+// 1.4 (2026-11-16): "f<mask>" marks jacks that carry a footswitch (an FSR
+// divider, see docs/footswitch-validation.md). Those jacks always send the
+// plain mean, also in "g1" mode, so the app can time the switch edges.
 // Streams data over WebSocket (ws://afo-mega.local/ws) and USB Serial to the web app.
 //
 // Wiring:
@@ -48,7 +51,7 @@
 #include "emgdsp.h"
 #include "emgraw.h"
 
-#define FW_VERSION "esp32-stream-1.3"
+#define FW_VERSION "esp32-stream-1.4"
 #define PIN_I2C0_SDA 21
 #define PIN_I2C0_SCL 22
 #define PIN_I2C1_SDA 18
@@ -93,6 +96,9 @@ uint32_t clients = 0;
 // value per channel per frame under emgMux.
 emgdsp::Channel emgCh[frame::MAX_EMG];
 emgdsp::Proc emgProc = emgdsp::PROC_AVG;
+// Jacks that carry a footswitch (command f<mask>): always the plain mean,
+// never band-passed or rectified, whatever the EMG mode is.
+uint8_t fswMask = 0;
 portMUX_TYPE emgMux = portMUX_INITIALIZER_UNLOCKED;
 esp_timer_handle_t emgTimer = nullptr;
 volatile uint16_t emgLastRaw = 0;  // channel 0, for the status page
@@ -261,7 +267,7 @@ static void emgTick(void*) {
   if (mask & 1) emgLastRaw = raw[0];
   portENTER_CRITICAL(&emgMux);
   for (uint8_t ch = 0; ch < frame::MAX_EMG; ch++)
-    if (mask & (1 << ch)) emgCh[ch].add(raw[ch], emgProc);
+    if (mask & (1 << ch)) emgCh[ch].add(raw[ch], (fswMask & (1 << ch)) ? emgdsp::PROC_AVG : emgProc);
   if (rawOn && mode == MODE_BINARY) rawRing.push(raw);  // only while streaming, so idle time is not counted as loss
   portEXIT_CRITICAL(&emgMux);
   uint32_t took = (uint32_t)(esp_timer_get_time() - start);
@@ -285,6 +291,13 @@ void setEmg(uint8_t mask, emgdsp::Proc proc) {
   emgProc = proc;
   for (uint8_t ch = 0; ch < frame::MAX_EMG; ch++) emgCh[ch].reset();
   rawRing.reset();  // the channel set changed: start a fresh raw timeline
+  portEXIT_CRITICAL(&emgMux);
+}
+
+void setFsw(uint8_t mask) {
+  portENTER_CRITICAL(&emgMux);
+  fswMask = mask;
+  for (uint8_t ch = 0; ch < frame::MAX_EMG; ch++) emgCh[ch].reset();
   portEXIT_CRITICAL(&emgMux);
 }
 
@@ -316,9 +329,10 @@ void takeSample(frame::Sample& s) {
   portENTER_CRITICAL(&emgMux);
   for (uint8_t ch = 0; ch < frame::MAX_EMG; ch++) v[ch] = (emgMask & (1 << ch)) ? emgCh[ch].take() : 0;
   emgdsp::Proc proc = emgProc;
+  uint8_t fsw = fswMask;
   portEXIT_CRITICAL(&emgMux);
   // 0..1023 counts; the volts per 1023 counts are in the info frame (adc_ref_v).
-  for (uint8_t ch = 0; ch < frame::MAX_EMG; ch++) s.emg[ch] = (emgMask & (1 << ch)) ? emgdsp::toCounts(v[ch], proc) : 0;
+  for (uint8_t ch = 0; ch < frame::MAX_EMG; ch++) s.emg[ch] = (emgMask & (1 << ch)) ? emgdsp::toCounts(v[ch], (fsw & (1 << ch)) ? emgdsp::PROC_AVG : proc) : 0;
   for (uint8_t k = 0; k < frame::MAX_IMU; k++) {
     if (!(imuMask & (1 << k)) || !imuBus[k]) continue;
     if (!mpuReadMotion(*imuBus[k], imuAddr[k], s.imu[k])) {
@@ -366,16 +380,16 @@ void queueWs(const uint8_t* data, size_t len) {
 }
 
 void sendInfo() {
-  char json[352];
+  char json[384];
   // emg_hz: ADC rate per EMG channel; emg_proc: avg (ENV) or arv (RAW, rectified on the board).
   int n = snprintf(json, sizeof(json),
            "{\"fw\":\"%s\",\"port\":\"%s\",\"baud\":%lu,\"rate\":%u,\"max_rate\":%u,"
            "\"emg_mask\":%u,\"imu_mask\":%u,\"who\":[%u,%u],\"accel_lsb_per_g\":%u,"
-           "\"gyro_lsb_per_dps\":%s,\"adc_ref_v\":%s,\"emg_hz\":%lu,\"emg_proc\":\"%s\",\"emg_raw\":%u,"
+           "\"gyro_lsb_per_dps\":%s,\"adc_ref_v\":%s,\"emg_hz\":%lu,\"emg_proc\":\"%s\",\"emg_raw\":%u,\"fsw\":%u,"
            "\"sent\":%lu,\"dropped\":%lu}",
            FW_VERSION, "Wi-Fi", 115200UL, rateHz, MAX_RATE_HZ, emgMask, imuMask,
            imuWhoAmI[0], imuWhoAmI[1], ACCEL_LSB_PER_G, GYRO_LSB_PER_DPS,
-           emgdsp::refVolts(emgProc), (unsigned long)emgdsp::FS_HZ, emgdsp::name(emgProc), rawOn ? 1 : 0,
+           emgdsp::refVolts(emgProc), (unsigned long)emgdsp::FS_HZ, emgdsp::name(emgProc), rawOn ? 1 : 0, fswMask,
            (unsigned long)sent, (unsigned long)dropped);
   if (n < 0 || n > 255) {  // a frame payload is at most 255 bytes: drop the counters
     char* tail = strstr(json, ",\"sent\"");
@@ -497,6 +511,12 @@ void handleCommand(const char* cmd) {
       setEmg(emgMask, atoi(cmd + 1) == 1 ? emgdsp::PROC_ARV : emgdsp::PROC_AVG);
       sendInfo();
       break;
+    case 'f': {  // f<mask>: these jacks carry footswitches (plain mean in every EMG mode)
+      int m = atoi(cmd + 1);
+      if (m >= 0 && m < (1 << frame::MAX_EMG)) setFsw((uint8_t)m);
+      sendInfo();
+      break;
+    }
     case 'w':  // w1: also stream the unprocessed 2 kHz samples ('E' frames), w0: stop
       setRaw(atoi(cmd + 1) == 1);
       sendInfo();

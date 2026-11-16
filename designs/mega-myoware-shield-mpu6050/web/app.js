@@ -5,6 +5,7 @@ import { DemoTransport } from './demo.js';
 import { SerialTransport, serialSupported } from './serial.js';
 import { WifiTransport, DEFAULT_HOST } from './wifi.js';
 import { analyzeSource, stridesCsv } from './gait.js';
+import { footswitchCsv } from './footswitch.js';
 import { GaitPanel } from './gaitui.js';
 import { CoherencePanel } from './coherenceui.js';
 
@@ -31,10 +32,34 @@ function syncEmgProc() {
   if (info.emg_proc !== want) send(`g${want === 'arv' ? 1 : 0}`);
 }
 
+// Footswitch jacks chosen in the live gait panel: make sure they are sampled,
+// and tell boards that know the command (ESP32 fw 1.4+) to leave them
+// unprocessed.
+function switchMask(s) {
+  let m = 0;
+  for (const ch of [s.switches && s.switches.heel, s.switches && s.switches.toe]) if (Number.isInteger(ch) && ch >= 0 && ch < MAX_EMG) m |= 1 << ch;
+  return m;
+}
+function syncSwitches() {
+  const info = st.info;
+  if (!info) return;
+  const want = switchMask(liveGait.settings);
+  const have = prefs.get('emgMask', 1);
+  if (want & ~have) {
+    const m = have | want;
+    prefs.set('emgMask', m);
+    document.querySelectorAll('#emg-mask input').forEach((cb) => (cb.checked = !!(m & (1 << Number(cb.value)))));
+    applyMasks(liveCharts, m, info.imu_mask);
+    send(`e${m}`);
+  }
+  if (Number.isInteger(info.fsw) && info.fsw !== want) send(`f${want}`);
+}
+
 // Analysis options from the panel settings and the stream's scales.
 function gaitArgs(s, scales, emgMask = 0) {
   return {
     emg: { mask: emgMask, adcRefV: scales.adcRefV, signal: emgSignal(s, scales), muscles: s.muscles || {} },
+    switches: s.switches ? { ...s.switches, leg: s.layout === 'shank-foot' ? (s.limb || GAIT_DEFAULTS.limb).side : '' } : null,
     layout: s.layout || 'bilateral',
     limb: s.limb || GAIT_DEFAULTS.limb,
     sides: s.sides,
@@ -315,7 +340,10 @@ const liveGait = new GaitPanel($('live-gait'), {
   onChange: (s) => {
     prefs.set('gait', s);
     st.gaitDue = 0;
-    if (!st.recorder) syncEmgProc();
+    if (!st.recorder) {
+      syncEmgProc();
+      syncSwitches();
+    }
   },
 });
 
@@ -536,6 +564,7 @@ async function connect(transport) {
   const wantMask = prefs.get('emgMask', 1);
   if (wantMask !== info.emg_mask) send(`e${wantMask}`);
   syncEmgProc();
+  syncSwitches();
   syncRaw();
   const wantRate = prefs.get('rate', 0);
   if (wantRate) send(`r${wantRate}`);
@@ -811,6 +840,10 @@ async function openRecording(id) {
   gait.hidden = !meta.imuMask;
   gait.strideCsv.addEventListener('click', () => {
     if (detail && detail.gaitResult) download(`${safeName(detail.meta.name)}.gait.csv`, new Blob([stridesCsv(detail.gaitResult, detail.meta.name)], { type: 'text/csv' }));
+  });
+  gait.fswCsv.addEventListener('click', () => {
+    const v = detail && detail.gaitResult && detail.gaitResult.footswitch;
+    if (v && v.rows && v.rows.length) download(`${safeName(detail.meta.name)}.footswitch.csv`, new Blob([footswitchCsv(v, detail.meta.name)], { type: 'text/csv' }));
   });
   detail.gait = gait;
   const coh = new CoherencePanel($('d-coh'), {

@@ -196,7 +196,37 @@ export function makeScenario({ standS = 2.5, strides = 12, T = 1.1, jitter = 0, 
     return 40 + 560 * gauss(q, 0.45, 0.07);
   }
 
-  return { at, truth, ankle, emgAt, period, durs, sl, stancePct: 100 * (TPL.pTo - TPL.pIc), walkStart: standS, walkEnd };
+  // Footswitch pressure (0 = off the ground, 1 = full load) of leg 0, for the
+  // footswitch validation. which: 'heel' or 'toe' (forefoot). Normal
+  // heel-first contact: the heel switch closes heelIcS before the shank
+  // signal's dip (the instant the IMU rules call initial contact) and opens at
+  // 60 % of stance; the forefoot switch closes at 12 % of stance and opens
+  // toeFcS after the IMU's toe-off dip. contact 'toe' swaps the landing order
+  // (toes first, as in drop foot). Both are loaded while standing. Edges ramp
+  // over 8 ms, centred on the edge time.
+  const switchOffsets = { heelIcS: -0.015, toeFcS: 0.025 };
+  function switchAt(t, which, contact = 'heel') {
+    const { p, rate } = phase(t, 0);
+    if (!rate) return 1;
+    const q = p - Math.floor(p);
+    const st = TPL.pTo - TPL.pIc; // stance as a fraction of the cycle
+    let s = q - TPL.pIc;
+    s -= Math.floor(s);
+    if (s > 0.9) s -= 1; // just before contact
+    const first = switchOffsets.heelIcS * rate;
+    const last = st + switchOffsets.toeFcS * rate;
+    const early = which === (contact === 'toe' ? 'toe' : 'heel');
+    let a;
+    let b;
+    if (which === 'heel') [a, b] = [early ? first : 0.12 * st, 0.6 * st];
+    else [a, b] = [early ? first : 0.12 * st, last];
+    const half = 0.004 * rate;
+    const up = Math.min(1, Math.max(0, (s - a + half) / (2 * half)));
+    const down = Math.min(1, Math.max(0, (b - s + half) / (2 * half)));
+    return Math.min(up, down);
+  }
+
+  return { at, truth, ankle, emgAt, switchAt, switchOffsets, period, durs, sl, stancePct: 100 * (TPL.pTo - TPL.pIc), walkStart: standS, walkEnd };
 }
 
 // Samples a scenario on a grid with sensor noise and gyro offset.

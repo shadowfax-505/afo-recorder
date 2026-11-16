@@ -5,6 +5,8 @@
 //      recording, its CSV export and a backup/import round trip;
 //   1b. records ~11 s of the demo's synthetic walk and checks the gait
 //      parameters live, on the saved recording, and in the gait CSV;
+//   1c. records the raw 2 kHz EMG and checks the coherence panel and exports;
+//   1d. footswitch jacks against the IMU events, live, saved and as CSV;
 //   2. replaces navigator.serial with a fake port that answers like the
 //      sketch (including the ~2 s silence after a USB reset) to exercise the
 //      real Web Serial code path;
@@ -285,6 +287,54 @@ try {
     await cp.click('#tab-live');
     await cp.click('#disconnect');
     await cctx.close();
+  }
+
+  // ---- 1d. footswitches on jacks A4 and A5 against the IMU events ----
+  {
+    const fctx = await browser.newContext({ viewport: { width: 1360, height: 1000 }, acceptDownloads: true });
+    const fp = await fctx.newPage();
+    watch(fp);
+    await fp.goto(url);
+    await fp.selectOption('#lg-window', '0');
+    await fp.click('#demo');
+    await fp.waitForFunction(() => document.querySelector('#status').textContent.startsWith('Streaming'));
+    // choosing a jack for a switch enables that jack
+    await fp.selectOption('#lg-fsw-heel', '4');
+    await fp.selectOption('#lg-fsw-toe', '5');
+    await fp.waitForFunction(() => document.querySelector('#emg-mask input[value="4"]').checked && document.querySelector('#emg-mask input[value="5"]').checked);
+    await fp.fill('#rec-name', 'e2e footswitch');
+    await fp.click('#record');
+    await fp.waitForTimeout(13000);
+    await fp.waitForFunction(() => !document.querySelector('#live-gait .fsw-gait .table-scroll').hidden);
+    await fp.click('#record');
+    await fp.waitForFunction(() => document.querySelector('#rec-count').textContent === '1');
+    await fp.click('#tab-recordings');
+    await fp.click('#rec-rows tr');
+    await fp.waitForFunction(() => document.querySelectorAll('#d-gait .fsw-table tbody tr').length > 0);
+    const fswRow = (name) =>
+      fp.evaluate((n) => {
+        const tr = [...document.querySelectorAll('#d-gait .fsw-table tbody tr')].find((r) => r.querySelector('th').textContent.startsWith(n));
+        return [...tr.querySelectorAll('td')].map((td) => td.textContent);
+      }, name);
+    const pairs = (await fswRow('Pairs compared')).map(Number);
+    assert.ok(pairs[0] >= 6 && pairs[1] >= 5, `pairs ${pairs}`);
+    // the demo's switches close 15 ms before the IMU heel strike and open 25 ms after its toe-off
+    const diff = (await fswRow('Mean difference')).map((x) => Number(x.split(' ')[0]));
+    assert.ok(Math.abs(diff[0] - 15) <= 8, `heel strike difference ${diff[0]} ms`);
+    assert.ok(Math.abs(diff[1] + 25) <= 8, `toe-off difference ${diff[1]} ms`);
+    assert.deepEqual((await fswRow('Switch events the IMU missed')).slice(0, 2), ['0', '0']);
+    assert.match(await fp.textContent('#dg-fsw-contact'), /^Heel first: \d+ \(100 %\)/);
+    // the switch jacks are not treated as muscles
+    assert.equal(await fp.locator('#d-gait .emg-table thead th').count(), 2);
+    if (shots) await fp.locator('#d-gait .fsw-gait').screenshot({ path: join(shots, 'footswitch.png') });
+    const [fdl] = await Promise.all([fp.waitForEvent('download'), fp.click('#dg-fsw-csv')]);
+    const fcsv = (await readFile(await fdl.path(), 'utf8')).trim().split('\n');
+    assert.match(fcsv[0], /^# IMU gait events against footswitches for e2e footswitch/);
+    assert.equal(fcsv[1].split(',')[4], 'hs_diff_ms');
+    assert.ok(fcsv.length - 2 >= 5 && fcsv[2].startsWith('1,heel,'));
+    await fp.click('#tab-live');
+    await fp.click('#disconnect');
+    await fctx.close();
   }
 
   // ---- 2. fake Web Serial port that behaves like the sketch over USB ----

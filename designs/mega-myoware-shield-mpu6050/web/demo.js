@@ -15,6 +15,7 @@ const RAW_HZ = 2000;
 const DRIVE = [20.5, 22, 23.5, 25, 26.5, 28, 29.5].map((f, i) => ({ w: 2 * Math.PI * f, p: 1.7 * i * i }));
 const gauss = () => Math.sqrt(-2 * Math.log(Math.random() + 1e-12)) * Math.cos(2 * Math.PI * Math.random());
 function rawEmgAt(t, tw, ch) {
+  if (ch >= 4) return Math.round(280 + 3120 * WALK.switchAt(tw, ch === 4 ? 'heel' : 'toe') + 30 * (Math.random() - 0.5));
   const level = WALK.emgAt(tw, ch % 2) * (1 - Math.floor(ch / 2) * 0.25); // 40 at rest, up to ~600 in a burst
   let m = 1;
   if (ch === 0 || ch === 2) m = Math.max(0, 1 + 0.25 * DRIVE.reduce((a, d) => a + Math.sin(d.w * t + d.p), 0));
@@ -40,6 +41,7 @@ export class DemoTransport {
     this.rawIdx = 0;
     this.rawCarry = 0;
     this.proc = 'avg';
+    this.fsw = 0;
   }
 
   maxRate() {
@@ -68,6 +70,7 @@ export class DemoTransport {
       emg_hz: RAW_HZ,
       emg_proc: this.proc,
       emg_raw: this.raw ? 1 : 0,
+      fsw: this.fsw,
       synthetic: true,
     };
   }
@@ -98,6 +101,7 @@ export class DemoTransport {
         this.emgMask = (arg || 0) & 0x3f;
         this.setRate(this.rate);
       } else if (cmd[0] === 'g') this.proc = arg === 1 ? 'arv' : 'avg';
+      else if (cmd[0] === 'f') this.fsw = (arg || 0) & 0x3f;
       else if (cmd[0] === 'w') {
         this.raw = arg === 1;
         this.rawIdx = 0;
@@ -136,9 +140,14 @@ export class DemoTransport {
     const t = this.us / 1e6;
     const tw = t % WALK.period;
     // A0 = tibialis anterior, A1 = gastrocnemius, timed by the simulated walk;
-    // the other jacks echo them at lower gain.
+    // A2 and A3 echo them at lower gain; A4 and A5 are footswitches under the
+    // heel and the forefoot (FSR dividers, see gaitsim.js switchAt).
     const emg = [];
     for (let ch = 0; ch < 6; ch++) {
+      if (ch >= 4) {
+        emg.push(Math.round(70 + 780 * WALK.switchAt(tw, ch === 4 ? 'heel' : 'toe') + 10 * (Math.random() - 0.5)));
+        continue;
+      }
       const level = WALK.emgAt(tw, ch % 2) * (1 - Math.floor(ch / 2) * 0.25) * (0.9 + 0.2 * Math.random());
       emg.push(Math.max(0, Math.min(1023, Math.round(level + 12 * (Math.random() - 0.5)))));
     }
