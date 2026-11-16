@@ -5,6 +5,8 @@
 //      recording, its CSV export and a backup/import round trip;
 //   1b. records ~11 s of the demo's synthetic walk and checks the gait
 //      parameters live, on the saved recording, and in the gait CSV;
+//   1c. records the raw 2 kHz EMG and checks the coherence panel and exports;
+//   1d. footswitch jacks against the IMU events, live, saved and as CSV;
 //   2. replaces navigator.serial with a fake port that answers like the
 //      sketch (including the ~2 s silence after a USB reset) to exercise the
 //      real Web Serial code path;
@@ -212,6 +214,127 @@ try {
     await gp.selectOption('#dg-side-B', 'off');
     await gp.waitForFunction(() => document.querySelectorAll('#d-gait .gait-table:not(.emg-table) thead th').length === 3);
     await gctx.close();
+  }
+
+  // ---- 1c. raw 2 kHz EMG: record, coherence between two jacks, exports ----
+  {
+    const cctx = await browser.newContext({ viewport: { width: 1360, height: 1000 }, acceptDownloads: true });
+    const cp = await cctx.newPage();
+    watch(cp);
+    await cp.goto(url);
+    await cp.click('#demo');
+    await cp.waitForFunction(() => document.querySelector('#status').textContent.startsWith('Streaming'));
+    await cp.check('#emg-mask input[value="2"]');
+    await cp.waitForFunction(() => !document.querySelector('#raw-emg-box').hidden && !document.querySelector('#raw-emg').disabled);
+    await cp.check('#raw-emg');
+    await cp.waitForFunction(() => /^(19|20)\d\d samples\/s · \d+ lost/.test(document.querySelector('#raw-emg-stat').textContent), null, { timeout: 8000 });
+    await cp.fill('#rec-name', 'e2e raw');
+    await cp.click('#record');
+    assert.ok(await cp.isDisabled('#raw-emg'), 'raw toggle locked while recording');
+    await cp.waitForTimeout(16000); // stand 1.5 s, then 12 strides
+    await cp.click('#record');
+    await cp.waitForFunction(() => document.querySelector('#rec-count').textContent === '1');
+    await cp.click('#tab-recordings');
+    await cp.click('#rec-rows tr');
+    await cp.waitForFunction(() => !document.querySelector('#rec-detail').hidden && document.querySelector('#d-meta').textContent.includes('raw EMG'));
+    const rmeta = await cp.textContent('#d-meta');
+    // the demo drops 0.2 % of its frames on purpose, and their raw samples go with them
+    const rm = rmeta.match(/raw EMG 2000 Hz: ([\d,]+) samples, ([\d,]+) lost/);
+    const rawN = Number(rm[1].replace(/,/g, ''));
+    const rawLost = Number(rm[2].replace(/,/g, ''));
+    const durS = Number(rmeta.match(/\(([\d.]+) s\)/)[1]);
+    assert.ok(Math.abs(rawN + rawLost - durS * 2000) < 40, `${rawN} + ${rawLost} raw samples in ${durS} s`);
+    assert.ok(rawLost < 0.02 * rawN, `${rawLost} of ${rawN} raw samples lost`);
+    const cohRow = (name) =>
+      cp.evaluate((n) => {
+        const tr = [...document.querySelectorAll('.coh-table tbody tr')].find((r) => r.querySelector('th').textContent.startsWith(n));
+        return tr ? tr.querySelector('td').textContent : null;
+      }, name);
+    // whole recording: the demo's A0 and A2 (two sites, one muscle) share a 20-30 Hz rhythm
+    await cp.selectOption('#dc-phase', 'all');
+    const segs = Number(await cohRow('Segments averaged'));
+    assert.ok(segs >= 25, `${segs} segments`);
+    const limit = Number(await cohRow('95 % chance limit'));
+    const peak = (await cohRow('Peak in band')).match(/([\d.]+) at ([\d.]+) Hz/).slice(1).map(Number);
+    assert.ok(peak[0] > 3 * limit && peak[1] >= 18 && peak[1] <= 32, `peak ${peak[0]} at ${peak[1]} Hz, limit ${limit}`);
+    // (the demo's rhythm is narrow-band, so its lag plot has near-equal peaks one period apart; the lag itself is unit-tested)
+    assert.match(await cohRow('Lag of the shared part'), /-?[\d.]+ ms \(size [\d.]+\)/);
+    // swing only: fewer segments, taken from the gait events
+    await cp.selectOption('#dc-phase', 'swing');
+    const swingSegs = Number(await cohRow('Segments averaged'));
+    assert.ok(swingSegs >= 3 && swingSegs < segs, `${swingSegs} swing segments`);
+    if (shots) await cp.locator('#d-coh').screenshot({ path: join(shots, 'coherence.png') });
+
+    const [rawDl] = await Promise.all([cp.waitForEvent('download'), cp.click('#d-raw-csv')]);
+    const rawCsv = (await readFile(await rawDl.path(), 'utf8')).trim().split('\n').filter((l) => !l.startsWith('#'));
+    assert.equal(rawCsv[0], 'time_s,sample,A0_counts,A2_counts');
+    assert.equal(rawCsv.length - 1, rawN);
+    const r0 = rawCsv[1].split(',').map(Number);
+    const r9 = rawCsv[2001].split(',').map(Number);
+    assert.ok(Math.abs(r0[0]) < 0.02, `raw EMG starts at ${r0[0]} s`);
+    assert.ok(r9[1] - r0[1] >= 2000 && Math.abs(r9[0] - r0[0] - (r9[1] - r0[1]) / 2000) < 1e-4, 'time follows the sample index');
+    assert.ok(r0[2] > 1500 && r0[2] < 2600, `mid-scale counts ${r0[2]}`);
+    const [cohDl] = await Promise.all([cp.waitForEvent('download'), cp.click('#dc-csv')]);
+    const cohCsv = await readFile(await cohDl.path(), 'utf8');
+    assert.ok(cohCsv.includes('frequency_hz,coherence,phase_rad') && cohCsv.includes('lag_ms,cumulant'));
+
+    // backup and import keep the raw EMG
+    const [bk] = await Promise.all([cp.waitForEvent('download'), cp.click('#d-backup')]);
+    await cp.setInputFiles('#import', await bk.path());
+    await cp.waitForFunction(() => document.querySelector('#rec-count').textContent === '2');
+    await cp.waitForFunction((n) => document.querySelector('#d-meta').textContent.includes(`raw EMG 2000 Hz: ${n.toLocaleString('en-US')} samples`), rawN);
+    assert.ok(!(await cp.isHidden('#d-coh .coh')));
+    await cp.click('#tab-live');
+    await cp.click('#disconnect');
+    await cctx.close();
+  }
+
+  // ---- 1d. footswitches on jacks A4 and A5 against the IMU events ----
+  {
+    const fctx = await browser.newContext({ viewport: { width: 1360, height: 1000 }, acceptDownloads: true });
+    const fp = await fctx.newPage();
+    watch(fp);
+    await fp.goto(url);
+    await fp.selectOption('#lg-window', '0');
+    await fp.click('#demo');
+    await fp.waitForFunction(() => document.querySelector('#status').textContent.startsWith('Streaming'));
+    // choosing a jack for a switch enables that jack
+    await fp.selectOption('#lg-fsw-heel', '4');
+    await fp.selectOption('#lg-fsw-toe', '5');
+    await fp.waitForFunction(() => document.querySelector('#emg-mask input[value="4"]').checked && document.querySelector('#emg-mask input[value="5"]').checked);
+    await fp.fill('#rec-name', 'e2e footswitch');
+    await fp.click('#record');
+    await fp.waitForTimeout(13000);
+    await fp.waitForFunction(() => !document.querySelector('#live-gait .fsw-gait .table-scroll').hidden);
+    await fp.click('#record');
+    await fp.waitForFunction(() => document.querySelector('#rec-count').textContent === '1');
+    await fp.click('#tab-recordings');
+    await fp.click('#rec-rows tr');
+    await fp.waitForFunction(() => document.querySelectorAll('#d-gait .fsw-table tbody tr').length > 0);
+    const fswRow = (name) =>
+      fp.evaluate((n) => {
+        const tr = [...document.querySelectorAll('#d-gait .fsw-table tbody tr')].find((r) => r.querySelector('th').textContent.startsWith(n));
+        return [...tr.querySelectorAll('td')].map((td) => td.textContent);
+      }, name);
+    const pairs = (await fswRow('Pairs compared')).map(Number);
+    assert.ok(pairs[0] >= 6 && pairs[1] >= 5, `pairs ${pairs}`);
+    // the demo's switches close 15 ms before the IMU heel strike and open 25 ms after its toe-off
+    const diff = (await fswRow('Mean difference')).map((x) => Number(x.split(' ')[0]));
+    assert.ok(Math.abs(diff[0] - 15) <= 8, `heel strike difference ${diff[0]} ms`);
+    assert.ok(Math.abs(diff[1] + 25) <= 8, `toe-off difference ${diff[1]} ms`);
+    assert.deepEqual((await fswRow('Switch events the IMU missed')).slice(0, 2), ['0', '0']);
+    assert.match(await fp.textContent('#dg-fsw-contact'), /^Heel first: \d+ \(100 %\)/);
+    // the switch jacks are not treated as muscles
+    assert.equal(await fp.locator('#d-gait .emg-table thead th').count(), 2);
+    if (shots) await fp.locator('#d-gait .fsw-gait').screenshot({ path: join(shots, 'footswitch.png') });
+    const [fdl] = await Promise.all([fp.waitForEvent('download'), fp.click('#dg-fsw-csv')]);
+    const fcsv = (await readFile(await fdl.path(), 'utf8')).trim().split('\n');
+    assert.match(fcsv[0], /^# IMU gait events against footswitches for e2e footswitch/);
+    assert.equal(fcsv[1].split(',')[4], 'hs_diff_ms');
+    assert.ok(fcsv.length - 2 >= 5 && fcsv[2].startsWith('1,heel,'));
+    await fp.click('#tab-live');
+    await fp.click('#disconnect');
+    await fctx.close();
   }
 
   // ---- 2. fake Web Serial port that behaves like the sketch over USB ----

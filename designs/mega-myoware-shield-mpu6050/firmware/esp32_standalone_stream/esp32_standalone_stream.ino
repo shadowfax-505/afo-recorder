@@ -10,6 +10,13 @@
 // 250 Hz frame, so the MyoWare RAW output no longer aliases. Each frame
 // carries the mean of the 8 samples (ENV, "g0", default) or, for RAW ("g1"),
 // the average rectified value after a 20-450 Hz band-pass (see emgdsp.h).
+// 1.3 (2026-11-16): "w1" also streams every 2 kHz ADC sample, unprocessed, in
+// 'E' frames next to the 250 Hz frames (emgraw.h). This is what coherence,
+// spectra and noise checks need. Use it over Wi-Fi: USB at 115200 baud is too
+// slow for it. The status page shows late ADC ticks and ring overruns.
+// 1.4 (2026-11-16): "f<mask>" marks jacks that carry a footswitch (an FSR
+// divider, see docs/footswitch-validation.md). Those jacks always send the
+// plain mean, also in "g1" mode, so the app can time the switch edges.
 // Streams data over WebSocket (ws://afo-mega.local/ws) and USB Serial to the web app.
 //
 // Wiring:
@@ -42,8 +49,9 @@
 #include <esp_timer.h>
 #include "frame.h"
 #include "emgdsp.h"
+#include "emgraw.h"
 
-#define FW_VERSION "esp32-stream-1.2"
+#define FW_VERSION "esp32-stream-1.4"
 #define PIN_I2C0_SDA 21
 #define PIN_I2C0_SCL 22
 #define PIN_I2C1_SDA 18
@@ -88,9 +96,23 @@ uint32_t clients = 0;
 // value per channel per frame under emgMux.
 emgdsp::Channel emgCh[frame::MAX_EMG];
 emgdsp::Proc emgProc = emgdsp::PROC_AVG;
+// Jacks that carry a footswitch (command f<mask>): always the plain mean,
+// never band-passed or rectified, whatever the EMG mode is.
+uint8_t fswMask = 0;
 portMUX_TYPE emgMux = portMUX_INITIALIZER_UNLOCKED;
 esp_timer_handle_t emgTimer = nullptr;
 volatile uint16_t emgLastRaw = 0;  // channel 0, for the status page
+
+// Raw 2 kHz stream (emgraw.h), filled by the same timer under emgMux.
+emgraw::Ring rawRing;
+volatile bool rawOn = false;
+static emgraw::Row rawOut[emgraw::RING_ROWS];  // loopTask only
+uint32_t rawSent = 0;
+// ADC timing health: a tick that starts more than 1.5 periods after the
+// previous one is late (the six reads did not fit, or Wi-Fi held the CPU).
+volatile uint32_t emgTicks = 0;
+volatile uint32_t emgLateTicks = 0;
+volatile uint32_t emgMaxTickUs = 0;
 
 String netInfo;
 char usbLine[96];
@@ -233,21 +255,48 @@ void scanImus() {
 // ---------- sampling ----------
 
 static void emgTick(void*) {
+  static int64_t lastStart = 0;
+  int64_t start = esp_timer_get_time();
+  if (lastStart && start - lastStart > (int64_t)emgdsp::TICK_US * 3 / 2) emgLateTicks++;
+  lastStart = start;
+  emgTicks++;
   uint8_t mask = emgMask;
-  uint16_t raw[frame::MAX_EMG];
+  uint16_t raw[frame::MAX_EMG] = {0, 0, 0, 0, 0, 0};
   for (uint8_t ch = 0; ch < frame::MAX_EMG; ch++)
     if (mask & (1 << ch)) raw[ch] = (uint16_t)analogRead(EMG_PINS[ch]);
   if (mask & 1) emgLastRaw = raw[0];
   portENTER_CRITICAL(&emgMux);
   for (uint8_t ch = 0; ch < frame::MAX_EMG; ch++)
-    if (mask & (1 << ch)) emgCh[ch].add(raw[ch], emgProc);
+    if (mask & (1 << ch)) emgCh[ch].add(raw[ch], (fswMask & (1 << ch)) ? emgdsp::PROC_AVG : emgProc);
+  if (rawOn && mode == MODE_BINARY) rawRing.push(raw);  // only while streaming, so idle time is not counted as loss
   portEXIT_CRITICAL(&emgMux);
+  uint32_t took = (uint32_t)(esp_timer_get_time() - start);
+  if (took > emgMaxTickUs) emgMaxTickUs = took;
+}
+
+void setRaw(bool on) {
+  portENTER_CRITICAL(&emgMux);
+  rawRing.reset();
+  rawOn = on;
+  portEXIT_CRITICAL(&emgMux);
+  rawSent = 0;
+  emgTicks = 0;
+  emgLateTicks = 0;
+  emgMaxTickUs = 0;
 }
 
 void setEmg(uint8_t mask, emgdsp::Proc proc) {
   portENTER_CRITICAL(&emgMux);
   emgMask = mask;
   emgProc = proc;
+  for (uint8_t ch = 0; ch < frame::MAX_EMG; ch++) emgCh[ch].reset();
+  rawRing.reset();  // the channel set changed: start a fresh raw timeline
+  portEXIT_CRITICAL(&emgMux);
+}
+
+void setFsw(uint8_t mask) {
+  portENTER_CRITICAL(&emgMux);
+  fswMask = mask;
   for (uint8_t ch = 0; ch < frame::MAX_EMG; ch++) emgCh[ch].reset();
   portEXIT_CRITICAL(&emgMux);
 }
@@ -280,9 +329,10 @@ void takeSample(frame::Sample& s) {
   portENTER_CRITICAL(&emgMux);
   for (uint8_t ch = 0; ch < frame::MAX_EMG; ch++) v[ch] = (emgMask & (1 << ch)) ? emgCh[ch].take() : 0;
   emgdsp::Proc proc = emgProc;
+  uint8_t fsw = fswMask;
   portEXIT_CRITICAL(&emgMux);
   // 0..1023 counts; the volts per 1023 counts are in the info frame (adc_ref_v).
-  for (uint8_t ch = 0; ch < frame::MAX_EMG; ch++) s.emg[ch] = (emgMask & (1 << ch)) ? emgdsp::toCounts(v[ch], proc) : 0;
+  for (uint8_t ch = 0; ch < frame::MAX_EMG; ch++) s.emg[ch] = (emgMask & (1 << ch)) ? emgdsp::toCounts(v[ch], (fsw & (1 << ch)) ? emgdsp::PROC_AVG : proc) : 0;
   for (uint8_t k = 0; k < frame::MAX_IMU; k++) {
     if (!(imuMask & (1 << k)) || !imuBus[k]) continue;
     if (!mpuReadMotion(*imuBus[k], imuAddr[k], s.imu[k])) {
@@ -330,16 +380,16 @@ void queueWs(const uint8_t* data, size_t len) {
 }
 
 void sendInfo() {
-  char json[320];
+  char json[384];
   // emg_hz: ADC rate per EMG channel; emg_proc: avg (ENV) or arv (RAW, rectified on the board).
   int n = snprintf(json, sizeof(json),
            "{\"fw\":\"%s\",\"port\":\"%s\",\"baud\":%lu,\"rate\":%u,\"max_rate\":%u,"
            "\"emg_mask\":%u,\"imu_mask\":%u,\"who\":[%u,%u],\"accel_lsb_per_g\":%u,"
-           "\"gyro_lsb_per_dps\":%s,\"adc_ref_v\":%s,\"emg_hz\":%lu,\"emg_proc\":\"%s\","
+           "\"gyro_lsb_per_dps\":%s,\"adc_ref_v\":%s,\"emg_hz\":%lu,\"emg_proc\":\"%s\",\"emg_raw\":%u,\"fsw\":%u,"
            "\"sent\":%lu,\"dropped\":%lu}",
            FW_VERSION, "Wi-Fi", 115200UL, rateHz, MAX_RATE_HZ, emgMask, imuMask,
            imuWhoAmI[0], imuWhoAmI[1], ACCEL_LSB_PER_G, GYRO_LSB_PER_DPS,
-           emgdsp::refVolts(emgProc), (unsigned long)emgdsp::FS_HZ, emgdsp::name(emgProc),
+           emgdsp::refVolts(emgProc), (unsigned long)emgdsp::FS_HZ, emgdsp::name(emgProc), rawOn ? 1 : 0, fswMask,
            (unsigned long)sent, (unsigned long)dropped);
   if (n < 0 || n > 255) {  // a frame payload is at most 255 bytes: drop the counters
     char* tail = strstr(json, ",\"sent\"");
@@ -376,6 +426,28 @@ void emitBinary(const frame::Sample& s) {
   sent++;
 }
 
+// Sends everything the raw ring holds as 'E' frames. Runs right after the
+// data frame, so t_us is close to that frame's time.
+void emitRaw() {
+  if (!rawOn) return;
+  uint32_t idx0 = 0;
+  portENTER_CRITICAL(&emgMux);
+  uint16_t n = rawRing.drain(rawOut, emgraw::RING_ROWS, idx0);
+  uint8_t mask = emgMask;
+  portEXIT_CRITICAL(&emgMux);
+  uint32_t tUs = micros();
+  uint8_t per = emgraw::maxRows(mask);
+  if (!n || !per) return;
+  static uint8_t buf[255 + frame::OVERHEAD];
+  for (uint16_t at = 0; at < n; at += per) {
+    uint8_t k = (uint8_t)((n - at) < per ? (n - at) : per);
+    size_t len = emgraw::buildFrame(buf, idx0 + at, tUs, mask, rawOut + at, k);
+    if (wsFd >= 0) queueWs(buf, len);
+    if (Serial.availableForWrite() >= (int)len) Serial.write(buf, len);
+    rawSent += k;
+  }
+}
+
 void emitCsv(const frame::Sample& s) {
   Serial.print(s.seq);
   Serial.print(',');
@@ -405,6 +477,7 @@ void handleCommand(const char* cmd) {
       sendInfo();
       break;
     case 's':
+      if (rawOn) setRaw(true);  // fresh raw timeline for each stream start
       mode = MODE_BINARY;
       sent = 0;
       dropped = 0;
@@ -436,6 +509,16 @@ void handleCommand(const char* cmd) {
     }
     case 'g':  // g0: ENV output (mean), g1: RAW output (band-pass, rectify, mean)
       setEmg(emgMask, atoi(cmd + 1) == 1 ? emgdsp::PROC_ARV : emgdsp::PROC_AVG);
+      sendInfo();
+      break;
+    case 'f': {  // f<mask>: these jacks carry footswitches (plain mean in every EMG mode)
+      int m = atoi(cmd + 1);
+      if (m >= 0 && m < (1 << frame::MAX_EMG)) setFsw((uint8_t)m);
+      sendInfo();
+      break;
+    }
+    case 'w':  // w1: also stream the unprocessed 2 kHz samples ('E' frames), w0: stop
+      setRaw(atoi(cmd + 1) == 1);
       sendInfo();
       break;
     case 'i':
@@ -501,6 +584,9 @@ static esp_err_t statusHandler(httpd_req_t* req) {
   html += F("</p><p>Web app: <b>http://localhost:8000</b></p><pre>");
   html += "Mode: " + String(mode == MODE_BINARY ? "STREAMING BINARY" : mode == MODE_CSV ? "CSV" : "IDLE") + "\n";
   html += "EMG A0 live (12-bit, 2 kHz): " + String(emgLastRaw) + ", mode " + String(emgdsp::name(emgProc)) + "\n";
+  html += "ADC ticks: " + String(emgTicks) + ", late: " + String(emgLateTicks) + ", longest tick: " + String(emgMaxTickUs) + " us (period " +
+          String(emgdsp::TICK_US) + " us)\n";
+  html += "Raw 2 kHz stream: " + String(rawOn ? "ON" : "off") + ", samples sent: " + String(rawSent) + ", ring overruns: " + String(rawRing.overruns) + "\n";
   html += "IMU Mask: " + String(imuMask) + " (IMU A 0x68: " + String(imuMask & 1 ? "FOUND" : "not found") +
           ", IMU B 0x69: " + String(imuMask & 2 ? "FOUND" : "not found") + ")\n";
   html += "Rate: " + String(rateHz) + " Hz\n";
@@ -591,6 +677,9 @@ static void pollUsb() {
           Serial.printf(FW_VERSION "\n%s\nApp connected: %s, mode: %d, frames: %lu, errors: %lu, imuMask: %d\n",
                         netInfo.c_str(), wsFd >= 0 ? "yes" : "no", (int)mode,
                         (unsigned long)framesSent, (unsigned long)sendErrors, imuMask);
+          Serial.printf("ADC ticks: %lu, late: %lu, longest tick: %lu us; raw %s, sent %lu, overruns %lu\n",
+                        (unsigned long)emgTicks, (unsigned long)emgLateTicks, (unsigned long)emgMaxTickUs,
+                        rawOn ? "on" : "off", (unsigned long)rawSent, (unsigned long)rawRing.overruns);
         } else {
           queueCommand(usbLine);
         }
@@ -651,8 +740,10 @@ void loop() {
       frame::Sample s;
       takeSample(s);
       seq++;
-      if (mode == MODE_BINARY) emitBinary(s);
-      else emitCsv(s);
+      if (mode == MODE_BINARY) {
+        emitBinary(s);
+        emitRaw();
+      } else emitCsv(s);
     }
   }
 

@@ -6,6 +6,7 @@ export const SYNC1 = 0x5a;
 export const TYPE_DATA = 0x44; // 'D'
 export const TYPE_INFO = 0x49; // 'I'
 export const TYPE_LOG = 0x4c; // 'L'
+export const TYPE_RAW = 0x45; // 'E': unprocessed 2 kHz EMG (ESP32 fw 1.3+, emgraw.h)
 export const MAX_EMG = 6;
 export const MAX_IMU = 2;
 export const IMU_AXES = ['ax', 'ay', 'az', 'gx', 'gy', 'gz'];
@@ -56,6 +57,32 @@ export function encodeText(type, text) {
   return wrap(type, new TextEncoder().encode(text).slice(0, 255));
 }
 
+// 'E' frame: {idx0, tUs, mask, n, rows} with rows a Uint16Array of
+// n * popcount(mask) ADC counts, sample by sample (firmware emgraw.h).
+export function encodeRaw({ idx0, tUs, mask, rows }) {
+  const pc = popcount(mask);
+  const n = pc ? rows.length / pc : 0;
+  const p = new DataView(new ArrayBuffer(10 + rows.length * 2));
+  p.setUint32(0, idx0 >>> 0, true);
+  p.setUint32(4, tUs >>> 0, true);
+  p.setUint8(8, mask);
+  p.setUint8(9, n);
+  for (let i = 0; i < rows.length; i++) p.setUint16(10 + 2 * i, rows[i], true);
+  return wrap(TYPE_RAW, new Uint8Array(p.buffer));
+}
+
+export function decodeRaw(payload) {
+  if (payload.length < 10) return null;
+  const p = new DataView(payload.buffer, payload.byteOffset, payload.byteLength);
+  const mask = p.getUint8(8);
+  const n = p.getUint8(9);
+  const pc = popcount(mask);
+  if (!pc || mask >> MAX_EMG || payload.length !== 10 + 2 * n * pc) return null;
+  const rows = new Uint16Array(n * pc);
+  for (let i = 0; i < rows.length; i++) rows[i] = p.getUint16(10 + 2 * i, true);
+  return { idx0: p.getUint32(0, true), tUs: p.getUint32(4, true), mask, n, rows };
+}
+
 export function decodeData(payload) {
   if (payload.length < 9) return null;
   const p = new DataView(payload.buffer, payload.byteOffset, payload.byteLength);
@@ -83,11 +110,12 @@ export function decodeData(payload) {
 // Splits a byte stream into frames. Bytes outside frames are collected as
 // text lines (the sketch prints "# ..." banners before streaming starts).
 export class FrameParser {
-  constructor({ onSample, onInfo, onLog, onText } = {}) {
+  constructor({ onSample, onInfo, onLog, onText, onRaw } = {}) {
     this.onSample = onSample || (() => {});
     this.onInfo = onInfo || (() => {});
     this.onLog = onLog || (() => {});
     this.onText = onText || (() => {});
+    this.onRaw = onRaw || (() => {});
     this.buf = new Uint8Array(4096);
     this.len = 0;
     this.text = '';
@@ -142,6 +170,10 @@ export class FrameParser {
     if (type === TYPE_DATA) {
       const s = decodeData(payload);
       if (s) this.onSample(s);
+      else this.stats.badFrames++;
+    } else if (type === TYPE_RAW) {
+      const r = decodeRaw(payload);
+      if (r) this.onRaw(r);
       else this.stats.badFrames++;
     } else if (type === TYPE_INFO) {
       const text = new TextDecoder().decode(payload);
@@ -203,6 +235,45 @@ export class SampleClock {
     this.received++;
     return { seq: this.seqBase, us: this.usBase };
   }
+
+  // Places another board micros() stamp (an 'E' frame's t_us) on the same
+  // unwrapped timeline; null before the first data frame.
+  at(tUs) {
+    if (this.lastUs === null) return null;
+    return this.usBase + (((tUs - this.lastUs) | 0));
+  }
+}
+
+// Unwraps the 32-bit sample index of the raw EMG stream and counts gaps.
+// A backwards jump means the board restarted its raw timeline.
+export class RawClock {
+  constructor() {
+    this.reset();
+  }
+
+  reset() {
+    this.next = null; // expected idx0 of the next frame (wrapped)
+    this.base = 0; // unwrapped index of the next expected sample
+    this.lost = 0;
+    this.received = 0;
+    this.restarts = 0;
+  }
+
+  // Returns the unwrapped index of the frame's first sample.
+  step(r) {
+    if (this.next !== null) {
+      const d = (r.idx0 - this.next) | 0;
+      if (d > 0) {
+        this.lost += d;
+        this.base += d;
+      } else if (d < 0) this.restarts++; // new timeline: keep counting forward without a gap
+    }
+    const first = this.base;
+    this.base += r.n;
+    this.next = (r.idx0 + r.n) >>> 0;
+    this.received += r.n;
+    return first;
+  }
 }
 
 export function scalesFromInfo(info) {
@@ -213,5 +284,8 @@ export function scalesFromInfo(info) {
     // ESP32 fw 1.2+: EMG sampled at emg_hz; 'arv' = RAW band-passed and rectified on the board.
     emgHz: (info && info.emg_hz) || 0,
     emgProc: (info && info.emg_proc) || '',
+    emgRaw: !!(info && info.emg_raw),
+    // ESP32 fw 1.4+: jacks marked as footswitches (never rectified on the board).
+    fsw: info && Number.isInteger(info.fsw) ? info.fsw : -1,
   };
 }

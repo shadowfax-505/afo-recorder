@@ -4,6 +4,7 @@
 import { StripChart } from './chart.js';
 import { strideFromWalk, ANKLE_FEATURES } from './gait.js';
 import { MUSCLES, EMG_ROWS } from './emg.js';
+import { CONTACT_LABEL } from './footswitch.js';
 
 const LEG_COLOR = { right: '--series-1', left: '--series-2' };
 const SIDES = [
@@ -200,7 +201,8 @@ export class GaitPanel {
     this.cycle = el('figure', { class: 'chart wide gait-cycle' });
     this.chartHost.append(this.cycle);
     this.emgBox = this.buildEmg(opts);
-    this.root.append(head, controls, person, this.warn, this.tiles, tableWrap, this.chartHost, this.emgBox);
+    this.fswBox = this.buildSwitches(opts);
+    this.root.append(head, controls, person, this.warn, this.tiles, tableWrap, this.chartHost, this.emgBox, this.fswBox);
     if (!opts.live) {
       this.strideBody = el('tbody');
       this.strideCsv = el('button', { type: 'button', id: `${opts.idPrefix}-csv` }, 'Export gait CSV');
@@ -257,6 +259,92 @@ export class GaitPanel {
       el('div', { class: 'table-scroll' }, this.emgTable),
       this.emgCycle,
     );
+  }
+
+  // Footswitch section: which jacks carry the heel and forefoot switches, and
+  // how far the IMU events are from the switch events.
+  buildSwitches(opts) {
+    const p = opts.idPrefix;
+    this.settings.switches = { heel: -1, toe: -1, invert: false, ...(this.settings.switches || {}) };
+    const jack = (which) => {
+      const s = el('select', { id: `${p}-fsw-${which}` }, el('option', { value: '-1' }, 'Not fitted'), ...[0, 1, 2, 3, 4, 5].map((ch) => el('option', { value: String(ch) }, `Jack A${ch}`)));
+      s.value = String(this.settings.switches[which]);
+      s.addEventListener('change', () => {
+        this.settings.switches[which] = Number(s.value);
+        this.changed();
+      });
+      return s;
+    };
+    const inv = el('input', { type: 'checkbox', id: `${p}-fsw-invert` });
+    inv.checked = !!this.settings.switches.invert;
+    inv.addEventListener('change', () => {
+      this.settings.switches.invert = inv.checked;
+      this.changed();
+    });
+    this.fswWarn = el('ul', { class: 'notice gait-warn', hidden: true });
+    this.fswTable = el('table', { class: 'gait-table fsw-table' });
+    this.fswTableWrap = el('div', { class: 'table-scroll', hidden: true }, this.fswTable);
+    this.fswCsv = opts.live ? null : el('button', { type: 'button', id: `${p}-fsw-csv`, hidden: true }, 'Export footswitch CSV');
+    return el(
+      'section',
+      { class: 'emg-gait fsw-gait' },
+      el('h3', { class: 'emg-title' }, 'Footswitch check of the gait events'),
+      el(
+        'p',
+        { class: 'hint' },
+        'Optional. Two force-sensing resistors under the heel and the forefoot of the same leg, each wired into a spare jack, give heel strike and toe-off independently of the IMU: contact = the first switch to close, toe-off = the last to open. The table shows how far the IMU events are from them, and how the foot landed. Differences are IMU − footswitch (positive = the IMU is late).',
+      ),
+      el('div', { class: 'toolbar' }, el('label', { class: 'field' }, 'Heel switch', jack('heel')), el('label', { class: 'field' }, 'Forefoot switch', jack('toe')), el('label', { class: 'field check', title: 'Tick when pressing the sensor lowers the voltage (FSR on the ground side of the divider).' }, el('span', {}, 'Pressing lowers the signal'), inv), this.fswCsv),
+      this.fswWarn,
+      this.fswTableWrap,
+    );
+  }
+
+  renderSwitches(v) {
+    const sw = this.settings.switches || {};
+    const chosen = sw.heel >= 0 || sw.toe >= 0;
+    const warnings = v ? v.warnings : [];
+    this.fswWarn.replaceChildren(...warnings.map((w) => el('li', {}, w)));
+    this.fswWarn.hidden = !warnings.length;
+    const show = !!(chosen && v && v.ic);
+    this.fswTableWrap.hidden = !show;
+    if (this.fswCsv) this.fswCsv.hidden = !(show && v.rows.length);
+    if (!show) return;
+    const msv = (x) => (ok(x) ? (x * 1000).toFixed(0) : '–');
+    const bias = (a) => (a.n ? `${msv(a.bias)} ± ${a.n > 1 ? msv(a.sd) : '–'}` : '–');
+    const loa = (a) => (a.n > 1 ? `${msv(a.loa[0])} to ${msv(a.loa[1])}` : '–');
+    const cols = [
+      ['Heel strike', v.ic, v.missed.ic, v.extra.ic],
+      ['Toe-off', v.fc, v.missed.fc, v.extra.fc],
+      ['Stance time', v.stanceT, null, null],
+      ['Stride time', v.strideT, null, null],
+    ];
+    const rows = [
+      ['Pairs compared', '', (c) => String(c[1].n)],
+      ['Mean difference ± SD (ms)', 'IMU − footswitch', (c) => bias(c[1])],
+      ['95 % limits of agreement (ms)', 'mean ± 1.96 SD', (c) => loa(c[1])],
+      ['Mean absolute difference (ms)', '', (c) => msv(c[1].mae)],
+      ['Median / largest absolute difference (ms)', '', (c) => (c[1].n ? `${msv(c[1].medae)} / ${msv(c[1].maxAbs)}` : '–')],
+      ['Switch events the IMU missed', 'inside the walked stretch', (c) => (c[2] === null ? '' : String(c[2]))],
+      ['IMU events with no switch event', `none within ${Math.round(v.opts.tolS * 1000)} ms`, (c) => (c[3] === null ? '' : String(c[3]))],
+    ];
+    const body = rows.map(([lab, note, fn]) => el('tr', {}, el('th', { scope: 'row' }, lab, note ? el('small', {}, note) : null), ...cols.map((c) => el('td', { class: 'num' }, fn(c)))));
+    const types = Object.entries(v.contact);
+    const total = types.reduce((a, [, n]) => a + n, 0);
+    if (total)
+      body.push(
+        el(
+          'tr',
+          {},
+          el('th', { scope: 'row' }, 'How the foot landed', el('small', {}, 'every contact the switches saw; heel strike difference for each kind')),
+          el('td', { class: 'num', colSpan: cols.length, id: `${this.opts.idPrefix}-fsw-contact` }, types.map(([k, n]) => `${CONTACT_LABEL[k] || k}: ${n} (${Math.round((100 * n) / total)} %)${v.byContact[k] ? `, ${bias(v.byContact[k])} ms` : ''}`).join(' · ')),
+        ),
+      );
+    const thr = Object.entries(v.switches)
+      .filter(([, s]) => s.ok)
+      .map(([k, s]) => `${k === 'heel' ? 'heel' : 'forefoot'} ${Math.round(s.threshold)} counts (range ${Math.round(Math.min(s.lo, s.hi))}–${Math.round(Math.max(s.lo, s.hi))}, ${s.closures} closures)`);
+    body.push(el('tr', {}, el('th', { scope: 'row' }, 'Switch thresholds', el('small', {}, `${Math.round(v.opts.thresholdFrac * 100)} % of each switch’s own range`)), el('td', { class: 'num', colSpan: cols.length }, thr.join(' · '))));
+    this.fswTable.replaceChildren(el('thead', {}, el('tr', {}, el('th', {}, `IMU against footswitch${v.leg ? ` · ${label(v.leg)} leg` : ''}`), ...cols.map((c) => el('th', { class: 'num' }, c[0])))), el('tbody', {}, ...body));
   }
 
   renderEmg(e) {
@@ -492,6 +580,7 @@ ${[0, 25, 50, 75, 100].map((p) => `<text x="${x(p)}" y="${H - 8}" text-anchor="m
     this.ankleChart.el.hidden = !this.ankleSrc;
     this.renderCycle(ankleLeg);
     this.renderEmg(result && result.emg);
+    this.renderSwitches(result && result.footswitch);
     this.draw();
 
     if (this.strideBody) {

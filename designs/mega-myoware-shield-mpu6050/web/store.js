@@ -8,9 +8,15 @@
 //   flags  Uint8    bit0/bit1 = IMU A/B read failed
 //   emg    Uint16   n x 6, ADC counts for A0..A5 (0 where not enabled)
 //   imu    Int16    n x 12, raw LSB: IMU A ax ay az gx gy gz, then IMU B
+//
+// Raw EMG (ESP32 fw 1.3+, 2 kHz) lives in "raw", also in chunks:
+//   si     Uint32   sample index since the recording started (gaps = lost samples)
+//   v      Uint16   n x 6, 12-bit ADC counts for A0..A5 (0 where not enabled)
+// The recording's meta.raw = {hz, mask, t0, n, lost} places sample si at
+// t0 + si / hz seconds on the recording's time axis.
 
 const DB_NAME = 'mega-myoware-recorder';
-const DB_VERSION = 1;
+const DB_VERSION = 2;
 export const EMG_COLS = 6;
 export const IMU_COLS = 12;
 
@@ -39,6 +45,7 @@ export function openDb() {
         const db = r.result;
         if (!db.objectStoreNames.contains('recordings')) db.createObjectStore('recordings', { keyPath: 'id', autoIncrement: true });
         if (!db.objectStoreNames.contains('chunks')) db.createObjectStore('chunks', { keyPath: ['recId', 'idx'] });
+        if (!db.objectStoreNames.contains('raw')) db.createObjectStore('raw', { keyPath: ['recId', 'idx'] });
       };
       r.onsuccess = () => resolve(r.result);
       r.onerror = () => reject(r.error);
@@ -75,9 +82,10 @@ export async function putChunk(recId, idx, chunk) {
 
 export async function deleteRecording(id) {
   const db = await openDb();
-  const tx = db.transaction(['recordings', 'chunks'], 'readwrite');
+  const tx = db.transaction(['recordings', 'chunks', 'raw'], 'readwrite');
   tx.objectStore('recordings').delete(id);
   tx.objectStore('chunks').delete(IDBKeyRange.bound([id, 0], [id, Infinity]));
+  tx.objectStore('raw').delete(IDBKeyRange.bound([id, 0], [id, Infinity]));
   await done(tx);
 }
 
@@ -154,6 +162,56 @@ export class ChunkBuilder {
       emg: this.emg.slice(0, n * EMG_COLS),
       imu: this.imu.slice(0, n * IMU_COLS),
     };
+    this.n = 0;
+    return chunk;
+  }
+}
+
+export async function putRawChunk(recId, idx, chunk) {
+  const db = await openDb();
+  const tx = db.transaction('raw', 'readwrite');
+  tx.objectStore('raw').put({ recId, idx, ...chunk });
+  await done(tx);
+}
+
+// All raw EMG of a recording as {n, si, v}; n is 0 when it has none.
+export async function loadRaw(id) {
+  const db = await openDb();
+  const chunks = await req(db.transaction('raw').objectStore('raw').getAll(IDBKeyRange.bound([id, 0], [id, Infinity])));
+  chunks.sort((a, b) => a.idx - b.idx);
+  const n = chunks.reduce((s, c) => s + c.n, 0);
+  const out = { n, si: new Uint32Array(n), v: new Uint16Array(n * EMG_COLS) };
+  let o = 0;
+  for (const c of chunks) {
+    out.si.set(c.si.subarray(0, c.n), o);
+    out.v.set(c.v.subarray(0, c.n * EMG_COLS), o * EMG_COLS);
+    o += c.n;
+  }
+  return out;
+}
+
+export class RawBuilder {
+  constructor(capacity = 4096) {
+    this.capacity = capacity;
+    this.n = 0;
+    this.si = new Uint32Array(capacity);
+    this.v = new Uint16Array(capacity * EMG_COLS);
+  }
+
+  get full() {
+    return this.n >= this.capacity;
+  }
+
+  // One sample: index si, and its values for the channels in mask, in order.
+  add(si, mask, rows, at) {
+    const i = this.n++;
+    this.si[i] = si;
+    for (let ch = 0, k = at; ch < EMG_COLS; ch++) this.v[i * EMG_COLS + ch] = mask & (1 << ch) ? rows[k++] : 0;
+  }
+
+  take() {
+    const n = this.n;
+    const chunk = { n, si: this.si.slice(0, n), v: this.v.slice(0, n * EMG_COLS) };
     this.n = 0;
     return chunk;
   }

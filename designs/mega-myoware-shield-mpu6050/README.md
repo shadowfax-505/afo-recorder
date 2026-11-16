@@ -164,6 +164,18 @@ Firmware 1.1 read each EMG jack once per 250 Hz frame. That is fine for the MyoW
 
 The app sends `g0`/`g1` itself when you change the panel's EMG signal, and the info frame carries `emg_hz` (2000), `emg_proc` and the matching `adc_ref_v`, so recordings keep the right scale. The 8-sample mean has zeros at 250, 500 and 750 Hz, so almost nothing folds back below the frame Nyquist. `host/tests/emgdsp.test.mjs` runs the firmware's filter code (`emgdsp.h`, compiled with g++) on simulated RAW EMG: the envelope error is about 9 % against the true envelope, against about 18 % for one sample per frame. Use RAW when you want the band-passed signal; ENV still works and needs nothing new.
 
+#### Raw 2 kHz EMG and coherence (ESP32 firmware 1.3, from 16 Nov 2026)
+
+The per-frame value above is enough for envelopes. Anything that needs the EMG waveform itself (coherence between two electrode sites, spectra, noise floor) needs every sample. Firmware 1.3 adds the command `w1`: every 2 kHz ADC sample is also sent, unprocessed, in `E` frames next to the 250 Hz frames ([`emgraw.h`](firmware/esp32_standalone_stream/emgraw.h)). Each frame carries a running sample index, so lost samples show as gaps, and the board time at which it was sent, so the app can place the samples on the IMU time axis. Use it over Wi-Fi; USB at 115200 baud is too slow. The board's status page shows late ADC ticks and buffer overruns.
+
+In the app, tick **Raw 2 kHz EMG** on the Live tab before recording (the box appears when the board supports it). The recording then has a **Raw EMG CSV** export (`time_s`, `sample`, counts per jack) and a **coherence panel** ([`web/coherence.js`](web/coherence.js)): pick two channels, the part of the walk (swing, stance, whole strides, whole recording or the zoomed part) and the band (15–55 Hz by default). It reports the coherence spectrum, the 95 % chance limit, the mean and peak in the band, and the time lag of the shared part. Backups include the raw samples. The demo's jacks A0 and A2 share a 20–30 Hz rhythm so the panel can be tried without hardware.
+
+This is the tooling for the planned tibialis anterior coherence study (two sites on the muscle, AFO on and off). It has not run on the real board. Before any walking data, work through [`docs/coherence-bench-checks.md`](docs/coherence-bench-checks.md): whether the shield really carries RAW, whether 2 kHz holds with Wi-Fi on, the noise floor, and whether the electronics alone produce coherence.
+
+#### Footswitch check of the gait events (ESP32 firmware 1.4, from 16 Nov 2026)
+
+The heel strikes and toe-offs come from rules on the shank signal that assume a heel-first landing, which drop foot often is not. Two force-sensing resistors under the heel and the forefoot, wired as dividers into two spare jacks, give an independent reference on the same clock. Pick their jacks in the gait panel under **Footswitch check of the gait events**: the app reports the difference between the IMU events and the switch events (mean ± SD, 95 % limits of agreement, absolute differences, missed and extra events), the same for stance and stride time, and how the foot landed (heel first, flat, toes first), and exports one row per stride as CSV ([`web/footswitch.js`](web/footswitch.js)). Firmware 1.4 adds the command `f<mask>` so the switch jacks are never band-passed or rectified. Wiring, sensor placement and what to check first are in [`docs/footswitch-validation.md`](docs/footswitch-validation.md). The demo carries footswitches on jacks A4 and A5. Not yet run on hardware.
+
 ### Both shanks (the original layout)
 
 **Sensor placement.** One IMU on each shank, just above the outer ankle bone, as in Fig. 1 of the first paper. Pick which IMU is on which leg in the panel (the owner's physical labels are the reverse of the app's, see Wiring). Start each trial by standing still for about 2 s.
@@ -206,7 +218,7 @@ The tests in `host/tests/gait.test.mjs` check the pipeline against synthetic sha
 
 ## Serial protocol
 
-Commands are single ASCII lines: `?` info, `s` binary stream, `p` CSV stream, `x` stop, `r<hz>` rate, `e<mask>` EMG jacks (bit n = An), `i` rescan IMUs, and on the ESP32 standalone firmware 1.2 `g0`/`g1` EMG processing for the ENV/RAW output. The board streams to whichever port sent the command. Binary frames are `A5 5A type len payload crc8`; the layout is documented in [`frame.h`](firmware/mega_myoware_stream/frame.h).
+Commands are single ASCII lines: `?` info, `s` binary stream, `p` CSV stream, `x` stop, `r<hz>` rate, `e<mask>` EMG jacks (bit n = An), `i` rescan IMUs, and on the ESP32 standalone firmware 1.2 `g0`/`g1` EMG processing for the ENV/RAW output. Firmware 1.3 adds `w1`/`w0`: raw 2 kHz EMG in `E` frames, layout in [`emgraw.h`](firmware/esp32_standalone_stream/emgraw.h). Firmware 1.4 adds `f<mask>`: jacks that carry footswitches (plain mean in every EMG mode; the info frame reports it as `fsw`). The board streams to whichever port sent the command. Binary frames are `A5 5A type len payload crc8`; the layout is documented in [`frame.h`](firmware/mega_myoware_stream/frame.h).
 
 ## Tests
 
@@ -217,6 +229,9 @@ node --test designs/mega-myoware-shield-mpu6050/host/tests/hmm.test.mjs
 node --test designs/mega-myoware-shield-mpu6050/host/tests/wifi.test.mjs
 node --test designs/mega-myoware-shield-mpu6050/host/tests/emg.test.mjs
 node --test designs/mega-myoware-shield-mpu6050/host/tests/emgdsp.test.mjs     # needs g++
+node --test designs/mega-myoware-shield-mpu6050/host/tests/emgraw.test.mjs     # needs g++
+node --test designs/mega-myoware-shield-mpu6050/host/tests/coherence.test.mjs
+node --test designs/mega-myoware-shield-mpu6050/host/tests/footswitch.test.mjs
 node designs/mega-myoware-shield-mpu6050/host/tests/webapp.e2e.mjs             # needs Playwright + Chromium
 ```
 
